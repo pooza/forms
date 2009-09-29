@@ -1,0 +1,12 @@
+# レーダーチャート 表示色設定
+#
+# @package org.carrot-framework
+# @author 小石達也 <tkoishi@b-shock.co.jp>
+# @version $Id: rader_chart.yaml 776 2009-01-11 06:51:54Z pooza $
+
+background: white
+chart_border: darkgray
+item_label: darkblue
+radiation: darkgray
+rader_border: darkgray
+rader_fill: lavender

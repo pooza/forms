@@ -1,0 +1,69 @@
+<?php
+/**
+ * @package org.carrot-framework
+ * @subpackage net.mail
+ */
+
+/**
+ * 連絡先URL
+ *
+ * mailtoとかtelとか。
+ *
+ * @author 小石達也 <tkoishi@b-shock.co.jp>
+ * @version $Id: BSContactURL.class.php 1522 2009-09-22 06:38:56Z pooza $
+ */
+class BSContactURL extends BSURL {
+	private $query;
+
+
+	/**
+	 * @access protected
+	 * @param mixed $contents URL
+	 */
+	protected function __construct ($contents = null) {
+		$this->query = new BSWWWFormRenderer;
+		parent::__construct($contents);
+	}
+
+	/**
+	 * 内容を返す
+	 *
+	 * @access public
+	 * @return string URL
+	 */
+	public function getContents () {
+		if (!$this->contents) {
+			$this->contents = $this['scheme'] . ':' . $this['path'];
+			if ($this->query->count()) {
+				$this->contents .= '?' . $this->query->getContents();
+			}
+		}
+		return $this->contents;
+	}
+
+	/**
+	 * 属性を設定
+	 *
+	 * @access public
+	 * @param string $name 属性の名前
+	 * @param mixed $value 値
+	 * @return BSURL 自分自身
+	 */
+	public function setAttribute ($name, $value) {
+		switch ($name) {
+			case 'scheme':
+			case 'path':
+				$this->attributes[$name] = $value;
+				break;
+			case 'query':
+				$this->query->setContents($value);
+				break;
+			default:
+				throw new BSNetException($name . 'は正しくない属性名です。');
+		}
+		$this->contents = null;
+		return $this;
+	}
+}
+
+/* vim:set tabstop=4: */

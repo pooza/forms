@@ -1,0 +1,10 @@
+# フィルタ設定ファイル
+#
+# @package org.carrot-framework
+# @subpackage AdminLog
+# @author 小石達也 <tkoishi@b-shock.co.jp>
+# @version $Id: filters.yaml 628 2008-09-27 14:30:03Z pooza $
+
+- class: BSSecurityFilter
+- class: BSHostSecurityFilter
+- class: BSMenuFilter

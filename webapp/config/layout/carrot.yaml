@@ -1,0 +1,104 @@
+# ディレクトリレイアウト設定ファイル
+#
+# @package org.carrot-framework
+# @author 小石達也 <tkoishi@b-shock.co.jp>
+# @version $Id: carrot.yaml 1515 2009-09-20 13:30:54Z pooza $
+
+awstats:
+  parent: lib
+  name: AWStats
+awstats_data:
+  parent: var
+awstats_log:
+  constant: yes
+bin:
+  constant: yes
+cache:
+  parent: var
+  suffix: .cache.php
+carrot:
+  parent: lib
+carrotlib:
+  parent: www
+config:
+  parent: webapp
+compile:
+  parent: var
+css:
+  parent: carrotlib
+  suffix: .css
+db:
+  parent: var
+  suffix: .sqlite3
+dictionaries:
+  parent: webapp
+  class: BSDictionaryDirectory
+dump:
+  parent: var
+favicon:
+  parent: var
+  suffix: .png
+font:
+  parent: share
+  suffix: .ttf
+images:
+  parent: carrotlib
+image_cache:
+  parent: var
+javascript_set:
+  parent: config
+js:
+  parent: carrotlib
+  suffix: .js
+lib:
+  constant: yes
+local_lib:
+  parent: webapp
+  name: lib
+log:
+  parent: var
+  class: BSLogDirectory
+man:
+  parent: share
+menu:
+  parent: config
+modules:
+  parent: webapp
+mysql:
+  constant: yes
+pictogram:
+  parent: images
+proctools:
+  constant: yes
+pgsql:
+  constant: yes
+request:
+  parent: var
+  suffix: .txt
+root:
+  constant: yes
+serialized:
+  parent: var
+share:
+  constant: yes
+sql:
+  parent: share
+  suffix: .sql
+sqlite3:
+  constant: yes
+style_set:
+  parent: config
+templates:
+  parent: webapp
+  suffix: .tpl
+tmp:
+  parent: var
+var:
+  constant: yes
+webapp:
+  constant: yes
+www:
+  constant: yes
+zipcode:
+  parent: var
+  suffix: .json

@@ -1,0 +1,47 @@
+# メディアタイプ設定ファイル
+#
+# @package org.carrot-framework
+# @author 小石達也 <tkoishi@b-shock.co.jp>
+# @version $Id: mime.yaml 1227 2009-05-29 08:11:09Z pooza $
+
+types:
+  css: text/css
+  csv: text/csv
+  dat: application/octet-stream
+  doc: application/vnd.ms-word
+  docx: application/vnd.openxmlformats-officedocument.wordprocessingml.document
+  eml: message/rfc822
+  gif: image/gif
+  gz: application/x-gzip
+  htm: text/html
+  html: text/html
+  ini: text/x-ini-file
+  jpg: image/jpeg
+  jpeg: image/jpeg
+  js: text/javascript
+  json: text/javascript
+  mime: message/rfc822
+  odp: application/vnd.oasis.opendocument.presentation
+  ods: application/vnd.oasis.opendocument.spreadsheet
+  odt: application/vnd.oasis.opendocument.text
+  pdf: application/pdf
+  php:
+  pl:
+  pm:
+  png: image/png
+  ppt: application/vnd.ms-powerpoint
+  pptx: application/vnd.openxmlformats-officedocument.presentationml.presentation
+  rb:
+  sql:
+  swf: application/x-shockwave-flash
+  tgz: application/x-gzip
+  tpl:
+  ttf: application/x-truetype-font
+  txt: text/plain
+  yaml: text/yaml
+  yml: text/yaml
+  xls: application/vnd.ms-excel
+  xlsx: application/vnd.openxmlformats-officedocument.wordprocessingml.document
+  xml: application/xml
+  vcf: text/x-vcard
+  zip: application/zip

@@ -1,0 +1,14 @@
+# モジュール設定ファイル
+#
+# @package org.carrot-framework
+# @subpackage AdminMemcache
+# @author 小石達也 <tkoishi@b-shock.co.jp>
+# @version $Id: module.yaml 980 2009-03-15 09:16:40Z pooza $
+
+module:
+  title_menu: Memcache
+  title: Memcache管理モジュール
+
+actions:
+  Summary:
+    title: Memcacheの状態

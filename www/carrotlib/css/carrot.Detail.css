@@ -1,0 +1,16 @@
+/**
+ * carrot標準スタイルシート 詳細画面
+ *
+ * @package org.carrot-framework
+ * @author 小石達也 <tkoishi@b-shock.co.jp>
+ * @version $Id: carrot.Detail.css 501 2008-08-17 16:36:14Z pooza $
+ */
+
+table.Detail th {
+	width: 120px;
+	text-align: left;
+}
+
+table.Detail td {
+	width: 480px;
+}

@@ -1,0 +1,8 @@
+# フィルタ設定ファイル
+#
+# @package org.carrot-framework
+# @subpackage Console
+# @author 小石達也 <tkoishi@b-shock.co.jp>
+# @version $Id: filters.yaml 501 2008-08-17 16:36:14Z pooza $
+
+- class: BSHostSecurityFilter

@@ -1,0 +1,8 @@
+# フィルタ設定ファイル
+#
+# @package org.carrot-framework
+# @author 小石達也 <tkoishi@b-shock.co.jp>
+# @version $Id: carrot.yaml 838 2009-02-05 05:22:23Z pooza $
+
+- class: BSNullByteRequestFilter
+- class: BSMagicQuoteRequestFilter

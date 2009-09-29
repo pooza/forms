@@ -1,0 +1,146 @@
+# アプリケーション定数設定ファイル - carrot分
+#
+# @package org.carrot-framework
+# @author 小石達也 <tkoishi@b-shock.co.jp>
+# @version $Id: carrot.yaml 1526 2009-09-26 00:57:01Z pooza $
+
+carrot:
+  name: carrot Framework
+  ver: 2.2.49
+  bts:
+    url: http://redmine.carrot-framework.org/projects/show/carrot
+
+admin:
+  email:
+  password:
+  jid:
+  networks:
+app:
+  name:
+    ja: unknown
+    en: unknown
+  ver: unknown
+  bts:
+    url: http://redmine.carrot-framework.org/projects/show/carrot
+  xmpp:
+    jid:
+    password:
+author:
+  name:
+  email:
+  password:
+awstats:
+  daily: yes
+  server_name_aliases:
+crypt:
+  salt: carrot
+  engine: blowfish
+date:
+  timezone: Asia/Tokyo
+debug: yes
+feed:
+  class: BSRSS20Document
+flash:
+  href_prefix: /carrotlib/swf/
+  player_ver: 8.0.0
+  installer_path: /carrotlib/swf/expressInstall.swf
+home:
+  href: /index.html
+image:
+  thumbnail:
+    bgcolor: black
+    type: image/png
+  mobile:
+    type:
+      docomo: image/jpeg
+      au: image/png
+      softbank: image/png
+languages:
+  - ja
+log:
+  loggers:
+    - file
+    - mail
+    - system
+  syslog:
+    facility: LOCAL6
+  mail:
+    patterns:
+      - BSDatabaseException
+      - BSFileException
+  jabber:
+    patterns:
+      - BSDatabaseException
+      - BSMailException
+      - BSFileException
+memcache:
+  daemon_name: memcached
+  host: localhost
+  port: 11211
+module:
+  prefixes:
+    - Admin
+    - User
+    - Develop
+  default:
+    module: Default
+    action: Default
+  not_found:
+    module: Default
+    action: NotFound
+  secure:
+    module: Default
+    action: NotFound
+mysql:
+  dir: /usr/local
+net:
+  resolvable: yes
+package:
+  name:
+  ver:
+pdo:
+  query_log_enable: no
+  default:
+    dsn: sqlite:%BS_VAR_DIR%/db/db.sqlite3
+    loggable: yes
+  log:
+    dsn: sqlite:%BS_VAR_DIR%/db/log.sqlite3
+  session:
+    dsn: sqlite:%BS_VAR_DIR%/db/session.sqlite3
+  serialize:
+    dsn: sqlite:%BS_VAR_DIR%/db/serialize.sqlite3
+pictogram:
+pgsql:
+  dir: /usr/local
+proctools:
+  dir: /usr/local
+request:
+  validate:
+    strict: no
+serialize:
+  storage: default
+  serializer: JSON
+  keep:
+    - BSCounter.*
+session:
+  storage: default
+  regenerate_id: no
+smarty:
+  cache:
+    storage: default
+    life_time: 300
+smtp:
+  host: localhost
+  check_addresses: no
+sqlite3:
+  dir: /usr/local
+string:
+  mobile:
+    force_convert: no
+types:
+  file: /etc/httpd/mime.types
+xmpp:
+  host: talk.google.com
+  port: 5222
+  server: gmail.com
+  ssl: yes

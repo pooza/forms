@@ -1,0 +1,22 @@
+# アプリケーション定数設定ファイル
+#
+# @package __PACKAGE__
+# @author 小石達也 <tkoishi@b-shock.co.jp>
+# @version $Id: application.yaml 1438 2009-09-06 11:15:30Z pooza $
+
+app:
+  name:
+    ja: __NAME_JA__
+    en: __NAME_EN__
+  ver: 1.0.0-dev
+  bts:
+    url: http://redmine.carrot-framework.org/projects/show/carrot
+  svn:
+    url: http://svn.carrot-framework.org/carrot/trunk
+
+author:
+  name: 有限会社 ビーショック
+  email: info@b-shock.co.jp
+
+crypt:
+  salt: carrot

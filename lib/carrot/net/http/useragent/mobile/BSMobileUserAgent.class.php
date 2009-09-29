@@ -1,0 +1,181 @@
+<?php
+/**
+ * @package org.carrot-framework
+ * @subpackage net.http.useragent.mobile
+ */
+
+/**
+ * モバイルユーザーエージェント
+ *
+ * @author 小石達也 <tkoishi@b-shock.co.jp>
+ * @version $Id: BSMobileUserAgent.class.php 1397 2009-08-25 09:40:44Z pooza $
+ * @abstract
+ */
+abstract class BSMobileUserAgent extends BSUserAgent implements BSUserIdentifier {
+	private $carrier;
+	private $smarty;
+	const DEFAULT_DISPLAY_WIDTH = 240;
+	const DEFAULT_DISPLAY_HEIGHT = 320;
+
+	/**
+	 * @access public
+	 * @param string $name ユーザーエージェント名
+	 */
+	public function __construct ($name = null) {
+		parent::__construct($name);
+		$this->attributes['is_mobile'] = $this->isMobile();
+		$this->attributes['id'] = $this->getID();
+		$this->attributes['is_legacy'] = $this->isLegacy();
+		$this->attributes['display'] = $this->getDisplayInfo();
+		$this->attributes['query'] = new BSArray;
+	}
+
+	/**
+	 * ビューを初期化
+	 *
+	 * @access public
+	 * @param BSSmartyView 対象ビュー
+	 * @return boolean 成功時にTrue
+	 */
+	public function initializeView (BSSmartyView $view) {
+		parent::initializeView($view);
+		$view->getRenderer()->setEncoding('sjis-win');
+		$view->getRenderer()->addModifier('pictogram');
+		$view->getRenderer()->addOutputFilter('mobile');
+		$view->getRenderer()->addOutputFilter('encoding');
+		$this->smarty = $view->getRenderer();
+		return true;
+	}
+
+	/**
+	 * セッションハンドラを生成して返す
+	 *
+	 * @access public
+	 * @return BSSessionHandler
+	 */
+	public function createSession () {
+		$session = new BSMobileSessionHandler;
+
+		$params = new BSWWWFormRenderer;
+		$params->setParameters($this->attributes['query']);
+		$params[$session->getName()] = $session->getID();
+		if (BS_DEBUG) {
+			$params[BSRequest::USER_AGENT_ACCESSOR] = $this->getName();
+		}
+
+		$this->attributes['query'] = $params->getParameters();
+		$this->attributes['query_params'] = $params->getContents();
+		if ($this->smarty) {
+			$this->smarty->setAttribute('useragent', $this);
+		}
+
+		return $session;
+	}
+
+	/**
+	 * ケータイ環境か？
+	 *
+	 * @access public
+	 * @return boolean ケータイ環境ならTrue
+	 */
+	public function isMobile () {
+		return true;
+	}
+
+	/**
+	 * プラットホームを返す
+	 *
+	 * @access public
+	 * @return string プラットホーム
+	 */
+	public function getPlatform () {
+		if (!$this->attributes['platform']) {
+			$this->attributes['platform'] = $this->getType();
+		}
+		return $this->attributes['platform'];
+	}
+
+	/**
+	 * キャリアを返す
+	 *
+	 * @access public
+	 * @return BSMobileCarrier キャリア
+	 */
+	public function getCarrier () {
+		if (!$this->carrier) {
+			$this->carrier = BSClassLoader::getInstance()->getObject(
+				$this->getType(),
+				'MobileCarrier'
+			);
+		}
+		return $this->carrier;
+	}
+
+	/**
+	 * 旧機種か？
+	 *
+	 * @access public
+	 * @return boolean 旧機種ならばTrue
+	 * @abstract
+	 */
+	abstract public function isLegacy ();
+
+	/**
+	 * 規定の画像形式を返す
+	 *
+	 * @access public
+	 * @return string 規定の画像形式
+	 */
+	public function getDefaultImageType () {
+		$constants = BSConstantHandler::getInstance();
+		return $constants['IMAGE_MOBILE_TYPE_' . $this->getCarrier()->getName()];
+	}
+
+	/**
+	 * 画面情報を返す
+	 *
+	 * @access public
+	 * @return BSArray 画面情報
+	 * @abstract
+	 */
+	abstract public function getDisplayInfo ();
+
+	/**
+	 * 端末IDを返す
+	 *
+	 * @access public
+	 * @return string 端末ID
+	 */
+	public function getID () {
+		if (BS_DEBUG) {
+			return BSCrypt::getSHA1(
+				BSRequest::getInstance()->getHost()->getName() . BS_CRYPT_SALT
+			);
+		}
+	}
+
+	/**
+	 * ユーザーIDを返す
+	 *
+	 * @access public
+	 * @return string ユーザーID
+	 */
+	public function getUserID () {
+		return $this->getID();
+	}
+
+	/**
+	 * 端末認証
+	 *
+	 * パスワードを用いず、端末個体認証を行う。
+	 *
+	 * @access public
+	 * @params string $password パスワード
+	 * @return boolean 正しいユーザーならTrue
+	 */
+	public function auth ($password = null) {
+		return $this->getUserID() && ($this === BSRequest::getInstance()->getUserAgent());
+	}
+}
+
+/* vim:set tabstop=4: */
