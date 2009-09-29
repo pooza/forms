@@ -1,0 +1,22 @@
+# ホスト別設定ファイル
+#
+# @package jp.co.commons.forms
+# @author 小石達也 <tkoishi@b-shock.co.jp>
+# @version $Id$
+
+root_url: http://forms.gisarme.local/
+root_url_https: http://forms.gisarme.local/
+debug: yes
+
+admin:
+  email: admin@b-shock.co.jp
+  password: 7e240de74fb1ed08fa08d38063f6a6a91462a815
+  jid: tatsuya.koishi@gmail.com
+  networks:
+    - 192.168.102.0/24
+
+pdo:
+  default:
+    dsn: mysql:host=127.0.0.1;dbname=forms
+    uid: root
+    password:

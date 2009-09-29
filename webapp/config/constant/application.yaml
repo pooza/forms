@@ -6,17 +6,18 @@
 
 app:
   name:
-    ja: __NAME_JA__
-    en: __NAME_EN__
-  ver: 1.0.0-dev
+    ja: forms
+    en: forms
+  ver: 1.0.0-dev(2009-09-29)
   bts:
-    url: http://redmine.carrot-framework.org/projects/show/carrot
+    url: http://redmine.carrot-framework.org/projects/show/forms
   svn:
-    url: http://svn.carrot-framework.org/carrot/trunk
+    url: http://b-shock.co.jp/commons/forms/trunk
 
 author:
   name: 有限会社 ビーショック
   email: info@b-shock.co.jp
 
 crypt:
-  salt: carrot
+  salt: EGQ1TT4MXA
+  engine: cbc
