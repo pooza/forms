@@ -16,13 +16,13 @@ end
 
 namespace :development do
   namespace :local do
-    task :init => []
+    task :init => ['ajaxzip2:init']
   end
 end
 
 namespace :database do
   namespace :local do
-    task :init => []
+    task :init => ['ajaxzip2:init']
   end
 end
 
