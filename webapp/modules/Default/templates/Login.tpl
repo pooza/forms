@@ -1,10 +1,10 @@
 {*
 ログイン画面テンプレート
 
-@package __PACKAGE__
+@package jp.co.commons.forms
 @subpackage Default
 @author 小石達也 <tkoishi@b-shock.co.jp>
-@version $Id: Login.tpl 1430 2009-09-05 10:19:12Z pooza $
+@version $Id$
 *}
 {assign var='styleset' value='carrot.LoginForm'}
 {assign var='body.id' value='LoginFormContainer'}

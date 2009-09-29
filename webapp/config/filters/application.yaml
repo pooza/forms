@@ -1,8 +1,8 @@
 # フィルタ設定ファイル
 #
-# @package __PACKAGE__
+# @package jp.co.commons.forms
 # @author 小石達也 <tkoishi@b-shock.co.jp>
-# @version $Id: application.yaml 1438 2009-09-06 11:15:30Z pooza $
+# @version $Id$
 
 - class: BSDeniedUserAgentFilter
 - class: BSEncodingRequestFilter

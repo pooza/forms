@@ -1,9 +1,9 @@
 # ログイン画面バリデーション設定ファイル
 #
-# @package __PACKAGE__
+# @package jp.co.commons.forms
 # @subpackage Default
 # @author 小石達也 <tkoishi@b-shock.co.jp>
-# @version $Id: Login.yaml 1250 2009-06-08 04:42:28Z pooza $
+# @version $Id$
 
 methods:
   - POST

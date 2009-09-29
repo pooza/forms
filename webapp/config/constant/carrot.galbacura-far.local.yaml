@@ -1,8 +1,8 @@
 # ホスト別設定ファイル
 #
-# @package __PACKAGE__
+# @package jp.co.commons.forms
 # @author 小石達也 <tkoishi@b-shock.co.jp>
-# @version $Id: carrot.galbacura-far.local.yaml 1484 2009-09-14 03:18:44Z pooza $
+# @version $Id$
 
 root_url: http://carrot.galbacura-far.local/
 root_url_https: http://carrot.galbacura-far.local/

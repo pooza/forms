@@ -1,9 +1,9 @@
 {*
 ユーザー画面 テンプレートひな形
 
-@package __PACKAGE__
+@package jp.co.commons.forms
 @author 小石達也 <tkoishi@b-shock.co.jp>
-@version $Id: UserFooter.tpl 1407 2009-08-26 11:44:42Z pooza $
+@version $Id$
 *}
 <div id="Footer">
 <a href="{const name='app_bts_url'}" target="_blank">{const name='app_name_en'}</a> {const name='app_ver'}

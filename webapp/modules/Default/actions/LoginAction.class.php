@@ -2,10 +2,10 @@
 /**
  * Loginアクション
  *
- * @package __PACKAGE__
+ * @package jp.co.commons.forms
  * @subpackage Default
  * @author 小石達也 <tkoishi@b-shock.co.jp>
- * @version $Id: LoginAction.class.php 1252 2009-06-08 05:46:24Z pooza $
+ * @version $Id$
  */
 class LoginAction extends BSAction {
 	public function execute () {

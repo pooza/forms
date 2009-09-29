@@ -2,9 +2,9 @@
 
 # carrotユーティリティタスク
 #
-# @package __PACKAGE__
+# @package jp.co.commons.forms
 # @author 小石達也 <tkoishi@b-shock.co.jp>
-# @version $Id: Rakefile.local.rb 881 2009-02-18 14:42:50Z pooza $
+# @version $Id$
 
 $KCODE = 'u'
 
