@@ -8,7 +8,7 @@
  * RSS2.0文書
  *
  * @author 小石達也 <tkoishi@b-shock.co.jp>
- * @version $Id: BSRSS20Document.class.php 1495 2009-09-16 16:24:26Z pooza $
+ * @version $Id: BSRSS20Document.class.php 1527 2009-09-29 09:34:43Z pooza $
  */
 class BSRSS20Document extends BSRSS09Document {
 	protected $version = '2.0';
@@ -20,7 +20,7 @@ class BSRSS20Document extends BSRSS09Document {
 	 * @return boolean 妥当な文書ならTrue
 	 */
 	public function validate () {
-		return (parent::validate()
+		return (BSXMLDocument::validate()
 			&& $this->query('/rss/channel/title')
 			&& $this->query('/rss/channel/description')
 			&& $this->query('/rss/channel/link')
