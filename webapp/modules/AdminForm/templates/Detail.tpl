@@ -18,7 +18,7 @@
 <div class="tabs10">
 	<ul id="Tabs">
 		<li><a href="#DetailForm"><span>フォーム詳細</span></a></li>
-		<li><a href="#FieldList"><span>項目管理</span></a></li>
+		<li><a href="#FieldList"><span>フィールド管理</span></a></li>
 		{if $form.has_form_template}<li><a href="#FormTemplateViewer"><span>フォームテンプレート内容</span></a></li>{/if}
 		{if $form.has_confirm_template}<li><a href="#ConfirmTemplateViewer"><span>確認画面テンプレート内容</span></a></li>{/if}
 	</ul>

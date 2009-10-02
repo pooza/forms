@@ -1,0 +1,45 @@
+# フィールド詳細画面バリデーション設定ファイル
+#
+# @package jp.co.commons.forms
+# @subpackage AdminField
+# @author 小石達也 <tkoishi@b-shock.co.jp>
+# @version $Id$
+
+methods:
+  - POST
+
+fields:
+  name:
+    required: yes
+    validators:
+      - name_unique
+  label:
+    required: yes
+  field_type_id:
+    require: yes
+    validators:
+      - field_type
+  choices:
+  required:
+    validators:
+      - flag
+  status:
+    required: yes
+    validators:
+      - status
+
+validators:
+  name_unique:
+    class: BSRecordValidator
+    params:
+      class: Field
+      field: name
+      exist: no
+      update: yes
+      criteria:
+        form_id:
+          function: getForm
+  status:
+    class: BSChoiceValidator
+    params:
+      class: Field
