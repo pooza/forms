@@ -1,0 +1,31 @@
+# フォーム詳細画面バリデーション設定ファイル
+#
+# @package jp.co.commons.forms
+# @subpackage AdminForm
+# @author 小石達也 <tkoishi@b-shock.co.jp>
+# @version $Id$
+
+methods:
+  - POST
+
+fields:
+  name:
+    required: yes
+  form_template:
+    file: yes
+    validators:
+      - smarty
+  confirm_template:
+    file: yes
+    validators:
+      - smarty
+  status:
+    required: yes
+    validators:
+      - status
+
+validators:
+  status:
+    class: BSChoiceValidator
+    params:
+      class: Form

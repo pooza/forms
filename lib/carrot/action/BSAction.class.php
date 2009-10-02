@@ -11,7 +11,7 @@
  * @version $Id: BSAction.class.php 1521 2009-09-22 06:28:16Z pooza $
  * @abstract
  */
-abstract class BSAction implements BSHTTPRedirector, BSAssignable {
+abstract class BSAction implements BSHTTPRedirector, BSAssignable, BSValidatorContainer {
 	private $name;
 	protected $title;
 	private $config;

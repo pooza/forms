@@ -9,7 +9,7 @@
  * @author 小石達也 <tkoishi@b-shock.co.jp>
  * @version $Id$
  */
-class Field extends BSSortableRecord implements BSValidatable {
+class Field extends BSSortableRecord implements BSValidatorContainer {
 	private $alikeRecords;
 
 	/**
@@ -50,6 +50,14 @@ class Field extends BSSortableRecord implements BSValidatable {
 			$this->alikeRecords = new FieldHandler($criteria);
 		}
 		return $this->alikeRecords;
+	}
+
+	/**
+	 * バリデータ登録
+	 *
+	 * @access public
+	 */
+	public function registerValidators () {
 	}
 }
 

@@ -1,3 +1,5 @@
 label,ja
 form,フォーム
 form_id,フォーム
+form_template,フォームテンプレート
+confirm_template,確認画面テンプレート

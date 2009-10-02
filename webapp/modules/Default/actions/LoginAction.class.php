@@ -15,7 +15,7 @@ class LoginAction extends BSAction {
 		}
 
 		$url = BSURL::getInstance($this->controller->getConstant('ROOT_URL_HTTPS'));
-		$url['path'] = '/AdminLog/';
+		$url['path'] = '/AdminForm/';
 		return $url->redirect();
 	}
 
