@@ -5,7 +5,7 @@
  * @package org.carrot-framework
  * @subpackage Console
  * @author 小石達也 <tkoishi@b-shock.co.jp>
- * @version $Id: AnalyzeAccessLogAction.class.php 1176 2009-05-10 11:38:04Z pooza $
+ * @version $Id: AnalyzeAccessLogAction.class.php 1530 2009-09-30 12:23:19Z pooza $
  */
 class AnalyzeAccessLogAction extends BSAction {
 	private $config;
@@ -33,7 +33,7 @@ class AnalyzeAccessLogAction extends BSAction {
 					$network->getAttribute('broadcast')
 				);
 			}
-			$this->config['admin_networks'] = $networks->implode(' ');
+			$this->config['admin_networks'] = $networks->join(' ');
 
 			if (BS_AWSTATS_DAILY) {
 				$this->config['logfile'] = BS_AWSTATS_LOG_DIR

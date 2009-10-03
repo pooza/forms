@@ -10,7 +10,7 @@ BSUtility::includeFile('pear/Crypt/Blowfish.php');
  * Blowfish暗号
  *
  * @author 小石達也 <tkoishi@b-shock.co.jp>
- * @version $Id: BSBlowfishCryptor.class.php 810 2009-01-27 17:54:31Z pooza $
+ * @version $Id: BSBlowfishCryptor.class.php 1533 2009-10-02 17:01:41Z pooza $
  */
 class BSBlowfishCryptor extends Crypt_Blowfish implements BSCryptor {
 	private $salt;
@@ -21,6 +21,34 @@ class BSBlowfishCryptor extends Crypt_Blowfish implements BSCryptor {
 	 */
 	public function __construct ($salt = BS_CRYPT_SALT) {
 		parent::Crypt_Blowfish($salt);
+	}
+
+	/**
+	 * 暗号化された文字列を返す
+	 *
+	 * @access public
+	 * @param string $value 対象文字列
+	 * @return string 暗号化された文字列
+	 */
+	public function encrypt ($value) {
+		if (BSString::isBlank($value)) {
+			return; // 空文字列をCrypt_Blowfishに渡すと、E_NOTICEが発生する。
+		}
+		return parent::encrypt($value);
+	}
+
+	/**
+	 * 複号化された文字列を返す
+	 *
+	 * @access public
+	 * @param string $value 対象文字列
+	 * @return string 複号化された文字列
+	 */
+	public function decrypt ($value) {
+		if (BSString::isBlank($value)) {
+			return; // 空文字列をCrypt_Blowfishに渡すと、E_NOTICEが発生する。
+		}
+		return parent::decrypt($value);
 	}
 
 	/**

@@ -8,7 +8,7 @@
  * バリデート可能なクラスへのインターフェース
  *
  * @author 小石達也 <tkoishi@b-shock.co.jp>
- * @version $Id: BSValidateManager.class.php 1522 2009-09-22 06:38:56Z pooza $
+ * @version $Id: BSValidatorContainer.interface.php 1531 2009-10-02 09:16:38Z pooza $
  */
 interface BSValidatorContainer {
 

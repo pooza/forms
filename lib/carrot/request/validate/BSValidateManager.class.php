@@ -8,7 +8,7 @@
  * バリデートマネージャ
  *
  * @author 小石達也 <tkoishi@b-shock.co.jp>
- * @version $Id: BSValidateManager.class.php 1522 2009-09-22 06:38:56Z pooza $
+ * @version $Id: BSValidateManager.class.php 1532 2009-10-02 16:28:09Z pooza $
  */
 class BSValidateManager implements IteratorAggregate {
 	private $fields;
@@ -90,16 +90,6 @@ class BSValidateManager implements IteratorAggregate {
 			$this->fields[$name] = new BSArray;
 		}
 		$this->fields[$name][$validator->getName()] = $validator;
-	}
-
-	/**
-	 * バリデータをまとめて登録
-	 *
-	 * @access public
-	 * @param BSValidatable $container バリデータコンテナ
-	 */
-	public function registerContainer (BSValidatorContainer $container) {
-		$container->registerValidators();
 	}
 
 	/**

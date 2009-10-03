@@ -8,7 +8,7 @@
  * Smartyバリデータ
  *
  * @author 小石達也 <tkoishi@b-shock.co.jp>
- * @version $Id: BSSmartyValidator.class.php 1099 2009-04-26 05:31:57Z pooza $
+ * @version $Id: BSSmartyValidator.class.php 1531 2009-10-02 09:16:38Z pooza $
  */
 class BSSmartyValidator extends BSValidator {
 
