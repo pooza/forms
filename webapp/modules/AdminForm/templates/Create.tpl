@@ -26,21 +26,27 @@
 			</td>
 		</tr>
 		<tr>
-			<th>フォームテンプレート</th>
+			<th>フォーム<br/>テンプレート</th>
 			<td>
 				<input type="file" name="form_template" size="30" />
 			</td>
 		</tr>
 		<tr>
-			<th>確認画面テンプレート</th>
+			<th>確認画面<br/>テンプレート</th>
 			<td>
 				<input type="file" name="confirm_template" size="30" />
 			</td>
 		</tr>
 		<tr>
-			<th>サンクステンプレート</th>
+			<th>サンクス画面<br/>テンプレート</th>
 			<td>
 				<input type="file" name="thanx_template" size="30" />
+			</td>
+		</tr>
+		<tr>
+			<th>サンクスメール<br/>テンプレート</th>
+			<td>
+				<input type="file" name="thanx_mail_template" size="30" />
 			</td>
 		</tr>
 		<tr>

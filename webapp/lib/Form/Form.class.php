@@ -99,9 +99,13 @@ class Form extends BSRecord implements
 	 *
 	 * @access public
 	 * @param BSArray 回答
+	 * @return Registration 応募
 	 */
 	public function registerAnswer (BSArray $answers) {
-		$id = $this->getRegistrations()->createRecord(array('status' => 'show'));
+		$values = array(
+			'form_id' => $this->getID(),
+		);
+		$id = $this->getRegistrations()->createRecord($values);
 		$registration = $this->getRegistrations()->getRecord($id);
 
 		$this->getFields()->query();
@@ -111,6 +115,7 @@ class Form extends BSRecord implements
 			}
 			$registration->registerDetail($field, $answer);
 		}
+		return $registration;
 	}
 
 	/**

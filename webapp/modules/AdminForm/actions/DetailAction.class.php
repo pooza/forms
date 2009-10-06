@@ -48,14 +48,10 @@ class DetailAction extends BSRecordAction {
 	public function registerValidators () {
 		$manager = BSValidateManager::getInstance();
 		if ($this->request['status'] == 'show') {
-			if (!$this->getRecord()->getAttachmentInfo('form_template')) {
-				$manager->register('form_template', new BSEmptyValidator);
-			}
-			if (!$this->getRecord()->getAttachmentInfo('confirm_template')) {
-				$manager->register('confirm_template', new BSEmptyValidator);
-			}
-			if (!$this->getRecord()->getAttachmentInfo('thanx_template')) {
-				$manager->register('thanx_template', new BSEmptyValidator);
+			foreach (array('form', 'confirm', 'thanx', 'thanx_mail') as $name) {
+				if (!$this->getRecord()->getAttachmentInfo($name . '_template')) {
+					$manager->register($name . '_template', new BSEmptyValidator);
+				}
 			}
 		}
 	}

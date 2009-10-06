@@ -23,6 +23,10 @@ fields:
     file: yes
     validators:
       - smarty
+  thanx_mail_template:
+    file: yes
+    validators:
+      - smarty
   status:
     required: yes
     validators:

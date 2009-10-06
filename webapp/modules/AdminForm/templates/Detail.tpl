@@ -19,9 +19,10 @@
 	<ul id="Tabs">
 		<li><a href="#DetailForm"><span>フォーム詳細</span></a></li>
 		<li><a href="#FieldList"><span>フィールド管理</span></a></li>
-		{if $form.has_form_template}<li><a href="#FormTemplateViewer"><span>フォームテンプレート内容</span></a></li>{/if}
-		{if $form.has_confirm_template}<li><a href="#ConfirmTemplateViewer"><span>確認画面テンプレート内容</span></a></li>{/if}
-		{if $form.has_thanx_template}<li><a href="#ThanxTemplateViewer"><span>サンクステンプレート内容</span></a></li>{/if}
+		{if $form.has_form_template}<li><a href="#FormTemplateViewer"><span>フォームテンプレート</span></a></li>{/if}
+		{if $form.has_confirm_template}<li><a href="#ConfirmTemplateViewer"><span>確認画面テンプレート</span></a></li>{/if}
+		{if $form.has_thanx_template}<li><a href="#ThanxTemplateViewer"><span>サンクス画面テンプレート</span></a></li>{/if}
+		{if $form.has_thanx_mail_template}<li><a href="#ThanxMailTemplateViewer"><span>サンクスメールテンプレート</span></a></li>{/if}
 	</ul>
 </div>
 
@@ -47,7 +48,7 @@
 				</td>
 			</tr>
 			<tr>
-				<th>フォームテンプレート</th>
+				<th>フォーム<br/>テンプレート</th>
 				<td>
 					<input type="file" name="form_template" size="30" /><br/>
 {if $form.has_form_template}
@@ -58,7 +59,7 @@
 				</td>
 			</tr>
 			<tr>
-				<th>確認画面テンプレート</th>
+				<th>確認画面<br/>テンプレート</th>
 				<td>
 					<input type="file" name="confirm_template" size="30" /><br/>
 {if $form.has_confirm_template}
@@ -69,13 +70,24 @@
 				</td>
 			</tr>
 			<tr>
-				<th>サンクステンプレート</th>
+				<th>サンクス画面<br/>テンプレート</th>
 				<td>
 					<input type="file" name="thanx_template" size="30" /><br/>
 {if $form.has_thanx_template}
 					<a href="{$form.thanx_template.url}" ><img src="/carrotlib/images/document.gif" width="16" height="16" alt="" /></a>
 					{$form.thanx_template.size|binary_size_format}B
 					[<a href="/{$module.name}/DeleteAttachment?name=thanx_template">このファイルを削除</a>]
+{/if}
+				</td>
+			</tr>
+			<tr>
+				<th>サンクスメール<br/>テンプレート</th>
+				<td>
+					<input type="file" name="thanx_mail_template" size="30" /><br/>
+{if $form.has_thanx_mail_template}
+					<a href="{$form.thanx_mail_template.url}" ><img src="/carrotlib/images/document.gif" width="16" height="16" alt="" /></a>
+					{$form.thanx_mail_template.size|binary_size_format}B
+					[<a href="/{$module.name}/DeleteAttachment?name=thanx_mail_template">このファイルを削除</a>]
 {/if}
 				</td>
 			</tr>
@@ -123,6 +135,13 @@
 <div id="ThanxTemplateViewer" class="panel">
 	{smarty_preformatted}{$form.thanx_template.contents}{/smarty_preformatted}
 	<br/>({$form.thanx_template.size|binary_size_format}B)
+</div>
+{/if}
+
+{if $form.has_thanx_mail_template}
+<div id="ThanxMailTemplateViewer" class="panel">
+	{smarty_preformatted}{$form.thanx_mail_template.contents}{/smarty_preformatted}
+	<br/>({$form.thanx_mail_template.size|binary_size_format}B)
 </div>
 {/if}
 

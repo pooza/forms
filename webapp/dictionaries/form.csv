@@ -3,4 +3,5 @@ form,フォーム
 form_id,フォーム
 form_template,フォームテンプレート
 confirm_template,確認画面テンプレート
-thanx_template,サンクステンプレート
+thanx_template,サンクス画面テンプレート
+thanx_mail_template,サンクスメールテンプレート

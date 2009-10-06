@@ -51,9 +51,9 @@ class CreateAction extends BSRecordAction {
 	public function registerValidators () {
 		$manager = BSValidateManager::getInstance();
 		if ($this->request['status'] == 'show') {
-			$manager->register('form_template', new BSEmptyValidator);
-			$manager->register('confirm_template', new BSEmptyValidator);
-			$manager->register('thanx_template', new BSEmptyValidator);
+			foreach (array('form', 'confirm', 'thanx', 'thanx_mail') as $name) {
+				$manager->register($name . '_template', new BSEmptyValidator);
+			}
 		}
 	}
 
