@@ -53,6 +53,7 @@ class CreateAction extends BSRecordAction {
 		if ($this->request['status'] == 'show') {
 			$manager->register('form_template', new BSEmptyValidator);
 			$manager->register('confirm_template', new BSEmptyValidator);
+			$manager->register('thanx_template', new BSEmptyValidator);
 		}
 	}
 

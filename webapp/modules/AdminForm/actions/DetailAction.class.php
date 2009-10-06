@@ -54,6 +54,9 @@ class DetailAction extends BSRecordAction {
 			if (!$this->getRecord()->getAttachmentInfo('confirm_template')) {
 				$manager->register('confirm_template', new BSEmptyValidator);
 			}
+			if (!$this->getRecord()->getAttachmentInfo('thanx_template')) {
+				$manager->register('thanx_template', new BSEmptyValidator);
+			}
 		}
 	}
 

@@ -21,6 +21,7 @@
 		<li><a href="#FieldList"><span>フィールド管理</span></a></li>
 		{if $form.has_form_template}<li><a href="#FormTemplateViewer"><span>フォームテンプレート内容</span></a></li>{/if}
 		{if $form.has_confirm_template}<li><a href="#ConfirmTemplateViewer"><span>確認画面テンプレート内容</span></a></li>{/if}
+		{if $form.has_thanx_template}<li><a href="#ThanxTemplateViewer"><span>サンクステンプレート内容</span></a></li>{/if}
 	</ul>
 </div>
 
@@ -34,6 +35,10 @@
 			<tr>
 				<th>フォームID</th>
 				<td>{$form.id}</td>
+			</tr>
+			<tr>
+				<th>応募画面URL</th>
+				<td>{$form.url|url2link}</td>
 			</tr>
 			<tr>
 				<th>名前</th>
@@ -60,6 +65,17 @@
 					<a href="{$form.confirm_template.url}" ><img src="/carrotlib/images/document.gif" width="16" height="16" alt="" /></a>
 					{$form.confirm_template.size|binary_size_format}B
 					[<a href="/{$module.name}/DeleteAttachment?name=confirm_template">このファイルを削除</a>]
+{/if}
+				</td>
+			</tr>
+			<tr>
+				<th>サンクステンプレート</th>
+				<td>
+					<input type="file" name="thanx_template" size="30" /><br/>
+{if $form.has_thanx_template}
+					<a href="{$form.thanx_template.url}" ><img src="/carrotlib/images/document.gif" width="16" height="16" alt="" /></a>
+					{$form.thanx_template.size|binary_size_format}B
+					[<a href="/{$module.name}/DeleteAttachment?name=thanx_template">このファイルを削除</a>]
 {/if}
 				</td>
 			</tr>
@@ -100,6 +116,13 @@
 <div id="ConfirmTemplateViewer" class="panel">
 	{smarty_preformatted}{$form.confirm_template.contents}{/smarty_preformatted}
 	<br/>({$form.confirm_template.size|binary_size_format}B)
+</div>
+{/if}
+
+{if $form.has_thanx_template}
+<div id="ThanxTemplateViewer" class="panel">
+	{smarty_preformatted}{$form.thanx_template.contents}{/smarty_preformatted}
+	<br/>({$form.thanx_template.size|binary_size_format}B)
 </div>
 {/if}
 

@@ -9,8 +9,10 @@
  * @author 小石達也 <tkoishi@b-shock.co.jp>
  * @version $Id$
  */
-class Form extends BSRecord implements BSAttachmentContainer, BSExportable {
+class Form extends BSRecord
+	implements BSAttachmentContainer, BSExportable, BSHTTPRedirector, BSValidatorContainer {
 	private $exporter;
+	private $fields;
 
 	/**
 	 * 更新
@@ -59,6 +61,21 @@ class Form extends BSRecord implements BSAttachmentContainer, BSExportable {
 	 */
 	protected function isDeletable () {
 		return true;
+	}
+
+	/**
+	 * 追加項目を返す
+	 *
+	 * @access public
+	 * @return CampaignFieldHandler 追加項目テーブル
+	 */
+	public function getFields () {
+		if (!$this->fields) {
+			$criteria = $this->getTable()->getDatabase()->createCriteriaSet();
+			$criteria->register('form_id', $this);
+			$this->fields = new FieldHandler($criteria);
+		}
+		return $this->fields;
 	}
 
 	/**
@@ -161,6 +178,20 @@ class Form extends BSRecord implements BSAttachmentContainer, BSExportable {
 	}
 
 	/**
+	 * テンプレートファイルを返す
+	 *
+	 * @access public
+	 * @param string $name 名前
+	 * @return BSTemplateFile テンプレートファイル
+	 */
+	public function getTemplateFile ($name) {
+		if (!$file = $this->getAttachment($name . '_template')) {
+			throw new BSViewException($this . 'に' . $name . '_templateがありません。');
+		}
+		return new BSTemplateFile($file->getPath());
+	}
+
+	/**
 	 * エクスポータを返す
 	 *
 	 * @access public
@@ -211,6 +242,41 @@ class Form extends BSRecord implements BSAttachmentContainer, BSExportable {
 	}
 
 	/**
+	 * リダイレクト対象
+	 *
+	 * @access public
+	 * @return BSURL
+	 */
+	public function getURL () {
+		$url = BSURL::getInstance(null, 'BSCarrotURL');
+		$url['module'] = 'UserForm';
+		$url['action'] = 'Register';
+		$url['record'] = $this;
+		return $url;
+	}
+
+	/**
+	 * リダイレクト
+	 *
+	 * @access public
+	 * @return string ビュー名
+	 */
+	public function redirect () {
+		return $this->getURL()->redirect();
+	}
+
+	/**
+	 * バリデータ登録
+	 *
+	 * @access public
+	 */
+	public function registerValidators () {
+		foreach ($this->getFields() as $field) {
+			$field->registerValidators();
+		}
+	}
+
+	/**
 	 * アサインすべき値を返す
 	 *
 	 * @access public
@@ -218,6 +284,7 @@ class Form extends BSRecord implements BSAttachmentContainer, BSExportable {
 	 */
 	public function getAssignValue () {
 		$values = $this->getAttributes();
+		$values['url'] = $this->getURL()->getContents();
 		foreach (FormHandler::getAttachmentNames() as $field) {
 			if ($this->getAttachment($field)) {
 				$values['has_' . $field] = true;

@@ -38,6 +38,12 @@
 			</td>
 		</tr>
 		<tr>
+			<th>サンクステンプレート</th>
+			<td>
+				<input type="file" name="thanx_template" size="30" />
+			</td>
+		</tr>
+		<tr>
 			<th>状態</th>
 			<td>
 				{html_radios name='status' options=$status_options selected=$params.status}

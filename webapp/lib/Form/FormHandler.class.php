@@ -54,7 +54,11 @@ class FormHandler extends BSTableHandler {
 	 * @static
 	 */
 	static public function getAttachmentNames () {
-		return new BSArray(array('form_template', 'confirm_template'));
+		return new BSArray(array(
+			'form_template',
+			'confirm_template',
+			'thanx_template',
+		));
 	}
 }
 
