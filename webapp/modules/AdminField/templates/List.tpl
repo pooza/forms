@@ -9,20 +9,26 @@
 <h2>■{$action.title}</h2>
 <table>
 	<tr>
-		<th width="240">名前</th>
-		<th width="150">種別</th>
+		<th width="150">名前</th>
+		<th width="240">ラベル</th>
+		<th width="90">種別</th>
+		<th width="60">必須</th>
+		<th width="60">選択</th>
 		<th width="60"></th>
 	</tr>
 	<tr>
-		<td colspan="3">
+		<td colspan="6">
 			<a href="/{$module.name}/Create">新しいフィールドを登録...</a>
 		</td>
 	</tr>
 
 {foreach from=$fields item='field' name='fields'}
 	<tr class="{$field.status}">
-		<td width="240"><a href="/{$module.name}/Detail/{$field.id}">{$field.name|default:'(無題)'}</a></td>
-		<td width="150">{$field.field_type_id|translate:'FieldHandler'}</td>
+		<td width="150"><a href="/{$module.name}/Detail/{$field.id}">{$field.name}</a></td>
+		<td width="240">{$field.label}</td>
+		<td width="90">{$field.field_type_id|translate:'FieldHandler'}</td>
+		<td width="60" align="center">{if $field.required}○{/if}</td>
+		<td width="60" align="center">{if $field.choices}○{/if}</td>
 		<td width="60" align="center">
 	{strip}
 		{if $smarty.foreach.fields.first}
@@ -41,7 +47,7 @@
 	</tr>
 {foreachelse}
 	<tr>
-		<td colspan="3" class="alert">登録されていません。</td>
+		<td colspan="6" class="alert">登録されていません。</td>
 	</tr>
 {/foreach}
 
