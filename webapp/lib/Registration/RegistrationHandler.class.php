@@ -21,6 +21,8 @@ class RegistrationHandler extends BSTableHandler {
 	 * @return string レコードの主キー
 	 */
 	public function createRecord ($values, $flags = BSDatabase::WITH_LOGGING) {
+		$values['user_agent'] = BSRequest::getInstance()->getUserAgent()->getName();
+		$values['remote_host'] = BSRequest::getInstance()->getHost()->getName();
 		$values['create_date'] = BSDate::getNow('Y-m-d H:i:s');
 		return parent::createRecord($values, $flags);
 	}

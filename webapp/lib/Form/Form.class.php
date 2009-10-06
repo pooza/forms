@@ -13,6 +13,7 @@ class Form extends BSRecord implements
 	BSAttachmentContainer, BSExportable, BSHTTPRedirector, BSValidatorContainer, BSDictionary {
 	private $exporter;
 	private $fields;
+	private $registrations;
 
 	/**
 	 * 更新
@@ -76,6 +77,40 @@ class Form extends BSRecord implements
 			$this->fields = new FieldHandler($criteria);
 		}
 		return $this->fields;
+	}
+
+	/**
+	 * 応募を返す
+	 *
+	 * @access public
+	 * @return RegistrationHandler 応募テーブル
+	 */
+	public function getRegistrations () {
+		if (!$this->registrations) {
+			$criteria = $this->getTable()->getDatabase()->createCriteriaSet();
+			$criteria->register('form_id', $this);
+			$this->registrations = new RegistrationHandler($criteria);
+		}
+		return $this->registrations;
+	}
+
+	/**
+	 * 応募
+	 *
+	 * @access public
+	 * @param BSArray 回答
+	 */
+	public function registerAnswer (BSArray $answers) {
+		$id = $this->getRegistrations()->createRecord(array('status' => 'show'));
+		$registration = $this->getRegistrations()->getRecord($id);
+
+		$this->getFields()->query();
+		foreach ($answers as $key => $answer) {
+			if (!$field = $this->getFields()->getRecord(array('name' => $key))) {
+				throw new BSException('フィールド' . $key . 'が見つかりません。');
+			}
+			$registration->registerDetail($field, $answer);
+		}
 	}
 
 	/**

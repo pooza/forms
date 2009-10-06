@@ -11,7 +11,7 @@ class CommitAction extends BSRecordAction {
 	public function execute () {
 		try {
 			$this->database->beginTransaction();
-////////////
+			$this->getRecord()->registerAnswer(new BSArray($this->user->getAttribute('answer')));
 			$this->database->commit();
 		} catch (BSDatabaseException $e) {
 			$this->database->rollback();
