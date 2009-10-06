@@ -10,7 +10,7 @@
  * @version $Id$
  */
 class Form extends BSRecord implements
-	BSAttachmentContainer, BSExportable, BSHTTPRedirector, BSValidatorContainer, BSDictionary {
+	BSAttachmentContainer, BSHTTPRedirector, BSValidatorContainer, BSDictionary {
 	private $exporter;
 	private $fields;
 	private $registrations;
@@ -74,6 +74,7 @@ class Form extends BSRecord implements
 		if (!$this->fields) {
 			$criteria = $this->getTable()->getDatabase()->createCriteriaSet();
 			$criteria->register('form_id', $this);
+			$criteria->register('status', 'show');
 			$this->fields = new FieldHandler($criteria);
 		}
 		return $this->fields;
@@ -232,56 +233,6 @@ class Form extends BSRecord implements
 	}
 
 	/**
-	 * エクスポータを返す
-	 *
-	 * @access public
-	 * @return BSExporter エクスポータ
-	 */
-	public function getExporter () {
-		if (!$this->exporter) {
-			$this->exporter = new BSCSVExporter;
-		}
-		return $this->exporter;
-	}
-
-	/**
-	 * 見出しを返す
-	 *
-	 * @access public
-	 * @return BSArray 見出し
-	 */
-	public function getHeader () {
-		throw new BSException('getHeaderが未実装です。');
-	}
-
-	/**
-	 * エクスポート
-	 *
-	 * @access public
-	 * @return BSExporter エクスポーター
-	 */
-	public function export () {
-		$this->getExporter()->addRecord($this->getHeader());
-		foreach (BSDatabase::getInstance()->query('SELECT * from ' . $this->getName()) as $row) {
-			$this->getExporter()->addRecord(
-				$this->modifyRecord(new BSArray($row))
-			);
-		}
-		return $this->getExporter();
-	}
-
-	/**
-	 * レコードを整形する
-	 *
-	 * @access protected
-	 * @param BSArray $record レコード
-	 * @return BSArray 整形後のレコード
-	 */
-	protected function modifyRecord (BSArray $record) {
-		return $record;
-	}
-
-	/**
 	 * リダイレクト対象
 	 *
 	 * @access public
@@ -340,6 +291,17 @@ class Form extends BSRecord implements
 	 */
 	public function getDictionaryName () {
 		return get_class($this) . '.' . $this->getID();
+	}
+
+	/**
+	 * エクスポート
+	 *
+	 * @access public
+	 * @return BSExporter エクスポーター
+	 */
+	public function export () {
+		$table = new RegistrationDumpHandler($this);
+		return $table->export();
 	}
 
 	/**
