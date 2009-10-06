@@ -108,7 +108,7 @@
 			<tr>
 				<td colspan="2">
 					<input type="submit" value="更新" />
-					<input type="button" value="CSVエクスポート" onclick="redirect('{$module.name}','Export')" />
+					<input type="button" value="CSVエクスポート..." onclick="redirect('{$module.name}','Export')" />
 					<input type="button" value="このフォームを削除..." onclick="confirmDelete('{$module.name}','Delete','フォーム')" />
 				</td>
 			</tr>
