@@ -17,6 +17,11 @@ class AgreementField extends Field {
 	 * @access public
 	 */
 	public function registerValidators () {
+		$params = array('required_msg' => 'ご同意下さい。');
+		BSValidateManager::getInstance()->register(
+			$this->getName(),
+			new BSEmptyValidator($params)
+		);
 	}
 }
 

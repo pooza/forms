@@ -9,14 +9,20 @@
  * @author 小石達也 <tkoishi@b-shock.co.jp>
  * @version $Id$
  */
-class PrefField extends Field {
+class PrefField extends SingleAnswerField {
 
 	/**
-	 * バリデータ登録
+	 * 選択肢を返す
 	 *
 	 * @access public
+	 * @return BSArray 選択肢
 	 */
-	public function registerValidators () {
+	public function getChoices () {
+		if (!$this->choices) {
+			$prefs = new PrefHandler;
+			$this->choices = $prefs->getLabels();
+		}
+		return $this->choices;
 	}
 }
 

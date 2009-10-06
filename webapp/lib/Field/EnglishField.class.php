@@ -17,6 +17,8 @@ class EnglishField extends Field {
 	 * @access public
 	 */
 	public function registerValidators () {
+		parent::registerValidators();
+		BSValidateManager::getInstance()->register($this->getName(), new BSEnglishValidator);
 	}
 }
 

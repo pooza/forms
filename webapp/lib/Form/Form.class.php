@@ -9,8 +9,8 @@
  * @author 小石達也 <tkoishi@b-shock.co.jp>
  * @version $Id$
  */
-class Form extends BSRecord
-	implements BSAttachmentContainer, BSExportable, BSHTTPRedirector, BSValidatorContainer {
+class Form extends BSRecord implements
+	BSAttachmentContainer, BSExportable, BSHTTPRedirector, BSValidatorContainer, BSDictionary {
 	private $exporter;
 	private $fields;
 
@@ -277,6 +277,32 @@ class Form extends BSRecord
 	}
 
 	/**
+	 * 翻訳して返す
+	 *
+	 * @access public
+	 * @param string $label ラベル
+	 * @param string $language 言語
+	 * @return string 翻訳された文字列
+	 */
+	public function translate ($label, $language) {
+		$fields = $this->getFields();
+		$fields->query();
+		if ($field = $fields->getRecord(array('name' => $label))) {
+			return $field['label'];
+		}
+	}
+
+	/**
+	 * 辞書の名前を返す
+	 *
+	 * @access public
+	 * @return string 辞書の名前
+	 */
+	public function getDictionaryName () {
+		return get_class($this) . '.' . $this->getID();
+	}
+
+	/**
 	 * アサインすべき値を返す
 	 *
 	 * @access public
@@ -290,6 +316,10 @@ class Form extends BSRecord
 				$values['has_' . $field] = true;
 				$values[$field] = $this->getAttachmentInfo($field);
 			}
+		}
+		$values['fields'] = new BSArray;
+		foreach ($this->getFields() as $field) {
+			$values['fields'][$field->getName()] = $field->getAssignValue();
 		}
 		return $values;
 	}

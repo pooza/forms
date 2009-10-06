@@ -11,16 +11,7 @@ class CommitAction extends BSRecordAction {
 	public function execute () {
 		try {
 			$this->database->beginTransaction();
-			$account = AccountHandler::getCurrentAccount();
-			$account->subscribe(
-				$this->getRecord(),
-				$this->user->getAttribute('answer'),
-				$this->user->getAttribute('enquete')
-			);
-			$params = new BSArray(array(
-				'form' => $this->getRecord(),
-			));
-			$account->sendMail('Form', $params);
+////////////
 			$this->database->commit();
 		} catch (BSDatabaseException $e) {
 			$this->database->rollback();
@@ -29,6 +20,7 @@ class CommitAction extends BSRecordAction {
 			$this->database->rollback();
 			return $this->handleError();
 		}
+		$this->user->removeAttribute('answer');
 		return $this->getModule()->getAction('Thanx')->redirect();
 	}
 
@@ -41,16 +33,7 @@ class CommitAction extends BSRecordAction {
 	}
 
 	public function validate () {
-		if (AccountHandler::getCurrentAccount()->isRegisterd($this->getRecord())) {
-			return false;
-		} else if (!$this->user->getAttribute('answer')) {
-			return false;
-		}
-		return true;
-	}
-
-	public function getRequestMethods () {
-		return BSRequest::POST;
+		return (parent::validate() && $this->user->getAttribute('answer'));
 	}
 }
 

@@ -18,7 +18,7 @@ class RegisterAction extends BSRecordAction {
 			return $this->controller->getNotFoundAction()->forward();
 		}
 		if ($answer = $this->user->getAttribute('answer')) {
-			$this->request->setParameters($params);
+			$this->request->setParameters($answer);
 		}
 		return BSView::INPUT;
 	}

@@ -17,6 +17,15 @@ class MultiAnswerField extends Field {
 	 * @access public
 	 */
 	public function registerValidators () {
+		$manager = BSValidateManager::getInstance();
+		if ($this['required']) {
+			$params = array('required_msg' => '選ばれていません。');
+			$manager->register($this->getName(), new BSEmptyValidator($params));
+			$params = array('max' => 2048);
+			$manager->register($this->getName(), new BSStringValidator($params));
+		}
+		$params = array('choices' => $this->getChoices());
+		$manager->register($this->getName(), new BSChoiceValidator($params));
 	}
 }
 

@@ -9,8 +9,8 @@
  */
 class ThanxSuccessView extends BSSmartyView {
 	public function execute () {
-		$this->setTemplate($this->getModule()->getRecord()->getTemplateFile('register'));
-		$this->translator->register($this->getModule()->getRecord()->getFields());
+		$this->setTemplate($this->getModule()->getRecord()->getTemplateFile('thanx'));
+		$this->translator->register($this->getModule()->getRecord());
 	}
 }
 

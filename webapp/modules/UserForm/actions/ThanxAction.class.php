@@ -9,7 +9,6 @@
  */
 class ThanxAction extends BSRecordAction {
 	public function execute () {
-		$this->user->removeAttribute('answer');
 		return BSView::SUCCESS;
 	}
 }

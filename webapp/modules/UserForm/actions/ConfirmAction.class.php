@@ -17,12 +17,7 @@ class ConfirmAction extends BSRecordAction {
 	}
 
 	public function validate () {
-		if (AccountHandler::getCurrentAccount()->isRegisterd($this->getRecord())) {
-			return false;
-		} else if (!$this->user->getAttribute('answer')) {
-			return false;
-		}
-		return true;
+		return (parent::validate() && $this->user->getAttribute('answer'));
 	}
 }
 
