@@ -19,7 +19,7 @@ class DeleteAction extends BSRecordAction {
 			return $this->getModule()->getAction('Detail')->forward();
 		}
 
-		$url = BSModule::getInstance('AdminEvent')->getAction('Detail')->getURL();
+		$url = BSModule::getInstance('AdminForm')->getAction('Detail')->getURL();
 		$url->setParameter('pane', 'FieldList');
 		return $url->redirect();
 	}
