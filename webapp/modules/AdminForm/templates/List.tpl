@@ -17,7 +17,7 @@
 <h1>{$action.title}</h1>
 <table>
 	<tr>
-		<th width="240">名前</th>
+		<th width="480">名前</th>
 	</tr>
 	<tr>
 		<td colspan="1">
@@ -27,7 +27,7 @@
 
 {foreach from=$forms item='form'}
 	<tr class="{$form.status}">
-		<td width="240"><a href="/{$module.name}/Detail/{$form.id}">{$form.name}</a></td>
+		<td width="480"><a href="/{$module.name}/Detail/{$form.id}">{$form.name}</a></td>
 	</tr>
 {foreachelse}
 	<tr>
