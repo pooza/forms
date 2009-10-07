@@ -108,6 +108,7 @@
 			<tr>
 				<td colspan="2">
 					<input type="submit" value="更新" />
+					<input type="button" value="複製" onclick="redirect('{$module.name}','Duplicate')" />
 					<input type="button" value="CSVエクスポート..." onclick="redirect('{$module.name}','Export')" />
 					<input type="button" value="このフォームを削除..." onclick="confirmDelete('{$module.name}','Delete','フォーム')" />
 				</td>
@@ -120,29 +121,53 @@
 
 {if $form.has_form_template}
 <div id="FormTemplateViewer" class="panel">
-	{smarty_preformatted}{$form.form_template.contents}{/smarty_preformatted}
-	<br/>({$form.form_template.size|binary_size_format}B)
+	<div>
+		{smarty_preformatted}{$form.form_template.contents}{/smarty_preformatted}
+	</div>
+	<div class="attachment_navigation">
+		<a href="{$form.form_template.url}" ><img src="/carrotlib/images/document.gif" width="16" height="16" alt="" /></a>
+		{$form.form_template.size|binary_size_format}B
+		[<a href="/{$module.name}/DeleteAttachment?name=form_template">このファイルを削除</a>]
+	</div>
 </div>
 {/if}
 
 {if $form.has_confirm_template}
 <div id="ConfirmTemplateViewer" class="panel">
-	{smarty_preformatted}{$form.confirm_template.contents}{/smarty_preformatted}
-	<br/>({$form.confirm_template.size|binary_size_format}B)
+	<div>
+		{smarty_preformatted}{$form.confirm_template.contents}{/smarty_preformatted}
+	</div>
+	<div class="attachment_navigation">
+		<a href="{$form.confirm_template.url}" ><img src="/carrotlib/images/document.gif" width="16" height="16" alt="" /></a>
+		{$form.confirm_template.size|binary_size_format}B
+		[<a href="/{$module.name}/DeleteAttachment?name=confirm_template">このファイルを削除</a>]
+	</div>
 </div>
 {/if}
 
 {if $form.has_thanx_template}
 <div id="ThanxTemplateViewer" class="panel">
-	{smarty_preformatted}{$form.thanx_template.contents}{/smarty_preformatted}
-	<br/>({$form.thanx_template.size|binary_size_format}B)
+	<div>
+		{smarty_preformatted}{$form.thanx_template.contents}{/smarty_preformatted}
+	</div>
+	<div class="attachment_navigation">
+		<a href="{$form.thanx_template.url}" ><img src="/carrotlib/images/document.gif" width="16" height="16" alt="" /></a>
+		{$form.thanx_template.size|binary_size_format}B
+		[<a href="/{$module.name}/DeleteAttachment?name=thanx_template">このファイルを削除</a>]
+	</div>
 </div>
 {/if}
 
 {if $form.has_thanx_mail_template}
 <div id="ThanxMailTemplateViewer" class="panel">
-	{smarty_preformatted}{$form.thanx_mail_template.contents}{/smarty_preformatted}
-	<br/>({$form.thanx_mail_template.size|binary_size_format}B)
+	<div>
+		{smarty_preformatted}{$form.thanx_mail_template.contents}{/smarty_preformatted}
+	</div>
+	<div class="attachment_navigation">
+		<a href="{$form.thanx_mail_template.url}" ><img src="/carrotlib/images/document.gif" width="16" height="16" alt="" /></a>
+		{$form.thanx_mail_template.size|binary_size_format}B
+		[<a href="/{$module.name}/DeleteAttachment?name=thanx_mail_template">このファイルを削除</a>]
+	</div>
 </div>
 {/if}
 

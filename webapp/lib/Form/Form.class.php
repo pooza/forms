@@ -65,6 +65,30 @@ class Form extends BSRecord implements
 	}
 
 	/**
+	 * 複製
+	 *
+	 * @access public
+	 * @return integer[] 複製されたレコードの主キー
+	 */
+	public function duplicate () {
+		$values = clone $this->getAttributes();
+		$values['name'] .= 'のコピー';
+		$values['status'] = 'hide';
+		$values->removeParameter('id');
+		$id = $this->getTable()->createRecord($values);
+		$new = $this->getTable()->getRecord($id);
+
+		foreach ($this->getFields() as $field) {
+			$values = clone $field->getAttributes();
+			$values['form_id'] = $new->getID();
+			$values->removeParameter('id');
+			$new->getFields()->createRecord($values);
+		}
+
+		return $new->getID();
+	}
+
+	/**
 	 * 追加項目を返す
 	 *
 	 * @access public
