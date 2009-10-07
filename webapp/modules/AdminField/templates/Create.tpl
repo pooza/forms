@@ -43,7 +43,7 @@
 		<tr>
 			<th>選択肢</th>
 			<td>
-				<textarea name="choices" cols="32" rows="8" />{$params.choices}</textarea><br/>
+				<textarea name="choices" cols="48" rows="8" />{$params.choices}</textarea><br/>
 				<span class="alert">改行で区切って。</span>
 			</td>
 		</tr>
