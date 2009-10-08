@@ -10,7 +10,7 @@
 class RegisterInputView extends BSSmartyView {
 	public function execute () {
 		$this->setTemplate($this->getModule()->getRecord()->getTemplateFile('form'));
-		$this->translator->register($this->getModule()->getRecord());
+		$this->translator->register($this->getModule()->getRecord(), BSArray::POSITION_TOP);
 	}
 }
 

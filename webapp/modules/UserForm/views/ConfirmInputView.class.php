@@ -11,7 +11,7 @@ class ConfirmInputView extends BSSmartyView {
 	public function execute () {
 		$this->setAttribute('answer', $this->user->getAttribute('answer'));
 		$this->setTemplate($this->getModule()->getRecord()->getTemplateFile('confirm'));
-		$this->translator->register($this->getModule()->getRecord());
+		$this->translator->register($this->getModule()->getRecord(), BSArray::POSITION_TOP);
 	}
 }
 
