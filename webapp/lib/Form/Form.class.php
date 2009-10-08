@@ -99,7 +99,7 @@ class Form extends BSRecord implements
 			$criteria = $this->getTable()->getDatabase()->createCriteriaSet();
 			$criteria->register('form_id', $this);
 			$criteria->register('status', 'show');
-			$this->fields = new FieldHandler($criteria);
+			$this->fields = new FieldHandler($criteria, 'form_id,rank');
 		}
 		return $this->fields;
 	}

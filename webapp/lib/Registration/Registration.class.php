@@ -30,7 +30,7 @@ class Registration extends BSRecord {
 				array('field.name AS field_name', 'detail.answer'),
 				array('registration_detail AS detail', 'field'),
 				$criteria,
-				'field.id'
+				'field.rank,field.id'
 			);
 			foreach ($db->query($sql) as $row) {
 				$this->answers[$row['field_name']] = $row['answer'];
