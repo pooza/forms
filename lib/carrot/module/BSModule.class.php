@@ -19,7 +19,7 @@ class BSModule implements BSHTTPRedirector, BSAssignable {
 	private $configFiles;
 	private $prefix;
 	private $record;
-	private $table;
+	protected $table;
 	private $parameters;
 	private $recordClassName;
 	static private $instances;

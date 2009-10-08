@@ -19,10 +19,12 @@
 	<ul id="Tabs">
 		<li><a href="#DetailForm"><span>フォーム詳細</span></a></li>
 		<li><a href="#FieldList"><span>フィールド管理</span></a></li>
-		{if $form.has_form_template}<li><a href="#FormTemplateViewer"><span>フォームテンプレート</span></a></li>{/if}
-		{if $form.has_confirm_template}<li><a href="#ConfirmTemplateViewer"><span>確認画面テンプレート</span></a></li>{/if}
-		{if $form.has_thanx_template}<li><a href="#ThanxTemplateViewer"><span>サンクス画面テンプレート</span></a></li>{/if}
-		{if $form.has_thanx_mail_template}<li><a href="#ThanxMailTemplateViewer"><span>サンクスメールテンプレート</span></a></li>{/if}
+		<li><a href="#RegistrationList"><span>応募管理</span></a></li>
+		<li><a href="#RegistrationStatistics"><span>応募統計</span></a></li>
+		{if $form.has_form_template}<li><a href="#FormTemplateViewer"><span>フォーム</span></a></li>{/if}
+		{if $form.has_confirm_template}<li><a href="#ConfirmTemplateViewer"><span>確認画面</span></a></li>{/if}
+		{if $form.has_thanx_template}<li><a href="#ThanxTemplateViewer"><span>サンクス画面</span></a></li>{/if}
+		{if $form.has_thanx_mail_template}<li><a href="#ThanxMailTemplateViewer"><span>サンクスメール</span></a></li>{/if}
 	</ul>
 </div>
 
@@ -109,7 +111,7 @@
 				<td colspan="2">
 					<input type="submit" value="更新" />
 					<input type="button" value="複製" onclick="redirect('{$module.name}','Duplicate')" />
-					<input type="button" value="CSVエクスポート..." onclick="redirect('{$module.name}','Export')" />
+					<input type="button" value="応募のCSVエクスポート..." onclick="redirect('{$module.name}','Export')" />
 					<input type="button" value="このフォームを削除..." onclick="confirmDelete('{$module.name}','Delete','フォーム')" />
 				</td>
 			</tr>
@@ -118,6 +120,8 @@
 </div>
 
 <div id="FieldList" class="panel"></div>
+<div id="RegistrationList" class="panel"></div>
+<div id="RegistrationStatistics" class="panel"></div>
 
 {if $form.has_form_template}
 <div id="FormTemplateViewer" class="panel">
@@ -176,7 +180,9 @@ actions.onload.push(function(){ldelim}
   new ProtoTabs('Tabs', {ldelim}
     defaultPanel:'{$params.pane|default:'DetailForm'}',
     ajaxUrls: {ldelim}
-      FieldList: '/AdminField/List/{$form.id}'
+      FieldList: '/AdminField/List/{$form.id}',
+      RegistrationList: '/AdminRegistration/List',
+      RegistrationStatistics: '/AdminField/Statistics'
     {rdelim}
   {rdelim});
 {rdelim});

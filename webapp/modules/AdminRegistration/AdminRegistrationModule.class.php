@@ -1,13 +1,13 @@
 <?php
 /**
- * AdminFieldモジュール
+ * AdminRegistrationモジュール
  *
  * @package jp.co.commons.forms
- * @subpackage AdminField
+ * @subpackage AdminRegistration
  * @author 小石達也 <tkoishi@b-shock.co.jp>
  * @version $Id$
  */
-class AdminFieldModule extends BSModule {
+class AdminRegistrationModule extends BSModule {
 
 	/**
 	 * フォームを返す
@@ -21,6 +21,19 @@ class AdminFieldModule extends BSModule {
 		} else {
 			return BSModule::getInstance('AdminForm')->getRecord();
 		}
+	}
+
+	/**
+	 * テーブルを返す
+	 *
+	 * @access public
+	 * @return BSTableHandler テーブル
+	 */
+	public function getTable () {
+		if (!$this->table) {
+			$this->table = new RegistrationDumpHandler($this->getForm());
+		}
+		return $this->table;
 	}
 }
 
