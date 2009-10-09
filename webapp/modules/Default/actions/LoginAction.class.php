@@ -14,15 +14,19 @@ class LoginAction extends BSAction {
 			$this->user->addCredential('Develop');
 		}
 
-		$url = BSURL::getInstance($this->controller->getConstant('ROOT_URL_HTTPS'));
-		$url['path'] = '/AdminForm/';
+		if (!BSString::isBlank($url = $this->user->getAttribute('RequestURL'))) {
+			$url = BSURL::getInstance($url);
+			$this->user->removeAttribute('RequestURL');
+		} else {
+			$url = BSURL::getInstance($this->controller->getConstant('ROOT_URL_HTTPS'));
+			$url['path'] = '/AdminForm/';
+		}
 		return $url->redirect();
 	}
 
 	public function getDefaultView () {
-		$this->request->clearAttributes();
-		$this->user->clearAttributes();
-		$this->user->clearCredentials();
+		//$this->user->clearAttributes();
+		//$this->user->clearCredentials();
 		return BSView::INPUT;
 	}
 

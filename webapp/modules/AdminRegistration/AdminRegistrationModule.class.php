@@ -16,7 +16,13 @@ class AdminRegistrationModule extends BSModule {
 	 * @return Form フォーム
 	 */
 	public function getForm () {
-		return BSModule::getInstance('AdminForm')->getRecord();
+		if (!$form = BSModule::getInstance('AdminForm')->getRecord()) {
+			$table = new RegistrationHandler;
+			if ($record = $table->getRecord($this->getRecordID())) {
+				$form = $record->getForm();
+			}
+		}
+		return $form;
 	}
 
 	/**

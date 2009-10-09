@@ -21,3 +21,8 @@ author:
 crypt:
   salt: EGQ1TT4MXA
   engine: cbc
+
+module:
+  secure:
+    module: Default
+    action: Login

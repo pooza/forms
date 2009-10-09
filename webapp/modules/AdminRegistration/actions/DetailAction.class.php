@@ -12,6 +12,11 @@ class DetailAction extends BSRecordAction {
 		$this->request->setAttribute('form', $this->getModule()->getForm());
 		return BSView::SUCCESS;
 	}
+
+	public function deny () {
+		$this->user->setAttribute('RequestURL', $this->request->getURL()->getContents());
+		return parent::deny();
+	}
 }
 
 /* vim:set tabstop=4: */
