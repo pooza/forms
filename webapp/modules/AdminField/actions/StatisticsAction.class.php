@@ -1,14 +1,15 @@
 <?php
 /**
- * Detailアクション
+ * Statisticsアクション
  *
  * @package jp.co.commons.forms
- * @subpackage AdminRegistration
+ * @subpackage AdminField
  * @author 小石達也 <tkoishi@b-shock.co.jp>
  * @version $Id$
  */
-class DetailAction extends BSRecordAction {
+class StatisticsAction extends BSRecordAction {
 	public function execute () {
+		$this->request->setAttribute('statistics', $this->getRecord()->getStatistics());
 		$this->request->setAttribute('form', $this->getModule()->getForm());
 		return BSView::SUCCESS;
 	}
@@ -18,12 +19,7 @@ class DetailAction extends BSRecordAction {
 	}
 
 	public function validate () {
-		return parent::validate() && $this->getModule()->getForm();
-	}
-
-	public function deny () {
-		$this->user->setAttribute('RequestURL', $this->request->getURL()->getContents());
-		return parent::deny();
+		return parent::validate() && ($this->getRecord() instanceof ChoiceField);
 	}
 }
 

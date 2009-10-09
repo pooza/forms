@@ -40,6 +40,9 @@ class DetailAction extends BSRecordAction {
 	}
 
 	public function getDefaultView () {
+		if (!$this->getRecord()) {
+			return $this->controller->getNotFoundAction()->redirect();
+		}
 		$this->request->setAttribute('form', $this->getModule()->getForm());
 		return BSView::INPUT;
 	}

@@ -9,23 +9,34 @@
  * @author 小石達也 <tkoishi@b-shock.co.jp>
  * @version $Id$
  */
-class SingleAnswerField extends Field {
+class SingleAnswerField extends ChoiceField {
 
 	/**
-	 * バリデータ登録
+	 * 統計
 	 *
 	 * @access public
+	 * @return BSArray 統計結果
 	 */
-	public function registerValidators () {
-		$manager = BSValidateManager::getInstance();
-		if ($this['required']) {
-			$params = array('required_msg' => '選ばれていません。');
-			$manager->register($this->getName(), new BSEmptyValidator($params));
-			$params = array('max' => 2048);
-			$manager->register($this->getName(), new BSStringValidator($params));
+	public function getStatistics () {
+		if (!$this->statistics) {
+			$this->statistics = new BSArray;
+
+			$db = $this->getTable()->getDatabase();
+			$criteria = $db->createCriteriaSet();
+			$criteria->register('field_id', $this);
+			$sql = BSSQL::getSelectQueryString(
+				array('count(*) AS count', 'answer'),
+				'registration_detail',
+				$criteria,
+				null,
+				'answer'
+			);
+			foreach ($db->query($sql) as $row) {
+				$this->statistics[$row['answer']] = new BSArray($row);
+			}
+			$this->summarizeStatistics();
 		}
-		$params = array('choices' => $this->getChoices());
-		$manager->register($this->getName(), new BSChoiceValidator($params));
+		return $this->statistics;
 	}
 }
 

@@ -25,6 +25,10 @@ class RegistrationDumpHandler extends RegistrationHandler implements BSExportabl
 		}
 		$this->form = $criteria;
 
+		if (!$order) {
+			$order = 'create_date';
+		}
+
 		parent::__construct(null, $order);
 
 		$criteria = $this->getDatabase()->createCriteriaSet();

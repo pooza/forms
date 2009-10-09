@@ -82,6 +82,16 @@ class Field extends BSSortableRecord implements BSValidatorContainer {
 	}
 
 	/**
+	 * 統計を返す
+	 *
+	 * @access public
+	 * @return BSArray 統計結果
+	 */
+	public function getStatistics () {
+		return new BSArray;
+	}
+
+	/**
 	 * アサインすべき値を返す
 	 *
 	 * @access public

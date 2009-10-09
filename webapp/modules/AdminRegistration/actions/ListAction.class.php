@@ -26,7 +26,7 @@ class ListAction extends BSPaginateTableAction {
 	 * @return string[] ソート順
 	 */
 	protected function getOrder () {
-		return 'id DESC';
+		return 'create_date DESC';
 	}
 
 	/**
