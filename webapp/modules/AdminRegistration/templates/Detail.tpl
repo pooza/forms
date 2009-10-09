@@ -30,8 +30,14 @@
 
 {foreach from=$registration.answers key='field' item='answer'}
 	<tr>
-		<th>{$field|translate}</th>
-		<td>{$answer}</td>
+		<th>
+	{if $form.fields[$field].choices}
+			<a href="{carrot_url module='AdminField' action='Detail' record=$form.fields[$field].id params_pane='Statistics'}">{$field|translate}</a>
+	{else}
+			{$field|translate}
+	{/if}
+		</th>
+		<td>{$answer|nl2br}</td>
 	</tr>
 {/foreach}
 

@@ -29,9 +29,9 @@
 		<td width="150">{$field.label}</td>
 		<td width="90">{$field.field_type_id|translate:'FieldHandler'}</td>
 		<td width="30" align="center">{if $field.required}○{/if}</td>
-		<td width="30" align="center">{if $field.choices}○{/if}</td>
+		<td width="30" align="center">{if $field.has_statistics}○{/if}</td>
 		<td width="60" align="center">
-	{if $field.choices}
+	{if $field.has_statistics}
 			<a href="/{$module.name}/Detail/{$field.id}?pane=Statistics">構成比</a>
 	{/if}
 		</td>

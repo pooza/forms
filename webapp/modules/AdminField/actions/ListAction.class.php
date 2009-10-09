@@ -23,6 +23,18 @@ class ListAction extends BSTableAction {
 		return $this->criteria;
 	}
 
+	public function getRows () {
+		if (!$this->rows) {
+			$this->rows = new BSArray;
+			foreach ($this->getTable() as $record) {
+				$values = $record->getAttributes();
+				$values['has_statistics'] = !!$record->getChoices()->count();
+				$this->rows[] = $values;
+			}
+		}
+		return $this->rows;
+	}
+
 	public function execute () {
 		$this->request->setAttribute('fields', $this->getRows());
 		return BSView::INPUT;
