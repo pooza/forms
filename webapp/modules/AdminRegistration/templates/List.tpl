@@ -36,12 +36,12 @@
 	</tr>
 {foreachelse}
 	<tr>
-		<td colspan="5" class="alert">登録されていません。</td>
+		<td colspan="4" class="alert">登録されていません。</td>
 	</tr>
 {/foreach}
 
 	<tr>
-		<td colspan="5" style="text-align:center">
+		<td colspan="4" style="text-align:center">
 {strip}
 			<span><a href="javascript:void({if 1<$page}new Ajax.Updater('RegistrationList','/{$module.name}/{$action.name}?page=1'){/if})"><img src="/carrotlib/images/navigation_arrow/left3.gif" width="14" height="14" alt="|&lt;" /></a></span>&nbsp;
 			<span><a href="javascript:void({if 1<$page}new Ajax.Updater('RegistrationList','/{$module.name}/{$action.name}?page={$page-1}'){/if})"><img src="/carrotlib/images/navigation_arrow/left1.gif" width="14" height="14" alt="&lt;" /></a></span>&nbsp;
