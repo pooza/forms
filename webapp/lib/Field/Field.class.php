@@ -27,6 +27,16 @@ class Field extends BSSortableRecord implements BSValidatorContainer {
 	}
 
 	/**
+	 * 削除可能か？
+	 *
+	 * @access protected
+	 * @return boolean 削除可能ならTrue
+	 */
+	protected function isDeletable () {
+		return $this->getForm()->isDeletable();
+	}
+
+	/**
 	 * 削除
 	 *
 	 * @access public

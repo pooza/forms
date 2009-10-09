@@ -61,7 +61,7 @@ class Form extends BSRecord implements
 	 * @return boolean 削除可能ならTrue
 	 */
 	protected function isDeletable () {
-		return true;
+		return !$this->getRegistrations()->count();
 	}
 
 	/**
