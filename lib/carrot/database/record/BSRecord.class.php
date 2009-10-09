@@ -8,7 +8,7 @@
  * テーブルのレコード
  *
  * @author 小石達也 <tkoishi@b-shock.co.jp>
- * @version $Id: BSRecord.class.php 1521 2009-09-22 06:28:16Z pooza $
+ * @version $Id: BSRecord.class.php 1536 2009-10-09 09:33:52Z pooza $
  * @abstract
  */
 abstract class BSRecord implements ArrayAccess, BSAssignable {

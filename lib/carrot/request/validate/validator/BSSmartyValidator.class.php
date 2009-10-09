@@ -8,9 +8,20 @@
  * Smartyバリデータ
  *
  * @author 小石達也 <tkoishi@b-shock.co.jp>
- * @version $Id: BSSmartyValidator.class.php 1531 2009-10-02 09:16:38Z pooza $
+ * @version $Id: BSSmartyValidator.class.php 1541 2009-10-09 09:57:44Z pooza $
  */
 class BSSmartyValidator extends BSValidator {
+
+	/**
+	 * 初期化
+	 *
+	 * @access public
+	 * @param string[] $parameters パラメータ配列
+	 */
+	public function initialize ($parameters = array()) {
+		$this['invalid_encoding_error'] = '正しいエンコードではありません。';
+		return parent::initialize($parameters);
+	}
 
 	/**
 	 * 実行
@@ -23,6 +34,10 @@ class BSSmartyValidator extends BSValidator {
 		$tempfile = BSFile::getTemporaryFile('.tpl');
 		if (is_array($value) && isset($value['is_file']) && !!$value['is_file']) {
 			$file = new BSFile($value['tmp_name']);
+			if (!mb_check_encoding($file->getContents())) {
+				$this->error = $this['invalid_encoding_error'];
+				return false;
+			}
 			$tempfile->setContents($file->getContents());
 		} else {
 			$tempfile->setContents($value);

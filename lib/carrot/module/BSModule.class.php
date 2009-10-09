@@ -8,20 +8,20 @@
  * モジュール
  *
  * @author 小石達也 <tkoishi@b-shock.co.jp>
- * @version $Id: BSModule.class.php 1521 2009-09-22 06:28:16Z pooza $
+ * @version $Id: BSModule.class.php 1540 2009-10-09 09:42:10Z pooza $
  */
 class BSModule implements BSHTTPRedirector, BSAssignable {
-	private $name;
-	private $title;
-	private $directories;
-	private $actions;
-	private $config = array();
-	private $configFiles;
-	private $prefix;
-	private $record;
+	protected $name;
+	protected $title;
+	protected $directories;
+	protected $actions;
+	protected $config = array();
+	protected $configFiles;
+	protected $prefix;
+	protected $record;
 	protected $table;
-	private $parameters;
-	private $recordClassName;
+	protected $parameters;
+	protected $recordClassName;
 	static private $instances;
 	static private $prefixes = array();
 

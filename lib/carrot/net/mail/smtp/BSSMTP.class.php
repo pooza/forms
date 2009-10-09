@@ -8,7 +8,7 @@
  * SMTPプロトコル
  *
  * @author 小石達也 <tkoishi@b-shock.co.jp>
- * @version $Id: BSSMTP.class.php 1521 2009-09-22 06:28:16Z pooza $
+ * @version $Id: BSSMTP.class.php 1542 2009-10-09 10:12:47Z pooza $
  */
 class BSSMTP extends BSSocket {
 	private $mail;
@@ -87,6 +87,7 @@ class BSSMTP extends BSSocket {
 	 */
 	public function send ($flags = null) {
 		if ($this->getMail()->validate()) {
+			$this->getMail()->updateMessageID();
 			for ($i = 0 ; $i < self::RETRY_LIMIT ; $i ++) {
 				try {
 					$this->execute('MAIL FROM:' . $this->getFrom()->getContents());

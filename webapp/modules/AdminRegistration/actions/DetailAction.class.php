@@ -8,6 +8,17 @@
  * @version $Id$
  */
 class DetailAction extends BSRecordAction {
+
+	/**
+	 * タイトルを返す
+	 *
+	 * @access public
+	 * @return string タイトル
+	 */
+	public function getTitle () {
+		return '応募:' . $this->getRecord()->getID();
+	}
+
 	public function execute () {
 		$this->request->setAttribute('form', $this->getModule()->getForm());
 		return BSView::SUCCESS;

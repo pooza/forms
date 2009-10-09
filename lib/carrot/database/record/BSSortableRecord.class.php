@@ -8,7 +8,7 @@
  * ソート可能なテーブルのレコード
  *
  * @author 小石達也 <tkoishi@b-shock.co.jp>
- * @version $Id: BSSortableRecord.class.php 1255 2009-06-08 07:41:00Z pooza $
+ * @version $Id: BSSortableRecord.class.php 1536 2009-10-09 09:33:52Z pooza $
  * @abstract
  */
 abstract class BSSortableRecord extends BSRecord {

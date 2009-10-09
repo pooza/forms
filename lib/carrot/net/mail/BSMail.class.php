@@ -8,7 +8,7 @@
  * メール
  *
  * @author 小石達也 <tkoishi@b-shock.co.jp>
- * @version $Id: BSMail.class.php 1176 2009-05-10 11:38:04Z pooza $
+ * @version $Id: BSMail.class.php 1542 2009-10-09 10:12:47Z pooza $
  */
 class BSMail extends BSMIMEDocument {
 	private $error;
@@ -28,7 +28,6 @@ class BSMail extends BSMIMEDocument {
 		$this->setHeader('Subject', 'untitled');
 		$this->setHeader('Content-Type', $renderer);
 		$this->setHeader('Content-Transfer-Encoding', $renderer);
-		$this->setHeader('Message-Id', null);
 		$this->setHeader('Date', BSDate::getNow());
 		$this->setHeader('Mime-Version', '1.0');
 		$this->setHeader('X-Mailer', null);
@@ -39,6 +38,15 @@ class BSMail extends BSMIMEDocument {
 		if (BS_DEBUG) {
 			$this->setHeader('X-Carrot-Debug-Mode', 'yes');
 		}
+	}
+
+	/**
+	 * メッセージIDを更新
+	 *
+	 * @access public
+	 */
+	public function updateMessageID () {
+		$this->setHeader('Message-Id', null);
 	}
 
 	/**

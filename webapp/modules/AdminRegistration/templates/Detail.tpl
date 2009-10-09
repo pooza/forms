@@ -11,10 +11,10 @@
 <div id="BreadCrumbs">
 	<a href="/AdminForm/">フォーム一覧</a>
 	<a href="/AdminForm/Detail/{$form.id}?pane=RegistrationList">{$form.name}</a>
-	<a href="#">応募詳細</a>
+	<a href="#">{$action.title}</a>
 </div>
 
-<h1>応募詳細</h1>
+<h1>{$action.title}</h1>
 
 {include file='ErrorMessages'}
 

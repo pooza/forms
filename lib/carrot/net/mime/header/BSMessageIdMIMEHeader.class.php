@@ -8,7 +8,7 @@
  * Message-IDヘッダ
  *
  * @author 小石達也 <tkoishi@b-shock.co.jp>
- * @version $Id: BSMessageIdMIMEHeader.class.php 1469 2009-09-11 12:40:31Z pooza $
+ * @version $Id: BSMessageIdMIMEHeader.class.php 1543 2009-10-09 10:16:09Z pooza $
  */
 class BSMessageIdMIMEHeader extends BSMIMEHeader {
 	private $id;
@@ -34,7 +34,7 @@ class BSMessageIdMIMEHeader extends BSMIMEHeader {
 			$this->id = sprintf(
 				'%s.%s@%s',
 				BSDate::getNow('YmdHis'),
-				BSNumeric::getRandom(),
+				BSUtility::getUniqueID(),
 				BS_SMTP_HOST
 			);
 		} else {

@@ -8,7 +8,7 @@
  * 選択バリデータ
  *
  * @author 小石達也 <tkoishi@b-shock.co.jp>
- * @version $Id: BSChoiceValidator.class.php 1513 2009-09-20 13:27:06Z pooza $
+ * @version $Id: BSChoiceValidator.class.php 1537 2009-10-09 09:35:20Z pooza $
  */
 class BSChoiceValidator extends BSValidator {
 

@@ -8,15 +8,15 @@
  * アクション
  *
  * @author 小石達也 <tkoishi@b-shock.co.jp>
- * @version $Id: BSAction.class.php 1531 2009-10-02 09:16:38Z pooza $
+ * @version $Id: BSAction.class.php 1540 2009-10-09 09:42:10Z pooza $
  * @abstract
  */
 abstract class BSAction implements BSHTTPRedirector, BSAssignable, BSValidatorContainer {
-	private $name;
+	protected $name;
 	protected $title;
-	private $config;
-	private $module;
-	private $methods;
+	protected $config;
+	protected $module;
+	protected $methods;
 
 	/**
 	 * @access public
