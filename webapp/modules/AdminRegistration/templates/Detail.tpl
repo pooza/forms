@@ -27,13 +27,6 @@
 		<th>応募日付</th>
 		<td>{$registration.create_date|date_format:'Y年n月j日(ww) H:i:s'}</td>
 	</tr>
-	<tr>
-		<th>ブラウザ</th>
-		<td>
-			{$registration.user_agent|user_agent_type|default:'(不明)'}系<br/>
-			{$registration.user_agent|default:'(不明)'}
-		</td>
-	</tr>
 
 {foreach from=$registration.answers key='field' item='answer'}
 	<tr>
@@ -42,6 +35,13 @@
 	</tr>
 {/foreach}
 
+	<tr>
+		<th>ブラウザ</th>
+		<td>
+			{$registration.user_agent|user_agent_type|default:'(不明)'}系<br/>
+			{$registration.user_agent|default:'(不明)'}
+		</td>
+	</tr>
 	<tr>
 		<th>リモートホスト</th>
 		<td>{$registration.remote_host|default:'(不明)'}</td>
