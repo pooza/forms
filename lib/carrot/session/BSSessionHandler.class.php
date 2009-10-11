@@ -8,7 +8,7 @@
  * セッションハンドラ
  *
  * @author 小石達也 <tkoishi@b-shock.co.jp>
- * @version $Id: BSSessionHandler.class.php 1412 2009-08-31 18:07:23Z pooza $
+ * @version $Id: BSSessionHandler.class.php 1550 2009-10-10 11:20:23Z pooza $
  */
 class BSSessionHandler implements BSUserIdentifier {
 	private $storage;
@@ -24,6 +24,7 @@ class BSSessionHandler implements BSUserIdentifier {
 			$this->storage = new BSDefaultSessionStorage;
 			$this->storage->initialize();
 		}
+		session_cache_limiter('private_no_expire');
 		session_start();
 
 		if (BS_SESSION_REGENERATE_ID) {

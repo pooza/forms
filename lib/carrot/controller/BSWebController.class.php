@@ -8,7 +8,7 @@
  * Webコントローラー
  *
  * @author 小石達也 <tkoishi@b-shock.co.jp>
- * @version $Id: BSWebController.class.php 1522 2009-09-22 06:38:56Z pooza $
+ * @version $Id: BSWebController.class.php 1549 2009-10-10 10:39:28Z pooza $
  */
 class BSWebController extends BSController {
 	static private $instance;
@@ -76,25 +76,6 @@ class BSWebController extends BSController {
 		$this->setHeader('Location', $url->getContents());
 		return BSView::NONE;
 	}
-
-	/**
-	 * レスポンスヘッダを送信
-	 *
-	 * @access public
-	 */
-	public function putHeaders () {
-		if (headers_sent()) {
-			$this->putLog('レスポンスヘッダを送信できません。', $this);
-		}
-
-		if ($status = $this->getHeaders()->getParameter('Status')) {
-			header('HTTP/1.0 ' . $status);
-		}
-
-		foreach ($this->getHeaders() as $name => $value) {
-			header($name . ': ' . $value);
-		}
-	}	
 }
 
 /* vim:set tabstop=4: */

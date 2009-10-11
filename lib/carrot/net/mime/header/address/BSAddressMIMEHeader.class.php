@@ -8,7 +8,7 @@
  * メールアドレスを格納する抽象ヘッダ
  *
  * @author 小石達也 <tkoishi@b-shock.co.jp>
- * @version $Id: BSAddressMIMEHeader.class.php 1177 2009-05-11 03:30:10Z pooza $
+ * @version $Id: BSAddressMIMEHeader.class.php 1545 2009-10-10 07:13:02Z pooza $
  * @abstract
  */
 abstract class BSAddressMIMEHeader extends BSMIMEHeader {
@@ -55,8 +55,8 @@ abstract class BSAddressMIMEHeader extends BSMIMEHeader {
 	 *
 	 * @access protected
 	 */
-	protected function parseParameters () {
-		parent::parseParameters();
+	protected function parse () {
+		parent::parse();
 		$this->email = BSMailAddress::getInstance($this->contents);
 	}
 }

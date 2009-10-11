@@ -8,7 +8,7 @@
  * Content-Dispositionヘッダ
  *
  * @author 小石達也 <tkoishi@b-shock.co.jp>
- * @version $Id: BSContentDispositionMIMEHeader.class.php 998 2009-03-20 11:16:16Z pooza $
+ * @version $Id: BSContentDispositionMIMEHeader.class.php 1545 2009-10-10 07:13:02Z pooza $
  */
 class BSContentDispositionMIMEHeader extends BSMIMEHeader {
 
@@ -17,8 +17,8 @@ class BSContentDispositionMIMEHeader extends BSMIMEHeader {
 	 *
 	 * @access protected
 	 */
-	protected function parseParameters () {
-		parent::parseParameters();
+	protected function parse () {
+		parent::parse();
 		if ($this['filename'] && ($part = $this->getPart()) && !$part->getFileName()) {
 			$part->setFileName($this['filename']);
 		}

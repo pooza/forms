@@ -8,10 +8,9 @@
  * Webリクエスト
  *
  * @author 小石達也 <tkoishi@b-shock.co.jp>
- * @version $Id: BSWebRequest.class.php 1522 2009-09-22 06:38:56Z pooza $
+ * @version $Id: BSWebRequest.class.php 1546 2009-10-10 07:32:34Z pooza $
  */
 class BSWebRequest extends BSRequest {
-	private $useragentReal;
 	static private $instance;
 
 	/**
@@ -181,13 +180,9 @@ class BSWebRequest extends BSRequest {
 	 * @return BSUserAgent リモートホストのUserAgent
 	 */
 	public function getRealUserAgent () {
-		if (!$this->useragentReal) {
-			$name = $this->controller->getEnvironment('USER-AGENT');
-			if (!$this->useragentReal = BSUserAgent::getInstance($name)) {
-				throw new BSUserAgentException('正しくないUserAgentです。');
-			}
+		if ($header = $this->getHeader('user-agent')) {
+			return $header->getEntity();
 		}
-		return $this->useragentReal;
 	}
 }
 

@@ -8,7 +8,7 @@
  * Content-Typeヘッダ
  *
  * @author 小石達也 <tkoishi@b-shock.co.jp>
- * @version $Id: BSContentTypeMIMEHeader.class.php 998 2009-03-20 11:16:16Z pooza $
+ * @version $Id: BSContentTypeMIMEHeader.class.php 1545 2009-10-10 07:13:02Z pooza $
  */
 class BSContentTypeMIMEHeader extends BSMIMEHeader {
 
@@ -32,8 +32,8 @@ class BSContentTypeMIMEHeader extends BSMIMEHeader {
 	 *
 	 * @access protected
 	 */
-	protected function parseParameters () {
-		parent::parseParameters();
+	protected function parse () {
+		parent::parse();
 		if ($this['boundary'] && $this->getPart()) {
 			$this->getPart()->setBoundary($this['boundary']);
 		}

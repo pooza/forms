@@ -8,7 +8,7 @@
  * テーブルのレコード
  *
  * @author 小石達也 <tkoishi@b-shock.co.jp>
- * @version $Id: BSRecord.class.php 1536 2009-10-09 09:33:52Z pooza $
+ * @version $Id: BSRecord.class.php 1544 2009-10-10 07:12:00Z pooza $
  * @abstract
  */
 abstract class BSRecord implements ArrayAccess, BSAssignable {
@@ -65,19 +65,6 @@ abstract class BSRecord implements ArrayAccess, BSAssignable {
 	 */
 	public function getAttributes () {
 		return clone $this->attributes;
-	}
-
-	/**
-	 * 内容を返す
-	 *
-	 * getAttributesのエイリアス
-	 *
-	 * @access public
-	 * @return BSArray 全属性値
-	 * @final
-	 */
-	final public function getContents () {
-		return $this->getAttributes();
 	}
 
 	/**
@@ -206,7 +193,7 @@ abstract class BSRecord implements ArrayAccess, BSAssignable {
 	 * @return integer ID
 	 */
 	public function getID () {
-		return $this->getAttribute($this->getTable()->getKeyField());
+		return $this[$this->getTable()->getKeyField()];
 	}
 
 	/**
@@ -216,7 +203,7 @@ abstract class BSRecord implements ArrayAccess, BSAssignable {
 	 * @return BSDate 更新日
 	 */
 	public function getUpdateDate () {
-		return BSDate::getInstance($this->getAttribute('update_date'));
+		return BSDate::getInstance($this['update_date']);
 	}
 
 	/**
@@ -226,7 +213,7 @@ abstract class BSRecord implements ArrayAccess, BSAssignable {
 	 * @return BSDate 作成日
 	 */
 	public function getCreateDate () {
-		return BSDate::getInstance($this->getAttribute('create_date'));
+		return BSDate::getInstance($this['create_date']);
 	}
 
 	/**
@@ -240,7 +227,7 @@ abstract class BSRecord implements ArrayAccess, BSAssignable {
 		foreach (array('name', 'label', 'title') as $name) {
 			foreach (array('', '_' . $language) as $suffix) {
 				$name .= $suffix;
-				if (!BSString::isBlank($label = $this->getAttribute($name))) {
+				if (!BSString::isBlank($label = $this[$name])) {
 					return $label;
 				}
 			}

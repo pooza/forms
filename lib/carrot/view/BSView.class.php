@@ -8,11 +8,12 @@
  * 基底ビュー
  *
  * @author 小石達也 <tkoishi@b-shock.co.jp>
- * @version $Id: BSView.class.php 1412 2009-08-31 18:07:23Z pooza $
+ * @version $Id: BSView.class.php 1550 2009-10-10 11:20:23Z pooza $
  */
 class BSView extends BSHTTPResponse {
 	protected $nameSuffix;
 	protected $action;
+	protected $version = '1.0';
 	const ALERT = 'Alert';
 	const ERROR = 'Error';
 	const INPUT = 'Input';
@@ -120,6 +121,9 @@ class BSView extends BSHTTPResponse {
 			throw new BSViewException($message);
 		}
 
+		$this->setHeader('content-type', BSMIMEUtility::getContentType($this->renderer));
+		$this->setHeader('content-length', $this->renderer->getSize());
+
 		$this->putHeaders();
 		mb_http_output('pass');
 		print $this->renderer->getContents();
@@ -164,19 +168,17 @@ class BSView extends BSHTTPResponse {
 	 * @access public
 	 */
 	public function putHeaders () {
-		$this->setHeader('Content-Type', BSMIMEUtility::getContentType($this->renderer));
-		$this->setHeader('Content-Length', $this->renderer->getSize());
-
-		if ($this->useragent->hasBug('cache-control')
-			&& ($this->request->isSSL() || $this->renderer->getType() != 'text/html')) {
-			$this->setHeader('Cache-Control', null);
-			$this->setHeader('Pragma', null);
+		foreach ($this->controller->getHeaders() as $key => $value) {
+			$this->setHeader($key, $value);
 		}
 
-		foreach ($this->getHeaders() as $header) {
-			$this->controller->setHeader($header->getName(), $header->getContents());
+		if ($header = $this->getHeader('status')) {
+			self::putHeader('HTTP/' . $this->getVersion() . ' ' . $header->getContents());
 		}
-		$this->controller->putHeaders();
+
+		foreach ($this->getHeaders() as $name => $header) {
+			self::putHeader($header->format());
+		}
 	}
 
 	/**
@@ -212,6 +214,19 @@ class BSView extends BSHTTPResponse {
 			self::INPUT,
 			self::SUCCESS,
 		));
+	}
+
+	/**
+	 * ヘッダを送信
+	 *
+	 * @access public
+	 * @return BSArray 全てのサフィックス
+	 */
+	static public function putHeader ($header) {
+		if (headers_sent()) {
+			throw new BSHTTPException('レスポンスヘッダを送信できません。');
+		}
+		header($header);
 	}
 }
 

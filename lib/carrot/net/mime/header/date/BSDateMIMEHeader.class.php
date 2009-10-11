@@ -1,14 +1,14 @@
 <?php
 /**
  * @package org.carrot-framework
- * @subpackage net.mime.header
+ * @subpackage net.mime.header.date
  */
 
 /**
  * Dateヘッダ
  *
  * @author 小石達也 <tkoishi@b-shock.co.jp>
- * @version $Id: BSDateMIMEHeader.class.php 1195 2009-05-16 11:46:01Z pooza $
+ * @version $Id: BSDateMIMEHeader.class.php 1547 2009-10-10 08:06:14Z pooza $
  */
 class BSDateMIMEHeader extends BSMIMEHeader {
 	private $date;
@@ -41,8 +41,8 @@ class BSDateMIMEHeader extends BSMIMEHeader {
 	 *
 	 * @access protected
 	 */
-	protected function parseParameters () {
-		parent::parseParameters();
+	protected function parse () {
+		parent::parse();
 		$this->date = BSDate::getInstance($this->contents);
 	}
 }

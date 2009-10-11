@@ -8,7 +8,7 @@
  * BASIC認証
  *
  * @author 小石達也 <tkoishi@b-shock.co.jp>
- * @version $Id: BSBasicAuthFilter.class.php 1419 2009-09-03 10:09:26Z pooza $
+ * @version $Id: BSBasicAuthFilter.class.php 1549 2009-10-10 10:39:28Z pooza $
  */
 class BSBasicAuthFilter extends BSFilter {
 
@@ -41,12 +41,8 @@ class BSBasicAuthFilter extends BSFilter {
 
 	public function execute () {
 		if (!$this->isAuthenticated()) {
-			$this->controller->setHeader(
-				'WWW-Authenticate',
-				sprintf('Basic realm=\'%s\'', $this['realm'])
-			);
-			$this->controller->setHeader('Status', BSHTTP::getStatus(401));
-			$this->controller->putHeaders();
+			BSView::putHeader('WWW-Authenticate: Basic realm=\'' . $this['realm'] . '\'');
+			BSView::putHeader('Status: ' . BSHTTP::getStatus(401));
 			return true;
 		}
 	}

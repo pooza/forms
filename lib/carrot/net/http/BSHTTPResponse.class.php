@@ -8,13 +8,14 @@
  * httpレスポンス
  *
  * @author 小石達也 <tkoishi@b-shock.co.jp>
- * @version $Id: BSHTTPResponse.class.php 1481 2009-09-12 07:59:47Z pooza $
+ * @version $Id: BSHTTPResponse.class.php 1549 2009-10-10 10:39:28Z pooza $
  */
 class BSHTTPResponse extends BSMIMEDocument {
-	private $version;
-	private $status;
-	private $message;
-	private $url;
+	protected $version;
+	protected $status;
+	protected $message;
+	protected $url;
+	const STATUS_PATTERN = '^HTTP/([[:digit:]]+\\.[[:digit:]]+) ([[:digit:]]{3}) (.*)$';
 
 	/**
 	 * 出力内容を設定
@@ -27,7 +28,7 @@ class BSHTTPResponse extends BSMIMEDocument {
 		try {
 			$contents = BSString::explode("\n\n", $contents);
 			foreach ($contents as $index => $value) {
-				if (mb_ereg('^HTTP/', $value)) {
+				if (mb_ereg(self::STATUS_PATTERN, $value)) {
 					$this->parseHeaders($value);
 					$contents->removeParameter($index);
 				} else {
@@ -48,9 +49,8 @@ class BSHTTPResponse extends BSMIMEDocument {
 	 */
 	protected function parseHeaders ($headers) {
 		$this->getHeaders()->clear();
-		$pattern = '^HTTP/([[:digit:]]+\\.[[:digit:]]+) ([[:digit:]]{3}) (.*)$';
 		foreach (BSString::explode("\n", $headers) as $line) {
-			if (mb_ereg($pattern, $line, $matches)) {
+			if (mb_ereg(self::STATUS_PATTERN, $line, $matches)) {
 				$this->version = $matches[1];
 				$this->status = (int)$matches[2];
 				$this->message = $matches[3];
@@ -80,7 +80,11 @@ class BSHTTPResponse extends BSMIMEDocument {
 	 * @return integer ステータスコード
 	 */
 	public function getStatus () {
-		return $this->status;
+		if ($header = $this->getStatus('status')) {
+			return $header['code'];
+		} else {
+			return $this->status;
+		}
 	}
 
 	/**
@@ -90,10 +94,8 @@ class BSHTTPResponse extends BSMIMEDocument {
 	 * @param integer $code ステータスコード
 	 */
 	public function setStatus ($code) {
-		if ($status = BSHTTP::getStatus($code)) {
-			$this->status = $code;
-			$this->setHeader('Status', $status);
-		}
+		$this->status = $code;
+		$this->setHeader('status', $code);
 	}
 
 	/**

@@ -8,15 +8,16 @@
  * コンソールコントローラー
  *
  * @author 小石達也 <tkoishi@b-shock.co.jp>
- * @version $Id: BSConsoleController.class.php 1522 2009-09-22 06:38:56Z pooza $
+ * @version $Id: BSConsoleController.class.php 1549 2009-10-10 10:39:28Z pooza $
  */
 class BSConsoleController extends BSController {
 	static private $instance;
 
 	/**
-	 * @access private
+	 * @access protected
 	 */
-	private function __construct () {
+	protected function __construct () {
+		parent::__construct();
 		if (BSString::isBlank($this->request[self::MODULE_ACCESSOR])) {
 			$this->request[self::MODULE_ACCESSOR] = 'Console';
 		}

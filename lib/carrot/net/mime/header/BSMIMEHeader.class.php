@@ -8,7 +8,7 @@
  * 基底ヘッダ
  *
  * @author 小石達也 <tkoishi@b-shock.co.jp>
- * @version $Id: BSMIMEHeader.class.php 1469 2009-09-11 12:40:31Z pooza $
+ * @version $Id: BSMIMEHeader.class.php 1545 2009-10-10 07:13:02Z pooza $
  * @abstract
  */
 class BSMIMEHeader extends BSParameterHolder {
@@ -131,7 +131,7 @@ class BSMIMEHeader extends BSParameterHolder {
 	public function setContents ($contents) {
 		$contents = BSString::stripControlCharacters($contents);
 		$this->contents = BSMIMEUtility::decode($contents);
-		$this->parseParameters();
+		$this->parse();
 	}
 
 	/**
@@ -147,7 +147,7 @@ class BSMIMEHeader extends BSParameterHolder {
 			$contents = ' ' . $contents;
 		}
 		$this->contents .= $contents;
-		$this->parseParameters();
+		$this->parse();
 	}
 
 	/**
@@ -155,7 +155,7 @@ class BSMIMEHeader extends BSParameterHolder {
 	 *
 	 * @access protected
 	 */
-	protected function parseParameters () {
+	protected function parse () {
 		foreach (BSString::explode(';', $this->contents) as $index => $param) {
 			if ($index == 0) {
 				$this[0] = trim($param);
