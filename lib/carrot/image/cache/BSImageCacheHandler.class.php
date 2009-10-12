@@ -8,7 +8,7 @@
  * 画像キャッシュ
  *
  * @author 小石達也 <tkoishi@b-shock.co.jp>
- * @version $Id: BSImageCacheHandler.class.php 1522 2009-09-22 06:38:56Z pooza $
+ * @version $Id: BSImageCacheHandler.class.php 1551 2009-10-12 09:02:34Z pooza $
  */
 class BSImageCacheHandler {
 	private $useragent;
@@ -96,6 +96,10 @@ class BSImageCacheHandler {
 	public function getURL (BSImageContainer $record, $size, $pixel = null, $flags = null) {
 		if (!$file = $this->getFile($record, $size, $pixel, $flags)) {
 			return null;
+		}
+
+		if (BSUser::getInstance()->isAdministrator()) {
+			$flags += self::WITHOUT_BROWSER_CACHE;
 		}
 
 		$url = BSURL::getInstance();

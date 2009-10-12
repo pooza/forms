@@ -8,7 +8,7 @@
  * Flashムービーファイル
  *
  * @author 小石達也 <tkoishi@b-shock.co.jp>
- * @version $Id: BSFlashFile.class.php 1521 2009-09-22 06:28:16Z pooza $
+ * @version $Id: BSFlashFile.class.php 1552 2009-10-12 09:21:16Z pooza $
  */
 class BSFlashFile extends BSFile implements ArrayAccess {
 	private $attributes;
@@ -128,7 +128,12 @@ class BSFlashFile extends BSFile implements ArrayAccess {
 	 * @return BSXMLElement 要素
 	 */
 	private function getObjectElement (BSParameterHolder $params) {
-		$href = $params['href_prefix'] . $this->getName() . $params['href_suffix'];
+		$url = BSURL::getInstance();
+		$url['path'] = $params['href_prefix'] . $this->getName() . $params['href_suffix'];
+		if (BSUser::getInstance()->isAdministrator()) {
+			$url->setParameter('at', BSNumeric::getRandom());
+		}
+		$href = $url->getFullPath();
 
 		$element = new BSXMLElement('object');
 		$element->setAttribute('width', $this['width']);

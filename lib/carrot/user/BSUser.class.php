@@ -8,7 +8,7 @@
  * ユーザー
  *
  * @author 小石達也 <tkoishi@b-shock.co.jp>
- * @version $Id: BSUser.class.php 1522 2009-09-22 06:38:56Z pooza $
+ * @version $Id: BSUser.class.php 1551 2009-10-12 09:02:34Z pooza $
  */
 class BSUser extends BSParameterHolder {
 	protected $id;
@@ -245,6 +245,26 @@ class BSUser extends BSParameterHolder {
 	 */
 	public function hasCredential ($name) {
 		return BSString::isBlank($name) || $this->credentials[$name];
+	}
+
+	/**
+	 * 管理者権限を持っているか？
+	 *
+	 * @access public
+	 * @return boolean 持っていればTrue
+	 */
+	public function isAdministrator () {
+		return $this->hasCredential(BSAdministratorRole::CREDENTIAL);
+	}
+
+	/**
+	 * 発行者権限を持っているか？
+	 *
+	 * @access public
+	 * @return boolean 持っていればTrue
+	 */
+	public function isAuthor () {
+		return $this->hasCredential(BSAuthorRole::CREDENTIAL);
 	}
 }
 
