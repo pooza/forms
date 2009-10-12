@@ -8,10 +8,31 @@
  * @version $Id$
  */
 class LoginAction extends BSAction {
+	private function auth (BSUserIdentifier $role) {
+		$email = BSMailAddress::getInstance($this->request['email']);
+		if ($email->getContents() == $role->getMailAddress()->getContents()) {
+			if ($this->user->login($role, $this->request['password'])) {
+				return true;
+			}
+		}
+		return false;
+	}
+
 	public function execute () {
-		$this->user->addCredential(BSAdministratorRole::CREDENTIAL);
-		if (BS_DEBUG) {
-			$this->user->addCredential('Develop');
+		if ($this->auth(BSAdministratorRole::getInstance())) {
+			$this->user->addCredential(BSAdministratorRole::CREDENTIAL);
+			$this->user->addCredential('AdminEdit');
+			if (BS_DEBUG) {
+				$this->user->addCredential('Develop');
+			}
+		}
+		if ($this->auth(BSAuthorRole::getInstance())) {
+			$this->user->addCredential(BSAdministratorRole::CREDENTIAL);
+		}
+
+		if (!$this->user->hasCredential(BSAdministratorRole::CREDENTIAL)) {
+			$this->request->setError('password', '認証に失敗しました。');
+			return $this->handleError();
 		}
 
 		if (!BSString::isBlank($url = $this->user->getAttribute('RequestURL'))) {
@@ -32,17 +53,6 @@ class LoginAction extends BSAction {
 
 	public function handleError () {
 		return $this->getDefaultView();
-	}
-
-	public function validate () {
-		$role = BSAdministratorRole::getInstance();
-		$email = BSMailAddress::getInstance($this->request['email']);
-		if ($email->getContents() != $role->getMailAddress()->getContents()) {
-			$this->request->setError('email', 'ユーザー又はパスワードが違います。');
-		} else if (!$this->user->login($role, $this->request['password'])) {
-			$this->request->setError('password', 'ユーザー又はパスワードが違います。');
-		}
-		return !$this->request->hasErrors();
 	}
 }
 

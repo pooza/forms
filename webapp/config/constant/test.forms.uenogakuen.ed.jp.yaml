@@ -15,6 +15,7 @@ admin:
 author:
   name: 上野学園 中学校・高等学校
   email: info@uenogakuen.ed.jp
+  password: d24230852721c8130849d189a07a56919b874f60
 
 pdo:
   default:

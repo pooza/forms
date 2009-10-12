@@ -17,6 +17,7 @@
 
 <div class="tabs10">
 	<ul id="Tabs">
+{if $credentials.AdminEdit}
 		<li><a href="#DetailForm"><span>フォーム詳細</span></a></li>
 		<li><a href="#FieldList"><span>フィールド管理</span></a></li>
 		<li><a href="#RegistrationList"><span>応募管理</span></a></li>
@@ -24,9 +25,14 @@
 		{if $form.has_confirm_template}<li><a href="#ConfirmTemplateViewer"><span>確認画面</span></a></li>{/if}
 		{if $form.has_thanx_template}<li><a href="#ThanxTemplateViewer"><span>サンクス画面</span></a></li>{/if}
 		{if $form.has_thanx_mail_template}<li><a href="#ThanxMailTemplateViewer"><span>サンクスメール</span></a></li>{/if}
+{else}
+		<li><a href="#FieldList"><span>フィールド管理</span></a></li>
+		<li><a href="#RegistrationList"><span>応募管理</span></a></li>
+{/if}
 	</ul>
 </div>
 
+{if $credentials.AdminEdit}
 <div id="DetailForm" class="panel">
 	{form attachable=true}
 		<h2>■フォーム詳細</h2>
@@ -116,10 +122,12 @@
 		</table>
 	{/form}
 </div>
+{/if}
 
 <div id="FieldList" class="panel"></div>
 <div id="RegistrationList" class="panel"></div>
 
+{if $credentials.AdminEdit}
 {if $form.has_form_template}
 <div id="FormTemplateViewer" class="panel">
 	<div>
@@ -170,6 +178,11 @@
 		[<a href="/{$module.name}/DeleteAttachment?name=thanx_mail_template">このファイルを削除</a>]
 	</div>
 </div>
+{/if}
+{/if}
+
+{if !$credentials.AdminEdit && !$params.pane}
+	{assign var='params.pane' value='FieldList'}
 {/if}
 
 <script type="text/javascript">

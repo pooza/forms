@@ -18,11 +18,16 @@
 
 <div class="tabs10">
 	<ul id="Tabs">
+
+{if $credentials.AdminEdit}
 		<li><a href="#DetailForm"><span>フィールド詳細</span></a></li>
+{/if}
+
 		{if $field.choices}<li><a href="#Statistics"><span>回答構成比</span></a></li>{/if}
 	</ul>
 </div>
 
+{if $credentials.AdminEdit}
 <div id="DetailForm" class="panel">
 	{form}
 		<h2>■フィールド詳細</h2>
@@ -90,6 +95,7 @@
 		</table>
 	{/form}
 </div>
+{/if}
 
 {if $field.choices}
 <div id="Statistics" class="panel"></div>

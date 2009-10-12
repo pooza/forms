@@ -17,15 +17,23 @@
 		<th width="60"></th>
 		<th width="60"></th>
 	</tr>
+{if $credentials.AdminEdit}
 	<tr>
 		<td colspan="7">
 			<a href="/{$module.name}/Create">新しいフィールドを登録...</a>
 		</td>
 	</tr>
+{/if}
 
 {foreach from=$fields item='field' name='fields'}
 	<tr class="{$field.status}">
-		<td width="150"><a href="/{$module.name}/Detail/{$field.id}">{$field.name}</a></td>
+		<td width="150">
+	{if $credentials.AdminEdit}
+			<a href="/{$module.name}/Detail/{$field.id}">{$field.name}</a>
+	{else}
+			{$field.name}
+	{/if}
+		</td>
 		<td width="150">{$field.label}</td>
 		<td width="90">{$field.field_type_id|translate:'FieldHandler'}</td>
 		<td width="30" align="center">{if $field.required}○{/if}</td>
@@ -36,6 +44,8 @@
 	{/if}
 		</td>
 		<td width="60" align="center">
+
+	{if $credentials.AdminEdit}
 	{strip}
 		{if $smarty.foreach.fields.first}
 			△
@@ -49,6 +59,7 @@
 			<a href="javascript:void(new Ajax.Updater('FieldList','/{$module.name}/SetRank/{$field.id}?option=down'))">▼</a>
 		{/if}
 	{/strip}
+	{/if}
 		</td>
 	</tr>
 {foreachelse}

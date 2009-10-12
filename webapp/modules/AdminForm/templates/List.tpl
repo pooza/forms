@@ -19,11 +19,14 @@
 	<tr>
 		<th width="480">名前</th>
 	</tr>
+
+{if $credentials.AdminEdit}
 	<tr>
 		<td colspan="1">
 			<a href="/{$module.name}/Create">新しいフォームを登録...</a>
 		</td>
 	</tr>
+{/if}
 
 {foreach from=$forms item='form'}
 	<tr class="{$form.status}">
