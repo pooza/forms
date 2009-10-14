@@ -8,7 +8,7 @@
  * httpレスポンス
  *
  * @author 小石達也 <tkoishi@b-shock.co.jp>
- * @version $Id: BSHTTPResponse.class.php 1549 2009-10-10 10:39:28Z pooza $
+ * @version $Id: BSHTTPResponse.class.php 1554 2009-10-14 02:56:55Z pooza $
  */
 class BSHTTPResponse extends BSMIMEDocument {
 	protected $version;
@@ -80,7 +80,7 @@ class BSHTTPResponse extends BSMIMEDocument {
 	 * @return integer ステータスコード
 	 */
 	public function getStatus () {
-		if ($header = $this->getStatus('status')) {
+		if ($header = $this->getHeader('status')) {
 			return $header['code'];
 		} else {
 			return $this->status;
