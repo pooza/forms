@@ -8,7 +8,7 @@
  * ユーザー
  *
  * @author 小石達也 <tkoishi@b-shock.co.jp>
- * @version $Id: BSUser.class.php 1551 2009-10-12 09:02:34Z pooza $
+ * @version $Id: BSUser.class.php 1555 2009-10-14 04:12:56Z pooza $
  */
 class BSUser extends BSParameterHolder {
 	protected $id;
@@ -184,6 +184,9 @@ class BSUser extends BSParameterHolder {
 
 		$this->id = $identifier->getID();
 		$this->getSession()->write(__CLASS__, $this->id);
+		foreach ($identifier->getCredentials() as $credential) {
+			$this->addCredential($credential);
+		}
 		return true;
 	}
 

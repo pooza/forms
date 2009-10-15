@@ -8,9 +8,10 @@
  * 発行者ロール
  *
  * @author 小石達也 <tkoishi@b-shock.co.jp>
- * @version $Id: BSAuthorRole.class.php 1551 2009-10-12 09:02:34Z pooza $
+ * @version $Id: BSAuthorRole.class.php 1555 2009-10-14 04:12:56Z pooza $
  */
 class BSAuthorRole implements BSRole {
+	private $credentials;
 	static private $instance;
 	const CREDENTIAL = 'Author';
 
@@ -97,6 +98,20 @@ class BSAuthorRole implements BSRole {
 		return !BSString::isBlank(BS_AUTHOR_PASSWORD)
 			&& !BSString::isBlank($password)
 			&& BSCrypt::getInstance()->auth(BS_AUTHOR_PASSWORD, $password);
+	}
+
+	/**
+	 * 認証時に与えられるクレデンシャルを返す
+	 *
+	 * @access public
+	 * @return BSArray クレデンシャルの配列
+	 */
+	public function getCredentials () {
+		if (!$this->credentials) {
+			$this->credentials = new BSArray;
+			$this->credentials[] = self::CREDENTIAL;
+		}
+		return $this->credentials;
 	}
 }
 

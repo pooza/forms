@@ -8,7 +8,7 @@
  * Webリクエスト
  *
  * @author 小石達也 <tkoishi@b-shock.co.jp>
- * @version $Id: BSWebRequest.class.php 1546 2009-10-10 07:32:34Z pooza $
+ * @version $Id: BSWebRequest.class.php 1556 2009-10-14 04:17:47Z pooza $
  */
 class BSWebRequest extends BSRequest {
 	static private $instance;
@@ -80,8 +80,8 @@ class BSWebRequest extends BSRequest {
 			foreach ($this->getHeaders() as $header) {
 				$contents[] = $header->getName() . ': ' . $header->getContents();
 			}
-			$this->contents[] = null;
-			$this->contents[] = $this->getBody();
+			$contents[] = null;
+			$contents[] = $this->getBody();
 			$this->contents = $contents->join(self::LINE_SEPARATOR);
 		}
 		return $this->contents;

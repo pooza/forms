@@ -8,10 +8,11 @@
  * 管理者ロール
  *
  * @author 小石達也 <tkoishi@b-shock.co.jp>
- * @version $Id: BSAdministratorRole.class.php 1551 2009-10-12 09:02:34Z pooza $
+ * @version $Id: BSAdministratorRole.class.php 1555 2009-10-14 04:12:56Z pooza $
  */
 class BSAdministratorRole implements BSRole {
 	private $networks;
+	private $credentials;
 	static private $instance;
 	const CREDENTIAL = 'Admin';
 
@@ -128,6 +129,23 @@ class BSAdministratorRole implements BSRole {
 		return !BSString::isBlank(BS_ADMIN_PASSWORD)
 			&& !BSString::isBlank($password)
 			&& BSCrypt::getInstance()->auth(BS_ADMIN_PASSWORD, $password);
+	}
+
+	/**
+	 * 認証時に与えられるクレデンシャルを返す
+	 *
+	 * @access public
+	 * @return BSArray クレデンシャルの配列
+	 */
+	public function getCredentials () {
+		if (!$this->credentials) {
+			$this->credentials = new BSArray;
+			$this->credentials[] = self::CREDENTIAL;
+			if (BS_DEBUG) {
+				$this->credentials[] = 'Develop';
+			}
+		}
+		return $this->credentials;
 	}
 }
 

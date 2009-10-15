@@ -8,7 +8,7 @@
  * セッションハンドラ
  *
  * @author 小石達也 <tkoishi@b-shock.co.jp>
- * @version $Id: BSSessionHandler.class.php 1551 2009-10-12 09:02:34Z pooza $
+ * @version $Id: BSSessionHandler.class.php 1555 2009-10-14 04:12:56Z pooza $
  */
 class BSSessionHandler implements BSUserIdentifier {
 	private $storage;
@@ -123,6 +123,16 @@ class BSSessionHandler implements BSUserIdentifier {
 	 */
 	public function auth ($password = null) {
 		return true;
+	}
+
+	/**
+	 * 認証時に与えられるクレデンシャルを返す
+	 *
+	 * @access public
+	 * @return BSArray クレデンシャルの配列
+	 */
+	public function getCredentials () {
+		return new BSArray;
 	}
 }
 

@@ -8,13 +8,13 @@
  * 一覧画面用 アクションひな形
  *
  * @author 小石達也 <tkoishi@b-shock.co.jp>
- * @version $Id: BSTableAction.class.php 984 2009-03-15 13:54:01Z pooza $
+ * @version $Id: BSTableAction.class.php 1555 2009-10-14 04:12:56Z pooza $
  * @abstract
  */
 abstract class BSTableAction extends BSAction {
 	protected $criteria;
 	protected $order;
-	protected $rows = array();
+	protected $rows;
 	protected $table;
 	protected $page;
 
@@ -80,7 +80,7 @@ abstract class BSTableAction extends BSAction {
 	 * テーブルの内容を返す
 	 *
 	 * @access protected
-	 * @return string[][] テーブルの内容
+	 * @return BSArray テーブルの内容
 	 */
 	protected function getRows () {
 		if (!$this->isShowable()) {
@@ -88,6 +88,7 @@ abstract class BSTableAction extends BSAction {
 		}
 
 		if (!$this->rows) {
+			$this->rows = new BSArray;
 			foreach ($this->getTable() as $record) {
 				$this->rows[] = $record->getAttributes();
 			}

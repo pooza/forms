@@ -8,7 +8,7 @@
  * ユーザー識別
  *
  * @author 小石達也 <tkoishi@b-shock.co.jp>
- * @version $Id: BSUserIdentifier.interface.php 1343 2009-07-21 09:50:01Z pooza $
+ * @version $Id: BSUserIdentifier.interface.php 1555 2009-10-14 04:12:56Z pooza $
  */
 interface BSUserIdentifier {
 
@@ -28,6 +28,14 @@ interface BSUserIdentifier {
 	 * @return boolean 正しいユーザーならTrue
 	 */
 	public function auth ($password = null);
+
+	/**
+	 * 認証時に与えられるクレデンシャルを返す
+	 *
+	 * @access public
+	 * @return BSArray クレデンシャルの配列
+	 */
+	public function getCredentials ();
 }
 
 /* vim:set tabstop=4: */

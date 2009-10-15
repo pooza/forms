@@ -20,11 +20,7 @@ class LoginAction extends BSAction {
 
 	public function execute () {
 		if ($this->auth(BSAdministratorRole::getInstance())) {
-			$this->user->addCredential(BSAdministratorRole::CREDENTIAL);
 			$this->user->addCredential('AdminEdit');
-			if (BS_DEBUG) {
-				$this->user->addCredential('Develop');
-			}
 		}
 		if ($this->auth(BSAuthorRole::getInstance())) {
 			$this->user->addCredential(BSAdministratorRole::CREDENTIAL);

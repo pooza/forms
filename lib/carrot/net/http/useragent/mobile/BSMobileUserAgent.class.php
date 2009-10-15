@@ -8,7 +8,7 @@
  * モバイルユーザーエージェント
  *
  * @author 小石達也 <tkoishi@b-shock.co.jp>
- * @version $Id: BSMobileUserAgent.class.php 1397 2009-08-25 09:40:44Z pooza $
+ * @version $Id: BSMobileUserAgent.class.php 1555 2009-10-14 04:12:56Z pooza $
  * @abstract
  */
 abstract class BSMobileUserAgent extends BSUserAgent implements BSUserIdentifier {
@@ -175,6 +175,16 @@ abstract class BSMobileUserAgent extends BSUserAgent implements BSUserIdentifier
 	 */
 	public function auth ($password = null) {
 		return $this->getUserID() && ($this === BSRequest::getInstance()->getUserAgent());
+	}
+
+	/**
+	 * 認証時に与えられるクレデンシャルを返す
+	 *
+	 * @access public
+	 * @return BSArray クレデンシャルの配列
+	 */
+	public function getCredentials () {
+		return new BSArray;
 	}
 }
 
