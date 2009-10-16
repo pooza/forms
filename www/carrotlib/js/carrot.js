@@ -3,7 +3,7 @@
  *
  * @package org.carrot-framework
  * @author 小石達也 <tkoishi@b-shock.co.jp>
- * @version $Id: carrot.js 1528 2009-09-30 07:41:53Z pooza $
+ * @version $Id: carrot.js 1560 2009-10-16 05:53:42Z pooza $
  */
 
 function redirect (m, a, id) {
@@ -62,6 +62,19 @@ function putSmartTag (tag, field, name, params) {
 if (!String.prototype.trim) {
   String.prototype.trim = function () {
     return this.replace(/^[ ]+|[ ]+$/g, '');
+  }
+}
+
+// ゼロサプレス
+if (!Number.prototype.suppressZero) {
+  Number.prototype.suppressZero = function (n) {
+    var str = '';
+    var zerolen = n - ('' + this).length;
+    for (var i = 0 ; i < zerolen ; i ++) {
+      str += '0';
+    }
+    str += this;
+    return str;
   }
 }
 

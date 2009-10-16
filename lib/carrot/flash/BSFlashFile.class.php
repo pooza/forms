@@ -8,7 +8,7 @@
  * Flashムービーファイル
  *
  * @author 小石達也 <tkoishi@b-shock.co.jp>
- * @version $Id: BSFlashFile.class.php 1558 2009-10-16 03:25:12Z pooza $
+ * @version $Id: BSFlashFile.class.php 1560 2009-10-16 05:53:42Z pooza $
  */
 class BSFlashFile extends BSFile implements ArrayAccess {
 	private $attributes;
@@ -69,7 +69,12 @@ class BSFlashFile extends BSFile implements ArrayAccess {
 			}
 		}
 
+		$style = new BSCSSSelector;
+		$style['width'] = $this['width'] . 'px';
+		$style['height'] = $this['height'] . 'px';
+
 		$root = new BSXMLElement('div');
+		$root->setAttribute('style', $style->getContents());
 		if (!BSString::isBlank($params['style_class'])) {
 			$root->setAttribute('class', $params['style_class']);
 		}
