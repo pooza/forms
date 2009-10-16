@@ -5,11 +5,11 @@
  * @package org.carrot-framework
  * @subpackage Console
  * @author 小石達也 <tkoishi@b-shock.co.jp>
- * @version $Id: AnalyzeAccessLogAction.class.php 1530 2009-09-30 12:23:19Z pooza $
+ * @version $Id: AnalyzeAccessLogAction.class.php 1561 2009-10-16 09:00:23Z pooza $
  */
 class AnalyzeAccessLogAction extends BSAction {
-	private $config;
-	private $prev;
+	protected $config;
+	protected $prev;
 
 	/**
 	 * 設定値を返す
