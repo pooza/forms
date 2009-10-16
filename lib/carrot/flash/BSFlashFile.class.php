@@ -8,7 +8,7 @@
  * Flashムービーファイル
  *
  * @author 小石達也 <tkoishi@b-shock.co.jp>
- * @version $Id: BSFlashFile.class.php 1552 2009-10-12 09:21:16Z pooza $
+ * @version $Id: BSFlashFile.class.php 1558 2009-10-16 03:25:12Z pooza $
  */
 class BSFlashFile extends BSFile implements ArrayAccess {
 	private $attributes;
@@ -63,7 +63,7 @@ class BSFlashFile extends BSFile implements ArrayAccess {
 	 * @return BSXMLElement 要素
 	 */
 	public function getImageElement (BSParameterHolder $params) {
-		foreach (array('href_prefix', 'player_ver', 'installer_path') as $key) {
+		foreach (array('href_prefix', 'player_ver', 'installer_href') as $key) {
 			if (BSString::isBlank($params[$key])) {
 				$params[$key] = BSController::getInstance()->getConstant('flash_' . $key);
 			}

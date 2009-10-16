@@ -2,7 +2,7 @@
 #
 # @package org.carrot-framework
 # @author 小石達也 <tkoishi@b-shock.co.jp>
-# @version $Id: carrot.yaml 1315 2009-07-09 17:32:31Z pooza $
+# @version $Id: carrot.yaml 1558 2009-10-16 03:25:12Z pooza $
 
 carrot:
   files:
@@ -14,5 +14,6 @@ carrot:
     - protocalendar/lang_ja
     - usermenu
     - elevator
+    - flowplayer-3.1.4.min
     - carrot
     - application

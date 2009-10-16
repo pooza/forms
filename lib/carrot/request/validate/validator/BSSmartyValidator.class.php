@@ -8,7 +8,7 @@
  * Smartyバリデータ
  *
  * @author 小石達也 <tkoishi@b-shock.co.jp>
- * @version $Id: BSSmartyValidator.class.php 1541 2009-10-09 09:57:44Z pooza $
+ * @version $Id: BSSmartyValidator.class.php 1558 2009-10-16 03:25:12Z pooza $
  */
 class BSSmartyValidator extends BSValidator {
 
@@ -31,7 +31,7 @@ class BSSmartyValidator extends BSValidator {
 	 * @return boolean 妥当な値ならばTrue
 	 */
 	public function execute ($value) {
-		$tempfile = BSFile::getTemporaryFile('.tpl');
+		$tempfile = BSFileUtility::getTemporaryFile('.tpl', 'BSTemplateFile');
 		if (is_array($value) && isset($value['is_file']) && !!$value['is_file']) {
 			$file = new BSFile($value['tmp_name']);
 			if (!mb_check_encoding($file->getContents())) {

@@ -8,7 +8,7 @@
  * INI設定パーサー
  *
  * @author 小石達也 <tkoishi@b-shock.co.jp>
- * @version $Id: BSIniConfigParser.class.php 1436 2009-09-05 13:03:25Z pooza $
+ * @version $Id: BSIniConfigParser.class.php 1558 2009-10-16 03:25:12Z pooza $
  */
 class BSIniConfigParser implements BSConfigParser {
 	private $contents;
@@ -46,7 +46,7 @@ class BSIniConfigParser implements BSConfigParser {
 	 */
 	public function getResult () {
 		if (!$this->result) {
-			$file = BSFile::getTemporaryFile('.ini');
+			$file = BSFileUtility::getTemporaryFile('.ini');
 			$file->setContents($this->getContents());
 			$this->result = BSString::convertKana(parse_ini_file($file->getPath(), true), 'KVa');
 			$file->delete();

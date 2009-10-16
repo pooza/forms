@@ -8,7 +8,7 @@
  * コマンドラインビルダー
  *
  * @author 小石達也 <tkoishi@b-shock.co.jp>
- * @version $Id: BSCommandLine.class.php 1521 2009-09-22 06:28:16Z pooza $
+ * @version $Id: BSCommandLine.class.php 1558 2009-10-16 03:25:12Z pooza $
  */
 class BSCommandLine extends BSParameterHolder {
 	private $command;
@@ -105,8 +105,9 @@ class BSCommandLine extends BSParameterHolder {
 	 * @access public
 	 */
 	public function execute () {
-		exec($this->getContents(), $this->result, $this->returnCode);
+		exec($this->getContents(), $result, $this->returnCode);
 		$this->executed = true;
+		$this->result = new BSArray($result);
 
 		if ($seconds = $this->sleepSeconds) {
 			sleep($seconds);

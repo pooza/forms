@@ -10,7 +10,7 @@
  * パースの必要がなく、大量のCSVデータを出力するケースで使用する。
  *
  * @author 小石達也 <tkoishi@b-shock.co.jp>
- * @version $Id: BSCSVExporter.class.php 1163 2009-05-09 05:11:37Z pooza $
+ * @version $Id: BSCSVExporter.class.php 1558 2009-10-16 03:25:12Z pooza $
  */
 class BSCSVExporter implements BSExporter, BSTextRenderer {
 	private $file;
@@ -32,7 +32,7 @@ class BSCSVExporter implements BSExporter, BSTextRenderer {
 	 */
 	public function getFile () {
 		if (!$this->file) {
-			$this->file = BSFile::getTemporaryFile('.csv');
+			$this->file = BSFileUtility::getTemporaryFile('.csv');
 		}
 		return $this->file;
 	}

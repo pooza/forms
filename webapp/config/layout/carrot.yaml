@@ -2,7 +2,7 @@
 #
 # @package org.carrot-framework
 # @author 小石達也 <tkoishi@b-shock.co.jp>
-# @version $Id: carrot.yaml 1515 2009-09-20 13:30:54Z pooza $
+# @version $Id: carrot.yaml 1558 2009-10-16 03:25:12Z pooza $
 
 awstats:
   parent: lib
@@ -38,6 +38,8 @@ dump:
 favicon:
   parent: var
   suffix: .png
+ffmpeg:
+  constant: yes
 font:
   parent: share
   suffix: .ttf
@@ -64,6 +66,9 @@ menu:
   parent: config
 modules:
   parent: webapp
+movies:
+  parent: carrotlib
+  suffix: .flv
 mysql:
   constant: yes
 pictogram:

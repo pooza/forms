@@ -10,7 +10,7 @@
  * BSJavaScriptSet/BSStyleSetの基底クラス
  *
  * @author 小石達也 <tkoishi@b-shock.co.jp>
- * @version $Id: BSDocumentSet.class.php 1521 2009-09-22 06:28:16Z pooza $
+ * @version $Id: BSDocumentSet.class.php 1558 2009-10-16 03:25:12Z pooza $
  * @abstract
  */
 abstract class BSDocumentSet implements BSTextRenderer, IteratorAggregate {
@@ -184,7 +184,7 @@ abstract class BSDocumentSet implements BSTextRenderer, IteratorAggregate {
 	 */
 	public function getType () {
 		if (!$this->type) {
-			$file = BSFile::getTemporaryFile(null, $this->getDocumentClassName());
+			$file = BSFileUtility::getTemporaryFile(null, $this->getDocumentClassName());
 			$this->type = $file->getType();
 			$file->delete();
 		}
