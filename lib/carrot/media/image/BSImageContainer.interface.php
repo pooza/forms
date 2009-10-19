@@ -1,14 +1,14 @@
 <?php
 /**
  * @package org.carrot-framework
- * @subpackage image
+ * @subpackage media.image
  */
 
 /**
  * 画像コンテナ
  *
  * @author 小石達也 <tkoishi@b-shock.co.jp>
- * @version $Id: BSImageContainer.interface.php 1361 2009-08-03 09:25:47Z pooza $
+ * @version $Id: BSImageContainer.interface.php 1568 2009-10-19 10:56:07Z pooza $
  */
 interface BSImageContainer {
 

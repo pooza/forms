@@ -1,14 +1,14 @@
 <?php
 /**
  * @package org.carrot-framework
- * @subpackage image.cache
+ * @subpackage media.image.cache
  */
 
 /**
  * 画像キャッシュ
  *
  * @author 小石達也 <tkoishi@b-shock.co.jp>
- * @version $Id: BSImageCacheHandler.class.php 1551 2009-10-12 09:02:34Z pooza $
+ * @version $Id: BSImageCacheHandler.class.php 1568 2009-10-19 10:56:07Z pooza $
  */
 class BSImageCacheHandler {
 	private $useragent;

@@ -1,14 +1,14 @@
 <?php
 /**
  * @package org.carrot-framework
- * @subpackage image
+ * @subpackage media.image
  */
 
 /**
  * 画像ファイル
  *
  * @author 小石達也 <tkoishi@b-shock.co.jp>
- * @version $Id: BSImageFile.class.php 1521 2009-09-22 06:28:16Z pooza $
+ * @version $Id: BSImageFile.class.php 1568 2009-10-19 10:56:07Z pooza $
  */
 class BSImageFile extends BSFile implements BSImageContainer {
 	protected $renderer;

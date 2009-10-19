@@ -1,14 +1,14 @@
 <?php
 /**
  * @package org.carrot-framework
- * @subpackage image.renderer
+ * @subpackage media.image.renderer
  */
 
 /**
  * GD画像レンダラー
  *
  * @author 小石達也 <tkoishi@b-shock.co.jp>
- * @version $Id: BSImage.class.php 1385 2009-08-21 08:11:01Z pooza $
+ * @version $Id: BSImage.class.php 1568 2009-10-19 10:56:07Z pooza $
  */
 class BSImage implements BSImageRenderer {
 	private $type;

@@ -1,14 +1,14 @@
 <?php
 /**
  * @package org.carrot-framework
- * @subpackage image
+ * @subpackage media.image
  */
 
 /**
  * 色
  *
  * @author 小石達也 <tkoishi@b-shock.co.jp>
- * @version $Id: BSColor.class.php 1469 2009-09-11 12:40:31Z pooza $
+ * @version $Id: BSColor.class.php 1568 2009-10-19 10:56:07Z pooza $
  */
 class BSColor extends BSParameterHolder {
 	const DEFAULT_COLOR = 'black';

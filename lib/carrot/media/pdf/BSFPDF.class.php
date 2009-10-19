@@ -1,7 +1,7 @@
 <?php
 /**
  * @package org.carrot-framework
- * @subpackage pdf
+ * @subpackage media.pdf
  */
 
 BSUtility::includeFile('fpdf/fpdf.php');
@@ -12,7 +12,7 @@ BSUtility::includeFile('fpdf/mbfpdf.php');
  * MBFPDFラッパー
  *
  * @author 小石達也 <tkoishi@b-shock.co.jp>
- * @version $Id: BSFPDF.class.php 1339 2009-07-21 01:01:48Z pooza $
+ * @version $Id: BSFPDF.class.php 1568 2009-10-19 10:56:07Z pooza $
  */
 class BSFPDF extends MBFPDF implements BSRenderer {
 	private $error;

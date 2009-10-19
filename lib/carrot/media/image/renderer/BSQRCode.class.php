@@ -1,14 +1,14 @@
 <?php
 /**
  * @package org.carrot-framework
- * @subpackage image.renderer
+ * @subpackage media.image.renderer
  */
 
 /**
  * QRCodeレンダラー
  *
  * @author 小石達也 <tkoishi@b-shock.co.jp>
- * @version $Id: BSQRCode.class.php 1487 2009-09-14 16:47:15Z pooza $
+ * @version $Id: BSQRCode.class.php 1568 2009-10-19 10:56:07Z pooza $
  */
 class BSQRCode implements BSImageRenderer {
 	private $image;

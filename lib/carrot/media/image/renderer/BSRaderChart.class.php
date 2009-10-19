@@ -1,7 +1,7 @@
 <?php
 /**
  * @package org.carrot-framework
- * @subpackage image.renderer
+ * @subpackage media.image.renderer
  */
 
 /**
@@ -19,7 +19,7 @@
  * $this->getRenderer()->setData($data);
  *
  * @author 小石達也 <tkoishi@b-shock.co.jp>
- * @version $Id: BSRaderChart.class.php 1437 2009-09-05 13:10:56Z pooza $
+ * @version $Id: BSRaderChart.class.php 1568 2009-10-19 10:56:07Z pooza $
  * @link http://www.rakuto.net/study/htdocs/ 参考
  */
 class BSRaderChart extends BSImage {

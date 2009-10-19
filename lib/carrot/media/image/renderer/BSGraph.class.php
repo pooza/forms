@@ -1,7 +1,7 @@
 <?php
 /**
  * @package org.carrot-framework
- * @subpackage image.renderer
+ * @subpackage media.image.renderer
  */
 
 BSUtility::includeFile('phplot/phplot.php');
@@ -10,7 +10,7 @@ BSUtility::includeFile('phplot/phplot.php');
  * グラフレンダラー
  *
  * @author 小石達也 <tkoishi@b-shock.co.jp>
- * @version $Id: BSGraph.class.php 1269 2009-06-13 18:06:40Z pooza $
+ * @version $Id: BSGraph.class.php 1568 2009-10-19 10:56:07Z pooza $
  */
 class BSGraph extends PHPlot implements BSImageRenderer {
 	private $width;

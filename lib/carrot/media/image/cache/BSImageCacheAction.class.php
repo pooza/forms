@@ -1,14 +1,14 @@
 <?php
 /**
  * @package org.carrot-framework
- * @subpackage image.cache
+ * @subpackage media.image.cache
  */
 
 /**
  * 画像キャッシュアクション
  *
  * @author 小石達也 <tkoishi@b-shock.co.jp>
- * @version $Id: BSImageCacheAction.class.php 1361 2009-08-03 09:25:47Z pooza $
+ * @version $Id: BSImageCacheAction.class.php 1568 2009-10-19 10:56:07Z pooza $
  * @abstract
  */
 abstract class BSImageCacheAction extends BSRecordAction {

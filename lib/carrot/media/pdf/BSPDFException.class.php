@@ -1,14 +1,14 @@
 <?php
 /**
  * @package org.carrot-framework
- * @subpackage pdf
+ * @subpackage media.pdf
  */
 
 /**
  * PDF例外
  *
  * @author 小石達也 <tkoishi@b-shock.co.jp>
- * @version $Id: BSPDFException.class.php 738 2008-12-12 00:59:09Z pooza $
+ * @version $Id: BSPDFException.class.php 1568 2009-10-19 10:56:07Z pooza $
  */
 class BSPDFException extends BSException {
 }
