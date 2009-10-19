@@ -8,7 +8,7 @@
  * 動画ファイル
  *
  * @author 小石達也 <tkoishi@b-shock.co.jp>
- * @version $Id: BSMovieFile.class.php 1558 2009-10-16 03:25:12Z pooza $
+ * @version $Id: BSMovieFile.class.php 1565 2009-10-19 04:32:08Z pooza $
  */
 class BSMovieFile extends BSFile implements ArrayAccess {
 	private $attributes;
@@ -152,12 +152,10 @@ class BSMovieFile extends BSFile implements ArrayAccess {
 	 * @return BSXMLElement 要素
 	 */
 	public function getImageElement (BSParameterHolder $params) {
-		$style = new BSCSSSelector;
-		$style['width'] = $this['width'] . 'px';
-		$style['height'] = $this['height_full'] . 'px';
+		$style = $this->getPixelSizeCSSSelector($params);
 
 		$root = new BSXMLElement('div');
-		$root->setAttribute('style', $style->getContents());
+		$root->setAttribute('style', $style->getContents()); //Gecko対応
 		if (!BSString::isBlank($params['style_class'])) {
 			$root->setAttribute('class', $params['style_class']);
 		}
@@ -169,6 +167,28 @@ class BSMovieFile extends BSFile implements ArrayAccess {
 
 		$root->addElement($this->getScriptElement($params));
 		return $root;
+	}
+
+	/**
+	 * スタイル属性を返す
+	 *
+	 * @access private
+	 * @param BSParameterHolder $params パラメータ配列
+	 * @return BSCSSSelector スタイル属性
+	 */
+	private function getPixelSizeCSSSelector (BSParameterHolder $params) {
+		$style = new BSCSSSelector;
+		if ($params['width']) {
+			$style['width'] = $params['width'] . 'px';
+		} else {
+			$style['width'] = $this['width'] . 'px';
+		}
+		if ($params['height']) {
+			$style['height'] = $params['height'] . 'px';
+		} else {
+			$style['height'] = $this['height_full'] . 'px';
+		}
+		return $style;
 	}
 
 	/**
@@ -189,13 +209,17 @@ class BSMovieFile extends BSFile implements ArrayAccess {
 	 * @return BSXMLElement 要素
 	 */
 	private function getScriptElement (BSParameterHolder $params) {
+		$url = BSURL::getInstance();
+		$url['path'] = $params['href_prefix'] . $this->getName() . $params['href_suffix'];
+		if (BSUser::getInstance()->isAdministrator()) {
+			$url->setParameter('at', BSNumeric::getRandom());
+		}
+
 		$element = BSJavaScriptUtility::getScriptElement();
 		$body = new BSStringFormat('flowplayer(%s, %s, %s);');
 		$body[] = BSJavaScriptUtility::quote($this->getContainerID());
 		$body[] = BSJavaScriptUtility::quote(BS_MOVIE_PLAYER_HREF);
-		$body[] = BSJavaScriptUtility::quote(
-			$params['href_prefix'] . $this->getName() . $params['href_suffix']
-		);
+		$body[] = BSJavaScriptUtility::quote($url->getFullPath());
 		$element->setBody($body->getContents());
 		return $element;
 	}

@@ -8,7 +8,7 @@
  * Flashムービーファイル
  *
  * @author 小石達也 <tkoishi@b-shock.co.jp>
- * @version $Id: BSFlashFile.class.php 1560 2009-10-16 05:53:42Z pooza $
+ * @version $Id: BSFlashFile.class.php 1564 2009-10-19 04:16:39Z pooza $
  */
 class BSFlashFile extends BSFile implements ArrayAccess {
 	private $attributes;
@@ -69,16 +69,15 @@ class BSFlashFile extends BSFile implements ArrayAccess {
 			}
 		}
 
-		$style = new BSCSSSelector;
-		$style['width'] = $this['width'] . 'px';
-		$style['height'] = $this['height'] . 'px';
-
 		$root = new BSXMLElement('div');
-		$root->setAttribute('style', $style->getContents());
 		if (!BSString::isBlank($params['style_class'])) {
 			$root->setAttribute('class', $params['style_class']);
 		}
 		if ($params['mode'] == 'noscript') {
+			$style = new BSCSSSelector;
+			$style['width'] = $this['width'] . 'px';
+			$style['height'] = $this['height'] . 'px';
+			$root->setAttribute('style', $style->getContents());
 			$root->addElement($this->getObjectElement($params));
 		} else {
 			if (BSString::isBlank($params['container_id'])) {
@@ -109,11 +108,12 @@ class BSFlashFile extends BSFile implements ArrayAccess {
 	 * @return BSXMLElement 要素
 	 */
 	private function getScriptElement (BSParameterHolder $params) {
+		$url = BSURL::getInstance();
+		$url['path'] = $params['href_prefix'] . $this->getName() . $params['href_suffix'];
+
 		$element = BSJavaScriptUtility::getScriptElement();
 		$body = new BSStringFormat('swfobject.embedSWF(%s,%s,%d,%d,%s,%s,%s,%s);');
-		$body[] = BSJavaScriptUtility::quote(
-			$params['href_prefix'] . $this->getName() . $params['href_suffix']
-		);
+		$body[] = BSJavaScriptUtility::quote($url->getFullPath());
 		$body[] = BSJavaScriptUtility::quote($params['container_id']);
 		$body[] = $this['width'];
 		$body[] = $this['height'];
