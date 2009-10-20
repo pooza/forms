@@ -10,7 +10,7 @@ ini_set('auto_detect_line_endings', true);
  * ファイルユーティリティ
  *
  * @author 小石達也 <tkoishi@b-shock.co.jp>
- * @version $Id: BSFileUtility.class.php 1558 2009-10-16 03:25:12Z pooza $
+ * @version $Id: BSFileUtility.class.php 1575 2009-10-20 09:42:43Z pooza $
  */
 class BSFileUtility {
 
@@ -36,44 +36,6 @@ class BSFileUtility {
 			throw new BSFileException('一時ファイルが生成できません。');
 		}
 		return $file;
-	}
-
-	/**
-	 * 探す
-	 *
-	 * @access public
-	 * @param mixed パラメータ配列、BSFile、ファイルパス文字列
-	 * @return BSFile ファイル
-	 * @static
-	 */
-	static public function search ($file, $class = 'BSFile') {
-		if ($file instanceof BSFile) {
-			return new $class($file->getPath());
-		}
-		if (BSArray::isArray($file)) {
-			$params = new BSArray($file);
-			if ($path = $params['src']) {
-				return self::getFile($path);
-			}
-			$module = BSController::getInstance()->getModule();
-			if ($record = $module->searchRecord($params)) {
-				if ($file = $record->getAttachment($params['size'])) {
-					return self::search($file, $class);
-				}
-			}
-			return null;
-		} 
-
-		if (BSUtility::isPathAbsolute($path = $file)) {
-			return new BSMovieFile($path);
-		} else {
-			foreach (array('carrotlib', 'www', 'root') as $dir) {
-				$dir = BSController::getInstance()->getDirectory($dir);
-				if ($entry = $dir->getEntry($path, $class)) {
-					return $entry;
-				}
-			}
-		}
 	}
 }
 

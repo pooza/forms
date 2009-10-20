@@ -8,7 +8,7 @@
  * Flashユーティリティ
  *
  * @author 小石達也 <tkoishi@b-shock.co.jp>
- * @version $Id: BSFlashUtility.class.php 1568 2009-10-19 10:56:07Z pooza $
+ * @version $Id: BSFlashUtility.class.php 1575 2009-10-20 09:42:43Z pooza $
  */
 class BSFlashUtility {
 
@@ -56,7 +56,7 @@ class BSFlashUtility {
 	 * @static
 	 */
 	static public function getFile ($file) {
-		return BSFileUtility::search($file, 'BSFlashFile');
+		return BSMediaFile::search($file, 'BSFlashFile');
 	}
 }
 

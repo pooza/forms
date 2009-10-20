@@ -8,7 +8,7 @@
  * 動画ファイル
  *
  * @author 小石達也 <tkoishi@b-shock.co.jp>
- * @version $Id: BSMovieFile.class.php 1573 2009-10-19 14:20:46Z pooza $
+ * @version $Id: BSMovieFile.class.php 1574 2009-10-20 09:08:51Z pooza $
  */
 class BSMovieFile extends BSMediaFile {
 	private $output;
@@ -84,9 +84,8 @@ class BSMovieFile extends BSMediaFile {
 	public function getImageElement (BSParameterHolder $params) {
 		$element = parent::getImageElement($params);
 
-		$style = $this->getPixelSizeCSSSelector($params);
-		$element->setAttribute('style', $style->getContents());
 		if ($inner = $element->getElement('div')) { //Gecko対応
+			$style = $this->getPixelSizeCSSSelector($params);
 			$inner->setAttribute('style', $style->getContents());
 		}
 		return $element;
@@ -104,7 +103,7 @@ class BSMovieFile extends BSMediaFile {
 		$body = new BSStringFormat('flowplayer(%s, %s, %s);');
 		$body[] = BSJavaScriptUtility::quote($params['container_id']);
 		$body[] = BSJavaScriptUtility::quote(BS_MOVIE_PLAYER_HREF);
-		$body[] = BSJavaScriptUtility::quote($this->getMediaURL($params)->getContents());
+		$body[] = $this->getPlayerConfig($params);
 		$element->setBody($body->getContents());
 		return $element;
 	}
@@ -120,13 +119,20 @@ class BSMovieFile extends BSMediaFile {
 		$element = BSFlashUtility::getObjectElement(
 			BSURL::getInstance()->setAttribute('path', BS_MOVIE_PLAYER_HREF)
 		);
-		$config = array(
-			'clip' => array('url' => $this->getMediaURL($params)->getContents()),
-		);
 		$param = $element->createElement('param');
 		$param->setAttribute('name', 'flashvars');
-		$param->setAttribute('value', 'config=' . BSJavaScriptUtility::quote($config));
+		$param->setAttribute('value', 'config=' . $this->getPlayerConfig($params));
 		return $element;
+	}
+
+	private function getPlayerConfig (BSParameterHolder $params) {
+		$config = array('clip' => array(
+			'scaling' => 'fit',
+			'autoPlay' => false,
+			'autoBuffering' => true,
+			'url' => $this->getMediaURL($params)->getContents(),
+		));
+		return BSJavaScriptUtility::quote($config);
 	}
 
 	/**

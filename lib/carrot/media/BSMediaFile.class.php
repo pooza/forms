@@ -8,7 +8,7 @@
  * メディアファイル
  *
  * @author 小石達也 <tkoishi@b-shock.co.jp>
- * @version $Id: BSMediaFile.class.php 1573 2009-10-19 14:20:46Z pooza $
+ * @version $Id: BSMediaFile.class.php 1576 2009-10-20 09:50:12Z pooza $
  * @abstract
  */
 abstract class BSMediaFile extends BSFile implements ArrayAccess {
@@ -202,7 +202,7 @@ abstract class BSMediaFile extends BSFile implements ArrayAccess {
 	 * @param mixed 要素
 	 */
 	public function offsetSet ($key, $value) {
-		throw new BSFlashException($this . 'の属性を設定できません。');
+		throw new BSMediaException($this . 'の属性を設定できません。');
 	}
 
 	/**
@@ -212,7 +212,45 @@ abstract class BSMediaFile extends BSFile implements ArrayAccess {
 	 * @param string $key 添え字
 	 */
 	public function offsetUnset ($key) {
-		throw new BSFlashException($this . 'の属性を削除できません。');
+		throw new BSMediaException($this . 'の属性を削除できません。');
+	}
+
+	/**
+	 * 探す
+	 *
+	 * @access public
+	 * @param mixed パラメータ配列、BSFile、ファイルパス文字列
+	 * @return BSFile ファイル
+	 * @static
+	 */
+	static public function search ($file, $class = 'BSFile') {
+		if ($file instanceof BSFile) {
+			return new $class($file->getPath());
+		}
+		if (BSArray::isArray($file)) {
+			$params = new BSArray($file);
+			if ($path = $params['src']) {
+				return new $class($path);
+			}
+			$module = BSController::getInstance()->getModule();
+			if ($record = $module->searchRecord($params)) {
+				if ($attachment = $record->getAttachment($params['size'])) {
+					return new $class($attachment->getPath());
+				}
+			}
+			return null;
+		} 
+
+		if (BSUtility::isPathAbsolute($path = $file)) {
+			return new BSMovieFile($path);
+		} else {
+			foreach (array('carrotlib', 'www', 'root') as $dir) {
+				$dir = BSController::getInstance()->getDirectory($dir);
+				if ($entry = $dir->getEntry($path, $class)) {
+					return $entry;
+				}
+			}
+		}
 	}
 }
 
