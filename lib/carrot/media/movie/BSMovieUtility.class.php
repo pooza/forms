@@ -8,7 +8,7 @@
  * 動画ユーティリティ
  *
  * @author 小石達也 <tkoishi@b-shock.co.jp>
- * @version $Id: BSMovieUtility.class.php 1575 2009-10-20 09:42:43Z pooza $
+ * @version $Id: BSMovieUtility.class.php 1579 2009-10-21 07:59:32Z pooza $
  */
 class BSMovieUtility {
 
@@ -40,19 +40,8 @@ class BSMovieUtility {
 	 * @static
 	 */
 	static public function getType ($name) {
-		$names = new BSArray(array(
-			'flv' => BSMIMEType::getType('.flv'),
-			'mov' => BSMIMEType::getType('.mov'),
-			'm4a' => BSMIMEType::getType('.mov'),
-			'h264' => BSMIMEType::getType('.mov'),
-			'wmv1' => BSMIMEType::getType('.wmv'),
-			'wmv2' => BSMIMEType::getType('.wmv'),
-			'wmv3' => BSMIMEType::getType('.wmv'),
-			'rv10' => BSMIMEType::getType('.rm'),
-			'rv20' => BSMIMEType::getType('.rm'),
-			'rv30' => BSMIMEType::getType('.rm'),
-			'rv40' => BSMIMEType::getType('.rm'),
-		));
+		require(BSConfigManager::getInstance()->compile('movie_format'));
+		$names = new BSArray($config['types']);
 		return $names[BSString::toLower($name)];
 	}
 

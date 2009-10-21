@@ -8,7 +8,7 @@
  * Flashムービーファイル
  *
  * @author 小石達也 <tkoishi@b-shock.co.jp>
- * @version $Id: BSFlashFile.class.php 1576 2009-10-20 09:50:12Z pooza $
+ * @version $Id: BSFlashFile.class.php 1578 2009-10-21 07:07:41Z pooza $
  */
 class BSFlashFile extends BSMediaFile {
 
@@ -17,7 +17,7 @@ class BSFlashFile extends BSMediaFile {
 	 *
 	 * @access protected
 	 */
-	protected function analize () {
+	protected function analyze () {
 		$info = getimagesize($this->getPath());
 		if (!$info || ($info['mime'] != BSMIMEType::getType('swf'))) {
 			throw new BSMediaException($this . 'はFlashムービーではありません。');

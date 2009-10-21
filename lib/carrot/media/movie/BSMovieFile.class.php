@@ -8,7 +8,7 @@
  * 動画ファイル
  *
  * @author 小石達也 <tkoishi@b-shock.co.jp>
- * @version $Id: BSMovieFile.class.php 1574 2009-10-20 09:08:51Z pooza $
+ * @version $Id: BSMovieFile.class.php 1581 2009-10-21 08:08:40Z pooza $
  */
 class BSMovieFile extends BSMediaFile {
 	private $output;
@@ -18,7 +18,7 @@ class BSMovieFile extends BSMediaFile {
 	 *
 	 * @access protected
 	 */
-	protected function analize () {
+	protected function analyze () {
 		$command = BSMovieUtility::getCommandLine();
 		$command->addValue('-i');
 		$command->addValue($this->getPath());
@@ -33,15 +33,26 @@ class BSMovieFile extends BSMediaFile {
 			$sec = BSString::explode(':', $matches[1]);
 			$this->attributes['seconds'] = ($sec[0] * 3600) + ($sec[1] * 60) + $sec[2];
 		}
-		if (mb_ereg(' ([[:digit:]]{,4}x[[:digit:]]{,4}),', $this->output, $matches)) {
-			$size = BSString::explode('x', $matches[1]);
-			$this->attributes['width'] = $size[0];
-			$this->attributes['height'] = $size[1];
-			$this->attributes['height_full'] = $size[1] + BS_MOVIE_PLAYER_HEIGHT;
-			$this->attributes['pixel_size'] = $size[0] . '×' . $size[1];
+		if (mb_ereg(' ([[:digit:]]{,4})x([[:digit:]]{,4})', $this->output, $matches)) {
+			$this->attributes['width'] = $matches[1];
+			$this->attributes['height'] = $matches[2];
+			$this->attributes['height_full'] = $matches[2] + BS_MOVIE_PLAYER_HEIGHT;
+			$this->attributes['pixel_size'] = $matches[1] . '×' . $matches[2];
 		}
-		if (mb_ereg(' Video: ([[:alnum:]]+)', $this->output, $matches)) {
-			$this->attributes['type'] = BSMovieUtility::getType($matches[1]);
+		$this->attributes['type'] = $this->analyzeType($this->output);
+	}
+
+	private function analyzeType ($output) {
+		$patterns = new BSArray(array(
+			'Input #[[:digit:]]+, ([[:alnum:]]+)',
+			'Video: ([[:alnum:]]+)',
+		));
+		foreach ($patterns as $pattern) {
+			if (mb_ereg($pattern, $output, $matches)) {
+				if (!BSString::isBlank($type = BSMovieUtility::getType($matches[1]))) {
+					return $type;
+				}
+			}
 		}
 	}
 
@@ -125,13 +136,28 @@ class BSMovieFile extends BSMediaFile {
 		return $element;
 	}
 
+	/**
+	 * flowplayerの設定を返す
+	 *
+	 * @access private
+	 * @param BSParameterHolder $params パラメータ配列
+	 * @return string JSONシリアライズされた設定
+	 */
 	private function getPlayerConfig (BSParameterHolder $params) {
-		$config = array('clip' => array(
-			'scaling' => 'fit',
-			'autoPlay' => false,
-			'autoBuffering' => true,
-			'url' => $this->getMediaURL($params)->getContents(),
-		));
+		$config = array(
+			'clip' => array(
+				'scaling' => 'fit',
+				'autoPlay' => false,
+				'autoBuffering' => true,
+				'url' => $this->getMediaURL($params)->getContents(),
+			),
+			'plugins' => array(
+				'controls' => array(
+					'height' => BS_MOVIE_PLAYER_HEIGHT,
+					'fullscreen' => false,
+				),
+			),
+		);
 		return BSJavaScriptUtility::quote($config);
 	}
 
