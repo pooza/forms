@@ -8,7 +8,7 @@
  * モジュール
  *
  * @author 小石達也 <tkoishi@b-shock.co.jp>
- * @version $Id: BSModule.class.php 1586 2009-10-26 07:49:01Z pooza $
+ * @version $Id: BSModule.class.php 1588 2009-10-26 09:11:29Z pooza $
  */
 class BSModule implements BSHTTPRedirector, BSAssignable {
 	protected $name;
@@ -120,13 +120,10 @@ class BSModule implements BSHTTPRedirector, BSAssignable {
 	public function getTitle () {
 		if (BSString::isBlank($this->title)) {
 			if (BSString::isBlank($title = $this->getConfig('title'))) {
-				try {
-					$title = $this->getRecordClassName('ja');
-					if ($this->isAdminModule()) {
-						$title .= '管理';
-					}
-				} catch (Exception $e) {
+				if (BSString::isBlank($title = $this->getRecordClassName('ja'))) {
 					$title = $this->getName();
+				} else if ($this->isAdminModule()) {
+					$title .= '管理';
 				}
 			}
 			$this->title = mb_ereg_replace('モジュール$', '', $title) . 'モジュール';
@@ -142,9 +139,7 @@ class BSModule implements BSHTTPRedirector, BSAssignable {
 	 */
 	public function getMenuTitle () {
 		if (BSString::isBlank($title = $this->getConfig('title_menu'))) {
-			try {
-				$title = $this->getRecordClassName('ja');
-			} catch (Exception $e) {
+			if (BSString::isBlank($title = $this->getRecordClassName('ja'))) {
 				$title = $this->getName();
 			}
 		}
@@ -482,7 +477,11 @@ class BSModule implements BSHTTPRedirector, BSAssignable {
 				}
 			}
 			if (!BSString::isBlank($name)) {
-				$this->recordClassName = BSClassLoader::getInstance()->getClassName($name);
+				try {
+					$this->recordClassName = BSClassLoader::getInstance()->getClassName($name);
+				} catch (Exception $e) {
+					return null;
+				}
 			}
 		}
 		if (BSString::isBlank($lang)) {
