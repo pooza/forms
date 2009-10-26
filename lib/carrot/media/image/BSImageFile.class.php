@@ -8,19 +8,19 @@
  * 画像ファイル
  *
  * @author 小石達也 <tkoishi@b-shock.co.jp>
- * @version $Id: BSImageFile.class.php 1568 2009-10-19 10:56:07Z pooza $
+ * @version $Id: BSImageFile.class.php 1582 2009-10-22 03:43:35Z pooza $
  */
 class BSImageFile extends BSFile implements BSImageContainer {
 	protected $renderer;
 	protected $rendererClass;
-	const DEFAULT_ENGINE_CLASS = 'BSImage';
+	const DEFAULT_RENDERER_CLASS = 'BSImage';
 
 	/**
 	 * @access public
 	 * @param string $path パス
 	 * @param string $class レンダラーのクラス名
 	 */
-	public function __construct ($path, $class = self::DEFAULT_ENGINE_CLASS) {
+	public function __construct ($path, $class = self::DEFAULT_RENDERER_CLASS) {
 		parent::__construct($path);
 		$this->rendererClass = $class;
 	}

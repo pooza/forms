@@ -8,12 +8,14 @@
  * ソート可能なテーブルのレコード
  *
  * @author 小石達也 <tkoishi@b-shock.co.jp>
- * @version $Id: BSSortableRecord.class.php 1536 2009-10-09 09:33:52Z pooza $
+ * @version $Id: BSSortableRecord.class.php 1584 2009-10-26 07:41:43Z pooza $
  * @abstract
  */
 abstract class BSSortableRecord extends BSRecord {
 	const RANK_UP = 'up';
 	const RANK_DOWN = 'down';
+	const RANK_TOP = 'top';
+	const RANK_BOTTOM = 'bottom';
 
 	/**
 	 * 更新
@@ -72,12 +74,27 @@ abstract class BSSortableRecord extends BSRecord {
 			$rank ++;
 		}
 
-		if (($option == self::RANK_UP) && $ids[$rank - 1]) {
-			$ids[$rank] = $ids[$rank - 1];
-			$ids[$rank - 1] = $this->getID();
-		} else if (($option == self::RANK_DOWN) && $ids[$rank + 1]) {
-			$ids[$rank] = $ids[$rank + 1];
-			$ids[$rank + 1] = $this->getID();
+		switch ($option) {
+			case self::RANK_UP:
+				if ($ids[$rank - 1]) {
+					$ids[$rank] = $ids[$rank - 1];
+					$ids[$rank - 1] = $this->getID();
+				}
+				break;
+			case self::RANK_DOWN:
+				if ($ids[$rank + 1]) {
+					$ids[$rank] = $ids[$rank + 1];
+					$ids[$rank + 1] = $this->getID();
+				}
+				break;
+			case self::RANK_TOP:
+				$ids->removeParameter($rank);
+				$ids->unshift($this->getID());
+				break;
+			case self::RANK_BOTTOM:
+				$ids->removeParameter($rank);
+				$ids[] = $this->getID();
+				break;
 		}
 
 		$rank = 0;

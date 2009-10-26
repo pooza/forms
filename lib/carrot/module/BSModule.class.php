@@ -8,7 +8,7 @@
  * モジュール
  *
  * @author 小石達也 <tkoishi@b-shock.co.jp>
- * @version $Id: BSModule.class.php 1540 2009-10-09 09:42:10Z pooza $
+ * @version $Id: BSModule.class.php 1586 2009-10-26 07:49:01Z pooza $
  */
 class BSModule implements BSHTTPRedirector, BSAssignable {
 	protected $name;
@@ -97,6 +97,7 @@ class BSModule implements BSHTTPRedirector, BSAssignable {
 			'name' => $this->getName(),
 			'title' => $this->getTitle(),
 			'title_menu' => $this->getMenuTitle(),
+			'record_class' => $this->getRecordClassName(),
 		));
 	}
 

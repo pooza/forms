@@ -8,7 +8,7 @@
  * メディアファイル
  *
  * @author 小石達也 <tkoishi@b-shock.co.jp>
- * @version $Id: BSMediaFile.class.php 1578 2009-10-21 07:07:41Z pooza $
+ * @version $Id: BSMediaFile.class.php 1582 2009-10-22 03:43:35Z pooza $
  * @abstract
  */
 abstract class BSMediaFile extends BSFile implements ArrayAccess {
@@ -229,8 +229,8 @@ abstract class BSMediaFile extends BSFile implements ArrayAccess {
 		}
 		if (BSArray::isArray($file)) {
 			$params = new BSArray($file);
-			if ($path = $params['src']) {
-				return new $class($path);
+			if (!BSString::isBlank($path = $params['src'])) {
+				return self::search($path, $class);
 			}
 			$module = BSController::getInstance()->getModule();
 			if ($record = $module->searchRecord($params)) {
@@ -242,7 +242,7 @@ abstract class BSMediaFile extends BSFile implements ArrayAccess {
 		} 
 
 		if (BSUtility::isPathAbsolute($path = $file)) {
-			return new BSMovieFile($path);
+			return new $class($path);
 		} else {
 			foreach (array('carrotlib', 'www', 'root') as $dir) {
 				$dir = BSController::getInstance()->getDirectory($dir);
