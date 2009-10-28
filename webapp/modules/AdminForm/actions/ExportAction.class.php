@@ -9,9 +9,8 @@
  */
 class ExportAction extends BSRecordAction {
 	public function execute () {
-		$name = new BSStringFormat('%06d_%s.csv');
+		$name = new BSStringFormat('registrations_%06d.csv');
 		$name[] = $this->getRecord()->getID();
-		$name[] = $this->getRecord()->getName();
 		$this->request->setAttribute('filename', $name->getContents());
 
 		$this->request->setAttribute('renderer', $this->getRecord()->export());
