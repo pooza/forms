@@ -8,7 +8,7 @@
  * 抽象リクエスト
  *
  * @author 小石達也 <tkoishi@b-shock.co.jp>
- * @version $Id: BSRequest.class.php 1522 2009-09-22 06:38:56Z pooza $
+ * @version $Id: BSRequest.class.php 1590 2009-10-27 08:56:33Z pooza $
  * @abstract
  */
 abstract class BSRequest extends BSHTTPRequest {
@@ -275,7 +275,7 @@ abstract class BSRequest extends BSHTTPRequest {
 	 * UserAgent名を返す
 	 *
 	 * @access public
-	 * @return BSUserAgent リモートホストのUserAgent名
+	 * @return string リモートホストのUserAgent名
 	 */
 	public function getUserAgentName () {
 		return 'Console';

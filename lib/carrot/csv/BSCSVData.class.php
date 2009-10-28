@@ -10,7 +10,7 @@
  * @author 小石達也 <tkoishi@b-shock.co.jp>
  * @link http://project-p.jp/halt/kinowiki/php/Tips/csv 参考
  * @link http://www.din.or.jp/~ohzaki/perl.htm#CSV2Values 参考
- * @version $Id: BSCSVData.class.php 1469 2009-09-11 12:40:31Z pooza $
+ * @version $Id: BSCSVData.class.php 1591 2009-10-27 13:33:33Z pooza $
  */
 class BSCSVData implements BSTextRenderer, IteratorAggregate {
 	protected $contents;
@@ -36,6 +36,7 @@ class BSCSVData implements BSTextRenderer, IteratorAggregate {
 	 * @param BSArray $lines 
 	 */
 	public function setLines (BSArray $lines) {
+		$lines = BSString::convertEncoding($lines);
 		$this->records = new BSArray;
 		foreach ($lines as $line) {
 			if (isset($record) && $record) {
