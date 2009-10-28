@@ -131,18 +131,22 @@ class Form extends BSRecord implements
 		$values = new BSArray(array(
 			'form_id' => $this->getID(),
 		));
-		if (!BSString::isBlank($answers['ブラウザ'])) {
-			$values['user_agent'] = $answers['ブラウザ'];
-		}
-		if (!BSString::isBlank($answers['リモートホスト'])) {
-			$values['remote_host'] = $answers['リモートホスト'];
-		}
-		if (!BSString::isBlank($answers['応募日'])) {
-			$values['create_date'] = $answers['応募日'];
-		}
-		foreach (array('ブラウザ', 'リモートホスト', '応募日', '応募ID', 'フォーム') as $field) {
+		$fields = new BSArray(array(
+			'user_agent' => 'ブラウザ',
+			'remote_host' => 'リモートホスト',
+			'create_date' => '応募日',
+			'imported' => 'imported',
+		));
+		foreach ($fields as $key => $field) {
+			$values[$key] = $answers[$field];
 			$answers->removeParameter($field);
 		}
+
+		if ($answers['フォーム'] && ($answers['フォーム'] != $this->getName())) {
+			throw new BSException('別のフォームへの応募です。');
+		}
+		$answers->removeParameter('応募ID');
+		$answers->removeParameter('フォーム');
 
 		$id = $this->getRegistrations()->createRecord($values);
 		$registration = $this->getRegistrations()->getRecord($id);
@@ -157,6 +161,20 @@ class Form extends BSRecord implements
 			$registration->registerDetail($field, $answer);
 		}
 		return $registration;
+	}
+
+	/**
+	 * インポートされた応募を削除
+	 *
+	 * @access public
+	 */
+	public function clearImportedAnswers () {
+		$db = $this->getTable()->getDatabase();
+		$criteria = $db->createCriteriaSet();
+		$criteria->register('form_id', $this);
+		$criteria->register('imported', 1);
+		$sql = BSSQL::getDeleteQueryString('registration', $criteria);
+		$db->exec($sql);
 	}
 
 	/**

@@ -1,8 +1,8 @@
--- MySQL dump 10.13  Distrib 5.1.39, for apple-darwin10.0.0 (i386)
+-- MySQL dump 10.13  Distrib 5.1.40, for apple-darwin10.0.0 (i386)
 --
 -- Host: localhost    Database: forms
 -- ------------------------------------------------------
--- Server version	5.1.39
+-- Server version	5.1.40
 
 /*!40101 SET @OLD_CHARACTER_SET_CLIENT=@@CHARACTER_SET_CLIENT */;
 /*!40101 SET @OLD_CHARACTER_SET_RESULTS=@@CHARACTER_SET_RESULTS */;
@@ -134,6 +134,7 @@ CREATE TABLE `registration` (
   `id` int(10) unsigned NOT NULL AUTO_INCREMENT,
   `form_id` smallint(5) unsigned NOT NULL,
   `user_agent` tinytext NOT NULL,
+  `imported` tinyint(3) unsigned NOT NULL DEFAULT '0',
   `remote_host` tinytext NOT NULL,
   `create_date` datetime NOT NULL,
   PRIMARY KEY (`id`),
@@ -187,4 +188,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2009-10-06 21:05:06
+-- Dump completed on 2009-10-28 18:17:50

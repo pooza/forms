@@ -7,7 +7,7 @@
  * @author 小石達也 <tkoishi@b-shock.co.jp>
  * @version $Id$
  */
-class ImportAction extends BSAction {
+class ImportAction extends BSRecordAction {
 	public function getTitle () {
 		return 'CSVインポート';
 	}
@@ -15,13 +15,16 @@ class ImportAction extends BSAction {
 	public function execute () {
 		try {
 			$this->database->beginTransaction();
+			$this->getRecord()->clearImportedAnswers();
 			$csv = new BSHeaderCSVData;
 			$csv->setHasRowID(false);
 			$file = new BSCSVFile($this->request['file']['tmp_name'], $csv);
 			$line = 2;
 			foreach ($file->getEngine()->getRecords() as $record) {
 				try {
-					$this->getModule()->getRecord()->registerAnswer($record);
+					$record = clone $record;
+					$record['imported'] = true;
+					$this->getRecord()->registerAnswer($record);
 				} catch (Exception $e) {
 					$this->request->setError($line . '行目', $e->getMessage());
 				}
