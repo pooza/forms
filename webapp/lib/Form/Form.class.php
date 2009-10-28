@@ -127,16 +127,32 @@ class Form extends BSRecord implements
 	 * @return Registration 応募
 	 */
 	public function registerAnswer (BSArray $answers) {
-		$values = array(
+		$answers = clone $answers;
+		$values = new BSArray(array(
 			'form_id' => $this->getID(),
-		);
+		));
+		if (!BSString::isBlank($answers['ブラウザ'])) {
+			$values['user_agent'] = $answers['ブラウザ'];
+		}
+		if (!BSString::isBlank($answers['リモートホスト'])) {
+			$values['remote_host'] = $answers['リモートホスト'];
+		}
+		if (!BSString::isBlank($answers['応募日'])) {
+			$values['create_date'] = $answers['応募日'];
+		}
+		foreach (array('ブラウザ', 'リモートホスト', '応募日', '応募ID', 'フォーム') as $field) {
+			$answers->removeParameter($field);
+		}
+
 		$id = $this->getRegistrations()->createRecord($values);
 		$registration = $this->getRegistrations()->getRecord($id);
 
 		$this->getFields()->query();
 		foreach ($answers as $key => $answer) {
 			if (!$field = $this->getFields()->getRecord(array('name' => $key))) {
-				throw new BSException('フィールド' . $key . 'が見つかりません。');
+				if (!$field = $this->getFields()->getRecord(array('label' => $key))) {
+					throw new BSException('フィールド' . $key . 'が見つかりません。');
+				}
 			}
 			$registration->registerDetail($field, $answer);
 		}
