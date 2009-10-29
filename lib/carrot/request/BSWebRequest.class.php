@@ -8,7 +8,7 @@
  * Webリクエスト
  *
  * @author 小石達也 <tkoishi@b-shock.co.jp>
- * @version $Id: BSWebRequest.class.php 1590 2009-10-27 08:56:33Z pooza $
+ * @version $Id: BSWebRequest.class.php 1595 2009-10-29 05:41:21Z pooza $
  */
 class BSWebRequest extends BSRequest {
 	static private $instance;
@@ -165,8 +165,7 @@ class BSWebRequest extends BSRequest {
 	 * @return string リモートホストのUserAgent名
 	 */
 	public function getUserAgentName () {
-		if ((BS_DEBUG || $this->user->isAdministrator() || $this->user->isAuthor())
-			&& !BSString::isBlank($name = $this[BSRequest::USER_AGENT_ACCESSOR])) {
+		if (BS_DEBUG && !BSString::isBlank($name = $this[BSRequest::USER_AGENT_ACCESSOR])) {
 			return $name;
 		}
 		return $this->controller->getEnvironment('USER-AGENT');
