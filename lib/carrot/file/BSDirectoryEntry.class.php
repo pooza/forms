@@ -8,7 +8,7 @@
  * ディレクトリエントリ
  *
  * @author 小石達也 <tkoishi@b-shock.co.jp>
- * @version $Id: BSDirectoryEntry.class.php 1521 2009-09-22 06:28:16Z pooza $
+ * @version $Id: BSDirectoryEntry.class.php 1600 2009-10-30 14:48:55Z pooza $
  * @abstract
  */
 abstract class BSDirectoryEntry {
@@ -120,7 +120,7 @@ abstract class BSDirectoryEntry {
 	public function getShortPath () {
 		if (!$this->shortPath) {
 			$this->shortPath = str_replace(
-				BSController::getInstance()->getPath('root') . DIRECTORY_SEPARATOR,
+				BSFileUtility::getPath('root') . DIRECTORY_SEPARATOR,
 				'',
 				$this->getPath()
 			);

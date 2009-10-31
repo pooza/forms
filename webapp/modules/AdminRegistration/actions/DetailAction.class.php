@@ -25,7 +25,7 @@ class DetailAction extends BSRecordAction {
 	}
 
 	public function handleError () {
-		return $this->controller->getNotFoundAction()->redirect();
+		return $this->controller->getAction('not_found')->redirect();
 	}
 
 	public function validate () {

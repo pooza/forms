@@ -8,7 +8,7 @@
  * Carrotアプリケーションコントローラ
  *
  * @author 小石達也 <tkoishi@b-shock.co.jp>
- * @version $Id: BSController.class.php 1549 2009-10-10 10:39:28Z pooza $
+ * @version $Id: BSController.class.php 1600 2009-10-30 14:48:55Z pooza $
  * @abstract
  */
 abstract class BSController {
@@ -24,6 +24,7 @@ abstract class BSController {
 	 */
 	protected function __construct () {
 		$this->headers = new BSArray;
+		$this->actions = new BSArray;
 	}
 
 	/**
@@ -74,66 +75,9 @@ abstract class BSController {
 			$module = BSModule::getInstance($module);
 			$action = $module->getAction($action);
 		} catch (Exception $e) {
-			$action = $this->getNotFoundAction();
+			$action = $this->getAction('not_found');
 		}
 		$action->forward();
-	}
-
-	/**
-	 * サーバ環境変数を返す
-	 *
-	 * @access public
-	 * @param string $name サーバ環境変数の名前
-	 * @return mixed サーバ環境変数
-	 */
-	public function getEnvironment ($name) {
-		if (isset($_SERVER[$name])) {
-			return $_SERVER[$name];
-		}
-	}
-
-	/**
-	 * 定数を返す
-	 *
-	 * @access public
-	 * @param string $name 定数の名前
-	 * @return string 定数の値
-	 */
-	public function getConstant ($name) {
-		return BSConstantHandler::getInstance()->getParameter($name);
-	}
-
-	/**
-	 * ログを出力
-	 *
-	 * @access public
-	 * @param mixed $message ログメッセージの文字列、又はBSStringFormat
-	 * @param mixed $priority 優先順位
-	 */
-	public function putLog ($message, $priority = BSLogger::DEFAULT_PRIORITY) {
-		BSLogManager::getInstance()->put($message, $priority);
-	}
-
-	/**
-	 * 特別なディレクトリを返す
-	 *
-	 * @access public
-	 * @param string $name ディレクトリの名前
-	 * @return BSDirectory ディレクトリ
-	 */
-	public function getDirectory ($name) {
-		return BSDirectoryLayout::getInstance()->getDirectory($name);
-	}
-
-	/**
-	 * 特別なディレクトリのパスを返す
-	 *
-	 * @access public
-	 * @param string $name ディレクトリの名前
-	 * @return string パス
-	 */
-	public function getPath ($name) {
-		return BSDirectoryLayout::getInstance()->getPath($name);
 	}
 
 	/**
@@ -144,7 +88,7 @@ abstract class BSController {
 	 */
 	public function getHost () {
 		if (!$this->host) {
-			$this->host = new BSHost($this->getEnvironment('SERVER_NAME'));
+			$this->host = new BSHost($this->getAttribute('SERVER_NAME'));
 		}
 		return $this->host;
 	}
@@ -173,9 +117,6 @@ abstract class BSController {
 	 * @return BSArray アクションスタック
 	 */
 	public function getActionStack () {
-		if (!$this->actions) {
-			$this->actions = new BSArray;
-		}
 		return $this->actions;
 	}
 
@@ -193,35 +134,51 @@ abstract class BSController {
 	}
 
 	/**
-	 * 呼ばれたアクションを返す
+	 * 特別なアクションを返す
 	 *
 	 * @access public
-	 * @return BSAction アクション
+	 * @param string $name アクション名
+	 * @return BSAction 名前で指定されたアクション、指定なしの場合は呼ばれたアクション
 	 */
-	public function getAction () {
-		return $this->getActionStack()->getIterator()->getLast();
+	public function getAction ($name = null) {
+		if (BSString::isBlank($name)) {
+			return $this->getActionStack()->getIterator()->getLast();
+		}
+		if ($module = $this->getModule($this->getAttribute('module_' . $name . '_module'))) {
+			return $module->getAction($this->getAttribute('module_' . $name . '_action'));
+		}
 	}
 
 	/**
-	 * セキュアアクションを返す
+	 * 属性を返す
 	 *
 	 * @access public
-	 * @return BSAction アクション
+	 * @param string $name 属性の名前
+	 * @param BSDate $date 比較する日付 - この日付より古い属性値は破棄
+	 * @return mixed 属性値
 	 */
-	public function getSecureAction () {
-		return $this->getModule(BS_MODULE_SECURE_MODULE)
-			->getAction(BS_MODULE_SECURE_ACTION);
-	}
+	public function getAttribute ($name, BSDate $date = null) {
+		if (!$date && !is_object($name)) {
+			$env = new BSArray;
+			$env->setParameters($_ENV);
+			$env->setParameters($_SERVER);
+			$keys = new BSArray;
+			$keys[] = $name;
+			$keys[] = 'HTTP_' . $name;
+			$keys[] = 'HTTP_' . str_replace('-', '_', $name);
+			$keys->uniquize();
+			foreach ($keys as $key) {
+				if (!BSString::isBlank($value = $env[$key])) {
+					return $value;
+				}
+			}
 
-	/**
-	 * NotFoundアクションを返す
-	 *
-	 * @access public
-	 * @return BSAction アクション
-	 */
-	public function getNotFoundAction () {
-		return $this->getModule(BS_MODULE_NOT_FOUND_MODULE)
-			->getAction(BS_MODULE_NOT_FOUND_ACTION);
+			$constants = BSConstantHandler::getInstance();
+			if (!BSString::isBlank($value = $constants[$name])) {
+				return $value;
+			}
+		}
+		return BSSerializeHandler::getInstance()->getAttribute($name, $date);
 	}
 
 	/**
@@ -246,18 +203,6 @@ abstract class BSController {
 	}
 
 	/**
-	 * 属性を返す
-	 *
-	 * @access public
-	 * @param string $name 属性の名前
-	 * @param BSDate $date 比較する日付 - この日付より古い属性値は破棄
-	 * @return mixed 属性値
-	 */
-	public function getAttribute ($name, BSDate $date = null) {
-		return BSSerializeHandler::getInstance()->getAttribute($name, $date);
-	}
-
-	/**
 	 * 全ての属性を返す
 	 *
 	 * @access public
@@ -265,39 +210,6 @@ abstract class BSController {
 	 */
 	public function getAttributes () {
 		return BSSerializeHandler::getInstance()->getAttributes();
-	}
-
-	/**
-	 * アプリケーション名を返す
-	 *
-	 * @access public
-	 * @param string $lang 言語
-	 * @return string アプリケーション名
-	 */
-	static public function getName ($lang = 'ja') {
-		return self::getInstance()->getConstant('app_name_' . $lang);
-	}
-
-	/**
-	 * アプリケーションのバージョンを返す
-	 *
-	 * @access public
-	 * @return string バージョン
-	 */
-	static public function getVersion () {
-		return BS_APP_VER;
-	}
-
-	/**
-	 * バージョン番号込みのアプリケーション名を返す
-	 *
-	 * @access public
-	 * @param string $lang 言語
-	 * @return string アプリケーション名
-	 * @static
-	 */
-	static public function getFullName ($lang = 'ja') {
-		return self::getName($lang) . ' ' . self::getVersion();
 	}
 
 	/**
@@ -342,6 +254,39 @@ abstract class BSController {
 			BSString::stripControlCharacters($name),
 			BSString::stripControlCharacters($value)
 		);
+	}
+
+	/**
+	 * アプリケーション名を返す
+	 *
+	 * @access public
+	 * @param string $lang 言語
+	 * @return string アプリケーション名
+	 */
+	static public function getName ($lang = 'ja') {
+		return self::getInstance()->getAttribute('app_name_' . $lang);
+	}
+
+	/**
+	 * アプリケーションのバージョンを返す
+	 *
+	 * @access public
+	 * @return string バージョン
+	 */
+	static public function getVersion () {
+		return BS_APP_VER;
+	}
+
+	/**
+	 * バージョン番号込みのアプリケーション名を返す
+	 *
+	 * @access public
+	 * @param string $lang 言語
+	 * @return string アプリケーション名
+	 * @static
+	 */
+	static public function getFullName ($lang = 'ja') {
+		return self::getName($lang) . ' ' . self::getVersion();
 	}
 }
 

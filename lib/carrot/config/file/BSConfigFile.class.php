@@ -8,7 +8,7 @@
  * 設定ファイル
  *
  * @author 小石達也 <tkoishi@b-shock.co.jp>
- * @version $Id: BSConfigFile.class.php 1230 2009-05-31 09:22:09Z pooza $
+ * @version $Id: BSConfigFile.class.php 1602 2009-10-31 05:56:40Z pooza $
  */
 class BSConfigFile extends BSFile {
 	private $config = array();
@@ -59,14 +59,14 @@ class BSConfigFile extends BSFile {
 	 * コンパイル
 	 *
 	 * @access public
-	 * @return string キャッシュファイルのフルパス
+	 * @return BSFile 設定キャッシュファイル
 	 */
 	public function compile () {
 		$cache = $this->getCacheFile();
 		if (!$cache->isExists() || $cache->getUpdateDate()->isPast($this->getUpdateDate())) {
 			$cache->setContents($this->getCompiler()->execute($this));
 		}
-		return $cache->getPath();
+		return $cache;
 	}
 
 	/**

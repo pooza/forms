@@ -8,7 +8,7 @@
  * データベース接続
  *
  * @author 小石達也 <tkoishi@b-shock.co.jp>
- * @version $Id: BSDatabase.class.php 1522 2009-09-22 06:38:56Z pooza $
+ * @version $Id: BSDatabase.class.php 1599 2009-10-30 14:20:35Z pooza $
  * @abstract
  */
 abstract class BSDatabase extends PDO implements ArrayAccess, BSAssignable {
@@ -278,7 +278,7 @@ abstract class BSDatabase extends PDO implements ArrayAccess, BSAssignable {
 	 */
 	public function putLog ($log) {
 		if ($this->isLoggable()) {
-			BSController::getInstance()->putLog($log, $this);
+			BSLogManager::getInstance()->put($log, $this);
 		}
 	}
 
@@ -289,7 +289,7 @@ abstract class BSDatabase extends PDO implements ArrayAccess, BSAssignable {
 	 * @return boolean クエリーログを使用するならTrue
 	 */
 	private function isLoggable () {
-		return BSController::getInstance()->getConstant('PDO_' . $this->getName() . '_LOGGABLE');
+		return BSController::getInstance()->getAttribute('PDO_' . $this->getName() . '_LOGGABLE');
 	}
 
 	/**

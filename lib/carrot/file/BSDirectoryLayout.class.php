@@ -8,7 +8,7 @@
  * ディレクトリレイアウト
  *
  * @author 小石達也 <tkoishi@b-shock.co.jp>
- * @version $Id: BSDirectoryLayout.class.php 1522 2009-09-22 06:38:56Z pooza $
+ * @version $Id: BSDirectoryLayout.class.php 1602 2009-10-31 05:56:40Z pooza $
  */
 class BSDirectoryLayout {
 	static private $instance;
@@ -18,12 +18,13 @@ class BSDirectoryLayout {
 	 * @access private
 	 */
 	private function __construct () {
-		require(BSConfigManager::getInstance()->compile('layout/carrot'));
-		require(BSConfigManager::getInstance()->compile('layout/application'));
+		$configure = BSConfigManager::getInstance();
+		$this->directories += $configure->compile('layout/carrot');
+		$this->directories += $configure->compile('layout/application');
 
 		$name = 'layout/' . BSController::getInstance()->getHost()->getName();
 		if ($file = BSConfigManager::getConfigFile($name)) {
-			require(BSConfigManager::getInstance()->compile($file));
+			$this->directories += $configure->compile($file);
 		}
 	}
 
@@ -74,7 +75,7 @@ class BSDirectoryLayout {
 	private function getDirectoryInstance ($name) {
 		$params = $this->directories[$name];
 		if (isset($params['constant'])) {
-			$dir = new BSDirectory(BSController::getInstance()->getConstant($name . '_DIR'));
+			$dir = new BSDirectory(BSController::getInstance()->getAttribute($name . '_DIR'));
 		} else if (isset($params['name'])) {
 			$dir = $this->getDirectory($params['parent'])->getEntry($params['name']);
 		} else {

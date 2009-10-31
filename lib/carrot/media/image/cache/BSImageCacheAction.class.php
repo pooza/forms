@@ -8,7 +8,7 @@
  * 画像キャッシュアクション
  *
  * @author 小石達也 <tkoishi@b-shock.co.jp>
- * @version $Id: BSImageCacheAction.class.php 1568 2009-10-19 10:56:07Z pooza $
+ * @version $Id: BSImageCacheAction.class.php 1598 2009-10-30 12:26:03Z pooza $
  * @abstract
  */
 abstract class BSImageCacheAction extends BSRecordAction {
@@ -22,7 +22,7 @@ abstract class BSImageCacheAction extends BSRecordAction {
 	}
 
 	public function handleError () {
-		return $this->controller->getNotFoundAction()->forward();
+		return $this->controller->getAction('not_found')->forward();
 	}
 
 	public function validate () {

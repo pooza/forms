@@ -8,7 +8,7 @@
  * ユーザーエージェント
  *
  * @author 小石達也 <tkoishi@b-shock.co.jp>
- * @version $Id: BSUserAgent.class.php 1469 2009-09-11 12:40:31Z pooza $
+ * @version $Id: BSUserAgent.class.php 1602 2009-10-31 05:56:40Z pooza $
  * @abstract
  */
 abstract class BSUserAgent implements BSAssignable {
@@ -274,10 +274,9 @@ abstract class BSUserAgent implements BSAssignable {
 	static private function getDeniedTypes () {
 		if (!self::$denied) {
 			self::$denied = new BSArray;
-			require(BSConfigManager::getInstance()->compile('useragent/carrot'));
-			self::$denied->setParameters($config);
-			require(BSConfigManager::getInstance()->compile('useragent/application'));
-			self::$denied->setParameters($config);
+			$configure = BSConfigManager::getInstance();
+			self::$denied->setParameters($configure->compile('useragent/carrot'));
+			self::$denied->setParameters($configure->compile('useragent/application'));
 		}
 		return self::$denied;
 	}

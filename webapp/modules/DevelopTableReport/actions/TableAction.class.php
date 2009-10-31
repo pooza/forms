@@ -5,7 +5,7 @@
  * @package org.carrot-framework
  * @subpackage DevelopTableReport
  * @author 小石達也 <tkoishi@b-shock.co.jp>
- * @version $Id: TableAction.class.php 1436 2009-09-05 13:03:25Z pooza $
+ * @version $Id: TableAction.class.php 1598 2009-10-30 12:26:03Z pooza $
  */
 class TableAction extends BSAction {
 	private $database;
@@ -42,7 +42,7 @@ class TableAction extends BSAction {
 	}
 
 	public function handleError () {
-		return $this->controller->getNotFoundAction()->forward();
+		return $this->controller->getAction('not_found')->forward();
 	}
 
 	public function validate () {

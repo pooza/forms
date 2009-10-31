@@ -2,7 +2,7 @@
 #
 # @package org.carrot-framework
 # @author 小石達也 <tkoishi@b-shock.co.jp>
-# @version $Id: movie_format.yaml 1579 2009-10-21 07:59:32Z pooza $
+# @version $Id: movie_format.yaml 1587 2009-10-26 07:50:12Z pooza $
 
 types:
   flv: video/x-flv

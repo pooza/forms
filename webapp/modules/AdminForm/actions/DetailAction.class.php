@@ -43,7 +43,7 @@ class DetailAction extends BSRecordAction {
 
 	public function getDefaultView () {
 		if (!$this->getRecord()) {
-			return $this->controller->getNotFoundAction()->redirect();
+			return $this->controller->getAction('not_found')->redirect();
 		}
 		return BSView::INPUT;
 	}

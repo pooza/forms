@@ -15,7 +15,7 @@ class RegisterAction extends BSRecordAction {
 
 	public function getDefaultView () {
 		if (!$this->getRecord() || !$this->getRecord()->isVisible()) {
-			return $this->controller->getNotFoundAction()->forward();
+			return $this->controller->getAction('not_found')->forward();
 		}
 		if ($answer = $this->user->getAttribute('answer')) {
 			$this->request->setParameters($answer);

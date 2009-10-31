@@ -8,7 +8,7 @@
  * ログディレクトリ
  *
  * @author 小石達也 <tkoishi@b-shock.co.jp>
- * @version $Id: BSLogDirectory.class.php 940 2009-02-28 07:42:52Z pooza $
+ * @version $Id: BSLogDirectory.class.php 1600 2009-10-30 14:48:55Z pooza $
  */
 class BSLogDirectory extends BSDirectory {
 
@@ -18,7 +18,7 @@ class BSLogDirectory extends BSDirectory {
 	 */
 	public function __construct ($path = null) {
 		if (!$path) {
-			$path = BSController::getInstance()->getPath('log');
+			$path = BSFileUtility::getPath('log');
 		}
 		parent::__construct($path);
 		$this->setDefaultSuffix('.log');

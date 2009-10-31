@@ -8,7 +8,7 @@
  * 禁止されたUserAgent
  *
  * @author 小石達也 <tkoishi@b-shock.co.jp>
- * @version $Id: BSDeniedUserAgentFilter.class.php 1357 2009-08-01 09:48:33Z pooza $
+ * @version $Id: BSDeniedUserAgentFilter.class.php 1598 2009-10-30 12:26:03Z pooza $
  */
 class BSDeniedUserAgentFilter extends BSFilter {
 	public function initialize ($parameters = array()) {
@@ -23,7 +23,7 @@ class BSDeniedUserAgentFilter extends BSFilter {
 				$module = $this->controller->getModule($this['module']);
 				$action = $module->getAction($this['action']);
 			} catch (BSException $e) {
-				$action = $this->controller->getNotFoundAction();
+				$action = $this->controller->getAction('not_found');
 			}
 			$this->controller->registerAction($action);
 		}

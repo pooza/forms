@@ -8,7 +8,7 @@
  * アクション
  *
  * @author 小石達也 <tkoishi@b-shock.co.jp>
- * @version $Id: BSAction.class.php 1555 2009-10-14 04:12:56Z pooza $
+ * @version $Id: BSAction.class.php 1598 2009-10-30 12:26:03Z pooza $
  * @abstract
  */
 abstract class BSAction implements BSHTTPRedirector, BSAssignable, BSValidatorContainer {
@@ -313,7 +313,7 @@ abstract class BSAction implements BSHTTPRedirector, BSAssignable, BSValidatorCo
 	 * @return string ビュー名
 	 */
 	public function deny () {
-		return $this->controller->getSecureAction()->forward();
+		return $this->controller->getAction('secure')->forward();
 	}
 
 	/**

@@ -8,7 +8,7 @@
  * フィルタセット
  *
  * @author 小石達也 <tkoishi@b-shock.co.jp>
- * @version $Id: BSFilterSet.class.php 1478 2009-09-12 06:39:22Z pooza $
+ * @version $Id: BSFilterSet.class.php 1602 2009-10-31 05:56:40Z pooza $
  * @abstract
  */
 class BSFilterSet extends BSArray {
@@ -93,8 +93,7 @@ class BSFilterSet extends BSArray {
 	 * @param mixed $file 設定ファイル名、又はBSFileオブジェクト
 	 */
 	private function load ($file) {
-		require(BSConfigManager::getInstance()->compile($file));
-		foreach ((array)$objects as $filter) {
+		foreach ((array)BSConfigManager::getInstance()->compile($file) as $filter) {
 			$this->register($filter);
 		}
 	}

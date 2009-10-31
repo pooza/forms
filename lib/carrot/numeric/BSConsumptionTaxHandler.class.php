@@ -12,7 +12,7 @@
  * $price = $tax->includeTax(100, BSDate::getInstance(19890401));
  *
  * @author 小石達也 <tkoishi@b-shock.co.jp>
- * @version $Id: BSConsumptionTaxHandler.class.php 1522 2009-09-22 06:38:56Z pooza $
+ * @version $Id: BSConsumptionTaxHandler.class.php 1602 2009-10-31 05:56:40Z pooza $
  */
 class BSConsumptionTaxHandler {
 	private $rates;
@@ -22,7 +22,7 @@ class BSConsumptionTaxHandler {
 	 * @access private
 	 */
 	private function __construct () {
-		require(BSConfigManager::getInstance()->compile('consumption_tax'));
+		$config = BSConfigManager::getInstance()->compile('consumption_tax');
 		$this->rates = new BSArray;
 		foreach ($config['rates'] as $row) {
 			$date = BSDate::getInstance($row['start_date']);

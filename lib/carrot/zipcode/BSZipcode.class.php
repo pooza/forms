@@ -8,7 +8,7 @@
  * 郵便番号
  *
  * @author 小石達也 <tkoishi@b-shock.co.jp>
- * @version $Id: BSZipcode.class.php 1522 2009-09-22 06:38:56Z pooza $
+ * @version $Id: BSZipcode.class.php 1602 2009-10-31 05:56:40Z pooza $
  */
 class BSZipcode implements BSAssignable {
 	private $contents;
@@ -52,7 +52,7 @@ class BSZipcode implements BSAssignable {
 	 */
 	public function getFile () {
 		if (!$this->file) {
-			$dir = BSController::getInstance()->getDirectory('zipcode');
+			$dir = BSFileUtility::getDirectory('zipcode');
 			$this->file = $dir->getEntry('zip-' . $this->major);
 		}
 		return $this->file;
@@ -83,7 +83,7 @@ class BSZipcode implements BSAssignable {
 	 */
 	public function getPref () {
 		if (!$this->pref && $this->getInfo()) {
-			require(BSConfigManager::getInstance()->compile('postal'));
+			$config = BSConfigManager::getInstance()->compile('postal');
 			$this->pref = $config['prefs'][$this->getInfo()->getParameter(0) - 1];
 		}
 		return $this->pref;

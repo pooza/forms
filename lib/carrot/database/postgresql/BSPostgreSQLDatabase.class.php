@@ -8,7 +8,7 @@
  * PostgreSQLデータベース
  *
  * @author 小石達也 <tkoishi@b-shock.co.jp>
- * @version $Id: BSPostgreSQLDatabase.class.php 1439 2009-09-06 12:28:06Z pooza $
+ * @version $Id: BSPostgreSQLDatabase.class.php 1600 2009-10-30 14:48:55Z pooza $
  */
 class BSPostgreSQLDatabase extends BSDatabase {
 
@@ -101,7 +101,7 @@ class BSPostgreSQLDatabase extends BSDatabase {
 		}
 
 		if (!$dir) {
-			$dir = BSController::getInstance()->getDirectory('sql');
+			$dir = BSFileUtility::getDirectory('sql');
 		}
 		$file = $dir->createEntry($this->getName() . $suffix . '.sql');
 		$file->setContents($command->getResult());
@@ -124,7 +124,7 @@ class BSPostgreSQLDatabase extends BSDatabase {
 		}
 
 		if (!$dir) {
-			$dir = BSController::getInstance()->getDirectory('sql');
+			$dir = BSFileUtility::getDirectory('sql');
 		}
 		$file = $dir->createEntry($this->getName() . $suffix . '.sql');
 		$file->setContents($command->getResult());
@@ -140,7 +140,7 @@ class BSPostgreSQLDatabase extends BSDatabase {
 	 */
 	private function getCommandLine ($command = 'psql') {
 		$command = new BSCommandLine('bin/' . $command);
-		$command->setDirectory(BSController::getInstance()->getDirectory('pgsql'));
+		$command->setDirectory(BSFileUtility::getDirectory('pgsql'));
 		$command->addValue('--host=' . $this['host']->getAddress());
 		$command->addValue('--user=' . $this['user']);
 		$command->addValue($this['database_name']);

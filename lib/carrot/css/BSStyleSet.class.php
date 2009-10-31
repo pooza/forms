@@ -8,7 +8,7 @@
  * スタイルセット
  *
  * @author 小石達也 <tkoishi@b-shock.co.jp>
- * @version $Id: BSStyleSet.class.php 1513 2009-09-20 13:27:06Z pooza $
+ * @version $Id: BSStyleSet.class.php 1600 2009-10-30 14:48:55Z pooza $
  */
 class BSStyleSet extends BSDocumentSet {
 
@@ -29,7 +29,7 @@ class BSStyleSet extends BSDocumentSet {
 	 * @return BSDirectory ディレクトリ
 	 */
 	protected function getDirectory () {
-		return BSController::getInstance()->getDirectory('css');
+		return BSFileUtility::getDirectory('css');
 	}
 }
 

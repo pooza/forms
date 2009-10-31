@@ -8,7 +8,7 @@
  * オブジェクト登録設定コンパイラ
  *
  * @author 小石達也 <tkoishi@b-shock.co.jp>
- * @version $Id: BSObjectRegisterConfigCompiler.class.php 1521 2009-09-22 06:28:16Z pooza $
+ * @version $Id: BSObjectRegisterConfigCompiler.class.php 1602 2009-10-31 05:56:40Z pooza $
  */
 class BSObjectRegisterConfigCompiler extends BSConfigCompiler {
 	public function execute (BSConfigFile $file) {
@@ -25,6 +25,7 @@ class BSObjectRegisterConfigCompiler extends BSConfigCompiler {
 			$line[] = self::quote((array)$values['params']);
 			$this->putLine($line);
 		}
+		$this->putLine('return $objects;');
 		return $this->getBody();
 	}
 }

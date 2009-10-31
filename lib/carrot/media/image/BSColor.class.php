@@ -8,7 +8,7 @@
  * 色
  *
  * @author 小石達也 <tkoishi@b-shock.co.jp>
- * @version $Id: BSColor.class.php 1568 2009-10-19 10:56:07Z pooza $
+ * @version $Id: BSColor.class.php 1602 2009-10-31 05:56:40Z pooza $
  */
 class BSColor extends BSParameterHolder {
 	const DEFAULT_COLOR = 'black';
@@ -44,8 +44,7 @@ class BSColor extends BSParameterHolder {
 			$this['blue'] = hexdec($color[2] . $color[2]);
 		} else {
 			$color = BSString::toLower($color);
-			require(BSConfigManager::getInstance()->compile('color'));
-			$colors = new BSArray($config);
+			$colors = new BSArray(BSConfigManager::getInstance()->compile('color'));
 			if (BSString::isBlank($code = $colors[$color])) {
 				throw new BSImageException('色 "%s" は正しくありません。', $color);
 			}

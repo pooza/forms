@@ -10,7 +10,7 @@ BSUtility::includeFile('Smarty/Smarty.class.php');
  * Smartyラッパー
  *
  * @author 小石達也 <tkoishi@b-shock.co.jp>
- * @version $Id: BSSmarty.class.php 1490 2009-09-15 09:42:41Z pooza $
+ * @version $Id: BSSmarty.class.php 1600 2009-10-30 14:48:55Z pooza $
  */
 class BSSmarty extends Smarty implements BSTextRenderer {
 	private $type;
@@ -28,12 +28,11 @@ class BSSmarty extends Smarty implements BSTextRenderer {
 	 * @access public
 	 */
 	public function __construct() {
-		$controller = BSController::getInstance();
-		$this->compile_dir = $controller->getPath('compile');
+		$this->compile_dir = BSFileUtility::getPath('compile');
 		$this->plugins_dir = array();
-		$this->plugins_dir[] = $controller->getPath('local_lib') . '/smarty';
-		$this->plugins_dir[] = $controller->getPath('carrot') . '/view/renderer/smarty/plugins';
-		$this->plugins_dir[] = $controller->getPath('lib') . '/Smarty/plugins';
+		$this->plugins_dir[] = BSFileUtility::getPath('local_lib') . '/smarty';
+		$this->plugins_dir[] = BSFileUtility::getPath('carrot') . '/view/renderer/smarty/plugins';
+		$this->plugins_dir[] = BSFileUtility::getPath('lib') . '/Smarty/plugins';
 		$this->force_compile = BS_DEBUG;
 		$this->addModifier('encoding');
 		$this->setEncoding('utf-8');
@@ -57,7 +56,7 @@ class BSSmarty extends Smarty implements BSTextRenderer {
 	 */
 	public function getTemplatesDirectory () {
 		if (!$this->templatesDirectory) {
-			$dir = BSController::getInstance()->getDirectory('templates');
+			$dir = BSFileUtility::getDirectory('templates');
 			$this->setTemplatesDirectory($dir);
 		}
 		return $this->templatesDirectory;
@@ -353,7 +352,7 @@ class BSSmarty extends Smarty implements BSTextRenderer {
 			$name = mb_eregi_replace('\\.tpl$', '', $name);
 			$directories = new BSArray;
 			$directories[] = $this->getTemplatesDirectory();
-			$directories[] = BSController::getInstance()->getDirectory('templates');
+			$directories[] = BSFileUtility::getDirectory('templates');
 			$names = new BSArray($name);
 			if ($this->getUserAgent()) {
 				if ($this->getUserAgent()->isMobile()) {

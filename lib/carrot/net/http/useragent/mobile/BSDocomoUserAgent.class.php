@@ -8,7 +8,7 @@
  * Docomoユーザーエージェント
  *
  * @author 小石達也 <tkoishi@b-shock.co.jp>
- * @version $Id: BSDocomoUserAgent.class.php 1480 2009-09-12 07:47:30Z pooza $
+ * @version $Id: BSDocomoUserAgent.class.php 1600 2009-10-30 14:48:55Z pooza $
  */
 class BSDocomoUserAgent extends BSMobileUserAgent {
 	const LIST_FILE_NAME = 'docomo_agents.xml';
@@ -31,7 +31,7 @@ class BSDocomoUserAgent extends BSMobileUserAgent {
 	 * @return string 端末ID
 	 */
 	public function getID () {
-		if ($id = BSController::getInstance()->getEnvironment('X-DCMGUID')) {
+		if ($id = BSController::getInstance()->getAttribute('X-DCMGUID')) {
 			return $id;
 		}
 		return parent::getID();
@@ -100,7 +100,7 @@ class BSDocomoUserAgent extends BSMobileUserAgent {
 
 	static private function getDisplayInfos () {
 		if (!self::$displayInfo) {
-			$dir = BSController::getInstance()->getDirectory('config');
+			$dir = BSFileUtility::getDirectory('config');
 			$file = $dir->getEntry(self::LIST_FILE_NAME);
 
 			$controller = BSController::getInstance();

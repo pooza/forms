@@ -8,7 +8,7 @@
  * memcacheマネージャ
  *
  * @author 小石達也 <tkoishi@b-shock.co.jp>
- * @version $Id: BSMemcacheManager.class.php 1522 2009-09-22 06:38:56Z pooza $
+ * @version $Id: BSMemcacheManager.class.php 1597 2009-10-30 11:58:53Z pooza $
  */
 class BSMemcacheManager {
 	private $server;
@@ -61,7 +61,7 @@ class BSMemcacheManager {
 	 * @return string 設定値
 	 */
 	public function getConfig ($name) {
-		return BSController::getInstance()->getConstant('MEMCACHE_' . $name);
+		return BSController::getInstance()->getAttribute('MEMCACHE_' . $name);
 	}
 
 	/**

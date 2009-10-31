@@ -8,7 +8,7 @@
  * リクエストを保存するフィルタ
  *
  * @author 小石達也 <tkoishi@b-shock.co.jp>
- * @version $Id: BSStoreRequestFilter.class.php 1469 2009-09-11 12:40:31Z pooza $
+ * @version $Id: BSStoreRequestFilter.class.php 1600 2009-10-30 14:48:55Z pooza $
  */
 class BSStoreRequestFilter extends BSRequestFilter {
 
@@ -34,8 +34,8 @@ class BSStoreRequestFilter extends BSRequestFilter {
 
 	private function getDirectory () {
 		$name = BSDate::getNow('Y-m');
-		if (!$dir = $this->controller->getDirectory('request')->getEntry($name)) {
-			$dir = $this->controller->getDirectory('request')->createDirectory($name);
+		if (!$dir = BSFileUtility::getDirectory('request')->getEntry($name)) {
+			$dir = BSFileUtility::getDirectory('request')->createDirectory($name);
 		}
 		return $dir;
 	}

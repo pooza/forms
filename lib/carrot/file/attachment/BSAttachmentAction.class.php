@@ -8,7 +8,7 @@
  * 添付ファイルのダウンロードアクション
  *
  * @author 小石達也 <tkoishi@b-shock.co.jp>
- * @version $Id: BSAttachmentAction.class.php 1129 2009-04-29 11:16:30Z pooza $
+ * @version $Id: BSAttachmentAction.class.php 1598 2009-10-30 12:26:03Z pooza $
  * @abstract
  */
 abstract class BSAttachmentAction extends BSRecordAction {
@@ -25,7 +25,7 @@ abstract class BSAttachmentAction extends BSRecordAction {
 	}
 
 	public function handleError () {
-		return $this->controller->getNotFoundAction()->forward();
+		return $this->controller->getAction('not_found')->forward();
 	}
 
 	public function validate () {

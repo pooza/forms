@@ -8,7 +8,7 @@
  * 基底MIME文書
  *
  * @author 小石達也 <tkoishi@b-shock.co.jp>
- * @version $Id: BSMIMEDocument.class.php 1521 2009-09-22 06:28:16Z pooza $
+ * @version $Id: BSMIMEDocument.class.php 1601 2009-10-30 15:18:20Z pooza $
  */
 class BSMIMEDocument extends BSParameterHolder implements BSRenderer {
 	protected $headers;
@@ -196,7 +196,7 @@ class BSMIMEDocument extends BSParameterHolder implements BSRenderer {
 	 * @return boolean マルチパートならばTrue
 	 */
 	public function isMultiPart () {
-		if (0 < $this->getParts()->count()) {
+		if (!!$this->getParts()->count()) {
 			return true;
 		} else {
 			if ($header = $this->getHeader('Content-Type')) {

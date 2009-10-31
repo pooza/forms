@@ -8,7 +8,7 @@
  * 設定マネージャ
  *
  * @author 小石達也 <tkoishi@b-shock.co.jp>
- * @version $Id: BSConfigManager.class.php 1522 2009-09-22 06:38:56Z pooza $
+ * @version $Id: BSConfigManager.class.php 1603 2009-10-31 06:02:21Z pooza $
  */
 class BSConfigManager {
 	private $compilers;
@@ -18,9 +18,8 @@ class BSConfigManager {
 	 * @access private
 	 */
 	private function __construct () {
-		$objects = array();
-		require_once(self::getConfigFile('config_compilers', 'BSRootConfigFile')->compile());
-		$this->compilers = new BSArray($objects);
+		$file = self::getConfigFile('config_compilers', 'BSRootConfigFile');
+		$this->compilers = new BSArray($this->compile($file));
 		$this->compilers[] = new BSDefaultConfigCompiler(array('pattern' => '.'));;
 	}
 
@@ -50,7 +49,7 @@ class BSConfigManager {
 	 *
 	 * @access public
 	 * @param mixed $file BSFile又はファイル名
-	 * @return string コンパイル済みキャッシュファイルのフルパス
+	 * @return mixed 設定ファイルからの戻り値
 	 */
 	public function compile ($file) {
 		if (!($file instanceof BSFile)) {
@@ -59,7 +58,7 @@ class BSConfigManager {
 		if (!$file->isReadable()) {
 			throw new BSConfigException($file . 'が読めません。');
 		}
-		return $file->compile();
+		return require($file->compile()->getPath());
 	}
 
 	/**

@@ -5,7 +5,7 @@
  * @package org.carrot-framework
  * @subpackage Default
  * @author 小石達也 <tkoishi@b-shock.co.jp>
- * @version $Id: JavaScriptAction.class.php 1513 2009-09-20 13:27:06Z pooza $
+ * @version $Id: JavaScriptAction.class.php 1598 2009-10-30 12:26:03Z pooza $
  */
 class JavaScriptAction extends BSAction {
 	private $jsset;
@@ -33,7 +33,7 @@ class JavaScriptAction extends BSAction {
 	}
 
 	public function handleError () {
-		return $this->controller->getNotFoundAction()->forward();
+		return $this->controller->getAction('not_found')->forward();
 	}
 }
 

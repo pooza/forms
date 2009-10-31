@@ -8,7 +8,7 @@
  * Webリクエスト
  *
  * @author 小石達也 <tkoishi@b-shock.co.jp>
- * @version $Id: BSWebRequest.class.php 1595 2009-10-29 05:41:21Z pooza $
+ * @version $Id: BSWebRequest.class.php 1596 2009-10-30 11:31:21Z pooza $
  */
 class BSWebRequest extends BSRequest {
 	static private $instance;
@@ -17,7 +17,7 @@ class BSWebRequest extends BSRequest {
 	 * @access private
 	 */
 	private function __construct () {
-		$this->setMethod($this->controller->getEnvironment('REQUEST_METHOD'));
+		$this->setMethod($this->controller->getAttribute('REQUEST_METHOD'));
 	}
 
 	/**
@@ -95,7 +95,7 @@ class BSWebRequest extends BSRequest {
 	 */
 	public function getVersion () {
 		if (!$this->version) {
-			$version = $this->controller->getEnvironment('SERVER_PROTOCOL');
+			$version = $this->controller->getAttribute('SERVER_PROTOCOL');
 			$this->version = BSString::explode('/', $version)->getParameter(1);
 		}
 		return $this->version;
@@ -153,7 +153,7 @@ class BSWebRequest extends BSRequest {
 			}
 			$url .= "://" . $this->controller->getHost()->getName();
 			$this->url = BSURL::getInstance($url);
-			$this->url['path'] = $this->controller->getEnvironment('REQUEST_URI');
+			$this->url['path'] = $this->controller->getAttribute('REQUEST_URI');
 		}
 		return $this->url;
 	}
@@ -168,7 +168,7 @@ class BSWebRequest extends BSRequest {
 		if (BS_DEBUG && !BSString::isBlank($name = $this[BSRequest::USER_AGENT_ACCESSOR])) {
 			return $name;
 		}
-		return $this->controller->getEnvironment('USER-AGENT');
+		return $this->controller->getAttribute('USER-AGENT');
 	}
 
 	/**

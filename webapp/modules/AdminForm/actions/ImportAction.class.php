@@ -39,7 +39,7 @@ class ImportAction extends BSRecordAction {
 			$this->request->setError($this->getTable()->getName(), $e->getMessage());
 			return $this->handleError();
 		}
-		$this->controller->putLog($this->request['file']['name'] . 'をインポートしました。');
+		BSLogManager::getInstance()->put($this->request['file']['name'] . 'をインポートしました。');
 		return BSView::SUCCESS;
 	}
 

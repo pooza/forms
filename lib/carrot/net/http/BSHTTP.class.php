@@ -8,7 +8,7 @@
  * HTTPプロトコル
  *
  * @author 小石達也 <tkoishi@b-shock.co.jp>
- * @version $Id: BSHTTP.class.php 1521 2009-09-22 06:28:16Z pooza $
+ * @version $Id: BSHTTP.class.php 1602 2009-10-31 05:56:40Z pooza $
  */
 class BSHTTP extends BSSocket {
 	private $headers = array();
@@ -127,8 +127,7 @@ class BSHTTP extends BSSocket {
 	 * @static
 	 */
 	static public function getAllStatus () {
-		require(BSConfigManager::getInstance()->compile('http_status'));
-		return new BSArray($config);
+		return new BSArray(BSConfigManager::getInstance()->compile('http_status'));
 	}
 
 	/**

@@ -8,7 +8,7 @@
  * Webコントローラー
  *
  * @author 小石達也 <tkoishi@b-shock.co.jp>
- * @version $Id: BSWebController.class.php 1549 2009-10-10 10:39:28Z pooza $
+ * @version $Id: BSWebController.class.php 1596 2009-10-30 11:31:21Z pooza $
  */
 class BSWebController extends BSController {
 	static private $instance;
@@ -32,27 +32,6 @@ class BSWebController extends BSController {
 	 */
 	public function __clone () {
 		throw new BSSingletonException(__CLASS__ . 'はコピーできません。');
-	}
-
-	/**
-	 * サーバ環境変数を返す
-	 *
-	 * @access public
-	 * @param string $name サーバ環境変数の名前
-	 * @return mixed サーバ環境変数
-	 */
-	public function getEnvironment ($name) {
-		$names = new BSArray;
-		$names[] = $name;
-		$names[] = 'HTTP_' . $name;
-		$names[] = 'HTTP_' . str_replace('-', '_', $name);
-		$names->uniquize();
-
-		foreach ($names as $name) {
-			if (isset($_SERVER[$name])) {
-				return $_SERVER[$name];
-			}
-		}
 	}
 
 	/**

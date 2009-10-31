@@ -8,7 +8,7 @@
  * 辞書ディレクトリ
  *
  * @author 小石達也 <tkoishi@b-shock.co.jp>
- * @version $Id: BSDictionaryDirectory.class.php 1148 2009-05-05 04:12:22Z pooza $
+ * @version $Id: BSDictionaryDirectory.class.php 1600 2009-10-30 14:48:55Z pooza $
  */
 class BSDictionaryDirectory extends BSDirectory {
 
@@ -18,7 +18,7 @@ class BSDictionaryDirectory extends BSDirectory {
 	 */
 	public function __construct ($path = null) {
 		if (!$path) {
-			$path = BSController::getInstance()->getPath('dictionaries');
+			$path = BSFileUtility::getPath('dictionaries');
 		}
 		parent::__construct($path);
 		$this->setDefaultSuffix('.csv');

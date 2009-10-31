@@ -8,7 +8,7 @@
  * モジュール
  *
  * @author 小石達也 <tkoishi@b-shock.co.jp>
- * @version $Id: BSModule.class.php 1588 2009-10-26 09:11:29Z pooza $
+ * @version $Id: BSModule.class.php 1602 2009-10-31 05:56:40Z pooza $
  */
 class BSModule implements BSHTTPRedirector, BSAssignable {
 	protected $name;
@@ -35,8 +35,7 @@ class BSModule implements BSHTTPRedirector, BSAssignable {
 			throw new BSModuleException($this . 'のディレクトリが見つかりません。');
 		}
 		if ($file = $this->getConfigFile('module')) {
-			require(BSConfigManager::getInstance()->compile($file));
-			$this->config = (array)$config;
+			$this->config = (array)BSConfigManager::getInstance()->compile($file);
 		}
 		if ($file = $this->getConfigFile('filters')) {
 			$this->config['filters'] = $file->getResult();
@@ -160,7 +159,7 @@ class BSModule implements BSHTTPRedirector, BSAssignable {
 		if (!$this->directories[$name]) {
 			switch ($name) {
 				case 'module':
-					$dir = $this->controller->getDirectory('modules');
+					$dir = BSFileUtility::getDirectory('modules');
 					$this->directories['module'] = $dir->getEntry($this->getName());
 					break;
 				default:

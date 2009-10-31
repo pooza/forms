@@ -5,7 +5,7 @@
  * @package org.carrot-framework
  * @subpackage Console
  * @author 小石達也 <tkoishi@b-shock.co.jp>
- * @version $Id: BackupDatabaseAction.class.php 1525 2009-09-25 10:38:32Z pooza $
+ * @version $Id: BackupDatabaseAction.class.php 1600 2009-10-30 14:48:55Z pooza $
  */
 class BackupDatabaseAction extends BSAction {
 	private $database;
@@ -47,7 +47,7 @@ class BackupDatabaseAction extends BSAction {
 
 		$message = new BSStringFormat('%sをバックアップしました。');
 		$message[] = $this->getDatabase();
-		$this->controller->putLog($message, $this->getDatabase());
+		BSLogManager::getInstance()->put($message, $this->getDatabase());
 	}
 
 	/**
@@ -76,14 +76,14 @@ class BackupDatabaseAction extends BSAction {
 
 	public function execute () {
 		try {
-			$dir = $this->controller->getDirectory('dump');
+			$dir = BSFileUtility::getDirectory('dump');
 			$this->backup($dir);
 			$this->purge($dir);
 		} catch (Exception $e) {
 			$this->handleError();
 		}
 
-		$this->controller->putLog('実行しました。', $this);
+		BSLogManager::getInstance()->put('実行しました。', $this);
 		return BSView::NONE;
 	}
 

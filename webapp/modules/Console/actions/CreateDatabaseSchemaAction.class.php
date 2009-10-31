@@ -5,7 +5,7 @@
  * @package org.carrot-framework
  * @subpackage Console
  * @author 小石達也 <tkoishi@b-shock.co.jp>
- * @version $Id: CreateDatabaseSchemaAction.class.php 1135 2009-05-03 09:57:26Z pooza $
+ * @version $Id: CreateDatabaseSchemaAction.class.php 1599 2009-10-30 14:20:35Z pooza $
  */
 class CreateDatabaseSchemaAction extends BSAction {
 	public function initialize () {
@@ -23,7 +23,7 @@ class CreateDatabaseSchemaAction extends BSAction {
 
 		$message = new BSStringFormat('%sのスキーマを作成しました。');
 		$message[] = $db;
-		$this->controller->putLog($message, $db);
+		BSLogManager::getInstance()->put($message, $db);
 		return BSView::NONE;
 	}
 }

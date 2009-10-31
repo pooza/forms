@@ -8,7 +8,7 @@
  * データベーステーブル
  *
  * @author 小石達也 <tkoishi@b-shock.co.jp>
- * @version $Id: BSTableHandler.class.php 1522 2009-09-22 06:38:56Z pooza $
+ * @version $Id: BSTableHandler.class.php 1600 2009-10-30 14:48:55Z pooza $
  * @abstract
  */
 abstract class BSTableHandler implements IteratorAggregate, BSDictionary, BSAssignable {
@@ -671,7 +671,7 @@ abstract class BSTableHandler implements IteratorAggregate, BSDictionary, BSAssi
 	 */
 	public function getDirectory () {
 		try {
-			return BSController::getInstance()->getDirectory($this->getName());
+			return BSFileUtility::getDirectory($this->getName());
 		} catch (BSFileException $e) {
 		}
 	}

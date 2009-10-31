@@ -8,7 +8,7 @@
  * メディアファイル
  *
  * @author 小石達也 <tkoishi@b-shock.co.jp>
- * @version $Id: BSMediaFile.class.php 1594 2009-10-29 05:13:17Z pooza $
+ * @version $Id: BSMediaFile.class.php 1600 2009-10-30 14:48:55Z pooza $
  * @abstract
  */
 abstract class BSMediaFile extends BSFile implements ArrayAccess {
@@ -245,7 +245,7 @@ abstract class BSMediaFile extends BSFile implements ArrayAccess {
 			return new $class($path);
 		} else {
 			foreach (array('carrotlib', 'www', 'root') as $dir) {
-				$dir = BSController::getInstance()->getDirectory($dir);
+				$dir = BSFileUtility::getDirectory($dir);
 				if ($entry = $dir->getEntry($path, $class)) {
 					return $entry;
 				}

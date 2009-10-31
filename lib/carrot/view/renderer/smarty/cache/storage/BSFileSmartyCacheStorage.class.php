@@ -8,7 +8,7 @@
  * ファイルを用いたSmartyキャッシュストレージ
  *
  * @author 小石達也 <tkoishi@b-shock.co.jp>
- * @version $Id: BSFileSmartyCacheStorage.class.php 971 2009-03-12 03:48:25Z pooza $
+ * @version $Id: BSFileSmartyCacheStorage.class.php 1600 2009-10-30 14:48:55Z pooza $
  */
 class BSFileSmartyCacheStorage implements BSSmartyCacheStorage {
 
@@ -20,7 +20,7 @@ class BSFileSmartyCacheStorage implements BSSmartyCacheStorage {
 	 * @return string 利用可能ならTrue
 	 */
 	public function initialize (BSSmarty $smarty) {
-		$dir = BSController::getInstance()->getDirectory('cache');
+		$dir = BSFileUtility::getDirectory('cache');
 		$smarty->cache_dir = $dir->getPath();
 		$smarty->cache_lifetime = BS_SMARTY_CACHE_LIFE_TIME;
 		$smarty->caching = 1;

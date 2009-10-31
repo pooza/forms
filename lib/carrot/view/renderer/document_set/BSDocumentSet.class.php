@@ -10,7 +10,7 @@
  * BSJavaScriptSet/BSStyleSetの基底クラス
  *
  * @author 小石達也 <tkoishi@b-shock.co.jp>
- * @version $Id: BSDocumentSet.class.php 1558 2009-10-16 03:25:12Z pooza $
+ * @version $Id: BSDocumentSet.class.php 1602 2009-10-31 05:56:40Z pooza $
  * @abstract
  */
 abstract class BSDocumentSet implements BSTextRenderer, IteratorAggregate {
@@ -234,8 +234,7 @@ abstract class BSDocumentSet implements BSTextRenderer, IteratorAggregate {
 			$entries[$file->getBaseName()] = array();
 		}
 		foreach ($this->getConfigFileNames() as $configFile) {
-			require(BSConfigManager::getInstance()->compile($configFile));
-			$entries->setParameters($config);
+			$entries->setParameters(BSConfigManager::getInstance()->compile($configFile));
 		}
 
 		if (!BSString::isBlank($prefix)) {

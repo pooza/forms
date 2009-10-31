@@ -8,7 +8,7 @@
  * 規定設定コンパイラ
  *
  * @author 小石達也 <tkoishi@b-shock.co.jp>
- * @version $Id: BSDefaultConfigCompiler.class.php 991 2009-03-17 07:55:23Z pooza $
+ * @version $Id: BSDefaultConfigCompiler.class.php 1602 2009-10-31 05:56:40Z pooza $
  */
 class BSDefaultConfigCompiler extends BSConfigCompiler {
 	public function execute (BSConfigFile $file) {
@@ -18,7 +18,7 @@ class BSDefaultConfigCompiler extends BSConfigCompiler {
 
 		$this->clearBody();
 		$line = sprintf(
-			'$config = BSController::getInstance()->getAttribute(%s);',
+			'return BSController::getInstance()->getAttribute(%s);',
 			self::quote(BSSerializeHandler::getInstance()->getAttributeName($file))
 		);
 		$this->putLine($line);

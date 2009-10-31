@@ -8,7 +8,7 @@
  * 携帯電話キャリア
  *
  * @author 小石達也 <tkoishi@b-shock.co.jp>
- * @version $Id: BSMobileCarrier.class.php 1469 2009-09-11 12:40:31Z pooza $
+ * @version $Id: BSMobileCarrier.class.php 1600 2009-10-30 14:48:55Z pooza $
  * @abstract
  */
 abstract class BSMobileCarrier {
@@ -161,7 +161,7 @@ abstract class BSMobileCarrier {
 	public function getPictogramDirectory () {
 		if (!$this->pictogramDirectory) {
 			try {
-				$dir = BSController::getInstance()->getDirectory('pictogram');
+				$dir = BSFileUtility::getDirectory('pictogram');
 				$this->pictogramDirectory = $dir->getEntry($this->getPictogramDirectoryName());
 				if (!$this->pictogramDirectory->isDirectory()) {
 					throw new BSMobileException('絵文字ディレクトリが見つかりません。');

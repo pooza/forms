@@ -8,7 +8,7 @@
  * 受信メール
  *
  * @author 小石達也 <tkoishi@b-shock.co.jp>
- * @version $Id: BSPOP3Mail.class.php 1135 2009-05-03 09:57:26Z pooza $
+ * @version $Id: BSPOP3Mail.class.php 1599 2009-10-30 14:20:35Z pooza $
  */
 class BSPOP3Mail extends BSMIMEDocument {
 	private $id;
@@ -104,7 +104,7 @@ class BSPOP3Mail extends BSMIMEDocument {
 			$message = new BSStringFormat('%sを%sから削除しました。');
 			$message[] = $this;
 			$message[] = $this->server;
-			BSController::getInstance()->putLog($message, $this);
+			BSLogManager::getInstance()->put($message, $this);
 			$this->executed['DELE'] = true;
 		}
 	}

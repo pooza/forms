@@ -8,7 +8,7 @@
  * 抽象リクエスト
  *
  * @author 小石達也 <tkoishi@b-shock.co.jp>
- * @version $Id: BSRequest.class.php 1590 2009-10-27 08:56:33Z pooza $
+ * @version $Id: BSRequest.class.php 1601 2009-10-30 15:18:20Z pooza $
  * @abstract
  */
 abstract class BSRequest extends BSHTTPRequest {
@@ -150,7 +150,7 @@ abstract class BSRequest extends BSHTTPRequest {
 	 * @return boolean 存在すればTrue
 	 */
 	public function hasErrors () {
-		return (0 < $this->getErrors()->count());
+		return !!$this->getErrors()->count();
 	}
 
 	/**
@@ -224,7 +224,7 @@ abstract class BSRequest extends BSHTTPRequest {
 	public function getHost () {
 		if (!$this->host) {
 			$this->host = new BSHost(
-				$this->controller->getEnvironment('REMOTE_ADDR')
+				$this->controller->getAttribute('REMOTE_ADDR')
 			);
 		}
 		return $this->host;
@@ -341,7 +341,7 @@ abstract class BSRequest extends BSHTTPRequest {
 	 * @return boolean SSL環境ならTrue
 	 */
 	public function isSSL () {
-		return !BSString::isBlank($this->controller->getEnvironment('HTTPS'));
+		return !BSString::isBlank($this->controller->getAttribute('HTTPS'));
 	}
 
 	/**
@@ -351,7 +351,7 @@ abstract class BSRequest extends BSHTTPRequest {
 	 * @return boolean Ajax環境ならTrue
 	 */
 	public function isAjax () {
-		return !BSString::isBlank($this->controller->getEnvironment('X-PROTOTYPE-VERSION'));
+		return !BSString::isBlank($this->controller->getAttribute('X-PROTOTYPE-VERSION'));
 	}
 
 	/**
@@ -361,8 +361,8 @@ abstract class BSRequest extends BSHTTPRequest {
 	 * @return boolean Flash環境ならTrue
 	 */
 	public function isFlash () {
-		return $this->controller->getEnvironment('X-FLASH-VERSION')
-			|| $this->controller->getEnvironment('X-IS-FLASH');
+		return $this->controller->getAttribute('X-FLASH-VERSION')
+			|| $this->controller->getAttribute('X-IS-FLASH');
 	}
 }
 

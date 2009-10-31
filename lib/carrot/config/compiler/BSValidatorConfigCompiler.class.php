@@ -8,7 +8,7 @@
  * バリデータ設定コンパイラ
  *
  * @author 小石達也 <tkoishi@b-shock.co.jp>
- * @version $Id: BSValidatorConfigCompiler.class.php 1522 2009-09-22 06:38:56Z pooza $
+ * @version $Id: BSValidatorConfigCompiler.class.php 1602 2009-10-31 05:56:40Z pooza $
  */
 class BSValidatorConfigCompiler extends BSConfigCompiler {
 	private $methods;
@@ -39,11 +39,10 @@ class BSValidatorConfigCompiler extends BSConfigCompiler {
 	}
 
 	private function parse (BSConfigFile $file) {
+		$configure = BSConfigManager::getInstance();
 		$this->validators = new BSArray;
-		require(BSConfigManager::getInstance()->compile('validator/carrot'));
-		$this->validators->setParameters($config);
-		require(BSConfigManager::getInstance()->compile('validator/application'));
-		$this->validators->setParameters($config);
+		$this->validators->setParameters($configure->compile('validator/carrot'));
+		$this->validators->setParameters($configure->compile('validator/application'));
 
 		$config = new BSArray($file->getResult());
 		$this->parseMethods(new BSArray($config['methods']));

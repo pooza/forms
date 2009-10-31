@@ -8,7 +8,7 @@
  * MIMEタイプ
  *
  * @author 小石達也 <tkoishi@b-shock.co.jp>
- * @version $Id: BSMIMEType.class.php 1522 2009-09-22 06:38:56Z pooza $
+ * @version $Id: BSMIMEType.class.php 1602 2009-10-31 05:56:40Z pooza $
  */
 class BSMIMEType extends BSParameterHolder {
 	static private $instance;
@@ -94,7 +94,7 @@ class BSMIMEType extends BSParameterHolder {
 			}
 		}
 
-		require(BSConfigManager::getInstance()->compile($this->getConfigFile()));
+		$config = BSConfigManager::getInstance()->compile($this->getConfigFile());
 		foreach ($config['types'] as $key => $value) {
 			if (BSString::isBlank($value)) {
 				$this->removeParameter($key);
@@ -132,7 +132,7 @@ class BSMIMEType extends BSParameterHolder {
 	 */
 	static public function getAttachableTypes () {
 		$types = new BSArray;
-		require(BSConfigManager::getInstance()->compile(self::getInstance()->getConfigFile()));
+		$config = BSConfigManager::getInstance()->compile(self::getInstance()->getConfigFile());
 		foreach ($config['types'] as $key => $value) {
 			$types['.' . $key] = $value;
 		}

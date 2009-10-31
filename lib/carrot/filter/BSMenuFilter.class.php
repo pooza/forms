@@ -8,7 +8,7 @@
  * メニュー構築フィルタ
  *
  * @author 小石達也 <tkoishi@b-shock.co.jp>
- * @version $Id: BSMenuFilter.class.php 1275 2009-06-15 12:45:16Z pooza $
+ * @version $Id: BSMenuFilter.class.php 1602 2009-10-31 05:56:40Z pooza $
  */
 class BSMenuFilter extends BSFilter {
 	private $menu = array();
@@ -26,8 +26,7 @@ class BSMenuFilter extends BSFilter {
 	private function getMenu () {
 		if (!$this->menu) {
 			$separator = true; //次の仕切りを無視するか？
-			require(BSConfigManager::getInstance()->compile($this->getMenuFile()));
-			foreach ($config as $values) {
+			foreach (BSConfigManager::getInstance()->compile($this->getMenuFile()) as $values) {
 				if ($menuitem = $this->getMenuItem($values)) {
 					if (BSString::isBlank($menuitem['separator'])) {
 						$separator = false;

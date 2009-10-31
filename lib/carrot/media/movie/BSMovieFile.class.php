@@ -8,7 +8,7 @@
  * 動画ファイル
  *
  * @author 小石達也 <tkoishi@b-shock.co.jp>
- * @version $Id: BSMovieFile.class.php 1581 2009-10-21 08:08:40Z pooza $
+ * @version $Id: BSMovieFile.class.php 1599 2009-10-30 14:20:35Z pooza $
  */
 class BSMovieFile extends BSMediaFile {
 	private $output;
@@ -80,7 +80,7 @@ class BSMovieFile extends BSMediaFile {
 			$command->addValue($file->getPath());
 			$command->addValue('2>&1', null);
 			$this->output = $command->getResult()->join("\n");
-			BSController::getInstance()->putLog($this . 'をflvに変換しました。', $this);
+			BSLogManager::getInstance()->put($this . 'をflvに変換しました。', $this);
 		}
 		return new self($file->getPath());
 	}

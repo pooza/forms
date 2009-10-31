@@ -8,7 +8,7 @@
  * ZIPアーカイブ
  *
  * @author 小石達也 <tkoishi@b-shock.co.jp>
- * @version $Id: BSZipArchive.class.php 1558 2009-10-16 03:25:12Z pooza $
+ * @version $Id: BSZipArchive.class.php 1600 2009-10-30 14:48:55Z pooza $
  */
 class BSZipArchive extends ZipArchive implements BSrenderer {
 	private $file;
@@ -117,8 +117,7 @@ class BSZipArchive extends ZipArchive implements BSrenderer {
 		} else if (!($file instanceof BSFile)) {
 			$path = $file;
 			if (!BSUtility::isPathAbsolute($path)) {
-				$controller = BSController::getInstance();
-				$path = $controller->getPath('tmp') . DIRECTORY_SEPARATOR . $path;
+				$path = BSFileUtility::getPath('tmp') . DIRECTORY_SEPARATOR . $path;
 			}
 			$this->temporaryFile = false;
 			$file = new BSFile($path);

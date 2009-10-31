@@ -10,7 +10,7 @@ ini_set('auto_detect_line_endings', true);
  * ファイルユーティリティ
  *
  * @author 小石達也 <tkoishi@b-shock.co.jp>
- * @version $Id: BSFileUtility.class.php 1575 2009-10-20 09:42:43Z pooza $
+ * @version $Id: BSFileUtility.class.php 1600 2009-10-30 14:48:55Z pooza $
  */
 class BSFileUtility {
 
@@ -18,6 +18,30 @@ class BSFileUtility {
 	 * @access private
 	 */
 	private function __construct () {
+	}
+
+	/**
+	 * 特別なディレクトリを返す
+	 *
+	 * @access public
+	 * @param string $name ディレクトリの名前
+	 * @return BSDirectory ディレクトリ
+	 * @static
+	 */
+	static public function getDirectory ($name) {
+		return BSDirectoryLayout::getInstance()->getDirectory($name);
+	}
+
+	/**
+	 * 特別なディレクトリのパスを返す
+	 *
+	 * @access public
+	 * @param string $name ディレクトリの名前
+	 * @return string パス
+	 * @static
+	 */
+	static public function getPath ($name) {
+		return BSDirectoryLayout::getInstance()->getPath($name);
 	}
 
 	/**
@@ -30,7 +54,7 @@ class BSFileUtility {
 	 * @static
 	 */
 	static public function getTemporaryFile ($suffix = null, $class = 'BSFile') {
-		$dir = BSController::getInstance()->getDirectory('tmp');
+		$dir = BSFileUtility::getDirectory('tmp');
 		$name = BSUtility::getUniqueID() . $suffix;
 		if (!$file = $dir->createEntry($name, $class)) {
 			throw new BSFileException('一時ファイルが生成できません。');

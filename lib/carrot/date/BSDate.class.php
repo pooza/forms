@@ -8,7 +8,7 @@
  * 日付
  *
  * @author 小石達也 <tkoishi@b-shock.co.jp>
- * @version $Id: BSDate.class.php 1522 2009-09-22 06:38:56Z pooza $
+ * @version $Id: BSDate.class.php 1602 2009-10-31 05:56:40Z pooza $
  */
 class BSDate implements ArrayAccess, BSAssignable {
 	const MON = 1;
@@ -404,7 +404,7 @@ class BSDate implements ArrayAccess, BSAssignable {
 			throw new BSDateException('日付が初期化されていません。');
 		}
 
-		require(BSConfigManager::getInstance()->compile('date'));
+		$config = BSConfigManager::getInstance()->compile('date');
 		if (!isset($config['holiday'][$country])) {
 			throw new BSConfigException('国名"%s"の休日が未定義です。', $country);
 		}
@@ -672,7 +672,7 @@ class BSDate implements ArrayAccess, BSAssignable {
 	static public function getGengos () {
 		if (!self::$gengos) {
 			self::$gengos = new BSArray;
-			require(BSConfigManager::getInstance()->compile('date'));
+			$config = BSConfigManager::getInstance()->compile('date');
 			if (!isset($config['gengo'])) {
 				throw new BSConfigException('元号が設定されていません。');
 			}

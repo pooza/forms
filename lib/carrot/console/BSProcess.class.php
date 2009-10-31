@@ -8,7 +8,7 @@
  * プロセス関連のユーティリティ
  *
  * @author 小石達也 <tkoishi@b-shock.co.jp>
- * @version $Id: BSProcess.class.php 1459 2009-09-09 15:57:27Z pooza $
+ * @version $Id: BSProcess.class.php 1600 2009-10-30 14:48:55Z pooza $
  */
 class BSProcess {
 
@@ -39,7 +39,7 @@ class BSProcess {
 	static public function getID ($name) {
 		$command = new BSCommandLine('bin/pgrep');
 		$command->addValue($name);
-		$command->setDirectory(BSController::getInstance()->getDirectory('proctools'));
+		$command->setDirectory(BSFileUtility::getDirectory('proctools'));
 		if ($command->hasError()) {
 			throw new BSConsoleException('実行時エラーです。(%s)', $command->getContents());
 		}

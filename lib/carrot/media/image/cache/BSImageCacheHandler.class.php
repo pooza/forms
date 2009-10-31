@@ -8,7 +8,7 @@
  * 画像キャッシュ
  *
  * @author 小石達也 <tkoishi@b-shock.co.jp>
- * @version $Id: BSImageCacheHandler.class.php 1568 2009-10-19 10:56:07Z pooza $
+ * @version $Id: BSImageCacheHandler.class.php 1600 2009-10-30 14:48:55Z pooza $
  */
 class BSImageCacheHandler {
 	private $useragent;
@@ -135,7 +135,7 @@ class BSImageCacheHandler {
 			return $file->getEngine();
 		} catch (BSImageException $e) {
 			$file->delete();
-			BSController::getInstance()->putLog($file . 'を削除しました。');
+			BSLogManager::getInstance()->put($file . 'を削除しました。');
 		}
 	}
 
@@ -350,7 +350,7 @@ class BSImageCacheHandler {
 	 * @param BSDirectory ディレクトリ
 	 */
 	private function getDirectory () {
-		return BSController::getInstance()->getDirectory('image_cache');
+		return BSFileUtility::getDirectory('image_cache');
 	}
 
 	/**
@@ -381,7 +381,7 @@ class BSImageCacheHandler {
 	public function getContainer (BSParameterHolder $params) {
 		if (!BSString::isBlank($params['src'])) {
 			foreach (array('images', 'www', 'root') as $name) {
-				$dir = BSController::getInstance()->getDirectory($name);
+				$dir = BSFileUtility::getDirectory($name);
 				if ($entry = $dir->getEntry($params['src'], 'BSImageFile')) {
 					return $entry;
 				}

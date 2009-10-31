@@ -8,7 +8,7 @@
  * MovableTypeクライアント
  *
  * @author 小石達也 <tkoishi@b-shock.co.jp>
- * @version $Id: BSMovableTypeBlog.class.php 1220 2009-05-24 12:40:47Z pooza $
+ * @version $Id: BSMovableTypeBlog.class.php 1599 2009-10-30 14:20:35Z pooza $
  */
 class BSMovableTypeBlog {
 	private $urls;
@@ -43,7 +43,7 @@ class BSMovableTypeBlog {
 
 		$message = new BSStringFormat('%sにコメントを送信しました。');
 		$message[] = $url;
-		BSController::getInstance()->putLog($message, $this);
+		BSLogManager::getInstance()->put($message, $this);
 	}
 }
 

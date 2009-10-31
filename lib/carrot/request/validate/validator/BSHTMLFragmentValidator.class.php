@@ -8,7 +8,7 @@
  * HTMLフラグメントバリデータ
  *
  * @author 小石達也 <tkoishi@b-shock.co.jp>
- * @version $Id: BSHTMLFragmentValidator.class.php 1521 2009-09-22 06:28:16Z pooza $
+ * @version $Id: BSHTMLFragmentValidator.class.php 1601 2009-10-30 15:18:20Z pooza $
  */
 class BSHTMLFragmentValidator extends BSValidator {
 	private $allowedTags;
@@ -58,7 +58,7 @@ class BSHTMLFragmentValidator extends BSValidator {
 	 * @return boolean 問題なしならTrue
 	 */
 	private function isValidElement (BSXMLElement $element) {
-		if (0 < $element->getElements()->count()) {
+		if (!!$element->getElements()->count()) {
 			foreach ($element as $child) {
 				if (!self::isValidElement($child)) {
 					return false;

@@ -8,7 +8,7 @@
  * 動画ユーティリティ
  *
  * @author 小石達也 <tkoishi@b-shock.co.jp>
- * @version $Id: BSMovieUtility.class.php 1579 2009-10-21 07:59:32Z pooza $
+ * @version $Id: BSMovieUtility.class.php 1602 2009-10-31 05:56:40Z pooza $
  */
 class BSMovieUtility {
 
@@ -27,7 +27,7 @@ class BSMovieUtility {
 	 */
 	static public function getCommandLine () {
 		$command = new BSCommandLine('bin/ffmpeg');
-		$command->setDirectory(BSController::getInstance()->getDirectory('ffmpeg'));
+		$command->setDirectory(BSFileUtility::getDirectory('ffmpeg'));
 		return $command;
 	}
 
@@ -40,7 +40,7 @@ class BSMovieUtility {
 	 * @static
 	 */
 	static public function getType ($name) {
-		require(BSConfigManager::getInstance()->compile('movie_format'));
+		$config = BSConfigManager::getInstance()->compile('movie_format');
 		$names = new BSArray($config['types']);
 		return $names[BSString::toLower($name)];
 	}

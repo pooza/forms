@@ -19,7 +19,7 @@
  * $this->getRenderer()->setData($data);
  *
  * @author 小石達也 <tkoishi@b-shock.co.jp>
- * @version $Id: BSRaderChart.class.php 1568 2009-10-19 10:56:07Z pooza $
+ * @version $Id: BSRaderChart.class.php 1602 2009-10-31 05:56:40Z pooza $
  * @link http://www.rakuto.net/study/htdocs/ 参考
  */
 class BSRaderChart extends BSImage {
@@ -86,8 +86,7 @@ class BSRaderChart extends BSImage {
 	 * @return BSColor 色
 	 */
 	private function getColor ($name) {
-		require(BSConfigManager::getInstance()->compile('rader_chart'));
-		$config = new BSArray($config);
+		$config = new BSArray(BSConfigManager::getInstance()->compile('rader_chart'));
 		if (!$config->hasParameter($name)) {
 			throw new BSImageException('レーダーチャートの色 "%s" は未定義です。', $name);
 		}

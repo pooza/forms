@@ -8,7 +8,7 @@
  * SQLiteデータベース
  *
  * @author 小石達也 <tkoishi@b-shock.co.jp>
- * @version $Id: BSSQLiteDatabase.class.php 1439 2009-09-06 12:28:06Z pooza $
+ * @version $Id: BSSQLiteDatabase.class.php 1600 2009-10-30 14:48:55Z pooza $
  */
 class BSSQLiteDatabase extends BSDatabase {
 
@@ -75,7 +75,7 @@ class BSSQLiteDatabase extends BSDatabase {
 		}
 
 		if (!$dir) {
-			$dir = BSController::getInstance()->getDirectory('sql');
+			$dir = BSFileUtility::getDirectory('sql');
 		}
 		$file = $dir->createEntry($this->getName() . $suffix . '.sql');
 		$file->setContents($command->getResult());
@@ -98,7 +98,7 @@ class BSSQLiteDatabase extends BSDatabase {
 		}
 
 		if (!$dir) {
-			$dir = BSController::getInstance()->getDirectory('sql');
+			$dir = BSFileUtility::getDirectory('sql');
 		}
 		$file = $dir->createEntry($this->getName() . $suffix . '.sql');
 		$file->setContents($command->getResult());
@@ -114,7 +114,7 @@ class BSSQLiteDatabase extends BSDatabase {
 	 */
 	private function getCommandLine ($command = 'sqlite3') {
 		$command = new BSCommandLine('bin/' . $command);
-		$command->setDirectory(BSController::getInstance()->getDirectory('sqlite3'));
+		$command->setDirectory(BSFileUtility::getDirectory('sqlite3'));
 		$command->addValue($this['file']->getPath());
 		return $command;
 	}

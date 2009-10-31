@@ -8,7 +8,7 @@
  * SMTPプロトコル
  *
  * @author 小石達也 <tkoishi@b-shock.co.jp>
- * @version $Id: BSSMTP.class.php 1542 2009-10-09 10:12:47Z pooza $
+ * @version $Id: BSSMTP.class.php 1599 2009-10-30 14:20:35Z pooza $
  */
 class BSSMTP extends BSSocket {
 	private $mail;
@@ -99,7 +99,7 @@ class BSSMTP extends BSSocket {
 					if ($this->execute('.') != 250) {
 						throw new BSMailException($this->getPrevLine());
 					}
-					BSController::getInstance()->putLog($this->getSentMessage(), $this);
+					BSLogManager::getInstance()->put($this->getSentMessage(), $this);
 					return $this->getPrevLine();
 				} catch (BSMailException $e) {
 					sleep(1);

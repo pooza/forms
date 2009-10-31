@@ -8,7 +8,7 @@
  * 規定シリアライズストレージ
  *
  * @author 小石達也 <tkoishi@b-shock.co.jp>
- * @version $Id: BSDefaultSerializeStorage.class.php 933 2009-02-27 04:58:09Z pooza $
+ * @version $Id: BSDefaultSerializeStorage.class.php 1600 2009-10-30 14:48:55Z pooza $
  */
 class BSDefaultSerializeStorage implements BSSerializeStorage {
 	private $attributes;
@@ -41,7 +41,7 @@ class BSDefaultSerializeStorage implements BSSerializeStorage {
 	 * @param BSDictionary ディレクトリ
 	 */
 	private function getDirectory () {
-		return BSController::getInstance()->getDirectory('serialized');
+		return BSFileUtility::getDirectory('serialized');
 	}
 
 	/**
