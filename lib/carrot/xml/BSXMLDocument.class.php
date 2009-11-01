@@ -8,9 +8,10 @@
  * 整形式XML文書
  *
  * @author 小石達也 <tkoishi@b-shock.co.jp>
- * @version $Id: BSXMLDocument.class.php 890 2009-02-21 13:59:40Z pooza $
+ * @version $Id: BSXMLDocument.class.php 1604 2009-10-31 13:04:15Z pooza $
  */
 class BSXMLDocument extends BSXMLElement implements BSTextRenderer {
+	private $dirty = false;
 	private $error;
 
 	/**
@@ -44,6 +45,31 @@ class BSXMLDocument extends BSXMLElement implements BSTextRenderer {
 	}
 
 	/**
+	 * ダーティモードか？
+	 *
+	 * @access public
+	 * @return boolean ダーティモードならTrue
+	 */
+	public function isDirty () {
+		return $this->dirty;
+	}
+
+	/**
+	 * ダーティモードを設定
+	 *
+	 * libxml2がエラーを起こすXML文書を無理やり処理する。
+	 *
+	 * @access public
+	 * @param boolean $mode ダーティモード
+	 */
+	public function setDirty ($mode) {
+		$this->dirty = $mode;
+		$this->getAttributes()->clear();
+		$this->getElements()->clear();
+		$this->setBody();
+	}
+
+	/**
 	 * 内容をXMLで返す
 	 *
 	 * @access public
@@ -55,6 +81,19 @@ class BSXMLDocument extends BSXMLElement implements BSTextRenderer {
 		$xml->formatOutput = true;
 		$xml->normalizeDocument();
 		return $xml->saveXML();
+	}
+
+	/**
+	 * XMLをパースして要素と属性を抽出
+	 *
+	 * @access public
+	 * @param $string $contents XML文書
+	 */
+	public function setContents ($contents) {
+		if ($this->isDirty()) {
+			$contents = mb_ereg_replace('[+&]', '', $contents);
+		}
+		parent::setContents($contents);
 	}
 
 	/**

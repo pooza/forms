@@ -8,7 +8,7 @@
  * セッションハンドラ
  *
  * @author 小石達也 <tkoishi@b-shock.co.jp>
- * @version $Id: BSSessionHandler.class.php 1555 2009-10-14 04:12:56Z pooza $
+ * @version $Id: BSSessionHandler.class.php 1604 2009-10-31 13:04:15Z pooza $
  */
 class BSSessionHandler implements BSUserIdentifier {
 	private $storage;
@@ -17,12 +17,8 @@ class BSSessionHandler implements BSUserIdentifier {
 	 * @access public
 	 */
 	public function __construct () {
-		if (headers_sent()) {
+		if (headers_sent() || !$this->getStorage()->initialize()) {
 			throw new BSSessionException('セッションを開始できません。');
-		}
-		if (!$this->getStorage()->initialize()) {
-			$this->storage = new BSDefaultSessionStorage;
-			$this->storage->initialize();
 		}
 		session_start();
 		if (BS_SESSION_REGENERATE_ID) {

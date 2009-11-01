@@ -8,7 +8,7 @@
  * ディレクトリレイアウト
  *
  * @author 小石達也 <tkoishi@b-shock.co.jp>
- * @version $Id: BSDirectoryLayout.class.php 1602 2009-10-31 05:56:40Z pooza $
+ * @version $Id: BSDirectoryLayout.class.php 1604 2009-10-31 13:04:15Z pooza $
  */
 class BSDirectoryLayout {
 	static private $instance;
@@ -32,7 +32,7 @@ class BSDirectoryLayout {
 	 * シングルトンインスタンスを返す
 	 *
 	 * @access public
-	 * @return BSConsoleController インスタンス
+	 * @return BSDirectoryLayout インスタンス
 	 * @static
 	 */
 	static public function getInstance () {
@@ -95,16 +95,6 @@ class BSDirectoryLayout {
 		}
 
 		return $dir;
-	}
-
-	/**
-	 * 特別なディレクトリのパスを返す
-	 *
-	 * @access public
-	 * @param string パス
-	 */
-	public function getPath ($name) {
-		return $this->getDirectory($name)->getPath();
 	}
 }
 

@@ -8,7 +8,7 @@
  * Docomoユーザーエージェント
  *
  * @author 小石達也 <tkoishi@b-shock.co.jp>
- * @version $Id: BSDocomoUserAgent.class.php 1600 2009-10-30 14:48:55Z pooza $
+ * @version $Id: BSDocomoUserAgent.class.php 1604 2009-10-31 13:04:15Z pooza $
  */
 class BSDocomoUserAgent extends BSMobileUserAgent {
 	const LIST_FILE_NAME = 'docomo_agents.xml';
@@ -106,13 +106,9 @@ class BSDocomoUserAgent extends BSMobileUserAgent {
 			$controller = BSController::getInstance();
 			if (!$agents = $controller->getAttribute($file, $file->getUpdateDate())) {
 				$agents = new BSArray;
-				$contents = $file->getContents();
-
-				//libxml2がパースエラーを起こす
-				$contents = mb_ereg_replace('[+&]', '', $contents);
-
 				$xml = new BSXMLDocument;
-				$xml->setContents($contents);
+				$xml->setDirty(true);
+				$xml->setContents($file->getContents());
 				foreach ($xml->getElements() as $element) {
 					$agents[$element->getName()] = $element->getAttributes();
 				}

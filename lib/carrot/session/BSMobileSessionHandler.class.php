@@ -8,7 +8,7 @@
  * ケータイ用セッションハンドラ
  *
  * @author 小石達也 <tkoishi@b-shock.co.jp>
- * @version $Id: BSMobileSessionHandler.class.php 1551 2009-10-12 09:02:34Z pooza $
+ * @version $Id: BSMobileSessionHandler.class.php 1604 2009-10-31 13:04:15Z pooza $
  */
 class BSMobileSessionHandler extends BSSessionHandler {
 
@@ -17,8 +17,7 @@ class BSMobileSessionHandler extends BSSessionHandler {
 	 */
 	public function __construct () {
 		if (!$this->getStorage()->initialize()) {
-			$this->storage = new BSDefaultSessionStorage;
-			$this->storage->initialize();
+			throw new BSSessionException('セッションを開始できません。');
 		}
 		ini_set('session.use_only_cookies', 0);
 		session_start();
