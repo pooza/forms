@@ -8,7 +8,7 @@
  * Docomoユーザーエージェント
  *
  * @author 小石達也 <tkoishi@b-shock.co.jp>
- * @version $Id: BSDocomoUserAgent.class.php 1604 2009-10-31 13:04:15Z pooza $
+ * @version $Id: BSDocomoUserAgent.class.php 1609 2009-11-09 09:21:23Z pooza $
  */
 class BSDocomoUserAgent extends BSMobileUserAgent {
 	const LIST_FILE_NAME = 'docomo_agents.xml';
@@ -110,7 +110,7 @@ class BSDocomoUserAgent extends BSMobileUserAgent {
 				$xml->setDirty(true);
 				$xml->setContents($file->getContents());
 				foreach ($xml->getElements() as $element) {
-					$agents[$element->getName()] = $element->getAttributes();
+					$agents[$element->getName()] = $element->getAttributes()->getParameters();
 				}
 				$agents->sort(BSArray::SORT_KEY_DESC);
 				$controller->setAttribute($file, $agents->getParameters());
