@@ -8,7 +8,7 @@
  * 選択バリデータ
  *
  * @author 小石達也 <tkoishi@b-shock.co.jp>
- * @version $Id: BSChoiceValidator.class.php 1537 2009-10-09 09:35:20Z pooza $
+ * @version $Id: BSChoiceValidator.class.php 1608 2009-11-09 03:11:27Z pooza $
  */
 class BSChoiceValidator extends BSValidator {
 
@@ -34,11 +34,10 @@ class BSChoiceValidator extends BSValidator {
 	 * @return boolean 妥当な値ならばTrue
 	 */
 	public function execute ($value) {
-		if (!BSArray::isArray($value)) {
-			$value = array($value);
-		}
-		foreach ($value as $item) {
-			if (!$this->getChoices()->isContain($item)) {
+		$choices = new BSArray($value);
+		$choices->trim();
+		foreach ($choices as $choice) {
+			if (!$this->getChoices()->isContain($choice)) {
 				$this->error = $this['choices_error'];
 				return false;
 			}

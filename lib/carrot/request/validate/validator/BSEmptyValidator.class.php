@@ -8,7 +8,7 @@
  * 必須バリデータ
  *
  * @author 小石達也 <tkoishi@b-shock.co.jp>
- * @version $Id: BSEmptyValidator.class.php 1601 2009-10-30 15:18:20Z pooza $
+ * @version $Id: BSEmptyValidator.class.php 1608 2009-11-09 03:11:27Z pooza $
  */
 class BSEmptyValidator extends BSValidator {
 
@@ -51,6 +51,7 @@ class BSEmptyValidator extends BSValidator {
 			if ($value['is_file']) {
 				return BSString::isBlank($value['name']);
 			} else {
+				$value->trim();
 				return !$value->count();
 			}
 		} else {

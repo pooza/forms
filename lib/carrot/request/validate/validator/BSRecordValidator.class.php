@@ -8,7 +8,7 @@
  * レコードバリデータ
  *
  * @author 小石達也 <tkoishi@b-shock.co.jp>
- * @version $Id: BSRecordValidator.class.php 1089 2009-04-22 09:58:46Z pooza $
+ * @version $Id: BSRecordValidator.class.php 1608 2009-11-09 03:11:27Z pooza $
  */
 class BSRecordValidator extends BSValidator {
 	private $table;
@@ -40,7 +40,9 @@ class BSRecordValidator extends BSValidator {
 	 * @return boolean 妥当な値ならばTrue
 	 */
 	public function execute ($value) {
-		foreach ((array)$value as $id) {
+		$ids = new BSArray($value);
+		$ids->trim();
+		foreach ($ids as $id) {
 			if ($this->isExists($id)) {
 				if (!$this['exist']) {
 					$this->error = $this['duplicate_error'];

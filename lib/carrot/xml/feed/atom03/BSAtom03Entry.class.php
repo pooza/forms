@@ -8,7 +8,7 @@
  * Atom0.3エントリー
  *
  * @author 小石達也 <tkoishi@b-shock.co.jp>
- * @version $Id: BSAtom03Entry.class.php 1525 2009-09-25 10:38:32Z pooza $
+ * @version $Id: BSAtom03Entry.class.php 1607 2009-11-09 03:10:36Z pooza $
  */
 class BSAtom03Entry extends BSXMLElement implements BSFeedEntry {
 	protected $document;
@@ -41,6 +41,7 @@ class BSAtom03Entry extends BSXMLElement implements BSFeedEntry {
 			$element = $this->createElement('link');
 		}
 		$element->setBody($link->getURL()->getContents());
+		$element->setAttribute('href', $link->getURL()->getContents());
 	}
 
 	/**
@@ -75,8 +76,10 @@ class BSAtom03Entry extends BSXMLElement implements BSFeedEntry {
 	 * @return BSDate 日付
 	 */
 	public function getDate () {
-		if ($element = $this->getElement('published')) {
-			return BSDate::getInstance($element->getBody());
+		foreach (array('published', 'created') as $field) {
+			if ($element = $this->getElement($field)) {
+				return BSDate::getInstance($element->getBody());
+			}
 		}
 	}
 
@@ -87,10 +90,12 @@ class BSAtom03Entry extends BSXMLElement implements BSFeedEntry {
 	 * @param BSDate $date 日付
 	 */
 	public function setDate (BSDate $date) {
-		if (!$element = $this->getElement('published')) {
-			$element = $this->createElement('published');
+		foreach (array('published', 'created') as $field) {
+			if (!$element = $this->getElement($field)) {
+				$element = $this->createElement($field);
+			}
+			$element->setBody($date->format(DATE_RFC3339));
 		}
-		$element->setBody($date->format(DATE_RFC3339));
 	}
 
 	/**
