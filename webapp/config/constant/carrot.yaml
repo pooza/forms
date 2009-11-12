@@ -2,11 +2,11 @@
 #
 # @package org.carrot-framework
 # @author 小石達也 <tkoishi@b-shock.co.jp>
-# @version $Id: carrot.yaml 1608 2009-11-09 03:11:27Z pooza $
+# @version $Id: carrot.yaml 1610 2009-11-10 02:37:07Z pooza $
 
 carrot:
   name: carrot Framework
-  ver: 2.3.2
+  ver: 2.3.3
   bts:
     url: http://redmine.carrot-framework.org/projects/show/carrot
 
@@ -49,14 +49,18 @@ flash:
 home:
   href: /index.html
 image:
-  thumbnail:
-    bgcolor: black
-    type: image/png
   mobile:
     type:
       docomo: image/jpeg
       au: image/png
       softbank: image/png
+  qrcode:
+    size: 2
+    margin: 4
+    type: image/png
+  thumbnail:
+    bgcolor: black
+    type: image/png
 languages:
   - ja
 log:
