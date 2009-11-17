@@ -8,7 +8,7 @@
  * CarrotアプリケーションのURLを貼り付ける関数
  *
  * @author 小石達也 <tkoishi@b-shock.co.jp>
- * @version $Id: function.carrot_url.php 1499 2009-09-18 13:23:51Z pooza $
+ * @version $Id: function.carrot_url.php 1615 2009-11-17 08:23:54Z pooza $
  */
 function smarty_function_carrot_url ($params, &$smarty) {
 	$params = new BSArray($params);
@@ -26,6 +26,9 @@ function smarty_function_carrot_url ($params, &$smarty) {
 		if (BSString::isBlank($params['module'])) {
 			if (BSString::isBlank($params['action'])) {
 				$url['action'] = BSController::getInstance()->getAction();
+				if (!BSString::isBlank($params['record_id'])) {
+					$url['record'] = $params['record_id'];
+				}
 			} else {
 				$url['module'] = BSController::getInstance()->getModule();
 			}

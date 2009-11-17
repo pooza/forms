@@ -10,7 +10,7 @@
  * BSJavaScriptSet/BSStyleSetの基底クラス
  *
  * @author 小石達也 <tkoishi@b-shock.co.jp>
- * @version $Id: BSDocumentSet.class.php 1602 2009-10-31 05:56:40Z pooza $
+ * @version $Id: BSDocumentSet.class.php 1616 2009-11-17 08:24:37Z pooza $
  * @abstract
  */
 abstract class BSDocumentSet implements BSTextRenderer, IteratorAggregate {
@@ -34,7 +34,8 @@ abstract class BSDocumentSet implements BSTextRenderer, IteratorAggregate {
 
 		$entries = $this->getEntries();
 		if (isset($entries[$name]['files']) && BSArray::isArray($entries[$name]['files'])) {
-			foreach ($entries[$name]['files'] as $file) {
+			$files = $entries[$name]['files']; //この代入はPHP5.1対応。
+			foreach ($files as $file) {
 				$this->register($file);
 			}
 		} else {

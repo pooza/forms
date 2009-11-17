@@ -8,7 +8,7 @@
  * form要素
  *
  * @author 小石達也 <tkoishi@b-shock.co.jp>
- * @version $Id: BSFormElement.class.php 1522 2009-09-22 06:38:56Z pooza $
+ * @version $Id: BSFormElement.class.php 1619 2009-11-17 12:06:17Z pooza $
  */
 class BSFormElement extends BSXMLElement {
 	private $useragent;
@@ -57,8 +57,7 @@ class BSFormElement extends BSXMLElement {
 			throw new BSHTTPException($this->getMethod() . 'は正しくないメソッドです。');
 		}
 		if ($this->getMethod() == 'post') {
-			$this->addHiddenField('dummy', '符号形式識別用文字列');
-			$this->addHiddenField('submit', 1);
+			$this->addSubmitFields();
 		}
 	}
 
@@ -129,6 +128,16 @@ class BSFormElement extends BSXMLElement {
 		} else {
 			$this->removeAttribute('enctype');
 		}
+	}
+
+	/**
+	 * Submit判定用のhidden値を加える
+	 *
+	 * @access public
+	 */
+	public function addSubmitFields () {
+		$this->addHiddenField('dummy', '符号形式識別用文字列');
+		$this->addHiddenField('submit', 1);
 	}
 
 	/**

@@ -8,7 +8,7 @@
  * 基底ビュー
  *
  * @author 小石達也 <tkoishi@b-shock.co.jp>
- * @version $Id: BSView.class.php 1554 2009-10-14 02:56:55Z pooza $
+ * @version $Id: BSView.class.php 1617 2009-11-17 09:03:29Z pooza $
  */
 class BSView extends BSHTTPResponse {
 	protected $nameSuffix;
@@ -185,7 +185,7 @@ class BSView extends BSHTTPResponse {
 			self::putHeader('HTTP/' . $this->getVersion() . ' ' . $header->getContents());
 		}
 		foreach ($this->getHeaders() as $name => $header) {
-			self::putHeader($header->format());
+			self::putHeader($header->format(BSMIMEHeader::WITHOUT_CRLF));
 		}
 	}
 

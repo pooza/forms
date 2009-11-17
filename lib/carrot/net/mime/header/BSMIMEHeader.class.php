@@ -8,13 +8,14 @@
  * 基底ヘッダ
  *
  * @author 小石達也 <tkoishi@b-shock.co.jp>
- * @version $Id: BSMIMEHeader.class.php 1545 2009-10-10 07:13:02Z pooza $
+ * @version $Id: BSMIMEHeader.class.php 1617 2009-11-17 09:03:29Z pooza $
  * @abstract
  */
 class BSMIMEHeader extends BSParameterHolder {
 	protected $part;
 	protected $name;
 	protected $contents;
+	const WITHOUT_CRLF = 1;
 
 	/**
 	 * @access public
@@ -170,11 +171,16 @@ class BSMIMEHeader extends BSParameterHolder {
 	 * ヘッダを整形して返す
 	 *
 	 * @access public
-	 * @param ヘッダ行
+	 * @param integer $flags フラグのビット列
+	 *   self::WITHOUT_CRLF 改行を含まない
+	 * @return ヘッダ行
 	 */
-	public function format () {
+	public function format ($flags = null) {
 		if (!$this->isVisible()) {
 			return null;
+		}
+		if ($flags & self::WITHOUT_CRLF) {
+			return $this->name . ': ' . $this->getContents();
 		}
 
 		$contents = BSMIMEUtility::encode($this->getContents());
