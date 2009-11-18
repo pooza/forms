@@ -8,15 +8,15 @@
  * ソケット
  *
  * @author 小石達也 <tkoishi@b-shock.co.jp>
- * @version $Id: BSSocket.class.php 1472 2009-09-11 13:32:25Z pooza $
+ * @version $Id: BSSocket.class.php 1621 2009-11-18 09:20:35Z pooza $
  */
 class BSSocket {
 	protected $host;
 	protected $port;
 	protected $protocol;
 	protected $name;
-	private $client;
-	private $line;
+	protected $client;
+	protected $line;
 	const LINE_BUFFER = 4096;
 	const RETRY_LIMIT = 10;
 	const LINE_SEPARATOR = "\r\n";
@@ -126,7 +126,7 @@ class BSSocket {
 		} else if ($this->isEof()) {
 			return '';
 		}
-		$this->line = rtrim(fread($this->client, $length));
+		$this->line = rtrim(fgets($this->client, $length));
 		return $this->line;
 	}
 

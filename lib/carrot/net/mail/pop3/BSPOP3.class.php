@@ -8,7 +8,7 @@
  * POP3プロトコル
  *
  * @author 小石達也 <tkoishi@b-shock.co.jp>
- * @version $Id: BSPOP3.class.php 1469 2009-09-11 12:40:31Z pooza $
+ * @version $Id: BSPOP3.class.php 1621 2009-11-18 09:20:35Z pooza $
  */
 class BSPOP3 extends BSSocket {
 	private $mails;
@@ -22,10 +22,6 @@ class BSPOP3 extends BSSocket {
 		parent::open();
 		if (!$this->isSuccess()) {
 			throw new BSMailException('%sに接続できません。 (%s)', $this, $this->getPrevLine());
-		}
-		try {
-			$this->execute('UIDL');
-		} catch (Exception $e) {
 		}
 	}
 

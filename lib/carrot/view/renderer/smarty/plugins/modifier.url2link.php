@@ -8,7 +8,7 @@
  * URL変換修飾子
  *
  * @author 小石達也 <tkoishi@b-shock.co.jp>
- * @version $Id: modifier.url2link.php 1469 2009-09-11 12:40:31Z pooza $
+ * @version $Id: modifier.url2link.php 1620 2009-11-18 09:19:57Z pooza $
  */
 function smarty_modifier_url2link ($value) {
 	if (is_array($value)) {
@@ -17,7 +17,7 @@ function smarty_modifier_url2link ($value) {
 		return $value->getParameters();
 	} else if (!BSString::isBlank($value)) {
 		return mb_ereg_replace(
-			'https?://[[:graph:]]+',
+			'https?://[[:alnum:][:punct:]]+',
 			'<a href="\\0" target="_blank">\\0</a>',
 			$value
 		);

@@ -8,7 +8,7 @@
  * 文字列に関するユーティリティ
  *
  * @author 小石達也 <tkoishi@b-shock.co.jp>
- * @version $Id: BSString.class.php 1616 2009-11-17 08:24:37Z pooza $
+ * @version $Id: BSString.class.php 1621 2009-11-18 09:20:35Z pooza $
  */
 class BSString {
 
@@ -112,12 +112,7 @@ class BSString {
 				$value[$key] = self::convertKana($item, $format);
 			}
 		} else {
-			if (BSString::isBlank($encoding = self::getEncoding($value))) {
-				// PHP5.1のバグ？
-				return mb_convert_kana($value, $format);
-			} else {
-				return mb_convert_kana($value, $format, $encoding);
-			}
+			return mb_convert_kana($value, $format, self::getEncoding($value));
 		}
 		return $value;
 	}
