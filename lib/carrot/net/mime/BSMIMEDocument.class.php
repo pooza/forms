@@ -8,7 +8,7 @@
  * 基底MIME文書
  *
  * @author 小石達也 <tkoishi@b-shock.co.jp>
- * @version $Id: BSMIMEDocument.class.php 1601 2009-10-30 15:18:20Z pooza $
+ * @version $Id: BSMIMEDocument.class.php 1623 2009-11-19 07:43:39Z pooza $
  */
 class BSMIMEDocument extends BSParameterHolder implements BSRenderer {
 	protected $headers;
@@ -200,7 +200,7 @@ class BSMIMEDocument extends BSParameterHolder implements BSRenderer {
 			return true;
 		} else {
 			if ($header = $this->getHeader('Content-Type')) {
-				if (mb_ereg('^multipart/', $header->getContents())) {
+				if (mb_eregi('^multipart/', $header->getContents())) {
 					return true;
 				}
 			}
@@ -233,6 +233,7 @@ class BSMIMEDocument extends BSParameterHolder implements BSRenderer {
 	public function setContents ($contents) {
 		$this->contents = $contents;
 		try {
+			$contents = BSString::convertLineSeparator($contents);
 			$contents = BSString::explode("\n\n", $contents);
 			$this->parseHeaders($contents->shift());
 			$contents = $contents->join("\n\n");

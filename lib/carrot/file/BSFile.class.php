@@ -10,7 +10,7 @@ ini_set('auto_detect_line_endings', true);
  * ファイル
  *
  * @author 小石達也 <tkoishi@b-shock.co.jp>
- * @version $Id: BSFile.class.php 1558 2009-10-16 03:25:12Z pooza $
+ * @version $Id: BSFile.class.php 1625 2009-11-19 07:44:56Z pooza $
  */
 class BSFile extends BSDirectoryEntry implements BSRenderer {
 	private $mode;
@@ -199,7 +199,7 @@ class BSFile extends BSDirectoryEntry implements BSRenderer {
 		if ($this->isEof()) {
 			return '';
 		}
-		$line = fread($this->handle, $length);
+		$line = fgets($this->handle, $length);
 		$line = rtrim($line);
 		return $line;
 	}
