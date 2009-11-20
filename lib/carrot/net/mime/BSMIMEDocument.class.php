@@ -8,7 +8,7 @@
  * 基底MIME文書
  *
  * @author 小石達也 <tkoishi@b-shock.co.jp>
- * @version $Id: BSMIMEDocument.class.php 1623 2009-11-19 07:43:39Z pooza $
+ * @version $Id: BSMIMEDocument.class.php 1627 2009-11-20 04:21:46Z pooza $
  */
 class BSMIMEDocument extends BSParameterHolder implements BSRenderer {
 	protected $headers;
@@ -369,8 +369,8 @@ class BSMIMEDocument extends BSParameterHolder implements BSRenderer {
 			}
 			return $parts;
 		} else {
+			$entity = $this->getRenderer()->getContents();
 			if ($header = $this->getHeader('Content-Type')) {
-				$entity = $this->getRenderer()->getContents();
 				switch ($this->getContentTransferEncoding()) {
 					case 'base64':
 						$entity = BSMIMEUtility::decodeBase64($entity);
@@ -382,9 +382,8 @@ class BSMIMEDocument extends BSParameterHolder implements BSRenderer {
 				if ($header['main_type'] == 'text') {
 					$entity = BSString::convertEncoding($entity, 'utf-8', $header['charset']);
 				}
-				return $entity;
 			}
-			return $this->getRenderer();
+			return $entity;
 		}
 	}
 

@@ -8,7 +8,7 @@
  * Webリクエスト
  *
  * @author 小石達也 <tkoishi@b-shock.co.jp>
- * @version $Id: BSWebRequest.class.php 1617 2009-11-17 09:03:29Z pooza $
+ * @version $Id: BSWebRequest.class.php 1628 2009-11-20 04:22:45Z pooza $
  */
 class BSWebRequest extends BSRequest {
 	static private $instance;
@@ -129,15 +129,15 @@ class BSWebRequest extends BSRequest {
 			$this->headers = new BSArray;
 			if (extension_loaded('http')) {
 				$headers = http_get_request_headers();
-			} else if (PHP_SAPI == 'cgi') {
+			} else if (function_exists('apache_request_headers')) {
+				$headers = apache_request_headers();
+			} else {
 				$headers = array();
 				foreach ($_SERVER as $key => $value) {
 					if (mb_ereg('HTTP_(.*)', $key, $matches)) {
 						$headers[str_replace('_', '-', $matches[1])] = $value;
 					}
 				}
-			} else {
-				$headers = apache_request_headers();
 			}
 			foreach ($headers as $key => $value) {
 				$this->setHeader($key, $value);
