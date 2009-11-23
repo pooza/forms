@@ -2,7 +2,7 @@
 #
 # @package org.carrot-framework
 # @author 小石達也 <tkoishi@b-shock.co.jp>
-# @version $Id: carrot.yaml 1626 2009-11-20 04:20:40Z pooza $
+# @version $Id: carrot.yaml 1630 2009-11-23 03:31:21Z pooza $
 
 date:
   class: BSDateValidator
@@ -85,6 +85,8 @@ pixel:
   params:
     min: 8
     max: 1024
+smarty:
+  class: BSSmartyValidator
 string:
   class: BSStringValidator
   params:
