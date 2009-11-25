@@ -8,7 +8,7 @@
  * form要素
  *
  * @author 小石達也 <tkoishi@b-shock.co.jp>
- * @version $Id: block.form.php 1619 2009-11-17 12:06:17Z pooza $
+ * @version $Id: block.form.php 1631 2009-11-25 03:44:32Z pooza $
  */
 function smarty_block_form ($params, $contents, &$smarty) {
 	$params = new BSArray($params);
@@ -31,7 +31,7 @@ function smarty_block_form ($params, $contents, &$smarty) {
 	$form->setAction($params);
 
 	$params->removeParameter('method');
-	$params->removeParameter('attchable');
+	$params->removeParameter('attachable');
 	$params->removeParameter('path');
 	$params->removeParameter('module');
 	$params->removeParameter('action');

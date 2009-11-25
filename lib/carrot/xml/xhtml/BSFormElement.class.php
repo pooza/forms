@@ -8,7 +8,7 @@
  * form要素
  *
  * @author 小石達也 <tkoishi@b-shock.co.jp>
- * @version $Id: BSFormElement.class.php 1619 2009-11-17 12:06:17Z pooza $
+ * @version $Id: BSFormElement.class.php 1633 2009-11-25 07:39:10Z pooza $
  */
 class BSFormElement extends BSXMLElement {
 	private $useragent;
@@ -32,6 +32,8 @@ class BSFormElement extends BSXMLElement {
 			foreach ($this->useragent->getAttribute('query') as $key => $value) {
 				$this->addHiddenField($key, $value);
 			}
+		} else {
+			$this->disableMultiSubmit();
 		}
 	}
 
@@ -138,6 +140,15 @@ class BSFormElement extends BSXMLElement {
 	public function addSubmitFields () {
 		$this->addHiddenField('dummy', '符号形式識別用文字列');
 		$this->addHiddenField('submit', 1);
+	}
+
+	/**
+	 * 二度押し防止
+	 *
+	 * @access public
+	 */
+	public function disableMultiSubmit () {
+		$this->setAttribute('onsubmit', 'this.onsubmit=function(){return false}');
 	}
 
 	/**

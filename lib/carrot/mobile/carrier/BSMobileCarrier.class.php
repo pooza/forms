@@ -8,7 +8,7 @@
  * 携帯電話キャリア
  *
  * @author 小石達也 <tkoishi@b-shock.co.jp>
- * @version $Id: BSMobileCarrier.class.php 1600 2009-10-30 14:48:55Z pooza $
+ * @version $Id: BSMobileCarrier.class.php 1634 2009-11-25 10:36:21Z pooza $
  * @abstract
  */
 abstract class BSMobileCarrier {
@@ -104,6 +104,8 @@ abstract class BSMobileCarrier {
 	/**
 	 * 絵文字変換器を返す
 	 *
+	 * BSEncodingRequestFilterの適用前、素のSJIS文字列に対してのみ有効。
+	 *
 	 * @access public
 	 * @return MPC_Common 絵文字変換器
 	 */
@@ -113,7 +115,7 @@ abstract class BSMobileCarrier {
 			BSUtility::includeFile('MPC/Carrier/' . BSString::toLower($this->getMPCCode()) . '.php');
 			$class = 'MPC_' . $this->getMPCCode();
 			$this->mpc = new $class;
-			$this->mpc->setFromCharset('UTF-8');
+			$this->mpc->setFromCharset('SJIS');
 			$this->mpc->setFrom($this->getMPCCode());
 			$this->mpc->setStringType(BSMobileCarrier::MPC_RAW);
 			$this->mpc->setImagePath('/carrotlib/images/pictogram');

@@ -5,6 +5,7 @@
 # @version $Id$
 
 - class: BSDeniedUserAgentFilter
+- class: BSPictogramRequestFilter
 - class: BSEncodingRequestFilter
 - class: BSNewLineRequestFilter
 - class: BSPictogramRequestFilter

@@ -10,7 +10,7 @@
  * 絵文字を検出し、内部表現タグに置換
  *
  * @author 小石達也 <tkoishi@b-shock.co.jp>
- * @version $Id: BSPictogramRequestFilter.class.php 1015 2009-03-25 09:34:57Z pooza $
+ * @version $Id: BSPictogramRequestFilter.class.php 1634 2009-11-25 10:36:21Z pooza $
  */
 class BSPictogramRequestFilter extends BSRequestFilter {
 
@@ -25,7 +25,7 @@ class BSPictogramRequestFilter extends BSRequestFilter {
 	protected function convert ($key, $value) {
 		$useragent = $this->request->getUserAgent();
 		if ($useragent->isMobile()) {
-			$value = $useragent->getCarrier()->convertPictogram($value);
+			$value = $useragent->getCarrier()->trimPictogram($value);
 		}
 		return $value;
 	}

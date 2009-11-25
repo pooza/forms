@@ -8,7 +8,7 @@
  * 画像ファイル
  *
  * @author 小石達也 <tkoishi@b-shock.co.jp>
- * @version $Id: BSImageFile.class.php 1582 2009-10-22 03:43:35Z pooza $
+ * @version $Id: BSImageFile.class.php 1632 2009-11-25 03:45:33Z pooza $
  */
 class BSImageFile extends BSFile implements BSImageContainer {
 	protected $renderer;
@@ -214,11 +214,15 @@ class BSImageFile extends BSFile implements BSImageContainer {
 	 * @return string ラベル
 	 */
 	public function getLabel ($language = 'ja') {
-		return BSTranslateManager::getInstance()->execute(
-			$this->getBaseName(),
-			'user_image',
-			$language
-		);
+		try {
+			return BSTranslateManager::getInstance()->execute(
+				$this->getBaseName(),
+				'user_image',
+				$language
+			);
+		} catch (BSTranslateException $e) {
+			return $this->getBaseName();
+		}
 	}
 
 	/**
