@@ -25,12 +25,14 @@
  * {/jsonp}
  *
  * @author 小石達也 <tkoishi@b-shock.co.jp>
- * @version $Id: block.jsonp.php 1629 2009-11-22 14:03:39Z pooza $
+ * @version $Id: block.jsonp.php 1636 2009-11-27 09:52:39Z pooza $
  */
 function smarty_block_jsonp ($params, $contents, &$smarty) {
 	$params = new BSArray($params);
-	$serializer = new BSJSONSerializer;
-	return sprintf('%s(%s);', $params['method'], $serializer->encode($contents));
+	$body = new BSStringFormat('%s(%s);');
+	$body[] = $params['method'];
+	$body[] = BSJavaScriptUtility::quote($contents);
+	return $body->getContents();
 }
 
 /* vim:set tabstop=4: */

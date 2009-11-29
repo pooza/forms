@@ -8,7 +8,7 @@
  * CarrotアプリケーションのURL
  *
  * @author 小石達也 <tkoishi@b-shock.co.jp>
- * @version $Id: BSCarrotURL.class.php 1301 2009-07-06 11:27:20Z pooza $
+ * @version $Id: BSCarrotURL.class.php 1640 2009-11-27 12:43:39Z pooza $
  */
 class BSCarrotURL extends BSHTTPURL {
 	private $module;
@@ -26,10 +26,13 @@ class BSCarrotURL extends BSHTTPURL {
 	public function setAttribute ($name, $value) {
 		switch ($name) {
 			case 'module':
+			case 'module_name':
 				return $this->setModuleName($value);
 			case 'action':
+			case 'action_name':
 				return $this->setActionName($value);
 			case 'record':
+			case 'record_id':
 				return $this->setRecordID($value);
 		}
 		return parent::setAttribute($name, $value);
@@ -139,6 +142,37 @@ class BSCarrotURL extends BSHTTPURL {
 
 		// path属性をsetAttributeすると、queryやflagmentが初期化されてしまう。
 		$this->attributes['path'] = $path->join('/');
+	}
+
+	/**
+	 * パラメータ配列をパース
+	 *
+	 * パラメータ配列にmodule要素やaction要素がない場合は、
+	 * 実行中アクションから引用する。
+	 *
+	 * @access public
+	 * @param BSParameterHolder $params 又はパラメータ配列
+	 * @return BSArray パースされたパラメータ配列
+	 * @static
+	 */
+	static public function parseParameters (BSParameterHolder $params) {
+		$params = new BSArray($params->getParameters());
+		if (BSString::isBlank($params['scheme'])) {
+			$params['scheme'] = 'http';
+		}
+		if (BSString::isBlank($params['host'])) {
+			$params['host'] = BSController::getInstance()->getHost();
+		}
+		if (BSString::isBlank($params['module'])) {
+			if (BSString::isBlank($params['action'])) {
+				$action = BSController::getInstance()->getAction();
+				$params['action'] = $action->getName();
+				$params['module'] = $action->getModule()->getName();
+			} else {
+				$params['module'] = BSController::getInstance()->getModule();
+			}
+		}
+		return $params;
 	}
 }
 

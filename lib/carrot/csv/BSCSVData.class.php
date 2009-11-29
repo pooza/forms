@@ -10,7 +10,7 @@
  * @author 小石達也 <tkoishi@b-shock.co.jp>
  * @link http://project-p.jp/halt/kinowiki/php/Tips/csv 参考
  * @link http://www.din.or.jp/~ohzaki/perl.htm#CSV2Values 参考
- * @version $Id: BSCSVData.class.php 1593 2009-10-29 02:31:23Z pooza $
+ * @version $Id: BSCSVData.class.php 1643 2009-11-28 11:07:02Z pooza $
  */
 class BSCSVData implements BSTextRenderer, IteratorAggregate {
 	protected $contents;
@@ -142,16 +142,20 @@ class BSCSVData implements BSTextRenderer, IteratorAggregate {
 	 */
 	public function getContents () {
 		if (!$this->contents) {
+			$contents = new BSArray;
 			foreach ($this->getRecords() as $key => $record) {
 				foreach ($record as $key => $field) {
 					$field = '"' . str_replace('"', '""', $field) . '"';
 					$record[$key] = $field;
 				}
-				$this->contents .= $record->join($this->getFieldSeparator());
-				$this->contents .= $this->getRecordSeparator();
+				$contents[] = $record->join($this->getFieldSeparator());
 			}
+			$contents = $contents->join($this->getRecordSeparator());
+			$contents = BSString::convertEncoding($contents, $this->getEncoding());
+			$contents = BSString::convertLineSeparator($contents, $this->getRecordSeparator());
+			$this->contents = $contents;
 		}
-		return BSString::convertEncoding($this->contents, $this->getEncoding());
+		return $this->contents;
 	}
 
 	/**
@@ -162,7 +166,7 @@ class BSCSVData implements BSTextRenderer, IteratorAggregate {
 	 */
 	public function setContents ($contents) {
 		$contents = BSString::convertLineSeparator($contents, $this->getRecordSeparator());
-		$contents = BSString::convertEncoding($contents);
+		$contents = BSString::convertEncoding($contents, $this->getEncoding());
 		$this->contents = $contents;
 		$this->records = new BSArray;
 	}

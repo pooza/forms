@@ -8,7 +8,7 @@
  * 一致バリデータ
  *
  * @author 小石達也 <tkoishi@b-shock.co.jp>
- * @version $Id: BSPairValidator.class.php 1521 2009-09-22 06:28:16Z pooza $
+ * @version $Id: BSPairValidator.class.php 1635 2009-11-27 09:49:03Z pooza $
  */
 class BSPairValidator extends BSValidator {
 
@@ -40,7 +40,7 @@ class BSPairValidator extends BSValidator {
 		if (BSString::isBlank($name = $this['field'])) {
 			throw new BSConfigException(get_class($this) . 'の対象フィールドが未定義です。');
 		}
-		if ($this['equal'] && ($value != $this->request[$name])) {
+		if ($this['equal'] && ($value !== $this->request[$name])) {
 			$this->error = $this['equal_error'];
 			return false;
 		}

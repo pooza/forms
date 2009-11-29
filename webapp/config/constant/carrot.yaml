@@ -2,11 +2,11 @@
 #
 # @package org.carrot-framework
 # @author 小石達也 <tkoishi@b-shock.co.jp>
-# @version $Id: carrot.yaml 1632 2009-11-25 03:45:33Z pooza $
+# @version $Id: carrot.yaml 1635 2009-11-27 09:49:03Z pooza $
 
 carrot:
   name: carrot Framework
-  ver: 2.3.9
+  ver: 2.3.10
   bts:
     url: http://redmine.carrot-framework.org/projects/show/carrot
 
@@ -111,7 +111,8 @@ package:
   name:
   ver:
 pdo:
-  query_log_enable: no
+  query_log:
+    enable: no
   default:
     dsn: sqlite:%BS_VAR_DIR%/db/db.sqlite3
     loggable: yes
