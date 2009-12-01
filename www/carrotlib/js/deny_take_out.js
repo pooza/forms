@@ -3,19 +3,23 @@
  *
  * @package org.carrot-framework
  * @author 小石達也 <tkoishi@b-shock.co.jp>
- * @version $Id: deny_take_out.js 1314 2009-07-09 16:16:48Z pooza $
+ * @version $Id: deny_take_out.js 1644 2009-12-01 06:51:57Z pooza $
  */
 
-function denyTakeOut () {
+function denyTakeOut (selector_name) {
   var doNothing = function () {return false;}
   var configureElement = function (element) {
-    if (element.oncontextmenu == null) {
+    if (!element.oncontextmenu) {
       element.oncontextmenu = doNothing;
       element.onselectstart = doNothing;
       element.onmousedown = doNothing;
     }
   }
-  var elements = $$('.deny_take_out');
+
+  if (!selector_name) {
+    selector_name = '.deny_take_out';
+  }
+  var elements = $$(selector_name);
   for (var i = 0 ; i < elements.length ; i ++) {
     configureElement(elements[i]);
   }

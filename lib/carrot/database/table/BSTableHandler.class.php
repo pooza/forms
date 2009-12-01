@@ -8,7 +8,7 @@
  * データベーステーブル
  *
  * @author 小石達也 <tkoishi@b-shock.co.jp>
- * @version $Id: BSTableHandler.class.php 1600 2009-10-30 14:48:55Z pooza $
+ * @version $Id: BSTableHandler.class.php 1646 2009-12-01 10:06:45Z pooza $
  * @abstract
  */
 abstract class BSTableHandler implements IteratorAggregate, BSDictionary, BSAssignable {
@@ -277,6 +277,13 @@ abstract class BSTableHandler implements IteratorAggregate, BSDictionary, BSAssi
 			throw new BSDatabaseException($this . 'へのレコード挿入はできません。');
 		}
 
+		$fields = $this->getProfile()->getFields();
+		foreach (array($this->getCreateDateField(), $this->getUpdateDateField()) as $field) {
+			if ($fields[$field]) {
+				$values[$field] = BSDate::getNow('Y-m-d H:i:s');
+			}
+		}
+
 		$db = $this->getDatabase();
 		$query = BSSQL::getInsertQueryString($this->getName(), $values, $db);
 		$db->exec($query);
@@ -293,7 +300,6 @@ abstract class BSTableHandler implements IteratorAggregate, BSDictionary, BSAssi
 			$message[] = $id;
 			$db->putLog($message);
 		}
-
 		return $id;
 	}
 
@@ -403,6 +409,26 @@ abstract class BSTableHandler implements IteratorAggregate, BSDictionary, BSAssi
 	}
 
 	/**
+	 * 作成日フィールド名
+	 *
+	 * @access public
+	 * @return string 作成日フィールド名
+	 */
+	public function getCreateDateField () {
+		return 'create_date';
+	}
+
+	/**
+	 * 更新日フィールド名
+	 *
+	 * @access public
+	 * @return string 更新日フィールド名
+	 */
+	public function getUpdateDateField () {
+		return 'update_date';
+	}
+
+	/**
 	 * テーブルを作成
 	 *
 	 * @access public
@@ -416,6 +442,16 @@ abstract class BSTableHandler implements IteratorAggregate, BSDictionary, BSAssi
 				BSSQL::getCreateTableQueryString($this->getName(), $schema->getParameters())
 			);
 		}
+	}
+
+	/**
+	 * プロフィールを返す
+	 *
+	 * @access public
+	 * @return BSTableProfile
+	 */
+	public function getProfile () {
+		return $this->getDatabase()->getTableProfile($this->getName());
 	}
 
 	/**

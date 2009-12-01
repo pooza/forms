@@ -8,7 +8,7 @@
  * テーブルのレコード
  *
  * @author 小石達也 <tkoishi@b-shock.co.jp>
- * @version $Id: BSRecord.class.php 1544 2009-10-10 07:12:00Z pooza $
+ * @version $Id: BSRecord.class.php 1646 2009-12-01 10:06:45Z pooza $
  * @abstract
  */
 abstract class BSRecord implements ArrayAccess, BSAssignable {
@@ -95,6 +95,12 @@ abstract class BSRecord implements ArrayAccess, BSAssignable {
 	public function update ($values, $flags = BSDatabase::WITH_LOGGING) {
 		if (!$this->isUpdatable()) {
 			throw new BSDatabaseException($this . 'を更新することはできません。');
+		}
+
+		$fields = $this->getTable()->getProfile()->getFields();
+		$field = $this->getTable()->getUpdateDateField();
+		if ($fields[$field]) {
+			$values[$field] = BSDate::getNow('Y-m-d H:i:s');
 		}
 
 		$query = BSSQL::getUpdateQueryString(
@@ -203,7 +209,7 @@ abstract class BSRecord implements ArrayAccess, BSAssignable {
 	 * @return BSDate 更新日
 	 */
 	public function getUpdateDate () {
-		return BSDate::getInstance($this['update_date']);
+		return BSDate::getInstance($this[$this->getTable()->getUpdateDateField()]);
 	}
 
 	/**
@@ -213,7 +219,7 @@ abstract class BSRecord implements ArrayAccess, BSAssignable {
 	 * @return BSDate 作成日
 	 */
 	public function getCreateDate () {
-		return BSDate::getInstance($this['create_date']);
+		return BSDate::getInstance($this[$this->getTable()->getCreateDateField()]);
 	}
 
 	/**
