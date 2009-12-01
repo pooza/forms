@@ -8,7 +8,7 @@
  * SQLiteテーブルのプロフィール
  *
  * @author 小石達也 <tkoishi@b-shock.co.jp>
- * @version $Id: BSSQLiteTableProfile.class.php 1646 2009-12-01 10:06:45Z pooza $
+ * @version $Id: BSSQLiteTableProfile.class.php 1647 2009-12-01 10:46:41Z pooza $
  */
 class BSSQLiteTableProfile extends BSTableProfile {
 
@@ -42,6 +42,7 @@ class BSSQLiteTableProfile extends BSTableProfile {
 	 */
 	public function getConstraints () {
 		if (!$this->constraints) {
+			$this->constraints = new BSArray;
 			$query = 'PRAGMA index_list(' . $this->getName() . ')';
 			foreach ($this->getDatabase()->query($query) as $rowKey) {
 				$key = array(
