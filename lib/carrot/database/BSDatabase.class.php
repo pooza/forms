@@ -8,7 +8,7 @@
  * データベース接続
  *
  * @author 小石達也 <tkoishi@b-shock.co.jp>
- * @version $Id: BSDatabase.class.php 1599 2009-10-30 14:20:35Z pooza $
+ * @version $Id: BSDatabase.class.php 1649 2009-12-02 02:56:32Z pooza $
  * @abstract
  */
 abstract class BSDatabase extends PDO implements ArrayAccess, BSAssignable {
@@ -262,11 +262,11 @@ abstract class BSDatabase extends PDO implements ArrayAccess, BSAssignable {
 	 * @param string $type クォートのタイプ
 	 * @return string クォート後の文字列
 	 */
-	public function quote ($string, $type = PDO::PARAM_STR) {
-		if (!BSString::isBlank($string)) {
-			return parent::quote($string, $type);
-		} else {
+	public function quote ($string, $type = self::PARAM_STR) {
+		if (BSString::isBlank($string)) {
 			return 'NULL';
+		} else {
+			return parent::quote($string, $type);
 		}
 	}
 

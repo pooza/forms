@@ -8,7 +8,7 @@
  * データベーステーブル
  *
  * @author 小石達也 <tkoishi@b-shock.co.jp>
- * @version $Id: BSTableHandler.class.php 1646 2009-12-01 10:06:45Z pooza $
+ * @version $Id: BSTableHandler.class.php 1648 2009-12-02 02:48:58Z pooza $
  * @abstract
  */
 abstract class BSTableHandler implements IteratorAggregate, BSDictionary, BSAssignable {
@@ -72,6 +72,36 @@ abstract class BSTableHandler implements IteratorAggregate, BSDictionary, BSAssi
 	 */
 	public function getKeyField () {
 		return 'id';
+	}
+
+	/**
+	 * 状態フィールド名
+	 *
+	 * @access public
+	 * @return string 状態フィールド名
+	 */
+	public function getStatusField () {
+		return 'status';
+	}
+
+	/**
+	 * 作成日フィールド名
+	 *
+	 * @access public
+	 * @return string 作成日フィールド名
+	 */
+	public function getCreateDateField () {
+		return 'create_date';
+	}
+
+	/**
+	 * 更新日フィールド名
+	 *
+	 * @access public
+	 * @return string 更新日フィールド名
+	 */
+	public function getUpdateDateField () {
+		return 'update_date';
 	}
 
 	/**
@@ -406,26 +436,6 @@ abstract class BSTableHandler implements IteratorAggregate, BSDictionary, BSAssi
 	 */
 	public function getIterator () {
 		return new BSTableIterator($this);
-	}
-
-	/**
-	 * 作成日フィールド名
-	 *
-	 * @access public
-	 * @return string 作成日フィールド名
-	 */
-	public function getCreateDateField () {
-		return 'create_date';
-	}
-
-	/**
-	 * 更新日フィールド名
-	 *
-	 * @access public
-	 * @return string 更新日フィールド名
-	 */
-	public function getUpdateDateField () {
-		return 'update_date';
 	}
 
 	/**

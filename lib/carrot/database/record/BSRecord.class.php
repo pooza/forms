@@ -8,7 +8,7 @@
  * テーブルのレコード
  *
  * @author 小石達也 <tkoishi@b-shock.co.jp>
- * @version $Id: BSRecord.class.php 1646 2009-12-01 10:06:45Z pooza $
+ * @version $Id: BSRecord.class.php 1648 2009-12-02 02:48:58Z pooza $
  * @abstract
  */
 abstract class BSRecord implements ArrayAccess, BSAssignable {
@@ -70,16 +70,13 @@ abstract class BSRecord implements ArrayAccess, BSAssignable {
 	/**
 	 * 抽出条件を返す
 	 *
-	 * @access public
-	 * @return string 抽出条件
+	 * @access protected
+	 * @return BSCriteriaSet 抽出条件
 	 */
-	public function getCriteria () {
+	protected function getCriteria () {
 		if (!$this->criteria) {
-			$this->criteria = sprintf(
-				'%s=%s',
-				$this->getTable()->getKeyField(),
-				$this->getTable()->getDatabase()->quote($this->getID())
-			);
+			$this->criteria = $this->getTable()->getDatabase()->createCriteriaSet();
+			$this->criteria->register($this->getTable()->getKeyField(), $this);
 		}
 		return $this->criteria;
 	}

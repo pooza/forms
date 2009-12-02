@@ -8,7 +8,7 @@
  * ソート可能なテーブル
  *
  * @author 小石達也 <tkoishi@b-shock.co.jp>
- * @version $Id: BSSortableTableHandler.class.php 1584 2009-10-26 07:41:43Z pooza $
+ * @version $Id: BSSortableTableHandler.class.php 1648 2009-12-02 02:48:58Z pooza $
  * @abstract
  */
 abstract class BSSortableTableHandler extends BSTableHandler {
@@ -59,8 +59,6 @@ abstract class BSSortableTableHandler extends BSTableHandler {
 	 * @return string レコードの主キー
 	 */
 	public function createRecord ($values, $flags = BSDatabase::WITH_LOGGING) {
-		$values['create_date'] = BSDate::getNow('Y-m-d H:i:s');
-		$values['update_date'] = BSDate::getNow('Y-m-d H:i:s');
 		$values[$this->getRankField()] = $this->getNextRank();
 		return parent::createRecord($values, $flags);
 	}
@@ -89,16 +87,6 @@ abstract class BSSortableTableHandler extends BSTableHandler {
 	 */
 	public function getRankField () {
 		return 'rank';
-	}
-
-	/**
-	 * 状態フィールド名
-	 *
-	 * @access public
-	 * @return string 状態フィールド名
-	 */
-	public function getStatusField () {
-		return 'status';
 	}
 
 	/**
