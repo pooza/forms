@@ -8,7 +8,7 @@
  * テーブルのレコード
  *
  * @author 小石達也 <tkoishi@b-shock.co.jp>
- * @version $Id: BSRecord.class.php 1648 2009-12-02 02:48:58Z pooza $
+ * @version $Id: BSRecord.class.php 1652 2009-12-04 06:49:14Z pooza $
  * @abstract
  */
 abstract class BSRecord implements ArrayAccess, BSAssignable {
@@ -108,6 +108,7 @@ abstract class BSRecord implements ArrayAccess, BSAssignable {
 		);
 		$this->getTable()->getDatabase()->exec($query);
 		$this->attributes->setParameters($values);
+		$this->clearSerialized();
 
 		if ($flags & BSDatabase::WITH_LOGGING) {
 			$message = new BSStringFormat('%sを更新しました。');
@@ -151,6 +152,7 @@ abstract class BSRecord implements ArrayAccess, BSAssignable {
 
 		$query = BSSQL::getDeleteQueryString($this->getTable()->getName(), $this->getCriteria());
 		$this->getTable()->getDatabase()->exec($query);
+		$this->clearSerialized();
 
 		if ($flags & BSDatabase::WITH_LOGGING) {
 			$message = new BSStringFormat('%sを削除しました。');
@@ -295,13 +297,80 @@ abstract class BSRecord implements ArrayAccess, BSAssignable {
 	}
 
 	/**
+	 * シリアライズするか？
+	 *
+	 * @access public
+	 * @return boolean シリアライズするならTrue
+	 */
+	public function isSerializable () {
+		return false;
+	}
+
+	/**
+	 * シリアライズされるときの名前を返す
+	 *
+	 * @access public
+	 * @return string シリアライズされるときの名前
+	 */
+	public function getSerializedName () {
+		return sprintf('%s.%08d', get_class($this), $this->getID());
+	}
+
+	/**
+	 * シリアライズ
+	 *
+	 * @access public
+	 */
+	public function serialize () {
+		if (!$this->isSerializable()) {
+			throw new BSDatabaseException($this . 'はシリアライズできません。');
+		}
+		BSController::getInstance()->setAttribute($this, $this->getFullAttributes());
+	}
+
+	/**
+	 * シリアライズされた情報を返す
+	 *
+	 * @access protected
+	 */
+	protected function getSerialized () {
+		return BSController::getInstance()->getAttribute($this);
+	}
+
+	/**
+	 * シリアライズを削除
+	 *
+	 * @access public
+	 */
+	public function clearSerialized () {
+		BSController::getInstance()->removeAttribute($this);
+	}
+
+	/**
+	 * 全てのファイル属性
+	 *
+	 * @access protected
+	 * @return BSArray ファイル属性の配列
+	 */
+	protected function getFullAttributes () {
+		return $this->getAttributes();
+	}
+
+	/**
 	 * アサインすべき値を返す
 	 *
 	 * @access public
 	 * @return mixed アサインすべき値
 	 */
 	public function getAssignValue () {
-		return $this->getAttributes();
+		if ($this->isSerializable()) {
+			if (BSString::isBlank($this->getSerialized())) {
+				$this->serialize();
+			}
+			return $this->getSerialized();
+		} else {
+			return $this->getFullAttributes();
+		}
 	}
 
 	/**

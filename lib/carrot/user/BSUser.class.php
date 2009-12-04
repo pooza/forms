@@ -8,7 +8,7 @@
  * ユーザー
  *
  * @author 小石達也 <tkoishi@b-shock.co.jp>
- * @version $Id: BSUser.class.php 1555 2009-10-14 04:12:56Z pooza $
+ * @version $Id: BSUser.class.php 1652 2009-12-04 06:49:14Z pooza $
  */
 class BSUser extends BSParameterHolder {
 	protected $id;
@@ -34,8 +34,8 @@ class BSUser extends BSParameterHolder {
 	 * @access public
 	 */
 	public function __destruct () {
-		$this->getSession()->write('attributes', $this->attributes->getParameters());
-		$this->getSession()->write('credentials', $this->credentials->getParameters());
+		$this->getSession()->write('attributes', $this->attributes);
+		$this->getSession()->write('credentials', $this->credentials);
 	}
 
 	/**

@@ -8,7 +8,7 @@
  * 一覧画面用 アクションひな形
  *
  * @author 小石達也 <tkoishi@b-shock.co.jp>
- * @version $Id: BSTableAction.class.php 1555 2009-10-14 04:12:56Z pooza $
+ * @version $Id: BSTableAction.class.php 1651 2009-12-04 05:42:16Z pooza $
  * @abstract
  */
 abstract class BSTableAction extends BSAction {
@@ -90,7 +90,7 @@ abstract class BSTableAction extends BSAction {
 		if (!$this->rows) {
 			$this->rows = new BSArray;
 			foreach ($this->getTable() as $record) {
-				$this->rows[] = $record->getAttributes();
+				$this->rows[] = $record->getAssignValue();
 			}
 		}
 		return $this->rows;

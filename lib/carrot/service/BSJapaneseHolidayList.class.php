@@ -17,7 +17,7 @@
  * p($holidays->getHolidays()); //当月のすべての祝日を配列で
  *
  * @author 小石達也 <tkoishi@b-shock.co.jp>
- * @version $Id: BSJapaneseHolidayList.class.php 1521 2009-09-22 06:28:16Z pooza $
+ * @version $Id: BSJapaneseHolidayList.class.php 1652 2009-12-04 06:49:14Z pooza $
  * @link http://www.finds.jp/wsdocs/calendar/
  */
 class BSJapaneseHolidayList extends BSCurlHTTP implements BSHolidayList {
@@ -81,7 +81,7 @@ class BSJapaneseHolidayList extends BSCurlHTTP implements BSHolidayList {
 			$expire = BSDate::getNow()->setAttribute('month', '-1');
 			$holidays = BSController::getInstance()->getAttribute($name, $expire);
 			if (BSString::isBlank($holidays)) {
-				$holidays = $this->query()->getParameters();
+				$holidays = $this->query();
 				BSController::getInstance()->setAttribute($name, $holidays);
 			}
 			$this->holidays = new BSArray($holidays);

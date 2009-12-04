@@ -7,7 +7,7 @@
  * 配列
  *
  * @author 小石達也 <tkoishi@b-shock.co.jp>
- * @version $Id: BSArray.class.php 1518 2009-09-20 17:44:54Z pooza $
+ * @version $Id: BSArray.class.php 1651 2009-12-04 05:42:16Z pooza $
  */
 class BSArray extends BSParameterHolder implements BSAssignable {
 	const POSITION_TOP = true;
@@ -244,6 +244,22 @@ class BSArray extends BSParameterHolder implements BSAssignable {
 			BSNumeric::getRandom(0, $this->count() - 1)
 		);
 		return $this[$key];
+	}
+
+	/**
+	 * PHP配列に戻す
+	 *
+	 * @access public
+	 * @return mixed[] PHP配列
+	 */
+	public function decode () {
+		$values = $this->getParameters();
+		foreach ($values as $key => $value) {
+			if ($value instanceof BSArray) {
+				$values[$key] = $value->decode();
+			}
+		}
+		return $values;
 	}
 
 	/**

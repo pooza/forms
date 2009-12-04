@@ -8,7 +8,7 @@
  * ユーザーエージェント
  *
  * @author 小石達也 <tkoishi@b-shock.co.jp>
- * @version $Id: BSUserAgent.class.php 1602 2009-10-31 05:56:40Z pooza $
+ * @version $Id: BSUserAgent.class.php 1652 2009-12-04 06:49:14Z pooza $
  * @abstract
  */
 abstract class BSUserAgent implements BSAssignable {
@@ -261,7 +261,7 @@ abstract class BSUserAgent implements BSAssignable {
 	 * @return mixed アサインすべき値
 	 */
 	public function getAssignValue () {
-		return $this->attributes->getParameters();
+		return $this->attributes;
 	}
 
 	/**

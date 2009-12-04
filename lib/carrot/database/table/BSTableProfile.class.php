@@ -8,7 +8,7 @@
  * テーブルのプロフィール
  *
  * @author 小石達也 <tkoishi@b-shock.co.jp>
- * @version $Id: BSTableProfile.class.php 1646 2009-12-01 10:06:45Z pooza $
+ * @version $Id: BSTableProfile.class.php 1652 2009-12-04 06:49:14Z pooza $
  * @abstract
  */
 abstract class BSTableProfile implements BSAssignable {
@@ -46,8 +46,8 @@ abstract class BSTableProfile implements BSAssignable {
 		$name = get_class($this) . '.' . $this->getName();
 		if (!$profile = BSController::getInstance()->getAttribute($this->getAttributeName())) {
 			$values = array(
-				'fields' => $this->getFields()->getParameters(),
-				'constraints' => $this->getConstraints()->getParameters(),
+				'fields' => $this->getFields(),
+				'constraints' => $this->getConstraints(),
 			);
 			BSController::getInstance()->setAttribute($this->getAttributeName(), $values);
 		}

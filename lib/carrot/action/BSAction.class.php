@@ -8,7 +8,7 @@
  * アクション
  *
  * @author 小石達也 <tkoishi@b-shock.co.jp>
- * @version $Id: BSAction.class.php 1598 2009-10-30 12:26:03Z pooza $
+ * @version $Id: BSAction.class.php 1652 2009-12-04 06:49:14Z pooza $
  * @abstract
  */
 abstract class BSAction implements BSHTTPRedirector, BSAssignable, BSValidatorContainer {
@@ -413,7 +413,7 @@ abstract class BSAction implements BSHTTPRedirector, BSAssignable, BSValidatorCo
 	 * @return mixed アサインすべき値
 	 */
 	public function getAssignValue () {
-		return $this->getAttributes()->getParameters();
+		return $this->getAttributes();
 	}
 
 	/**

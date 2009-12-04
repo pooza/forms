@@ -8,7 +8,7 @@
  * 辞書ファイル
  *
  * @author 小石達也 <tkoishi@b-shock.co.jp>
- * @version $Id: BSDictionaryFile.class.php 1255 2009-06-08 07:41:00Z pooza $
+ * @version $Id: BSDictionaryFile.class.php 1652 2009-12-04 06:49:14Z pooza $
  */
 class BSDictionaryFile extends BSCSVFile implements BSDictionary {
 	private $words;
@@ -36,7 +36,7 @@ class BSDictionaryFile extends BSCSVFile implements BSDictionary {
 			if (BSString::isBlank($words)) {
 				$this->words = clone $this->getEngine()->getRecords();
 				$this->words->flatten();
-				$controller->setAttribute($this, $this->words->getParameters());
+				$controller->setAttribute($this, $this->words);
 			} else {
 				$this->words = new BSArray($words);
 			}

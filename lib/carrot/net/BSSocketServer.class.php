@@ -10,7 +10,7 @@
  * onReadを適宜オーバライドして使用すること。
  *
  * @author 小石達也 <tkoishi@b-shock.co.jp>
- * @version $Id: BSSocketServer.class.php 1599 2009-10-30 14:20:35Z pooza $
+ * @version $Id: BSSocketServer.class.php 1652 2009-12-04 06:49:14Z pooza $
  */
 class BSSocketServer {
 	protected $attributes;
@@ -55,7 +55,7 @@ class BSSocketServer {
 		$params = new BSArray;
 		$params['port'] = $this->open();
 		$params['pid'] = BSProcess::getCurrentID();
-		BSController::getInstance()->setAttribute($this, $params->getParameters());
+		BSController::getInstance()->setAttribute($this, $params);
 		$this->attributes = $params;
 
 		$message = new BSStringFormat('開始しました。（ポート:%d, PID:%d）');

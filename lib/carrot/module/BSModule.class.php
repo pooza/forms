@@ -8,7 +8,7 @@
  * モジュール
  *
  * @author 小石達也 <tkoishi@b-shock.co.jp>
- * @version $Id: BSModule.class.php 1602 2009-10-31 05:56:40Z pooza $
+ * @version $Id: BSModule.class.php 1652 2009-12-04 06:49:14Z pooza $
  */
 class BSModule implements BSHTTPRedirector, BSAssignable {
 	protected $name;
@@ -196,10 +196,7 @@ class BSModule implements BSHTTPRedirector, BSAssignable {
 		$this->parameters = clone $params;
 		$this->parameters->removeParameter(BSController::MODULE_ACCESSOR);
 		$this->parameters->removeParameter(BSController::ACTION_ACCESSOR);
-		$this->user->setAttribute(
-			$this->getParameterCacheName(),
-			$this->parameters->getParameters()
-		);
+		$this->user->setAttribute($this->getParameterCacheName(), $this->parameters);
 	}
 
 	/**
@@ -498,7 +495,7 @@ class BSModule implements BSHTTPRedirector, BSAssignable {
 	 * @return mixed アサインすべき値
 	 */
 	public function getAssignValue () {
-		return $this->getAttributes()->getParameters();
+		return $this->getAttributes();
 	}
 
 	/**

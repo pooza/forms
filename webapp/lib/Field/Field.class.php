@@ -102,12 +102,12 @@ class Field extends BSSortableRecord implements BSValidatorContainer {
 	}
 
 	/**
-	 * アサインすべき値を返す
+	 * 全てのファイル属性
 	 *
-	 * @access public
-	 * @return mixed アサインすべき値
+	 * @access protected
+	 * @return BSArray ファイル属性の配列
 	 */
-	public function getAssignValue () {
+	protected function getFullAttributes () {
 		$values = $this->getAttributes();
 		$values['choices'] = $this->getChoices();
 		return $values;

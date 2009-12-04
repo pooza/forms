@@ -8,7 +8,7 @@
  * データベーステーブル
  *
  * @author 小石達也 <tkoishi@b-shock.co.jp>
- * @version $Id: BSTableHandler.class.php 1648 2009-12-02 02:48:58Z pooza $
+ * @version $Id: BSTableHandler.class.php 1652 2009-12-04 06:49:14Z pooza $
  * @abstract
  */
 abstract class BSTableHandler implements IteratorAggregate, BSDictionary, BSAssignable {
@@ -449,7 +449,7 @@ abstract class BSTableHandler implements IteratorAggregate, BSDictionary, BSAssi
 		}
 		if ($schema = $this->getSchema()) {
 			$this->getDatabase()->exec(
-				BSSQL::getCreateTableQueryString($this->getName(), $schema->getParameters())
+				BSSQL::getCreateTableQueryString($this->getName(), $schema)
 			);
 		}
 	}
