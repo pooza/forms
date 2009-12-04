@@ -8,7 +8,7 @@
  * ユーザー
  *
  * @author 小石達也 <tkoishi@b-shock.co.jp>
- * @version $Id: BSUser.class.php 1652 2009-12-04 06:49:14Z pooza $
+ * @version $Id: BSUser.class.php 1654 2009-12-04 08:16:33Z pooza $
  */
 class BSUser extends BSParameterHolder {
 	protected $id;
@@ -105,6 +105,12 @@ class BSUser extends BSParameterHolder {
 	 * @param BSDate $expire 期限
 	 */
 	public function setAttribute ($name, $value, BSDate $expire = null) {
+		if ($value instanceof BSArray) {
+			$value = $value->decode();
+		} else if ($value instanceof BSParameterHolder) {
+			$value = $value->getParameters();
+		}
+
 		$this->attributes[(string)$name] = $value;
 
 		if ($expire) {
@@ -142,7 +148,9 @@ class BSUser extends BSParameterHolder {
 	 * @param mixed[] $attributes 属性値
 	 */
 	public function setAttributes ($attributes) {
-		$this->attributes->setParameters($attributes);
+		foreach ($attributes as $key => $value) {
+			$this->setAttribute($key, $value);
+		}
 	}
 
 	/**
