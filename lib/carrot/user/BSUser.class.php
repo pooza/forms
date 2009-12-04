@@ -8,7 +8,7 @@
  * ユーザー
  *
  * @author 小石達也 <tkoishi@b-shock.co.jp>
- * @version $Id: BSUser.class.php 1654 2009-12-04 08:16:33Z pooza $
+ * @version $Id: BSUser.class.php 1655 2009-12-04 13:33:15Z pooza $
  */
 class BSUser extends BSParameterHolder {
 	protected $id;
@@ -105,7 +105,8 @@ class BSUser extends BSParameterHolder {
 	 * @param BSDate $expire 期限
 	 */
 	public function setAttribute ($name, $value, BSDate $expire = null) {
-		if ($value instanceof BSArray) {
+		if (BSArray::isArray($value)) {
+			$value = new BSArray($value);
 			$value = $value->decode();
 		} else if ($value instanceof BSParameterHolder) {
 			$value = $value->getParameters();

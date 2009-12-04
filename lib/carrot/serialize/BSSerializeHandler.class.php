@@ -8,7 +8,7 @@
  * シリアライズされたキャッシュ
  *
  * @author 小石達也 <tkoishi@b-shock.co.jp>
- * @version $Id: BSSerializeHandler.class.php 1651 2009-12-04 05:42:16Z pooza $
+ * @version $Id: BSSerializeHandler.class.php 1655 2009-12-04 13:33:15Z pooza $
  */
 class BSSerializeHandler {
 	private $serializer;
@@ -113,11 +113,13 @@ class BSSerializeHandler {
 	 * @param mixed $value 値
 	 */
 	public function setAttribute ($name, $value) {
-		if ($value instanceof BSArray) {
+		if (BSArray::isArray($value)) {
+			$value = new BSArray($value);
 			$value = $value->decode();
 		} else if ($value instanceof BSParameterHolder) {
 			$value = $value->getParameters();
 		}
+
 		$serialized = $this->getStorage()->setAttribute($this->getAttributeName($name), $value);
 		$message = new BSStringFormat('%sのシリアライズをキャッシュしました。 (%sB)');
 		$message[] = $name;
