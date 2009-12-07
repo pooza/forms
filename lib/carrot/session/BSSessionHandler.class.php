@@ -8,7 +8,7 @@
  * セッションハンドラ
  *
  * @author 小石達也 <tkoishi@b-shock.co.jp>
- * @version $Id: BSSessionHandler.class.php 1652 2009-12-04 06:49:14Z pooza $
+ * @version $Id: BSSessionHandler.class.php 1656 2009-12-06 09:31:18Z pooza $
  */
 class BSSessionHandler implements BSUserIdentifier {
 	private $storage;
@@ -83,7 +83,8 @@ class BSSessionHandler implements BSUserIdentifier {
 	 * @param mixed $value 値
 	 */
 	public function write ($key, $value) {
-		if ($value instanceof BSArray) {
+		if (BSArray::isArray($value)) {
+			$value = new BSArray($value);
 			$value = $value->decode();
 		} else if ($value instanceof BSParameterHolder) {
 			$value = $value->getParameters();

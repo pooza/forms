@@ -8,7 +8,7 @@
  * ユーザー
  *
  * @author 小石達也 <tkoishi@b-shock.co.jp>
- * @version $Id: BSUser.class.php 1655 2009-12-04 13:33:15Z pooza $
+ * @version $Id: BSUser.class.php 1656 2009-12-06 09:31:18Z pooza $
  */
 class BSUser extends BSParameterHolder {
 	protected $id;
@@ -105,15 +105,7 @@ class BSUser extends BSParameterHolder {
 	 * @param BSDate $expire 期限
 	 */
 	public function setAttribute ($name, $value, BSDate $expire = null) {
-		if (BSArray::isArray($value)) {
-			$value = new BSArray($value);
-			$value = $value->decode();
-		} else if ($value instanceof BSParameterHolder) {
-			$value = $value->getParameters();
-		}
-
 		$this->attributes[(string)$name] = $value;
-
 		if ($expire) {
 			setcookie((string)$name, $value, $expire->getTimestamp(), '/');
 		}
