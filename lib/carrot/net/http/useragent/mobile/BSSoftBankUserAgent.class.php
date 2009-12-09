@@ -8,7 +8,7 @@
  * SoftBankユーザーエージェント
  *
  * @author 小石達也 <tkoishi@b-shock.co.jp>
- * @version $Id: BSSoftBankUserAgent.class.php 1596 2009-10-30 11:31:21Z pooza $
+ * @version $Id: BSSoftBankUserAgent.class.php 1660 2009-12-09 10:49:20Z pooza $
  */
 class BSSoftBankUserAgent extends BSMobileUserAgent {
 

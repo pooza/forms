@@ -8,7 +8,7 @@
  * Auユーザーエージェント
  *
  * @author 小石達也 <tkoishi@b-shock.co.jp>
- * @version $Id: BSAuUserAgent.class.php 1596 2009-10-30 11:31:21Z pooza $
+ * @version $Id: BSAuUserAgent.class.php 1665 2009-12-09 11:34:42Z pooza $
  */
 class BSAuUserAgent extends BSMobileUserAgent {
 
@@ -18,6 +18,7 @@ class BSAuUserAgent extends BSMobileUserAgent {
 	 */
 	public function __construct ($name = null) {
 		parent::__construct($name);
+		$this->bugs['multipart_form'] = true;
 		$this->attributes['is_wap2'] = $this->isWAP2();
 	}
 

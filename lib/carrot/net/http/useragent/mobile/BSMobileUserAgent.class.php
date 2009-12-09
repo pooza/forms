@@ -8,7 +8,7 @@
  * モバイルユーザーエージェント
  *
  * @author 小石達也 <tkoishi@b-shock.co.jp>
- * @version $Id: BSMobileUserAgent.class.php 1555 2009-10-14 04:12:56Z pooza $
+ * @version $Id: BSMobileUserAgent.class.php 1663 2009-12-09 11:25:07Z pooza $
  * @abstract
  */
 abstract class BSMobileUserAgent extends BSUserAgent implements BSUserIdentifier {
@@ -26,7 +26,6 @@ abstract class BSMobileUserAgent extends BSUserAgent implements BSUserIdentifier
 		$this->attributes['is_mobile'] = $this->isMobile();
 		$this->attributes['id'] = $this->getID();
 		$this->attributes['is_attachable'] = $this->isAttachable();
-		$this->attributes['is_legacy'] = $this->isLegacy();
 		$this->attributes['display'] = $this->getDisplayInfo();
 		$this->attributes['query'] = new BSArray;
 	}
@@ -112,15 +111,6 @@ abstract class BSMobileUserAgent extends BSUserAgent implements BSUserIdentifier
 		}
 		return $this->carrier;
 	}
-
-	/**
-	 * 旧機種か？
-	 *
-	 * @access public
-	 * @return boolean 旧機種ならばTrue
-	 * @abstract
-	 */
-	abstract public function isLegacy ();
 
 	/**
 	 * 規定の画像形式を返す

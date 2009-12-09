@@ -8,7 +8,7 @@
  * Tasmanユーザーエージェント
  *
  * @author 小石達也 <tkoishi@b-shock.co.jp>
- * @version $Id: BSTasmanUserAgent.class.php 1469 2009-09-11 12:40:31Z pooza $
+ * @version $Id: BSTasmanUserAgent.class.php 1662 2009-12-09 11:22:11Z pooza $
  */
 class BSTasmanUserAgent extends BSUserAgent {
 
@@ -31,6 +31,16 @@ class BSTasmanUserAgent extends BSUserAgent {
 	public function encodeFileName ($name) {
 		$name = BSString::convertEncoding($name, 'sjis-win');
 		return BSString::sanitize($name);
+	}
+
+	/**
+	 * レガシー環境/旧機種か？
+	 *
+	 * @access public
+	 * @return boolean レガシーならばTrue
+	 */
+	public function isLegacy () {
+		return true;
 	}
 
 	/**

@@ -8,7 +8,7 @@
  * ユーザーエージェント
  *
  * @author 小石達也 <tkoishi@b-shock.co.jp>
- * @version $Id: BSUserAgent.class.php 1652 2009-12-04 06:49:14Z pooza $
+ * @version $Id: BSUserAgent.class.php 1663 2009-12-09 11:25:07Z pooza $
  * @abstract
  */
 abstract class BSUserAgent implements BSAssignable {
@@ -26,6 +26,7 @@ abstract class BSUserAgent implements BSAssignable {
 		$this->attributes['name'] = $name;
 		$this->attributes['type'] = $this->getType();
 		$this->attributes['is_' . BSString::underscorize($this->getType())] = true;
+		$this->attributes['is_legacy'] = $this->isLegacy();
 		$this->attributes['is_denied'] = $this->isDenied();
 		$this->bugs = new BSArray;
 	}
@@ -66,18 +67,32 @@ abstract class BSUserAgent implements BSAssignable {
 	}
 
 	/**
+	 * レガシー環境/旧機種か？
+	 *
+	 * @access public
+	 * @return boolean レガシーならばTrue
+	 */
+	public function isLegacy () {
+		return false;
+	}
+
+	/**
 	 * 非対応のUserAgentか？
 	 *
 	 * @access public
 	 * @return boolean 非対応のUserAgentならTrue
 	 */
 	public function isDenied () {
-		if ($type = $this->getDeniedTypes()->getParameter($this->getType())) {
-			if (isset($type['denied']) && $type['denied']) {
+		if ($type = self::getDeniedTypes()->getParameter($this->getType())) {
+			$values = new BSArray($type);
+			if ($values['denied']) {
 				return true;
 			}
-			if (isset($type['denied_patterns']) && is_array($type['denied_patterns'])) {
-				foreach ($type['denied_patterns'] as $pattern) {
+			if ($values['legacy_denied'] && $this->isLegacy()) {
+				return true;
+			}
+			if (BSArray::isArray($values['denied_patterns'])) {
+				foreach ($values['denied_patterns'] as $pattern) {
 					if (BSString::isContain($pattern, $this->getName())) {
 						return true;
 					}
@@ -267,11 +282,11 @@ abstract class BSUserAgent implements BSAssignable {
 	/**
 	 * 全てのタイプ情報を返す
 	 *
-	 * @access private
+	 * @access protected
 	 * @return BSArray 全てのタイプ情報
 	 * @static
 	 */
-	static private function getDeniedTypes () {
+	static protected function getDeniedTypes () {
 		if (!self::$denied) {
 			self::$denied = new BSArray;
 			$configure = BSConfigManager::getInstance();

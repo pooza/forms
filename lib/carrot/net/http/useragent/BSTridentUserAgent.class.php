@@ -10,7 +10,7 @@
  * Windows版 InternetExplorer 4.x以降
  *
  * @author 小石達也 <tkoishi@b-shock.co.jp>
- * @version $Id: BSTridentUserAgent.class.php 1551 2009-10-12 09:02:34Z pooza $
+ * @version $Id: BSTridentUserAgent.class.php 1665 2009-12-09 11:34:42Z pooza $
  */
 class BSTridentUserAgent extends BSUserAgent {
 
@@ -21,6 +21,7 @@ class BSTridentUserAgent extends BSUserAgent {
 	public function __construct ($name = null) {
 		parent::__construct($name);
 		$this->bugs['cache_control'] = true;
+		$this->attributes['is_kuso'] = $this->isLegacy();
 		$this->attributes['is_ie' . floor($this->getVersion())] = true;
 	}
 
@@ -71,13 +72,23 @@ class BSTridentUserAgent extends BSUserAgent {
 	}
 
 	/**
+	 * レガシー環境/旧機種か？
+	 *
+	 * @access public
+	 * @return boolean レガシーならばTrue
+	 */
+	public function isLegacy () {
+		return $this->getVersion() < 6;
+	}
+
+	/**
 	 * 一致すべきパターンを返す
 	 *
 	 * @access public
 	 * @return string パターン
 	 */
 	public function getPattern () {
-		return 'MSIE ([4-9]\\.[[:digit:]]+); ([^;]+);';
+		return 'MSIE ([:digit:]\\.[[:digit:]]+); ([^;]+);';
 	}
 }
 

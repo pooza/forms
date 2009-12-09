@@ -2,13 +2,16 @@
 #
 # @package org.carrot-framework
 # @author 小石達也 <tkoishi@b-shock.co.jp>
-# @version $Id: carrot.yaml 761 2009-01-01 08:02:14Z pooza $
+# @version $Id: carrot.yaml 1662 2009-12-09 11:22:11Z pooza $
 
 Tasman:
   denied: yes
 LegacyMozilla:
   denied: yes
+Trident:
+  legacy_denied: yes
 Docomo:
+  legacy_denied: yes
   denied_patterns:
     - D20
     - D21
@@ -54,6 +57,7 @@ Docomo:
     - NM850iG
     - F2051
 Au:
+  legacy_denied: yes
   denied_patterns:
     - ST14
     - HI14
@@ -81,6 +85,7 @@ Au:
     - CA14
     - TS14
 SoftBank:
+  legacy_denied: yes
   denied_patterns:
     - 304T
     - C980

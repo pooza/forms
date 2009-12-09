@@ -8,7 +8,7 @@
  * レガシーMozillaユーザーエージェント
  *
  * @author 小石達也 <tkoishi@b-shock.co.jp>
- * @version $Id: BSLegacyMozillaUserAgent.class.php 1469 2009-09-11 12:40:31Z pooza $
+ * @version $Id: BSLegacyMozillaUserAgent.class.php 1665 2009-12-09 11:34:42Z pooza $
  */
 class BSLegacyMozillaUserAgent extends BSUserAgent {
 
@@ -19,6 +19,17 @@ class BSLegacyMozillaUserAgent extends BSUserAgent {
 	public function __construct ($name = null) {
 		parent::__construct($name);
 		$this->bugs['css'] = true;
+		$this->attributes['is_kuso'] = true;
+	}
+
+	/**
+	 * レガシー環境/旧機種か？
+	 *
+	 * @access public
+	 * @return boolean レガシーならばTrue
+	 */
+	public function isLegacy () {
+		return true;
 	}
 
 	/**

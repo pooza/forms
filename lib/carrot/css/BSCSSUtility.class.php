@@ -8,7 +8,7 @@
  * CSSユーティリティ
  *
  * @author 小石達也 <tkoishi@b-shock.co.jp>
- * @version $Id: BSCSSUtility.class.php 1645 2009-12-01 07:25:35Z pooza $
+ * @version $Id: BSCSSUtility.class.php 1659 2009-12-08 10:20:38Z pooza $
  */
 class BSCSSUtility {
 
@@ -30,14 +30,16 @@ class BSCSSUtility {
 	 * @static
 	 */
 	static public function trim ($value, BSArray $properties = null) {
+		$value = BSString::stripControlCharacters($value);
 		if (!$properties) {
 			$properties = new BSArray;
+			$properties[] = 'font';
 			$properties[] = 'font-size';
 			$properties[] = 'font-family';
 			$properties[] = 'margin';
 		}
 		foreach ($properties as $property) {
-			$value = mb_ereg_replace($property . ':[^;"]+([;"])', '\\1', $value);
+			$value = mb_ereg_replace($property . ' ?: ?[^;"]+([;"])', '\\1', $value);
 		}
 		$value = str_replace('class="MsoNormal"', null, $value);
 		$value = str_replace('style=";"', null, $value);

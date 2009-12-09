@@ -8,7 +8,7 @@
  * 整形式XML文書
  *
  * @author 小石達也 <tkoishi@b-shock.co.jp>
- * @version $Id: BSXMLDocument.class.php 1604 2009-10-31 13:04:15Z pooza $
+ * @version $Id: BSXMLDocument.class.php 1658 2009-12-08 06:54:17Z pooza $
  */
 class BSXMLDocument extends BSXMLElement implements BSTextRenderer {
 	private $dirty = false;
@@ -118,6 +118,18 @@ class BSXMLDocument extends BSXMLElement implements BSTextRenderer {
 	 */
 	public function getError () {
 		return $this->error;
+	}
+
+	/**
+	 * コメントを削除
+	 *
+	 * @access public
+	 * @param string $value 対象文字列
+	 * @return string 変換後の文字列
+	 * @static
+	 */
+	static public function stripComment ($value) {
+		return mb_ereg_replace('<!--.*?-->', null, $value);
 	}
 }
 
