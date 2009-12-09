@@ -4,4 +4,7 @@ form_id,フォーム
 form_template,フォームテンプレート
 confirm_template,確認画面テンプレート
 thanx_template,サンクス画面テンプレート
+mobile_form_template,フォームテンプレート(携)
+mobile_confirm_template,確認画面テンプレート(携)
+mobile_thanx_template,サンクス画面テンプレート(携)
 thanx_mail_template,サンクスメールテンプレート

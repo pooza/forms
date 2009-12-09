@@ -43,6 +43,9 @@ class FormHandler extends BSTableHandler {
 			'form_template',
 			'confirm_template',
 			'thanx_template',
+			'mobile_form_template',
+			'mobile_confirm_template',
+			'mobile_thanx_template',
 			'thanx_mail_template',
 		));
 	}

@@ -9,7 +9,12 @@
  */
 class ThanxSuccessView extends BSSmartyView {
 	public function execute () {
-		$this->setTemplate($this->getModule()->getRecord()->getTemplateFile('thanx'));
+		if ($this->useragent->isMobile()) {
+			$template = 'mobile_thanx';
+		} else {
+			$template = 'thanx';
+		}
+		$this->setTemplate($this->getModule()->getRecord()->getTemplateFile($template));
 		$this->translator->register($this->getModule()->getRecord(), BSArray::POSITION_TOP);
 	}
 }

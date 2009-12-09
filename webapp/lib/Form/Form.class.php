@@ -253,13 +253,7 @@ class Form extends BSRecord implements
 	 */
 	public function getAttachmentFileName ($name = null) {
 		if ($file = $this->getAttachment($name)) {
-			return sprintf(
-				'%06d_%s_%s%s',
-				$this->getID(),
-				$this->getName(),
-				$name,
-				$file->getSuffix()
-			);
+			return $this->getAttachmentBaseName($name) . $file->getSuffix();
 		}
 	}
 
