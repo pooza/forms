@@ -69,7 +69,7 @@ CREATE TABLE `field_type` (
 
 LOCK TABLES `field_type` WRITE;
 /*!40000 ALTER TABLE `field_type` DISABLE KEYS */;
-INSERT INTO `field_type` VALUES ('agreement','同意'),('email','メールアドレス'),('english','英数字'),('multi_answer','複数回答'),('number','数値'),('phone','電話番号'),('pref','都道府県'),('reading','フリガナ'),('single_answer','単一回答'),('text','テキスト'),('zipcode','郵便番号');
+INSERT INTO `field_type` VALUES ('agreement','同意'),('email','メールアドレス'),('english','英数字'),('file','ファイル'),('image','画像'),('multi_answer','複数回答'),('number','数値'),('phone','電話番号'),('pref','都道府県'),('reading','フリガナ'),('single_answer','単一回答'),('text','テキスト'),('zipcode','郵便番号');
 /*!40000 ALTER TABLE `field_type` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -188,4 +188,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2009-10-28 18:17:50
+-- Dump completed on 2009-12-10 17:45:30
