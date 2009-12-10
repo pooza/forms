@@ -29,6 +29,7 @@ class ListAction extends BSTableAction {
 			foreach ($this->getTable() as $record) {
 				$values = $record->getAttributes();
 				$values['has_statistics'] = !!$record->getChoices()->count();
+				$values['is_file'] = $record->isFile();
 				$this->rows[] = $values;
 			}
 		}

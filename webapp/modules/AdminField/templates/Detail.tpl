@@ -29,6 +29,13 @@
 
 {if $credentials.AdminEdit}
 <div id="DetailForm" class="panel">
+	{if $field.is_file}
+	<div>
+		<a href="/AdminField/Export/{$field.id}" ><img src="/carrotlib/images/document.gif" width="16" height="16" alt="" />ダウンロード</a>
+	</div>
+	{/if}
+
+
 	{form}
 		<h2>■フィールド詳細</h2>
 

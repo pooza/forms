@@ -83,6 +83,34 @@ class FileField extends Field {
 	}
 
 	/**
+	 * アーカイブを生成して返す
+	 *
+	 * @access public
+	 * @return BSZipArchive アーカイブ
+	 */
+	public function createArchive () {
+		$archive = new BSZipArchive;
+		$archive->open();
+		foreach ($this->getForm()->getRegistrations() as $registration) {
+			if ($file = $registration->getAttachment($this->getName())) {
+				$archive->register($file);
+			}
+		}
+		$archive->close();
+		return $archive;
+	}
+
+	/**
+	 * アーカイブのファイル名を返す
+	 *
+	 * @access public
+	 * @return string アーカイブのファイル名
+	 */
+	public function getArchiveFileName () {
+		return sprintf('%06d_%s.zip', $this->getForm()->getID(), $this->getName());
+	}
+
+	/**
 	 * バリデータ登録
 	 *
 	 * @access public
