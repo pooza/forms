@@ -10,7 +10,7 @@
  * Windows版 InternetExplorer 4.x以降
  *
  * @author 小石達也 <tkoishi@b-shock.co.jp>
- * @version $Id: BSTridentUserAgent.class.php 1665 2009-12-09 11:34:42Z pooza $
+ * @version $Id: BSTridentUserAgent.class.php 1668 2009-12-10 06:59:13Z pooza $
  */
 class BSTridentUserAgent extends BSUserAgent {
 
@@ -88,7 +88,7 @@ class BSTridentUserAgent extends BSUserAgent {
 	 * @return string パターン
 	 */
 	public function getPattern () {
-		return 'MSIE ([:digit:]\\.[[:digit:]]+); ([^;]+);';
+		return 'MSIE ([[:digit:]]\\.[[:digit:]]+); ([^;]+);';
 	}
 }
 

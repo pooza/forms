@@ -8,7 +8,7 @@
  * モバイルユーザーエージェント
  *
  * @author 小石達也 <tkoishi@b-shock.co.jp>
- * @version $Id: BSMobileUserAgent.class.php 1666 2009-12-10 06:29:24Z pooza $
+ * @version $Id: BSMobileUserAgent.class.php 1667 2009-12-10 06:44:27Z pooza $
  * @abstract
  */
 abstract class BSMobileUserAgent extends BSUserAgent implements BSUserIdentifier {
@@ -61,11 +61,10 @@ abstract class BSMobileUserAgent extends BSUserAgent implements BSUserIdentifier
 		$params[$session->getName()] = $session->getID();
 		if (BS_DEBUG) {
 			$params[BSRequest::USER_AGENT_ACCESSOR] = $this->getName();
+			$params['mobile_agent_id'] = $this->getID();
 		}
-		$this->attributes['query_params'] = $params->getContents();
-
-		$params['mobile_agent_id'] = $this->getID();
 		$this->attributes['query'] = $params->getParameters();
+		$this->attributes['query_params'] = $params->getContents();
 
 		if ($this->smarty) {
 			$this->smarty->setAttribute('useragent', $this);
