@@ -9,7 +9,20 @@
  */
 class RegisterAction extends BSRecordAction {
 	public function execute () {
-		$this->user->setAttribute('answer', BSValidateManager::getInstance()->getFieldValues());
+		$answer = BSValidateManager::getInstance()->getFieldValues();
+		foreach ($this->getRecord()->getFields() as $field) {
+			if ($field->isFile()) {
+				if ($info = $answer[$field->getName()]) {
+					$file = $field->setTemporaryFile(new BSFile($info['tmp_name']));
+					$info['tmp_name'] = $file->getPath();
+					$info['field_type'] = $field->getFieldType()->getID();
+					$answer[$field->getName()] = $info;
+				} else {
+					$field->clearTemporaryFile();
+				}
+			}
+		}
+		$this->user->setAttribute('answer', $answer);
 		return $this->getModule()->getAction('Confirm')->redirect();
 	}
 

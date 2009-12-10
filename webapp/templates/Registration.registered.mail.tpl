@@ -16,7 +16,7 @@ To: {const name='author_email'}
 {$registration.id|default:'(不明)'}
 
 応募詳細:
-{carrot_url module='AdminRegistration' action='Detail' record=$registration.id}
+{const name='root_url'}AdminRegistration/Detail/{$registration.id}
 
 日時:
 {$registration.create_date|date_format:'Y/n/j(ww) H:i:s'}

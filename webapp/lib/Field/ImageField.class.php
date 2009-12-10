@@ -12,6 +12,16 @@
 class ImageField extends FileField {
 
 	/**
+	 * ファイルのクラスを返す
+	 *
+	 * @access public
+	 * @return string ファイルのクラス
+	 */
+	protected function getFileClassName () {
+		return 'BSImageFile';
+	}
+
+	/**
 	 * バリデータ登録
 	 *
 	 * @access public

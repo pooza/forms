@@ -128,6 +128,7 @@ class Form extends BSRecord implements
 			$values[$key] = $answers[$field];
 			$answers->removeParameter($field);
 		}
+		$values['imported'] = !!$values['imported'];
 
 		if ($answers['フォーム'] && ($answers['フォーム'] != $this->getName())) {
 			throw new BSException('別のフォームへの応募です。');

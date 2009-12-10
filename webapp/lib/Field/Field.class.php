@@ -37,6 +37,16 @@ class Field extends BSSortableRecord implements BSValidatorContainer {
 	}
 
 	/**
+	 * ファイル項目か？
+	 *
+	 * @access public
+	 * @return boolean ファイル項目ならTrue
+	 */
+	public function isFile () {
+		return false;
+	}
+
+	/**
 	 * 削除
 	 *
 	 * @access public
@@ -110,6 +120,7 @@ class Field extends BSSortableRecord implements BSValidatorContainer {
 	protected function getFullAttributes () {
 		$values = $this->getAttributes();
 		$values['choices'] = $this->getChoices();
+		$values['is_file'] = $this->isFile();
 		return $values;
 	}
 }

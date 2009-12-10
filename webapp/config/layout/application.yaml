@@ -6,3 +6,6 @@
 
 form:
   parent: var
+
+registration:
+  parent: var
