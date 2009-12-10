@@ -37,7 +37,12 @@
 			{$field|translate}
 	{/if}
 		</th>
-		<td>{$answer|nl2br}</td>
+		<td>
+	{if $form.fields[$field].is_file}
+			<a href="{carrot_url module='AdminRegistration' action='Attachment' record=$registration.id param_name=$form.fields[$field].name}"><img src="/carrotlib/images/document.gif" width="16" height="16" alt="ダウンロード" /></a>
+	{/if}
+			{$answer|nl2br}
+		</td>
 	</tr>
 {/foreach}
 

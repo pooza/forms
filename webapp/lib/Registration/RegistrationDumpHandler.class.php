@@ -55,6 +55,17 @@ class RegistrationDumpHandler extends RegistrationHandler implements BSExportabl
 		return $this->name;
 	}
 
+
+	/**
+	 * ディレクトリを返す
+	 *
+	 * @access public
+	 * @return BSDirectory ディレクトリ
+	 */
+	public function getDirectory () {
+		return BSFileUtility::getDirectory('registration');
+	}
+
 	/**
 	 * レコードクラス名を返す
 	 *
