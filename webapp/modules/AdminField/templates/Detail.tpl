@@ -31,7 +31,7 @@
 <div id="DetailForm" class="panel">
 	{if $field.is_file}
 	<div>
-		<a href="/AdminField/Export/{$field.id}" ><img src="/carrotlib/images/document.gif" width="16" height="16" alt="" />ダウンロード</a>
+		<a href="/AdminField/Export/{$field.id}" ><img src="/carrotlib/images/document.gif" width="16" height="16" alt="" />まとめてダウンロード</a>
 	</div>
 	{/if}
 
