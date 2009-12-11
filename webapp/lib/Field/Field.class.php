@@ -11,7 +11,6 @@
  */
 class Field extends BSSortableRecord implements BSValidatorContainer {
 	private $alikeRecords;
-	protected $choices;
 
 	/**
 	 * 更新
@@ -94,11 +93,7 @@ class Field extends BSSortableRecord implements BSValidatorContainer {
 	 * @return BSArray 選択肢
 	 */
 	public function getChoices () {
-		if (!$this->choices) {
-			$this->choices = BSString::explode("\n", $this['choices']);
-			$this->choices->uniquize()->trim();
-		}
-		return $this->choices;
+		return new BSArray;
 	}
 
 	/**
@@ -119,7 +114,6 @@ class Field extends BSSortableRecord implements BSValidatorContainer {
 	 */
 	protected function getFullAttributes () {
 		$values = $this->getAttributes();
-		$values['choices'] = $this->getChoices();
 		$values['is_file'] = $this->isFile();
 		return $values;
 	}

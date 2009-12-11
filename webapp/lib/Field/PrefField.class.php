@@ -24,6 +24,16 @@ class PrefField extends SingleAnswerField {
 		}
 		return $this->choices;
 	}
+
+	/**
+	 * グループ化された選択肢を返す
+	 *
+	 * @access public
+	 * @return BSArray 選択肢
+	 */
+	public function getGroupedChoices () {
+		return $this->getChoices();
+	}
 }
 
 /* vim:set tabstop=4 */
