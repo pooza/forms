@@ -57,16 +57,6 @@ abstract class ChoiceField extends Field {
 	}
 
 	/**
-	 * グループ化された選択肢を返す
-	 *
-	 * @access public
-	 * @return BSArray 選択肢
-	 */
-	public function getGroupedChoices () {
-		return $this->getChoices();
-	}
-
-	/**
 	 * 統計を集計
 	 *
 	 * @access protected
