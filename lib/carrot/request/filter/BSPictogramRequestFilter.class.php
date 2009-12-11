@@ -10,7 +10,7 @@
  * 絵文字を検出し、内部表現タグに置換
  *
  * @author 小石達也 <tkoishi@b-shock.co.jp>
- * @version $Id: BSPictogramRequestFilter.class.php 1634 2009-11-25 10:36:21Z pooza $
+ * @version $Id: BSPictogramRequestFilter.class.php 1669 2009-12-10 12:49:17Z pooza $
  */
 class BSPictogramRequestFilter extends BSRequestFilter {
 

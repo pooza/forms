@@ -8,7 +8,7 @@
  * 画像キャッシュ
  *
  * @author 小石達也 <tkoishi@b-shock.co.jp>
- * @version $Id: BSImageCacheHandler.class.php 1600 2009-10-30 14:48:55Z pooza $
+ * @version $Id: BSImageCacheHandler.class.php 1669 2009-12-10 12:49:17Z pooza $
  */
 class BSImageCacheHandler {
 	private $useragent;
