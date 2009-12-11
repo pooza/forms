@@ -12,7 +12,6 @@
  */
 abstract class ChoiceField extends Field {
 	protected $choices;
-	protected $choicesGrouped;
 	protected $statistics;
 
 	/**
@@ -64,26 +63,7 @@ abstract class ChoiceField extends Field {
 	 * @return BSArray 選択肢
 	 */
 	public function getGroupedChoices () {
-		if (!$this->choicesGrouped) {
-			$this->choicesGrouped = new BSArray;
-			$group = $this->choicesGrouped;
-			$prefix = null;
-			foreach (BSString::explode("\n", $this['choices']) as $choice) {
-				if (BSString::isBlank($choice)) {
-					continue;
-				} else if (mb_ereg('^=(.*)$', $choice, $matches)) {
-					$prefix = $matches[1];
-					$this->choicesGrouped[$prefix] = $group = new BSArray;
-				} else {
-					if (BSString::isBlank($prefix)) {
-						$group[$choice] = $choice;
-					} else {
-						$group[$prefix . ':' . $choice] = $choice;
-					}
-				}
-			}
-		}
-		return $this->choicesGrouped;
+		return $this->getChoices();
 	}
 
 	/**
@@ -112,7 +92,6 @@ abstract class ChoiceField extends Field {
 	protected function getFullAttributes () {
 		$values = parent::getFullAttributes();
 		$values['choices'] = $this->getChoices();
-		$values['choices_grouped'] = $this->getGroupedChoices();
 		return $values;
 	}
 }
