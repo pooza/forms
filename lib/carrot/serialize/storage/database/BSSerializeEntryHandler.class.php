@@ -8,7 +8,7 @@
  * シリアライズテーブル
  *
  * @author 小石達也 <tkoishi@b-shock.co.jp>
- * @version $Id: BSSerializeEntryHandler.class.php 944 2009-02-28 09:49:04Z pooza $
+ * @version $Id: BSSerializeEntryHandler.class.php 1670 2009-12-11 12:06:04Z pooza $
  */
 class BSSerializeEntryHandler extends BSTableHandler {
 
@@ -20,6 +20,22 @@ class BSSerializeEntryHandler extends BSTableHandler {
 	 */
 	protected function isInsertable () {
 		return true;
+	}
+
+	/**
+	 * レコード追加
+	 *
+	 * @access public
+	 * @param mixed $values 値
+	 * @param integer $flags フラグのビット列
+	 *   BSDatabase::WITH_LOGGING ログを残さない
+	 * @return string レコードの主キー
+	 */
+	public function createRecord ($values, $flags = BSDatabase::WITH_LOGGING) {
+		$db = $this->getDatabase();
+		$query = BSSQL::getInsertQueryString($this->getName(), $values, $db);
+		$db->exec($query);
+		return $values[$this->getKeyField()];
 	}
 
 	/**

@@ -8,7 +8,7 @@
  * ディレクトリエントリ
  *
  * @author 小石達也 <tkoishi@b-shock.co.jp>
- * @version $Id: BSDirectoryEntry.class.php 1600 2009-10-30 14:48:55Z pooza $
+ * @version $Id: BSDirectoryEntry.class.php 1672 2009-12-12 06:57:42Z pooza $
  * @abstract
  */
 abstract class BSDirectoryEntry {
@@ -178,13 +178,23 @@ abstract class BSDirectoryEntry {
 	}
 
 	/**
+	 * 無視対象か？
+	 *
+	 * @access public
+	 * @return boolean 無視対象ならTrue
+	 */
+	public function isIgnore () {
+		return BSFileUtility::isIgnoreName($this->getName());
+	}
+
+	/**
 	 * 名前がドットから始まるか？
 	 *
 	 * @access public
 	 * @return boolean ドットから始まるならTrue
 	 */
-	public function isDoted () {
-		return mb_ereg("^\\.", $this->getName());
+	public function isDotted () {
+		return BSFileUtility::isDottedName($this->getName());
 	}
 
 	/**

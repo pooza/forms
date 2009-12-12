@@ -8,7 +8,7 @@
  * SQL生成に関するユーティリティ
  *
  * @author 小石達也 <tkoishi@b-shock.co.jp>
- * @version $Id: BSSQL.class.php 1332 2009-07-18 01:06:15Z pooza $
+ * @version $Id: BSSQL.class.php 1670 2009-12-11 12:06:04Z pooza $
  */
 class BSSQL {
 
@@ -160,6 +160,7 @@ class BSSQL {
 	 * @static
 	 */
 	static public function getCreateTableQueryString ($table, $fields) {
+		$fields = new BSArray($fields);
 		foreach ($fields as $key => $field) {
 			if (is_numeric($key)) {
 				$fields[$key] = $field;
@@ -167,7 +168,7 @@ class BSSQL {
 				$fields[$key] = $key . ' ' . $field;
 			}
 		}
-		return sprintf('CREATE TABLE %s (%s)', $table, implode(',', $fields));
+		return sprintf('CREATE TABLE %s (%s)', $table, $fields->join(','));
 	}
 
 	/**
