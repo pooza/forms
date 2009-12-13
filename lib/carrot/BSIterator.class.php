@@ -7,7 +7,7 @@
  * 基底イテレータ
  *
  * @author 小石達也 <tkoishi@b-shock.co.jp>
- * @version $Id: BSIterator.class.php 1487 2009-09-14 16:47:15Z pooza $
+ * @version $Id: BSIterator.class.php 1680 2009-12-13 04:19:39Z pooza $
  */
 class BSIterator implements Iterator {
 	protected $keys = array();
@@ -75,6 +75,26 @@ class BSIterator implements Iterator {
 	 */
 	final public function getLast () {
 		return $this->forward();
+	}
+
+	/**
+	 * カーソルは最初か？
+	 *
+	 * @access public
+	 * @return boolean 最初ならTrue
+	 */
+	public function isFirst () {
+		return ($this->cursor == 0);
+	}
+
+	/**
+	 * カーソルは最後か？
+	 *
+	 * @access public
+	 * @return boolean 最後ならTrue
+	 */
+	public function isLast () {
+		return ($this->cursor == (count($this->values) - 1));
 	}
 
 	/**

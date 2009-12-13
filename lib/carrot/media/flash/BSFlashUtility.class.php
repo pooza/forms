@@ -8,7 +8,7 @@
  * Flashユーティリティ
  *
  * @author 小石達也 <tkoishi@b-shock.co.jp>
- * @version $Id: BSFlashUtility.class.php 1575 2009-10-20 09:42:43Z pooza $
+ * @version $Id: BSFlashUtility.class.php 1675 2009-12-12 13:27:54Z pooza $
  */
 class BSFlashUtility {
 
@@ -27,23 +27,10 @@ class BSFlashUtility {
 	 * @static
 	 */
 	static public function getObjectElement (BSHTTPRedirector $url = null) {
-		$element = new BSXMLElement('object');
-		$element->setAttribute('width', '100%');
-		$element->setAttribute('height', '100%');
-		$element->setAttribute('type', BSMIMEType::getType('swf'));
-		$element->createElement('p', 'Flash Player ' . BS_FLASH_PLAYER_VER . ' 以上が必要です。');
-
+		$element = new BSFlashObjectElement;
 		if ($url) {
-			$element->setAttribute('data', $url->getContents());
-			$param = $element->createElement('param');
-			$param->setAttribute('name', 'movie');
-			$param->setAttribute('value', $url->getContents());
+			$element->setURL($url);
 		}
-
-		$param = $element->createElement('param');
-		$param->setAttribute('name', 'wmode');
-		$param->setAttribute('value', 'transparent');
-
 		return $element;
 	}
 

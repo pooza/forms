@@ -8,7 +8,7 @@
  * Flashムービーファイル
  *
  * @author 小石達也 <tkoishi@b-shock.co.jp>
- * @version $Id: BSFlashFile.class.php 1578 2009-10-21 07:07:41Z pooza $
+ * @version $Id: BSFlashFile.class.php 1675 2009-12-12 13:27:54Z pooza $
  */
 class BSFlashFile extends BSMediaFile {
 
@@ -55,7 +55,7 @@ class BSFlashFile extends BSMediaFile {
 	 * @return BSXMLElement 要素
 	 */
 	protected function getScriptElement (BSParameterHolder $params) {
-		$element = BSJavaScriptUtility::getScriptElement();
+		$element = new BSScriptElement;
 		$body = new BSStringFormat('swfobject.embedSWF(%s,%s,%d,%d,%s,%s,%s,%s);');
 		$body[] = BSJavaScriptUtility::quote($this->getMediaURL($params)->getContents());
 		$body[] = BSJavaScriptUtility::quote($params['container_id']);

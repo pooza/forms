@@ -10,7 +10,7 @@ require_once('Zend/Feed.php');
  * フィードユーティリティ
  *
  * @author 小石達也 <tkoishi@b-shock.co.jp>
- * @version $Id: BSFeedUtility.class.php 1525 2009-09-25 10:38:32Z pooza $
+ * @version $Id: BSFeedUtility.class.php 1675 2009-12-12 13:27:54Z pooza $
  */
 class BSFeedUtility extends Zend_Feed {
 	const IGNORE_TITLE_PATTERN = '^(PR|AD):';
@@ -128,7 +128,7 @@ class BSFeedUtility extends Zend_Feed {
 	 */
 	static public function createEntry (BSFeedDocument $feed) {
 		$class = str_replace('Document', 'Entry', get_class($feed));
-		$feed->getEntryRootElement()->addElement($entry = new $class);
+		$entry = $feed->getEntryRootElement()->addElement(new $class);
 		$entry->setDocument($feed);
 		return $entry;
 	}

@@ -8,9 +8,28 @@
  * CSSセレクタレンダラー
  *
  * @author 小石達也 <tkoishi@b-shock.co.jp>
- * @version $Id: BSCSSSelector.class.php 1376 2009-08-18 16:56:13Z pooza $
+ * @version $Id: BSCSSSelector.class.php 1680 2009-12-13 04:19:39Z pooza $
  */
 class BSCSSSelector extends BSArray {
+
+	/**
+	 * 要素を設定
+	 *
+	 * @access public
+	 * @param string $name 名前
+	 * @param mixed $value 要素
+	 * @param boolean $position 先頭ならTrue
+	 */
+	public function setParameter ($name, $value, $position = self::POSITION_BOTTOM) {
+		if ($value instanceof BSColor) {
+			$value = $value->getContents();
+		} else if (is_numeric($value)) {
+			$value .= 'px';
+		}
+		if (($name = trim($name)) && ($value = trim($value))) {
+			parent::setParameter($name, $value, $position);
+		}
+	}
 
 	/**
 	 * 内容を返す
@@ -20,6 +39,19 @@ class BSCSSSelector extends BSArray {
 	 */
 	public function getContents () {
 		return BSString::toString($this, ':', '; ');
+	}
+
+	/**
+	 * 文字列をパースし、属性を設定
+	 *
+	 * @access public
+	 * @param string $contents 内容
+	 */
+	public function setContents ($contents) {
+		foreach (BSString::explode(';', $contents) as $param) {
+			$param = BSString::explode(':', $param);
+			$this[$param[0]] = $param[1];
+		}
 	}
 }
 

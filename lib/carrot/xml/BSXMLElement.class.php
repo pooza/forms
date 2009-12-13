@@ -8,22 +8,24 @@
  * XML要素
  *
  * @author 小石達也 <tkoishi@b-shock.co.jp>
- * @version $Id: BSXMLElement.class.php 1524 2009-09-23 12:44:46Z pooza $
+ * @version $Id: BSXMLElement.class.php 1680 2009-12-13 04:19:39Z pooza $
  */
 class BSXMLElement implements IteratorAggregate {
-	private $contents;
-	private $raw = false;
-	private $body;
-	private $name;
-	private $attributes;
-	private $elements;
+	protected $contents;
+	protected $body;
+	protected $name;
+	protected $attributes;
+	protected $elements;
+	protected $raw = false;
 
 	/**
 	 * @access public
 	 * @param string $name 要素の名前
 	 */
 	public function __construct ($name = null) {
-		if ($name) {
+		$this->attributes = new BSArray;
+		$this->elements = new BSArray;
+		if (!BSString::isBlank($name)) {
 			$this->setName($name);
 		}
 	}
@@ -36,7 +38,7 @@ class BSXMLElement implements IteratorAggregate {
 	 * @return string 属性値
 	 */
 	public function getAttribute ($name) {
-		return $this->getAttributes()->getparameter($name);
+		return $this->attributes[$name];
 	}
 
 	/**
@@ -46,9 +48,6 @@ class BSXMLElement implements IteratorAggregate {
 	 * @return BSArray 属性値
 	 */
 	public function getAttributes () {
-		if (!$this->attributes) {
-			$this->attributes = new BSArray;
-		}
 		return $this->attributes;
 	}
 
@@ -62,7 +61,7 @@ class BSXMLElement implements IteratorAggregate {
 	public function setAttribute ($name, $value) {
 		$value = trim($value);
 		$value = BSString::convertEncoding($value, 'utf-8');
-		$this->getAttributes()->setParameter($name, $value);
+		$this->attributes[$name] = $value;
 		$this->contents = null;
 	}
 
@@ -73,7 +72,7 @@ class BSXMLElement implements IteratorAggregate {
 	 * @param string $name 属性名
 	 */
 	public function removeAttribute ($name) {
-		$this->getAttributes()->removeParameter($name);
+		$this->attributes->removeParameter($name);
 		$this->contents = null;
 	}
 
@@ -182,14 +181,26 @@ class BSXMLElement implements IteratorAggregate {
 	}
 
 	/**
+	 * 空要素か？
+	 *
+	 * @access public
+	 * @return boolean 空要素ならTrue
+	 */
+	public function isEmptyElement () {
+		return false;
+	}
+
+	/**
 	 * 子要素を追加
 	 *
 	 * @access public
 	 * @param BSXMLElement $element 要素
+	 * @return BSXMLElement 追加した要素
 	 */
 	public function addElement (BSXMLElement $element) {
-		$this->getElements()->push($element);
+		$this->elements[] = $element;
 		$this->contents = null;
+		return $element;
 	}
 
 	/**
@@ -201,9 +212,8 @@ class BSXMLElement implements IteratorAggregate {
 	 * @return BSXMLElement 要素
 	 */
 	public function createElement ($name, $body = null) {
-		$element = new BSXMLElement($name);
+		$element = $this->addElement(new BSXMLElement($name));
 		$element->setBody($body);
-		$this->addElement($element);
 		return $element;
 	}
 
@@ -260,13 +270,18 @@ class BSXMLElement implements IteratorAggregate {
 	public function getContents () {
 		if (!$this->contents) {
 			$this->contents = '<' . $this->getName();
-			if ($this->getAttributes()->count()) {
-				foreach ($this->getAttributes() as $key => $value) {
+			if ($this->attributes->count()) {
+				foreach ($this->attributes as $key => $value) {
 					$this->contents .= sprintf(' %s="%s"', $key, BSString::sanitize($value));
 				}
 			}
+
+			if ($this->isEmptyElement()) {
+				return $this->contents .= ' />';
+			}
+
 			$this->contents .= '>';
-			foreach ($this->getElements() as $element) {
+			foreach ($this->elements as $element) {
 				$this->contents .= $element->getContents();
 			}
 			if ($this->raw) {
@@ -286,8 +301,8 @@ class BSXMLElement implements IteratorAggregate {
 	 * @param $string $contents XML文書
 	 */
 	public function setContents ($contents) {
-		$this->getAttributes()->clear();
-		$this->getElements()->clear();
+		$this->attributes->clear();
+		$this->elements->clear();
 		$this->setBody();
 		$this->contents = $contents;
 
@@ -326,12 +341,24 @@ class BSXMLElement implements IteratorAggregate {
 	}
 
 	/**
+	 * 上位のタグでくくって返す
+	 *
+	 * @access public
+	 * @param BSXMLElement $parent 上位の要素
+	 * @return BSXMLElement 上位の要素
+	 */
+	public function wrap (BSXMLElement $parent) {
+		$parent->addElement($this);
+		return $parent;
+	}
+
+	/**
 	 * RAWモードを返す
 	 *
 	 * @access public
 	 * @return boolean RAWモード
 	 */
-	public function getRawMode () {
+	public function isRawMode () {
 		return $this->raw;
 	}
 
@@ -356,7 +383,7 @@ class BSXMLElement implements IteratorAggregate {
 	 * @return BSIterator イテレータ
 	 */
 	public function getIterator () {
-		return new BSIterator($this->getElements());
+		return new BSIterator($this->elements);
 	}
 }
 

@@ -8,7 +8,7 @@
  * 動画ファイル
  *
  * @author 小石達也 <tkoishi@b-shock.co.jp>
- * @version $Id: BSMovieFile.class.php 1599 2009-10-30 14:20:35Z pooza $
+ * @version $Id: BSMovieFile.class.php 1680 2009-12-13 04:19:39Z pooza $
  */
 class BSMovieFile extends BSMediaFile {
 	private $output;
@@ -94,10 +94,8 @@ class BSMovieFile extends BSMediaFile {
 	 */
 	public function getImageElement (BSParameterHolder $params) {
 		$element = parent::getImageElement($params);
-
 		if ($inner = $element->getElement('div')) { //Gecko対応
-			$style = $this->getPixelSizeCSSSelector($params);
-			$inner->setAttribute('style', $style->getContents());
+			$inner->setStyles($this->getStyles($params));
 		}
 		return $element;
 	}
@@ -110,7 +108,7 @@ class BSMovieFile extends BSMediaFile {
 	 * @return BSXMLElement 要素
 	 */
 	protected function getScriptElement (BSParameterHolder $params) {
-		$element = BSJavaScriptUtility::getScriptElement();
+		$element = new BSScriptElement;
 		$body = new BSStringFormat('flowplayer(%s, %s, %s);');
 		$body[] = BSJavaScriptUtility::quote($params['container_id']);
 		$body[] = BSJavaScriptUtility::quote(BS_MOVIE_PLAYER_HREF);
@@ -130,9 +128,7 @@ class BSMovieFile extends BSMediaFile {
 		$element = BSFlashUtility::getObjectElement(
 			BSURL::getInstance()->setAttribute('path', BS_MOVIE_PLAYER_HREF)
 		);
-		$param = $element->createElement('param');
-		$param->setAttribute('name', 'flashvars');
-		$param->setAttribute('value', 'config=' . $this->getPlayerConfig($params));
+		$element->setFlashVar('config', $this->getPlayerConfig($params));
 		return $element;
 	}
 

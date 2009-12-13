@@ -8,7 +8,7 @@
  * 画像キャッシュ
  *
  * @author 小石達也 <tkoishi@b-shock.co.jp>
- * @version $Id: BSImageCacheHandler.class.php 1669 2009-12-10 12:49:17Z pooza $
+ * @version $Id: BSImageCacheHandler.class.php 1675 2009-12-12 13:27:54Z pooza $
  */
 class BSImageCacheHandler {
 	private $useragent;
@@ -361,13 +361,8 @@ class BSImageCacheHandler {
 	 * @return BSXMLElement img要素
 	 */
 	public function getImageElement (BSArray $info) {
-		$element = new BSXMLElement('img');
-		$element->setAttribute('src', $info['url']);
-		$element->setAttribute('width', $info['width']);
-		$element->setAttribute('height', $info['height']);
-		if (!$this->getUserAgent()->isMobile()) {
-			$element->setAttribute('alt', $info['alt']);
-		}
+		$element = new BSImageElement;
+		$element->setAttributes($info);
 		return $element;
 	}
 

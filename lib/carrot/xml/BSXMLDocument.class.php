@@ -8,7 +8,7 @@
  * 整形式XML文書
  *
  * @author 小石達也 <tkoishi@b-shock.co.jp>
- * @version $Id: BSXMLDocument.class.php 1658 2009-12-08 06:54:17Z pooza $
+ * @version $Id: BSXMLDocument.class.php 1680 2009-12-13 04:19:39Z pooza $
  */
 class BSXMLDocument extends BSXMLElement implements BSTextRenderer {
 	private $dirty = false;
@@ -64,8 +64,8 @@ class BSXMLDocument extends BSXMLElement implements BSTextRenderer {
 	 */
 	public function setDirty ($mode) {
 		$this->dirty = $mode;
-		$this->getAttributes()->clear();
-		$this->getElements()->clear();
+		$this->attributes->clear();
+		$this->elements->clear();
 		$this->setBody();
 	}
 

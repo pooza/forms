@@ -8,7 +8,7 @@
  * メディアファイル
  *
  * @author 小石達也 <tkoishi@b-shock.co.jp>
- * @version $Id: BSMediaFile.class.php 1600 2009-10-30 14:48:55Z pooza $
+ * @version $Id: BSMediaFile.class.php 1680 2009-12-13 04:19:39Z pooza $
  * @abstract
  */
 abstract class BSMediaFile extends BSFile implements ArrayAccess {
@@ -65,19 +65,16 @@ abstract class BSMediaFile extends BSFile implements ArrayAccess {
 	 * @return BSXMLElement 要素
 	 */
 	public function getImageElement (BSParameterHolder $params) {
-		$root = new BSXMLElement('div');
-		if (!BSString::isBlank($params['style_class'])) {
-			$root->setAttribute('class', $params['style_class']);
-		}
+		$root = new BSDivisionElement;
+		$root->registerStyleClass($params['style_class']);
 		if ($params['mode'] == 'noscript') {
-			$style = $this->getPixelSizeCSSSelector($params);
-			$root->setAttribute('style', $style->getContents());
+			$root->setStyles($this->getStyles($params));
 			$root->addElement($this->getObjectElement($params));
 		} else {
 			if (BSString::isBlank($params['container_id'])) {
 				$params['container_id'] = $this->createContainerID();
-				$container = $root->createElement('div');
-				$container->setAttribute('id', $params['container_id']);
+				$container = $root->addElement(new BSDivisionElement);
+				$container->setID($params['container_id']);
 			}
 			$root->addElement($this->getScriptElement($params));
 		}
@@ -91,7 +88,7 @@ abstract class BSMediaFile extends BSFile implements ArrayAccess {
 	 * @param BSParameterHolder $params パラメータ配列
 	 * @return BSCSSSelector スタイル属性
 	 */
-	protected function getPixelSizeCSSSelector (BSParameterHolder $params) {
+	protected function getStyles (BSParameterHolder $params) {
 		$style = new BSCSSSelector;
 		if ($params['width']) {
 			$style['width'] = $params['width'] . 'px';

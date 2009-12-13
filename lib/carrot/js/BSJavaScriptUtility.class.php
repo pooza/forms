@@ -8,7 +8,7 @@
  * JavaScriptユーティリティ
  *
  * @author 小石達也 <tkoishi@b-shock.co.jp>
- * @version $Id: BSJavaScriptUtility.class.php 1375 2009-08-18 16:24:47Z pooza $
+ * @version $Id: BSJavaScriptUtility.class.php 1675 2009-12-12 13:27:54Z pooza $
  */
 class BSJavaScriptUtility {
 
@@ -26,10 +26,7 @@ class BSJavaScriptUtility {
 	 * @static
 	 */
 	static public function getScriptElement () {
-		$element = new BSXMLElement('script');
-		$element->setAttribute('type', 'text/javascript');
-		$element->setRawMode(true);
-		return $element;
+		return new BSScriptElement;
 	}
 
 	/**
