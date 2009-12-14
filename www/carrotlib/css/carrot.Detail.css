@@ -3,7 +3,7 @@
  *
  * @package org.carrot-framework
  * @author 小石達也 <tkoishi@b-shock.co.jp>
- * @version $Id: carrot.Detail.css 501 2008-08-17 16:36:14Z pooza $
+ * @version $Id: carrot.Detail.css 1686 2009-12-14 07:50:02Z pooza $
  */
 
 table.Detail th {
@@ -13,4 +13,10 @@ table.Detail th {
 
 table.Detail td {
 	width: 480px;
+}
+
+table.Detail .image_uploader {
+	border: 1px solid #666666;
+	padding: 4px;
+	margin: 2px;
 }

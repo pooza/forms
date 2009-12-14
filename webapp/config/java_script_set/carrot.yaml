@@ -2,13 +2,15 @@
 #
 # @package org.carrot-framework
 # @author 小石達也 <tkoishi@b-shock.co.jp>
-# @version $Id: carrot.yaml 1558 2009-10-16 03:25:12Z pooza $
+# @version $Id: carrot.yaml 1685 2009-12-14 07:30:31Z pooza $
 
 carrot:
   files:
     - prototype
     - scriptaculous/effects
+    - scriptaculous/builder
     - ajaxzip2/ajaxzip2
+    - lightbox
     - prototabs
     - protocalendar/protocalendar
     - protocalendar/lang_ja
