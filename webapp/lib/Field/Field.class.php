@@ -83,8 +83,8 @@ class Field extends BSSortableRecord implements BSValidatorContainer {
 			$manager->register($this->getName(), new BSEmptyValidator);
 		}
 		if ($this['has_confirm_field']) {
-			$values = array('field' => $this->getName() . '_confirm');
-			$manager->register($this->getName(), new BSPairValidator($values));
+			$params = array('field' => $this->getName() . '_confirm');
+			$manager->register($this->getName(), new BSPairValidator($params));
 		}
 		$params = array('max' => 2048);
 		$manager->register($this->getName(), new BSStringValidator($params));
