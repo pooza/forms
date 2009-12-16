@@ -76,7 +76,8 @@
 			<tr>
 				<th></th>
 				<td>
-					<label><input type="checkbox" name="required" value="1" {if $params.required}checked="checked"{/if} />必須項目</label>
+					<label><input type="checkbox" name="required" value="1" {if $params.required}checked="checked"{/if} />必須項目</label><br/>
+					<label><input type="checkbox" name="has_confirm_field" value="1" {if $params.has_confirm_field}checked="checked"{/if} />確認欄あり</label><br/>
 				</td>
 			</tr>
 			<tr>

@@ -4,3 +4,4 @@ field_id,フィールド
 label,ラベル
 choices,選択肢
 required,必須
+has_confirm_field,確認欄の有無

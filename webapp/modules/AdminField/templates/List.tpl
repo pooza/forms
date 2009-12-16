@@ -13,6 +13,7 @@
 		<th width="150">ラベル</th>
 		<th width="90">種別</th>
 		<th width="30">必須</th>
+		<th width="30">確認</th>
 		<th width="30">選択</th>
 		<th width="30">DL</th>
 		<th width="60"></th>
@@ -20,7 +21,7 @@
 	</tr>
 {if $credentials.AdminEdit}
 	<tr>
-		<td colspan="8">
+		<td colspan="9">
 			<a href="/{$module.name}/Create">新しいフィールドを登録...</a>
 		</td>
 	</tr>
@@ -38,6 +39,7 @@
 		<td width="150">{$field.label}</td>
 		<td width="90">{$field.field_type_id|translate:'FieldHandler'}</td>
 		<td width="30" align="center">{if $field.required}○{/if}</td>
+		<td width="30" align="center">{if $field.has_confirm_field}○{/if}</td>
 		<td width="30" align="center">{if $field.has_statistics}○{/if}</td>
 		<td width="30" align="center">
 	{if $field.is_file}
@@ -71,7 +73,7 @@
 	</tr>
 {foreachelse}
 	<tr>
-		<td colspan="8" class="alert">登録されていません。</td>
+		<td colspan="9" class="alert">登録されていません。</td>
 	</tr>
 {/foreach}
 

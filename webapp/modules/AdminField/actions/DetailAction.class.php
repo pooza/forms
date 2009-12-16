@@ -22,6 +22,7 @@ class DetailAction extends BSRecordAction {
 			'field_type_id' => $this->request['field_type_id'],
 			'choices' => $this->request['choices'],
 			'required' => (int)$this->request['required'],
+			'has_confirm_field' => (int)$this->request['has_confirm_field'],
 			'status' => $this->request['status'],
 		);
 	}

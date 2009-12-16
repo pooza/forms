@@ -30,6 +30,7 @@ CREATE TABLE `field` (
   `field_type_id` varchar(16) NOT NULL DEFAULT 'text',
   `choices` text,
   `required` tinyint(3) unsigned NOT NULL DEFAULT '0',
+  `has_confirm_field` tinyint(3) unsigned NOT NULL DEFAULT '0',
   `rank` tinyint(3) unsigned DEFAULT NULL,
   `status` enum('show','hide') NOT NULL DEFAULT 'hide',
   `create_date` datetime NOT NULL,
@@ -188,4 +189,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2009-12-10 17:45:30
+-- Dump completed on 2009-12-16 17:32:58

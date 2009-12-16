@@ -23,6 +23,9 @@ fields:
   required:
     validators:
       - flag
+  has_confirm_field:
+    validators:
+      - flag
   status:
     required: yes
     validators:
