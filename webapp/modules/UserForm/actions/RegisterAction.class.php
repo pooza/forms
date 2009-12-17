@@ -8,6 +8,15 @@
  * @version $Id$
  */
 class RegisterAction extends BSRecordAction {
+	public function initialize () {
+		if ($id = $this->request['id']) {
+			$this->setRecordID($id);
+		}
+		$this->request->setAttribute('form', $record);
+		$this->request->setAttribute('styleset', 'carrot.Detail');
+		return true;
+	}
+
 	public function execute () {
 		$answer = BSValidateManager::getInstance()->getFieldValues();
 		foreach ($this->getRecord()->getFields() as $field) {
