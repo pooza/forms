@@ -3,7 +3,7 @@
  *
  * @package org.carrot-framework
  * @author 小石達也 <tkoishi@b-shock.co.jp>
- * @version $Id: deny_take_out.js 1644 2009-12-01 06:51:57Z pooza $
+ * @version $Id: deny_take_out.js 1688 2009-12-16 02:42:16Z pooza $
  */
 
 function denyTakeOut (selector_name) {
@@ -13,6 +13,8 @@ function denyTakeOut (selector_name) {
       element.oncontextmenu = doNothing;
       element.onselectstart = doNothing;
       element.onmousedown = doNothing;
+      element.unselectable = 'on';
+      element.galleryimg = 'no';
     }
   }
 
