@@ -21,6 +21,14 @@ To: {const name='author_email'}
 日時:
 {$registration.create_date|date_format:'Y/n/j(ww) H:i:s'}
 
+{if $is_include_answers}
+{foreach from=$registration.answers key='field' item='answer'}
+{$field|translate}:
+{$answer}
+
+{/foreach}
+{/if}
+
 クライアントホスト:
 {$client_host.ip}
 {$client_host.name|default:'(名前解決に失敗)'}

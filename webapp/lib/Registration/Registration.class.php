@@ -89,6 +89,11 @@ class Registration extends BSRecord implements BSAttachmentContainer {
 		} else if ($file = $this->getForm()->getTemplateFile($template)) {
 		}
 
+		if (BS_APP_MAIL_INCLUDE_ANSWERS) {
+			BSTranslateManager::getInstance()->register($this->getForm(), BSArray::POSITION_TOP);
+			$smtp->setAttribute('is_include_answers', true);
+		}
+
 		$smtp->setTemplate($file);
 		$smtp->setAttribute('registration', $this);
 		$smtp->setAttribute('form', $this->getForm());

@@ -26,3 +26,6 @@ module:
   secure:
     module: Default
     action: Login
+
+mail:
+  include_answers: no
