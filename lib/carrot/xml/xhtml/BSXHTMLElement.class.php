@@ -8,7 +8,7 @@
  * XHTMLの要素
  *
  * @author 小石達也 <tkoishi@b-shock.co.jp>
- * @version $Id: BSXHTMLElement.class.php 1680 2009-12-13 04:19:39Z pooza $
+ * @version $Id: BSXHTMLElement.class.php 1690 2009-12-18 06:53:03Z pooza $
  */
 class BSXHTMLElement extends BSXMLElement {
 	protected $tag;
@@ -32,7 +32,7 @@ class BSXHTMLElement extends BSXMLElement {
 		$this->styles = new BSCSSSelector;
 		$this->styleClasses = new BSArray;
 
-		parent::__construct($name, $useragent);
+		parent::__construct($name);
 		if ($useragent) {
 			$this->useragent = $useragent;
 		} else {

@@ -8,7 +8,7 @@
  * Atom0.3文書
  *
  * @author 小石達也 <tkoishi@b-shock.co.jp>
- * @version $Id: BSAtom03Document.class.php 1495 2009-09-16 16:24:26Z pooza $
+ * @version $Id: BSAtom03Document.class.php 1690 2009-12-18 06:53:03Z pooza $
  */
 class BSAtom03Document extends BSXMLDocument implements BSFeedDocument {
 	protected $version = '0.3';
@@ -16,9 +16,10 @@ class BSAtom03Document extends BSXMLDocument implements BSFeedDocument {
 
 	/**
 	 * @access public
+	 * @param string $name 要素の名前
 	 */
-	public function __construct () {
-		$this->setName('feed');
+	public function __construct ($name = null) {
+		parent::__construct('feed');
 		$this->setNamespace($this->namespace);
 		$this->setAttribute('version', $this->version);
 		$this->setDate(BSDate::getNow());
