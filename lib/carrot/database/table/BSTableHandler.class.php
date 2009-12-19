@@ -8,7 +8,7 @@
  * データベーステーブル
  *
  * @author 小石達也 <tkoishi@b-shock.co.jp>
- * @version $Id: BSTableHandler.class.php 1652 2009-12-04 06:49:14Z pooza $
+ * @version $Id: BSTableHandler.class.php 1692 2009-12-18 12:06:44Z pooza $
  * @abstract
  */
 abstract class BSTableHandler implements IteratorAggregate, BSDictionary, BSAssignable {
@@ -317,7 +317,7 @@ abstract class BSTableHandler implements IteratorAggregate, BSDictionary, BSAssi
 		$db = $this->getDatabase();
 		$query = BSSQL::getInsertQueryString($this->getName(), $values, $db);
 		$db->exec($query);
-		if ($this->isAutoIncrement()) {
+		if ($this->hasSurrogateKey()) {
 			$id = $db->lastInsertId($db->getSequenceName($this->getName(), $this->getKeyField()));
 		} else {
 			$id = $values[$this->getKeyField()];
@@ -360,23 +360,13 @@ abstract class BSTableHandler implements IteratorAggregate, BSDictionary, BSAssi
 	}
 
 	/**
-	 * 最終レコードを返す
+	 * サロゲートキーを持つテーブルか？
 	 *
-	 * @access public
-	 * @return BSRecord レコード
+	 * @access protected
+	 * @return boolean サロゲートキーを持つならTrue
 	 */
-	public function getLastRecord () {
-		return $this->getIterator()->getLast();
-	}
-
-	/**
-	 * 先頭レコードを返す
-	 *
-	 * @access public
-	 * @return BSRecord レコード
-	 */
-	public function getFirstRecord () {
-		return $this->getIterator()->getFirst();
+	protected function hasSurrogateKey () {
+		return $this->isInsertable();
 	}
 
 	/**
@@ -697,16 +687,6 @@ abstract class BSTableHandler implements IteratorAggregate, BSDictionary, BSAssi
 			}
 		}
 		return $this->recordClassName;
-	}
-
-	/**
-	 * オートインクリメントのテーブルか？
-	 *
-	 * @access public
-	 * @return boolean オートインクリメントならTrue
-	 */
-	public function isAutoIncrement () {
-		return false;
 	}
 
 	/**

@@ -5,13 +5,13 @@
  */
 
 /**
- * キャッシュ機能つきデータベーステーブル
+ * シリアライズ可能なデータベーステーブル
  *
  * @author 小石達也 <tkoishi@b-shock.co.jp>
- * @version $Id: BSCachedTableHandler.class.php 1412 2009-08-31 18:07:23Z pooza $
+ * @version $Id: BSSerializableTableHandler.class.php 1693 2009-12-18 12:13:30Z pooza $
  * @abstract
  */
-abstract class BSCachedTableHandler extends BSTableHandler {
+abstract class BSSerializableTableHandler extends BSTableHandler {
 
 	/**
 	 * @access public

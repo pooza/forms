@@ -22,16 +22,6 @@ class FormHandler extends BSTableHandler {
 	}
 
 	/**
-	 * オートインクリメントのテーブルか？
-	 *
-	 * @access public
-	 * @return boolean オートインクリメントならTrue
-	 */
-	public function isAutoIncrement () {
-		return true;
-	}
-
-	/**
 	 * 添付ファイル名を全てを返す
 	 *
 	 * @access public

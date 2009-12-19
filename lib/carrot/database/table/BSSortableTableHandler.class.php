@@ -8,7 +8,7 @@
  * ソート可能なテーブル
  *
  * @author 小石達也 <tkoishi@b-shock.co.jp>
- * @version $Id: BSSortableTableHandler.class.php 1648 2009-12-02 02:48:58Z pooza $
+ * @version $Id: BSSortableTableHandler.class.php 1691 2009-12-18 11:57:52Z pooza $
  * @abstract
  */
 abstract class BSSortableTableHandler extends BSTableHandler {
@@ -36,16 +36,6 @@ abstract class BSSortableTableHandler extends BSTableHandler {
 	 * @return boolean レコード追加可能ならTrue
 	 */
 	protected function isInsertable () {
-		return true;
-	}
-
-	/**
-	 * オートインクリメントのテーブルか？
-	 *
-	 * @access public
-	 * @return boolean オートインクリメントならTrue
-	 */
-	public function isAutoIncrement () {
 		return true;
 	}
 

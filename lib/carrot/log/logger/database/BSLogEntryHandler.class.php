@@ -8,7 +8,7 @@
  * ログテーブル
  *
  * @author 小石達也 <tkoishi@b-shock.co.jp>
- * @version $Id: BSLogEntryHandler.class.php 941 2009-02-28 08:49:54Z pooza $
+ * @version $Id: BSLogEntryHandler.class.php 1691 2009-12-18 11:57:52Z pooza $
  */
 class BSLogEntryHandler extends BSTableHandler {
 
@@ -19,16 +19,6 @@ class BSLogEntryHandler extends BSTableHandler {
 	 * @return boolean レコード追加可能ならTrue
 	 */
 	protected function isInsertable () {
-		return true;
-	}
-
-	/**
-	 * オートインクリメントのテーブルか？
-	 *
-	 * @access public
-	 * @return boolean オートインクリメントならTrue
-	 */
-	public function isAutoIncrement () {
 		return true;
 	}
 

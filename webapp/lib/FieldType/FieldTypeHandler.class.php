@@ -9,7 +9,7 @@
  * @author 小石達也 <tkoishi@b-shock.co.jp>
  * @version $Id$
  */
-class FieldTypeHandler extends BSCachedTableHandler {
+class FieldTypeHandler extends BSSerializableTableHandler {
 }
 
 /* vim:set tabstop=4 */

@@ -1,14 +1,14 @@
 <?php
 /**
  * @package org.carrot-framework
- * @subpackage database
+ * @subpackage database.query
  */
 
 /**
  * SQL生成に関するユーティリティ
  *
  * @author 小石達也 <tkoishi@b-shock.co.jp>
- * @version $Id: BSSQL.class.php 1670 2009-12-11 12:06:04Z pooza $
+ * @version $Id: BSSQL.class.php 1695 2009-12-18 12:32:54Z pooza $
  */
 class BSSQL {
 
@@ -20,6 +20,9 @@ class BSSQL {
 
 	/**
 	 * 文字列をクォート
+	 *
+	 * 極力使わない。
+	 * BSCriteriaSet等、クォート処理をラップした機能を使用すること。
 	 *
 	 * @access public
 	 * @param string $str クォートの対象

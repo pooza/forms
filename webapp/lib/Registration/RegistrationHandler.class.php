@@ -46,16 +46,6 @@ class RegistrationHandler extends BSTableHandler {
 	protected function isInsertable () {
 		return true;
 	}
-
-	/**
-	 * オートインクリメントのテーブルか？
-	 *
-	 * @access public
-	 * @return boolean オートインクリメントならTrue
-	 */
-	public function isAutoIncrement () {
-		return true;
-	}
 }
 
 /* vim:set tabstop=4 */
