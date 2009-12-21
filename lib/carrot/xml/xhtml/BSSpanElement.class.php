@@ -8,7 +8,7 @@
  * span要素
  *
  * @author 小石達也 <tkoishi@b-shock.co.jp>
- * @version $Id: BSSpanElement.class.php 1682 2009-12-13 04:31:44Z pooza $
+ * @version $Id: BSSpanElement.class.php 1702 2009-12-21 10:11:02Z pooza $
  */
 class BSSpanElement extends BSXHTMLElement {
 
@@ -23,6 +23,15 @@ class BSSpanElement extends BSXHTMLElement {
 		$element->setBody($this->getBody());
 		if ($color = $this->getStyle('color')) {
 			$element->setAttribute('color', $color);
+		}
+		if ($this->getStyle('font-weight') == 'bold') {
+			$element = $element->wrap(new BSXHTMLElement('b'));
+		}
+		if ($this->getStyle('font-style') == 'italic') {
+			$element = $element->wrap(new BSXHTMLElement('i'));
+		}
+		if ($this->getStyle('text-decoration') == 'underline') {
+			$element = $element->wrap(new BSXHTMLElement('u'));
 		}
 		return $element;
 	}

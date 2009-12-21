@@ -8,7 +8,7 @@
  * カレンダー
  *
  * @author 小石達也 <tkoishi@b-shock.co.jp>
- * @version $Id: BSCalendar.class.php 1195 2009-05-16 11:46:01Z pooza $
+ * @version $Id: BSCalendar.class.php 1701 2009-12-21 10:09:53Z pooza $
  */
 class BSCalendar implements IteratorAggregate {
 	private $dates;
@@ -134,6 +134,24 @@ class BSCalendar implements IteratorAggregate {
 				$this->dates[$key][$name] = new BSArray;
 			}
 			$this->dates[$key][$name][] = $value;
+		}
+	}
+
+	/**
+	 * カレンダーから値を削除
+	 *
+	 * @access public
+	 * @param BSDate $date 日付
+	 * @param string $name 値の名前
+	 * @param mixed $value 値
+	 */
+	public function removeValue (BSDate $date, $name) {
+		$key = $date->format('Y-m-d');
+		if ($this->dates[$key]) {
+			if (!$this->dates[$key][$name]) {
+				$this->dates[$key][$name] = new BSArray;
+			}
+			$this->dates[$key][$name]->clear();
 		}
 	}
 

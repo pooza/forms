@@ -2,8 +2,13 @@
 #
 # @package org.carrot-framework
 # @author 小石達也 <tkoishi@b-shock.co.jp>
-# @version $Id: carrot.yaml 1630 2009-11-23 03:31:21Z pooza $
+# @version $Id: carrot.yaml 1700 2009-12-21 10:09:05Z pooza $
 
+color:
+  class: BSRegexValidator
+  params:
+    pattern: [[:xdigit:]]{6}
+    match_error: 色指定が正しくありません。
 date:
   class: BSDateValidator
 email:
