@@ -8,9 +8,10 @@
  * object要素
  *
  * @author 小石達也 <tkoishi@b-shock.co.jp>
- * @version $Id: BSObjectElement.class.php 1681 2009-12-13 04:28:24Z pooza $
+ * @version $Id: BSObjectElement.class.php 1704 2009-12-21 14:33:54Z pooza $
  */
 class BSObjectElement extends BSXHTMLElement {
+	protected $inner;
 
 	/**
 	 * タグ名を返す
@@ -23,9 +24,28 @@ class BSObjectElement extends BSXHTMLElement {
 	}
 
 	/**
-	 * param要素を加える
+	 * 属性を設定
 	 *
 	 * @access public
+	 * @param string $name 属性名
+	 * @param mixed $value 属性値
+	 */
+	public function setAttribute ($name, $value) {
+		parent::setAttribute($name, $value);
+		switch ($name) {
+			case 'width':
+			case 'height':
+				if ($this->inner) {
+					$this->inner->setAttribute($name, $value);
+				}
+				break;
+		}
+	}
+
+	/**
+	 * param要素を加える
+	 *
+	 * @access protected
 	 * @param string $name 名前
 	 * @param string $value 値
 	 */
@@ -41,6 +61,10 @@ class BSObjectElement extends BSXHTMLElement {
 		$param = $this->createElement('param');
 		$param->setAttribute('name', $name);
 		$param->setAttribute('value', $value);
+
+		if ($this->inner) {
+			$this->inner->setAttribute($name, $value);
+		}
 	}
 }
 

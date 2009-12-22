@@ -8,7 +8,7 @@
  * スマートタグ
  *
  * @author 小石達也 <tkoishi@b-shock.co.jp>
- * @version $Id: BSSmartTag.class.php 1476 2009-09-12 03:18:57Z pooza $
+ * @version $Id: BSSmartTag.class.php 1708 2009-12-22 12:59:43Z pooza $
  */
 abstract class BSSmartTag extends BSParameterHolder {
 	private $useragent;
@@ -86,6 +86,33 @@ abstract class BSSmartTag extends BSParameterHolder {
 	 * @abstract
 	 */
 	abstract public function execute ($body);
+
+	/**
+	 * スマートタグが含まれる文字列をパースする
+	 *
+	 * @access public
+	 * @param string $text 置換対象文字列
+	 * @param BSArray $tags 許可するタグ
+	 * @param BSParameterHolder $params タグに載せるパラメータ
+	 * @return string 置換された文字列
+	 * @static
+	 */
+	static public function parse ($text, BSArray $tags, BSParameterHolder $params) {
+		foreach (BSString::eregMatchAll('\\[\\[([^\\]]+)\\]\\]', $text) as $matches) {
+			foreach ($tags as $tag) {
+				$class = BSClassLoader::getInstance()->getClassName($tag, 'Tag');
+				$tag = new $class($matches[1]);
+				if ($tag->isMatched()) {
+					$tag->setParameters($params);
+					$text = $tag->execute($text);
+					break;
+				}
+			}
+			$message = sprintf('[エラー: "%s" は不明なタグです。]', $matches[1]);
+			$text = str_replace($matches[0], $message, $text);
+		}
+		return $text;
+	}
 }
 
 /* vim:set tabstop=4: */

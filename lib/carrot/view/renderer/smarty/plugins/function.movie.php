@@ -8,7 +8,7 @@
  * 動画関数
  *
  * @author 小石達也 <tkoishi@b-shock.co.jp>
- * @version $Id: function.movie.php 1558 2009-10-16 03:25:12Z pooza $
+ * @version $Id: function.movie.php 1704 2009-12-21 14:33:54Z pooza $
  */
 function smarty_function_movie ($params, &$smarty) {
 	$params = new BSArray($params);
@@ -26,6 +26,7 @@ function smarty_function_movie ($params, &$smarty) {
 		case 'height_full':
 		case 'seconds':
 		case 'duration':
+		case 'type':
 			return $file[$mode];
 		default:
 			if (BSString::isBlank($params['href_prefix'])) {

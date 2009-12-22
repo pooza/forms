@@ -8,7 +8,7 @@
  * 動画ユーティリティ
  *
  * @author 小石達也 <tkoishi@b-shock.co.jp>
- * @version $Id: BSMovieUtility.class.php 1602 2009-10-31 05:56:40Z pooza $
+ * @version $Id: BSMovieUtility.class.php 1706 2009-12-21 16:27:48Z pooza $
  */
 class BSMovieUtility {
 
@@ -54,7 +54,16 @@ class BSMovieUtility {
 	 * @static
 	 */
 	static public function getFile ($file) {
-		return BSMediaFile::search($file, 'BSMovieFile');
+		if (!$file = BSMediaFile::search($file, 'BSMovieFile')) {
+			return;
+		}
+		switch ($file->getType()) {
+			case BSMIMEType::getType('mov'):
+				return BSMediaFile::search($file, 'BSQuickTimeMovieFile');
+			case BSMIMEType::getType('wmv'):
+				return BSMediaFile::search($file, 'BSWindowsMediaMovieFile');
+		}
+		return $file;
 	}
 }
 

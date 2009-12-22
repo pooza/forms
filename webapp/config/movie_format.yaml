@@ -2,7 +2,7 @@
 #
 # @package org.carrot-framework
 # @author 小石達也 <tkoishi@b-shock.co.jp>
-# @version $Id: movie_format.yaml 1587 2009-10-26 07:50:12Z pooza $
+# @version $Id: movie_format.yaml 1704 2009-12-21 14:33:54Z pooza $
 
 types:
   flv: video/x-flv
@@ -12,7 +12,3 @@ types:
   wmv1: video/x-ms-wmv
   wmv2: video/x-ms-wmv
   wmv3: video/x-ms-wmv
-  rv10: application/vnd.rn-realmedia
-  rv20: application/vnd.rn-realmedia
-  rv30: application/vnd.rn-realmedia
-  rv40: application/vnd.rn-realmedia
