@@ -8,7 +8,7 @@
  * WindowsMedia用object要素
  *
  * @author 小石達也 <tkoishi@b-shock.co.jp>
- * @version $Id: BSWindowsMediaObjectElement.class.php 1704 2009-12-21 14:33:54Z pooza $
+ * @version $Id: BSWindowsMediaObjectElement.class.php 1710 2009-12-23 09:48:24Z pooza $
  */
 class BSWindowsMediaObjectElement extends BSObjectElement {
 
@@ -20,7 +20,7 @@ class BSWindowsMediaObjectElement extends BSObjectElement {
 	public function __construct ($name = null, BSUserAgent $useragent = null) {
 		parent::__construct($name, $useragent);
 		$this->inner = $this->createElement('embed');
-		$this->setAttribute('classid', 'clsid:6BF52A52-394A-11d3-B153-00C04F79FAA6');
+		$this->setAttribute('classid', 'clsid:' . BS_MOVIE_WMV_PLAYER_CLSID);
 		$this->setAttribute('type', BSMIMEType::getType('wmv'));
 		$this->setParameter('autostart', '0');
 	}

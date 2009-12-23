@@ -8,7 +8,7 @@
  * データベーステーブル
  *
  * @author 小石達也 <tkoishi@b-shock.co.jp>
- * @version $Id: BSTableHandler.class.php 1692 2009-12-18 12:06:44Z pooza $
+ * @version $Id: BSTableHandler.class.php 1709 2009-12-23 09:46:15Z pooza $
  * @abstract
  */
 abstract class BSTableHandler implements IteratorAggregate, BSDictionary, BSAssignable {
@@ -253,6 +253,16 @@ abstract class BSTableHandler implements IteratorAggregate, BSDictionary, BSAssi
 	}
 
 	/**
+	 * 抽出条件を生成して返す
+	 *
+	 * @access public
+	 * @return BSCriteriaSet 抽出条件
+	 */
+	public function createCriteriaSet () {
+		return $this->getDatabase()->createCriteriaSet();
+	}
+
+	/**
 	 * レコードを返す
 	 *
 	 * @access public
@@ -279,7 +289,7 @@ abstract class BSTableHandler implements IteratorAggregate, BSDictionary, BSAssi
 			}
 		} else {
 			$table = clone $this;
-			$criteria = $this->getDatabase()->createCriteriaSet();
+			$criteria = $this->createCriteriaSet();
 			$criteria->merge($this->getCriteria());
 			foreach ($key as $field => $value) {
 				$criteria->register($field, $value);

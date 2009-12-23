@@ -8,7 +8,7 @@
  * QuickTime動画ファイル
  *
  * @author 小石達也 <tkoishi@b-shock.co.jp>
- * @version $Id: BSQuickTimeMovieFile.class.php 1704 2009-12-21 14:33:54Z pooza $
+ * @version $Id: BSQuickTimeMovieFile.class.php 1711 2009-12-23 10:05:53Z pooza $
  */
 class BSQuickTimeMovieFile extends BSMovieFile {
 
@@ -28,6 +28,16 @@ class BSQuickTimeMovieFile extends BSMovieFile {
 		$object->setAttribute('height', $params['height']);
 		$object->setURL($this->getMediaURL($params));
 		return $element;
+	}
+
+	/**
+	 * プレイヤーの高さを返す
+	 *
+	 * @access public
+	 * @return integer プレイヤーの高さ
+	 */
+	public function getPlayerHeight () {
+		return BS_MOVIE_QUICKTIME_PLAYER_HEIGHT;
 	}
 
 	/**

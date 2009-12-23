@@ -83,7 +83,7 @@ class Form extends BSRecord implements
 	 */
 	public function getFields () {
 		if (!$this->fields) {
-			$criteria = $this->getTable()->getDatabase()->createCriteriaSet();
+			$criteria = $this->createCriteriaSet();
 			$criteria->register('form_id', $this);
 			$criteria->register('status', 'show');
 			$this->fields = new FieldHandler($criteria, 'form_id,rank');
@@ -99,7 +99,7 @@ class Form extends BSRecord implements
 	 */
 	public function getRegistrations () {
 		if (!$this->registrations) {
-			$criteria = $this->getTable()->getDatabase()->createCriteriaSet();
+			$criteria = $this->createCriteriaSet();
 			$criteria->register('form_id', $this);
 			$this->registrations = new RegistrationHandler($criteria);
 		}
@@ -157,7 +157,7 @@ class Form extends BSRecord implements
 	 * @access public
 	 */
 	public function clearImportedAnswers () {
-		$db = $this->getTable()->getDatabase();
+		$db = $this->getDatabase();
 		$criteria = $db->createCriteriaSet();
 		$criteria->register('form_id', $this);
 		$criteria->register('imported', 1);

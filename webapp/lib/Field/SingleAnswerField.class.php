@@ -51,7 +51,7 @@ class SingleAnswerField extends ChoiceField {
 		if (!$this->statistics) {
 			$this->statistics = new BSArray;
 
-			$db = $this->getTable()->getDatabase();
+			$db = $this->getDatabase();
 			$criteria = $db->createCriteriaSet();
 			$criteria->register('field_id', $this);
 			$sql = BSSQL::getSelectQueryString(

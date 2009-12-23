@@ -22,7 +22,7 @@ class Registration extends BSRecord implements BSAttachmentContainer {
 	public function getAnswers () {
 		if (!$this->answers) {
 			$this->answers = new BSArray;
-			$db = $this->getTable()->getDatabase();
+			$db = $this->getDatabase();
 			$criteria = $db->createCriteriaSet();
 			$criteria->register('detail.registration_id', $this);
 			$criteria[] = 'detail.field_id=field.id';
@@ -71,7 +71,7 @@ class Registration extends BSRecord implements BSAttachmentContainer {
 			'answer' => $answer,
 		);
 		$sql = BSSQL::getInsertQueryString('registration_detail', $values);
-		$this->getTable()->getDatabase()->exec($sql);
+		$this->getDatabase()->exec($sql);
 	}
 
 	/**

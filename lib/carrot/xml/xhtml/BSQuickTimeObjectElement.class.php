@@ -8,7 +8,7 @@
  * QuickTime用object要素
  *
  * @author 小石達也 <tkoishi@b-shock.co.jp>
- * @version $Id: BSQuickTimeObjectElement.class.php 1707 2009-12-21 16:35:36Z pooza $
+ * @version $Id: BSQuickTimeObjectElement.class.php 1710 2009-12-23 09:48:24Z pooza $
  */
 class BSQuickTimeObjectElement extends BSObjectElement {
 
@@ -20,7 +20,7 @@ class BSQuickTimeObjectElement extends BSObjectElement {
 	public function __construct ($name = null, BSUserAgent $useragent = null) {
 		parent::__construct($name, $useragent);
 		$this->inner = $this->createElement('embed');
-		$this->setAttribute('classid', 'clsid:02BF25D5-8C17-4B23-BC80-D3488ABDDC6B');
+		$this->setAttribute('classid', 'clsid:' . BS_MOVIE_QUICKTIME_PLAYER_CLSID);
 		$this->setAttribute('type', BSMIMEType::getType('mov'));
 		$this->setParameter('controller', 'true');
 		$this->setParameter('autoplay', 'false');

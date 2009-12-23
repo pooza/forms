@@ -17,7 +17,7 @@ class ListAction extends BSTableAction {
 	 */
 	protected function getCriteria () {
 		if (!$this->criteria) {
-			$this->criteria = $this->getTable()->getDatabase()->createCriteriaSet();
+			$this->criteria = $this->createCriteriaSet();
 			$this->criteria->register('form_id', $this->getModule()->getForm());
 		}
 		return $this->criteria;

@@ -10,7 +10,7 @@
  * @version $Id$
  */
 class Field extends BSSortableRecord implements BSValidatorContainer {
-	private $alikeRecords;
+	private $similars;
 
 	/**
 	 * 更新
@@ -63,13 +63,13 @@ class Field extends BSSortableRecord implements BSValidatorContainer {
 	 * @access public
 	 * @return SortableTableHandler テーブル
 	 */
-	public function getAlikeRecords () {
-		if (!$this->alikeRecords) {
-			$criteria = $this->getTable()->getDatabase()->createCriteriaSet();
+	public function getSimilars () {
+		if (!$this->similars) {
+			$criteria = $this->createCriteriaSet();
 			$criteria->register('form_id', $this['form_id']);
-			$this->alikeRecords = new FieldHandler($criteria);
+			$this->similars = new FieldHandler($criteria);
 		}
-		return $this->alikeRecords;
+		return $this->similars;
 	}
 
 	/**

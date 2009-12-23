@@ -8,7 +8,7 @@
  * SQLiteデータベース
  *
  * @author 小石達也 <tkoishi@b-shock.co.jp>
- * @version $Id: BSSQLiteDatabase.class.php 1600 2009-10-30 14:48:55Z pooza $
+ * @version $Id: BSSQLiteDatabase.class.php 1709 2009-12-23 09:46:15Z pooza $
  */
 class BSSQLiteDatabase extends BSDatabase {
 
@@ -135,7 +135,7 @@ class BSSQLiteDatabase extends BSDatabase {
 	 * @return float バージョン
 	 */
 	protected function getVersion () {
-		if (version_compare(PHP_VERSION, '5.3', '>=')) {
+		if (version_compare(PHP_VERSION, '5.3', '>=') && extension_loaded('sqlite3')) {
 			$ver = SQLite3::version();
 			return $ver['versionString'];
 		} else {

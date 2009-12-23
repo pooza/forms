@@ -8,7 +8,7 @@
  * ソート可能なテーブル
  *
  * @author 小石達也 <tkoishi@b-shock.co.jp>
- * @version $Id: BSSortableTableHandler.class.php 1691 2009-12-18 11:57:52Z pooza $
+ * @version $Id: BSSortableTableHandler.class.php 1709 2009-12-23 09:46:15Z pooza $
  * @abstract
  */
 abstract class BSSortableTableHandler extends BSTableHandler {
@@ -94,7 +94,7 @@ abstract class BSSortableTableHandler extends BSTableHandler {
 			array($this->getRankField() => 0),
 			$criteria
 		);
-		BSDatabase::getInstance()->exec($sql);
+		$this->getDatabase()->exec($sql);
 	}
 }
 

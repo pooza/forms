@@ -31,7 +31,7 @@ class RegistrationDumpHandler extends RegistrationHandler implements BSExportabl
 
 		parent::__construct(null, $order);
 
-		$criteria = $this->getDatabase()->createCriteriaSet();
+		$criteria = $this->createCriteriaSet();
 		$criteria->register('form_id', $this->form);
 		$sql = 'CREATE TEMPORARY TABLE ' . $this->getName() . ' ';
 		$sql .= BSSQL::getSelectQueryString('*', 'registration', $criteria, $this->getOrder());
