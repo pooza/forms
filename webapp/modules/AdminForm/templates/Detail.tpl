@@ -49,7 +49,12 @@
 			</tr>
 			<tr>
 				<th>応募画面URL</th>
-				<td>{$form.url|url2link}</td>
+				<td>
+					{$form.url|url2link}
+	{if $form.has_mobile_form_template}
+					<div>{$form.url|qrcode}</div>
+	{/if}
+				</td>
 			</tr>
 			<tr>
 				<th>名前</th>
