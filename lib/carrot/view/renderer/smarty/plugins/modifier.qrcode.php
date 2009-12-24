@@ -8,7 +8,7 @@
  * qrcode修飾子
  *
  * @author 小石達也 <tkoishi@b-shock.co.jp>
- * @version $Id: modifier.truncate.php 1102 2009-04-26 07:06:58Z pooza $
+ * @version $Id: modifier.qrcode.php 1714 2009-12-24 08:15:51Z pooza $
  */
 function smarty_modifier_qrcode ($value) {
 	$url = BSURL::getInstance(null, 'BSCarrotURL');

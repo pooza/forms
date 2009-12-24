@@ -37,11 +37,11 @@ class ListAction extends BSPaginateTableAction {
 	 */
 	protected function getCriteria () {
 		if (!$this->criteria) {
-			$this->criteria = $this->database->createCriteriaSet();
+			$this->criteria = $this->createCriteriaSet();
 			$this->criteria->register('form_id', $this->getModule()->getForm());
 
 			if (!BSString::isBlank($key = $this->request['key'])) {
-				$this->criteria['key'] = $this->database->createCriteriaSet();
+				$this->criteria['key'] = $this->createCriteriaSet();
 				$this->criteria['key']->setGlue('OR');
 				foreach ($this->getModule()->getForm()->getFields() as $field) {
 					$name = new BSStringFormat('a%02d');

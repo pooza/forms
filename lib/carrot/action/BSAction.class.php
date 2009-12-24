@@ -8,7 +8,7 @@
  * アクション
  *
  * @author 小石達也 <tkoishi@b-shock.co.jp>
- * @version $Id: BSAction.class.php 1652 2009-12-04 06:49:14Z pooza $
+ * @version $Id: BSAction.class.php 1712 2009-12-24 08:13:40Z pooza $
  * @abstract
  */
 abstract class BSAction implements BSHTTPRedirector, BSAssignable, BSValidatorContainer {
@@ -291,6 +291,16 @@ abstract class BSAction implements BSHTTPRedirector, BSAssignable, BSValidatorCo
 	 */
 	public function getTable () {
 		return $this->getModule()->getTable();
+	}
+
+	/**
+	 * 抽出条件を生成して返す
+	 *
+	 * @access protected
+	 * @return BSCriteriaSet 抽出条件
+	 */
+	protected function createCriteriaSet () {
+		return $this->database->createCriteriaSet();
 	}
 
 	/**
