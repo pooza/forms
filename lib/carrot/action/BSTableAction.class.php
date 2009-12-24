@@ -127,6 +127,16 @@ abstract class BSTableAction extends BSAction {
 	}
 
 	/**
+	 * 抽出条件を生成して返す
+	 *
+	 * @access protected
+	 * @return BSCriteriaSet 抽出条件
+	 */
+	protected function createCriteriaSet () {
+		return $this->database->createCriteriaSet();
+	}
+
+	/**
 	 * リストを表示するか
 	 *
 	 * @access protected
