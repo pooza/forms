@@ -5,5 +5,5 @@
 # @version $Id$
 
 SET NAMES 'utf8';
-INSERT INTO field_type VALUES ('file','ファイル'),('image','画像');
+INSERT INTO field_type VALUES ('file','ファイル'),('image','画像'),('date','日付');
 ALTER TABLE `field` ADD `has_confirm_field` tinyint(3) UNSIGNED NOT NULL DEFAULT '0'  AFTER `required`;

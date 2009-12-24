@@ -1,8 +1,8 @@
--- MySQL dump 10.13  Distrib 5.1.40, for apple-darwin10.0.0 (i386)
+-- MySQL dump 10.13  Distrib 5.4.3-beta, for apple-darwin10.2.0 (i386)
 --
 -- Host: localhost    Database: forms
 -- ------------------------------------------------------
--- Server version	5.1.40
+-- Server version	5.4.3-beta
 
 /*!40101 SET @OLD_CHARACTER_SET_CLIENT=@@CHARACTER_SET_CLIENT */;
 /*!40101 SET @OLD_CHARACTER_SET_RESULTS=@@CHARACTER_SET_RESULTS */;
@@ -70,7 +70,7 @@ CREATE TABLE `field_type` (
 
 LOCK TABLES `field_type` WRITE;
 /*!40000 ALTER TABLE `field_type` DISABLE KEYS */;
-INSERT INTO `field_type` VALUES ('agreement','同意'),('email','メールアドレス'),('english','英数字'),('file','ファイル'),('image','画像'),('multi_answer','複数回答'),('number','数値'),('phone','電話番号'),('pref','都道府県'),('reading','フリガナ'),('single_answer','単一回答'),('text','テキスト'),('zipcode','郵便番号');
+INSERT INTO `field_type` VALUES ('agreement','同意'),('date','日付'),('email','メールアドレス'),('english','英数字'),('file','ファイル'),('image','画像'),('multi_answer','複数回答'),('number','数値'),('phone','電話番号'),('pref','都道府県'),('reading','フリガナ'),('single_answer','単一回答'),('text','テキスト'),('zipcode','郵便番号');
 /*!40000 ALTER TABLE `field_type` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -189,4 +189,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2009-12-16 17:32:58
+-- Dump completed on 2009-12-24 12:10:51
