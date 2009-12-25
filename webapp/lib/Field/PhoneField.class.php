@@ -18,7 +18,10 @@ class PhoneField extends Field {
 	 */
 	public function registerValidators () {
 		parent::registerValidators();
-		BSValidateManager::getInstance()->register($this->getName(), new BSPhoneNumberValidator);
+		BSValidateManager::getInstance()->register(
+			$this->getName(),
+			new BSPhoneNumberValidator(array('loose' => true))
+		);
 	}
 }
 

@@ -5,14 +5,12 @@
  */
 
 /**
- * 絵文字リクエストフィルタ
- *
- * 絵文字を取り除く。
+ * 郵便番号 リクエストフィルタ
  *
  * @author 小石達也 <tkoishi@b-shock.co.jp>
- * @version $Id: BSPictogramRequestFilter.class.php 1669 2009-12-10 12:49:17Z pooza $
+ * @version $Id: BSReadingRequestFilter.class.php 1469 2009-09-11 12:40:31Z pooza $
  */
-class BSPictogramRequestFilter extends BSRequestFilter {
+class BSZipcodeRequestFilter extends BSRequestFilter {
 
 	/**
 	 * 変換して返す
@@ -23,9 +21,9 @@ class BSPictogramRequestFilter extends BSRequestFilter {
 	 * @return mixed 変換後
 	 */
 	protected function convert ($key, $value) {
-		$useragent = $this->request->getUserAgent();
-		if (!BSArray::isArray($value) && $useragent->isMobile()) {
-			$value = $useragent->getCarrier()->trimPictogram($value);
+		if (!BSArray::isArray($value) && mb_ereg('zipcode$', $key)) {
+			$value = mb_ereg_replace('[^[:digit:]]', null, $value);
+			$value = substr($value, 0, 3) . '-' . substr($value, 3, 4);
 		}
 		return $value;
 	}

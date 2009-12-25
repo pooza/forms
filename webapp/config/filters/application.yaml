@@ -14,3 +14,4 @@
     option: KVa
 - class: BSReadingRequestFilter
 - class: BSDateRequestFilter
+- class: BSZipcodeRequestFilter
