@@ -2,7 +2,7 @@
 #
 # @package org.carrot-framework
 # @author 小石達也 <tkoishi@b-shock.co.jp>
-# @version $Id: date.yaml 775 2009-01-11 03:51:40Z pooza $
+# @version $Id: date.yaml 1718 2009-12-25 09:15:55Z pooza $
 
 gengo:
   - name: 平成
@@ -17,4 +17,4 @@ gengo:
 
 holiday:
   ja:
-    class: BSJapaneseHolidayList
+    class: BSJapaneseHolidayListService

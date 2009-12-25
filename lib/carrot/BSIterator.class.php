@@ -7,9 +7,9 @@
  * 基底イテレータ
  *
  * @author 小石達也 <tkoishi@b-shock.co.jp>
- * @version $Id: BSIterator.class.php 1680 2009-12-13 04:19:39Z pooza $
+ * @version $Id: BSIterator.class.php 1717 2009-12-25 08:58:02Z pooza $
  */
-class BSIterator implements Iterator {
+class BSIterator implements Iterator, Countable {
 	protected $keys = array();
 	protected $values = array();
 	protected $cursor;
@@ -151,6 +151,16 @@ class BSIterator implements Iterator {
 	 */
 	public function valid () {
 		return isset($this->keys[$this->cursor]);
+	}
+
+	/**
+	 * 要素数を返す
+	 *
+	 * @access public
+	 * @return integer 要素数
+	 */
+	public function count () {
+		return count($this->keys);
 	}
 }
 

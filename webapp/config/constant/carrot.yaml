@@ -2,11 +2,11 @@
 #
 # @package org.carrot-framework
 # @author 小石達也 <tkoishi@b-shock.co.jp>
-# @version $Id: carrot.yaml 1714 2009-12-24 08:15:51Z pooza $
+# @version $Id: carrot.yaml 1721 2009-12-25 10:13:46Z pooza $
 
 carrot:
   name: carrot Framework
-  ver: 2.3.26
+  ver: 2.3.27
   bts:
     url: http://redmine.carrot-framework.org/projects/show/carrot
 
@@ -118,6 +118,8 @@ mysql:
   dir: /usr/local
 net:
   resolvable: yes
+  url:
+    shorter: bitly
 package:
   name:
   ver:
@@ -146,6 +148,11 @@ serialize:
   serializer: JSON
   keep:
     - BSCounter.*
+service:
+  bitly:
+    version: 2.0.1
+    login: carrotfw
+    api_key: R_dbbb70d7b5959e23289acfc3458f836f
 session:
   storage: default
   regenerate_id: no

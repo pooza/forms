@@ -8,12 +8,12 @@
  * HTTPスキーマのURL
  *
  * @author 小石達也 <tkoishi@b-shock.co.jp>
- * @version $Id: BSHTTPURL.class.php 1640 2009-11-27 12:43:39Z pooza $
+ * @version $Id: BSHTTPURL.class.php 1720 2009-12-25 09:28:54Z pooza $
  */
 class BSHTTPURL extends BSURL implements BSHTTPRedirector, BSImageContainer {
 	private $fullpath;
 	private $query;
-	private $tinyurl;
+	private $shortURL;
 	private $dirty = false;
 
 	/**
@@ -294,17 +294,33 @@ class BSHTTPURL extends BSURL implements BSHTTPRedirector, BSImageContainer {
 	}
 
 	/**
-	 * TinyURLを返す
+	 * 短縮URLを返す
 	 *
 	 * @access public
-	 * @return BSURL TinyURL
+	 * @return BSURL 短縮URL
 	 */
-	public function getTinyURL () {
-		if (!$this->tinyurl) {
-			$service = new BSTinyURL; 
-			$this->tinyurl = $service->encode($this);
+	public function getShortURL () {
+		if (!$this->shortURL) {
+			$service = BSClassLoader::getInstance()->getObject(BS_NET_URL_SHORTER, 'Service');
+			if (!$service || !($service instanceof BSURLShorter)) {
+				throw new BSHTTPException('URL短縮サービスが取得できません。');
+			}
+			$this->shortURL = $service->getShortURL($this);
 		}
-		return $this->tinyurl;
+		return $this->shortURL;
+	}
+
+	/**
+	 * 短縮URLを返す
+	 *
+	 * getShortURLのエイリアス
+	 *
+	 * @access public
+	 * @return BSURL 短縮URL
+	 * @final
+	 */
+	final public function getTinyURL () {
+		return $this->getShortURL();
 	}
 
 	/**

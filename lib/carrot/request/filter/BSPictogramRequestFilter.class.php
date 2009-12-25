@@ -10,7 +10,7 @@
  * 絵文字を取り除く。
  *
  * @author 小石達也 <tkoishi@b-shock.co.jp>
- * @version $Id: BSPictogramRequestFilter.class.php 1669 2009-12-10 12:49:17Z pooza $
+ * @version $Id: BSPictogramRequestFilter.class.php 1716 2009-12-25 08:55:41Z pooza $
  */
 class BSPictogramRequestFilter extends BSRequestFilter {
 

@@ -1,16 +1,16 @@
 <?php
 /**
  * @package org.carrot-framework
- * @subpackage service
+ * @subpackage service.blog
  */
 
 /**
  * MovableTypeクライアント
  *
  * @author 小石達也 <tkoishi@b-shock.co.jp>
- * @version $Id: BSMovableTypeBlog.class.php 1599 2009-10-30 14:20:35Z pooza $
+ * @version $Id: BSMovableTypeBlogService.class.php 1718 2009-12-25 09:15:55Z pooza $
  */
-class BSMovableTypeBlog {
+class BSMovableTypeBlogService {
 	private $urls;
 
 	private function getURL ($type = 'comment') {

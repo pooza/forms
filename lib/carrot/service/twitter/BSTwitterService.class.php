@@ -8,9 +8,9 @@
  * Twitterクライアント
  *
  * @author 小石達也 <tkoishi@b-shock.co.jp>
- * @version $Id: BSTwitter.class.php 1412 2009-08-31 18:07:23Z pooza $
+ * @version $Id: BSTwitterService.class.php 1718 2009-12-25 09:15:55Z pooza $
  */
-class BSTwitter extends BSCurlHTTP {
+class BSTwitterService extends BSCurlHTTP {
 	private $uid;
 	private $password;
 	const DEFAULT_HOST = 'twitter.com';
