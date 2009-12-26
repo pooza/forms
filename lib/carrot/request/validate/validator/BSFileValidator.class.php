@@ -8,7 +8,7 @@
  * ファイルバリデータ
  *
  * @author 小石達也 <tkoishi@b-shock.co.jp>
- * @version $Id: BSFileValidator.class.php 1339 2009-07-21 01:01:48Z pooza $
+ * @version $Id: BSFileValidator.class.php 1722 2009-12-26 04:15:51Z pooza $
  */
 class BSFileValidator extends BSValidator {
 	const ATTACHABLE = 'ATTACHABLE';
@@ -23,7 +23,7 @@ class BSFileValidator extends BSValidator {
 		if (BSArray::isArray($this['suffixes'])) {
 			$suffixes = new BSArray($this['suffixes']);
 		} else if (BSString::toUpper($this['suffixes']) == self::ATTACHABLE) {
-			$suffixes = BSMIMEType::getAttachableTypes()->getKeys(BSArray::WITHOUT_KEY);
+			$suffixes = BSMIMEType::getAttachableTypes()->getKeys();
 		} else {
 			$suffixes = BSString::explode(',', $this['suffixes']);
 		}

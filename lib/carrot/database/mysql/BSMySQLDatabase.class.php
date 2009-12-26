@@ -8,7 +8,7 @@
  * MySQLデータベース
  *
  * @author 小石達也 <tkoishi@b-shock.co.jp>
- * @version $Id: BSMySQLDatabase.class.php 1600 2009-10-30 14:48:55Z pooza $
+ * @version $Id: BSMySQLDatabase.class.php 1722 2009-12-26 04:15:51Z pooza $
  */
 class BSMySQLDatabase extends BSDatabase {
 	static private $configFile;
@@ -255,7 +255,7 @@ class BSMySQLDatabase extends BSDatabase {
 	 * @return string MySQLのエンコード名
 	 */
 	private function getEncodingName () {
-		$names = self::getEncodings()->getKeys();
+		$names = self::getEncodings()->getFlipped();
 		return $names[$this['encoding']];
 	}
 

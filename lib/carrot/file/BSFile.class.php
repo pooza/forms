@@ -10,7 +10,7 @@ ini_set('auto_detect_line_endings', true);
  * ファイル
  *
  * @author 小石達也 <tkoishi@b-shock.co.jp>
- * @version $Id: BSFile.class.php 1704 2009-12-21 14:33:54Z pooza $
+ * @version $Id: BSFile.class.php 1722 2009-12-26 04:15:51Z pooza $
  */
 class BSFile extends BSDirectoryEntry implements BSRenderer {
 	private $mode;
@@ -56,7 +56,7 @@ class BSFile extends BSDirectoryEntry implements BSRenderer {
 	 */
 	public function getDefaultSuffix () {
 		$types = new BSArray(BSMIMEType::getInstance()->getParameters());
-		$suffixes = $types->getKeys();
+		$suffixes = $types->getFlipped();
 		return '.' . $suffixes[$this->getType()];
 	}
 

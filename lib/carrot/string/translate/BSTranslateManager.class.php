@@ -8,7 +8,7 @@
  * 単語翻訳機能
  *
  * @author 小石達也 <tkoishi@b-shock.co.jp>
- * @version $Id: BSTranslateManager.class.php 1600 2009-10-30 14:48:55Z pooza $
+ * @version $Id: BSTranslateManager.class.php 1722 2009-12-26 04:15:51Z pooza $
  */
 class BSTranslateManager implements IteratorAggregate {
 	private $language = 'ja';
@@ -141,7 +141,7 @@ class BSTranslateManager implements IteratorAggregate {
 		$names = new BSArray;
 		$names[] = $name;
 		$names[] = 'BSDictionaryFile.' . $name;
-		$names->merge($this->dictionaries->getKeys(BSArray::WITHOUT_KEY));
+		$names->merge($this->dictionaries->getKeys());
 		$names->uniquize();
 		return $names;
 	}
@@ -220,7 +220,7 @@ class BSTranslateManager implements IteratorAggregate {
 	 * @static
 	 */
 	static public function getLanguageNames () {
-		return self::getLanguages()->getKeys();
+		return self::getLanguages()->getFlipped();
 	}
 
 	/**

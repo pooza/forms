@@ -8,7 +8,7 @@
  * 選択バリデータ
  *
  * @author 小石達也 <tkoishi@b-shock.co.jp>
- * @version $Id: BSChoiceValidator.class.php 1608 2009-11-09 03:11:27Z pooza $
+ * @version $Id: BSChoiceValidator.class.php 1722 2009-12-26 04:15:51Z pooza $
  */
 class BSChoiceValidator extends BSValidator {
 
@@ -61,7 +61,7 @@ class BSChoiceValidator extends BSValidator {
 				$class = $classes->getClassName($this['class']);
 			}
 			$choices->setParameters(call_user_func(array($class, $this['function'])));
-			$choices = $choices->getKeys(BSArray::WITHOUT_KEY);
+			$choices = $choices->getKeys();
 		}
 		return $choices;
 	}

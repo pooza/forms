@@ -10,7 +10,7 @@
  * BSJavaScriptSet/BSStyleSetの基底クラス
  *
  * @author 小石達也 <tkoishi@b-shock.co.jp>
- * @version $Id: BSDocumentSet.class.php 1616 2009-11-17 08:24:37Z pooza $
+ * @version $Id: BSDocumentSet.class.php 1722 2009-12-26 04:15:51Z pooza $
  * @abstract
  */
 abstract class BSDocumentSet implements BSTextRenderer, IteratorAggregate {
@@ -257,7 +257,7 @@ abstract class BSDocumentSet implements BSTextRenderer, IteratorAggregate {
 	 * @return BSArray 登録名
 	 */
 	public function getEntryNames ($prefix = null) {
-		return $this->getEntries($prefix)->getKeys(BSArray::WITHOUT_KEY);
+		return $this->getEntries($prefix)->getKeys();
 	}
 
 	/**

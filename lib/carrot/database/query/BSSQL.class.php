@@ -8,7 +8,7 @@
  * SQL生成に関するユーティリティ
  *
  * @author 小石達也 <tkoishi@b-shock.co.jp>
- * @version $Id: BSSQL.class.php 1695 2009-12-18 12:32:54Z pooza $
+ * @version $Id: BSSQL.class.php 1727 2009-12-26 14:43:20Z pooza $
  */
 class BSSQL {
 
@@ -52,26 +52,15 @@ class BSSQL {
 	 * @static
 	 */
 	static public function getSelectQueryString ($fields, $tables, $criteria = null, $order = null, $group = null, $page = null, $pagesize = null) {
-		$query = array(
-			'SELECT',
-			self::getFieldsString($fields),
-			'FROM ' . self::getFromString($tables),
-		);
-
-		if ($criteria) {
-			$query[] = 'WHERE ' . self::getCriteriaString($criteria);
-		}
-		if ($group) {
-			$query[] = 'GROUP BY ' . self::getGroupString($group);
-		}
-		if ($order) {
-			$query[] = 'ORDER BY ' . self::getOrderString($order);
-		}
-		if ($page && $pagesize) {
-			$query[] = self::getOffsetString($page, $pagesize);
-		}
-
-		return implode(' ', $query);
+		$query = new BSArray;
+		$query[] = 'SELECT';
+		$query[] = self::getFieldsString($fields);
+		$query[] = self::getFromString($tables);
+		$query[] = self::getCriteriaString($criteria);
+		$query[] = self::getGroupString($group);
+		$query[] = self::getOrderString($order);
+		$query[] = self::getOffsetString($page, $pagesize);
+		return $query->trim()->join(' ');
 	}
 
 	/**
@@ -102,7 +91,7 @@ class BSSQL {
 		return sprintf(
 			'INSERT INTO %s (%s) VALUES (%s)',
 			$table,
-			$values->getKeys(BSArray::WITHOUT_KEY)->join(', '),
+			$values->getKeys()->join(', '),
 			$quoted->join(', ')
 		);
 	}
@@ -119,9 +108,13 @@ class BSSQL {
 	 * @static
 	 */
 	static public function getUpdateQueryString ($table, $values, $criteria, BSDatabase $db = null) {
+		if (BSString::isBlank($criteria = self::getCriteriaString($criteria))) {
+			throw new BSDatabaseException('抽出条件がありません。');
+		}
 		if (!$db) {
 			$db = BSDatabase::getInstance();
 		}
+
 		if (is_array($values)) {
 			$values = new BSArray($values);
 		} else if ($values instanceof BSParameterHolder) {
@@ -133,12 +126,7 @@ class BSSQL {
 			$fields[] = sprintf('%s=%s', $key, $db->quote($value));
 		}
 
-		return sprintf(
-			'UPDATE %s SET %s WHERE %s',
-			$table,
-			$fields->join(', '),
-			self::getCriteriaString($criteria)
-		);
+		return sprintf('UPDATE %s SET %s %s', $table, $fields->join(', '), $criteria);
 	}
 
 	/**
@@ -151,7 +139,10 @@ class BSSQL {
 	 * @static
 	 */
 	static public function getDeleteQueryString ($table, $criteria) {
-		return sprintf('DELETE FROM %s WHERE %s', $table, self::getCriteriaString($criteria));
+		if (BSString::isBlank($criteria = self::getCriteriaString($criteria))) {
+			throw new BSDatabaseException('抽出条件がありません。');
+		}
+		return sprintf('DELETE FROM %s %s', $table, $criteria);
 	}
 
 	/**
@@ -188,104 +179,100 @@ class BSSQL {
 	/**
 	 * フィールドリスト文字列を返す
 	 *
-	 * @access public
+	 * @access private
 	 * @param string[] $fields フィールドリストの配列
 	 * @return string フィールドリスト文字列
 	 * @static
 	 */
-	static public function getFieldsString ($fields = null) {
-		if (!$fields) {
-			return '*';
-		} if (!is_array($fields)) {
-			return $fields;
+	static private function getFieldsString ($fields = null) {
+		if (!($fields instanceof BSTableFieldSet)) {
+			$fields = new BSTableFieldSet($fields);
 		}
-
-		return implode(', ', $fields);
+		if (!$fields->count()) {
+			$fields[] = '*';
+		}
+		return $fields->getContents();
 	}
 
 	/**
 	 * テーブル文字列を返す
 	 *
-	 * @access public
+	 * @access private
 	 * @param string[] $tables テーブルの配列
 	 * @return string テーブル文字列
 	 * @static
 	 */
-	static public function getFromString ($tables) {
-		if (!is_array($tables)) {
-			return $tables;
+	static private function getFromString ($tables) {
+		if (!($tables instanceof BSTableFieldSet)) {
+			$tables = new BSTableFieldSet($tables);
 		}
-
-		return implode(', ', $tables);
+		return 'FROM ' . $tables->getContents();
 	}
 
 	/**
 	 * 抽出条件文字列を返す
 	 *
-	 * @access public
+	 * @access private
 	 * @param mixed $criteria 抽出条件の配列
-	 * @param string $glue 結合子
 	 * @return string 抽出条件文字列
 	 * @static
 	 */
-	static public function getCriteriaString ($criteria, $glue = ' AND ') {
-		if ($criteria instanceof BSCriteriaSet) {
-			return $criteria->getContents();
-		} else if (!is_array($criteria)) {
-			return $criteria;
+	static private function getCriteriaString ($criteria) {
+		if (!($criteria instanceof BSCriteriaSet)) {
+			$criteria = new BSCriteriaSet($criteria);
 		}
-		$criteriaFormed = array();
-		foreach ($criteria as $item) {
-			$criteriaFormed[] = sprintf('(%s)', $item);
+		if ($criteria->count()) {
+			return 'WHERE ' . $criteria->getContents();
 		}
-		return implode($glue, $criteriaFormed);
 	}
 
 	/**
 	 * ソート順文字列を返す
 	 *
-	 * @access public
+	 * @access private
 	 * @param string[] $order ソート順の配列
 	 * @return string ソート順文字列
 	 * @static
 	 */
-	static public function getOrderString ($order) {
-		if (!is_array($order)) {
-			return $order;
+	static private function getOrderString ($order) {
+		if (!($order instanceof BSTableFieldSet)) {
+			$order = new BSTableFieldSet($order);
 		}
-		return implode(', ', $order);
+		if ($order->count()) {
+			return 'ORDER BY ' . $order->getContents();
+		}
 	}
 
 	/**
 	 * グループ化文字列を返す
 	 *
-	 * @access public
+	 * @access private
 	 * @param string[] $order グループ化の配列
 	 * @return string グループ化文字列
 	 * @static
 	 */
-	static public function getGroupString ($group) {
-		if (!is_array($group)) {
-			return $group;
+	static private function getGroupString ($group) {
+		if (!($group instanceof BSTableFieldSet)) {
+			$group = new BSTableFieldSet($group);
 		}
-		return implode(', ', $group);
+		if ($group->count()) {
+			return $group->getContents();
+		}
 	}
 
 	/**
 	 * オフセット文字列を返す
 	 *
-	 * @access public
+	 * @access private
 	 * @param integer $page ページ番号
 	 * @param integer $pagesize ページサイズ
 	 * @return string オフセット文字列
 	 * @static
 	 */
-	static public function getOffsetString ($page, $pagesize) {
-		return sprintf(
-			'LIMIT %d OFFSET %d',
-			$pagesize,
-			($page - 1) * $pagesize
-		);
+	static private function getOffsetString ($page, $pagesize) {
+		if ($page && $pagesize) {
+			return sprintf('LIMIT %d OFFSET %d', $pagesize, ($page - 1) * $pagesize);
+		}
 	}
 }
 

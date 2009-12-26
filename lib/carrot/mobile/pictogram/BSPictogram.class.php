@@ -8,7 +8,7 @@
  * 絵文字
  *
  * @author 小石達也 <tkoishi@b-shock.co.jp>
- * @version $Id: BSPictogram.class.php 1602 2009-10-31 05:56:40Z pooza $
+ * @version $Id: BSPictogram.class.php 1722 2009-12-26 04:15:51Z pooza $
  */
 class BSPictogram implements BSAssignable, BSImageContainer {
 	private $id;
@@ -289,7 +289,7 @@ class BSPictogram implements BSAssignable, BSImageContainer {
 	static public function getPictogramNames () {
 		$config = BSConfigManager::getInstance()->compile('pictogram');
 		$codes = new BSArray($config['codes']);
-		return $codes->getKeys(BSArray::WITHOUT_KEY);
+		return $codes->getKeys();
 	}
 }
 

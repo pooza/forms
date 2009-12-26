@@ -8,11 +8,11 @@
  * データベーステーブル
  *
  * @author 小石達也 <tkoishi@b-shock.co.jp>
- * @version $Id: BSTableHandler.class.php 1709 2009-12-23 09:46:15Z pooza $
+ * @version $Id: BSTableHandler.class.php 1724 2009-12-26 05:29:02Z pooza $
  * @abstract
  */
 abstract class BSTableHandler implements IteratorAggregate, BSDictionary, BSAssignable {
-	private $fields = '*';
+	private $fields;
 	private $criteria;
 	private $order;
 	private $page;
@@ -35,6 +35,7 @@ abstract class BSTableHandler implements IteratorAggregate, BSDictionary, BSAssi
 	public function __construct ($criteria = null, $order = null) {
 		$this->setCriteria($criteria);
 		$this->setOrder($order);
+		$this->setFields('*');
 
 		if (!$this->isExists() && $this->getSchema()) {
 			$this->create();
@@ -45,7 +46,7 @@ abstract class BSTableHandler implements IteratorAggregate, BSDictionary, BSAssi
 	 * 出力フィールド文字列を返す
 	 *
 	 * @access public
-	 * @return string 出力フィールド文字列
+	 * @return BSTableFieldSet 出力フィールド
 	 */
 	public function getFields () {
 		return $this->fields;
@@ -58,10 +59,11 @@ abstract class BSTableHandler implements IteratorAggregate, BSDictionary, BSAssi
 	 * @param mixed $fields 配列または文字列による出力フィールド
 	 */
 	public function setFields ($fields) {
-		if ($fields) {
-			$this->fields = BSSQL::getFieldsString($fields);
-			$this->setExecuted(false);
+		if (!($fields instanceof BSTableFieldSet)) {
+			$fields = new BSTableFieldSet($fields);
 		}
+		$this->fields = $fields;
+		$this->setExecuted(false);
 	}
 
 	/**
@@ -105,10 +107,10 @@ abstract class BSTableHandler implements IteratorAggregate, BSDictionary, BSAssi
 	}
 
 	/**
-	 * 抽出条件文字列を返す
+	 * 抽出条件を返す
 	 *
 	 * @access public
-	 * @return string 抽出条件文字列
+	 * @return BSCriteriaSet 抽出条件
 	 */
 	public function getCriteria () {
 		return $this->criteria;
@@ -121,20 +123,21 @@ abstract class BSTableHandler implements IteratorAggregate, BSDictionary, BSAssi
 	 * @param mixed $criteria 配列または文字列による抽出条件
 	 */
 	public function setCriteria ($criteria) {
-		if (!$criteria) {
-			return;
+		if (!($criteria instanceof BSCriteriaSet)) {
+			$criteria = new BSCriteriaSet($criteria);
+			$criteria->setDatabase($this->getDatabase());
 		}
-		$this->criteria = BSSQL::getCriteriaString($criteria);
+		$this->criteria = $criteria;
 		$this->setExecuted(false);
 	}
 
 	/**
-	 * 抽出条件文字列を返す
+	 * 抽出条件を返す
 	 *
 	 * getCriteriaのエイリアス
 	 *
 	 * @access public
-	 * @return string 抽出条件文字列
+	 * @return BSCriteriaSet 抽出条件
 	 * final
 	 */
 	final public function getWhere () {
@@ -158,12 +161,9 @@ abstract class BSTableHandler implements IteratorAggregate, BSDictionary, BSAssi
 	 * ソート順文字列を返す
 	 *
 	 * @access public
-	 * @return string ソート順文字列
+	 * @return BSFieldSet ソート順文字列
 	 */
 	public function getOrder () {
-		if (!$this->order) {
-			$this->setOrder($this->getKeyField());
-		}
 		return $this->order;
 	}
 
@@ -174,10 +174,13 @@ abstract class BSTableHandler implements IteratorAggregate, BSDictionary, BSAssi
 	 * @param mixed $order 配列または文字列によるソート順
 	 */
 	public function setOrder ($order) {
-		if (!$order) {
-			return;
+		if (!($order instanceof BSTableFieldSet)) {
+			$order = new BSTableFieldSet($order);
 		}
-		$this->order = BSSQL::getOrderString($order);
+		if (!$order->count()) {
+			$order[] = $this->getKeyField();
+		}
+		$this->order = $order;
 		$this->setExecuted(false);
 	}
 

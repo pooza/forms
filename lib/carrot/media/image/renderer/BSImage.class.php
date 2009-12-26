@@ -8,7 +8,7 @@
  * GD画像レンダラー
  *
  * @author 小石達也 <tkoishi@b-shock.co.jp>
- * @version $Id: BSImage.class.php 1568 2009-10-19 10:56:07Z pooza $
+ * @version $Id: BSImage.class.php 1722 2009-12-26 04:15:51Z pooza $
  */
 class BSImage implements BSImageRenderer {
 	private $type;
@@ -452,7 +452,7 @@ class BSImage implements BSImageRenderer {
 	 * @return BSArray 拡張子
 	 */
 	static public function getSuffixes () {
-		return self::getTypes()->getKeys();
+		return self::getTypes()->getFlipped();
 	}
 
 	/**

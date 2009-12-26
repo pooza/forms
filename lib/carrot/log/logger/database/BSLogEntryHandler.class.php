@@ -8,7 +8,7 @@
  * ログテーブル
  *
  * @author 小石達也 <tkoishi@b-shock.co.jp>
- * @version $Id: BSLogEntryHandler.class.php 1691 2009-12-18 11:57:52Z pooza $
+ * @version $Id: BSLogEntryHandler.class.php 1723 2009-12-26 04:46:32Z pooza $
  */
 class BSLogEntryHandler extends BSTableHandler {
 
@@ -63,7 +63,8 @@ class BSLogEntryHandler extends BSTableHandler {
 	 */
 	public function getEntries (BSDate $date) {
 		$table = clone $this;
-		$criteria = sprintf(
+		$criteria = $this->createCriteriaSet();
+		$criteria[] = sprintf(
 			'strftime(%s,date)=%s',
 			$this->getDatabase()->quote('%Y-%m-%d'),
 			$this->getDatabase()->quote($date->format('Y-m-d'))

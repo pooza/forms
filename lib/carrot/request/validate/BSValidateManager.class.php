@@ -8,7 +8,7 @@
  * バリデートマネージャ
  *
  * @author 小石達也 <tkoishi@b-shock.co.jp>
- * @version $Id: BSValidateManager.class.php 1532 2009-10-02 16:28:09Z pooza $
+ * @version $Id: BSValidateManager.class.php 1722 2009-12-26 04:15:51Z pooza $
  */
 class BSValidateManager implements IteratorAggregate {
 	private $fields;
@@ -99,7 +99,7 @@ class BSValidateManager implements IteratorAggregate {
 	 * @return BSArray フィールド名
 	 */
 	public function getFieldNames () {
-		return $this->fields->getKeys(BSArray::WITHOUT_KEY);
+		return $this->fields->getKeys();
 	}
 
 	/**

@@ -7,7 +7,7 @@
  * 配列
  *
  * @author 小石達也 <tkoishi@b-shock.co.jp>
- * @version $Id: BSArray.class.php 1651 2009-12-04 05:42:16Z pooza $
+ * @version $Id: BSArray.class.php 1722 2009-12-26 04:15:51Z pooza $
  */
 class BSArray extends BSParameterHolder implements BSAssignable {
 	const POSITION_TOP = true;
@@ -16,7 +16,6 @@ class BSArray extends BSParameterHolder implements BSAssignable {
 	const SORT_KEY_DESC = 'KEY_DESC';
 	const SORT_VALUE_ASC = 'VALUE_ASC';
 	const SORT_VALUE_DESC = 'VALUE_DESC';
-	const WITHOUT_KEY = 1;
 
 	/**
 	 * @access public
@@ -220,17 +219,20 @@ class BSArray extends BSParameterHolder implements BSAssignable {
 	 * 添字の配列を返す
 	 *
 	 * @access public
-	 * @param integer $flags フラグのビット列
-	 *   self::WITHOUT_KEY:キーを含まない
 	 * @return BSArray 添字の配列
 	 */
-	public function getKeys ($flags = null) {
-		if ($flags & self::WITHOUT_KEY) {
-			$keys = array_keys($this->getParameters());
-		} else {
-			$keys = array_flip($this->getParameters());
-		}
-		return new BSArray($keys);
+	public function getKeys () {
+		return new BSArray(array_keys($this->getParameters()));
+	}
+
+	/**
+	 * 添字と値を反転して返す
+	 *
+	 * @access public
+	 * @return BSArray 反転した配列
+	 */
+	public function getFlipped () {
+		return new BSArray(array_flip($this->getParameters()));
 	}
 
 	/**
@@ -240,9 +242,8 @@ class BSArray extends BSParameterHolder implements BSAssignable {
 	 * @return mixed ランダムな要素
 	 */
 	public function getRandom () {
-		$key = $this->getKeys(self::WITHOUT_KEY)->getParameter(
-			BSNumeric::getRandom(0, $this->count() - 1)
-		);
+		$keys = $this->getKeys();
+		$key = $keys[BSNumeric::getRandom(0, $this->count() - 1)];
 		return $this[$key];
 	}
 
