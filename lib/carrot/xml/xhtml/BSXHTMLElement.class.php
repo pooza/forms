@@ -8,7 +8,7 @@
  * XHTMLの要素
  *
  * @author 小石達也 <tkoishi@b-shock.co.jp>
- * @version $Id: BSXHTMLElement.class.php 1690 2009-12-18 06:53:03Z pooza $
+ * @version $Id: BSXHTMLElement.class.php 1730 2009-12-27 07:18:22Z pooza $
  */
 class BSXHTMLElement extends BSXMLElement {
 	protected $tag;
@@ -94,7 +94,11 @@ class BSXHTMLElement extends BSXMLElement {
 	 * @param string $value スタイル値
 	 */
 	public function setStyle ($name, $value) {
-		$this->styles[$name] = $value;
+		if (BSString::isBlank($value)) {
+			$this->styles->removeParameter($name);
+		} else {
+			$this->styles[$name] = $value;
+		}
 		$this->contents = null;
 	}
 

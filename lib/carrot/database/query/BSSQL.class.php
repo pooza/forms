@@ -8,7 +8,7 @@
  * SQL生成に関するユーティリティ
  *
  * @author 小石達也 <tkoishi@b-shock.co.jp>
- * @version $Id: BSSQL.class.php 1727 2009-12-26 14:43:20Z pooza $
+ * @version $Id: BSSQL.class.php 1731 2009-12-27 10:09:00Z pooza $
  */
 class BSSQL {
 
@@ -256,7 +256,7 @@ class BSSQL {
 			$group = new BSTableFieldSet($group);
 		}
 		if ($group->count()) {
-			return $group->getContents();
+			return 'GROUP BY ' . $group->getContents();
 		}
 	}
 

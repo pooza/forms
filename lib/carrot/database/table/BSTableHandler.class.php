@@ -8,7 +8,7 @@
  * データベーステーブル
  *
  * @author 小石達也 <tkoishi@b-shock.co.jp>
- * @version $Id: BSTableHandler.class.php 1728 2009-12-27 01:46:21Z pooza $
+ * @version $Id: BSTableHandler.class.php 1729 2009-12-27 07:17:34Z pooza $
  * @abstract
  */
 abstract class BSTableHandler implements IteratorAggregate, BSDictionary, BSAssignable {
@@ -49,7 +49,9 @@ abstract class BSTableHandler implements IteratorAggregate, BSDictionary, BSAssi
 		$this->fields = clone $this->fields;
 		$this->criteria = clone $this->criteria;
 		$this->order = clone $this->order;
-		$this->ids = clone $this->ids;
+		if ($this->ids) {
+			$this->ids = clone $this->ids;
+		}
 	}
 
 	/**
