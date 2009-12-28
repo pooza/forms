@@ -8,7 +8,7 @@
  * データベーステーブル
  *
  * @author 小石達也 <tkoishi@b-shock.co.jp>
- * @version $Id: BSTableHandler.class.php 1729 2009-12-27 07:17:34Z pooza $
+ * @version $Id: BSTableHandler.class.php 1732 2009-12-28 05:39:57Z pooza $
  * @abstract
  */
 abstract class BSTableHandler implements IteratorAggregate, BSDictionary, BSAssignable {
@@ -33,6 +33,9 @@ abstract class BSTableHandler implements IteratorAggregate, BSDictionary, BSAssi
 	 * @param mixed $order ソート順
 	 */
 	public function __construct ($criteria = null, $order = null) {
+		$this->fields = new BSTableFieldSet;
+		$this->criteria = $this->createCriteriaSet();
+		$this->order = new BSTableFieldSet;
 		$this->setCriteria($criteria);
 		$this->setOrder($order);
 		$this->setFields('*');
@@ -71,6 +74,9 @@ abstract class BSTableHandler implements IteratorAggregate, BSDictionary, BSAssi
 	 * @param mixed $fields 配列または文字列による出力フィールド
 	 */
 	public function setFields ($fields) {
+		if (!$fields) {
+			return;
+		}
 		if ($fields instanceof BSTableFieldSet) {
 			$fields = clone $fields;
 		} else {
@@ -137,6 +143,9 @@ abstract class BSTableHandler implements IteratorAggregate, BSDictionary, BSAssi
 	 * @param mixed $criteria 配列または文字列による抽出条件
 	 */
 	public function setCriteria ($criteria) {
+		if (!$criteria) {
+			return;
+		}
 		if ($criteria instanceof BSCriteriaSet) {
 			$criteria = clone $criteria;
 		} else {
@@ -190,6 +199,9 @@ abstract class BSTableHandler implements IteratorAggregate, BSDictionary, BSAssi
 	 * @param mixed $order 配列または文字列によるソート順
 	 */
 	public function setOrder ($order) {
+		if (!$order) {
+			return;
+		}
 		if ($order instanceof BSTableFieldSet) {
 			$order = clone $order;
 		} else {

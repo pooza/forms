@@ -8,7 +8,7 @@
  * テーブルのレコード
  *
  * @author 小石達也 <tkoishi@b-shock.co.jp>
- * @version $Id: BSRecord.class.php 1709 2009-12-23 09:46:15Z pooza $
+ * @version $Id: BSRecord.class.php 1732 2009-12-28 05:39:57Z pooza $
  * @abstract
  */
 abstract class BSRecord implements ArrayAccess, BSAssignable {
@@ -108,8 +108,9 @@ abstract class BSRecord implements ArrayAccess, BSAssignable {
 		);
 		$this->getDatabase()->exec($query);
 		$this->attributes->setParameters($values);
-		$this->clearSerialized();
-
+		if ($this->isSerializable() && !($flags & BSDatabase::WITHOUT_SERIALIZE)) {
+			$this->clearSerialized();
+		}
 		if ($flags & BSDatabase::WITH_LOGGING) {
 			$message = new BSStringFormat('%sを更新しました。');
 			$message[] = $this;

@@ -8,7 +8,7 @@
  * データベース接続
  *
  * @author 小石達也 <tkoishi@b-shock.co.jp>
- * @version $Id: BSDatabase.class.php 1649 2009-12-02 02:56:32Z pooza $
+ * @version $Id: BSDatabase.class.php 1732 2009-12-28 05:39:57Z pooza $
  * @abstract
  */
 abstract class BSDatabase extends PDO implements ArrayAccess, BSAssignable {
@@ -17,6 +17,7 @@ abstract class BSDatabase extends PDO implements ArrayAccess, BSAssignable {
 	private $name;
 	static private $instances;
 	const WITH_LOGGING = 1;
+	const WITHOUT_SERIALIZE = 2;
 
 	/**
 	 * フライウェイトインスタンスを返す
