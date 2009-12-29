@@ -30,9 +30,9 @@ class Form extends BSRecord implements
 	 *
 	 * @access public
 	 * @param integer $flags フラグのビット列
-	 *   BSDatabase::WITH_LOGGING ログを残さない
+	 *   BSDatabase::WITHOUT_LOGGING ログを残さない
 	 */
-	public function delete ($flags = BSDatabase::WITH_LOGGING) {
+	public function delete ($flags = null) {
 		foreach (FormHandler::getAttachmentNames() as $field) {
 			if ($file = $this->getAttachment($field)) {
 				$file->delete();

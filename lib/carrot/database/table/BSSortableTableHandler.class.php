@@ -8,7 +8,7 @@
  * ソート可能なテーブル
  *
  * @author 小石達也 <tkoishi@b-shock.co.jp>
- * @version $Id: BSSortableTableHandler.class.php 1709 2009-12-23 09:46:15Z pooza $
+ * @version $Id: BSSortableTableHandler.class.php 1734 2009-12-29 04:20:30Z pooza $
  * @abstract
  */
 abstract class BSSortableTableHandler extends BSTableHandler {
@@ -40,15 +40,15 @@ abstract class BSSortableTableHandler extends BSTableHandler {
 	}
 
 	/**
-	 * レコード追加
+	 * レコード作成
 	 *
 	 * @access public
-	 * @param mixed[] $values 値
+	 * @param mixed $values 値
 	 * @param integer $flags フラグのビット列
-	 *   BSDatabase::WITH_LOGGING ログを残さない
+	 *   BSDatabase::WITHOUT_LOGGING ログを残さない
 	 * @return string レコードの主キー
 	 */
-	public function createRecord ($values, $flags = BSDatabase::WITH_LOGGING) {
+	public function createRecord ($values, $flags = null) {
 		$values[$this->getRankField()] = $this->getNextRank();
 		return parent::createRecord($values, $flags);
 	}

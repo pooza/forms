@@ -8,7 +8,7 @@
  * フリガナ リクエストフィルタ
  *
  * @author 小石達也 <tkoishi@b-shock.co.jp>
- * @version $Id: BSReadingRequestFilter.class.php 1716 2009-12-25 08:55:41Z pooza $
+ * @version $Id: BSReadingRequestFilter.class.php 1733 2009-12-29 04:19:51Z pooza $
  */
 class BSReadingRequestFilter extends BSRequestFilter {
 
@@ -21,7 +21,7 @@ class BSReadingRequestFilter extends BSRequestFilter {
 	 * @return mixed 変換後
 	 */
 	protected function convert ($key, $value) {
-		if (!BSArray::isArray($value) && mb_ereg('_read$', $key)) {
+		if ($value && !BSArray::isArray($value) && mb_ereg('_read$', $key)) {
 			$value = str_replace(' ', '', $value);
 			$value = BSString::convertKana($value, 'KVC');
 		}

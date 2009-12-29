@@ -8,7 +8,7 @@
  * データベーステーブル
  *
  * @author 小石達也 <tkoishi@b-shock.co.jp>
- * @version $Id: BSTableHandler.class.php 1732 2009-12-28 05:39:57Z pooza $
+ * @version $Id: BSTableHandler.class.php 1734 2009-12-29 04:20:30Z pooza $
  * @abstract
  */
 abstract class BSTableHandler implements IteratorAggregate, BSDictionary, BSAssignable {
@@ -342,7 +342,7 @@ abstract class BSTableHandler implements IteratorAggregate, BSDictionary, BSAssi
 	 *   BSDatabase::WITH_LOGGING ログを残さない
 	 * @return string レコードの主キー
 	 */
-	public function createRecord ($values, $flags = BSDatabase::WITH_LOGGING) {
+	public function createRecord ($values, $flags = null) {
 		if (!$this->isInsertable()) {
 			throw new BSDatabaseException($this . 'へのレコード挿入はできません。');
 		}
@@ -364,7 +364,7 @@ abstract class BSTableHandler implements IteratorAggregate, BSDictionary, BSAssi
 		}
 
 		$this->setExecuted(false);
-		if ($flags & BSDatabase::WITH_LOGGING) {
+		if (!($flags & BSDatabase::WITHOUT_LOGGING)) {
 			$message = new BSStringFormat('%s(%d)を作成しました。');
 			$message[] = BSTranslateManager::getInstance()->execute($this->getName());
 			$message[] = $id;
@@ -385,7 +385,7 @@ abstract class BSTableHandler implements IteratorAggregate, BSDictionary, BSAssi
 	 * @return string レコードの主キー
 	 * @final
 	 */
-	final public function insertRecord ($values, $flags = BSDatabase::WITH_LOGGING) {
+	final public function insertRecord ($values, $flags = null) {
 		return $this->createRecord($values, $flags);
 	}
 

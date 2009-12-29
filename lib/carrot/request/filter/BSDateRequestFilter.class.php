@@ -8,7 +8,7 @@
  * 日付 リクエストフィルタ
  *
  * @author 小石達也 <tkoishi@b-shock.co.jp>
- * @version $Id: BSDateRequestFilter.class.php 1716 2009-12-25 08:55:41Z pooza $
+ * @version $Id: BSDateRequestFilter.class.php 1733 2009-12-29 04:19:51Z pooza $
  */
 class BSDateRequestFilter extends BSRequestFilter {
 
@@ -21,7 +21,7 @@ class BSDateRequestFilter extends BSRequestFilter {
 	 * @return mixed 変換後
 	 */
 	protected function convert ($key, $value) {
-		if (!BSArray::isArray($value) && mb_ereg('(day|date)$', $key)) {
+		if ($value && !BSArray::isArray($value) && mb_ereg('(day|date)$', $key)) {
 			if ($date = BSDate::getInstance($value)) {
 				if ($date['hour'] || $date['minute'] || $date['second']) {
 					$value = $date->format('Y-m-d H:i:s');

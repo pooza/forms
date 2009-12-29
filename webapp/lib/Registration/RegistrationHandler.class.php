@@ -15,15 +15,15 @@ class RegistrationHandler extends BSTableHandler {
 	const OVERWRITE_CREATE_DATE = 512;
 
 	/**
-	 * レコード追加
+	 * レコード作成
 	 *
 	 * @access public
-	 * @param mixed[] $values 値
+	 * @param mixed $values 値
 	 * @param integer $flags フラグのビット列
-	 *   BSDatabase::WITH_LOGGING ログを残さない
+	 *   BSDatabase::WITHOUT_LOGGING ログを残さない
 	 * @return string レコードの主キー
 	 */
-	public function createRecord ($values, $flags = BSDatabase::WITH_LOGGING) {
+	public function createRecord ($values, $flags = null) {
 		$value = new BSArray($values);
 		if (BSString::isBlank($values['user_agent'])) {
 			$values['user_agent'] = BSRequest::getInstance()->getUserAgent()->getName();

@@ -16,11 +16,12 @@ class Field extends BSSortableRecord implements BSValidatorContainer {
 	 * 更新
 	 *
 	 * @access public
-	 * @param string[] $values 更新する値
+	 * @param mixed $values 更新する値
 	 * @param integer $flags フラグのビット列
-	 *   BSDatabase::WITH_LOGGING ログを残さない
+	 *   BSDatabase::WITHOUT_LOGGING ログを残さない
+	 *   BSDatabase::WITHOUT_SERIALIZE シリアライズしない
 	 */
-	public function update ($values, $flags = BSDatabase::WITH_LOGGING) {
+	public function update ($values, $flags = null) {
 		parent::update($values, $flags);
 		$this->getForm()->touch();
 	}
@@ -50,9 +51,9 @@ class Field extends BSSortableRecord implements BSValidatorContainer {
 	 *
 	 * @access public
 	 * @param integer $flags フラグのビット列
-	 *   BSDatabase::WITH_LOGGING ログを残さない
+	 *   BSDatabase::WITHOUT_LOGGING ログを残さない
 	 */
-	public function delete ($flags = BSDatabase::WITH_LOGGING) {
+	public function delete ($flags = null) {
 		$this->getForm()->touch();
 		parent::delete($flags);
 	}

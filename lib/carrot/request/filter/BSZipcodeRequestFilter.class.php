@@ -8,7 +8,7 @@
  * 郵便番号 リクエストフィルタ
  *
  * @author 小石達也 <tkoishi@b-shock.co.jp>
- * @version $Id: BSZipcodeRequestFilter.class.php 1716 2009-12-25 08:55:41Z pooza $
+ * @version $Id: BSZipcodeRequestFilter.class.php 1733 2009-12-29 04:19:51Z pooza $
  */
 class BSZipcodeRequestFilter extends BSRequestFilter {
 
@@ -21,7 +21,7 @@ class BSZipcodeRequestFilter extends BSRequestFilter {
 	 * @return mixed 変換後
 	 */
 	protected function convert ($key, $value) {
-		if (!BSArray::isArray($value) && $value && mb_ereg('zipcode$', $key)) {
+		if ($value && !BSArray::isArray($value) && mb_ereg('zipcode$', $key)) {
 			$value = mb_ereg_replace('[^[:digit:]]', null, $value);
 			$value = substr($value, 0, 3) . '-' . substr($value, 3, 4);
 		}

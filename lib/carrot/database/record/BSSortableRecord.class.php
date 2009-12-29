@@ -8,7 +8,7 @@
  * ソート可能なテーブルのレコード
  *
  * @author 小石達也 <tkoishi@b-shock.co.jp>
- * @version $Id: BSSortableRecord.class.php 1732 2009-12-28 05:39:57Z pooza $
+ * @version $Id: BSSortableRecord.class.php 1734 2009-12-29 04:20:30Z pooza $
  * @abstract
  */
 abstract class BSSortableRecord extends BSRecord {
@@ -100,7 +100,7 @@ abstract class BSSortableRecord extends BSRecord {
 	protected function setRank ($rank) {
 		$this->update(
 			array($this->getTable()->getRankField() => $rank),
-			BSDatabase::WITHOUT_SERIALIZE
+			BSDatabase::WITHOUT_LOGGING | BSDatabase::WITHOUT_SERIALIZE
 		);
 	}
 }
