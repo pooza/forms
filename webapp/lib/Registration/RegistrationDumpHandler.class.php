@@ -116,7 +116,7 @@ class RegistrationDumpHandler extends RegistrationHandler implements BSExportabl
 	 */
 	public function export () {
 		$this->getExporter()->addRecord($this->getHeader());
-		foreach (BSDatabase::getInstance()->query('SELECT * from ' . $this->getName()) as $row) {
+		foreach ($this->getDatabase()->query('SELECT * from ' . $this->getName()) as $row) {
 			$row = new BSArray($row);
 			$row['form_id'] = $this->form->getName();
 			$this->getExporter()->addRecord($row);
@@ -127,14 +127,14 @@ class RegistrationDumpHandler extends RegistrationHandler implements BSExportabl
 	private function addField (Field $field) {
 		$name = sprintf('a%02d', $field->getID());
 		$sql = 'ALTER TABLE ' . $this->getName() . ' ADD COLUMN ' . $name . ' text';
-		BSDatabase::getInstance()->exec($sql);
+		$this->getDatabase()->exec($sql);
 
 		$sql = 'UPDATE '
 			. $this->getName() . ',registration_detail '
 			. 'SET ' . $name . '=registration_detail.answer '
 			. 'WHERE (' . $this->getName() . '.id=registration_detail.registration_id) '
 			. ' AND (registration_detail.field_id=' . $field->getID() . ')';
-		BSDatabase::getInstance()->exec($sql);
+		$this->getDatabase()->exec($sql);
 	}
 }
 
