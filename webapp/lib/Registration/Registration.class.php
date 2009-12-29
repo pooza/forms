@@ -22,8 +22,7 @@ class Registration extends BSRecord implements BSAttachmentContainer {
 	public function getAnswers () {
 		if (!$this->answers) {
 			$this->answers = new BSArray;
-			$db = $this->getDatabase();
-			$criteria = $db->createCriteriaSet();
+			$criteria = $this->createCriteriaSet();
 			$criteria->register('detail.registration_id', $this);
 			$criteria[] = 'detail.field_id=field.id';
 			$sql = BSSQL::getSelectQueryString(
@@ -32,7 +31,7 @@ class Registration extends BSRecord implements BSAttachmentContainer {
 				$criteria,
 				'field.rank,field.id'
 			);
-			foreach ($db->query($sql) as $row) {
+			foreach ($this->getDatabase()->query($sql) as $row) {
 				$this->answers[$row['field_name']] = $row['answer'];
 			}
 		}

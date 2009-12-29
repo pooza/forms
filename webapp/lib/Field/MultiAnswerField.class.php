@@ -21,11 +21,10 @@ class MultiAnswerField extends ChoiceField {
 		if (!$this->statistics) {
 			$this->statistics = new BSArray;
 
-			$db = $this->getDatabase();
-			$criteria = $db->createCriteriaSet();
+			$criteria = $this->createCriteriaSet();
 			$criteria->register('field_id', $this);
 			$sql = BSSQL::getSelectQueryString('answer', 'registration_detail', $criteria);
-			foreach ($db->query($sql) as $row) {
+			foreach ($this->getDatabase()->query($sql) as $row) {
 				foreach (BSString::explode("\n", $row['answer'])->trim() as $answer) {
 					if (!$this->statistics[$answer]) {
 						$this->statistics[$answer] = new BSArray(array(

@@ -35,7 +35,7 @@ class RegistrationDumpHandler extends RegistrationHandler implements BSExportabl
 		$criteria->register('form_id', $this->form);
 		$sql = 'CREATE TEMPORARY TABLE ' . $this->getName() . ' ';
 		$sql .= BSSQL::getSelectQueryString('*', 'registration', $criteria, $this->getOrder());
-		BSDatabase::getInstance()->exec($sql);
+		$this->getDatabase()->exec($sql);
 
 		foreach ($this->form->getFields() as $field) {
 			$this->addField($field);

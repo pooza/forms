@@ -51,8 +51,7 @@ class SingleAnswerField extends ChoiceField {
 		if (!$this->statistics) {
 			$this->statistics = new BSArray;
 
-			$db = $this->getDatabase();
-			$criteria = $db->createCriteriaSet();
+			$criteria = $this->createCriteriaSet();
 			$criteria->register('field_id', $this);
 			$sql = BSSQL::getSelectQueryString(
 				array('count(*) AS count', 'answer'),
@@ -61,7 +60,7 @@ class SingleAnswerField extends ChoiceField {
 				null,
 				'answer'
 			);
-			foreach ($db->query($sql) as $row) {
+			foreach ($this->getDatabase()->query($sql) as $row) {
 				$this->statistics[$row['answer']] = new BSArray($row);
 			}
 			$this->summarizeStatistics();

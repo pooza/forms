@@ -65,9 +65,8 @@ class Field extends BSSortableRecord implements BSValidatorContainer {
 	 */
 	public function getSimilars () {
 		if (!$this->similars) {
-			$criteria = $this->createCriteriaSet();
-			$criteria->register('form_id', $this['form_id']);
-			$this->similars = new FieldHandler($criteria);
+			$this->similars = new FieldHandler;
+			$this->similars->getCriteria()->register('form_id', $this->getForm());
 		}
 		return $this->similars;
 	}

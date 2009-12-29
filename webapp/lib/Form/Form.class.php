@@ -83,10 +83,11 @@ class Form extends BSRecord implements
 	 */
 	public function getFields () {
 		if (!$this->fields) {
-			$criteria = $this->createCriteriaSet();
-			$criteria->register('form_id', $this);
-			$criteria->register('status', 'show');
-			$this->fields = new FieldHandler($criteria, 'form_id,rank');
+			$this->fields = new FieldHandler;
+			$this->fields->getCriteria()->register('form_id', $this);
+			$this->fields->getCriteria()->register('status', 'show');
+			$this->fields->getOrder()->push('form_id');
+			$this->fields->getOrder()->push('rank');
 		}
 		return $this->fields;
 	}
@@ -99,9 +100,8 @@ class Form extends BSRecord implements
 	 */
 	public function getRegistrations () {
 		if (!$this->registrations) {
-			$criteria = $this->createCriteriaSet();
-			$criteria->register('form_id', $this);
-			$this->registrations = new RegistrationHandler($criteria);
+			$this->registrations = new RegistrationHandler;
+			$this->registrations->getCriteria()->register('form_id', $this);
 		}
 		return $this->registrations;
 	}
@@ -157,12 +157,11 @@ class Form extends BSRecord implements
 	 * @access public
 	 */
 	public function clearImportedAnswers () {
-		$db = $this->getDatabase();
-		$criteria = $db->createCriteriaSet();
+		$criteria = $this->createCriteriaSet();
 		$criteria->register('form_id', $this);
 		$criteria->register('imported', 1);
 		$sql = BSSQL::getDeleteQueryString('registration', $criteria);
-		$db->exec($sql);
+		$this->getDatabase()->exec($sql);
 	}
 
 	/**
