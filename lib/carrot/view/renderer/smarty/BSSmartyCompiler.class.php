@@ -10,7 +10,7 @@ BSUtility::includeFile('Smarty/Smarty_Compiler.class.php');
  * Smarty_Compilerラッパー
  *
  * @author 小石達也 <tkoishi@b-shock.co.jp>
- * @version $Id: BSSmartyCompiler.class.php 1101 2009-04-26 06:34:54Z pooza $
+ * @version $Id: BSSmartyCompiler.class.php 1744 2010-01-04 00:57:45Z pooza $
  */
 class BSSmartyCompiler extends Smarty_Compiler {
 
@@ -80,6 +80,62 @@ class BSSmartyCompiler extends Smarty_Compiler {
 	 */
 	public function getTemplate () {
 		return $this->template;
+	}
+
+	/**
+	 * Compile {foreach ...} tag.
+	 *
+	 * @access public
+	 * @param string $args
+	 * @return string
+	 */
+	public function _compile_foreach_start ($args) {
+		$params = new BSArray($this->_parse_attrs($args));
+		if (BSString::isBlank($params['name'])) {
+			$params['name'] = 'foreach_' . BSUtility::getUniqueID();
+		}
+		if (BSString::isBlank($params['item'])) {
+			$params['item'] = $params['name'] . '_item';
+		}
+		if (BSString::isBlank($params['key'])) {
+			$params['key'] = $params['name'] . '_key';
+		}
+
+		$var = '$this->_foreach[' . $this->quote($params['name']) . ']';
+		$body = new BSArray;
+		$body[] = sprintf(
+			'<?php %s = array(\'from\' => %s, \'iteration\' => 0);',
+			$var, $params['from']
+		);
+		$body[] = sprintf('%s[\'total\'] = count(%s[\'from\']);', $var, $var);
+		$body[] = sprintf('if (0 < %s[\'total\']):', $var);
+		$body[] = sprintf(
+			'  foreach (%s[\'from\'] as $this->_tpl_vars[%s] => $this->_tpl_vars[%s]):',
+			$var, $this->quote($params['key']), $this->quote($params['item'])
+		);
+		$body[] = sprintf('    %s[\'iteration\'] ++;', $var);
+		if ($max = $params['max']) {
+			$body[] = sprintf('    if (%d < %s[\'iteration\']) {break;}', $max, $var);
+		}
+		$body[] = '?>';
+		return $body->join("\n");
+	}
+
+	private function quote ($value) {
+		$value = BSString::dequote($value);
+		$value = BSConfigCompiler::quote($value);
+		return $value;
+	}
+
+	/**
+	 * クォートされた文字列から、クォートを外す
+	 *
+	 * @access public
+	 * @param mixed $value 変換対象の文字列又は配列
+	 * @return mixed 変換後
+	 */
+	public function _dequote ($value) {
+		return BSString::dequote($value);
 	}
 
 	/**

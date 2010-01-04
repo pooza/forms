@@ -8,7 +8,7 @@
  * SQL生成に関するユーティリティ
  *
  * @author 小石達也 <tkoishi@b-shock.co.jp>
- * @version $Id: BSSQL.class.php 1731 2009-12-27 10:09:00Z pooza $
+ * @version $Id: BSSQL.class.php 1736 2010-01-02 09:04:41Z pooza $
  */
 class BSSQL {
 
@@ -82,17 +82,13 @@ class BSSQL {
 		} else if ($values instanceof BSParameterHolder) {
 			$values = new BSArray($values->getParameters());
 		}
-
-		$quoted = new BSArray;
-		foreach ($values as $value) {
-			$quoted[] = $db->quote($value);
-		}
+		$values = $db->quote($values);
 
 		return sprintf(
 			'INSERT INTO %s (%s) VALUES (%s)',
 			$table,
 			$values->getKeys()->join(', '),
-			$quoted->join(', ')
+			$values->join(', ')
 		);
 	}
 
@@ -142,7 +138,7 @@ class BSSQL {
 		if (BSString::isBlank($criteria = self::getCriteriaString($criteria))) {
 			throw new BSDatabaseException('抽出条件がありません。');
 		}
-		return sprintf('DELETE FROM %s %s', $table, $criteria);
+		return sprintf('DELETE %s %s', self::getFromString($table), $criteria);
 	}
 
 	/**

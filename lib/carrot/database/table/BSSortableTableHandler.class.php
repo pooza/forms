@@ -8,7 +8,7 @@
  * ソート可能なテーブル
  *
  * @author 小石達也 <tkoishi@b-shock.co.jp>
- * @version $Id: BSSortableTableHandler.class.php 1734 2009-12-29 04:20:30Z pooza $
+ * @version $Id: BSSortableTableHandler.class.php 1736 2010-01-02 09:04:41Z pooza $
  * @abstract
  */
 abstract class BSSortableTableHandler extends BSTableHandler {
@@ -20,11 +20,9 @@ abstract class BSSortableTableHandler extends BSTableHandler {
 	 */
 	public function __construct ($criteria = null, $order = null) {
 		if (!$order) {
-			$order = array(
-				$this->getRankField(),
-				$this->getKeyField(),
-			);
-			$order = implode(',', $order);
+			$order = new BSTableFieldSet;
+			$order[] = $this->getRankField();
+			$order[] = $this->getKeyField();
 		}
 		parent::__construct($criteria, $order);
 	}

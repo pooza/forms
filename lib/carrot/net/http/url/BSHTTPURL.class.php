@@ -8,7 +8,7 @@
  * HTTPスキーマのURL
  *
  * @author 小石達也 <tkoishi@b-shock.co.jp>
- * @version $Id: BSHTTPURL.class.php 1720 2009-12-25 09:28:54Z pooza $
+ * @version $Id: BSHTTPURL.class.php 1742 2010-01-03 14:40:25Z pooza $
  */
 class BSHTTPURL extends BSURL implements BSHTTPRedirector, BSImageContainer {
 	private $fullpath;
@@ -291,6 +291,16 @@ class BSHTTPURL extends BSURL implements BSHTTPRedirector, BSImageContainer {
 	 */
 	public function getLabel ($language = 'ja') {
 		return $this->getID();
+	}
+
+	/**
+	 * 外部のURLか？
+	 *
+	 * @access public
+	 * @return boolean 外部のURLならTrue
+	 */
+	public function isForeign () {
+		return $this['host']->isForeign();
 	}
 
 	/**

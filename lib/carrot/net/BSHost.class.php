@@ -8,7 +8,7 @@
  * ホストコンピュータ
  *
  * @author 小石達也 <tkoishi@b-shock.co.jp>
- * @version $Id: BSHost.class.php 1522 2009-09-22 06:38:56Z pooza $
+ * @version $Id: BSHost.class.php 1742 2010-01-03 14:40:25Z pooza $
  */
 class BSHost implements BSAssignable {
 	protected $address;
@@ -140,6 +140,20 @@ class BSHost implements BSAssignable {
 	 */
 	public function isInNetwork (BSNetwork $network) {
 		return $this->address->ipInNetwork($this->getAddress(), $network->getCIDR());
+	}
+
+	/**
+	 * 異なるホストか？
+	 *
+	 * @access public
+	 * @param BSHost $host 対象ホスト
+	 * @return boolean 異なるホストならTrue
+	 */
+	public function isForeign (BSHost $host = null) {
+		if (!$host) {
+			$host = BSController::getInstance()->getHost();
+		}
+		return ($this->getName() != $host->getName());
 	}
 
 	/**

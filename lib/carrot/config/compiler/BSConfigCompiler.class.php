@@ -8,7 +8,7 @@
  * 抽象設定コンパイラ
  *
  * @author 小石達也 <tkoishi@b-shock.co.jp>
- * @version $Id: BSConfigCompiler.class.php 1469 2009-09-11 12:40:31Z pooza $
+ * @version $Id: BSConfigCompiler.class.php 1737 2010-01-02 12:19:26Z pooza $
  */
 abstract class BSConfigCompiler extends BSParameterHolder {
 	private $body;
@@ -104,7 +104,7 @@ abstract class BSConfigCompiler extends BSParameterHolder {
 	 * @static
 	 */
 	static public function quote ($value) {
-		if (BSArray::isArray($value)) {
+		if (BSArray::isArray($value) || ($value instanceof BSParameterHolder)) {
 			$body =  new BSArray;
 			foreach ($value as $key => $item) {
 				$body[] = sprintf('%s => %s', self::quote($key), self::quote($item));

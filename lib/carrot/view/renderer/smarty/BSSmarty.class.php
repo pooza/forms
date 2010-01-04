@@ -10,7 +10,7 @@ BSUtility::includeFile('Smarty/Smarty.class.php');
  * Smartyラッパー
  *
  * @author 小石達也 <tkoishi@b-shock.co.jp>
- * @version $Id: BSSmarty.class.php 1600 2009-10-30 14:48:55Z pooza $
+ * @version $Id: BSSmarty.class.php 1744 2010-01-04 00:57:45Z pooza $
  */
 class BSSmarty extends Smarty implements BSTextRenderer {
 	private $type;
@@ -387,6 +387,17 @@ class BSSmarty extends Smarty implements BSTextRenderer {
 			}
 		}
 		return $this->compiler;
+	}
+
+	/**
+	 * クォートされた文字列から、クォートを外す
+	 *
+	 * @access public
+	 * @param mixed $value 変換対象の文字列又は配列
+	 * @return mixed 変換後
+	 */
+	public function _dequote ($value) {
+		return BSString::dequote($value);
 	}
 
 	/**
