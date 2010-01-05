@@ -39,15 +39,15 @@ class RegisterAction extends BSRecordAction {
 		if (!$this->getRecord() || !$this->getRecord()->isVisible()) {
 			return $this->controller->getAction('not_found')->forward();
 		}
-		if (!$this->request['submit']) {
+		if ($answer = $this->user->getAttribute('answer')) {
+			$this->request->setParameters($answer);
+		} else if (!$this->request['submit']) {
 			foreach ($this->getRecord()->getFields() as $field) {
 				if (!!$field->getChoices()->count()) {
 					$choice = $field->getChoices()->getIterator()->getFirst();
 					$this->request[$field->getName()] = $choice;
 				}
 			}
-		} else if ($answer = $this->user->getAttribute('answer')) {
-			$this->request->setParameters($answer);
 		}
 		return BSView::INPUT;
 	}
