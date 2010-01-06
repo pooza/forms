@@ -38,12 +38,15 @@
 	{/if}
 		</th>
 		<td>
-	{if $form.fields[$field].is_image}
-			{image_cache size=$field pixel=400 mode='lightbox'}<br/>
-	{elseif $form.fields[$field].is_file}
+	{if $answer}
+		{if $form.fields[$field].is_image}
+			{image_cache src=$answer pixel=400 style_class='bordered'}<br/>
+		{/if}
+		{if $form.fields[$field].is_file}
 			<a href="{carrot_url module='AdminRegistration' action='Attachment' record=$registration.id param_name=$form.fields[$field].name}"><img src="/carrotlib/images/document.gif" width="16" height="16" alt="ダウンロード" /></a>
-	{/if}
+		{/if}
 			{$answer|nl2br}
+	{/if}
 		</td>
 	</tr>
 {/foreach}
