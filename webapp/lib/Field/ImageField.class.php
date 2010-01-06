@@ -30,6 +30,18 @@ class ImageField extends FileField {
 		parent::registerValidators();
 		BSValidateManager::getInstance()->register($this->getName(), new BSImageValidator);
 	}
+
+	/**
+	 * 全てのファイル属性
+	 *
+	 * @access protected
+	 * @return BSArray ファイル属性の配列
+	 */
+	protected function getFullAttributes () {
+		$values = parent::getFullAttributes();
+		$values['is_image'] = true;
+		return $values;
+	}
 }
 
 /* vim:set tabstop=4 */

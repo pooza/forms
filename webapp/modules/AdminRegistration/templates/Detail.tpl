@@ -38,7 +38,9 @@
 	{/if}
 		</th>
 		<td>
-	{if $form.fields[$field].is_file}
+	{if $form.fields[$field].is_image}
+			{images_cache size=$name pixel=400 mode='lightbox'}
+	{elseif $form.fields[$field].is_file}
 			<a href="{carrot_url module='AdminRegistration' action='Attachment' record=$registration.id param_name=$form.fields[$field].name}"><img src="/carrotlib/images/document.gif" width="16" height="16" alt="ダウンロード" /></a>
 	{/if}
 			{$answer|nl2br}
