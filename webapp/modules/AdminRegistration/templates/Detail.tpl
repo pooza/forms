@@ -39,7 +39,7 @@
 		</th>
 		<td>
 	{if $form.fields[$field].is_image}
-			{image_cache size=$field pixel=400 mode='lightbox'}
+			{*{image_cache size=$field pixel=400 mode='lightbox'}*}
 	{elseif $form.fields[$field].is_file}
 			<a href="{carrot_url module='AdminRegistration' action='Attachment' record=$registration.id param_name=$form.fields[$field].name}"><img src="/carrotlib/images/document.gif" width="16" height="16" alt="ダウンロード" /></a>
 	{/if}
