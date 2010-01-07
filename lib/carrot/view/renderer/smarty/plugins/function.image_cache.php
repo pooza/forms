@@ -10,7 +10,7 @@
  * BSImageCacheHandlerのフロントエンド
  *
  * @author 小石達也 <tkoishi@b-shock.co.jp>
- * @version $Id: function.image_cache.php 1680 2009-12-13 04:19:39Z pooza $
+ * @version $Id: function.image_cache.php 1745 2010-01-07 08:43:55Z pooza $
  */
 function smarty_function_image_cache ($params, &$smarty) {
 	$caches = BSImageCacheHandler::getInstance();
@@ -30,6 +30,7 @@ function smarty_function_image_cache ($params, &$smarty) {
 			return $info['pixel_size'];
 		case 'width':
 		case 'height':
+		case 'url':
 			return $info[$mode];
 		case 'lightbox':
 			$element = $element->wrap(new BSAnchorElement);
@@ -40,6 +41,9 @@ function smarty_function_image_cache ($params, &$smarty) {
 			);
 			//↓そのまま実行
 		default:
+			if ($id = $params['container_id']) {
+				$element->setID($id);
+			}
 			return $element->getContents();
 	}
 }

@@ -8,7 +8,7 @@
  * 動画ファイル
  *
  * @author 小石達也 <tkoishi@b-shock.co.jp>
- * @version $Id: BSMovieFile.class.php 1711 2009-12-23 10:05:53Z pooza $
+ * @version $Id: BSMovieFile.class.php 1746 2010-01-07 08:44:31Z pooza $
  */
 class BSMovieFile extends BSMediaFile {
 	private $output;
@@ -33,7 +33,7 @@ class BSMovieFile extends BSMediaFile {
 			$sec = BSString::explode(':', $matches[1]);
 			$this->attributes['seconds'] = ($sec[0] * 3600) + ($sec[1] * 60) + $sec[2];
 		}
-		if (mb_ereg(' ([[:digit:]]{,4})x([[:digit:]]{,4})', $this->output, $matches)) {
+		if (mb_ereg(' ([[:digit:]]{2,4})x([[:digit:]]{2,4})', $this->output, $matches)) {
 			$this->attributes['width'] = $matches[1];
 			$this->attributes['height'] = $matches[2];
 			$this->attributes['height_full'] = $matches[2] + $this->getPlayerHeight();

@@ -8,7 +8,7 @@
  * QuickTime用object要素
  *
  * @author 小石達也 <tkoishi@b-shock.co.jp>
- * @version $Id: BSQuickTimeObjectElement.class.php 1710 2009-12-23 09:48:24Z pooza $
+ * @version $Id: BSQuickTimeObjectElement.class.php 1746 2010-01-07 08:44:31Z pooza $
  */
 class BSQuickTimeObjectElement extends BSObjectElement {
 
@@ -36,6 +36,8 @@ class BSQuickTimeObjectElement extends BSObjectElement {
 	public function setURL (BSHTTPRedirector $url) {
 		$this->setParameter('src', $url->getContents());
 		$this->inner->setAttribute('src', $url->getContents());
+		$this->setParameter('qtsrc', $url->getContents());
+		$this->inner->setAttribute('qtsrc', $url->getContents());
 	}
 }
 
