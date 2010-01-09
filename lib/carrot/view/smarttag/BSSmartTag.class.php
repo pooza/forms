@@ -8,13 +8,12 @@
  * スマートタグ
  *
  * @author 小石達也 <tkoishi@b-shock.co.jp>
- * @version $Id: BSSmartTag.class.php 1708 2009-12-22 12:59:43Z pooza $
+ * @version $Id: BSSmartTag.class.php 1749 2010-01-09 10:31:35Z pooza $
  */
 abstract class BSSmartTag extends BSParameterHolder {
 	private $useragent;
 	protected $tag;
 	protected $contents;
-	private $params;
 
 	/**
 	 * @access public
@@ -66,6 +65,18 @@ abstract class BSSmartTag extends BSParameterHolder {
 	 */
 	public function isMatched () {
 		return !BSString::isBlank($this->tag[0]) && ($this->tag[0] == $this->getTagName());
+	}
+
+	/**
+	 * 引数をURLクエリーに変換して返す
+	 *
+	 * @access protected
+	 * @return BSWWWFormRenderer
+	 */
+	protected function getQueryParameters () {
+		$params = new BSWWWFormRenderer;
+		$params->setContents(str_replace(';', '&', $this->tag[2]));
+		return $params;
 	}
 
 	/**

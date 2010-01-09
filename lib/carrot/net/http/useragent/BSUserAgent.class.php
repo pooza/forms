@@ -8,7 +8,7 @@
  * ユーザーエージェント
  *
  * @author 小石達也 <tkoishi@b-shock.co.jp>
- * @version $Id: BSUserAgent.class.php 1663 2009-12-09 11:25:07Z pooza $
+ * @version $Id: BSUserAgent.class.php 1748 2010-01-09 10:30:57Z pooza $
  * @abstract
  */
 abstract class BSUserAgent implements BSAssignable {
@@ -91,8 +91,10 @@ abstract class BSUserAgent implements BSAssignable {
 			if ($values['legacy_denied'] && $this->isLegacy()) {
 				return true;
 			}
-			if (BSArray::isArray($values['denied_patterns'])) {
-				foreach ($values['denied_patterns'] as $pattern) {
+
+			// $patterns変数への代入は、PHP5.1対応。
+			if (BSArray::isArray($patterns = $values['denied_patterns'])) {
+				foreach ($patterns as $pattern) {
 					if (BSString::isContain($pattern, $this->getName())) {
 						return true;
 					}

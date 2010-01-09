@@ -10,7 +10,7 @@
  * Windows版 InternetExplorer 4.x以降
  *
  * @author 小石達也 <tkoishi@b-shock.co.jp>
- * @version $Id: BSTridentUserAgent.class.php 1668 2009-12-10 06:59:13Z pooza $
+ * @version $Id: BSTridentUserAgent.class.php 1750 2010-01-09 10:31:51Z pooza $
  */
 class BSTridentUserAgent extends BSUserAgent {
 
@@ -21,7 +21,7 @@ class BSTridentUserAgent extends BSUserAgent {
 	public function __construct ($name = null) {
 		parent::__construct($name);
 		$this->bugs['cache_control'] = true;
-		$this->attributes['is_kuso'] = $this->isLegacy();
+		$this->attributes['is_kuso'] = ($this->getVersion() < 8);
 		$this->attributes['is_ie' . floor($this->getVersion())] = true;
 	}
 
