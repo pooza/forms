@@ -65,7 +65,7 @@
 			<tr>
 				<th>フォーム<br/>テンプレート</th>
 				<td>
-					<input type="file" name="form_template" size="30" /><br/>
+					<input type="file" name="form_template" size="48" /><br/>
 {if $form.has_form_template}
 					<a href="{$form.form_template.url}" ><img src="/carrotlib/images/document.gif" width="16" height="16" alt="" /></a>
 					{$form.form_template.size|binary_size_format}B
@@ -76,7 +76,7 @@
 			<tr>
 				<th>確認画面<br/>テンプレート</th>
 				<td>
-					<input type="file" name="confirm_template" size="30" /><br/>
+					<input type="file" name="confirm_template" size="48" /><br/>
 {if $form.has_confirm_template}
 					<a href="{$form.confirm_template.url}" ><img src="/carrotlib/images/document.gif" width="16" height="16" alt="" /></a>
 					{$form.confirm_template.size|binary_size_format}B
@@ -87,7 +87,7 @@
 			<tr>
 				<th>サンクス画面<br/>テンプレート</th>
 				<td>
-					<input type="file" name="thanx_template" size="30" /><br/>
+					<input type="file" name="thanx_template" size="48" /><br/>
 {if $form.has_thanx_template}
 					<a href="{$form.thanx_template.url}" ><img src="/carrotlib/images/document.gif" width="16" height="16" alt="" /></a>
 					{$form.thanx_template.size|binary_size_format}B
@@ -98,7 +98,7 @@
 			<tr>
 				<th>フォーム<br/>テンプレート(携)</th>
 				<td>
-					<input type="file" name="mobile_form_template" size="30" /><br/>
+					<input type="file" name="mobile_form_template" size="48" /><br/>
 {if $form.has_mobile_form_template}
 					<a href="{$form.mobile_form_template.url}" ><img src="/carrotlib/images/document.gif" width="16" height="16" alt="" /></a>
 					{$form.mobile_form_template.size|binary_size_format}B
@@ -109,7 +109,7 @@
 			<tr>
 				<th>確認画面<br/>テンプレート(携)</th>
 				<td>
-					<input type="file" name="mobile_confirm_template" size="30" /><br/>
+					<input type="file" name="mobile_confirm_template" size="48" /><br/>
 {if $form.has_mobile_confirm_template}
 					<a href="{$form.mobile_confirm_template.url}" ><img src="/carrotlib/images/document.gif" width="16" height="16" alt="" /></a>
 					{$form.mobile_confirm_template.size|binary_size_format}B
@@ -120,7 +120,7 @@
 			<tr>
 				<th>サンクス画面<br/>テンプレート(携)</th>
 				<td>
-					<input type="file" name="mobile_thanx_template" size="30" /><br/>
+					<input type="file" name="mobile_thanx_template" size="48" /><br/>
 {if $form.has_mobile_thanx_template}
 					<a href="{$form.mobile_thanx_template.url}" ><img src="/carrotlib/images/document.gif" width="16" height="16" alt="" /></a>
 					{$form.mobile_thanx_template.size|binary_size_format}B
@@ -131,7 +131,7 @@
 			<tr>
 				<th>サンクスメール<br/>テンプレート</th>
 				<td>
-					<input type="file" name="thanx_mail_template" size="30" /><br/>
+					<input type="file" name="thanx_mail_template" size="48" /><br/>
 {if $form.has_thanx_mail_template}
 					<a href="{$form.thanx_mail_template.url}" ><img src="/carrotlib/images/document.gif" width="16" height="16" alt="" /></a>
 					{$form.thanx_mail_template.size|binary_size_format}B
