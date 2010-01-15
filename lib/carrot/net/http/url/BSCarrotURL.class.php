@@ -8,7 +8,7 @@
  * CarrotアプリケーションのURL
  *
  * @author 小石達也 <tkoishi@b-shock.co.jp>
- * @version $Id: BSCarrotURL.class.php 1640 2009-11-27 12:43:39Z pooza $
+ * @version $Id: BSCarrotURL.class.php 1755 2010-01-15 06:55:07Z pooza $
  */
 class BSCarrotURL extends BSHTTPURL {
 	private $module;
@@ -36,6 +36,33 @@ class BSCarrotURL extends BSHTTPURL {
 				return $this->setRecordID($value);
 		}
 		return parent::setAttribute($name, $value);
+	}
+
+	/**
+	 * URLを設定
+	 *
+	 * @access public
+	 * @param mixed $contents URL
+	 */
+	public function setContents ($contents) {
+		if (!BSString::isBlank($contents)) {
+			if (is_string($contents)) {
+				throw new BSNetException('BSCarrotURLは文字列から生成できません。');
+			}
+			if (is_array($contents) || ($contents instanceof BSParameterHolder)) {
+				$contents = new BSArray($contents);
+			}
+			if (BSString::isBlank($contents['module'])) {
+				if (BSString::isBlank($contents['action'])) {
+					$action = BSController::getInstance()->getAction();
+					$contents['action'] = $action->getName();
+					$contents['module'] = $action->getModule()->getName();
+				} else {
+					$contents['module'] = BSController::getInstance()->getModule();
+				}
+			}
+		}
+		parent::setContents($contents);
 	}
 
 	/**
@@ -142,37 +169,6 @@ class BSCarrotURL extends BSHTTPURL {
 
 		// path属性をsetAttributeすると、queryやflagmentが初期化されてしまう。
 		$this->attributes['path'] = $path->join('/');
-	}
-
-	/**
-	 * パラメータ配列をパース
-	 *
-	 * パラメータ配列にmodule要素やaction要素がない場合は、
-	 * 実行中アクションから引用する。
-	 *
-	 * @access public
-	 * @param BSParameterHolder $params 又はパラメータ配列
-	 * @return BSArray パースされたパラメータ配列
-	 * @static
-	 */
-	static public function parseParameters (BSParameterHolder $params) {
-		$params = new BSArray($params->getParameters());
-		if (BSString::isBlank($params['scheme'])) {
-			$params['scheme'] = 'http';
-		}
-		if (BSString::isBlank($params['host'])) {
-			$params['host'] = BSController::getInstance()->getHost();
-		}
-		if (BSString::isBlank($params['module'])) {
-			if (BSString::isBlank($params['action'])) {
-				$action = BSController::getInstance()->getAction();
-				$params['action'] = $action->getName();
-				$params['module'] = $action->getModule()->getName();
-			} else {
-				$params['module'] = BSController::getInstance()->getModule();
-			}
-		}
-		return $params;
 	}
 }
 

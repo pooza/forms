@@ -8,7 +8,7 @@
  * 動画バリデータ
  *
  * @author 小石達也 <tkoishi@b-shock.co.jp>
- * @version $Id: BSMovieValidator.class.php 1558 2009-10-16 03:25:12Z pooza $
+ * @version $Id: BSMovieValidator.class.php 1754 2010-01-14 11:04:40Z pooza $
  */
 class BSMovieValidator extends BSValidator {
 
@@ -16,11 +16,11 @@ class BSMovieValidator extends BSValidator {
 	 * 初期化
 	 *
 	 * @access public
-	 * @param string[] $parameters パラメータ配列
+	 * @param string[] $params パラメータ配列
 	 */
-	public function initialize ($parameters = array()) {
+	public function initialize ($params = array()) {
 		$this['invalid_error'] = '正しいファイルではありません。';
-		return BSValidator::initialize($parameters);
+		return BSValidator::initialize($params);
 	}
 
 	/**

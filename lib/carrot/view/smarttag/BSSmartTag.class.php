@@ -8,7 +8,7 @@
  * スマートタグ
  *
  * @author 小石達也 <tkoishi@b-shock.co.jp>
- * @version $Id: BSSmartTag.class.php 1749 2010-01-09 10:31:35Z pooza $
+ * @version $Id: BSSmartTag.class.php 1756 2010-01-15 07:21:15Z pooza $
  */
 abstract class BSSmartTag extends BSParameterHolder {
 	private $useragent;
@@ -111,7 +111,7 @@ abstract class BSSmartTag extends BSParameterHolder {
 	static public function parse ($text, BSArray $tags, BSParameterHolder $params) {
 		foreach (BSString::eregMatchAll('\\[\\[([^\\]]+)\\]\\]', $text) as $matches) {
 			foreach ($tags as $tag) {
-				$class = BSClassLoader::getInstance()->getClassName($tag, 'Tag');
+				$class = BSClassLoader::getInstance()->getClass($tag, 'Tag');
 				$tag = new $class($matches[1]);
 				if ($tag->isMatched()) {
 					$tag->setParameters($params);

@@ -8,14 +8,14 @@
  * Cookieのサポートをチェックするフィルタ
  *
  * @author 小石達也 <tkoishi@b-shock.co.jp>
- * @version $Id: BSCookieFilter.class.php 1396 2009-08-25 07:15:12Z pooza $
+ * @version $Id: BSCookieFilter.class.php 1754 2010-01-14 11:04:40Z pooza $
  */
 class BSCookieFilter extends BSFilter {
 	private $cookieName;
 
-	public function initialize ($parameters = array()) {
+	public function initialize ($params = array()) {
 		$this['cookie_error'] = 'Cookie機能が有効でない、又はセッションのタイムアウトです。';
-		return parent::initialize($parameters);
+		return parent::initialize($params);
 	}
 
 	public function execute () {

@@ -8,7 +8,7 @@
  * データベース接続
  *
  * @author 小石達也 <tkoishi@b-shock.co.jp>
- * @version $Id: BSDatabase.class.php 1736 2010-01-02 09:04:41Z pooza $
+ * @version $Id: BSDatabase.class.php 1756 2010-01-15 07:21:15Z pooza $
  * @abstract
  */
 abstract class BSDatabase extends PDO implements ArrayAccess, BSAssignable {
@@ -216,7 +216,7 @@ abstract class BSDatabase extends PDO implements ArrayAccess, BSAssignable {
 	 * @return BSTableProfile テーブルのプロフィール
 	 */
 	public function getTableProfile ($table) {
-		$class = BSClassLoader::getInstance()->getClassName($this['dbms'], 'TableProfile');
+		$class = BSClassLoader::getInstance()->getClass($this['dbms'], 'TableProfile');
 		return new $class($table, $this);
 	}
 

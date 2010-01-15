@@ -10,7 +10,7 @@ ini_set('auto_detect_line_endings', true);
  * ファイル
  *
  * @author 小石達也 <tkoishi@b-shock.co.jp>
- * @version $Id: BSFile.class.php 1722 2009-12-26 04:15:51Z pooza $
+ * @version $Id: BSFile.class.php 1756 2010-01-15 07:21:15Z pooza $
  */
 class BSFile extends BSDirectoryEntry implements BSRenderer {
 	private $mode;
@@ -116,7 +116,7 @@ class BSFile extends BSDirectoryEntry implements BSRenderer {
 		if (!copy($this->getPath(), $path)) {
 			throw new BSFileException($this . 'をコピーできません。');
 		}
-		$class = BSClassLoader::getInstance()->getClassName($class);
+		$class = BSClassLoader::getInstance()->getClass($class);
 		return new $class($path);
 	}
 

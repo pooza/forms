@@ -8,7 +8,7 @@
  * エンコード名バリデータ
  *
  * @author 小石達也 <tkoishi@b-shock.co.jp>
- * @version $Id: BSEncodingValidator.class.php 1335 2009-07-18 09:49:09Z pooza $
+ * @version $Id: BSEncodingValidator.class.php 1754 2010-01-14 11:04:40Z pooza $
  */
 class BSEncodingValidator extends BSValidator {
 
@@ -16,11 +16,11 @@ class BSEncodingValidator extends BSValidator {
 	 * 初期化
 	 *
 	 * @access public
-	 * @param string[] $parameters パラメータ配列
+	 * @param string[] $params パラメータ配列
 	 */
-	public function initialize ($parameters = array()) {
+	public function initialize ($params = array()) {
 		$this['match_error'] = '利用できないエンコード名です。';
-		return BSValidator::initialize($parameters);
+		return BSValidator::initialize($params);
 	}
 
 	/**

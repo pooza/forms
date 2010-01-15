@@ -8,7 +8,7 @@
  * HTMLフラグメントバリデータ
  *
  * @author 小石達也 <tkoishi@b-shock.co.jp>
- * @version $Id: BSHTMLFragmentValidator.class.php 1601 2009-10-30 15:18:20Z pooza $
+ * @version $Id: BSHTMLFragmentValidator.class.php 1754 2010-01-14 11:04:40Z pooza $
  */
 class BSHTMLFragmentValidator extends BSValidator {
 	private $allowedTags;
@@ -18,13 +18,13 @@ class BSHTMLFragmentValidator extends BSValidator {
 	 * 初期化
 	 *
 	 * @access public
-	 * @param string[] $parameters パラメータ配列
+	 * @param string[] $params パラメータ配列
 	 */
-	public function initialize ($parameters = array()) {
+	public function initialize ($params = array()) {
 		$this['element_error'] = '許可されていない要素又は属性が含まれています。';
 		$this['allowed_tags'] = 'a,br,div,li,ol,p,span,ul';
 		$this['javascript_allowed'] = false;
-		return parent::initialize($parameters);
+		return parent::initialize($params);
 	}
 
 	/**

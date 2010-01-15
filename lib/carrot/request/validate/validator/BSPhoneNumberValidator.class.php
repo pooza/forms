@@ -8,7 +8,7 @@
  * 電話番号バリデータ
  *
  * @author 小石達也 <tkoishi@b-shock.co.jp>
- * @version $Id: BSPhoneNumberValidator.class.php 1716 2009-12-25 08:55:41Z pooza $
+ * @version $Id: BSPhoneNumberValidator.class.php 1754 2010-01-14 11:04:40Z pooza $
  */
 class BSPhoneNumberValidator extends BSValidator {
 	const PATTERN = '^[[:digit:]]{2,4}-[[:digit:]]{2,4}-[[:digit:]]{3,4}$';
@@ -38,13 +38,13 @@ class BSPhoneNumberValidator extends BSValidator {
 	 * 初期化
 	 *
 	 * @access public
-	 * @param string[] $parameters パラメータ配列
+	 * @param string[] $params パラメータ配列
 	 */
-	public function initialize ($parameters = array()) {
+	public function initialize ($params = array()) {
 		$this['fields'] = array();
 		$this['invalid_error'] = '正しい電話番号ではありません。';
 		$this['loose'] = false;
-		return parent::initialize($parameters);
+		return parent::initialize($params);
 	}
 
 	/**

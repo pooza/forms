@@ -8,7 +8,7 @@
  * ディレクトリ
  *
  * @author 小石達也 <tkoishi@b-shock.co.jp>
- * @version $Id: BSDirectory.class.php 1671 2009-12-12 06:55:46Z pooza $
+ * @version $Id: BSDirectory.class.php 1756 2010-01-15 07:21:15Z pooza $
  */
 class BSDirectory extends BSDirectoryEntry implements IteratorAggregate {
 	private $suffix;
@@ -128,9 +128,9 @@ class BSDirectory extends BSDirectoryEntry implements IteratorAggregate {
 		$name = str_replace('..' . DIRECTORY_SEPARATOR, '', $name);
 
 		if (BSString::isBlank($class)) {
-			$class = $this->getDefaultEntryClassName();
+			$class = $this->getDefaultEntryClass();
 		}
-		$class = BSClassLoader::getInstance()->getClassName($class);
+		$class = BSClassLoader::getInstance()->getClass($class);
 
 		$path = $this->getPath() . DIRECTORY_SEPARATOR . $name;
 		if ($this->hasSubDirectory() && is_dir($path)) {
@@ -152,13 +152,13 @@ class BSDirectory extends BSDirectoryEntry implements IteratorAggregate {
 	 */
 	public function createEntry ($name, $class = null) {
 		if (BSString::isBlank($class)) {
-			$class = $this->getDefaultEntryClassName();
+			$class = $this->getDefaultEntryClass();
 		}
 
 		$name = basename($name, $this->getDefaultSuffix());
 		$path = $this->getPath() . DIRECTORY_SEPARATOR . $name . $this->getDefaultSuffix();
 
-		$class = BSClassLoader::getInstance()->getClassName($class);
+		$class = BSClassLoader::getInstance()->getClass($class);
 		$file = new $class($path);
 		$file->setContents(null);
 		$this->entries = null;
@@ -282,7 +282,7 @@ class BSDirectory extends BSDirectoryEntry implements IteratorAggregate {
 	 * @access public
 	 * @return string エントリーのクラス名
 	 */
-	public function getDefaultEntryClassName () {
+	public function getDefaultEntryClass () {
 		return 'BSFile';
 	}
 

@@ -8,7 +8,7 @@
  * 画像ファイル
  *
  * @author 小石達也 <tkoishi@b-shock.co.jp>
- * @version $Id: BSImageFile.class.php 1632 2009-11-25 03:45:33Z pooza $
+ * @version $Id: BSImageFile.class.php 1756 2010-01-15 07:21:15Z pooza $
  */
 class BSImageFile extends BSFile implements BSImageContainer {
 	protected $renderer;
@@ -71,7 +71,7 @@ class BSImageFile extends BSFile implements BSImageContainer {
 				default:
 					throw new BSImageException($this . 'の形式が不明です。');
 			}
-			$class = BSClassLoader::getInstance()->getClassName($this->rendererClass);
+			$class = BSClassLoader::getInstance()->getClass($this->rendererClass);
 			$this->renderer = new $class($info[0], $info[1]);
 			$this->renderer->setType($type);
 			$this->renderer->setImage($image);

@@ -8,7 +8,7 @@
  * 必須バリデータ
  *
  * @author 小石達也 <tkoishi@b-shock.co.jp>
- * @version $Id: BSEmptyValidator.class.php 1608 2009-11-09 03:11:27Z pooza $
+ * @version $Id: BSEmptyValidator.class.php 1754 2010-01-14 11:04:40Z pooza $
  */
 class BSEmptyValidator extends BSValidator {
 
@@ -16,11 +16,11 @@ class BSEmptyValidator extends BSValidator {
 	 * 初期化
 	 *
 	 * @access public
-	 * @param string[] $parameters パラメータ配列
+	 * @param string[] $params パラメータ配列
 	 */
-	public function initialize ($parameters = array()) {
+	public function initialize ($params = array()) {
 		$this['required_msg'] = '空欄です。';
-		return parent::initialize($parameters);
+		return parent::initialize($params);
 	}
 
 	/**

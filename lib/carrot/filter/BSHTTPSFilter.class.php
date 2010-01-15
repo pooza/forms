@@ -8,12 +8,12 @@
  * HTTPSによるGETを強制するフィルタ
  *
  * @author 小石達也 <tkoishi@b-shock.co.jp>
- * @version $Id: BSHTTPSFilter.class.php 1596 2009-10-30 11:31:21Z pooza $
+ * @version $Id: BSHTTPSFilter.class.php 1754 2010-01-14 11:04:40Z pooza $
  */
 class BSHTTPSFilter extends BSFilter {
-	public function initialize ($parameters = array()) {
+	public function initialize ($params = array()) {
 		$this['base_url'] = BS_ROOT_URL_HTTPS;
-		return parent::initialize($parameters);
+		return parent::initialize($params);
 	}
 
 	public function execute () {

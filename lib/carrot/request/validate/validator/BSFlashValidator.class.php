@@ -8,7 +8,7 @@
  * Flashムービーバリデータ
  *
  * @author 小石達也 <tkoishi@b-shock.co.jp>
- * @version $Id: BSFlashValidator.class.php 1372 2009-08-18 13:45:18Z pooza $
+ * @version $Id: BSFlashValidator.class.php 1754 2010-01-14 11:04:40Z pooza $
  */
 class BSFlashValidator extends BSValidator {
 
@@ -16,11 +16,11 @@ class BSFlashValidator extends BSValidator {
 	 * 初期化
 	 *
 	 * @access public
-	 * @param string[] $parameters パラメータ配列
+	 * @param string[] $params パラメータ配列
 	 */
-	public function initialize ($parameters = array()) {
+	public function initialize ($params = array()) {
 		$this['type_error'] = 'ファイル形式が正しくありません。';
-		return parent::initialize($parameters);
+		return parent::initialize($params);
 	}
 
 	/**

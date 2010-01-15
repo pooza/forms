@@ -8,9 +8,10 @@
  * 基底URL
  *
  * @author 小石達也 <tkoishi@b-shock.co.jp>
- * @version $Id: BSURL.class.php 1641 2009-11-27 13:11:29Z pooza $
+ * @version $Id: BSURL.class.php 1756 2010-01-15 07:21:15Z pooza $
+ * @abstract
  */
-class BSURL implements ArrayAccess, BSAssignable {
+abstract class BSURL implements ArrayAccess, BSAssignable {
 	protected $attributes;
 	protected $contents;
 	const PATTERN = '^[[:alnum:]]+:(//)?[[:graph:]]+$';
@@ -33,31 +34,31 @@ class BSURL implements ArrayAccess, BSAssignable {
 	 * @return BSURL
 	 * @static
 	 */
-	static public function getInstance ($contents = null, $class = 'BSHTTPURL') {
+	static public function getInstance ($contents = null, $class = 'http') {
+		if (!$class = BSClassLoader::getInstance()->getClass($class, 'URL')) {
+			throw new BSNetException('URLクラスが見つかりません。');
+		}
+
 		if (BSString::isBlank($contents)) {
 			return new $class;
 		} else if (is_string($contents)) {
 			$params = new BSArray(parse_url($contents));
+		} else if (is_array($contents)) {
+			$params = new BSArray($contents);
 		} else if ($contents instanceof BSParameterHolder) {
 			$params = new BSArray($contents->getParameters());
-			if ($class == 'BSCarrotURL') {
-				$params = BSCarrotURL::parseParameters($params);
-			}
 		} else {
 			return null;
 		}
 
 		switch ($params['scheme']) {
-			case 'http':
-			case 'https':
-				return new $class($params);
 			case 'mailto':
 			case 'xmpp':
 			case 'tel':
 			case 'skype':
 				return new BSContactURL($params);
 			default:
-				return new BSURL($params);
+				return new $class($params);
 		}
 	}
 
@@ -85,7 +86,7 @@ class BSURL implements ArrayAccess, BSAssignable {
 	 */
 	public function setContents ($contents) {
 		$this->attributes->clear();
-		if (!BSArray::isArray($contents)) {
+		if (!is_array($contents) && !($contents instanceof BSParameterHolder)) {
 			if (!mb_ereg(self::PATTERN, $contents)) {
 				return false;
 			}

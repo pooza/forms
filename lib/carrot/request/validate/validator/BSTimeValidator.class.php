@@ -8,7 +8,7 @@
  * 時刻バリデータ
  *
  * @author 小石達也 <tkoishi@b-shock.co.jp>
- * @version $Id: BSTimeValidator.class.php 1066 2009-04-17 07:25:12Z pooza $
+ * @version $Id: BSTimeValidator.class.php 1754 2010-01-14 11:04:40Z pooza $
  */
 class BSTimeValidator extends BSValidator {
 
@@ -42,12 +42,12 @@ class BSTimeValidator extends BSValidator {
 	 * 初期化
 	 *
 	 * @access public
-	 * @param string[] $parameters パラメータ配列
+	 * @param string[] $params パラメータ配列
 	 */
-	public function initialize ($parameters = array()) {
+	public function initialize ($params = array()) {
 		$this['fields'] = array();
 		$this['invalid_error'] = '正しい時刻ではありません。';
-		return parent::initialize($parameters);
+		return parent::initialize($params);
 	}
 
 	/**

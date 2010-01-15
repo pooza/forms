@@ -8,7 +8,7 @@
  * 一覧画面用 アクションひな形
  *
  * @author 小石達也 <tkoishi@b-shock.co.jp>
- * @version $Id: BSTableAction.class.php 1651 2009-12-04 05:42:16Z pooza $
+ * @version $Id: BSTableAction.class.php 1756 2010-01-15 07:21:15Z pooza $
  * @abstract
  */
 abstract class BSTableAction extends BSAction {
@@ -52,7 +52,7 @@ abstract class BSTableAction extends BSAction {
 		if (BSString::isBlank($this->title)) {
 			if (BSString::isBlank($this->title = $this->getConfig('title'))) {
 				try {
-					$this->title = $this->getModule()->getRecordClassName('ja') . '一覧';
+					$this->title = $this->getModule()->getRecordClass('ja') . '一覧';
 				} catch (Exception $e) {
 					$this->title = $this->getName();
 				}

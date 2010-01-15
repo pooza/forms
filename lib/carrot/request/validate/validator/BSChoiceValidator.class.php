@@ -8,7 +8,7 @@
  * 選択バリデータ
  *
  * @author 小石達也 <tkoishi@b-shock.co.jp>
- * @version $Id: BSChoiceValidator.class.php 1722 2009-12-26 04:15:51Z pooza $
+ * @version $Id: BSChoiceValidator.class.php 1756 2010-01-15 07:21:15Z pooza $
  */
 class BSChoiceValidator extends BSValidator {
 
@@ -16,14 +16,14 @@ class BSChoiceValidator extends BSValidator {
 	 * 初期化
 	 *
 	 * @access public
-	 * @param string[] $parameters パラメータ配列
+	 * @param string[] $params パラメータ配列
 	 */
-	public function initialize ($parameters = array()) {
+	public function initialize ($params = array()) {
 		$this['class'] = null;
 		$this['function'] = 'getStatusOptions';
 		$this['choices'] = null;
 		$this['choices_error'] = '正しくありません。';
-		return parent::initialize($parameters);
+		return parent::initialize($params);
 	}
 
 	/**
@@ -56,9 +56,9 @@ class BSChoiceValidator extends BSValidator {
 		} else if ($this['class']) {
 			$classes = BSClassLoader::getInstance();
 			try {
-				$class = $classes->getClassName($this['class'], BSTableHandler::CLASS_SUFFIX);
+				$class = $classes->getClass($this['class'], BSTableHandler::CLASS_SUFFIX);
 			} catch (Exception $e) {
-				$class = $classes->getClassName($this['class']);
+				$class = $classes->getClass($this['class']);
 			}
 			$choices->setParameters(call_user_func(array($class, $this['function'])));
 			$choices = $choices->getKeys();

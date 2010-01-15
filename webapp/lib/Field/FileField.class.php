@@ -30,7 +30,7 @@ class FileField extends Field {
 	public function getTemporaryFile () {
 		return BSFileUtility::getDirectory('tmp')->getEntry(
 			$this->getTemporaryFileName(),
-			$this->getFileClassName()
+			$this->getFileClass()
 		);
 	}
 
@@ -66,7 +66,7 @@ class FileField extends Field {
 	 * @access public
 	 * @return string ファイルのクラス
 	 */
-	protected function getFileClassName () {
+	protected function getFileClass () {
 		return 'BSFile';
 	}
 

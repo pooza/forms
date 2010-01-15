@@ -8,7 +8,7 @@
  * ディレクトリレイアウト
  *
  * @author 小石達也 <tkoishi@b-shock.co.jp>
- * @version $Id: BSDirectoryLayout.class.php 1624 2009-11-19 07:44:11Z pooza $
+ * @version $Id: BSDirectoryLayout.class.php 1756 2010-01-15 07:21:15Z pooza $
  */
 class BSDirectoryLayout {
 	static private $instance;
@@ -79,7 +79,7 @@ class BSDirectoryLayout {
 			}
 
 			if (!BSString::isBlank($info['class'])) {
-				$class = BSClassLoader::getInstance()->getClassName($info['class']);
+				$class = BSClassLoader::getInstance()->getClass($info['class']);
 				$dir = new $class($dir->getPath());
 			}
 			if (!BSString::isBlank($info['suffix'])) {

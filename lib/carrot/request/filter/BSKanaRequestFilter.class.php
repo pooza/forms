@@ -8,7 +8,7 @@
  * フリガナ リクエストフィルタ
  *
  * @author 小石達也 <tkoishi@b-shock.co.jp>
- * @version $Id: BSKanaRequestFilter.class.php 738 2008-12-12 00:59:09Z pooza $
+ * @version $Id: BSKanaRequestFilter.class.php 1754 2010-01-14 11:04:40Z pooza $
  */
 class BSKanaRequestFilter extends BSRequestFilter {
 
@@ -24,9 +24,9 @@ class BSKanaRequestFilter extends BSRequestFilter {
 		return BSString::convertKana($value, $this['option']);
 	}
 
-	public function initialize ($parameters = array()) {
+	public function initialize ($params = array()) {
 		$this['option'] = 'KV';
-		return parent::initialize($parameters);
+		return parent::initialize($params);
 	}
 }
 

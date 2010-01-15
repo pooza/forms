@@ -10,7 +10,7 @@ BSUtility::includeFile('Smarty/Smarty.class.php');
  * Smartyラッパー
  *
  * @author 小石達也 <tkoishi@b-shock.co.jp>
- * @version $Id: BSSmarty.class.php 1744 2010-01-04 00:57:45Z pooza $
+ * @version $Id: BSSmarty.class.php 1754 2010-01-14 11:04:40Z pooza $
  */
 class BSSmarty extends Smarty implements BSTextRenderer {
 	private $type;
@@ -134,6 +134,7 @@ class BSSmarty extends Smarty implements BSTextRenderer {
 		if (!$template = $this->getTemplate()) {
 			throw new BSViewException('テンプレートが未定義です。');
 		}
+		$this->setAttribute('useragent', $this->getUserAgent());
 		return $template->compile();
 	}
 
@@ -194,7 +195,6 @@ class BSSmarty extends Smarty implements BSTextRenderer {
 	 */
 	public function setUserAgent (BSUserAgent $useragent) {
 		$this->useragent = $useragent;
-		$this->setAttribute('useragent', $useragent);
 	}
 
 	/**

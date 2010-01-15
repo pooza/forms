@@ -8,7 +8,7 @@
  * コマンドラインビルダー
  *
  * @author 小石達也 <tkoishi@b-shock.co.jp>
- * @version $Id: BSCommandLine.class.php 1558 2009-10-16 03:25:12Z pooza $
+ * @version $Id: BSCommandLine.class.php 1754 2010-01-14 11:04:40Z pooza $
  */
 class BSCommandLine extends BSParameterHolder {
 	private $command;
@@ -66,7 +66,7 @@ class BSCommandLine extends BSParameterHolder {
 		if ($flags & self::WITH_QUOTE) {
 			$value =  self::quote($value);
 		}
-		$this->parameters[] = $value;
+		$this->params[] = $value;
 	}
 
 	/**

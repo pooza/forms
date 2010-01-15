@@ -8,7 +8,7 @@
  * 設定マネージャ
  *
  * @author 小石達也 <tkoishi@b-shock.co.jp>
- * @version $Id: BSConfigManager.class.php 1603 2009-10-31 06:02:21Z pooza $
+ * @version $Id: BSConfigManager.class.php 1756 2010-01-15 07:21:15Z pooza $
  */
 class BSConfigManager {
 	private $compilers;
@@ -89,7 +89,7 @@ class BSConfigManager {
 		if (!BSUtility::isPathAbsolute($name)) {
 			$name = BS_WEBAPP_DIR . '/config/' . $name;
 		}
-		$class = BSClassLoader::getInstance()->getClassName($class);
+		$class = BSClassLoader::getInstance()->getClass($class);
 		foreach (array('.yaml', '.ini') as $suffix) {
 			$file = new $class($name . $suffix);
 			if ($file->isExists()) {

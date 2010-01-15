@@ -23,7 +23,7 @@ class FieldHandler extends BSSortableTableHandler {
 			return null;
 		}
 
-		$class = BSClassLoader::getInstance()->getClassName($record['field_type_id'], 'Field');
+		$class = BSClassLoader::getInstance()->getClass($record['field_type_id'], 'Field');
 		return new $class($this, $record->getAttributes()->getParameters());
 	}
 }

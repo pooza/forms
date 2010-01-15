@@ -8,7 +8,7 @@
  * ログディレクトリ
  *
  * @author 小石達也 <tkoishi@b-shock.co.jp>
- * @version $Id: BSLogDirectory.class.php 1600 2009-10-30 14:48:55Z pooza $
+ * @version $Id: BSLogDirectory.class.php 1756 2010-01-15 07:21:15Z pooza $
  */
 class BSLogDirectory extends BSDirectory {
 
@@ -40,7 +40,7 @@ class BSLogDirectory extends BSDirectory {
 	 * @access public
 	 * @return string エントリーのクラス名
 	 */
-	public function getDefaultEntryClassName () {
+	public function getDefaultEntryClass () {
 		return 'BSLogFile';
 	}
 

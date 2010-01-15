@@ -8,7 +8,7 @@
  * BASIC認証
  *
  * @author 小石達也 <tkoishi@b-shock.co.jp>
- * @version $Id: BSBasicAuthFilter.class.php 1597 2009-10-30 11:58:53Z pooza $
+ * @version $Id: BSBasicAuthFilter.class.php 1754 2010-01-14 11:04:40Z pooza $
  */
 class BSBasicAuthFilter extends BSFilter {
 
@@ -32,11 +32,11 @@ class BSBasicAuthFilter extends BSFilter {
 		return true;
 	}
 
-	public function initialize ($parameters = array()) {
+	public function initialize ($params = array()) {
 		$this['user_id'] = $this->controller->getAttribute('ADMIN_EMAIL');
 		$this['password'] = $this->controller->getAttribute('ADMIN_PASSWORD');
 		$this['realm'] = $this->controller->getHost()->getName();
-		return parent::initialize($parameters);
+		return parent::initialize($params);
 	}
 
 	public function execute () {

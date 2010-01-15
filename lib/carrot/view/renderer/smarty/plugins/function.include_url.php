@@ -8,13 +8,13 @@
  * 外部コンテンツをインクルード
  *
  * @author 小石達也 <tkoishi@b-shock.co.jp>
- * @version $Id: function.include_url.php 1642 2009-11-27 13:25:12Z pooza $
+ * @version $Id: function.include_url.php 1755 2010-01-15 06:55:07Z pooza $
  */
 function smarty_function_include_url ($params, &$smarty) {
 	$params = new BSArray($params);
 
 	if (BSString::isBlank($params['src'])) {
-		$url = BSURL::getInstance($params, 'BSCarrotURL');
+		$url = BSURL::getInstance($params, 'carrot');
 	} else {
 		$url = BSURL::getInstance($params['src']);
 	}
@@ -22,9 +22,9 @@ function smarty_function_include_url ($params, &$smarty) {
 		return null;
 	}
 
-	if ($url['host']->getName() == BSController::getInstance()->getHost()->getName()) {
-		if (($useragent = $smarty->getUserAgent()) && $useragent->isMobile()) {
-			$url->setParameters($useragent->getAttribute('query'));
+	if (!$url['host']->isForeign(BSController::getInstance()->getHost())) {
+		if ($useragent = $smarty->getUserAgent()) {
+			$url->setParameters($useragent->getQuery());
 		}
 	}
 	return $url->fetch();

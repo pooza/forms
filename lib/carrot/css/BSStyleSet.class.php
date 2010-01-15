@@ -8,7 +8,7 @@
  * スタイルセット
  *
  * @author 小石達也 <tkoishi@b-shock.co.jp>
- * @version $Id: BSStyleSet.class.php 1600 2009-10-30 14:48:55Z pooza $
+ * @version $Id: BSStyleSet.class.php 1756 2010-01-15 07:21:15Z pooza $
  */
 class BSStyleSet extends BSDocumentSet {
 
@@ -18,7 +18,7 @@ class BSStyleSet extends BSDocumentSet {
 	 * @access protected
 	 * @return string $name 書類のクラス名
 	 */
-	protected function getDocumentClassName () {
+	protected function getDocumentClass () {
 		return 'BSCSSFile';
 	}
 

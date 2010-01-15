@@ -8,7 +8,7 @@
  * モジュール
  *
  * @author 小石達也 <tkoishi@b-shock.co.jp>
- * @version $Id: BSModule.class.php 1652 2009-12-04 06:49:14Z pooza $
+ * @version $Id: BSModule.class.php 1756 2010-01-15 07:21:15Z pooza $
  */
 class BSModule implements BSHTTPRedirector, BSAssignable {
 	protected $name;
@@ -20,8 +20,8 @@ class BSModule implements BSHTTPRedirector, BSAssignable {
 	protected $prefix;
 	protected $record;
 	protected $table;
-	protected $parameters;
-	protected $recordClassName;
+	protected $params;
+	protected $recordClass;
 	static private $instances;
 	static private $prefixes = array();
 
@@ -77,7 +77,7 @@ class BSModule implements BSHTTPRedirector, BSAssignable {
 			$class = $name . 'Module';
 			if ($file = $module->getDirectory()->getEntry($class . '.class.php')) {
 				require_once($file->getPath());
-				$class = BSClassLoader::getInstance()->getClassName($class);
+				$class = BSClassLoader::getInstance()->getClass($class);
 				$module = new $class($name);
 			}
 			self::$instances[$name] = $module;
@@ -96,7 +96,7 @@ class BSModule implements BSHTTPRedirector, BSAssignable {
 			'name' => $this->getName(),
 			'title' => $this->getTitle(),
 			'title_menu' => $this->getMenuTitle(),
-			'record_class' => $this->getRecordClassName(),
+			'record_class' => $this->getRecordClass(),
 		));
 	}
 
@@ -119,7 +119,7 @@ class BSModule implements BSHTTPRedirector, BSAssignable {
 	public function getTitle () {
 		if (BSString::isBlank($this->title)) {
 			if (BSString::isBlank($title = $this->getConfig('title'))) {
-				if (BSString::isBlank($title = $this->getRecordClassName('ja'))) {
+				if (BSString::isBlank($title = $this->getRecordClass('ja'))) {
 					$title = $this->getName();
 				} else if ($this->isAdminModule()) {
 					$title .= '管理';
@@ -138,7 +138,7 @@ class BSModule implements BSHTTPRedirector, BSAssignable {
 	 */
 	public function getMenuTitle () {
 		if (BSString::isBlank($title = $this->getConfig('title_menu'))) {
-			if (BSString::isBlank($title = $this->getRecordClassName('ja'))) {
+			if (BSString::isBlank($title = $this->getRecordClass('ja'))) {
 				$title = $this->getName();
 			}
 		}
@@ -177,13 +177,13 @@ class BSModule implements BSHTTPRedirector, BSAssignable {
 	 * @return BSArray 検索条件キャッシュ
 	 */
 	public function getParameterCache () {
-		if (!$this->parameters) {
-			$this->parameters = new BSArray;
+		if (!$this->params) {
+			$this->params = new BSArray;
 			if ($params = $this->user->getAttribute($this->getParameterCacheName())) {
-				$this->parameters->setParameters($params);
+				$this->params->setParameters($params);
 			}
 		}
-		return $this->parameters;
+		return $this->params;
 	}
 
 	/**
@@ -193,10 +193,10 @@ class BSModule implements BSHTTPRedirector, BSAssignable {
 	 * @param BSArray $params 検索条件キャッシュ
 	 */
 	public function setParameterCache (BSArray $params) {
-		$this->parameters = clone $params;
-		$this->parameters->removeParameter(BSController::MODULE_ACCESSOR);
-		$this->parameters->removeParameter(BSController::ACTION_ACCESSOR);
-		$this->user->setAttribute($this->getParameterCacheName(), $this->parameters);
+		$this->params = clone $params;
+		$this->params->removeParameter(BSController::MODULE_ACCESSOR);
+		$this->params->removeParameter(BSController::ACTION_ACCESSOR);
+		$this->user->setAttribute($this->getParameterCacheName(), $this->params);
 	}
 
 	/**
@@ -225,7 +225,7 @@ class BSModule implements BSHTTPRedirector, BSAssignable {
 	 * @return BSTableHandler テーブル
 	 */
 	public function getTable () {
-		if (!$this->table && !BSString::isBlank($class = $this->getRecordClassName())) {
+		if (!$this->table && !BSString::isBlank($class = $this->getRecordClass())) {
 			$this->table = BSTableHandler::getInstance($class);
 		}
 		return $this->table;
@@ -300,7 +300,7 @@ class BSModule implements BSHTTPRedirector, BSAssignable {
 	 */
 	public function searchRecord (BSParameterHolder $params) {
 		if (BSString::isBlank($params['class'])) {
-			$params['class'] = $this->getRecordClassName();
+			$params['class'] = $this->getRecordClass();
 
 			if (BSString::isBlank($params['id'])) {
 				$params['id'] = $this->getRecord()->getID();
@@ -380,7 +380,7 @@ class BSModule implements BSHTTPRedirector, BSAssignable {
 		}
 		if (!$this->actions[$name]) {
 			require_once($file->getPath());
-			$class = BSClassLoader::getInstance()->getClassName($class);
+			$class = BSClassLoader::getInstance()->getClass($class);
 			$this->actions[$name] = new $class($this);
 		}
 		return $this->actions[$name];
@@ -442,7 +442,7 @@ class BSModule implements BSHTTPRedirector, BSAssignable {
 	 * @return BSURL
 	 */
 	public function getURL () {
-		$url = BSURL::getInstance(null, 'BSCarrotURL');
+		$url = BSURL::getInstance(null, 'carrot');
 		$url['module'] = $this;
 		return $url;
 	}
@@ -464,8 +464,8 @@ class BSModule implements BSHTTPRedirector, BSAssignable {
 	 * @param string $lang 言語 - 翻訳が必要な場合
 	 * @return string レコードクラス名
 	 */
-	public function getRecordClassName ($lang = null) {
-		if (!$this->recordClassName) {
+	public function getRecordClass ($lang = null) {
+		if (!$this->recordClass) {
 			if (BSString::isBlank($name = $this->getConfig('record_class'))) {
 				$pattern = '^' . $this->getPrefix() . '([[:upper:]][[:alpha:]]+)$';
 				if (mb_ereg($pattern, $this->getName(), $matches)) {
@@ -474,16 +474,16 @@ class BSModule implements BSHTTPRedirector, BSAssignable {
 			}
 			if (!BSString::isBlank($name)) {
 				try {
-					$this->recordClassName = BSClassLoader::getInstance()->getClassName($name);
+					$this->recordClass = BSClassLoader::getInstance()->getClass($name);
 				} catch (Exception $e) {
 					return null;
 				}
 			}
 		}
 		if (BSString::isBlank($lang)) {
-			return $this->recordClassName;
+			return $this->recordClass;
 		} else {
-			$word = BSString::underscorize($this->recordClassName);
+			$word = BSString::underscorize($this->recordClass);
 			return BSTranslateManager::getInstance()->execute($word);
 		}
 	}

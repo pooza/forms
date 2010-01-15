@@ -8,13 +8,13 @@
  * 禁止されたUserAgent
  *
  * @author 小石達也 <tkoishi@b-shock.co.jp>
- * @version $Id: BSDeniedUserAgentFilter.class.php 1598 2009-10-30 12:26:03Z pooza $
+ * @version $Id: BSDeniedUserAgentFilter.class.php 1754 2010-01-14 11:04:40Z pooza $
  */
 class BSDeniedUserAgentFilter extends BSFilter {
-	public function initialize ($parameters = array()) {
+	public function initialize ($params = array()) {
 		$this['module'] = 'Default';
 		$this['action'] = 'DeniedUserAgent';
-		return parent::initialize($parameters);
+		return parent::initialize($params);
 	}
 
 	public function execute () {

@@ -8,7 +8,7 @@
  * 一致バリデータ
  *
  * @author 小石達也 <tkoishi@b-shock.co.jp>
- * @version $Id: BSPairValidator.class.php 1635 2009-11-27 09:49:03Z pooza $
+ * @version $Id: BSPairValidator.class.php 1754 2010-01-14 11:04:40Z pooza $
  */
 class BSPairValidator extends BSValidator {
 
@@ -16,9 +16,9 @@ class BSPairValidator extends BSValidator {
 	 * 初期化
 	 *
 	 * @access public
-	 * @param string[] $parameters パラメータ配列
+	 * @param string[] $params パラメータ配列
 	 */
-	public function initialize ($parameters = array()) {
+	public function initialize ($params = array()) {
 		$this['field'] = null;
 		$this['equal'] = true;
 		$this['equal_error'] = '一致しません。';
@@ -26,7 +26,7 @@ class BSPairValidator extends BSValidator {
 		$this['lesser_error'] = '小さすぎます。';
 		$this['greater'] = false;
 		$this['greater_error'] = '大きすぎます。';
-		return parent::initialize($parameters);
+		return parent::initialize($params);
 	}
 
 	/**

@@ -8,7 +8,7 @@
  * 辞書ディレクトリ
  *
  * @author 小石達也 <tkoishi@b-shock.co.jp>
- * @version $Id: BSDictionaryDirectory.class.php 1600 2009-10-30 14:48:55Z pooza $
+ * @version $Id: BSDictionaryDirectory.class.php 1756 2010-01-15 07:21:15Z pooza $
  */
 class BSDictionaryDirectory extends BSDirectory {
 
@@ -40,7 +40,7 @@ class BSDictionaryDirectory extends BSDirectory {
 	 * @access public
 	 * @return string エントリーのクラス名
 	 */
-	public function getDefaultEntryClassName () {
+	public function getDefaultEntryClass () {
 		return 'BSDictionaryFile';
 	}
 }

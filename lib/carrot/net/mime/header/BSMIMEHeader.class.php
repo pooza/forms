@@ -8,7 +8,7 @@
  * 基底ヘッダ
  *
  * @author 小石達也 <tkoishi@b-shock.co.jp>
- * @version $Id: BSMIMEHeader.class.php 1617 2009-11-17 09:03:29Z pooza $
+ * @version $Id: BSMIMEHeader.class.php 1751 2010-01-13 09:48:30Z pooza $
  * @abstract
  */
 class BSMIMEHeader extends BSParameterHolder {

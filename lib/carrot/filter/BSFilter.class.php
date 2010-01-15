@@ -8,17 +8,17 @@
  * 抽象フィルタ
  *
  * @author 小石達也 <tkoishi@b-shock.co.jp>
- * @version $Id: BSFilter.class.php 1271 2009-06-14 02:06:07Z pooza $
+ * @version $Id: BSFilter.class.php 1754 2010-01-14 11:04:40Z pooza $
  * @abstract
  */
 abstract class BSFilter extends BSParameterHolder {
 
 	/**
 	 * @access public
-	 * @param string[] $parameters パラメータ配列
+	 * @param string[] $params パラメータ配列
 	 */
-	public function __construct ($parameters = array()) {
-		$this->initialize($parameters);
+	public function __construct ($params = array()) {
+		$this->initialize($params);
 	}
 
 	/**
@@ -45,11 +45,11 @@ abstract class BSFilter extends BSParameterHolder {
 	 * 初期化
 	 *
 	 * @access public
-	 * @param mixed[] $parameters パラメータ
+	 * @param mixed[] $params パラメータ
 	 * @return boolean 初期化が成功すればTrue
 	 */
-	public function initialize ($parameters = array()) {
-		$this->setParameters($parameters);
+	public function initialize ($params = array()) {
+		$this->setParameters($params);
 		return true;
 	}
 

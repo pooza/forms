@@ -8,7 +8,7 @@
  * データベーステーブル
  *
  * @author 小石達也 <tkoishi@b-shock.co.jp>
- * @version $Id: BSTableHandler.class.php 1734 2009-12-29 04:20:30Z pooza $
+ * @version $Id: BSTableHandler.class.php 1756 2010-01-15 07:21:15Z pooza $
  * @abstract
  */
 abstract class BSTableHandler implements IteratorAggregate, BSDictionary, BSAssignable {
@@ -21,7 +21,7 @@ abstract class BSTableHandler implements IteratorAggregate, BSDictionary, BSAssi
 	private $executed = false;
 	private $result = array();
 	private $queryString;
-	private $recordClassName;
+	private $recordClass;
 	private $name;
 	private $fieldNames = array();
 	private $ids;
@@ -316,7 +316,7 @@ abstract class BSTableHandler implements IteratorAggregate, BSDictionary, BSAssi
 					}
 				}
 				if ($match) {
-					$class = $this->getRecordClassName();
+					$class = $this->getRecordClass();
 					return new $class($this, $record);
 				}
 			}
@@ -327,7 +327,7 @@ abstract class BSTableHandler implements IteratorAggregate, BSDictionary, BSAssi
 			}
 			if ($table->count() == 1) {
 				$table->query();
-				$class = $this->getRecordClassName();
+				$class = $this->getRecordClass();
 				return new $class($this, $table->result[0]);
 			}
 		}
@@ -706,7 +706,7 @@ abstract class BSTableHandler implements IteratorAggregate, BSDictionary, BSAssi
 	 */
 	public function getName () {
 		if (!$this->name) {
-			$this->name = BSString::underscorize($this->getRecordClassName());
+			$this->name = BSString::underscorize($this->getRecordClass());
 		}
 		return $this->name;
 	}
@@ -717,16 +717,16 @@ abstract class BSTableHandler implements IteratorAggregate, BSDictionary, BSAssi
 	 * @access protected
 	 * @return string レコードクラス名
 	 */
-	protected function getRecordClassName () {
-		if (!$this->recordClassName) {
+	protected function getRecordClass () {
+		if (!$this->recordClass) {
 			$class = get_class($this);
 			if (mb_ereg('^([[:alpha:]]+)' . self::CLASS_SUFFIX . '$', $class, $matches)) {
-				$this->recordClassName = BSClassLoader::getInstance()->getClassName($matches[1]);
+				$this->recordClass = BSClassLoader::getInstance()->getClass($matches[1]);
 			} else {
 				throw new BSDatabaseException($class . 'のクラス名が正しくありません。');
 			}
 		}
-		return $this->recordClassName;
+		return $this->recordClass;
 	}
 
 	/**

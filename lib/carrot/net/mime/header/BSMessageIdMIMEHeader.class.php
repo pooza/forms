@@ -8,7 +8,7 @@
  * Message-IDヘッダ
  *
  * @author 小石達也 <tkoishi@b-shock.co.jp>
- * @version $Id: BSMessageIdMIMEHeader.class.php 1543 2009-10-09 10:16:09Z pooza $
+ * @version $Id: BSMessageIdMIMEHeader.class.php 1751 2010-01-13 09:48:30Z pooza $
  */
 class BSMessageIdMIMEHeader extends BSMIMEHeader {
 	private $id;

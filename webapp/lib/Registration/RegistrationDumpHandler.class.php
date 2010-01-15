@@ -72,7 +72,7 @@ class RegistrationDumpHandler extends RegistrationHandler implements BSExportabl
 	 * @access protected
 	 * @return string レコードクラス名
 	 */
-	protected function getRecordClassName () {
+	protected function getRecordClass () {
 		return 'Registration';
 	}
 

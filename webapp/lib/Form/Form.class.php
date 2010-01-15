@@ -225,7 +225,7 @@ class Form extends BSRecord implements
 	 * @return BSURL 添付ファイルURL
 	 */
 	public function getAttachmentURL ($name = null) {
-		$url = BSURL::getInstance(null, 'BSCarrotURL');
+		$url = BSURL::getInstance(null, 'carrot');
 		$url['module'] = 'AdminForm';
 		$url['action'] = 'Attachment';
 		$url['record'] = $this;
@@ -278,7 +278,7 @@ class Form extends BSRecord implements
 	 * @return BSURL
 	 */
 	public function getURL () {
-		$url = BSURL::getInstance(null, 'BSCarrotURL');
+		$url = BSURL::getInstance(null, 'carrot');
 		$url['module'] = 'UserForm';
 		$url['action'] = 'Register';
 		$url['record'] = $this;

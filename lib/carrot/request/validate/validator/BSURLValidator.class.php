@@ -8,7 +8,7 @@
  * URLバリデータ
  *
  * @author 小石達也 <tkoishi@b-shock.co.jp>
- * @version $Id: BSURLValidator.class.php 1685 2009-12-14 07:30:31Z pooza $
+ * @version $Id: BSURLValidator.class.php 1754 2010-01-14 11:04:40Z pooza $
  */
 class BSURLValidator extends BSValidator {
 
@@ -16,16 +16,16 @@ class BSURLValidator extends BSValidator {
 	 * 初期化
 	 *
 	 * @access public
-	 * @param string[] $parameters パラメータ配列
+	 * @param string[] $params パラメータ配列
 	 */
-	public function initialize ($parameters = array()) {
+	public function initialize ($params = array()) {
 		$this['net_error'] = '正しくありません。';
 		$this['schemes'] = array('http', 'https');
 		$this['scheme_error'] = sprintf(
 			'スキーム(%s)が正しくありません。',
 			join('|', $this['schemes'])
 		);
-		return BSValidator::initialize($parameters);
+		return BSValidator::initialize($params);
 	}
 
 	private function getSchemes () {

@@ -8,7 +8,7 @@
  * form要素
  *
  * @author 小石達也 <tkoishi@b-shock.co.jp>
- * @version $Id: BSFormElement.class.php 1675 2009-12-12 13:27:54Z pooza $
+ * @version $Id: BSFormElement.class.php 1755 2010-01-15 06:55:07Z pooza $
  */
 class BSFormElement extends BSXHTMLElement {
 	const ATTACHABLE_TYPE = 'multipart/form-data';
@@ -20,15 +20,10 @@ class BSFormElement extends BSXHTMLElement {
 	 */
 	public function __construct ($name = null, BSUserAgent $useragent = null) {
 		parent::__construct($name);
-		if ($this->useragent->isMobile()) {
-			foreach ($this->useragent->getAttribute('query') as $key => $value) {
-				$this->addHiddenField($key, $value);
-			}
-
-			// DoCoMoのSSL環境で、以下の対応が必要？
-			$session = BSRequest::getInstance()->getSession();
-			$this->addHiddenField($session->getName(), $session->getID());
-		} else {
+		foreach ($this->useragent->getQuery() as $key => $value) {
+			$this->addHiddenField($key, $value);
+		}
+		if (!$this->useragent->isMobile()) {
 			$this->disableMultiSubmit();
 		}
 	}
@@ -80,7 +75,7 @@ class BSFormElement extends BSXHTMLElement {
 			$this->setAttribute('action', $action->getURL()->getContents());
 		} else if ($action instanceof BSParameterHolder) {
 			if (BSString::isBlank($action['path'])) {
-				$this->setAction(BSURL::getInstance($action, 'BSCarrotURL'));
+				$this->setAction(BSURL::getInstance($action, 'carrot'));
 			} else {
 				$this->setAction($action['path']);
 			}

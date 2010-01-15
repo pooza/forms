@@ -10,7 +10,7 @@
  * BSJavaScriptSet/BSStyleSetの基底クラス
  *
  * @author 小石達也 <tkoishi@b-shock.co.jp>
- * @version $Id: BSDocumentSet.class.php 1722 2009-12-26 04:15:51Z pooza $
+ * @version $Id: BSDocumentSet.class.php 1756 2010-01-15 07:21:15Z pooza $
  * @abstract
  */
 abstract class BSDocumentSet implements BSTextRenderer, IteratorAggregate {
@@ -53,7 +53,7 @@ abstract class BSDocumentSet implements BSTextRenderer, IteratorAggregate {
 	 * @return string 書類クラス
 	 * @abstract
 	 */
-	abstract protected function getDocumentClassName ();
+	abstract protected function getDocumentClass ();
 
 	/**
 	 * ディレクトリを返す
@@ -115,7 +115,7 @@ abstract class BSDocumentSet implements BSTextRenderer, IteratorAggregate {
 			if (!$dir = $this->getDirectory()) {
 				throw new BSInitializationException($this . 'のディレクトリが未定義です。');
 			}
-			if (!$entry = $dir->getEntry($entry, $this->getDocumentClassName())) {
+			if (!$entry = $dir->getEntry($entry, $this->getDocumentClass())) {
 				return;
 			}
 		}
@@ -185,7 +185,7 @@ abstract class BSDocumentSet implements BSTextRenderer, IteratorAggregate {
 	 */
 	public function getType () {
 		if (!$this->type) {
-			$file = BSFileUtility::getTemporaryFile(null, $this->getDocumentClassName());
+			$file = BSFileUtility::getTemporaryFile(null, $this->getDocumentClass());
 			$this->type = $file->getType();
 			$file->delete();
 		}

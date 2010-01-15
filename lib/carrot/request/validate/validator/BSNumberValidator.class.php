@@ -8,7 +8,7 @@
  * 数値バリデータ
  *
  * @author 小石達也 <tkoishi@b-shock.co.jp>
- * @version $Id: BSNumberValidator.class.php 1436 2009-09-05 13:03:25Z pooza $
+ * @version $Id: BSNumberValidator.class.php 1754 2010-01-14 11:04:40Z pooza $
  */
 class BSNumberValidator extends BSValidator {
 
@@ -16,15 +16,15 @@ class BSNumberValidator extends BSValidator {
 	 * 初期化
 	 *
 	 * @access public
-	 * @param string[] $parameters パラメータ配列
+	 * @param string[] $params パラメータ配列
 	 */
-	public function initialize ($parameters = array()) {
+	public function initialize ($params = array()) {
 		$this['max'] = null;
 		$this['max_error'] = '値が大きすぎます。';
 		$this['min'] = null;
 		$this['min_error'] = '値が小さすぎます。';
 		$this['nan_error'] = '数値を入力して下さい。';
-		return parent::initialize($parameters);
+		return parent::initialize($params);
 	}
 
 	/**

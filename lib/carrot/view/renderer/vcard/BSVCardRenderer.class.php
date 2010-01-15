@@ -8,7 +8,7 @@
  * vCard2.1レンダラー
  *
  * @author 小石達也 <tkoishi@b-shock.co.jp>
- * @version $Id: BSVCardRenderer.class.php 1469 2009-09-11 12:40:31Z pooza $
+ * @version $Id: BSVCardRenderer.class.php 1754 2010-01-14 11:04:40Z pooza $
  */
 class BSVCardRenderer extends BSParameterHolder implements BSRenderer {
 	private $contents;
@@ -33,7 +33,7 @@ class BSVCardRenderer extends BSParameterHolder implements BSRenderer {
 	}
 
 	private function getFieldContents ($key) {
-		$entry = new BSArray($this->parameters[$key]);
+		$entry = new BSArray($this->params[$key]);
 		$body = $entry->pop();
 		foreach ($entry as $param) {
 			if (mb_eregi('^charset=(.*)$', $param, $matches)) {

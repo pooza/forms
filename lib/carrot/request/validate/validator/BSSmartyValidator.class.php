@@ -8,7 +8,7 @@
  * Smartyバリデータ
  *
  * @author 小石達也 <tkoishi@b-shock.co.jp>
- * @version $Id: BSSmartyValidator.class.php 1558 2009-10-16 03:25:12Z pooza $
+ * @version $Id: BSSmartyValidator.class.php 1754 2010-01-14 11:04:40Z pooza $
  */
 class BSSmartyValidator extends BSValidator {
 
@@ -16,11 +16,11 @@ class BSSmartyValidator extends BSValidator {
 	 * 初期化
 	 *
 	 * @access public
-	 * @param string[] $parameters パラメータ配列
+	 * @param string[] $params パラメータ配列
 	 */
-	public function initialize ($parameters = array()) {
+	public function initialize ($params = array()) {
 		$this['invalid_encoding_error'] = '正しいエンコードではありません。';
-		return parent::initialize($parameters);
+		return parent::initialize($params);
 	}
 
 	/**

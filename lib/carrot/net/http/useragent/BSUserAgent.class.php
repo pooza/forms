@@ -8,7 +8,7 @@
  * ユーザーエージェント
  *
  * @author 小石達也 <tkoishi@b-shock.co.jp>
- * @version $Id: BSUserAgent.class.php 1748 2010-01-09 10:30:57Z pooza $
+ * @version $Id: BSUserAgent.class.php 1756 2010-01-15 07:21:15Z pooza $
  * @abstract
  */
 abstract class BSUserAgent implements BSAssignable {
@@ -44,7 +44,7 @@ abstract class BSUserAgent implements BSAssignable {
 		if (!$type) {
 			$type = self::getDefaultType($useragent);
 		}
-		$class = BSClassLoader::getInstance()->getClassName($type, 'UserAgent');
+		$class = BSClassLoader::getInstance()->getClass($type, 'UserAgent');
 		return new $class($useragent);
 	}
 
@@ -136,6 +136,16 @@ abstract class BSUserAgent implements BSAssignable {
 	 */
 	public function createSession () {
 		return new BSSessionHandler;
+	}
+
+	/**
+	 * クエリーパラメータを返す
+	 *
+	 * @access public
+	 * @return BSWWWFormRenderer
+	 */
+	public function getQuery () {
+		return new BSWWWFormRenderer;
 	}
 
 	/**
@@ -278,6 +288,8 @@ abstract class BSUserAgent implements BSAssignable {
 	 * @return mixed アサインすべき値
 	 */
 	public function getAssignValue () {
+		$this->attributes['query'] = $this->getQuery();
+		$this->attributes['query_params'] = $this->getQuery()->getContents();
 		return $this->attributes;
 	}
 

@@ -8,7 +8,7 @@
  * Webコントローラー
  *
  * @author 小石達也 <tkoishi@b-shock.co.jp>
- * @version $Id: BSWebController.class.php 1596 2009-10-30 11:31:21Z pooza $
+ * @version $Id: BSWebController.class.php 1754 2010-01-14 11:04:40Z pooza $
  */
 class BSWebController extends BSController {
 	static private $instance;
@@ -48,14 +48,7 @@ class BSWebController extends BSController {
 			$url = BSURL::getInstance();
 			$url['path'] = $redirectTo;
 		}
-
-		$session = $this->request->getSession();
-		$url->setParameters($this->request->getUserAgent()->getAttribute('query'));
-		if ($this->request->isMobile()) {
-			// DoCoMoのSSL環境で、以下の対応が必要？
-			$url->setParameter($session->getName(), $session->getID());
-		}
-
+		$url->setParameters($this->request->getUserAgent()->getQuery());
 		$this->setHeader('Location', $url->getContents());
 		return BSView::NONE;
 	}

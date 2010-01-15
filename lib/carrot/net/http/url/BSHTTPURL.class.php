@@ -8,7 +8,7 @@
  * HTTPスキーマのURL
  *
  * @author 小石達也 <tkoishi@b-shock.co.jp>
- * @version $Id: BSHTTPURL.class.php 1742 2010-01-03 14:40:25Z pooza $
+ * @version $Id: BSHTTPURL.class.php 1755 2010-01-15 06:55:07Z pooza $
  */
 class BSHTTPURL extends BSURL implements BSHTTPRedirector, BSImageContainer {
 	private $fullpath;
@@ -23,16 +23,7 @@ class BSHTTPURL extends BSURL implements BSHTTPRedirector, BSImageContainer {
 	protected function __construct ($contents = null) {
 		$this->attributes = new BSArray;
 		$this->query = new BSWWWFormRenderer;
-		if (BSString::isBlank($contents)) {
-			if (BSRequest::getInstance()->isSSL()) {
-				$this['scheme'] = 'https';
-			} else {
-				$this['scheme'] = 'http';
-			}
-			$this['host'] = BSController::getInstance()->getHost();
-		} else {
-			$this->setContents($contents);
-		}
+		$this->setContents($contents);
 	}
 
 	/**
@@ -79,12 +70,21 @@ class BSHTTPURL extends BSURL implements BSHTTPRedirector, BSImageContainer {
 	 * @param mixed $contents URL
 	 */
 	public function setContents ($contents) {
-		if (BSArray::isArray($contents)
-			&& BSString::isBlank($contents['scheme'])
-			&& BSString::isBlank($contents['host'])
-			&& BSRequest::getInstance()->isSSL()) {
-
-			$contents['scheme'] = 'https';
+		if (is_string($contents) || BSString::isBlank($contents)) {
+			$contents = parse_url($contents);
+		}
+		if (is_array($contents) || ($contents instanceof BSParameterHolder)) {
+			$contents = new BSArray($contents);
+		}
+		if (BSString::isBlank($contents['scheme'])) {
+			if (BSRequest::getInstance()->isSSL()) {
+				$contents['scheme'] = 'https';
+			} else {
+				$contents['scheme'] = 'http';
+			}
+		}
+		if (BSString::isBlank($contents['host'])) {
+			$contents['host'] = BSController::getInstance()->getHost();
 		}
 		parent::setContents($contents);
 	}
@@ -151,14 +151,14 @@ class BSHTTPURL extends BSURL implements BSHTTPRedirector, BSImageContainer {
 	 * パラメータを設定
 	 *
 	 * @access public
-	 * @param mixed $parameters パラメータ文字列、又は配列
+	 * @param mixed $params パラメータ文字列、又は配列
 	 */
-	public function setParameters ($parameters) {
-		if (!BSArray::isArray($parameters)) {
-			parse_str($parameters, $parsed);
-			$parameters = (array)$parsed;
+	public function setParameters ($params) {
+		if (!is_array($params) && !($params instanceof BSParameterHolder)) {
+			parse_str($params, $parsed);
+			$params = (array)$parsed;
 		}
-		$this->query->setParameters($parameters);
+		$this->query->setParameters($params);
 	}
 
 	/**

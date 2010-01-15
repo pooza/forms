@@ -8,12 +8,12 @@
  * クレデンシャル認証
  *
  * @author 小石達也 <tkoishi@b-shock.co.jp>
- * @version $Id: BSSecurityFilter.class.php 1598 2009-10-30 12:26:03Z pooza $
+ * @version $Id: BSSecurityFilter.class.php 1754 2010-01-14 11:04:40Z pooza $
  */
 class BSSecurityFilter extends BSFilter {
-	public function initialize ($parameters = array()) {
+	public function initialize ($params = array()) {
 		$this['credential'] = $this->action->getCredential();
-		return parent::initialize($parameters);
+		return parent::initialize($params);
 	}
 
 	public function execute () {

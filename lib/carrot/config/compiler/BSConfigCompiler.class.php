@@ -8,17 +8,17 @@
  * 抽象設定コンパイラ
  *
  * @author 小石達也 <tkoishi@b-shock.co.jp>
- * @version $Id: BSConfigCompiler.class.php 1737 2010-01-02 12:19:26Z pooza $
+ * @version $Id: BSConfigCompiler.class.php 1754 2010-01-14 11:04:40Z pooza $
  */
 abstract class BSConfigCompiler extends BSParameterHolder {
 	private $body;
 
 	/**
 	 * @access public
-	 * @param string[] $parameters パラメータ
+	 * @param string[] $params パラメータ
 	 */
-	public function __construct ($parameters = array()) {
-		$this->initialize($parameters);
+	public function __construct ($params = array()) {
+		$this->initialize($params);
 	}
 
 	/**
@@ -43,12 +43,12 @@ abstract class BSConfigCompiler extends BSParameterHolder {
 	 * 初期化
 	 *
 	 * @access public
-	 * @param string[] $parameters パラメータ
+	 * @param string[] $params パラメータ
 	 * @return boolean 成功ならばTrue
 	 * @static
 	 */
-	public function initialize ($parameters = array()) {
-		$this->setParameters($parameters);
+	public function initialize ($params = array()) {
+		$this->setParameters($params);
 	}
 
 	/**

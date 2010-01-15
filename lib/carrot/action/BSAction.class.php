@@ -8,7 +8,7 @@
  * アクション
  *
  * @author 小石達也 <tkoishi@b-shock.co.jp>
- * @version $Id: BSAction.class.php 1712 2009-12-24 08:13:40Z pooza $
+ * @version $Id: BSAction.class.php 1756 2010-01-15 07:21:15Z pooza $
  * @abstract
  */
 abstract class BSAction implements BSHTTPRedirector, BSAssignable, BSValidatorContainer {
@@ -228,7 +228,7 @@ abstract class BSAction implements BSHTTPRedirector, BSAssignable, BSValidatorCo
 			$basename = $this->getName() . $name . 'View';
 			if ($file = $dir->getEntry($basename . '.class.php')) {
 				require_once($file->getPath());
-				$class = BSClassLoader::getInstance()->getClassName($basename);
+				$class = BSClassLoader::getInstance()->getClass($basename);
 			}
 		}
 
@@ -370,7 +370,7 @@ abstract class BSAction implements BSHTTPRedirector, BSAssignable, BSValidatorCo
 	 * @return BSURL
 	 */
 	public function getURL () {
-		$url = BSURL::getInstance(null, 'BSCarrotURL');
+		$url = BSURL::getInstance(null, 'carrot');
 		$url['action'] = $this;
 		return $url;
 	}

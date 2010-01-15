@@ -8,7 +8,7 @@
  * 文字列バリデータ
  *
  * @author 小石達也 <tkoishi@b-shock.co.jp>
- * @version $Id: BSStringValidator.class.php 1339 2009-07-21 01:01:48Z pooza $
+ * @version $Id: BSStringValidator.class.php 1754 2010-01-14 11:04:40Z pooza $
  */
 class BSStringValidator extends BSValidator {
 	const MAX_SIZE = 1024;
@@ -17,15 +17,15 @@ class BSStringValidator extends BSValidator {
 	 * 初期化
 	 *
 	 * @access public
-	 * @param string[] $parameters パラメータ配列
+	 * @param string[] $params パラメータ配列
 	 */
-	public function initialize ($parameters = array()) {
+	public function initialize ($params = array()) {
 		$this['max'] = self::MAX_SIZE;
 		$this['max_error'] = '長すぎます。';
 		$this['min'] = null;
 		$this['min_error'] = '短すぎます。';
 		$this['invalid_error'] = '正しくありません。';
-		return parent::initialize($parameters);
+		return parent::initialize($params);
 	}
 
 	/**

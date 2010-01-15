@@ -8,7 +8,7 @@
  * 正規表現バリデータ
  *
  * @author 小石達也 <tkoishi@b-shock.co.jp>
- * @version $Id: BSRegexValidator.class.php 1469 2009-09-11 12:40:31Z pooza $
+ * @version $Id: BSRegexValidator.class.php 1754 2010-01-14 11:04:40Z pooza $
  */
 class BSRegexValidator extends BSValidator {
 
@@ -16,13 +16,13 @@ class BSRegexValidator extends BSValidator {
 	 * 初期化
 	 *
 	 * @access public
-	 * @param string[] $parameters パラメータ配列
+	 * @param string[] $params パラメータ配列
 	 */
-	public function initialize ($parameters = array()) {
+	public function initialize ($params = array()) {
 		$this['match'] = true;
 		$this['match_error'] = '正しくありません。';
 		$this['pattern'] = null;
-		parent::initialize($parameters);
+		parent::initialize($params);
 
 		if (!$this['pattern']) {
 			throw new BSValidateException('正規表現パターンが指定されていません。');
