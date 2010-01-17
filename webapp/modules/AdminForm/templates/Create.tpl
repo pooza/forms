@@ -28,7 +28,7 @@
 		<tr>
 			<th>メールアドレス</th>
 			<td>
-				<input type="text" name="email" value="{$params.email}" size="48" maxlength="64" class="english" />
+				<input type="text" name="email" value="{$params.email}" size="24" maxlength="64" class="english" />
 			</td>
 		</tr>
 		<tr>
