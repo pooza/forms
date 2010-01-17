@@ -29,6 +29,8 @@ class SingleAnswerField extends ChoiceField {
 				} else if (mb_ereg('^=(.*)$', $choice, $matches)) {
 					$prefix = $matches[1];
 					$this->choicesGrouped[$prefix] = $group = new BSArray;
+				} else if (mb_ereg('^-(.*)$', $choice, $matches)) {
+					$group[self::EMPTY_VALUE] = $matches[1];
 				} else {
 					if (BSString::isBlank($prefix)) {
 						$group[$choice] = $choice;

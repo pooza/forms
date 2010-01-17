@@ -13,6 +13,7 @@
 abstract class ChoiceField extends Field {
 	protected $choices;
 	protected $statistics;
+	const EMPTY_VALUE = '__EMPTY__';
 
 	/**
 	 * バリデータ登録
@@ -27,7 +28,10 @@ abstract class ChoiceField extends Field {
 			$params = array('max' => 256);
 			$manager->register($this->getName(), new BSStringValidator($params));
 		}
-		$params = array('choices' => $this->getChoices());
+
+		$choices = clone $this->getChoices();
+		$choices->removeParameter(self::EMPTY_VALUE);
+		$params = array('choices' => $choices, 'choices_error' => '空欄、又は正しくありません。');
 		$manager->register($this->getName(), new BSChoiceValidator($params));
 	}
 
@@ -46,6 +50,8 @@ abstract class ChoiceField extends Field {
 					continue;
 				} else if (mb_ereg('^=(.*)$', $choice, $matches)) {
 					$prefix = $matches[1] . ':';
+				} else if (mb_ereg('^-(.*)$', $choice, $matches)) {
+					$this->choices[self::EMPTY_VALUE] = $matches[1];
 				} else {
 					$value = $prefix . $choice;
 					$this->choices[$value] = $value;
