@@ -24,7 +24,6 @@ class CommitAction extends BSRecordAction {
 			$this->database->rollback();
 			return $this->handleError();
 		}
-		$this->user->removeAttribute('answer');
 		return $this->getModule()->getAction('Thanx')->redirect();
 	}
 
