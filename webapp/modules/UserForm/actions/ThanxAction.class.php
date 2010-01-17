@@ -9,7 +9,7 @@
  */
 class ThanxAction extends BSRecordAction {
 	public function execute () {
-		$this->setAttribute('answer', $this->user->getAttribute('answer'));
+		$this->request->setAttribute('answer', $this->user->getAttribute('answer'));
 		return BSView::SUCCESS;
 	}
 }
