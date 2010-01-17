@@ -14,6 +14,7 @@ class Form extends BSRecord implements
 	private $exporter;
 	private $fields;
 	private $registrations;
+	private $email;
 
 	/**
 	 * 更新可能か？
@@ -73,6 +74,23 @@ class Form extends BSRecord implements
 		}
 
 		return $new->getID();
+	}
+
+	/**
+	 * メールアドレスを返す
+	 *
+	 * @access public
+	 * @return BSMailAddress メールアドレス
+	 */
+	public function getMailAddress () {
+		if (!$this->email) {
+			if ($email = $this['email']) {
+				$this->email = BSMailAddress::getInstance($email);
+			} else {
+				$this->email = BSAuthorRole::getInstance()->getMailAddress();
+			}
+		}
+		return $this->email;
 	}
 
 	/**
@@ -344,6 +362,16 @@ class Form extends BSRecord implements
 	}
 
 	/**
+	 * シリアライズするか？
+	 *
+	 * @access public
+	 * @return boolean シリアライズするならTrue
+	 */
+	public function isSerializable () {
+		return true;
+	}
+
+	/**
 	 * 全てのファイル属性
 	 *
 	 * @access protected
@@ -352,6 +380,7 @@ class Form extends BSRecord implements
 	protected function getFullAttributes () {
 		$values = $this->getAttributes();
 		$values['url'] = $this->getURL()->getContents();
+		$values['email'] = $this->getMailAddress()->getContents();
 		foreach (FormHandler::getAttachmentNames() as $field) {
 			if ($this->getAttachment($field)) {
 				$values['has_' . $field] = true;

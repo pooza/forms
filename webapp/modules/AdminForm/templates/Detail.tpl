@@ -63,6 +63,12 @@
 				</td>
 			</tr>
 			<tr>
+				<th>メールアドレス</th>
+				<td>
+					<input type="text" name="email" value="{$params.email}" size="48" maxlength="64" class="english" />
+				</td>
+			</tr>
+			<tr>
 				<th>フォーム<br/>テンプレート</th>
 				<td>
 					<input type="file" name="form_template" size="48" /><br/>
