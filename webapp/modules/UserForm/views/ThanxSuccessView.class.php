@@ -16,6 +16,8 @@ class ThanxSuccessView extends BSSmartyView {
 		}
 		$this->setTemplate($this->getModule()->getRecord()->getTemplateFile($template));
 		$this->translator->register($this->getModule()->getRecord(), BSArray::POSITION_TOP);
+
+		$this->setAttribute('has_image', $this->user->getAttribute('has_image'));
 	}
 }
 

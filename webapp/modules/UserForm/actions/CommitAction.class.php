@@ -11,12 +11,14 @@ class CommitAction extends BSRecordAction {
 	public function execute () {
 		try {
 			$this->database->beginTransaction();
-			$registration = $this->getRecord()->registerAnswer(
-				new BSArray($this->user->getAttribute('answer'))
-			);
+			$answer = new BSArray($this->user->getAttribute('answer'));
+			$registration = $this->getRecord()->registerAnswer($answer);
 			$registration->sendMail('thanx_mail');
 			$registration->sendMail('Registration.registered');
 			$this->database->commit();
+
+			$this->user->setAttribute('has_image', !!$answer['image']);
+			$this->user->removeAttribute('answer');
 		} catch (BSDatabaseException $e) {
 			$this->database->rollback();
 			return $this->handleError();
