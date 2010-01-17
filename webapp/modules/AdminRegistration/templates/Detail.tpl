@@ -49,7 +49,7 @@
 			{$answer|nl2br}
 
 		{if $field=='birthday'}
-			({$answer|age}歳)
+			({$answer|date2age}歳)
 		{/if}
 	{/if}
 		</td>
