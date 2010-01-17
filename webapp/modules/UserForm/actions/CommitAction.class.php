@@ -17,7 +17,7 @@ class CommitAction extends BSRecordAction {
 			$registration->sendMail('Registration.registered');
 			$this->database->commit();
 
-			$this->user->setAttribute('has_image', !!$answer['image']);
+			$this->user->setAttribute('has_image', !!$answer['image']['name']);
 			$this->user->removeAttribute('answer');
 		} catch (BSDatabaseException $e) {
 			$this->database->rollback();
