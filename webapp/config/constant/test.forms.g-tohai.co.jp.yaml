@@ -1,0 +1,29 @@
+# ホスト別設定ファイル
+#
+# @package jp.co.commons.forms
+# @author 小石達也 <tkoishi@b-shock.co.jp>
+# @version $Id$
+
+root_url: http://test.forms.g-tohai.co.jp/
+root_url_https: http://test.forms.g-tohai.co.jp/
+debug: yes
+
+admin:
+  email: admin@www.g-tohai.co.jp
+  password: cf7f6a4127097714e01463e40bdcc07986dd8cb9
+
+author:
+  email: gt@g-tohai.co.jp
+  name: 株式会社劇団東俳
+
+root_site:
+  root_url: http://test.www.g-tohai.co.jp/
+
+pdo:
+  default:
+    dsn: mysql:host=localhost;dbname=forms_test
+    uid: tohai
+    password: UmFuZG9tSVbFpBSkK7pIpzZRMwdlkeHHXS9GPfI7Dh0=
+
+smtp:
+  host: www.g-tohai.co.jp
