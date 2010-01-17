@@ -119,13 +119,14 @@ class FileField extends Field {
 		parent::registerValidators();
 
 		$params = new BSArray(array('suffixes' => BSFileValidator::ATTACHABLE));
-		$validator = new BSFileValidator;
 		$server = BSController::getInstance()->getHost();
 		if ($file = BSConfigManager::getConfigFile('validator/' . $server->getName())) {
 			$config = new BSArray(BSConfigManager::getInstance()->compile($file));
-			$params->setParameters($config['file']);
-			$validator->initialize($params);
+			if ($config['file'] && isset($config['file']['params'])) {
+				$params->setParameters($config['file']['params']);
+			}
 		}
+		$validator = new BSFileValidator($params);
 
 		BSValidateManager::getInstance()->register($this->getName(), $validator);
 	}

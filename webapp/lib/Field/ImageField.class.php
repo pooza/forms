@@ -30,13 +30,14 @@ class ImageField extends FileField {
 		parent::registerValidators();
 
 		$params = new BSArray;
-		$validator = new BSImageValidator;
 		$server = BSController::getInstance()->getHost();
 		if ($file = BSConfigManager::getConfigFile('validator/' . $server->getName())) {
 			$config = new BSArray(BSConfigManager::getInstance()->compile($file));
-			$params->setParameters($config['image']);
-			$validator->initialize($params);
+			if ($config['image'] && isset($config['image']['params'])) {
+				$params->setParameters($config['image']['params']);
+			}
 		}
+		$validator = new BSImageValidator($params);
 
 		BSValidateManager::getInstance()->register($this->getName(), $validator);
 	}
