@@ -2,13 +2,15 @@
 #
 # @package org.carrot-framework
 # @author 小石達也 <tkoishi@b-shock.co.jp>
-# @version $Id: movie_format.yaml 1704 2009-12-21 14:33:54Z pooza $
+# @version $Id: movie_format.yaml 1758 2010-01-17 04:04:35Z pooza $
 
 types:
   flv: video/x-flv
   mov: video/quicktime
-  m4a: video/quicktime
   h264: video/quicktime
+  mpg: video/mpeg
+  mpeg: video/mpeg
+  mp4: video/mp4
   wmv1: video/x-ms-wmv
   wmv2: video/x-ms-wmv
   wmv3: video/x-ms-wmv

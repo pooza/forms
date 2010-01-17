@@ -8,7 +8,7 @@
  * コマンドラインビルダー
  *
  * @author 小石達也 <tkoishi@b-shock.co.jp>
- * @version $Id: BSCommandLine.class.php 1754 2010-01-14 11:04:40Z pooza $
+ * @version $Id: BSCommandLine.class.php 1760 2010-01-17 04:15:44Z pooza $
  */
 class BSCommandLine extends BSParameterHolder {
 	private $command;
@@ -122,7 +122,10 @@ class BSCommandLine extends BSParameterHolder {
 	 */
 	public function getContents () {
 		if ($this->directory) {
-			$contents = $this->directory->getPath() . DIRECTORY_SEPARATOR . $this->command;
+			if (!$file = $this->directory->getEntry($this->command)) {
+				throw new BSConsoleException($this->command . 'が見つかりません。');
+			}
+			$contents = $file->getPath();
 		} else {
 			$contents = $this->command;
 		}
