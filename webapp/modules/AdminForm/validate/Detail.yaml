@@ -11,6 +11,9 @@ methods:
 fields:
   name:
     required: yes
+  email:
+    validators:
+      - email
   form_template:
     file: yes
     validators:

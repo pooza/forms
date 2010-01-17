@@ -18,6 +18,7 @@ class CreateAction extends BSRecordAction {
 	protected function getRecordValues () {
 		return array(
 			'name' => $this->request['name'],
+			'email' => $this->request['email'],
 			'status' => $this->request['status'],
 		);
 	}
