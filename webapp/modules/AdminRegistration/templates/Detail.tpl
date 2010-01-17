@@ -45,7 +45,12 @@
 		{if $form.fields[$field].is_file}
 			<a href="{carrot_url module='AdminRegistration' action='Attachment' record=$registration.id param_name=$form.fields[$field].name}"><img src="/carrotlib/images/document.gif" width="16" height="16" alt="ダウンロード" /></a>
 		{/if}
+
 			{$answer|nl2br}
+
+		{if $field=='birthday'}
+			({$answer|age}歳)
+		{/if}
 	{/if}
 		</td>
 	</tr>
