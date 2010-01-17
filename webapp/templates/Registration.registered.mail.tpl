@@ -16,6 +16,7 @@ To: {$form.email}
 {else}
 To: {const name='author_email'}
 {/if}
+X-Priority: 3
 
 フォーム:
 {$form.name|default:'(不明)'}
