@@ -6,8 +6,8 @@
 @version $Id$
 *}
 Subject: [{const name='app_name_ja'}] {$form.name|default:'(不明)'}
-From: {const name='admin_email'}
-To: {const name='author_email'}
+From: {if $registration.answers.email}{$registration.answers.email}{else}{const name='admin_email'}{/if}
+To: {if $form.email}{$form.email}{else}{const name='author_email'}{/if}
 
 フォーム:
 {$form.name|default:'(不明)'}
