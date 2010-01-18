@@ -8,7 +8,7 @@
  * Atom0.3エントリー
  *
  * @author 小石達也 <tkoishi@b-shock.co.jp>
- * @version $Id: BSAtom03Entry.class.php 1607 2009-11-09 03:10:36Z pooza $
+ * @version $Id: BSAtom03Entry.class.php 1765 2010-01-18 01:19:46Z pooza $
  */
 class BSAtom03Entry extends BSXMLElement implements BSFeedEntry {
 	protected $document;
@@ -90,7 +90,7 @@ class BSAtom03Entry extends BSXMLElement implements BSFeedEntry {
 	 * @param BSDate $date 日付
 	 */
 	public function setDate (BSDate $date) {
-		foreach (array('published', 'created') as $field) {
+		foreach (array('published', 'created', 'updated') as $field) {
 			if (!$element = $this->getElement($field)) {
 				$element = $this->createElement($field);
 			}
