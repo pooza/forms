@@ -1,8 +1,8 @@
--- MySQL dump 10.13  Distrib 5.4.3-beta, for apple-darwin10.2.0 (i386)
+-- MySQL dump 10.13  Distrib 5.5.0-m2, for apple-darwin10.2.0 (i386)
 --
 -- Host: localhost    Database: forms
 -- ------------------------------------------------------
--- Server version	5.4.3-beta
+-- Server version	5.5.0-m2
 
 /*!40101 SET @OLD_CHARACTER_SET_CLIENT=@@CHARACTER_SET_CLIENT */;
 /*!40101 SET @OLD_CHARACTER_SET_RESULTS=@@CHARACTER_SET_RESULTS */;
@@ -84,6 +84,8 @@ DROP TABLE IF EXISTS `form`;
 CREATE TABLE `form` (
   `id` smallint(5) unsigned NOT NULL AUTO_INCREMENT,
   `name` varchar(32) NOT NULL,
+  `email` varchar(64) DEFAULT NULL,
+  `rank` smallint(5) unsigned DEFAULT NULL,
   `status` enum('show','hide') NOT NULL DEFAULT 'hide',
   `create_date` datetime NOT NULL,
   `update_date` datetime NOT NULL,
@@ -189,4 +191,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2009-12-24 12:10:51
+-- Dump completed on 2010-01-19 11:22:38

@@ -9,8 +9,9 @@
  * @author 小石達也 <tkoishi@b-shock.co.jp>
  * @version $Id$
  */
-class Form extends BSRecord implements
+class Form extends BSSortableRecord implements
 	BSAttachmentContainer, BSHTTPRedirector, BSValidatorContainer, BSDictionary {
+	private $similars;
 	private $exporter;
 	private $fields;
 	private $registrations;
@@ -74,6 +75,19 @@ class Form extends BSRecord implements
 		}
 
 		return $new->getID();
+	}
+
+	/**
+	 * 同種のレコードを返す
+	 *
+	 * @access public
+	 * @return SortableTableHandler テーブル
+	 */
+	public function getSimilars () {
+		if (!$this->similars) {
+			$this->similars = new FormHandler;
+		}
+		return $this->similars;
 	}
 
 	/**

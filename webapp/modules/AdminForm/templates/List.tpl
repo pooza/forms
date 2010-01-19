@@ -17,38 +17,47 @@
 <h1>{$action.title}</h1>
 <table>
 	<tr>
-		<th width="480">名前</th>
+		<th width="420">名前</th>
+		<th width="60"></th>
 	</tr>
 
 {if $credentials.AdminEdit}
 	<tr>
-		<td colspan="1">
+		<td colspan="2">
 			<a href="/{$module.name}/Create">新しいフォームを登録...</a>
 		</td>
 	</tr>
 {/if}
 
-{foreach from=$forms item='form'}
+{foreach from=$forms item='form' name='forms'}
 	<tr class="{$form.status}">
-		<td width="480"><a href="/{$module.name}/Detail/{$form.id}">{$form.name}</a></td>
+		<td width="420"><a href="/{$module.name}/Detail/{$form.id}">{$form.name}</a></td>
+		<td width="60" align="center">
+	{if $credentials.AdminEdit}
+		{if $smarty.foreach.forms.first}
+			<img src="/carrotlib/images/navigation_arrow/top_off.gif" width="11" height="11" alt="TOP"/>
+			<img src="/carrotlib/images/navigation_arrow/up_off.gif" width="11" height="11" alt="UP"/>
+		{else}
+			<a href="/{$module.name}/SetRank/{$form.id}?option=top"><img src="/carrotlib/images/navigation_arrow/top_on.gif" width="11" height="11" alt="TOP"/></a>
+			<a href="/{$module.name}/SetRank/{$form.id}?option=up"><img src="/carrotlib/images/navigation_arrow/up_on.gif" width="11" height="11" alt="UP"/></a>
+		{/if}
+
+		{if $smarty.foreach.forms.last}
+			<img src="/carrotlib/images/navigation_arrow/down_off.gif" width="11" height="11" alt="DOWN"/>
+			<img src="/carrotlib/images/navigation_arrow/bottom_off.gif" width="11" height="11" alt="DOWN"/>
+		{else}
+			<a href="/{$module.name}/SetRank/{$form.id}?option=down"><img src="/carrotlib/images/navigation_arrow/down_on.gif" width="11" height="11" alt="DOWN"/></a>
+			<a href="/{$module.name}/SetRank/{$form.id}?option=bottom"><img src="/carrotlib/images/navigation_arrow/bottom_on.gif" width="11" height="11" alt="BOTTOM"/></a>
+		{/if}
+	{/if}
+		</td>
 	</tr>
 {foreachelse}
 	<tr>
-		<td colspan="1" class="alert">登録されていません。</td>
+		<td colspan="2" class="alert">登録されていません。</td>
 	</tr>
 {/foreach}
 
-	<tr>
-		<td colspan="1" style="text-align:center">
-{strip}
-			<span><a href="{if 1<$page}/{$module.name}/{$action.name}?page=1{else}javascript:void(){/if}"><img src="/carrotlib/images/navigation_arrow/left3.gif" width="14" height="14" alt="|&lt;" /></a></span>&nbsp;
-			<span><a href="{if 1<$page}/{$module.name}/{$action.name}?page={$page-1}{else}javascript:void(){/if}"><img src="/carrotlib/images/navigation_arrow/left1.gif" width="14" height="14" alt="&lt;" /></a></span>&nbsp;
-			[{$page}]&nbsp;
-			<span><a href="{if $page<$lastpage}/{$module.name}/{$action.name}?page={$page+1}{else}javascript:void(){/if}"><img src="/carrotlib/images/navigation_arrow/right1.gif" width="14" height="14" alt="&gt;" /></a></span>&nbsp;
-			<span><a href="{if $page<$lastpage}/{$module.name}/{$action.name}?page={$lastpage}{else}javascript:void(){/if}"><img src="/carrotlib/images/navigation_arrow/right3.gif" width="14" height="14" alt="&gt;|" /></a></span>
-{/strip}
-		</td>
-	</tr>
 </table>
 
 {include file='AdminFooter'}
