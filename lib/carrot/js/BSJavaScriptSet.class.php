@@ -8,7 +8,7 @@
  * JavaScriptセット
  *
  * @author 小石達也 <tkoishi@b-shock.co.jp>
- * @version $Id: BSJavaScriptSet.class.php 1756 2010-01-15 07:21:15Z pooza $
+ * @version $Id: BSJavaScriptSet.class.php 1773 2010-01-24 05:10:09Z pooza $
  */
 class BSJavaScriptSet extends BSDocumentSet {
 
@@ -23,13 +23,35 @@ class BSJavaScriptSet extends BSDocumentSet {
 	}
 
 	/**
-	 * ディレクトリを返す
+	 * ソースディレクトリを返す
 	 *
 	 * @access protected
-	 * @return BSDirectory ディレクトリ
+	 * @return BSDirectory ソースディレクトリ
 	 */
-	protected function getDirectory () {
+	protected function getSourceDirectory () {
 		return BSFileUtility::getDirectory('js');
+	}
+
+	/**
+	 * キャッシュディレクトリを返す
+	 *
+	 * @access protected
+	 * @return BSDirectory キャッシュディレクトリ
+	 */
+	protected function getCacheDirectory () {
+		return BSFileUtility::getDirectory('js_cache');
+	}
+
+	/**
+	 * @access public
+	 * @return string 基本情報
+	 */
+	public function __toString () {
+		return sprintf(
+			'JavaScriptセット "%s"(%s)',
+			$this->getName(),
+			$this->getCacheFile()->getShortPath()
+		);
 	}
 }
 

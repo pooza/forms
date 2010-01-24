@@ -8,7 +8,7 @@
  * script要素
  *
  * @author 小石達也 <tkoishi@b-shock.co.jp>
- * @version $Id: BSScriptElement.class.php 1675 2009-12-12 13:27:54Z pooza $
+ * @version $Id: BSScriptElement.class.php 1772 2010-01-24 03:12:35Z pooza $
  */
 class BSScriptElement extends BSXHTMLElement {
 
@@ -20,6 +20,10 @@ class BSScriptElement extends BSXHTMLElement {
 	public function __construct ($name = null, BSUserAgent $useragent = null) {
 		parent::__construct($name, $useragent);
 		$this->setAttribute('type', 'text/javascript');
+
+		if (!$this->useragent->isMobile()) {
+			$this->setAttribute('charset', 'utf-8');
+		}
 	}
 }
 

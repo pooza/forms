@@ -2,7 +2,7 @@
 #
 # @package org.carrot-framework
 # @author 小石達也 <tkoishi@b-shock.co.jp>
-# @version $Id: mime.yaml 1758 2010-01-17 04:04:35Z pooza $
+# @version $Id: mime.yaml 1771 2010-01-23 08:12:21Z pooza $
 
 types:
   css: text/css
@@ -11,6 +11,7 @@ types:
   doc: application/vnd.ms-word
   docx: application/vnd.openxmlformats-officedocument.wordprocessingml.document
   eml: message/rfc822
+  eps: application/postscript
   flv: video/x-flv
   gif: image/gif
   gz: application/x-gzip
@@ -41,6 +42,8 @@ types:
   sql:
   swf: application/x-shockwave-flash
   tgz: application/x-gzip
+  tif: image/tiff
+  tiff: image/tiff
   tpl:
   ttf: application/x-truetype-font
   txt: text/plain

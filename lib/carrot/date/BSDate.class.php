@@ -8,7 +8,7 @@
  * 日付
  *
  * @author 小石達也 <tkoishi@b-shock.co.jp>
- * @version $Id: BSDate.class.php 1602 2009-10-31 05:56:40Z pooza $
+ * @version $Id: BSDate.class.php 1770 2010-01-23 07:34:16Z pooza $
  */
 class BSDate implements ArrayAccess, BSAssignable {
 	const MON = 1;
@@ -277,29 +277,38 @@ class BSDate implements ArrayAccess, BSAssignable {
 	 * @return boolean 妥当な日付ならtrue
 	 */
 	public function validate () {
-		return checkdate($this['month'], $this['day'], $this['year'])
+		return (checkdate($this['month'], $this['day'], $this['year'])
 			&& (0 <= $this['hour']) && ($this['hour'] <= 23)
 			&& (0 <= $this['minute']) && ($this['minute'] <= 59)
 			&& (0 <= $this['second']) && ($this['second'] <= 59)
-			&& ($this->getTimestamp() !== false);
+			&& ($this->getTimestamp() !== false)
+		);
 	}
 
 	/**
 	 * 指定日付よりも過去か？
 	 *
+	 * 配列が与えられたら、その中の最新日付と比較。
+	 *
 	 * @access public
-	 * @param BSDate $now 比較対象の日付
+	 * @param mixed $date 比較対象の日付またはその配列
 	 * @return boolean 過去日付ならtrue
 	 */
-	public function isPast (BSDate $now = null) {
+	public function isPast ($date = null) {
 		if (!$this->validate()) {
 			throw new BSDateException('日付が初期化されていません。');
 		}
 
-		if (!$now) {
-			$now = self::getNow();
+		if ($date === null) {
+			$date = self::getNow();
+		} else if (BSArray::isArray($date)) {
+			$date = self::getNewest(new BSArray($date));
+		} else if (!($date instanceof BSDate)) {
+			if (!$date = BSDate::getInstance($date)) {
+				throw new BSDateException('日付が正しくありません。');
+			}
 		}
-		return ($this->getTimestamp() < $now->getTimestamp());
+		return ($this->getTimestamp() < $date->getTimestamp());
 	}
 
 	/**
@@ -645,6 +654,29 @@ class BSDate implements ArrayAccess, BSAssignable {
 			$days[$day] = $day;
 		}
 		return $days;
+	}
+
+	/**
+	 * 配列の中から、最も新しい日付を返す
+	 *
+	 * @access public
+	 * @param BSArray 日付の配列
+	 * @return BSDate 最も新しい日付
+	 * @static
+	 */
+	static public function getNewest (BSArray $dates) {
+		$newest = null;
+		foreach ($dates as $date) {
+			if (!($date instanceof BSDate)) {
+				if (!$date = self::getInstance($date)) {
+					throw new BSDateException('日付でない要素が含まれています。');
+				}
+			}
+			if (!$newest || $newest->isPast($date)) {
+				$newest = $date;
+			}
+		}
+		return $newest;
 	}
 
 	/**

@@ -2,10 +2,12 @@
 /**
  * JavaScriptアクション
  *
+ * 利用非推奨。BSSmartyの js_cache 関数を利用すること。
+ *
  * @package org.carrot-framework
  * @subpackage Default
  * @author 小石達也 <tkoishi@b-shock.co.jp>
- * @version $Id: JavaScriptAction.class.php 1598 2009-10-30 12:26:03Z pooza $
+ * @version $Id: JavaScriptAction.class.php 1777 2010-01-24 08:21:54Z pooza $
  */
 class JavaScriptAction extends BSAction {
 	private $jsset;

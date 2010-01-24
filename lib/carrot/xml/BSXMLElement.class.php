@@ -8,7 +8,7 @@
  * XML要素
  *
  * @author 小石達也 <tkoishi@b-shock.co.jp>
- * @version $Id: BSXMLElement.class.php 1697 2009-12-18 15:56:24Z pooza $
+ * @version $Id: BSXMLElement.class.php 1772 2010-01-24 03:12:35Z pooza $
  */
 class BSXMLElement implements IteratorAggregate {
 	protected $contents;
@@ -17,6 +17,7 @@ class BSXMLElement implements IteratorAggregate {
 	protected $attributes;
 	protected $elements;
 	protected $raw = false;
+	protected $empty = false;
 
 	/**
 	 * @access public
@@ -170,7 +171,17 @@ class BSXMLElement implements IteratorAggregate {
 	 * @return boolean 空要素ならTrue
 	 */
 	public function isEmptyElement () {
-		return false;
+		return $this->empty;
+	}
+
+	/**
+	 * 空要素かを設定
+	 *
+	 * @access public
+	 * @param boolean $flag 空要素ならTrue
+	 */
+	public function setEmptyElement ($flag) {
+		$this->empty = $flag;
 	}
 
 	/**

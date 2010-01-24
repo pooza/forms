@@ -8,7 +8,7 @@
  * form要素
  *
  * @author 小石達也 <tkoishi@b-shock.co.jp>
- * @version $Id: BSFormElement.class.php 1755 2010-01-15 06:55:07Z pooza $
+ * @version $Id: BSFormElement.class.php 1772 2010-01-24 03:12:35Z pooza $
  */
 class BSFormElement extends BSXHTMLElement {
 	const ATTACHABLE_TYPE = 'multipart/form-data';
@@ -137,6 +137,7 @@ class BSFormElement extends BSXHTMLElement {
 	 */
 	public function addHiddenField ($name, $value) {
 		$hidden = $this->createElement('input');
+		$hidden->setEmptyElement(true);
 		$hidden->setAttribute('type', 'hidden');
 		$hidden->setAttribute('name', $name);
 		$hidden->setAttribute('value', $value);

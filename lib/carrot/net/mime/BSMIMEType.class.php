@@ -8,7 +8,7 @@
  * MIMEタイプ
  *
  * @author 小石達也 <tkoishi@b-shock.co.jp>
- * @version $Id: BSMIMEType.class.php 1761 2010-01-17 06:20:14Z pooza $
+ * @version $Id: BSMIMEType.class.php 1775 2010-01-24 06:11:05Z pooza $
  */
 class BSMIMEType extends BSParameterHolder {
 	static private $instance;
@@ -20,12 +20,12 @@ class BSMIMEType extends BSParameterHolder {
 	 * @access private
 	 */
 	private function __construct () {
-		$expire = $this->getTypesFile()->getUpdateDate();
-		if (!$this->getConfigFile()->getUpdateDate()->isPast($expire)) {
-			$expire = $this->getConfigFile()->getUpdateDate();
-		}
+		$date = BSDate::getNewest(new BSArray(array(
+			$this->getTypesFile()->getUpdateDate(),
+			$this->getConfigFile()->getUpdateDate(),
+		)));
 
-		if ($params = BSController::getInstance()->getAttribute($this, $expire)) {
+		if ($params = BSController::getInstance()->getAttribute($this, $date)) {
 			$this->setParameters($params);
 		} else {
 			$this->parse();
@@ -173,6 +173,23 @@ class BSMIMEType extends BSParameterHolder {
 			$type = self::DEFAULT_TYPE;
 		}
 		return $type;
+	}
+
+	/**
+	 * ファイル内容からメディアタイプを返す
+	 *
+	 * @access public
+	 * @param BSFile $file ファイル
+	 * @return string メディアタイプ
+	 * @static
+	 */
+	static public function analyzeType (BSFile $file) {
+		if (!extension_loaded('fileinfo')) {
+			throw new BSFileException('fileinfoモジュールがロードされていません。');
+		}
+		$types = self::getInstance();
+		$finfo = new finfo(FILEINFO_MIME);
+		return $finfo->file($file->getPath());
 	}
 }
 
