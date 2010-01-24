@@ -11,7 +11,7 @@
 <html xmlns="http://www.w3.org/1999/xhtml" xml:lang="ja" lang="ja">
 <head>
 <title>{const name='app_name_ja'} {$title}</title>
-<script type="text/javascript" src="/JavaScript" charset="utf-8"></script>
+{js_cache name=$jsset}
 </head>
 <body>
 	<script type="text/javascript">
