@@ -10,13 +10,14 @@ ini_set('auto_detect_line_endings', true);
  * ファイル
  *
  * @author 小石達也 <tkoishi@b-shock.co.jp>
- * @version $Id: BSFile.class.php 1775 2010-01-24 06:11:05Z pooza $
+ * @version $Id: BSFile.class.php 1781 2010-01-26 04:33:59Z pooza $
  */
 class BSFile extends BSDirectoryEntry implements BSRenderer {
 	private $mode;
 	private $lines;
 	private $size;
 	private $handle;
+	private $compressed;
 	private $error;
 	const LINE_SEPARATOR = "\n";
 	const COMPRESSED_SUFFIX = '.gz';
@@ -286,6 +287,7 @@ class BSFile extends BSDirectoryEntry implements BSRenderer {
 		$contents = gzencode($this->getContents(), 9);
 		$this->setContents($contents);
 		$this->rename($this->getName() . self::COMPRESSED_SUFFIX);
+		$this->compressed = true;
 	}
 
 	/**
@@ -295,8 +297,16 @@ class BSFile extends BSDirectoryEntry implements BSRenderer {
 	 * @return boolean gzip圧縮されていたらTrue
 	 */
 	public function isCompressed () {
-		// BSMIMEType等を通る無限ループが発生する為、$this->getType()は使用できない。
-		return ($this->getSuffix() == self::COMPRESSED_SUFFIX);
+		if ($this->compressed === null) {
+			if (extension_loaded('fileinfo')) {
+				$header = new BSContentTypeMIMEHeader;
+				$header->setContents($this->analyzeType());
+				$this->compressed = ($header['type'] == 'application/x-gzip');
+			} else {
+				$this->compressed = ($this->getSuffix() == self::COMPRESSED_SUFFIX);
+			}
+		}
+		return $this->compressed;
 	}
 
 	/**

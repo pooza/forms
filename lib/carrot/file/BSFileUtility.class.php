@@ -10,7 +10,7 @@ ini_set('auto_detect_line_endings', true);
  * ファイルユーティリティ
  *
  * @author 小石達也 <tkoishi@b-shock.co.jp>
- * @version $Id: BSFileUtility.class.php 1673 2009-12-12 07:46:33Z pooza $
+ * @version $Id: BSFileUtility.class.php 1779 2010-01-26 02:43:04Z pooza $
  */
 class BSFileUtility {
 
@@ -41,7 +41,23 @@ class BSFileUtility {
 	 * @static
 	 */
 	static public function getPath ($name) {
-		return self::getDirectory($name)->getPath();
+		if ($dir = self::getDirectory($name)) {
+			return $dir->getPath();
+		}
+	}
+
+	/**
+	 * 特別なディレクトリのURLを返す
+	 *
+	 * @access public
+	 * @param string $name ディレクトリの名前
+	 * @return BSHTTPURL URL
+	 * @static
+	 */
+	static public function getURL ($name) {
+		if (self::getDirectory($name)) {
+			return BSDirectoryLayout::getInstance()->getURL($name);
+		}
 	}
 
 	/**

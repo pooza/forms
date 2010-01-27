@@ -1,0 +1,9 @@
+# バリデーション設定ファイル
+#
+# @package org.carrot-framework
+# @subpackage AdminUtility
+# @author 小石達也 <tkoishi@b-shock.co.jp>
+# @version $Id: Backup.yaml 1791 2010-01-27 04:04:18Z pooza $
+
+methods:
+  - POST

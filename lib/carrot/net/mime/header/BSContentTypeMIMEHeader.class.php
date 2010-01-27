@@ -8,7 +8,7 @@
  * Content-Typeヘッダ
  *
  * @author 小石達也 <tkoishi@b-shock.co.jp>
- * @version $Id: BSContentTypeMIMEHeader.class.php 1545 2009-10-10 07:13:02Z pooza $
+ * @version $Id: BSContentTypeMIMEHeader.class.php 1780 2010-01-26 03:32:51Z pooza $
  */
 class BSContentTypeMIMEHeader extends BSMIMEHeader {
 
@@ -40,6 +40,7 @@ class BSContentTypeMIMEHeader extends BSMIMEHeader {
 		$type = BSString::explode('/', $this[0]);
 		$this['main_type'] = $type[0];
 		$this['sub_type'] = $type[1];
+		$this['type'] = $type[0] . '/' . $type[1];
 	}
 
 	/**

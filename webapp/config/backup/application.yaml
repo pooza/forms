@@ -1,0 +1,10 @@
+# バックアップ設定ファイル
+#
+# @package __PACKAGE__
+# @author 小石達也 <tkoishi@b-shock.co.jp>
+# @version $Id: application.yaml 1791 2010-01-27 04:04:18Z pooza $
+
+databases:
+  - default
+directories:
+  #- log

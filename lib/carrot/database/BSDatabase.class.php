@@ -8,7 +8,7 @@
  * データベース接続
  *
  * @author 小石達也 <tkoishi@b-shock.co.jp>
- * @version $Id: BSDatabase.class.php 1756 2010-01-15 07:21:15Z pooza $
+ * @version $Id: BSDatabase.class.php 1789 2010-01-27 03:06:29Z pooza $
  * @abstract
  */
 abstract class BSDatabase extends PDO implements ArrayAccess, BSAssignable {
@@ -335,27 +335,48 @@ abstract class BSDatabase extends PDO implements ArrayAccess, BSAssignable {
 	}
 
 	/**
-	 * ダンプファイルを生成
+	 * ダンプファイル生成してを返す
 	 *
 	 * @access public
-	 * @param string $suffix ファイル名サフィックス
 	 * @param BSDirectory $dir 出力先ディレクトリ
 	 * @return BSFile ダンプファイル
 	 */
-	public function createDumpFile ($suffix = null, BSDirectory $dir = null) {
-		return null;
+	public function createDumpFile (BSDirectory $dir = null) {
+		if (!$dir) {
+			$dir = BSFileUtility::getDirectory('dump');
+		}
+
+		try {
+			$name = sprintf('%s_%s.sql', $this->getName(), BSDate::getNow('Y-m-d'));
+			$file = $dir->createEntry($name);
+			$file->setContents($this->dump());
+			$dir->purge();
+		} catch (Exception $e) {
+			return;
+		}
+
+		$this->putLog($this . 'のダンプファイルを保存しました。');
+		return $file;
 	}
 
 	/**
-	 * スキーマファイルを生成
+	 * バックアップ対象ファイルを返す
 	 *
 	 * @access public
-	 * @param string $suffix ファイル名サフィックス
-	 * @param BSDirectory $dir 出力先ディレクトリ
-	 * @return BSFile スキーマファイル
+	 * @return BSFile バックアップ対象ファイル
 	 */
-	public function createSchemaFile ($suffix = null, BSDirectory $dir = null) {
-		return null;
+	public function getBackupTarget () {
+		return $this->createDumpFile();
+	}
+
+	/**
+	 * ダンプ実行
+	 *
+	 * @access protected
+	 * @return string 結果
+	 */
+	protected function dump () {
+		throw new BSDatabaseException($this . 'はダンプできません。');
 	}
 
 	/**

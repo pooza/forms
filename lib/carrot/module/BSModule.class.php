@@ -8,7 +8,7 @@
  * モジュール
  *
  * @author 小石達也 <tkoishi@b-shock.co.jp>
- * @version $Id: BSModule.class.php 1756 2010-01-15 07:21:15Z pooza $
+ * @version $Id: BSModule.class.php 1792 2010-01-27 06:06:34Z pooza $
  */
 class BSModule implements BSHTTPRedirector, BSAssignable {
 	protected $name;
@@ -138,8 +138,10 @@ class BSModule implements BSHTTPRedirector, BSAssignable {
 	 */
 	public function getMenuTitle () {
 		if (BSString::isBlank($title = $this->getConfig('title_menu'))) {
-			if (BSString::isBlank($title = $this->getRecordClass('ja'))) {
-				$title = $this->getName();
+			if (BSString::isBlank($title = $this->getConfig('title'))) {
+				if (BSString::isBlank($title = $this->getRecordClass('ja'))) {
+					$title = $this->getName();
+				}
 			}
 		}
 		return $title;

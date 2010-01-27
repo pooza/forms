@@ -5,12 +5,12 @@
  * @package org.carrot-framework
  * @subpackage AdminFeed
  * @author 小石達也 <tkoishi@b-shock.co.jp>
- * @version $Id: FeedSuccessView.class.php 1195 2009-05-16 11:46:01Z pooza $
+ * @version $Id: FeedSuccessView.class.php 1787 2010-01-27 02:44:00Z pooza $
  */
 class FeedSuccessView extends BSView {
 	public function initialize () {
 		parent::initialize();
-		$this->setRenderer(BSClassLoader::getInstance()->getObject(BS_FEED_CLASS));
+		$this->setRenderer(new BSRSS20Document);
 		return true;
 	}
 

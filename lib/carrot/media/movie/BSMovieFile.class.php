@@ -8,7 +8,7 @@
  * 動画ファイル
  *
  * @author 小石達也 <tkoishi@b-shock.co.jp>
- * @version $Id: BSMovieFile.class.php 1746 2010-01-07 08:44:31Z pooza $
+ * @version $Id: BSMovieFile.class.php 1786 2010-01-27 01:25:49Z pooza $
  */
 class BSMovieFile extends BSMediaFile {
 	private $output;
@@ -39,10 +39,10 @@ class BSMovieFile extends BSMediaFile {
 			$this->attributes['height_full'] = $matches[2] + $this->getPlayerHeight();
 			$this->attributes['pixel_size'] = $matches[1] . '×' . $matches[2];
 		}
-		$this->attributes['type'] = $this->analyzeType($this->output);
+		$this->attributes['type'] = $this->analyzeMovieType($this->output);
 	}
 
-	private function analyzeType ($output) {
+	private function analyzeMovieType ($output) {
 		$patterns = new BSArray(array(
 			'Input #[[:digit:]]+, ([[:alnum:]]+)',
 			'Video: ([[:alnum:]]+)',

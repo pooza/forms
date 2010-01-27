@@ -1,0 +1,13 @@
+# モジュール設定ファイル
+#
+# @package org.carrot-framework
+# @subpackage AdminUtility
+# @author 小石達也 <tkoishi@b-shock.co.jp>
+# @version $Id: module.yaml 1792 2010-01-27 06:06:34Z pooza $
+
+module:
+  title: ユーティリティ
+
+actions:
+  Backup:
+    title: バックアップ

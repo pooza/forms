@@ -8,7 +8,7 @@
  * MIMEタイプ
  *
  * @author 小石達也 <tkoishi@b-shock.co.jp>
- * @version $Id: BSMIMEType.class.php 1775 2010-01-24 06:11:05Z pooza $
+ * @version $Id: BSMIMEType.class.php 1784 2010-01-26 06:11:40Z pooza $
  */
 class BSMIMEType extends BSParameterHolder {
 	static private $instance;
@@ -187,9 +187,10 @@ class BSMIMEType extends BSParameterHolder {
 		if (!extension_loaded('fileinfo')) {
 			throw new BSFileException('fileinfoモジュールがロードされていません。');
 		}
-		$types = self::getInstance();
-		$finfo = new finfo(FILEINFO_MIME);
-		return $finfo->file($file->getPath());
+		if ($file->isExists()) {
+			$finfo = new finfo(FILEINFO_MIME);
+			return $finfo->file($file->getPath());
+		}
 	}
 }
 

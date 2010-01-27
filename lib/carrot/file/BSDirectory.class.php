@@ -8,11 +8,12 @@
  * ディレクトリ
  *
  * @author 小石達也 <tkoishi@b-shock.co.jp>
- * @version $Id: BSDirectory.class.php 1756 2010-01-15 07:21:15Z pooza $
+ * @version $Id: BSDirectory.class.php 1788 2010-01-27 03:05:53Z pooza $
  */
 class BSDirectory extends BSDirectoryEntry implements IteratorAggregate {
 	private $suffix;
 	private $entries;
+	private $url;
 	private $zip;
 	const SORT_ASC = 'asc';
 	const SORT_DESC = 'dsc';
@@ -193,6 +194,26 @@ class BSDirectory extends BSDirectoryEntry implements IteratorAggregate {
 	}
 
 	/**
+	 * 古いファイルを削除
+	 *
+	 * @access public
+	 * @param BSDate $date 基準日
+	 */
+	public function purge (BSDate $date = null) {
+		if (!$date) {
+			$date = BSDate::getNow()->setAttribute('month', '-1');
+		}
+		foreach ($this as $entry) {
+			if ($entry->isDirectory() || $entry->isIgnore() || $entry->isDotted()) {
+				continue;
+			}
+			if ($entry->getUpdateDate()->isPast($date)) {
+				$entry->delete();
+			}
+		}
+	}
+
+	/**
 	 * 新規ディレクトリを作り、返す
 	 *
 	 * @access public
@@ -210,6 +231,25 @@ class BSDirectory extends BSDirectoryEntry implements IteratorAggregate {
 			mkdir($path);
 		}
 		return new $class($path);
+	}
+
+	/**
+	 * URLを返す
+	 *
+	 * BSFileUtility::getURLから呼ばれるので、こちらを利用すること。
+	 *
+	 * @access public
+	 * @return BSHTTPURL URL
+	 */
+	public function getURL () {
+		if (!$this->url) {
+			$documentRoot = BSFileUtility::getPath('www');
+			if (mb_ereg('^' . $documentRoot, $this->getPath())) {
+				$this->url = BSURL::getInstance();
+				$this->url['path'] = str_replace($documentRoot, '', $this->getPath()) . '/';
+			}
+		}
+		return $this->url;
 	}
 
 	/**

@@ -5,9 +5,27 @@
  * @package org.carrot-framework
  * @subpackage Console
  * @author 小石達也 <tkoishi@b-shock.co.jp>
- * @version $Id: OptimizeDatabaseAction.class.php 1599 2009-10-30 14:20:35Z pooza $
+ * @version $Id: OptimizeDatabaseAction.class.php 1783 2010-01-26 06:01:52Z pooza $
  */
 class OptimizeDatabaseAction extends BSAction {
+	private $database;
+
+	/**
+	 * 対象データベースを返す
+	 *
+	 * @access private
+	 * @return BSDatabase 対象データベース
+	 */
+	private function getDatabase () {
+		if (!$this->database) {
+			if (!$name = $this->request['d']) {
+				$name = 'default';
+			}
+			$this->database = BSDatabase::getInstance($name);
+		}
+		return $this->database;
+	}
+
 	public function initialize () {
 		$this->request->addOption('d');
 		$this->request->parse();
@@ -15,16 +33,20 @@ class OptimizeDatabaseAction extends BSAction {
 	}
 
 	public function execute () {
-		if (BSString::isBlank($name = $this->request['d'])) {
-			$name = 'default';
+		try {
+			$this->getDatabase()->optimize();
+		} catch (Exception $e) {
+			$this->handleError();
 		}
-		$db = BSDatabase::getInstance($name);
-		$db->optimize();
-
-		$message = new BSStringFormat('%sを最適化しました。');
-		$message[] = $db;
-		BSLogManager::getInstance()->put($message, $db);
 		return BSView::NONE;
+	}
+
+	public function handleError () {
+		return BSView::NONE;
+	}
+
+	public function validate () {
+		return !!$this->getDatabase();
 	}
 }
 

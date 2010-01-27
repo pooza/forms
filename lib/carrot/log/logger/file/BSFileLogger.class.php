@@ -8,13 +8,12 @@
  * ファイル用ロガー
  *
  * @author 小石達也 <tkoishi@b-shock.co.jp>
- * @version $Id: BSFileLogger.class.php 1195 2009-05-16 11:46:01Z pooza $
+ * @version $Id: BSFileLogger.class.php 1779 2010-01-26 02:43:04Z pooza $
  */
 class BSFileLogger extends BSLogger {
 	private $dates;
 	private $entries;
 	private $file;
-	private $directory;
 
 	/**
 	 * @access public
@@ -50,11 +49,7 @@ class BSFileLogger extends BSLogger {
 	 * @return BSLogDirectory ログディレクトリ
 	 */
 	public function getDirectory () {
-		if (!$this->directory) {
-			//BSDirectoryLayoutは使わない。
-			$this->directory = new BSLogDirectory(BS_VAR_DIR . '/log');
-		}
-		return $this->directory;
+		return BSFileUtility::getDirectory('log');
 	}
 
 	/**

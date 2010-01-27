@@ -8,7 +8,7 @@
  * SQLiteデータベース
  *
  * @author 小石達也 <tkoishi@b-shock.co.jp>
- * @version $Id: BSSQLiteDatabase.class.php 1709 2009-12-23 09:46:15Z pooza $
+ * @version $Id: BSSQLiteDatabase.class.php 1785 2010-01-26 06:34:52Z pooza $
  */
 class BSSQLiteDatabase extends BSDatabase {
 
@@ -60,49 +60,28 @@ class BSSQLiteDatabase extends BSDatabase {
 	}
 
 	/**
-	 * ダンプファイルを生成
+	 * ダンプ実行
 	 *
-	 * @access public
-	 * @param string $suffix ファイル名サフィックス
-	 * @param BSDirectory $dir 出力先ディレクトリ
-	 * @return BSFile ダンプファイル
+	 * @access protected
+	 * @return string 結果
 	 */
-	public function createDumpFile ($suffix = '_init', BSDirectory $dir = null) {
+	protected function dump () {
 		$command = $this->getCommandLine();
 		$command->addValue('.dump');
 		if ($command->hasError()) {
 			throw new BSDatabaseException($command->getResult());
 		}
-
-		if (!$dir) {
-			$dir = BSFileUtility::getDirectory('sql');
-		}
-		$file = $dir->createEntry($this->getName() . $suffix . '.sql');
-		$file->setContents($command->getResult());
-		return $file;
+		return $command->getResult();
 	}
 
 	/**
-	 * スキーマファイルを生成
+	 * バックアップ対象ファイルを返す
 	 *
 	 * @access public
-	 * @param string $suffix ファイル名サフィックス
-	 * @param BSDirectory $dir 出力先ディレクトリ
-	 * @return BSFile スキーマファイル
+	 * @return BSFile バックアップ対象ファイル
 	 */
-	public function createSchemaFile ($suffix = '_schema', BSDirectory $dir = null) {
-		$command = $this->getCommandLine();
-		$command->addValue('.schema');
-		if ($command->hasError()) {
-			throw new BSDatabaseException($command->getResult());
-		}
-
-		if (!$dir) {
-			$dir = BSFileUtility::getDirectory('sql');
-		}
-		$file = $dir->createEntry($this->getName() . $suffix . '.sql');
-		$file->setContents($command->getResult());
-		return $file;
+	public function getBackupTarget () {
+		return $this['file'];
 	}
 
 	/**
@@ -126,6 +105,7 @@ class BSSQLiteDatabase extends BSDatabase {
 	 */
 	public function optimize () {
 		$this->exec('VACUUM');
+		$this->putLog($this . 'を最適化しました。');
 	}
 
 	/**

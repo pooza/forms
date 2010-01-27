@@ -4,7 +4,7 @@
 #
 # @package org.carrot-framework
 # @author 小石達也 <tkoishi@b-shock.co.jp>
-# @version $Id: Rakefile.rb 1773 2010-01-24 05:10:09Z pooza $
+# @version $Id: Rakefile.rb 1790 2010-01-27 03:10:58Z pooza $
 
 $KCODE = 'u'
 require 'yaml'
@@ -12,12 +12,12 @@ require 'webapp/config/Rakefile.local'
 
 namespace :production do
   desc '運用環境の構築'
-  task :init => ['var:init', 'var:clean', 'database:init', 'local:init']
+  task :init => ['var:init', 'database:init', 'local:init']
 end
 
 namespace :development do
   desc '開発環境の構築'
-  task :init => ['var:init', 'var:clean', 'database:init', 'local:init', 'phpdoc:init']
+  task :init => ['var:init', 'database:init', 'local:init', 'phpdoc:init']
 end
 
 namespace :database do
