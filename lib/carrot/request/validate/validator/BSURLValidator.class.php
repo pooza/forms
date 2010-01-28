@@ -8,7 +8,7 @@
  * URLバリデータ
  *
  * @author 小石達也 <tkoishi@b-shock.co.jp>
- * @version $Id: BSURLValidator.class.php 1754 2010-01-14 11:04:40Z pooza $
+ * @version $Id: BSURLValidator.class.php 1794 2010-01-28 09:58:55Z pooza $
  */
 class BSURLValidator extends BSValidator {
 
@@ -41,7 +41,9 @@ class BSURLValidator extends BSValidator {
 	 */
 	public function execute ($value) {
 		try {
-
+			if (!mb_ereg('https?://[-_.!~*\'()a-zA-Z0-9;/?:@&=+$,%#]+', $value)) {
+				$this->error = $this['net_error'];
+			}
 			if (!$url = BSURL::getInstance($value)) {
 				$this->error = $this['net_error'];
 			}

@@ -8,7 +8,7 @@
  * Atom0.3エントリー
  *
  * @author 小石達也 <tkoishi@b-shock.co.jp>
- * @version $Id: BSAtom03Entry.class.php 1765 2010-01-18 01:19:46Z pooza $
+ * @version $Id: BSAtom03Entry.class.php 1795 2010-01-28 09:59:14Z pooza $
  */
 class BSAtom03Entry extends BSXMLElement implements BSFeedEntry {
 	protected $document;
@@ -108,7 +108,7 @@ class BSAtom03Entry extends BSXMLElement implements BSFeedEntry {
 		if (!$element = $this->getElement('content')) {
 			$element = $this->createElement('content');
 		}
-		$element->setBody($body);
+		$element->setBody(mb_ereg_replace('&[[:alpha:]]+;', '', $body));
 		$element->setAttribute('type', BSMIMEType::getType('txt'));
 	}
 
