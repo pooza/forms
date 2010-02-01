@@ -2,7 +2,7 @@
 #
 # @package org.carrot-framework
 # @author 小石達也 <tkoishi@b-shock.co.jp>
-# @version $Id: carrot.yaml 1787 2010-01-27 02:44:00Z pooza $
+# @version $Id: carrot.yaml 1799 2010-02-01 08:10:40Z pooza $
 
 awstats:
   parent: lib
@@ -60,10 +60,10 @@ image_cache:
 js:
   parent: carrotlib
   suffix: .js
-  href: /carrotlib/js/cache/
 js_cache:
   parent: var
   suffix: .js
+  href: /carrotlib/js/cache/
 lib:
   constant: yes
 local_lib:
@@ -105,6 +105,7 @@ sqlite3:
   constant: yes
 swf:
   parent: carrotlib
+  suffix: .swf
 templates:
   parent: webapp
   suffix: .tpl

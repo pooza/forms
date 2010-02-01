@@ -4,13 +4,13 @@
  * @subpackage media.image.renderer
  */
 
-BSUtility::includeFile('qrcode.php');
+BSUtility::includeFile('qrcode');
 
 /**
  * QRコードレンダラー
  *
  * @author 小石達也 <tkoishi@b-shock.co.jp>
- * @version $Id: BSQRCode.class.php 1612 2009-11-10 03:12:04Z pooza $
+ * @version $Id: BSQRCode.class.php 1800 2010-02-01 08:23:35Z pooza $
  */
 class BSQRCode implements BSImageRenderer {
 	private $image;

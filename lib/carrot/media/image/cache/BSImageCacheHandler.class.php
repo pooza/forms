@@ -8,7 +8,7 @@
  * 画像キャッシュ
  *
  * @author 小石達也 <tkoishi@b-shock.co.jp>
- * @version $Id: BSImageCacheHandler.class.php 1699 2009-12-21 10:08:30Z pooza $
+ * @version $Id: BSImageCacheHandler.class.php 1799 2010-02-01 08:10:40Z pooza $
  */
 class BSImageCacheHandler {
 	private $useragent;
@@ -104,12 +104,8 @@ class BSImageCacheHandler {
 			$flags += self::WITHOUT_BROWSER_CACHE;
 		}
 
-		$url = BSURL::getInstance();
-		$url['path'] = sprintf(
-			'/carrotlib/images/cache/%s/%s',
-			$this->getEntryName($record, $size),
-			$file->getName()
-		);
+		$url = BSFileUtility::getURL('image_cache');
+		$url['path'] .= $this->getEntryName($record, $size) . '/' . $file->getName();
 		if ($flags & self::WITHOUT_BROWSER_CACHE) {
 			$url->setParameter('at', BSNumeric::getRandom());
 		}

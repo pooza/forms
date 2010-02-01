@@ -8,7 +8,7 @@
  * 文字列に関するユーティリティ
  *
  * @author 小石達也 <tkoishi@b-shock.co.jp>
- * @version $Id: BSString.class.php 1744 2010-01-04 00:57:45Z pooza $
+ * @version $Id: BSString.class.php 1800 2010-02-01 08:23:35Z pooza $
  */
 class BSString {
 
@@ -346,7 +346,7 @@ class BSString {
 	static public function split ($str, $width = 74) {
 		$str = self::convertEncoding($str, 'eucjp-win', 'utf-8');
 
-		BSUtility::includeFile('OME.php');
+		BSUtility::includeFile('OME');
 		mb_internal_encoding('eucjp-win');
 		$ome = new OME;
 		$ome->setBodyWidth($width);

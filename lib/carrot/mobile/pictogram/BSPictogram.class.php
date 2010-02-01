@@ -8,7 +8,7 @@
  * 絵文字
  *
  * @author 小石達也 <tkoishi@b-shock.co.jp>
- * @version $Id: BSPictogram.class.php 1722 2009-12-26 04:15:51Z pooza $
+ * @version $Id: BSPictogram.class.php 1799 2010-02-01 08:10:40Z pooza $
  */
 class BSPictogram implements BSAssignable, BSImageContainer {
 	private $id;
@@ -194,8 +194,8 @@ class BSPictogram implements BSAssignable, BSImageContainer {
 	 * @return BSURL URL
 	 */
 	public function getURL () {
-		$url = BSURL::getInstance();
-		$url['path'] = '/carrotlib/images/pictogram/i/' . $this->getImageFile()->getName();
+		$url = BSFileUtility::getURL('pictogram');
+		$url['path'] .= 'i/' . $this->getImageFile()->getName();
 		return $url;
 	}
 

@@ -8,7 +8,7 @@
  * JavaScriptファイル
  *
  * @author 小石達也 <tkoishi@b-shock.co.jp>
- * @version $Id: BSJavaScriptFile.class.php 1519 2009-09-22 05:40:44Z pooza $
+ * @version $Id: BSJavaScriptFile.class.php 1800 2010-02-01 08:23:35Z pooza $
  */
 class BSJavaScriptFile extends BSFile implements BSDocumentSetEntry {
 
@@ -21,7 +21,7 @@ class BSJavaScriptFile extends BSFile implements BSDocumentSetEntry {
 	public function getOptimizedContents () {
 		$contents = BSController::getInstance()->getAttribute($this, $this->getUpdateDate());
 		if ($contents === null) {
-			BSUtility::includeFile('jsmin.php');
+			BSUtility::includeFile('jsmin');
 			$contents = JSMin::minify($this->getContents());
 			BSController::getInstance()->setAttribute($this, $contents);
 		}

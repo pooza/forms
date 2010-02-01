@@ -8,7 +8,7 @@
  * 動画関数
  *
  * @author 小石達也 <tkoishi@b-shock.co.jp>
- * @version $Id: function.movie.php 1704 2009-12-21 14:33:54Z pooza $
+ * @version $Id: function.movie.php 1799 2010-02-01 08:10:40Z pooza $
  */
 function smarty_function_movie ($params, &$smarty) {
 	$params = new BSArray($params);
@@ -31,8 +31,9 @@ function smarty_function_movie ($params, &$smarty) {
 		default:
 			if (BSString::isBlank($params['href_prefix'])) {
 				if ($record = BSController::getInstance()->getModule()->searchRecord($params)) {
-					$dir = $record->getTable()->getDirectory();
-					$params['href_prefix'] = BS_MOVIE_HREF_PREFIX . $dir->getName() . '/';
+					$url = BSFileUtility::getURL('movies');
+					$url['path'] .= $record->getTable()->getDirectory()->getName() . '/';
+					$params['href_prefix'] = $url['path'];
 				}
 			}
 			return $file->getImageElement($params)->getContents();

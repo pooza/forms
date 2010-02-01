@@ -2,11 +2,11 @@
 #
 # @package org.carrot-framework
 # @author 小石達也 <tkoishi@b-shock.co.jp>
-# @version $Id: carrot.yaml 1795 2010-01-28 09:59:14Z pooza $
+# @version $Id: carrot.yaml 1799 2010-02-01 08:10:40Z pooza $
 
 carrot:
   name: carrot Framework
-  ver: 2.3.40
+  ver: 2.3.41
   bts:
     url: http://redmine.carrot-framework.org/projects/show/carrot
 
@@ -46,7 +46,6 @@ file:
   types:
     file: /etc/httpd/mime.types
 flash:
-  href_prefix: /carrotlib/swf/
   player_ver: 8.0.0
   installer:
     href: /carrotlib/swf/expressInstall.swf
@@ -102,7 +101,6 @@ module:
     module: Default
     action: NotFound
 movie:
-  href_prefix: /carrotlib/movies/
   video_codec: flv
   audio_codec: libfaac
   flv:

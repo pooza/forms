@@ -4,13 +4,13 @@
  * @subpackage net.xmpp
  */
 
-BSUtility::includeFile('XMPPHP/XMPP.php');
+BSUtility::includeFile('XMPPHP/XMPP');
 
 /**
  * XMPPプロトコル
  *
  * @author 小石達也 <tkoishi@b-shock.co.jp>
- * @version $Id: BSXMPP.class.php 1472 2009-09-11 13:32:25Z pooza $
+ * @version $Id: BSXMPP.class.php 1800 2010-02-01 08:23:35Z pooza $
  */
 class BSXMPP extends XMPPHP_XMPP {
 	private $to;

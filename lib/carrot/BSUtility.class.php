@@ -7,7 +7,7 @@
  * ユーティリティ
  *
  * @author 小石達也 <tkoishi@b-shock.co.jp>
- * @version $Id: BSUtility.class.php 1522 2009-09-22 06:38:56Z pooza $
+ * @version $Id: BSUtility.class.php 1800 2010-02-01 08:23:35Z pooza $
  */
 class BSUtility {
 
@@ -57,6 +57,7 @@ class BSUtility {
 	static public function includeFile ($file) {
 		if (($file instanceof BSFile) == false) {
 			$file = BSString::stripControlCharacters($file);
+			$file = mb_ereg_replace('\\.php$', '', $file) . '.php';
 			if (!self::isPathAbsolute($file)) {
 				$file = BS_LIB_DIR . DIRECTORY_SEPARATOR . $file;
 			}

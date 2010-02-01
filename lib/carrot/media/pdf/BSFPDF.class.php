@@ -4,15 +4,15 @@
  * @subpackage media.pdf
  */
 
-BSUtility::includeFile('fpdf/fpdf.php');
-BSUtility::includeFile('fpdf/font/mbttfdef.php');
-BSUtility::includeFile('fpdf/mbfpdf.php');
+BSUtility::includeFile('fpdf/fpdf');
+BSUtility::includeFile('fpdf/font/mbttfdef');
+BSUtility::includeFile('fpdf/mbfpdf');
 
 /**
  * MBFPDFラッパー
  *
  * @author 小石達也 <tkoishi@b-shock.co.jp>
- * @version $Id: BSFPDF.class.php 1568 2009-10-19 10:56:07Z pooza $
+ * @version $Id: BSFPDF.class.php 1800 2010-02-01 08:23:35Z pooza $
  */
 class BSFPDF extends MBFPDF implements BSRenderer {
 	private $error;

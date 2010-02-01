@@ -8,7 +8,7 @@
  * 携帯電話キャリア
  *
  * @author 小石達也 <tkoishi@b-shock.co.jp>
- * @version $Id: BSMobileCarrier.class.php 1634 2009-11-25 10:36:21Z pooza $
+ * @version $Id: BSMobileCarrier.class.php 1800 2010-02-01 08:23:35Z pooza $
  * @abstract
  */
 abstract class BSMobileCarrier {
@@ -111,14 +111,14 @@ abstract class BSMobileCarrier {
 	 */
 	public function getMPC () {
 		if (!$this->mpc) {
-			BSUtility::includeFile('MPC/MobilePictogramConverter.php');
-			BSUtility::includeFile('MPC/Carrier/' . BSString::toLower($this->getMPCCode()) . '.php');
+			BSUtility::includeFile('MPC/MobilePictogramConverter');
+			BSUtility::includeFile('MPC/Carrier/' . BSString::toLower($this->getMPCCode()));
 			$class = 'MPC_' . $this->getMPCCode();
 			$this->mpc = new $class;
 			$this->mpc->setFromCharset('SJIS');
 			$this->mpc->setFrom($this->getMPCCode());
 			$this->mpc->setStringType(BSMobileCarrier::MPC_RAW);
-			$this->mpc->setImagePath('/carrotlib/images/pictogram');
+			$this->mpc->setImagePath(BSFileUtility::getURL('pictogram')->getAttribute('path'));
 		}
 		return $this->mpc;
 	}

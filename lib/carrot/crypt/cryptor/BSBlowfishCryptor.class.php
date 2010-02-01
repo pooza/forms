@@ -4,13 +4,13 @@
  * @subpackage crypt.cryptor
  */
 
-BSUtility::includeFile('pear/Crypt/Blowfish.php');
+BSUtility::includeFile('pear/Crypt/Blowfish');
 
 /**
  * Blowfish暗号
  *
  * @author 小石達也 <tkoishi@b-shock.co.jp>
- * @version $Id: BSBlowfishCryptor.class.php 1533 2009-10-02 17:01:41Z pooza $
+ * @version $Id: BSBlowfishCryptor.class.php 1800 2010-02-01 08:23:35Z pooza $
  */
 class BSBlowfishCryptor extends Crypt_Blowfish implements BSCryptor {
 	private $salt;

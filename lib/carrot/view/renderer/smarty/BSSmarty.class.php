@@ -4,13 +4,13 @@
  * @subpackage view.renderer.smarty
  */
 
-BSUtility::includeFile('Smarty/Smarty.class.php');
+BSUtility::includeFile('Smarty/Smarty.class');
 
 /**
  * Smartyラッパー
  *
  * @author 小石達也 <tkoishi@b-shock.co.jp>
- * @version $Id: BSSmarty.class.php 1754 2010-01-14 11:04:40Z pooza $
+ * @version $Id: BSSmarty.class.php 1800 2010-02-01 08:23:35Z pooza $
  */
 class BSSmarty extends Smarty implements BSTextRenderer {
 	private $type;
@@ -34,6 +34,7 @@ class BSSmarty extends Smarty implements BSTextRenderer {
 		$this->plugins_dir[] = BSFileUtility::getPath('carrot') . '/view/renderer/smarty/plugins';
 		$this->plugins_dir[] = BSFileUtility::getPath('lib') . '/Smarty/plugins';
 		$this->force_compile = BS_DEBUG;
+		$this->error_reporting = E_ALL ^ E_NOTICE;
 		$this->addModifier('encoding');
 		$this->setEncoding('utf-8');
 

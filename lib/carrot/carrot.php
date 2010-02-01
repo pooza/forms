@@ -4,7 +4,7 @@
  *
  * @package org.carrot-framework
  * @author 小石達也 <tkoishi@b-shock.co.jp>
- * @version $Id: carrot.php 1602 2009-10-31 05:56:40Z pooza $
+ * @version $Id: carrot.php 1796 2010-01-30 05:04:42Z pooza $
  */
 
 /**
@@ -16,6 +16,21 @@ function __autoload ($name) {
 	$classes = BSClassLoader::getInstance()->getClasses();
 	if (isset($classes[strtolower($name)])) {
 		require_once($classes[strtolower($name)]);
+	}
+}
+
+/**
+ * エラーハンドラ
+ *
+ * @access public
+ * @param integer $errno エラー番号
+ * @param string $errstr エラーメッセージ
+ * @param string $errfile エラーが発生したファイル名
+ * @param string $errline エラーが発生した行数
+ */
+function handleError ($errno, $errstr, $errfile, $errline) {
+	if ($errno & error_reporting()) {
+		throw new RuntimeException($errstr, $errno);
 	}
 }
 
@@ -106,6 +121,7 @@ $configure->compile('constant/application');
 $configure->compile('constant/package');
 $configure->compile('constant/carrot');
 
+set_error_handler('handleError');
 ini_set('realpath_cache_size', '128K');
 date_default_timezone_set(BS_DATE_TIMEZONE);
 

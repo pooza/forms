@@ -4,13 +4,13 @@
  * @subpackage config.parser
  */
 
-BSUtility::includeFile('spyc.php');
+BSUtility::includeFile('spyc');
 
 /**
  * YAML設定パーサー
  *
  * @author 小石達也 <tkoishi@b-shock.co.jp>
- * @version $Id: BSYAMLConfigParser.class.php 1436 2009-09-05 13:03:25Z pooza $
+ * @version $Id: BSYAMLConfigParser.class.php 1800 2010-02-01 08:23:35Z pooza $
  */
 class BSYAMLConfigParser extends Spyc implements BSConfigParser {
 	private $contents;

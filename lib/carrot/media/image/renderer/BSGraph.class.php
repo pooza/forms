@@ -4,13 +4,13 @@
  * @subpackage media.image.renderer
  */
 
-BSUtility::includeFile('phplot/phplot.php');
+BSUtility::includeFile('phplot/phplot');
 
 /**
  * グラフレンダラー
  *
  * @author 小石達也 <tkoishi@b-shock.co.jp>
- * @version $Id: BSGraph.class.php 1600 2009-10-30 14:48:55Z pooza $
+ * @version $Id: BSGraph.class.php 1800 2010-02-01 08:23:35Z pooza $
  */
 class BSGraph extends PHPlot implements BSImageRenderer {
 	private $width;

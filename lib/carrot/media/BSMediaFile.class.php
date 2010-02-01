@@ -8,7 +8,7 @@
  * メディアファイル
  *
  * @author 小石達也 <tkoishi@b-shock.co.jp>
- * @version $Id: BSMediaFile.class.php 1680 2009-12-13 04:19:39Z pooza $
+ * @version $Id: BSMediaFile.class.php 1799 2010-02-01 08:10:40Z pooza $
  * @abstract
  */
 abstract class BSMediaFile extends BSFile implements ArrayAccess {
@@ -111,8 +111,8 @@ abstract class BSMediaFile extends BSFile implements ArrayAccess {
 	 * @return BSURL メディアURL
 	 */
 	protected function getMediaURL (BSParameterHolder $params) {
-		$url = BSURL::getInstance();
-		$url['path'] = $params['href_prefix'] . $this->getName() . $params['href_suffix'];
+		$url = BSURL::getInstance($params['href_prefix']);
+		$url['path'] .= $this->getName() . $params['href_suffix'];
 		if (BSUser::getInstance()->isAdministrator()) {
 			$url->setParameter('at', BSNumeric::getRandom());
 		}

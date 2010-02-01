@@ -4,13 +4,13 @@
  * @subpackage view.renderer.smarty
  */
 
-BSUtility::includeFile('Smarty/Smarty_Compiler.class.php');
+BSUtility::includeFile('Smarty/Smarty_Compiler.class');
 
 /**
  * Smarty_Compilerラッパー
  *
  * @author 小石達也 <tkoishi@b-shock.co.jp>
- * @version $Id: BSSmartyCompiler.class.php 1744 2010-01-04 00:57:45Z pooza $
+ * @version $Id: BSSmartyCompiler.class.php 1800 2010-02-01 08:23:35Z pooza $
  */
 class BSSmartyCompiler extends Smarty_Compiler {
 

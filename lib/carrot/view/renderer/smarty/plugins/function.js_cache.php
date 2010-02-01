@@ -8,7 +8,7 @@
  * JavaScriptキャッシュ関数
  *
  * @author 小石達也 <tkoishi@b-shock.co.jp>
- * @version $Id: function.js_cache.php 1773 2010-01-24 05:10:09Z pooza $
+ * @version $Id: function.js_cache.php 1799 2010-02-01 08:10:40Z pooza $
  */
 function smarty_function_js_cache ($params, &$smarty) {
 	$params = new BSArray($params);
@@ -20,8 +20,8 @@ function smarty_function_js_cache ($params, &$smarty) {
 		return;
 	}
 
-	$url = BSURL::getInstance();
-	$url['path'] =  '/carrotlib/js/cache/' . $jsset->getCacheFile()->getName();
+	$url = BSFileUtility::getURL('js_cache');
+	$url['path'] .= $jsset->getCacheFile()->getName();
 
 	$element = new BSScriptElement;
 	$element->setAttribute('src', $url->getContents());

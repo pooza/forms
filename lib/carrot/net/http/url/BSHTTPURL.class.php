@@ -8,7 +8,7 @@
  * HTTPスキーマのURL
  *
  * @author 小石達也 <tkoishi@b-shock.co.jp>
- * @version $Id: BSHTTPURL.class.php 1755 2010-01-15 06:55:07Z pooza $
+ * @version $Id: BSHTTPURL.class.php 1800 2010-02-01 08:23:35Z pooza $
  */
 class BSHTTPURL extends BSURL implements BSHTTPRedirector, BSImageContainer {
 	private $fullpath;
@@ -189,7 +189,7 @@ class BSHTTPURL extends BSURL implements BSHTTPRedirector, BSImageContainer {
 			$url = clone $this;
 			$url['path'] = '/favicon.ico';
 
-			BSUtility::includeFile('class.ico.php');
+			BSUtility::includeFile('class.ico');
 			$ico = new Ico($url->getContents());
 			$ico->setBackgroundTransparent(true);
 			$image = new BSImage;
@@ -218,8 +218,8 @@ class BSHTTPURL extends BSURL implements BSHTTPRedirector, BSImageContainer {
 	 */
 	public function getImageInfo ($size = 'favicon', $pixel = null, $flags = null) {
 		if ($file = $this->getImageFile()) {
-			$url = BSURL::getInstance();
-			$url['path'] = '/carrotlib/images/favicon/' . $file->getName();
+			$url = BSFileUtility::getURL('favicon');
+			$url['path'] .= $file->getName();
 			return new BSArray(array(
 				'width' => $file->getEngine()->getWidth(),
 				'height' => $file->getEngine()->getHeight(),

@@ -4,13 +4,13 @@
  * @subpackage crypt.cryptor
  */
 
-BSUtility::includeFile('pear/Crypt/CBC.php');
+BSUtility::includeFile('pear/Crypt/CBC');
 
 /**
  * CBC暗号
  *
  * @author 小石達也 <tkoishi@b-shock.co.jp>
- * @version $Id: BSCBCCryptor.class.php 1429 2009-09-05 08:18:34Z pooza $
+ * @version $Id: BSCBCCryptor.class.php 1800 2010-02-01 08:23:35Z pooza $
  */
 class BSCBCCryptor extends Crypt_CBC implements BSCryptor {
 	private $salt;
