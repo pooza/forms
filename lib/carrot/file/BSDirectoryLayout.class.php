@@ -8,7 +8,7 @@
  * ディレクトリレイアウト
  *
  * @author 小石達也 <tkoishi@b-shock.co.jp>
- * @version $Id: BSDirectoryLayout.class.php 1779 2010-01-26 02:43:04Z pooza $
+ * @version $Id: BSDirectoryLayout.class.php 1801 2010-02-01 10:52:31Z pooza $
  */
 class BSDirectoryLayout extends BSParameterHolder {
 	static private $instance;
@@ -107,7 +107,7 @@ class BSDirectoryLayout extends BSParameterHolder {
 				$info['url']['path'] = $info['href'];
 			}
 		}
-		return $info['url'];
+		return clone $info['url'];
 	}
 }
 

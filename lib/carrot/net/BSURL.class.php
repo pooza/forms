@@ -8,7 +8,7 @@
  * 基底URL
  *
  * @author 小石達也 <tkoishi@b-shock.co.jp>
- * @version $Id: BSURL.class.php 1756 2010-01-15 07:21:15Z pooza $
+ * @version $Id: BSURL.class.php 1801 2010-02-01 10:52:31Z pooza $
  * @abstract
  */
 abstract class BSURL implements ArrayAccess, BSAssignable {
@@ -60,6 +60,13 @@ abstract class BSURL implements ArrayAccess, BSAssignable {
 			default:
 				return new $class($params);
 		}
+	}
+
+	/**
+	 * @access public
+	 */
+	public function __clone () {
+		$this->attributes = clone $this->attributes;
 	}
 
 	/**
