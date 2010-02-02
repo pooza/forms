@@ -10,7 +10,7 @@
  * BSImageCacheHandlerのフロントエンド
  *
  * @author 小石達也 <tkoishi@b-shock.co.jp>
- * @version $Id: function.image_cache.php 1804 2010-02-02 01:37:13Z pooza $
+ * @version $Id: function.image_cache.php 1806 2010-02-02 10:27:32Z pooza $
  */
 function smarty_function_image_cache ($params, &$smarty) {
 	$caches = BSImageCacheHandler::getInstance();
@@ -37,25 +37,13 @@ function smarty_function_image_cache ($params, &$smarty) {
 		case 'url':
 			return $info[$mode];
 		case 'lightbox':
-			$element = $element->wrap(new BSAnchorElement);
-			if (BSString::isBlank($params['group'])) {
-				$element->setAttribute('rel', 'lightbox');
-			} else {
-				$element->setAttribute('rel', 'lightbox[' . $params['group'] . ']');
-			}
-			$flags = $caches->convertFlags($params['flags_full']);
-			$element->setURL(
-				$caches->getURL($container, $params['size'], $params['pixel_full'], $flags)
-			);
-			break;
 		case 'thickbox':
-			$element = $element->wrap(new BSAnchorElement);
-			$element->registerStyleClass('thickbox');
-			$element->setAttribute('rel', $params['group']);
+			$anchor = BSClassLoader::getInstance()->getObject($mode, 'AnchorElement');
+			$element = $element->wrap($anchor);
+			$element->setImageGroup($params['group']);
+			$element->setCaption($info['alt']);
 			$flags = $caches->convertFlags($params['flags_full']);
-			$element->setURL(
-				$caches->getURL($container, $params['size'], $params['pixel_full'], $flags)
-			);
+			$element->setImage($container, $params['size'], $params['pixel_full'], $flags);
 			break;
 	}
 	return $element->getContents();
