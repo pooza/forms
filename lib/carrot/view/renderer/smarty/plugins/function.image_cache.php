@@ -10,7 +10,7 @@
  * BSImageCacheHandlerのフロントエンド
  *
  * @author 小石達也 <tkoishi@b-shock.co.jp>
- * @version $Id: function.image_cache.php 1745 2010-01-07 08:43:55Z pooza $
+ * @version $Id: function.image_cache.php 1804 2010-02-02 01:37:13Z pooza $
  */
 function smarty_function_image_cache ($params, &$smarty) {
 	$caches = BSImageCacheHandler::getInstance();
@@ -24,28 +24,41 @@ function smarty_function_image_cache ($params, &$smarty) {
 
 	$element = $caches->getImageElement($info);
 	$element->registerStyleClass($params['style_class']);
+	if ($id = $params['container_id']) {
+		$element->setID($id);
+	}
+
 	switch ($mode = BSString::toLower($params['mode'])) {
-		case 'pixel_size':
 		case 'size':
 			return $info['pixel_size'];
+		case 'pixel_size':
 		case 'width':
 		case 'height':
 		case 'url':
 			return $info[$mode];
 		case 'lightbox':
 			$element = $element->wrap(new BSAnchorElement);
-			$element->setAttribute('rel', 'lightbox');
+			if (BSString::isBlank($params['group'])) {
+				$element->setAttribute('rel', 'lightbox');
+			} else {
+				$element->setAttribute('rel', 'lightbox[' . $params['group'] . ']');
+			}
 			$flags = $caches->convertFlags($params['flags_full']);
 			$element->setURL(
 				$caches->getURL($container, $params['size'], $params['pixel_full'], $flags)
 			);
-			//↓そのまま実行
-		default:
-			if ($id = $params['container_id']) {
-				$element->setID($id);
-			}
-			return $element->getContents();
+			break;
+		case 'thickbox':
+			$element = $element->wrap(new BSAnchorElement);
+			$element->registerStyleClass('thickbox');
+			$element->setAttribute('rel', $params['group']);
+			$flags = $caches->convertFlags($params['flags_full']);
+			$element->setURL(
+				$caches->getURL($container, $params['size'], $params['pixel_full'], $flags)
+			);
+			break;
 	}
+	return $element->getContents();
 }
 
 /* vim:set tabstop=4: */
