@@ -8,7 +8,7 @@
  * WWWフォームレンダラー
  *
  * @author 小石達也 <tkoishi@b-shock.co.jp>
- * @version $Id: BSWWWFormRenderer.class.php 1802 2010-02-02 00:18:56Z pooza $
+ * @version $Id: BSWWWFormRenderer.class.php 1805 2010-02-02 02:31:05Z pooza $
  */
 class BSWWWFormRenderer extends BSParameterHolder implements BSRenderer {
 
@@ -19,7 +19,7 @@ class BSWWWFormRenderer extends BSParameterHolder implements BSRenderer {
 	 * @param mixed[] $params パラメータの配列、又はクエリー文字列
 	 */
 	public function setParameters ($params) {
-		if (!BSArray::isArray($params)) {
+		if (!is_array($params) && !($params instanceof BSParameterHolder)) {
 			parse_str($params, $parsed);
 			$params = (array)$parsed;
 		}
