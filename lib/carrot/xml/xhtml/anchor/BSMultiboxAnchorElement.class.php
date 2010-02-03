@@ -8,7 +8,7 @@
  * multiBoxへのリンク
  *
  * @author 小石達也 <tkoishi@b-shock.co.jp>
- * @version $Id: BSMultiboxAnchorElement.class.php 1807 2010-02-03 03:45:49Z pooza $
+ * @version $Id: BSMultiboxAnchorElement.class.php 1810 2010-02-03 08:09:18Z pooza $
  */
 class BSMultiboxAnchorElement extends BSImageAnchorElement {
 
@@ -29,6 +29,7 @@ class BSMultiboxAnchorElement extends BSImageAnchorElement {
 	 * @param string $group グループ名
 	 */
 	public function setImageGroup ($group) {
+		$this->registerStyleClass($group);
 	}
 }
 
