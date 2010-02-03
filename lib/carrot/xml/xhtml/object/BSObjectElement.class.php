@@ -1,14 +1,14 @@
 <?php
 /**
  * @package org.carrot-framework
- * @subpackage xml.xhtml
+ * @subpackage xml.xhtml.object
  */
 
 /**
  * object要素
  *
  * @author 小石達也 <tkoishi@b-shock.co.jp>
- * @version $Id: BSObjectElement.class.php 1772 2010-01-24 03:12:35Z pooza $
+ * @version $Id: BSObjectElement.class.php 1807 2010-02-03 03:45:49Z pooza $
  */
 class BSObjectElement extends BSXHTMLElement {
 	protected $inner;

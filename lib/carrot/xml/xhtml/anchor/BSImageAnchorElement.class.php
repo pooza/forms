@@ -1,14 +1,14 @@
 <?php
 /**
  * @package org.carrot-framework
- * @subpackage xml.xhtml
+ * @subpackage xml.xhtml.anchor
  */
 
 /**
  * 画像へのリンク
  *
  * @author 小石達也 <tkoishi@b-shock.co.jp>
- * @version $Id: BSImageAnchorElement.class.php 1806 2010-02-02 10:27:32Z pooza $
+ * @version $Id: BSImageAnchorElement.class.php 1807 2010-02-03 03:45:49Z pooza $
  * @abstract
  */
 abstract class BSImageAnchorElement extends BSAnchorElement {

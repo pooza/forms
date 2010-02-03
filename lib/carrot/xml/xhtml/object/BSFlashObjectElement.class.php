@@ -1,14 +1,14 @@
 <?php
 /**
  * @package org.carrot-framework
- * @subpackage xml.xhtml
+ * @subpackage xml.xhtml.object
  */
 
 /**
  * Flash用object要素
  *
  * @author 小石達也 <tkoishi@b-shock.co.jp>
- * @version $Id: BSFlashObjectElement.class.php 1681 2009-12-13 04:28:24Z pooza $
+ * @version $Id: BSFlashObjectElement.class.php 1807 2010-02-03 03:45:49Z pooza $
  */
 class BSFlashObjectElement extends BSObjectElement {
 	private $flashvars;

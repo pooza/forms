@@ -4,7 +4,7 @@
 #
 # @package org.carrot-framework
 # @author 小石達也 <tkoishi@b-shock.co.jp>
-# @version $Id: Rakefile.rb 1790 2010-01-27 03:10:58Z pooza $
+# @version $Id: Rakefile.rb 1808 2010-02-03 03:55:50Z pooza $
 
 $KCODE = 'u'
 require 'yaml'
@@ -236,6 +236,10 @@ namespace :distribution do
     system 'svn pset svn:executable ON bin/*'
     system 'svn pset svn:executable ON lib/*/*.pl'
     system 'cd share; svn pset svn:eol-style LF `find . -name \'*.as\'`'
+    system 'cd www; svn pset svn:eol-style LF `find . -name \'*.html\'`'
+    system 'cd www; svn pset svn:eol-style LF `find . -name \'*.htm\'`'
+    system 'cd www; svn pset svn:eol-style LF `find . -name \'*.js\'`'
+    system 'cd www; svn pset svn:eol-style LF `find . -name \'*.css\'`'
   end
 
   desc '配布アーカイブを作成'

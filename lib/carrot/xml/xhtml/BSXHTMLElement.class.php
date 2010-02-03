@@ -8,7 +8,7 @@
  * XHTMLの要素
  *
  * @author 小石達也 <tkoishi@b-shock.co.jp>
- * @version $Id: BSXHTMLElement.class.php 1730 2009-12-27 07:18:22Z pooza $
+ * @version $Id: BSXHTMLElement.class.php 1807 2010-02-03 03:45:49Z pooza $
  */
 class BSXHTMLElement extends BSXMLElement {
 	protected $tag;
@@ -72,6 +72,9 @@ class BSXHTMLElement extends BSXMLElement {
 	 * @param string $id ID
 	 */
 	public function setID ($id) {
+		if (BSString::isBlank($id)) {
+			return;
+		}
 		$this->attributes['id'] = $id;
 	}
 

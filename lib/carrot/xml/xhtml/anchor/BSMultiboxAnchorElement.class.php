@@ -1,16 +1,16 @@
 <?php
 /**
  * @package org.carrot-framework
- * @subpackage xml.xhtml
+ * @subpackage xml.xhtml.anchor
  */
 
 /**
- * Lightboxへのリンク
+ * multiBoxへのリンク
  *
  * @author 小石達也 <tkoishi@b-shock.co.jp>
- * @version $Id: BSLightboxAnchorElement.class.php 1806 2010-02-02 10:27:32Z pooza $
+ * @version $Id: BSMultiboxAnchorElement.class.php 1807 2010-02-03 03:45:49Z pooza $
  */
-class BSLightboxAnchorElement extends BSImageAnchorElement {
+class BSMultiboxAnchorElement extends BSImageAnchorElement {
 
 	/**
 	 * @access public
@@ -19,7 +19,7 @@ class BSLightboxAnchorElement extends BSImageAnchorElement {
 	 */
 	public function __construct ($name = null, BSUserAgent $useragent = null) {
 		parent::__construct($name, $useragent);
-		$this->setAttribute('rel', 'lightbox');
+		$this->registerStyleClass('mb');
 	}
 
 	/**
@@ -29,11 +29,6 @@ class BSLightboxAnchorElement extends BSImageAnchorElement {
 	 * @param string $group グループ名
 	 */
 	public function setImageGroup ($group) {
-		if (BSString::isBlank($group)) {
-			$this->setAttribute('rel', 'lightbox');
-		} else {
-			$this->setAttribute('rel', 'lightbox[' . $group . ']');
-		}
 	}
 }
 
