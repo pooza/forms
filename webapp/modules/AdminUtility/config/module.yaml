@@ -3,7 +3,7 @@
 # @package org.carrot-framework
 # @subpackage AdminUtility
 # @author 小石達也 <tkoishi@b-shock.co.jp>
-# @version $Id: module.yaml 1812 2010-02-03 15:15:09Z pooza $
+# @version $Id: module.yaml 1819 2010-02-04 11:13:43Z pooza $
 
 module:
   title: ユーティリティ
@@ -11,3 +11,5 @@ module:
 actions:
   Backup:
     title: バックアップ
+  Pictogram:
+    title: 絵文字入力

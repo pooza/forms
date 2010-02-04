@@ -8,7 +8,7 @@
  * MySQLデータベース
  *
  * @author 小石達也 <tkoishi@b-shock.co.jp>
- * @version $Id: BSMySQLDatabase.class.php 1812 2010-02-03 15:15:09Z pooza $
+ * @version $Id: BSMySQLDatabase.class.php 1815 2010-02-04 10:54:12Z pooza $
  */
 class BSMySQLDatabase extends BSDatabase {
 	static private $configFile;
@@ -123,7 +123,7 @@ class BSMySQLDatabase extends BSDatabase {
 		if ($command->hasError()) {
 			throw new BSDatabaseException($command->getResult());
 		}
-		return $command->getResult();
+		return $command->getResult()->join("\n");
 	}
 
 	/**
@@ -137,7 +137,7 @@ class BSMySQLDatabase extends BSDatabase {
 		$command = new BSCommandLine('bin/' . $command);
 		$command->setDirectory(BSFileUtility::getDirectory('mysql'));
 		$command->addValue('--host=' . $this['host']->getAddress());
-		$command->addValue('--user=' . $this['user']);
+		$command->addValue('--user=' . $this['uid']);
 		$command->addValue($this['database_name']);
 		if (!BSString::isBlank($password = $this['password'])) {
 			$command->addValue('--password=' . $password);

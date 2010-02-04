@@ -1,13 +1,13 @@
 <?php
 /**
- * Choiceアクション
+ * Pictogramアクション
  *
  * @package org.carrot-framework
- * @subpackage UserPictogram
+ * @subpackage AdminUtility
  * @author 小石達也 <tkoishi@b-shock.co.jp>
- * @version $Id: ChoiceAction.class.php 1812 2010-02-03 15:15:09Z pooza $
+ * @version $Id: PictogramAction.class.php 1820 2010-02-04 11:15:28Z pooza $
  */
-class ChoiceAction extends BSAction {
+class PictogramAction extends BSAction {
 	public function execute () {
 		$this->request->setAttribute('pictograms', BSPictogram::getPictogramNames());
 		return BSView::INPUT;

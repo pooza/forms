@@ -8,7 +8,7 @@
  * SQLiteデータベース
  *
  * @author 小石達也 <tkoishi@b-shock.co.jp>
- * @version $Id: BSSQLiteDatabase.class.php 1812 2010-02-03 15:15:09Z pooza $
+ * @version $Id: BSSQLiteDatabase.class.php 1815 2010-02-04 10:54:12Z pooza $
  */
 class BSSQLiteDatabase extends BSDatabase {
 
@@ -71,7 +71,7 @@ class BSSQLiteDatabase extends BSDatabase {
 		if ($command->hasError()) {
 			throw new BSDatabaseException($command->getResult());
 		}
-		return $command->getResult();
+		return $command->getResult()->join("\n");
 	}
 
 	/**
