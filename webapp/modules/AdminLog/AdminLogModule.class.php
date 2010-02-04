@@ -5,7 +5,7 @@
  * @package org.carrot-framework
  * @subpackage AdminLog
  * @author 小石達也 <tkoishi@b-shock.co.jp>
- * @version $Id: AdminLogModule.class.php 1195 2009-05-16 11:46:01Z pooza $
+ * @version $Id: AdminLogModule.class.php 1812 2010-02-03 15:15:09Z pooza $
  */
 class AdminLogModule extends BSModule {
 	private $logger;

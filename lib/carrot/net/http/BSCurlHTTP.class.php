@@ -8,7 +8,7 @@
  * CurlによるHTTP処理
  *
  * @author 小石達也 <tkoishi@b-shock.co.jp>
- * @version $Id: BSCurlHTTP.class.php 1721 2009-12-25 10:13:46Z pooza $
+ * @version $Id: BSCurlHTTP.class.php 1812 2010-02-03 15:15:09Z pooza $
  */
 class BSCurlHTTP extends BSHTTP {
 	private $engine;

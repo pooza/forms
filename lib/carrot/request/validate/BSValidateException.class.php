@@ -8,7 +8,7 @@
  * バリデート例外
  *
  * @author 小石達也 <tkoishi@b-shock.co.jp>
- * @version $Id: BSValidateException.class.php 1066 2009-04-17 07:25:12Z pooza $
+ * @version $Id: BSValidateException.class.php 1812 2010-02-03 15:15:09Z pooza $
  */
 class BSValidateException extends BSException {
 }

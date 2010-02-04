@@ -8,7 +8,7 @@
  * テンプレートファイル
  *
  * @author 小石達也 <tkoishi@b-shock.co.jp>
- * @version $Id: BSTemplateFile.class.php 1103 2009-04-26 07:07:54Z pooza $
+ * @version $Id: BSTemplateFile.class.php 1812 2010-02-03 15:15:09Z pooza $
  */
 class BSTemplateFile extends BSFile {
 	private $engine;

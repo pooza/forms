@@ -8,7 +8,7 @@
  * ストアドシリアライズレコード
  *
  * @author 小石達也 <tkoishi@b-shock.co.jp>
- * @version $Id: BSSerializeEntry.class.php 1735 2009-12-29 04:32:14Z pooza $
+ * @version $Id: BSSerializeEntry.class.php 1812 2010-02-03 15:15:09Z pooza $
  */
 class BSSerializeEntry extends BSRecord {
 

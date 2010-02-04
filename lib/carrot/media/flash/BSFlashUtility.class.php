@@ -8,7 +8,7 @@
  * Flashユーティリティ
  *
  * @author 小石達也 <tkoishi@b-shock.co.jp>
- * @version $Id: BSFlashUtility.class.php 1675 2009-12-12 13:27:54Z pooza $
+ * @version $Id: BSFlashUtility.class.php 1812 2010-02-03 15:15:09Z pooza $
  */
 class BSFlashUtility {
 

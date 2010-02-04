@@ -8,7 +8,7 @@
  * 汎用レンダラー
  *
  * @author 小石達也 <tkoishi@b-shock.co.jp>
- * @version $Id: BSRawRenderer.class.php 1165 2009-05-09 05:52:40Z pooza $
+ * @version $Id: BSRawRenderer.class.php 1812 2010-02-03 15:15:09Z pooza $
  */
 class BSRawRenderer implements BSRenderer {
 	private $contents;

@@ -8,7 +8,7 @@
  * QuickTime動画ファイル
  *
  * @author 小石達也 <tkoishi@b-shock.co.jp>
- * @version $Id: BSQuickTimeMovieFile.class.php 1711 2009-12-23 10:05:53Z pooza $
+ * @version $Id: BSQuickTimeMovieFile.class.php 1812 2010-02-03 15:15:09Z pooza $
  */
 class BSQuickTimeMovieFile extends BSMovieFile {
 

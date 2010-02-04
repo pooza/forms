@@ -5,7 +5,7 @@
  * @package org.carrot-framework
  * @subpackage AdminMemcache
  * @author 小石達也 <tkoishi@b-shock.co.jp>
- * @version $Id: SummaryAction.class.php 957 2009-03-07 15:17:28Z pooza $
+ * @version $Id: SummaryAction.class.php 1812 2010-02-03 15:15:09Z pooza $
  */
 class SummaryAction extends BSAction {
 	public function execute () {

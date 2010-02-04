@@ -7,7 +7,7 @@
  * シンプル汎用カウンター
  *
  * @author 小石達也 <tkoishi@b-shock.co.jp>
- * @version $Id: BSCounter.class.php 1657 2009-12-07 02:35:36Z pooza $
+ * @version $Id: BSCounter.class.php 1812 2010-02-03 15:15:09Z pooza $
  */
 class BSCounter {
 	private $file;

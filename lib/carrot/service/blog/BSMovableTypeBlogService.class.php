@@ -8,7 +8,7 @@
  * MovableTypeクライアント
  *
  * @author 小石達也 <tkoishi@b-shock.co.jp>
- * @version $Id: BSMovableTypeBlogService.class.php 1718 2009-12-25 09:15:55Z pooza $
+ * @version $Id: BSMovableTypeBlogService.class.php 1812 2010-02-03 15:15:09Z pooza $
  */
 class BSMovableTypeBlogService {
 	private $urls;

@@ -3,7 +3,7 @@
 
 @package org.carrot-framework
 @author 小石達也 <tkoishi@b-shock.co.jp>
-@version $Id: ErrorMessages.mobile.tpl 1261 2009-06-11 09:33:31Z pooza $
+@version $Id: ErrorMessages.mobile.tpl 1812 2010-02-03 15:15:09Z pooza $
 *}
 {if $errors}
 <p>

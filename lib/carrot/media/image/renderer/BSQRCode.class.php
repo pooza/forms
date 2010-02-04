@@ -10,7 +10,7 @@ BSUtility::includeFile('qrcode');
  * QRコードレンダラー
  *
  * @author 小石達也 <tkoishi@b-shock.co.jp>
- * @version $Id: BSQRCode.class.php 1800 2010-02-01 08:23:35Z pooza $
+ * @version $Id: BSQRCode.class.php 1812 2010-02-03 15:15:09Z pooza $
  */
 class BSQRCode implements BSImageRenderer {
 	private $image;

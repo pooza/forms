@@ -5,7 +5,7 @@
  * @package org.carrot-framework
  * @subpackage UserPictogram
  * @author 小石達也 <tkoishi@b-shock.co.jp>
- * @version $Id: ChoiceAction.class.php 1088 2009-04-21 09:42:26Z pooza $
+ * @version $Id: ChoiceAction.class.php 1812 2010-02-03 15:15:09Z pooza $
  */
 class ChoiceAction extends BSAction {
 	public function execute () {

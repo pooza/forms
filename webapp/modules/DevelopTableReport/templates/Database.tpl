@@ -4,7 +4,7 @@
 @package org.carrot-framework
 @subpackage DevelopTableReport
 @author 小石達也 <tkoishi@b-shock.co.jp>
-@version $Id: Database.tpl 980 2009-03-15 09:16:40Z pooza $
+@version $Id: Database.tpl 1812 2010-02-03 15:15:09Z pooza $
 *}
 {include file='AdminHeader'}
 {include file='ErrorMessages' hide_error_code=true}

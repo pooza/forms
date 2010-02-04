@@ -8,7 +8,7 @@
  * 座標
  *
  * @author 小石達也 <tkoishi@b-shock.co.jp>
- * @version $Id: BSCoordinate.class.php 1568 2009-10-19 10:56:07Z pooza $
+ * @version $Id: BSCoordinate.class.php 1812 2010-02-03 15:15:09Z pooza $
  */
 class BSCoordinate {
 	private $image;

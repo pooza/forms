@@ -8,7 +8,7 @@
  * ZIPアーカイブ
  *
  * @author 小石達也 <tkoishi@b-shock.co.jp>
- * @version $Id: BSZipArchive.class.php 1671 2009-12-12 06:55:46Z pooza $
+ * @version $Id: BSZipArchive.class.php 1812 2010-02-03 15:15:09Z pooza $
  */
 class BSZipArchive extends ZipArchive implements BSrenderer {
 	private $file;

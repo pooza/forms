@@ -8,7 +8,7 @@
  * 抽出条件の集合
  *
  * @author 小石達也 <tkoishi@b-shock.co.jp>
- * @version $Id: BSCriteriaSet.class.php 1589 2009-10-27 08:55:31Z pooza $
+ * @version $Id: BSCriteriaSet.class.php 1812 2010-02-03 15:15:09Z pooza $
  */
 class BSCriteriaSet extends BSArray {
 	private $glue = 'AND';

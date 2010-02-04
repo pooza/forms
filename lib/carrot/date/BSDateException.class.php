@@ -8,7 +8,7 @@
  * 日付例外
  *
  * @author 小石達也 <tkoishi@b-shock.co.jp>
- * @version $Id: BSDateException.class.php 1657 2009-12-07 02:35:36Z pooza $
+ * @version $Id: BSDateException.class.php 1812 2010-02-03 15:15:09Z pooza $
  */
 class BSDateException extends BSException {
 

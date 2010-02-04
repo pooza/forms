@@ -8,7 +8,7 @@
  * データベースセッションストレージ
  *
  * @author 小石達也 <tkoishi@b-shock.co.jp>
- * @version $Id: BSDatabaseSessionStorage.class.php 941 2009-02-28 08:49:54Z pooza $
+ * @version $Id: BSDatabaseSessionStorage.class.php 1812 2010-02-03 15:15:09Z pooza $
  */
 class BSDatabaseSessionStorage implements BSSessionStorage {
 	const TABLE_NAME = 'session_entry';

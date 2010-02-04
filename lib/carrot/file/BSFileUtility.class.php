@@ -10,7 +10,7 @@ ini_set('auto_detect_line_endings', true);
  * ファイルユーティリティ
  *
  * @author 小石達也 <tkoishi@b-shock.co.jp>
- * @version $Id: BSFileUtility.class.php 1779 2010-01-26 02:43:04Z pooza $
+ * @version $Id: BSFileUtility.class.php 1812 2010-02-03 15:15:09Z pooza $
  */
 class BSFileUtility {
 

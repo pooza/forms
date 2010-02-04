@@ -3,7 +3,7 @@
  *
  * @package org.carrot-framework
  * @author 小石達也 <tkoishi@b-shock.co.jp>
- * @version $Id: deny_take_out.js 1688 2009-12-16 02:42:16Z pooza $
+ * @version $Id: deny_take_out.js 1808 2010-02-03 03:55:50Z pooza $
  */
 
 function denyTakeOut (selector_name) {

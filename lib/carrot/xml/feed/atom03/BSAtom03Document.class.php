@@ -8,7 +8,7 @@
  * Atom0.3文書
  *
  * @author 小石達也 <tkoishi@b-shock.co.jp>
- * @version $Id: BSAtom03Document.class.php 1765 2010-01-18 01:19:46Z pooza $
+ * @version $Id: BSAtom03Document.class.php 1812 2010-02-03 15:15:09Z pooza $
  */
 class BSAtom03Document extends BSXMLDocument implements BSFeedDocument {
 	protected $version = '0.3';

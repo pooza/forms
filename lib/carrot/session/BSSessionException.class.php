@@ -8,7 +8,7 @@
  * セッション例外
  *
  * @author 小石達也 <tkoishi@b-shock.co.jp>
- * @version $Id: BSSessionException.class.php 860 2009-02-16 01:17:27Z pooza $
+ * @version $Id: BSSessionException.class.php 1812 2010-02-03 15:15:09Z pooza $
  */
 class BSSessionException extends BSException {
 }

@@ -8,7 +8,7 @@
  * 抽象リクエストフィルタ
  *
  * @author 小石達也 <tkoishi@b-shock.co.jp>
- * @version $Id: BSRequestFilter.class.php 821 2009-01-31 07:22:56Z pooza $
+ * @version $Id: BSRequestFilter.class.php 1812 2010-02-03 15:15:09Z pooza $
  * @abstract
  */
 abstract class BSRequestFilter extends BSFilter {

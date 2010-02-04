@@ -8,7 +8,7 @@
  * フィードエントリー
  *
  * @author 小石達也 <tkoishi@b-shock.co.jp>
- * @version $Id: BSFeedEntry.interface.php 1453 2009-09-09 11:36:47Z pooza $
+ * @version $Id: BSFeedEntry.interface.php 1812 2010-02-03 15:15:09Z pooza $
  */
 interface BSFeedEntry {
 

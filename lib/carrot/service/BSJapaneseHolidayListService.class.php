@@ -17,7 +17,7 @@
  * p($holidays->getHolidays()); //当月のすべての祝日を配列で
  *
  * @author 小石達也 <tkoishi@b-shock.co.jp>
- * @version $Id: BSJapaneseHolidayListService.class.php 1771 2010-01-23 08:12:21Z pooza $
+ * @version $Id: BSJapaneseHolidayListService.class.php 1812 2010-02-03 15:15:09Z pooza $
  * @link http://www.finds.jp/wsdocs/calendar/
  */
 class BSJapaneseHolidayListService extends BSCurlHTTP implements BSHolidayList {

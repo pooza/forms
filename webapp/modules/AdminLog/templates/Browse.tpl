@@ -4,7 +4,7 @@
 @package org.carrot-framework
 @subpackage AdminLog
 @author 小石達也 <tkoishi@b-shock.co.jp>
-@version $Id: Browse.tpl 1431 2009-09-05 10:32:32Z pooza $
+@version $Id: Browse.tpl 1812 2010-02-03 15:15:09Z pooza $
 *}
 {include file='AdminHeader'}
 {form method='get'}

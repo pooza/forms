@@ -8,7 +8,7 @@
  * データベース接続
  *
  * @author 小石達也 <tkoishi@b-shock.co.jp>
- * @version $Id: BSDatabase.class.php 1789 2010-01-27 03:06:29Z pooza $
+ * @version $Id: BSDatabase.class.php 1812 2010-02-03 15:15:09Z pooza $
  * @abstract
  */
 abstract class BSDatabase extends PDO implements ArrayAccess, BSAssignable {

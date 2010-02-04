@@ -8,7 +8,7 @@
  * RSS1.0文書
  *
  * @author 小石達也 <tkoishi@b-shock.co.jp>
- * @version $Id: BSRSS10Document.class.php 1690 2009-12-18 06:53:03Z pooza $
+ * @version $Id: BSRSS10Document.class.php 1812 2010-02-03 15:15:09Z pooza $
  */
 class BSRSS10Document extends BSRSS09Document {
 	protected $version = '1.0';

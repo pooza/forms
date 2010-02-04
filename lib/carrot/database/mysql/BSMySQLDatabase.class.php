@@ -8,7 +8,7 @@
  * MySQLデータベース
  *
  * @author 小石達也 <tkoishi@b-shock.co.jp>
- * @version $Id: BSMySQLDatabase.class.php 1782 2010-01-26 05:57:00Z pooza $
+ * @version $Id: BSMySQLDatabase.class.php 1812 2010-02-03 15:15:09Z pooza $
  */
 class BSMySQLDatabase extends BSDatabase {
 	static private $configFile;

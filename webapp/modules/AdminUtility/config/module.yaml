@@ -3,7 +3,7 @@
 # @package org.carrot-framework
 # @subpackage AdminUtility
 # @author 小石達也 <tkoishi@b-shock.co.jp>
-# @version $Id: module.yaml 1792 2010-01-27 06:06:34Z pooza $
+# @version $Id: module.yaml 1812 2010-02-03 15:15:09Z pooza $
 
 module:
   title: ユーティリティ

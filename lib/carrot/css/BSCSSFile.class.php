@@ -8,7 +8,7 @@
  * CSSファイル
  *
  * @author 小石達也 <tkoishi@b-shock.co.jp>
- * @version $Id: BSCSSFile.class.php 1525 2009-09-25 10:38:32Z pooza $
+ * @version $Id: BSCSSFile.class.php 1812 2010-02-03 15:15:09Z pooza $
  */
 class BSCSSFile extends BSFile implements BSDocumentSetEntry {
 

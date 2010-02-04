@@ -8,7 +8,7 @@
  * Flashムービーバリデータ
  *
  * @author 小石達也 <tkoishi@b-shock.co.jp>
- * @version $Id: BSFlashValidator.class.php 1754 2010-01-14 11:04:40Z pooza $
+ * @version $Id: BSFlashValidator.class.php 1812 2010-02-03 15:15:09Z pooza $
  */
 class BSFlashValidator extends BSValidator {
 

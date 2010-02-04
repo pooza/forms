@@ -2,9 +2,10 @@
 #
 # @package org.carrot-framework
 # @author 小石達也 <tkoishi@b-shock.co.jp>
-# @version $Id: mime.yaml 1771 2010-01-23 08:12:21Z pooza $
+# @version $Id: mime.yaml 1812 2010-02-03 15:15:09Z pooza $
 
 types:
+  as:
   css: text/css
   csv: text/csv
   dat: application/octet-stream

@@ -5,7 +5,7 @@
  * @package org.carrot-framework
  * @subpackage Default
  * @author 小石達也 <tkoishi@b-shock.co.jp>
- * @version $Id: PingErrorView.class.php 1435 2009-09-05 12:44:09Z pooza $
+ * @version $Id: PingErrorView.class.php 1812 2010-02-03 15:15:09Z pooza $
  */
 class PingErrorView extends BSView {
 	public function execute () {

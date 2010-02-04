@@ -4,7 +4,7 @@
 #
 # @package org.carrot-framework
 # @author 小石達也 <tkoishi@b-shock.co.jp>
-# @version $Id: compress-access-log.rb 501 2008-08-17 16:36:14Z pooza $
+# @version $Id: compress-access-log.rb 1812 2010-02-03 15:15:09Z pooza $
 
 GZIP_CMD = '/usr/bin/gzip'
 LOG_DIR = '/var/log/httpd'

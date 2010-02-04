@@ -8,7 +8,7 @@
  * DOBCデータベース接続
  *
  * @author 小石達也 <tkoishi@b-shock.co.jp>
- * @version $Id: BSODBCDatabase.class.php 1438 2009-09-06 11:15:30Z pooza $
+ * @version $Id: BSODBCDatabase.class.php 1812 2010-02-03 15:15:09Z pooza $
  */
 class BSODBCDatabase extends BSDatabase {
 

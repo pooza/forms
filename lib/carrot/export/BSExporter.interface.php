@@ -8,7 +8,7 @@
  * エクスポータ
  *
  * @author 小石達也 <tkoishi@b-shock.co.jp>
- * @version $Id: BSExporter.interface.php 798 2009-01-24 12:34:55Z pooza $
+ * @version $Id: BSExporter.interface.php 1812 2010-02-03 15:15:09Z pooza $
  */
 interface BSExporter {
 

@@ -5,7 +5,7 @@
  * @package org.carrot-framework
  * @subpackage Default
  * @author 小石達也 <tkoishi@b-shock.co.jp>
- * @version $Id: DefaultAction.class.php 1220 2009-05-24 12:40:47Z pooza $
+ * @version $Id: DefaultAction.class.php 1812 2010-02-03 15:15:09Z pooza $
  */
 class DefaultAction extends BSAction {
 	public function execute () {

@@ -8,7 +8,7 @@
  * ケータイ用セッションハンドラ
  *
  * @author 小石達也 <tkoishi@b-shock.co.jp>
- * @version $Id: BSMobileSessionHandler.class.php 1604 2009-10-31 13:04:15Z pooza $
+ * @version $Id: BSMobileSessionHandler.class.php 1812 2010-02-03 15:15:09Z pooza $
  */
 class BSMobileSessionHandler extends BSSessionHandler {
 

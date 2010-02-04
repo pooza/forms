@@ -8,7 +8,7 @@
  * ロール
  *
  * @author 小石達也 <tkoishi@b-shock.co.jp>
- * @version $Id: BSRole.interface.php 1176 2009-05-10 11:38:04Z pooza $
+ * @version $Id: BSRole.interface.php 1812 2010-02-03 15:15:09Z pooza $
  * @abstract
  */
 interface BSRole extends BSUserIdentifier {

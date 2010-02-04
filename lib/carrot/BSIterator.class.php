@@ -7,7 +7,7 @@
  * 基底イテレータ
  *
  * @author 小石達也 <tkoishi@b-shock.co.jp>
- * @version $Id: BSIterator.class.php 1717 2009-12-25 08:58:02Z pooza $
+ * @version $Id: BSIterator.class.php 1812 2010-02-03 15:15:09Z pooza $
  */
 class BSIterator implements Iterator, Countable {
 	protected $keys = array();

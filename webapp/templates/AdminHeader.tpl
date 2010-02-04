@@ -3,7 +3,7 @@
 
 @package org.carrot-framework
 @author 小石達也 <tkoishi@b-shock.co.jp>
-@version $Id: AdminHeader.tpl 1772 2010-01-24 03:12:35Z pooza $
+@version $Id: AdminHeader.tpl 1812 2010-02-03 15:15:09Z pooza $
 *}
 <?xml version="1.0" encoding="UTF-8" ?>
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">

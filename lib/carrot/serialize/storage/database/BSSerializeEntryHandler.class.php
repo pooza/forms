@@ -8,7 +8,7 @@
  * シリアライズテーブル
  *
  * @author 小石達也 <tkoishi@b-shock.co.jp>
- * @version $Id: BSSerializeEntryHandler.class.php 1734 2009-12-29 04:20:30Z pooza $
+ * @version $Id: BSSerializeEntryHandler.class.php 1812 2010-02-03 15:15:09Z pooza $
  */
 class BSSerializeEntryHandler extends BSTableHandler {
 

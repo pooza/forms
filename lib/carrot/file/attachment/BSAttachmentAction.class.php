@@ -8,7 +8,7 @@
  * 添付ファイルのダウンロードアクション
  *
  * @author 小石達也 <tkoishi@b-shock.co.jp>
- * @version $Id: BSAttachmentAction.class.php 1598 2009-10-30 12:26:03Z pooza $
+ * @version $Id: BSAttachmentAction.class.php 1812 2010-02-03 15:15:09Z pooza $
  * @abstract
  */
 abstract class BSAttachmentAction extends BSRecordAction {

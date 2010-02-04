@@ -8,7 +8,7 @@
  * 複数のメールアドレスを格納する抽象ヘッダ
  *
  * @author 小石達也 <tkoishi@b-shock.co.jp>
- * @version $Id: BSAddressesMIMEHeader.class.php 1621 2009-11-18 09:20:35Z pooza $
+ * @version $Id: BSAddressesMIMEHeader.class.php 1812 2010-02-03 15:15:09Z pooza $
  * @abstract
  */
 abstract class BSAddressesMIMEHeader extends BSMIMEHeader {

@@ -8,7 +8,7 @@
  * データベースシリアライズストレージ
  *
  * @author 小石達也 <tkoishi@b-shock.co.jp>
- * @version $Id: BSDatabaseSerializeStorage.class.php 944 2009-02-28 09:49:04Z pooza $
+ * @version $Id: BSDatabaseSerializeStorage.class.php 1812 2010-02-03 15:15:09Z pooza $
  */
 class BSDatabaseSerializeStorage implements BSSerializeStorage {
 	const TABLE_NAME = 'serialize_entry';

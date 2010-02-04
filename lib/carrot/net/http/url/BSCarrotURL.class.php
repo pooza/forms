@@ -8,7 +8,7 @@
  * CarrotアプリケーションのURL
  *
  * @author 小石達也 <tkoishi@b-shock.co.jp>
- * @version $Id: BSCarrotURL.class.php 1755 2010-01-15 06:55:07Z pooza $
+ * @version $Id: BSCarrotURL.class.php 1812 2010-02-03 15:15:09Z pooza $
  */
 class BSCarrotURL extends BSHTTPURL {
 	private $module;

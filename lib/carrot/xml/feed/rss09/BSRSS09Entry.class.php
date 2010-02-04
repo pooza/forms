@@ -8,7 +8,7 @@
  * RSS0.9xエントリー
  *
  * @author 小石達也 <tkoishi@b-shock.co.jp>
- * @version $Id: BSRSS09Entry.class.php 1795 2010-01-28 09:59:14Z pooza $
+ * @version $Id: BSRSS09Entry.class.php 1812 2010-02-03 15:15:09Z pooza $
  */
 class BSRSS09Entry extends BSXMLElement implements BSFeedEntry {
 	protected $document;

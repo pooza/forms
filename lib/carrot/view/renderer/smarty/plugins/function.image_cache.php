@@ -10,7 +10,7 @@
  * BSImageCacheHandlerのフロントエンド
  *
  * @author 小石達也 <tkoishi@b-shock.co.jp>
- * @version $Id: function.image_cache.php 1807 2010-02-03 03:45:49Z pooza $
+ * @version $Id: function.image_cache.php 1812 2010-02-03 15:15:09Z pooza $
  */
 function smarty_function_image_cache ($params, &$smarty) {
 	$caches = BSImageCacheHandler::getInstance();

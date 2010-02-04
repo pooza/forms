@@ -8,7 +8,7 @@
  * Webリクエスト
  *
  * @author 小石達也 <tkoishi@b-shock.co.jp>
- * @version $Id: BSWebRequest.class.php 1628 2009-11-20 04:22:45Z pooza $
+ * @version $Id: BSWebRequest.class.php 1812 2010-02-03 15:15:09Z pooza $
  */
 class BSWebRequest extends BSRequest {
 	static private $instance;

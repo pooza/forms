@@ -8,7 +8,7 @@
  * URL変換修飾子
  *
  * @author 小石達也 <tkoishi@b-shock.co.jp>
- * @version $Id: modifier.url2link.php 1622 2009-11-19 07:42:56Z pooza $
+ * @version $Id: modifier.url2link.php 1812 2010-02-03 15:15:09Z pooza $
  */
 function smarty_modifier_url2link ($value) {
 	if (is_array($value)) {

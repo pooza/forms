@@ -8,7 +8,7 @@
  * 設定パーサー
  *
  * @author 小石達也 <tkoishi@b-shock.co.jp>
- * @version $Id: BSConfigParser.interface.php 738 2008-12-12 00:59:09Z pooza $
+ * @version $Id: BSConfigParser.interface.php 1812 2010-02-03 15:15:09Z pooza $
  */
 interface BSConfigParser extends BSTextRenderer {
 

@@ -8,7 +8,7 @@
  * 辞書ファイル
  *
  * @author 小石達也 <tkoishi@b-shock.co.jp>
- * @version $Id: BSDictionaryFile.class.php 1652 2009-12-04 06:49:14Z pooza $
+ * @version $Id: BSDictionaryFile.class.php 1812 2010-02-03 15:15:09Z pooza $
  */
 class BSDictionaryFile extends BSCSVFile implements BSDictionary {
 	private $words;

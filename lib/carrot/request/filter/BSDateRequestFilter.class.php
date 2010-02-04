@@ -8,7 +8,7 @@
  * 日付 リクエストフィルタ
  *
  * @author 小石達也 <tkoishi@b-shock.co.jp>
- * @version $Id: BSDateRequestFilter.class.php 1733 2009-12-29 04:19:51Z pooza $
+ * @version $Id: BSDateRequestFilter.class.php 1812 2010-02-03 15:15:09Z pooza $
  */
 class BSDateRequestFilter extends BSRequestFilter {
 

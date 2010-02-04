@@ -3,7 +3,7 @@ awstats.confファイル テンプレート
 
 @package org.carrot-framework
 @author 小石達也 <tkoishi@b-shock.co.jp>
-@version $Id: awstats.conf.tpl 601 2008-09-17 03:57:44Z pooza $
+@version $Id: awstats.conf.tpl 1812 2010-02-03 15:15:09Z pooza $
 *}
 LogFile="{$config.logfile}"
 SiteDomain="{$config.server_name}"

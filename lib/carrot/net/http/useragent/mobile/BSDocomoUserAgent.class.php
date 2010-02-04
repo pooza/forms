@@ -8,7 +8,7 @@
  * Docomoユーザーエージェント
  *
  * @author 小石達也 <tkoishi@b-shock.co.jp>
- * @version $Id: BSDocomoUserAgent.class.php 1652 2009-12-04 06:49:14Z pooza $
+ * @version $Id: BSDocomoUserAgent.class.php 1812 2010-02-03 15:15:09Z pooza $
  */
 class BSDocomoUserAgent extends BSMobileUserAgent {
 	const LIST_FILE_NAME = 'docomo_agents.xml';

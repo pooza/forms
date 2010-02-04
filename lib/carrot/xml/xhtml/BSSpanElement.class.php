@@ -8,7 +8,7 @@
  * span要素
  *
  * @author 小石達也 <tkoishi@b-shock.co.jp>
- * @version $Id: BSSpanElement.class.php 1702 2009-12-21 10:11:02Z pooza $
+ * @version $Id: BSSpanElement.class.php 1812 2010-02-03 15:15:09Z pooza $
  */
 class BSSpanElement extends BSXHTMLElement {
 

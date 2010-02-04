@@ -8,7 +8,7 @@
  * ログレコード
  *
  * @author 小石達也 <tkoishi@b-shock.co.jp>
- * @version $Id: BSLogEntry.class.php 1443 2009-09-06 12:53:17Z pooza $
+ * @version $Id: BSLogEntry.class.php 1812 2010-02-03 15:15:09Z pooza $
  */
 class BSLogEntry extends BSRecord {
 

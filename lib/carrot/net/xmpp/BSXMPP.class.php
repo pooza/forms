@@ -10,7 +10,7 @@ BSUtility::includeFile('XMPPHP/XMPP');
  * XMPPプロトコル
  *
  * @author 小石達也 <tkoishi@b-shock.co.jp>
- * @version $Id: BSXMPP.class.php 1800 2010-02-01 08:23:35Z pooza $
+ * @version $Id: BSXMPP.class.php 1812 2010-02-03 15:15:09Z pooza $
  */
 class BSXMPP extends XMPPHP_XMPP {
 	private $to;

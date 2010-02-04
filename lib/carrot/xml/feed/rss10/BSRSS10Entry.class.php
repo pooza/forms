@@ -8,7 +8,7 @@
  * RSS1.0エントリー
  *
  * @author 小石達也 <tkoishi@b-shock.co.jp>
- * @version $Id: BSRSS10Entry.class.php 1525 2009-09-25 10:38:32Z pooza $
+ * @version $Id: BSRSS10Entry.class.php 1812 2010-02-03 15:15:09Z pooza $
  */
 class BSRSS10Entry extends BSRSS09Entry {
 

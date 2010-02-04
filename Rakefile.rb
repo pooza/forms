@@ -4,7 +4,7 @@
 #
 # @package org.carrot-framework
 # @author 小石達也 <tkoishi@b-shock.co.jp>
-# @version $Id: Rakefile.rb 1808 2010-02-03 03:55:50Z pooza $
+# @version $Id: Rakefile.rb 1813 2010-02-03 15:20:23Z pooza $
 
 $KCODE = 'u'
 require 'yaml'
@@ -226,20 +226,23 @@ namespace :distribution do
   task :pset do
     system 'svn pset svn:ignore \'*\' var/*'
     media_types.each do |extension, type|
-      if type != nil
-        system 'svn pset svn:mime-type ' + type + ' `find . -name \'*.' + extension + '\'`'
-      else
+      if type == nil
         system 'svn pdel svn:mime-type `find . -name \'*.' + extension + '\'`'
+      else
+        system 'svn pset svn:mime-type ' + type + ' `find . -name \'*.' + extension + '\'`'
+      end
+      if (type == nil) || (/^text\// =~ type)
+        system 'svn pset svn:eol-style LF ./*.' + extension
+        system 'svn pset svn:eol-style LF `find bin -name \'*.' + extension + '\'`'
+        system 'svn pset svn:eol-style LF `find share -name \'*.' + extension + '\'`'
+        system 'svn pset svn:eol-style LF `find webapp -name \'*.' + extension + '\'`'
+        system 'svn pset svn:eol-style LF `find www -name \'*.' + extension + '\'`'
+        system 'svn pset svn:eol-style LF `find lib/carrot -name \'*.' + extension + '\'`'
       end
       system 'svn pdel svn:executable `find . -name \'*.' + extension + '\'`'
     end
     system 'svn pset svn:executable ON bin/*'
     system 'svn pset svn:executable ON lib/*/*.pl'
-    system 'cd share; svn pset svn:eol-style LF `find . -name \'*.as\'`'
-    system 'cd www; svn pset svn:eol-style LF `find . -name \'*.html\'`'
-    system 'cd www; svn pset svn:eol-style LF `find . -name \'*.htm\'`'
-    system 'cd www; svn pset svn:eol-style LF `find . -name \'*.js\'`'
-    system 'cd www; svn pset svn:eol-style LF `find . -name \'*.css\'`'
   end
 
   desc '配布アーカイブを作成'

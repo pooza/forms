@@ -3,7 +3,7 @@
  *
  * @package org.carrot-framework
  * @author 小石達也 <tkoishi@b-shock.co.jp>
- * @version $Id: elevator.js 1512 2009-09-19 14:45:26Z pooza $
+ * @version $Id: elevator.js 1808 2010-02-03 03:55:50Z pooza $
  */
 
 function Elevator (element, x, yMin, yMargin) {

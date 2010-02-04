@@ -8,7 +8,7 @@
  * モジュール例外
  *
  * @author 小石達也 <tkoishi@b-shock.co.jp>
- * @version $Id: BSModuleException.class.php 1004 2009-03-23 05:00:37Z pooza $
+ * @version $Id: BSModuleException.class.php 1812 2010-02-03 15:15:09Z pooza $
  */
 class BSModuleException extends BSException {
 

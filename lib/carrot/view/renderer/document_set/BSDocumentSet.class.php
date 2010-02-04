@@ -10,7 +10,7 @@
  * BSJavaScriptSet/BSStyleSetの基底クラス
  *
  * @author 小石達也 <tkoishi@b-shock.co.jp>
- * @version $Id: BSDocumentSet.class.php 1774 2010-01-24 05:45:28Z pooza $
+ * @version $Id: BSDocumentSet.class.php 1812 2010-02-03 15:15:09Z pooza $
  * @abstract
  */
 abstract class BSDocumentSet implements BSTextRenderer, IteratorAggregate {

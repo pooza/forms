@@ -8,7 +8,7 @@
  * バリデータ設定コンパイラ
  *
  * @author 小石達也 <tkoishi@b-shock.co.jp>
- * @version $Id: BSValidatorConfigCompiler.class.php 1764 2010-01-18 01:15:50Z pooza $
+ * @version $Id: BSValidatorConfigCompiler.class.php 1812 2010-02-03 15:15:09Z pooza $
  */
 class BSValidatorConfigCompiler extends BSConfigCompiler {
 	private $methods;

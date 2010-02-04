@@ -8,7 +8,7 @@
  * 電話番号変換修飾子
  *
  * @author 小石達也 <tkoishi@b-shock.co.jp>
- * @version $Id: modifier.tel2link.php 1469 2009-09-11 12:40:31Z pooza $
+ * @version $Id: modifier.tel2link.php 1812 2010-02-03 15:15:09Z pooza $
  */
 function smarty_modifier_tel2link ($value) {
 	if (is_array($value)) {

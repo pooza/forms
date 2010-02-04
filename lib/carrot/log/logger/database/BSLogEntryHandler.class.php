@@ -8,7 +8,7 @@
  * ログテーブル
  *
  * @author 小石達也 <tkoishi@b-shock.co.jp>
- * @version $Id: BSLogEntryHandler.class.php 1723 2009-12-26 04:46:32Z pooza $
+ * @version $Id: BSLogEntryHandler.class.php 1812 2010-02-03 15:15:09Z pooza $
  */
 class BSLogEntryHandler extends BSTableHandler {
 

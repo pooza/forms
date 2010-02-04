@@ -8,7 +8,7 @@
  * WWWフォームレンダラー
  *
  * @author 小石達也 <tkoishi@b-shock.co.jp>
- * @version $Id: BSWWWFormRenderer.class.php 1805 2010-02-02 02:31:05Z pooza $
+ * @version $Id: BSWWWFormRenderer.class.php 1812 2010-02-03 15:15:09Z pooza $
  */
 class BSWWWFormRenderer extends BSParameterHolder implements BSRenderer {
 

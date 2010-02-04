@@ -8,7 +8,7 @@
  * SoftBank 携帯電話キャリア
  *
  * @author 小石達也 <tkoishi@b-shock.co.jp>
- * @version $Id: BSSoftBankMobileCarrier.class.php 1016 2009-03-25 10:52:54Z pooza $
+ * @version $Id: BSSoftBankMobileCarrier.class.php 1812 2010-02-03 15:15:09Z pooza $
  */
 class BSSoftBankMobileCarrier extends BSMobileCarrier {
 

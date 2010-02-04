@@ -8,7 +8,7 @@
  * Smartyレンダラーによるメール送信
  *
  * @author 小石達也 <tkoishi@b-shock.co.jp>
- * @version $Id: BSSmartySender.class.php 1518 2009-09-20 17:44:54Z pooza $
+ * @version $Id: BSSmartySender.class.php 1812 2010-02-03 15:15:09Z pooza $
  */
 class BSSmartySender extends BSSMTP {
 

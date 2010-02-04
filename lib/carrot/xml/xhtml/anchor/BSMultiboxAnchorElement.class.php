@@ -8,7 +8,7 @@
  * multiBoxへのリンク
  *
  * @author 小石達也 <tkoishi@b-shock.co.jp>
- * @version $Id: BSMultiboxAnchorElement.class.php 1810 2010-02-03 08:09:18Z pooza $
+ * @version $Id: BSMultiboxAnchorElement.class.php 1812 2010-02-03 15:15:09Z pooza $
  */
 class BSMultiboxAnchorElement extends BSImageAnchorElement {
 

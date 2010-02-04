@@ -8,7 +8,7 @@
  * モジュール
  *
  * @author 小石達也 <tkoishi@b-shock.co.jp>
- * @version $Id: BSModule.class.php 1792 2010-01-27 06:06:34Z pooza $
+ * @version $Id: BSModule.class.php 1812 2010-02-03 15:15:09Z pooza $
  */
 class BSModule implements BSHTTPRedirector, BSAssignable {
 	protected $name;

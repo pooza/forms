@@ -8,7 +8,7 @@
  * Content-Typeヘッダ
  *
  * @author 小石達也 <tkoishi@b-shock.co.jp>
- * @version $Id: BSContentTypeMIMEHeader.class.php 1780 2010-01-26 03:32:51Z pooza $
+ * @version $Id: BSContentTypeMIMEHeader.class.php 1812 2010-02-03 15:15:09Z pooza $
  */
 class BSContentTypeMIMEHeader extends BSMIMEHeader {
 

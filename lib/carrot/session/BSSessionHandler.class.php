@@ -8,7 +8,7 @@
  * セッションハンドラ
  *
  * @author 小石達也 <tkoishi@b-shock.co.jp>
- * @version $Id: BSSessionHandler.class.php 1656 2009-12-06 09:31:18Z pooza $
+ * @version $Id: BSSessionHandler.class.php 1812 2010-02-03 15:15:09Z pooza $
  */
 class BSSessionHandler implements BSUserIdentifier {
 	private $storage;

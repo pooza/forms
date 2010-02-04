@@ -8,7 +8,7 @@
  * 動画ユーティリティ
  *
  * @author 小石達也 <tkoishi@b-shock.co.jp>
- * @version $Id: BSMovieUtility.class.php 1706 2009-12-21 16:27:48Z pooza $
+ * @version $Id: BSMovieUtility.class.php 1812 2010-02-03 15:15:09Z pooza $
  */
 class BSMovieUtility {
 

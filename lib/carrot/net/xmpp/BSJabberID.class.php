@@ -8,7 +8,7 @@
  * JabberID
  *
  * @author 小石達也 <tkoishi@b-shock.co.jp>
- * @version $Id: BSJabberID.class.php 1521 2009-09-22 06:28:16Z pooza $
+ * @version $Id: BSJabberID.class.php 1812 2010-02-03 15:15:09Z pooza $
  */
 class BSJabberID implements BSAssignable {
 	private $contents;

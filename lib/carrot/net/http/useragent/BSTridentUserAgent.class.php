@@ -10,7 +10,7 @@
  * Windows版 InternetExplorer 4.x以降
  *
  * @author 小石達也 <tkoishi@b-shock.co.jp>
- * @version $Id: BSTridentUserAgent.class.php 1750 2010-01-09 10:31:51Z pooza $
+ * @version $Id: BSTridentUserAgent.class.php 1812 2010-02-03 15:15:09Z pooza $
  */
 class BSTridentUserAgent extends BSUserAgent {
 

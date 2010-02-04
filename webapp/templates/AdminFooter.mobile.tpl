@@ -3,7 +3,7 @@
 
 @package org.carrot-framework
 @author 小石達也 <tkoishi@b-shock.co.jp>
-@version $Id: AdminFooter.mobile.tpl 1072 2009-04-18 06:19:42Z pooza $
+@version $Id: AdminFooter.mobile.tpl 1812 2010-02-03 15:15:09Z pooza $
 *}
 <hr/>
 <div>

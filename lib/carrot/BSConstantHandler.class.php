@@ -7,7 +7,7 @@
  * 定数ハンドラ
  *
  * @author 小石達也 <tkoishi@b-shock.co.jp>
- * @version $Id: BSConstantHandler.class.php 1522 2009-09-22 06:38:56Z pooza $
+ * @version $Id: BSConstantHandler.class.php 1812 2010-02-03 15:15:09Z pooza $
  */
 class BSConstantHandler extends BSParameterHolder implements BSDictionary {
 	static private $instance;

@@ -8,7 +8,7 @@
  * bit.lyクライアント
  *
  * @author 小石達也 <tkoishi@b-shock.co.jp>
- * @version $Id: BSBitlyService.class.php 1721 2009-12-25 10:13:46Z pooza $
+ * @version $Id: BSBitlyService.class.php 1812 2010-02-03 15:15:09Z pooza $
  */
 class BSBitlyService extends BSCurlHTTP implements BSURLShorter {
 	const DEFAULT_HOST = 'api.bit.ly';

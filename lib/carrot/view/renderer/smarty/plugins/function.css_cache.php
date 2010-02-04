@@ -8,7 +8,7 @@
  * CSSキャッシュ関数
  *
  * @author 小石達也 <tkoishi@b-shock.co.jp>
- * @version $Id: function.css_cache.php 1799 2010-02-01 08:10:40Z pooza $
+ * @version $Id: function.css_cache.php 1812 2010-02-03 15:15:09Z pooza $
  */
 function smarty_function_css_cache ($params, &$smarty) {
 	$params = new BSArray($params);

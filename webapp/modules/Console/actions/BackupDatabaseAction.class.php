@@ -5,7 +5,7 @@
  * @package org.carrot-framework
  * @subpackage Console
  * @author 小石達也 <tkoishi@b-shock.co.jp>
- * @version $Id: BackupDatabaseAction.class.php 1784 2010-01-26 06:11:40Z pooza $
+ * @version $Id: BackupDatabaseAction.class.php 1812 2010-02-03 15:15:09Z pooza $
  */
 class BackupDatabaseAction extends BSAction {
 	private $database;

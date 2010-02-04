@@ -8,7 +8,7 @@
  * メール
  *
  * @author 小石達也 <tkoishi@b-shock.co.jp>
- * @version $Id: BSMail.class.php 1542 2009-10-09 10:12:47Z pooza $
+ * @version $Id: BSMail.class.php 1812 2010-02-03 15:15:09Z pooza $
  */
 class BSMail extends BSMIMEDocument {
 	private $error;

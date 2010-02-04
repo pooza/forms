@@ -8,7 +8,7 @@
  * 改行 リクエストフィルタ
  *
  * @author 小石達也 <tkoishi@b-shock.co.jp>
- * @version $Id: BSNewLineRequestFilter.class.php 839 2009-02-05 13:45:44Z pooza $
+ * @version $Id: BSNewLineRequestFilter.class.php 1812 2010-02-03 15:15:09Z pooza $
  */
 class BSNewLineRequestFilter extends BSRequestFilter {
 

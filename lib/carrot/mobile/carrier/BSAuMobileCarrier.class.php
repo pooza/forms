@@ -8,7 +8,7 @@
  * Au 携帯電話キャリア
  *
  * @author 小石達也 <tkoishi@b-shock.co.jp>
- * @version $Id: BSAuMobileCarrier.class.php 1063 2009-04-17 06:58:35Z pooza $
+ * @version $Id: BSAuMobileCarrier.class.php 1812 2010-02-03 15:15:09Z pooza $
  */
 class BSAuMobileCarrier extends BSMobileCarrier {
 

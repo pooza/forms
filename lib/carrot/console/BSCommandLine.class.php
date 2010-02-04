@@ -8,7 +8,7 @@
  * コマンドラインビルダー
  *
  * @author 小石達也 <tkoishi@b-shock.co.jp>
- * @version $Id: BSCommandLine.class.php 1760 2010-01-17 04:15:44Z pooza $
+ * @version $Id: BSCommandLine.class.php 1812 2010-02-03 15:15:09Z pooza $
  */
 class BSCommandLine extends BSParameterHolder {
 	private $command;

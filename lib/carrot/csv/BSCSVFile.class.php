@@ -8,7 +8,7 @@
  * CSVファイル
  *
  * @author 小石達也 <tkoishi@b-shock.co.jp>
- * @version $Id: BSCSVFile.class.php 1138 2009-05-03 10:58:54Z pooza $
+ * @version $Id: BSCSVFile.class.php 1812 2010-02-03 15:15:09Z pooza $
  */
 class BSCSVFile extends BSFile {
 	private $engine;

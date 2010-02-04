@@ -8,7 +8,7 @@
  * JavaScriptファイル
  *
  * @author 小石達也 <tkoishi@b-shock.co.jp>
- * @version $Id: BSJavaScriptFile.class.php 1800 2010-02-01 08:23:35Z pooza $
+ * @version $Id: BSJavaScriptFile.class.php 1812 2010-02-03 15:15:09Z pooza $
  */
 class BSJavaScriptFile extends BSFile implements BSDocumentSetEntry {
 

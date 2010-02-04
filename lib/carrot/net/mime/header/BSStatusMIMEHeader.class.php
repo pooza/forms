@@ -8,7 +8,7 @@
  * Statusヘッダ
  *
  * @author 小石達也 <tkoishi@b-shock.co.jp>
- * @version $Id: BSStatusMIMEHeader.class.php 1549 2009-10-10 10:39:28Z pooza $
+ * @version $Id: BSStatusMIMEHeader.class.php 1812 2010-02-03 15:15:09Z pooza $
  */
 class BSStatusMIMEHeader extends BSMIMEHeader {
 

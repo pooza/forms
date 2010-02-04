@@ -10,7 +10,7 @@
  * Excel97形式に対応。
  *
  * @author 小石達也 <tkoishi@b-shock.co.jp>
- * @version $Id: BSExcelExporter.class.php 1558 2009-10-16 03:25:12Z pooza $
+ * @version $Id: BSExcelExporter.class.php 1812 2010-02-03 15:15:09Z pooza $
  */
 class BSExcelExporter implements BSExporter, BSRenderer {
 	private $file;

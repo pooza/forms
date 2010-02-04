@@ -3,7 +3,7 @@
 
 @package org.carrot-framework
 @author 小石達也 <tkoishi@b-shock.co.jp>
-@version $Id: AdminHeader.Docomo.tpl 1076 2009-04-18 10:21:00Z pooza $
+@version $Id: AdminHeader.Docomo.tpl 1812 2010-02-03 15:15:09Z pooza $
 *}
 <?xml version="1.0" encoding="Shift_JIS" ?>
 <!DOCTYPE html PUBLIC "-//i-mode group (ja)//DTD XHTML i-XHTML(Locale/Ver.=ja/1.0) 1.0//EN" "i-xhtml_4ja_10.dtd">

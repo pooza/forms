@@ -8,7 +8,7 @@
  * メディアファイル
  *
  * @author 小石達也 <tkoishi@b-shock.co.jp>
- * @version $Id: BSMediaFile.class.php 1799 2010-02-01 08:10:40Z pooza $
+ * @version $Id: BSMediaFile.class.php 1812 2010-02-03 15:15:09Z pooza $
  * @abstract
  */
 abstract class BSMediaFile extends BSFile implements ArrayAccess {

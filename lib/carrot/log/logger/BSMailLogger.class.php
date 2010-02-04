@@ -8,7 +8,7 @@
  * メール送信ロガー
  *
  * @author 小石達也 <tkoishi@b-shock.co.jp>
- * @version $Id: BSMailLogger.class.php 1089 2009-04-22 09:58:46Z pooza $
+ * @version $Id: BSMailLogger.class.php 1812 2010-02-03 15:15:09Z pooza $
  */
 class BSMailLogger extends BSLogger {
 	private $server;

@@ -8,7 +8,7 @@
  * JSONレンダラー
  *
  * @author 小石達也 <tkoishi@b-shock.co.jp>
- * @version $Id: BSJSONRenderer.class.php 1194 2009-05-15 12:25:06Z pooza $
+ * @version $Id: BSJSONRenderer.class.php 1812 2010-02-03 15:15:09Z pooza $
  */
 class BSJSONRenderer implements BSRenderer {
 	private $serializer;

@@ -8,7 +8,7 @@
  * Last-Modifiedヘッダ
  *
  * @author 小石達也 <tkoishi@b-shock.co.jp>
- * @version $Id: BSLastModifiedMIMEHeader.class.php 1547 2009-10-10 08:06:14Z pooza $
+ * @version $Id: BSLastModifiedMIMEHeader.class.php 1812 2010-02-03 15:15:09Z pooza $
  */
 class BSLastModifiedMIMEHeader extends BSDateMIMEHeader {
 }

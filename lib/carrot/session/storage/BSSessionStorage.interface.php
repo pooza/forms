@@ -8,7 +8,7 @@
  * セッションストレージ
  *
  * @author 小石達也 <tkoishi@b-shock.co.jp>
- * @version $Id: BSSessionStorage.interface.php 932 2009-02-27 04:39:33Z pooza $
+ * @version $Id: BSSessionStorage.interface.php 1812 2010-02-03 15:15:09Z pooza $
  */
 interface BSSessionStorage {
 

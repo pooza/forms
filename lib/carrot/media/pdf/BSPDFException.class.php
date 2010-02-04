@@ -8,7 +8,7 @@
  * PDF例外
  *
  * @author 小石達也 <tkoishi@b-shock.co.jp>
- * @version $Id: BSPDFException.class.php 1568 2009-10-19 10:56:07Z pooza $
+ * @version $Id: BSPDFException.class.php 1812 2010-02-03 15:15:09Z pooza $
  */
 class BSPDFException extends BSException {
 }

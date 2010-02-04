@@ -8,7 +8,7 @@
  * シリアライズストレージ
  *
  * @author 小石達也 <tkoishi@b-shock.co.jp>
- * @version $Id: BSSerializeStorage.interface.php 933 2009-02-27 04:58:09Z pooza $
+ * @version $Id: BSSerializeStorage.interface.php 1812 2010-02-03 15:15:09Z pooza $
  */
 interface BSSerializeStorage {
 

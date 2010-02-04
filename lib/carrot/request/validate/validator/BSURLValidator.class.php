@@ -8,7 +8,7 @@
  * URLバリデータ
  *
  * @author 小石達也 <tkoishi@b-shock.co.jp>
- * @version $Id: BSURLValidator.class.php 1794 2010-01-28 09:58:55Z pooza $
+ * @version $Id: BSURLValidator.class.php 1812 2010-02-03 15:15:09Z pooza $
  */
 class BSURLValidator extends BSValidator {
 

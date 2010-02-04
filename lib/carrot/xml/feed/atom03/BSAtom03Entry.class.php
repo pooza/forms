@@ -8,7 +8,7 @@
  * Atom0.3エントリー
  *
  * @author 小石達也 <tkoishi@b-shock.co.jp>
- * @version $Id: BSAtom03Entry.class.php 1795 2010-01-28 09:59:14Z pooza $
+ * @version $Id: BSAtom03Entry.class.php 1812 2010-02-03 15:15:09Z pooza $
  */
 class BSAtom03Entry extends BSXMLElement implements BSFeedEntry {
 	protected $document;

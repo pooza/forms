@@ -8,7 +8,7 @@
  * syslog用ロガー
  *
  * @author 小石達也 <tkoishi@b-shock.co.jp>
- * @version $Id: BSSystemLogger.class.php 946 2009-03-01 03:36:08Z pooza $
+ * @version $Id: BSSystemLogger.class.php 1812 2010-02-03 15:15:09Z pooza $
  */
 class BSSystemLogger extends BSLogger {
 

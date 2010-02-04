@@ -5,7 +5,7 @@
  * @package org.carrot-framework
  * @subpackage DevelopTableReport
  * @author 小石達也 <tkoishi@b-shock.co.jp>
- * @version $Id: DatabaseListAction.class.php 738 2008-12-12 00:59:09Z pooza $
+ * @version $Id: DatabaseListAction.class.php 1812 2010-02-03 15:15:09Z pooza $
  */
 class DatabaseListAction extends BSAction {
 	public function execute () {

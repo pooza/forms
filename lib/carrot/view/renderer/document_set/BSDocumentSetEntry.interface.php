@@ -10,7 +10,7 @@
  * BSDocumentSetにregister出来るクラスのインターフェース。
  *
  * @author 小石達也 <tkoishi@b-shock.co.jp>
- * @version $Id: BSDocumentSetEntry.interface.php 1521 2009-09-22 06:28:16Z pooza $
+ * @version $Id: BSDocumentSetEntry.interface.php 1812 2010-02-03 15:15:09Z pooza $
  */
 interface BSDocumentSetEntry extends BSTextRenderer {
 

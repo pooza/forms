@@ -5,7 +5,7 @@
  * @package org.carrot-framework
  * @subpackage Console
  * @author 小石達也 <tkoishi@b-shock.co.jp>
- * @version $Id: AnalyzeAccessLogAction.class.php 1600 2009-10-30 14:48:55Z pooza $
+ * @version $Id: AnalyzeAccessLogAction.class.php 1812 2010-02-03 15:15:09Z pooza $
  */
 class AnalyzeAccessLogAction extends BSAction {
 	protected $awstatsConfig;

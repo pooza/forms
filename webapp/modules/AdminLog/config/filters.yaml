@@ -3,7 +3,7 @@
 # @package org.carrot-framework
 # @subpackage AdminLog
 # @author 小石達也 <tkoishi@b-shock.co.jp>
-# @version $Id: filters.yaml 628 2008-09-27 14:30:03Z pooza $
+# @version $Id: filters.yaml 1812 2010-02-03 15:15:09Z pooza $
 
 - class: BSSecurityFilter
 - class: BSHostSecurityFilter

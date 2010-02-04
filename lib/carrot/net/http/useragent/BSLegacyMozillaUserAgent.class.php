@@ -8,7 +8,7 @@
  * レガシーMozillaユーザーエージェント
  *
  * @author 小石達也 <tkoishi@b-shock.co.jp>
- * @version $Id: BSLegacyMozillaUserAgent.class.php 1665 2009-12-09 11:34:42Z pooza $
+ * @version $Id: BSLegacyMozillaUserAgent.class.php 1812 2010-02-03 15:15:09Z pooza $
  */
 class BSLegacyMozillaUserAgent extends BSUserAgent {
 

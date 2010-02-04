@@ -8,7 +8,7 @@
  * httpレスポンス
  *
  * @author 小石達也 <tkoishi@b-shock.co.jp>
- * @version $Id: BSHTTPResponse.class.php 1554 2009-10-14 02:56:55Z pooza $
+ * @version $Id: BSHTTPResponse.class.php 1812 2010-02-03 15:15:09Z pooza $
  */
 class BSHTTPResponse extends BSMIMEDocument {
 	protected $version;

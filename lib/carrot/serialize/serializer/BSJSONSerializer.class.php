@@ -8,7 +8,7 @@
  * JSONシリアライザー
  *
  * @author 小石達也 <tkoishi@b-shock.co.jp>
- * @version $Id: BSJSONSerializer.class.php 928 2009-02-26 04:21:07Z pooza $
+ * @version $Id: BSJSONSerializer.class.php 1812 2010-02-03 15:15:09Z pooza $
  */
 class BSJSONSerializer implements BSSerializer {
 

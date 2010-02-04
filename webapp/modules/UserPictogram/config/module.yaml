@@ -3,7 +3,7 @@
 # @package org.carrot-framework
 # @subpackage UserPictogram
 # @author 小石達也 <tkoishi@b-shock.co.jp>
-# @version $Id: module.yaml 1093 2009-04-23 06:57:50Z pooza $
+# @version $Id: module.yaml 1812 2010-02-03 15:15:09Z pooza $
 
 actions:
   Choice:

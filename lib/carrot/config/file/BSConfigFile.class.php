@@ -8,7 +8,7 @@
  * 設定ファイル
  *
  * @author 小石達也 <tkoishi@b-shock.co.jp>
- * @version $Id: BSConfigFile.class.php 1602 2009-10-31 05:56:40Z pooza $
+ * @version $Id: BSConfigFile.class.php 1812 2010-02-03 15:15:09Z pooza $
  */
 class BSConfigFile extends BSFile {
 	private $config = array();

@@ -8,7 +8,7 @@
  * 基底URL
  *
  * @author 小石達也 <tkoishi@b-shock.co.jp>
- * @version $Id: BSURL.class.php 1801 2010-02-01 10:52:31Z pooza $
+ * @version $Id: BSURL.class.php 1812 2010-02-03 15:15:09Z pooza $
  * @abstract
  */
 abstract class BSURL implements ArrayAccess, BSAssignable {

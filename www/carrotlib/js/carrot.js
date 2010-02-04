@@ -3,7 +3,7 @@
  *
  * @package org.carrot-framework
  * @author 小石達也 <tkoishi@b-shock.co.jp>
- * @version $Id: carrot.js 1560 2009-10-16 05:53:42Z pooza $
+ * @version $Id: carrot.js 1808 2010-02-03 03:55:50Z pooza $
  */
 
 function redirect (m, a, id) {

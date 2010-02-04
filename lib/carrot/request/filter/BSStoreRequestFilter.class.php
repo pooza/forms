@@ -8,7 +8,7 @@
  * リクエストを保存するフィルタ
  *
  * @author 小石達也 <tkoishi@b-shock.co.jp>
- * @version $Id: BSStoreRequestFilter.class.php 1600 2009-10-30 14:48:55Z pooza $
+ * @version $Id: BSStoreRequestFilter.class.php 1812 2010-02-03 15:15:09Z pooza $
  */
 class BSStoreRequestFilter extends BSRequestFilter {
 

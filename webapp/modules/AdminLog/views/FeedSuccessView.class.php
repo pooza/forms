@@ -5,7 +5,7 @@
  * @package org.carrot-framework
  * @subpackage AdminFeed
  * @author 小石達也 <tkoishi@b-shock.co.jp>
- * @version $Id: FeedSuccessView.class.php 1787 2010-01-27 02:44:00Z pooza $
+ * @version $Id: FeedSuccessView.class.php 1812 2010-02-03 15:15:09Z pooza $
  */
 class FeedSuccessView extends BSView {
 	public function initialize () {

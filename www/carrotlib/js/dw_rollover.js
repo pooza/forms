@@ -2,7 +2,7 @@
  * ロールオーバーJavaScript （DreamWeaver用）
  *
  * @package org.carrot-framework
- * @version $Id: dw_rollover.js 501 2008-08-17 16:36:14Z pooza $
+ * @version $Id: dw_rollover.js 1808 2010-02-03 03:55:50Z pooza $
  */
 
 function MM_swapImgRestore() { 

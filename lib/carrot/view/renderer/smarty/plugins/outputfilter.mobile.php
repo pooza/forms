@@ -8,7 +8,7 @@
  * ケータイ向け出力フィルタ
  *
  * @author 小石達也 <tkoishi@b-shock.co.jp>
- * @version $Id: outputfilter.mobile.php 971 2009-03-12 03:48:25Z pooza $
+ * @version $Id: outputfilter.mobile.php 1812 2010-02-03 15:15:09Z pooza $
  */
 function smarty_outputfilter_mobile ($source, &$smarty) {
 	$source = BSString::convertKana($source, 'kas');

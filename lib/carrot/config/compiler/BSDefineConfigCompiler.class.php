@@ -8,7 +8,7 @@
  * 定数設定コンパイラ
  *
  * @author 小石達也 <tkoishi@b-shock.co.jp>
- * @version $Id: BSDefineConfigCompiler.class.php 1339 2009-07-21 01:01:48Z pooza $
+ * @version $Id: BSDefineConfigCompiler.class.php 1812 2010-02-03 15:15:09Z pooza $
  */
 class BSDefineConfigCompiler extends BSConfigCompiler {
 	public function execute (BSConfigFile $file) {

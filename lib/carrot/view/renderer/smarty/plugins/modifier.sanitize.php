@@ -8,7 +8,7 @@
  * サニタイズ修飾子
  *
  * @author 小石達也 <tkoishi@b-shock.co.jp>
- * @version $Id: modifier.sanitize.php 1079 2009-04-18 17:44:45Z pooza $
+ * @version $Id: modifier.sanitize.php 1812 2010-02-03 15:15:09Z pooza $
  */
 function smarty_modifier_sanitize ($value) {
 	if (is_array($value)) {

@@ -8,7 +8,7 @@
  * Toヘッダ
  *
  * @author 小石達也 <tkoishi@b-shock.co.jp>
- * @version $Id: BSToMIMEHeader.class.php 1008 2009-03-23 06:19:23Z pooza $
+ * @version $Id: BSToMIMEHeader.class.php 1812 2010-02-03 15:15:09Z pooza $
  */
 class BSToMIMEHeader extends BSAddressesMIMEHeader {
 }

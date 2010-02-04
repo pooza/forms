@@ -3,7 +3,7 @@
 
 @package org.carrot-framework
 @author 小石達也 <tkoishi@b-shock.co.jp>
-@version $Id: ErrorMessages.Console.tpl 973 2009-03-12 06:29:42Z pooza $
+@version $Id: ErrorMessages.Console.tpl 1812 2010-02-03 15:15:09Z pooza $
 *}
 {if $errors}
 {foreach from=$errors key=code item=message}

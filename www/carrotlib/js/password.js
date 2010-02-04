@@ -5,7 +5,7 @@
  *
  * @package org.carrot-framework
  * @author 小石達也 <tkoishi@b-shock.co.jp>
- * @version $Id: password.js 748 2008-12-16 02:13:14Z pooza $
+ * @version $Id: password.js 1808 2010-02-03 03:55:50Z pooza $
  */
 
 function getRandomPassword (length) {

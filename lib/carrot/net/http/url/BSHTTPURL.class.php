@@ -8,7 +8,7 @@
  * HTTPスキーマのURL
  *
  * @author 小石達也 <tkoishi@b-shock.co.jp>
- * @version $Id: BSHTTPURL.class.php 1802 2010-02-02 00:18:56Z pooza $
+ * @version $Id: BSHTTPURL.class.php 1812 2010-02-03 15:15:09Z pooza $
  */
 class BSHTTPURL extends BSURL implements BSHTTPRedirector, BSImageContainer {
 	private $fullpath;
