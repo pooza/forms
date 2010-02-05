@@ -8,7 +8,7 @@
  * データベース接続
  *
  * @author 小石達也 <tkoishi@b-shock.co.jp>
- * @version $Id: BSDatabase.class.php 1812 2010-02-03 15:15:09Z pooza $
+ * @version $Id: BSDatabase.class.php 1822 2010-02-05 02:04:19Z pooza $
  * @abstract
  */
 abstract class BSDatabase extends PDO implements ArrayAccess, BSAssignable {
@@ -312,13 +312,26 @@ abstract class BSDatabase extends PDO implements ArrayAccess, BSAssignable {
 	}
 
 	/**
-	 * テーブルを削除
+	 * テーブルを作成
 	 *
 	 * @access public
 	 * @param string $table テーブル名
+	 * @param BSArray $schema スキーマ
+	 */
+	public function createTable ($table, BSArray $schema) {
+		$this->exec(BSSQL::getCreateTableQueryString($table, $schema));
+		$this->tables = null;
+	}
+
+	/**
+	 * テーブルを削除
+	 *
+	 * @access public
+	 * @param string $name テーブル名
 	 */
 	public function deleteTable ($table) {
 		$this->exec(BSSQL::getDropTableQueryString($table));
+		$this->tables = null;
 	}
 
 	/**

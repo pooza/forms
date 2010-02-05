@@ -8,7 +8,7 @@
  * Google Mapsクライアント
  *
  * @author 小石達也 <tkoishi@b-shock.co.jp>
- * @version $Id: BSGoogleMapsService.class.php 1818 2010-02-04 11:04:46Z pooza $
+ * @version $Id: BSGoogleMapsService.class.php 1824 2010-02-05 02:23:27Z pooza $
  */
 class BSGoogleMapsService extends BSCurlHTTP {
 	private $table;
@@ -67,6 +67,31 @@ class BSGoogleMapsService extends BSCurlHTTP {
 			$this->table = new BSGeocodeEntryHandler;
 		}
 		return $this->table;
+	}
+
+	/**
+	 * サイトを直接開くURLを返す
+	 *
+	 * @access public
+	 * @param string $addr 住所
+	 * @param string BSUserAgent $useragent 対象ブラウザ
+	 * @return BSHTTPURL
+	 * @static
+	 */
+	static public function getURL ($addr, BSUserAgent $useragent = null) {
+		if (!$useragent) {
+			$useragent = BSRequest::getInstance()->getUserAgent();
+		}
+
+		$url = BSURL::getInstance();
+		if ($useragent->isMobile()) {
+			$url['host'] = 'www.google.co.jp';
+			$url['path'] = '/m/local';
+		} else {
+			$url['host'] = self::DEFAULT_HOST;
+		}
+		$url->setParameter('q', $addr);
+		return $url;
 	}
 }
 

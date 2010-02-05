@@ -8,7 +8,7 @@
  * 絵文字タグ
  *
  * @author 小石達也 <tkoishi@b-shock.co.jp>
- * @version $Id: BSPictogramTag.class.php 1812 2010-02-03 15:15:09Z pooza $
+ * @version $Id: BSPictogramTag.class.php 1824 2010-02-05 02:23:27Z pooza $
  */
 class BSPictogramTag extends BSSmartTag {
 
@@ -28,7 +28,6 @@ class BSPictogramTag extends BSSmartTag {
 	 * @access public
 	 * @param string $body 置換対象文字列
 	 * @return string 置換された文字列
-	 * @abstract
 	 */
 	public function execute ($body) {
 		try {
