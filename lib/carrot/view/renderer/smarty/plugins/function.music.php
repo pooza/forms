@@ -5,24 +5,18 @@
  */
 
 /**
- * 動画関数
+ * 楽曲関数
  *
  * @author 小石達也 <tkoishi@b-shock.co.jp>
- * @version $Id: function.movie.php 1825 2010-02-05 13:18:55Z pooza $
+ * @version $Id: function.music.php 1825 2010-02-05 13:18:55Z pooza $
  */
-function smarty_function_movie ($params, &$smarty) {
+function smarty_function_music ($params, &$smarty) {
 	$params = new BSArray($params);
-	if (!$file = BSMovieFile::search($params)) {
+	if (!$file = BSMusicFile::search($params)) {
 		return null;
 	}
 
 	switch ($mode = BSString::toLower($params['mode'])) {
-		case 'size':
-			return $file['pixel_size'];
-		case 'width':
-		case 'height':
-		case 'height_full':
-		case 'pixel_size':
 		case 'seconds':
 		case 'duration':
 		case 'type':
@@ -30,7 +24,7 @@ function smarty_function_movie ($params, &$smarty) {
 		default:
 			if (BSString::isBlank($params['href_prefix'])) {
 				if ($record = BSController::getInstance()->getModule()->searchRecord($params)) {
-					$url = BSFileUtility::getURL('movies');
+					$url = BSFileUtility::getURL('musics');
 					$url['path'] .= $record->getTable()->getDirectory()->getName() . '/';
 					$params['href_prefix'] = $url['path'];
 				}

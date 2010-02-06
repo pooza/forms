@@ -8,21 +8,20 @@
  * Flashムービー関数
  *
  * @author 小石達也 <tkoishi@b-shock.co.jp>
- * @version $Id: function.flash.php 1812 2010-02-03 15:15:09Z pooza $
+ * @version $Id: function.flash.php 1825 2010-02-05 13:18:55Z pooza $
  */
 function smarty_function_flash ($params, &$smarty) {
 	$params = new BSArray($params);
-	$mode = BSString::toLower($params['mode']);
-
-	if (!$file = BSFlashUtility::getFile($params)) {
+	if (!$file = BSFlashFile::search($params)) {
 		return null;
 	}
 
-	switch ($mode) {
+	switch ($mode = BSString::toLower($params['mode'])) {
 		case 'size':
 			return $file['pixel_size'];
 		case 'width':
 		case 'height':
+		case 'pixel_size':
 			return $file[$mode];
 		default:
 			if (BSString::isBlank($params['href_prefix'])) {
@@ -32,7 +31,7 @@ function smarty_function_flash ($params, &$smarty) {
 					$params['href_prefix'] = $url['path'];
 				}
 			}
-			return $file->getImageElement($params)->getContents();
+			return $file->getElement($params)->getContents();
 	}
 }
 

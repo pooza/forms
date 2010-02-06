@@ -10,7 +10,7 @@
  * BSImageCacheHandlerのフロントエンド
  *
  * @author 小石達也 <tkoishi@b-shock.co.jp>
- * @version $Id: function.image_cache.php 1812 2010-02-03 15:15:09Z pooza $
+ * @version $Id: function.image_cache.php 1825 2010-02-05 13:18:55Z pooza $
  */
 function smarty_function_image_cache ($params, &$smarty) {
 	$caches = BSImageCacheHandler::getInstance();
@@ -22,7 +22,7 @@ function smarty_function_image_cache ($params, &$smarty) {
 		return null;
 	}
 
-	$element = $caches->getImageElement($info);
+	$element = $caches->getElement($info);
 	$element->registerStyleClass($params['style_class']);
 	$element->setID($params['container_id']);
 

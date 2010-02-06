@@ -8,7 +8,7 @@
  * 絵文字
  *
  * @author 小石達也 <tkoishi@b-shock.co.jp>
- * @version $Id: BSPictogram.class.php 1812 2010-02-03 15:15:09Z pooza $
+ * @version $Id: BSPictogram.class.php 1825 2010-02-05 13:18:55Z pooza $
  */
 class BSPictogram implements BSAssignable, BSImageContainer {
 	private $id;
@@ -121,7 +121,7 @@ class BSPictogram implements BSAssignable, BSImageContainer {
 			return $this->getNumericReference();
 		} else {
 			$caches = BSImageCacheHandler::getInstance();
-			return $caches->getImageElement($this->getImageInfo())->getContents();
+			return $caches->getElement($this->getImageInfo())->getContents();
 		}
 	}
 

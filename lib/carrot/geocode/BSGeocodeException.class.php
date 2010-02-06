@@ -8,7 +8,7 @@
  * ジオコード例外
  *
  * @author 小石達也 <tkoishi@b-shock.co.jp>
- * @version $Id: BSGeocodeException.class.php 1823 2010-02-05 02:05:43Z pooza $
+ * @version $Id: BSGeocodeException.class.php 1825 2010-02-05 13:18:55Z pooza $
  */
 class BSGeocodeException extends BSException {
 }

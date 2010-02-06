@@ -8,7 +8,7 @@
  * Flashムービーファイル
  *
  * @author 小石達也 <tkoishi@b-shock.co.jp>
- * @version $Id: BSFlashFile.class.php 1812 2010-02-03 15:15:09Z pooza $
+ * @version $Id: BSFlashFile.class.php 1827 2010-02-05 14:00:42Z pooza $
  */
 class BSFlashFile extends BSMediaFile {
 
@@ -23,8 +23,8 @@ class BSFlashFile extends BSMediaFile {
 			throw new BSMediaException($this . 'はFlashムービーではありません。');
 		}
 		$this->attributes['path'] = $this->getPath();
-		$this->attributes['width'] = $info[0];
 		$this->attributes['type'] = $info['mime'];
+		$this->attributes['width'] = $info[0];
 		$this->attributes['height'] = $info[1];
 		$this->attributes['height_full'] = $info[1];
 		$this->attributes['pixel_size'] = $this['width'] . '×' . $this['height'];
@@ -37,14 +37,14 @@ class BSFlashFile extends BSMediaFile {
 	 * @param BSParameterHolder $params パラメータ配列
 	 * @return BSXMLElement 要素
 	 */
-	public function getImageElement (BSParameterHolder $params) {
+	public function getElement (BSParameterHolder $params) {
 		$constants = BSConstantHandler::getInstance();
 		foreach (array('player_ver', 'installer_href') as $key) {
 			if (BSString::isBlank($params[$key])) {
 				$params[$key] = $constants['flash_' . $key];
 			}
 		}
-		return parent::getImageElement($params);
+		return parent::getElement($params);
 	}
 
 	/**
@@ -77,7 +77,9 @@ class BSFlashFile extends BSMediaFile {
 	 * @return BSXMLElement 要素
 	 */
 	protected function getObjectElement (BSParameterHolder $params) {
-		return BSFlashUtility::getObjectElement($this->getMediaURL($params));
+		$element = new BSFlashObjectElement;
+		$element->setURL($this->getMediaURL($params));
+		return $element;
 	}
 
 	/**
@@ -86,6 +88,19 @@ class BSFlashFile extends BSMediaFile {
 	 */
 	public function __toString () {
 		return sprintf('Flashムービーファイル "%s"', $this->getShortPath());
+	}
+
+	/**
+	 * 探す
+	 *
+	 * @access public
+	 * @param mixed $file パラメータ配列、BSFile、ファイルパス文字列
+	 * @param string $class クラス名
+	 * @return BSFile ファイル
+	 * @static
+	 */
+	static public function search ($file, $class = 'BSFlashFile') {
+		return parent::search($file, $class);
 	}
 }
 

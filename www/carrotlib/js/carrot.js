@@ -3,7 +3,7 @@
  *
  * @package org.carrot-framework
  * @author 小石達也 <tkoishi@b-shock.co.jp>
- * @version $Id: carrot.js 1808 2010-02-03 03:55:50Z pooza $
+ * @version $Id: carrot.js 1828 2010-02-05 14:49:05Z pooza $
  */
 
 function redirect (m, a, id) {
@@ -22,7 +22,7 @@ function confirmDelete (m, a, recordType, id) {
 
 function openPictogramPallet (id) {
   window.open(
-    '/UserPictogram/Choice?field=' + id,
+    '/AdminUtility/Pictogram?field=' + id,
     'pictogram',
     'width=240,height=300,scrollbars=yes'
   );

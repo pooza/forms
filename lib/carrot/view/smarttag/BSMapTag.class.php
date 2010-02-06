@@ -8,7 +8,7 @@
  * Google Mapタグ
  *
  * @author 小石達也 <tkoishi@b-shock.co.jp>
- * @version $Id: BSMapTag.class.php 1824 2010-02-05 02:23:27Z pooza $
+ * @version $Id: BSMapTag.class.php 1825 2010-02-05 13:18:55Z pooza $
  */
 class BSMapTag extends BSSmartTag {
 	private $geocode;
