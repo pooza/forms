@@ -8,7 +8,7 @@
  * 基底ビュー
  *
  * @author 小石達也 <tkoishi@b-shock.co.jp>
- * @version $Id: BSView.class.php 1812 2010-02-03 15:15:09Z pooza $
+ * @version $Id: BSView.class.php 1829 2010-02-07 07:07:21Z pooza $
  */
 class BSView extends BSHTTPResponse {
 	protected $nameSuffix;
@@ -247,6 +247,9 @@ class BSView extends BSHTTPResponse {
 	 * @return BSArray 全てのサフィックス
 	 */
 	static public function putHeader ($header) {
+		if (BSRequest::getInstance()->isCLI()) {
+			return;
+		}
 		if (headers_sent()) {
 			throw new BSHTTPException('レスポンスヘッダを送信できません。');
 		}

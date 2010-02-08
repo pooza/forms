@@ -8,7 +8,7 @@
  * プロセス関連のユーティリティ
  *
  * @author 小石達也 <tkoishi@b-shock.co.jp>
- * @version $Id: BSProcess.class.php 1812 2010-02-03 15:15:09Z pooza $
+ * @version $Id: BSProcess.class.php 1829 2010-02-07 07:07:21Z pooza $
  */
 class BSProcess {
 
@@ -47,6 +47,23 @@ class BSProcess {
 		if ($result = $command->getResult()) {
 			return (int)$result[0];
 		}
+	}
+
+	/**
+	 * 許可されたユーザーを返す
+	 *
+	 * @access public
+	 * @return BSArray ユーザー名の配列
+	 * @static
+	 */
+	static public function getAllowedUsers () {
+		$users = new BSArray;
+		foreach (array('_', '') as $prefix) {
+			foreach (array('www', 'nobody') as $name) {
+				$users[] = $prefix . $name;
+			}
+		}
+		return $users;
 	}
 
 	/**
