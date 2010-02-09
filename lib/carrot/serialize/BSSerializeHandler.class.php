@@ -8,7 +8,7 @@
  * シリアライズされたキャッシュ
  *
  * @author 小石達也 <tkoishi@b-shock.co.jp>
- * @version $Id: BSSerializeHandler.class.php 1812 2010-02-03 15:15:09Z pooza $
+ * @version $Id: BSSerializeHandler.class.php 1846 2010-02-08 13:10:11Z pooza $
  */
 class BSSerializeHandler {
 	private $serializer;
@@ -91,7 +91,7 @@ class BSSerializeHandler {
 	 * @return mixed 属性値
 	 */
 	public function getAttribute ($name, BSDate $date = null) {
-		return $this->getStorage()->getAttribute($this->getAttributeName($name), $date);
+		return $this->getStorage()->getAttribute($this->serializeName($name), $date);
 	}
 
 	/**
@@ -102,7 +102,7 @@ class BSSerializeHandler {
 	 * @return BSDate 更新日
 	 */
 	public function getUpdateDate ($name) {
-		return $this->getStorage()->getUpdateDate($this->getAttributeName($name));
+		return $this->getStorage()->getUpdateDate($this->serializeName($name));
 	}
 
 	/**
@@ -120,7 +120,7 @@ class BSSerializeHandler {
 			$value = $value->getParameters();
 		}
 
-		$serialized = $this->getStorage()->setAttribute($this->getAttributeName($name), $value);
+		$serialized = $this->getStorage()->setAttribute($this->serializeName($name), $value);
 		$message = new BSStringFormat('%sのシリアライズをキャッシュしました。 (%sB)');
 		$message[] = $name;
 		$message[] = BSNumeric::getBinarySize(strlen($serialized));
@@ -134,25 +134,19 @@ class BSSerializeHandler {
 	 * @param string $name 属性の名前
 	 */
 	public function removeAttribute ($name) {
-		$this->getStorage()->removeAttribute($this->getAttributeName($name));
+		$this->getStorage()->removeAttribute($this->serializeName($name));
 	}
 
 	/**
-	 * 属性名を文字列に正規化する
+	 * 属性名へシリアライズ
 	 *
 	 * @access public
 	 * @param mixed $name 属性名に用いる値
 	 * @return string 属性名
 	 */
-	public function getAttributeName ($name) {
-		if ($name instanceof BSFile) {
-			$file = $name;
-			$name = new BSArray(get_class($file));
-			$name->merge(explode(DIRECTORY_SEPARATOR, $file->getShortPath()));
-			$name->trim();
-			return $name->join('.');
-		} else if ($name instanceof BSRecord) {
-			return $name->getSerializedName();
+	public function serializeName ($name) {
+		if ($name instanceof BSSerializable) {
+			return $name->serializeName();
 		} else if (is_object($name)) {
 			return get_class($name);
 		}

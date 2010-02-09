@@ -8,18 +8,18 @@
  * 規定設定コンパイラ
  *
  * @author 小石達也 <tkoishi@b-shock.co.jp>
- * @version $Id: BSDefaultConfigCompiler.class.php 1812 2010-02-03 15:15:09Z pooza $
+ * @version $Id: BSDefaultConfigCompiler.class.php 1848 2010-02-09 01:55:30Z pooza $
  */
 class BSDefaultConfigCompiler extends BSConfigCompiler {
 	public function execute (BSConfigFile $file) {
-		if ($this->controller->getAttribute($file, $file->getUpdateDate()) === null) {
-			$this->controller->setAttribute($file, $this->getContents($file->getResult()));
+		if ($file->getSerialized() === null) {
+			$file->serialize();
 		}
 
 		$this->clearBody();
 		$line = sprintf(
 			'return BSController::getInstance()->getAttribute(%s);',
-			self::quote(BSSerializeHandler::getInstance()->getAttributeName($file))
+			self::quote($file->serializeName())
 		);
 		$this->putLine($line);
 		return $this->getBody();

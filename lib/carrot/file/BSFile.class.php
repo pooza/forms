@@ -10,9 +10,9 @@ ini_set('auto_detect_line_endings', true);
  * ファイル
  *
  * @author 小石達也 <tkoishi@b-shock.co.jp>
- * @version $Id: BSFile.class.php 1812 2010-02-03 15:15:09Z pooza $
+ * @version $Id: BSFile.class.php 1845 2010-02-08 12:55:29Z pooza $
  */
-class BSFile extends BSDirectoryEntry implements BSRenderer {
+class BSFile extends BSDirectoryEntry implements BSRenderer, BSSerializable {
 	private $mode;
 	private $lines;
 	private $size;
@@ -411,6 +411,38 @@ class BSFile extends BSDirectoryEntry implements BSRenderer {
 	 */
 	public function getError () {
 		return $this->error;
+	}
+
+	/**
+	 * 属性名へシリアライズ
+	 *
+	 * @access public
+	 * @return string 属性名
+	 */
+	public function serializeName () {
+		$name = new BSArray(get_class($this));
+		$name->merge(explode(DIRECTORY_SEPARATOR, $this->getShortPath()));
+		$name->trim();
+		return $name->join('.');
+	}
+
+	/**
+	 * シリアライズ
+	 *
+	 * @access public
+	 */
+	public function serialize () {
+		throw new BSFileException('シリアライズできません。');
+	}
+
+	/**
+	 * シリアライズ時の値を返す
+	 *
+	 * @access public
+	 * @return mixed シリアライズ時の値
+	 */
+	public function getSerialized () {
+		return BSController::getInstance()->getAttribute($this, $this->getUpdateDate());
 	}
 
 	/**

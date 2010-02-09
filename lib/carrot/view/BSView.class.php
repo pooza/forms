@@ -8,16 +8,15 @@
  * 基底ビュー
  *
  * @author 小石達也 <tkoishi@b-shock.co.jp>
- * @version $Id: BSView.class.php 1829 2010-02-07 07:07:21Z pooza $
+ * @version $Id: BSView.class.php 1839 2010-02-08 10:56:52Z pooza $
  */
 class BSView extends BSHTTPResponse {
 	protected $nameSuffix;
 	protected $action;
 	protected $version = '1.0';
-	const ALERT = 'Alert';
+	const NONE = null;
 	const ERROR = 'Error';
 	const INPUT = 'Input';
-	const NONE = null;
 	const SUCCESS = 'Success';
 
 	/**
@@ -233,7 +232,6 @@ class BSView extends BSHTTPResponse {
 	 */
 	static public function getNameSuffixes () {
 		return new BSArray(array(
-			self::ALERT,
 			self::ERROR,
 			self::INPUT,
 			self::SUCCESS,

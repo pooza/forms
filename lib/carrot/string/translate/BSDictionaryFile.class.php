@@ -8,7 +8,7 @@
  * 辞書ファイル
  *
  * @author 小石達也 <tkoishi@b-shock.co.jp>
- * @version $Id: BSDictionaryFile.class.php 1812 2010-02-03 15:15:09Z pooza $
+ * @version $Id: BSDictionaryFile.class.php 1843 2010-02-08 12:42:17Z pooza $
  */
 class BSDictionaryFile extends BSCSVFile implements BSDictionary {
 	private $words;
@@ -31,15 +31,10 @@ class BSDictionaryFile extends BSCSVFile implements BSDictionary {
 	 */
 	public function getWords () {
 		if (!$this->words) {
-			$controller = BSController::getInstance();
-			$words = $controller->getAttribute($this, $this->getUpdateDate());
-			if (BSString::isBlank($words)) {
-				$this->words = clone $this->getEngine()->getRecords();
-				$this->words->flatten();
-				$controller->setAttribute($this, $this->words);
-			} else {
-				$this->words = new BSArray($words);
+			if (BSString::isBlank($this->getSerialized())) {
+				$this->serialize();
 			}
+			$this->words = new BSArray($this->getSerialized());
 		}
 		return $this->words;
 	}
@@ -64,6 +59,17 @@ class BSDictionaryFile extends BSCSVFile implements BSDictionary {
 	 */
 	public function getDictionaryName () {
 		return get_class($this) . '.' . $this->getBaseName();
+	}
+
+	/**
+	 * シリアライズ
+	 *
+	 * @access public
+	 */
+	public function serialize () {
+		$words = clone $this->getEngine()->getRecords();
+		$words->flatten();
+		BSController::getInstance()->setAttribute($this, $words);
 	}
 
 	/**

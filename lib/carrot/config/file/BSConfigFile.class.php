@@ -8,7 +8,7 @@
  * 設定ファイル
  *
  * @author 小石達也 <tkoishi@b-shock.co.jp>
- * @version $Id: BSConfigFile.class.php 1812 2010-02-03 15:15:09Z pooza $
+ * @version $Id: BSConfigFile.class.php 1848 2010-02-09 01:55:30Z pooza $
  */
 class BSConfigFile extends BSFile {
 	private $config = array();
@@ -83,6 +83,15 @@ class BSConfigFile extends BSFile {
 			$this->cache = new BSFile(BS_VAR_DIR . '/cache/' . $name);
 		}
 		return $this->cache;
+	}
+
+	/**
+	 * シリアライズ
+	 *
+	 * @access public
+	 */
+	public function serialize () {
+		BSController::getInstance()->setAttribute($this, $this->getResult());
 	}
 
 	/**

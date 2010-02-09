@@ -8,13 +8,13 @@
  * 携帯電話キャリア
  *
  * @author 小石達也 <tkoishi@b-shock.co.jp>
- * @version $Id: BSMobileCarrier.class.php 1812 2010-02-03 15:15:09Z pooza $
+ * @version $Id: BSMobileCarrier.class.php 1855 2010-02-09 04:01:25Z pooza $
  * @abstract
  */
 abstract class BSMobileCarrier {
-	private $attributes;
-	private $mpc;
-	private $pictogramDirectory;
+	protected $attributes;
+	protected $mpc;
+	protected $pictogramDirectory;
 	static private $instances;
 	const MPC_IMAGE = 'IMG';
 	const MPC_RAW = 'RAW';
@@ -62,7 +62,7 @@ abstract class BSMobileCarrier {
 			$names = new BSArray;
 			$names[] = BSString::toLower($instance->getName());
 			$names[] = BSString::toLower($instance->getMPCCode());
-			$names->merge($instance->getAltNames());
+			$names->merge($instance->getAlternativeNames());
 			$names->uniquize();
 			if ($names->isContain($carrier)) {
 				return $instance;
@@ -129,7 +129,7 @@ abstract class BSMobileCarrier {
 	 * @access public
 	 * @return BSArray 別名の配列
 	 */
-	public function getAltNames () {
+	public function getAlternativeNames () {
 		return new BSArray;
 	}
 

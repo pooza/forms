@@ -1,7 +1,7 @@
 <?php
 /**
  * @package org.carrot-framework
- * @subpackage view.renderer.document_set
+ * @subpackage view.renderer
  */
 
 /**
@@ -10,7 +10,7 @@
  * BSJavaScriptSet/BSStyleSetの基底クラス
  *
  * @author 小石達也 <tkoishi@b-shock.co.jp>
- * @version $Id: BSDocumentSet.class.php 1812 2010-02-03 15:15:09Z pooza $
+ * @version $Id: BSDocumentSet.class.php 1849 2010-02-09 02:00:50Z pooza $
  * @abstract
  */
 abstract class BSDocumentSet implements BSTextRenderer, IteratorAggregate {
@@ -180,7 +180,7 @@ abstract class BSDocumentSet implements BSTextRenderer, IteratorAggregate {
 				return;
 			}
 		}
-		if (($entry instanceof BSDocumentSetEntry) && $entry->validate()) {
+		if ($entry instanceof BSSerializable) {
 			$this->documents[] = $entry;
 		} else {
 			$this->error = $entry . 'が読み込めません。' . $entry->getError();
@@ -230,7 +230,10 @@ abstract class BSDocumentSet implements BSTextRenderer, IteratorAggregate {
 			$contents = new BSArray;
 			foreach ($this as $file) {
 				if ($this->isOptimized()) {
-					$contents[] = $file->getOptimizedContents();
+					if ($file->getSerialized() === null) {
+						$file->serialize();
+					}
+					$contents[] = $file->getSerialized();
 				} else {
 					$contents[] = $file->getContents();
 				}

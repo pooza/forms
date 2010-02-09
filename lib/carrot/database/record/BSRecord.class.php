@@ -8,10 +8,10 @@
  * テーブルのレコード
  *
  * @author 小石達也 <tkoishi@b-shock.co.jp>
- * @version $Id: BSRecord.class.php 1812 2010-02-03 15:15:09Z pooza $
+ * @version $Id: BSRecord.class.php 1845 2010-02-08 12:55:29Z pooza $
  * @abstract
  */
-abstract class BSRecord implements ArrayAccess, BSAssignable {
+abstract class BSRecord implements ArrayAccess, BSSerializable, BSAssignable {
 	private $attributes;
 	private $table;
 	private $criteria;
@@ -329,12 +329,12 @@ abstract class BSRecord implements ArrayAccess, BSAssignable {
 	}
 
 	/**
-	 * シリアライズされるときの名前を返す
+	 * 属性名へシリアライズ
 	 *
 	 * @access public
-	 * @return string シリアライズされるときの名前
+	 * @return string 属性名
 	 */
-	public function getSerializedName () {
+	public function serializeName () {
 		return sprintf('%s.%08d', get_class($this), $this->getID());
 	}
 
@@ -351,12 +351,17 @@ abstract class BSRecord implements ArrayAccess, BSAssignable {
 	}
 
 	/**
-	 * シリアライズされた情報を返す
+	 * シリアライズ時の値を返す
 	 *
-	 * @access protected
+	 * @access public
+	 * @return mixed シリアライズ時の値
 	 */
-	protected function getSerialized () {
-		return BSController::getInstance()->getAttribute($this);
+	public function getSerialized () {
+		if ($date = $this->getUpdateDate()) {
+			return BSController::getInstance()->getAttribute($this, $date);
+		} else {
+			return BSController::getInstance()->getAttribute($this);
+		}
 	}
 
 	/**
