@@ -307,12 +307,13 @@ class Form extends BSSortableRecord implements
 	 * リダイレクト対象
 	 *
 	 * @access public
+	 * @param string $action アクション名
 	 * @return BSURL
 	 */
-	public function getURL () {
+	public function getURL ($action = 'Register') {
 		$url = BSURL::getInstance(null, 'carrot');
 		$url['module'] = 'UserForm';
-		$url['action'] = 'Register';
+		$url['action'] = $action;
 		$url['record'] = $this;
 		return $url;
 	}

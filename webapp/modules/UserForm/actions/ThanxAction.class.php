@@ -8,8 +8,28 @@
  * @version $Id$
  */
 class ThanxAction extends BSRecordAction {
+	public function initialize () {
+		if ($id = $this->request['id']) {
+			$this->request->removeParameter('id');
+		}
+		parent::initialize();
+		if ($this->getRecord() && ($id != $this->getRecord()->getID())) {
+			$this->getModule()->clearRecordID();
+			$this->user->removeAttribute('answer');
+		}
+		return true;
+	}
+
 	public function execute () {
 		return BSView::SUCCESS;
+	}
+
+	public function handleError () {
+		if ($this->getRecord()) {
+			return $this->getRecord()->redirect();
+		} else {
+			return $this->controller->getAction('not_found')->forward();
+		}
 	}
 }
 

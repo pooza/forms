@@ -32,7 +32,7 @@ class RegisterAction extends BSRecordAction {
 			}
 		}
 		$this->user->setAttribute('answer', $answer);
-		return $this->getModule()->getAction('Confirm')->redirect();
+		return $this->getRecord()->getURL('Confirm')->redirect();
 	}
 
 	public function getDefaultView () {

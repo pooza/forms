@@ -8,7 +8,7 @@ app:
   name:
     ja: forms
     en: forms
-  ver: 1.1.2(2010-01-18)
+  ver: 1.1.3(2010-02-14)
   bts:
     url: http://redmine.carrot-framework.org/projects/show/forms
   svn:

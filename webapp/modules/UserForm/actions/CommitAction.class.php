@@ -26,7 +26,7 @@ class CommitAction extends BSRecordAction {
 			$this->database->rollback();
 			return $this->handleError();
 		}
-		return $this->getModule()->getAction('Thanx')->redirect();
+		return $this->getRecord()->getURL('Thanx')->redirect();
 	}
 
 	public function getDefaultView () {
@@ -34,7 +34,11 @@ class CommitAction extends BSRecordAction {
 	}
 
 	public function handleError () {
-		return $this->getRecord()->redirect();
+		if ($this->getRecord()) {
+			return $this->getRecord()->redirect();
+		} else {
+			return $this->controller->getAction('not_found')->forward();
+		}
 	}
 
 	public function validate () {
