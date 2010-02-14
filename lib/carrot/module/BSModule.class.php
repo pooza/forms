@@ -8,7 +8,7 @@
  * モジュール
  *
  * @author 小石達也 <tkoishi@b-shock.co.jp>
- * @version $Id: BSModule.class.php 1812 2010-02-03 15:15:09Z pooza $
+ * @version $Id: BSModule.class.php 1859 2010-02-14 06:54:04Z pooza $
  */
 class BSModule implements BSHTTPRedirector, BSAssignable {
 	protected $name;
@@ -525,4 +525,3 @@ class BSModule implements BSHTTPRedirector, BSAssignable {
 }
 
 /* vim:set tabstop=4: */
-

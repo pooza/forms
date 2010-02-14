@@ -10,7 +10,7 @@
  * Excel97形式に対応。
  *
  * @author 小石達也 <tkoishi@b-shock.co.jp>
- * @version $Id: BSExcelExporter.class.php 1830 2010-02-07 07:41:57Z pooza $
+ * @version $Id: BSExcelExporter.class.php 1861 2010-02-14 07:06:58Z pooza $
  */
 class BSExcelExporter implements BSExporter, BSRenderer {
 	private $file;
@@ -39,6 +39,7 @@ class BSExcelExporter implements BSExporter, BSRenderer {
 	public function getFile () {
 		if (!$this->file) {
 			$this->file = BSFileUtility::getTemporaryFile('.xls');
+			$this->file->setMode(0600);
 		}
 		return $this->file;
 	}
