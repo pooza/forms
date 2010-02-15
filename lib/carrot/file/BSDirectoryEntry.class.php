@@ -27,7 +27,7 @@ abstract class BSDirectoryEntry {
 	 * @return integer ID
 	 */
 	public function getID () {
-		return fileinode($this->getPath()) . $this->getCreateDate()->format('YmdHis');
+		return fileinode($this->getPath());
 	}
 
 	/**

@@ -26,6 +26,9 @@ class RegisterAction extends BSRecordAction {
 					$info['tmp_name'] = $file->getPath();
 					$info['field_type'] = $field->getFieldType()->getID();
 					$answer[$field->getName()] = $info;
+					if ($file instanceof BSImageContainer) {
+						$file->clearImageCache();
+					}
 				} else {
 					$field->clearTemporaryFile();
 				}
