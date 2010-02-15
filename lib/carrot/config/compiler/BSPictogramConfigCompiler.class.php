@@ -8,9 +8,23 @@
  * 絵文字用設定コンパイラ
  *
  * @author 小石達也 <tkoishi@b-shock.co.jp>
- * @version $Id: BSPictogramConfigCompiler.class.php 1812 2010-02-03 15:15:09Z pooza $
+ * @version $Id: BSPictogramConfigCompiler.class.php 1862 2010-02-15 11:00:37Z pooza $
  */
 class BSPictogramConfigCompiler extends BSDefaultConfigCompiler {
+	public function execute (BSConfigFile $file) {
+		// $file->serialize()が使用できない為、直接シリアライズ
+		if ($this->controller->getAttribute($file, $file->getUpdateDate()) === null) {
+			$this->controller->setAttribute($file, $this->getContents($file->getResult()));
+		}
+
+		$this->clearBody();
+		$line = sprintf(
+			'return BSController::getInstance()->getAttribute(%s);',
+			self::quote($file->serializeName())
+		);
+		$this->putLine($line);
+		return $this->getBody();
+	}
 
 	/**
 	 * 設定配列をシリアライズできる内容に修正

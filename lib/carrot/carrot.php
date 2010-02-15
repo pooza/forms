@@ -4,7 +4,7 @@
  *
  * @package org.carrot-framework
  * @author 小石達也 <tkoishi@b-shock.co.jp>
- * @version $Id: carrot.php 1830 2010-02-07 07:41:57Z pooza $
+ * @version $Id: carrot.php 1863 2010-02-15 11:47:33Z pooza $
  */
 
 /**
@@ -132,6 +132,9 @@ if (BS_DEBUG) {
 	ini_set('display_errors', 1);
 	BSController::getInstance()->dispatch();
 } else {
+	if (defined('E_DEPRECATED')) {
+		error_reporting(error_reporting() ^ E_DEPRECATED);
+	}
 	ini_set('display_errors', 0);
 	try {
 		BSController::getInstance()->dispatch();

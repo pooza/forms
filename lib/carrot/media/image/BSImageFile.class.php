@@ -46,16 +46,6 @@ class BSImageFile extends BSFile implements BSImageContainer {
 	}
 
 	/**
-	 * 削除
-	 *
-	 * @access public
-	 */
-	public function delete () {
-		$this->clearImageCache();
-		parent::delete();
-	}
-
-	/**
 	 * レンダラーを返す
 	 *
 	 * @access public

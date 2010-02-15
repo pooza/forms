@@ -8,10 +8,10 @@
  * Flash用object要素
  *
  * @author 小石達也 <tkoishi@b-shock.co.jp>
- * @version $Id: BSFlashObjectElement.class.php 1812 2010-02-03 15:15:09Z pooza $
+ * @version $Id: BSFlashObjectElement.class.php 1862 2010-02-15 11:00:37Z pooza $
  */
 class BSFlashObjectElement extends BSObjectElement {
-	private $flashvars;
+	protected $flashvars;
 
 	/**
 	 * @access public
