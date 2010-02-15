@@ -52,6 +52,11 @@ class RegisterAction extends BSRecordAction {
 				}
 			}
 		}
+		foreach ($this->getRecord()->getFields() as $field) {
+			if ($field->isFile()) {
+				$field->clearTemporaryFile();
+			}
+		}
 		return BSView::INPUT;
 	}
 
