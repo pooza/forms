@@ -8,7 +8,7 @@
  * CurlによるHTTP処理
  *
  * @author 小石達也 <tkoishi@b-shock.co.jp>
- * @version $Id: BSCurlHTTP.class.php 1812 2010-02-03 15:15:09Z pooza $
+ * @version $Id: BSCurlHTTP.class.php 1867 2010-02-16 09:00:32Z pooza $
  */
 class BSCurlHTTP extends BSHTTP {
 	private $engine;
@@ -60,18 +60,11 @@ class BSCurlHTTP extends BSHTTP {
 	 * リクエスト実行
 	 *
 	 * @param string $path パス
-	 * @access private
+	 * @access protected
 	 * @return BSHTTPResponse レスポンス
 	 */
-	private function execute ($path) {
-		$url = BSURL::getInstance();
-		$url['host'] = $this->getHost();
-		$url['path'] ='/' . ltrim($path, '/');
-		if ($this->isSSL()) {
-			$url['scheme'] = 'https';
-		} else {
-			$url['scheme'] = 'http';
-		}
+	protected function execute ($path) {
+		$url = $this->createURL($path);
 		$this->setAttribute('url', $url->getContents());
 
 		$response = new BSHTTPResponse;
@@ -83,13 +76,31 @@ class BSCurlHTTP extends BSHTTP {
 		$response->setContents($contents);
 
 		if (!$response->validate()) {
-			throw new BSHTTPException(
-				'不正なレスポンスです。 (%d %s)',
-				$response->getStatus(),
-				$response->getError()
-			);
+			$message = new BSStringFormat('不正なレスポンスです。 (%d %s)');
+			$message[] = $response->getStatus();
+			$message[] = $response->getError();
+			throw new BSHTTPException($message);
 		}
 		return $response;
+	}
+
+	/**
+	 * パスからリクエストURLを生成して返す
+	 *
+	 * @param string $href パス
+	 * @access protected
+	 * @return BSHTTPURL リクエストURL
+	 */
+	protected function createRequestURL ($href) {
+		$url = BSURL::getInstance();
+		$url['host'] = $this->getHost();
+		$url['path'] ='/' . ltrim($href, '/');
+		if ($this->isSSL()) {
+			$url['scheme'] = 'https';
+		} else {
+			$url['scheme'] = 'http';
+		}
+		return $url;
 	}
 
 	/**
