@@ -8,7 +8,7 @@
  * Google Mapsクライアント
  *
  * @author 小石達也 <tkoishi@b-shock.co.jp>
- * @version $Id: BSGoogleMapsService.class.php 1824 2010-02-05 02:23:27Z pooza $
+ * @version $Id: BSGoogleMapsService.class.php 1870 2010-02-17 10:35:01Z pooza $
  */
 class BSGoogleMapsService extends BSCurlHTTP {
 	private $table;
@@ -67,6 +67,35 @@ class BSGoogleMapsService extends BSCurlHTTP {
 			$this->table = new BSGeocodeEntryHandler;
 		}
 		return $this->table;
+	}
+
+	/**
+	 * script要素を返す
+	 *
+	 * @access public
+	 * @param BSGeocodeEntry $geocode ジオコード
+	 * @param BSParameterHolder $params パラメータ配列
+	 * @return BSDivisionElement
+	 * @static
+	 */
+	static public function getScriptElement (BSGeocodeEntry $geocode, BSParameterHolder $params) {
+		$element = new BSDivisionElement;
+		$inner = $element->addElement(new BSDivisionElement);
+		$script = $element->addElement(new BSScriptElement);
+
+		$inner->setID($params['id']);
+		$inner->setStyle('width', $params['width']);
+		$inner->setStyle('height', $params['height']);
+		$inner->setBody('Loading...');
+
+		$statement = 'actions.onload.push(function(){handleGoogleMaps($(%s), %f, %f);});';
+		$statement = new BSStringFormat($statement);
+		$statement[] = BSJavaScriptUtility::quote($params['id']);
+		$statement[] = $geocode['lat'];
+		$statement[] = $geocode['lng'];
+		$script->setBody($statement->getContents());
+
+		return $element;
 	}
 
 	/**

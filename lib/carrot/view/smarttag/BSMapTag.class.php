@@ -8,7 +8,7 @@
  * Google Mapタグ
  *
  * @author 小石達也 <tkoishi@b-shock.co.jp>
- * @version $Id: BSMapTag.class.php 1825 2010-02-05 13:18:55Z pooza $
+ * @version $Id: BSMapTag.class.php 1870 2010-02-17 10:35:01Z pooza $
  */
 class BSMapTag extends BSSmartTag {
 	private $geocode;
@@ -53,26 +53,9 @@ class BSMapTag extends BSSmartTag {
 	}
 
 	private function getAjaxDivisionElement () {
-		$params = $this->getQueryParameters();
-		$geocode = $this->getGeocode();
-
-		$element = new BSDivisionElement;
-		$inner = $element->addElement(new BSDivisionElement);
-		$script = $element->addElement(new BSScriptElement);
-
-		$inner->setID('map_' . BSCrypt::getSHA1($this->tag[1] . BS_CRYPT_SALT));
-		$inner->setStyle('width', $params['width']);
-		$inner->setStyle('height', $params['height']);
-		$inner->setBody('Loading...');
-
-		$statement = 'actions.onload.push(function(){handleGoogleMaps($(%s), %f, %f);});';
-		$statement = new BSStringFormat($statement);
-		$statement[] = BSJavaScriptUtility::quote($inner->getID());
-		$statement[] = $geocode['lat'];
-		$statement[] = $geocode['lng'];
-		$script->setBody($statement->getContents());
-
-		return $element;
+		$params = new BSArray($this->getQueryParameters());
+		$params['id'] = 'map_' . BSCrypt::getSHA1($this->tag[1] . BS_CRYPT_SALT);
+		return BSGoogleMapsService::getScriptElement($this->getGeocode(), $params);
 	}
 
 	private function getGeocode () {

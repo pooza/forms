@@ -2,7 +2,7 @@
 #
 # @package org.carrot-framework
 # @author 小石達也 <tkoishi@b-shock.co.jp>
-# @version $Id: carrot.yaml 1812 2010-02-03 15:15:09Z pooza $
+# @version $Id: carrot.yaml 1870 2010-02-17 10:35:01Z pooza $
 
 color:
   class: BSRegexValidator
@@ -81,6 +81,8 @@ longtext:
     max: 65536
 movie:
   class: BSMovieValidator
+music:
+  class: BSMusicValidator
 number:
   class: BSNumberValidator
 password:
