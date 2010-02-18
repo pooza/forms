@@ -8,7 +8,7 @@
  * Google Mapsクライアント
  *
  * @author 小石達也 <tkoishi@b-shock.co.jp>
- * @version $Id: BSGoogleMapsService.class.php 1870 2010-02-17 10:35:01Z pooza $
+ * @version $Id: BSGoogleMapsService.class.php 1871 2010-02-18 07:13:16Z pooza $
  */
 class BSGoogleMapsService extends BSCurlHTTP {
 	private $table;
@@ -88,8 +88,7 @@ class BSGoogleMapsService extends BSCurlHTTP {
 		$inner->setStyle('height', $params['height']);
 		$inner->setBody('Loading...');
 
-		$statement = 'actions.onload.push(function(){handleGoogleMaps($(%s), %f, %f);});';
-		$statement = new BSStringFormat($statement);
+		$statement = new BSStringFormat('handleGoogleMaps($(%s), %f, %f);');
 		$statement[] = BSJavaScriptUtility::quote($params['id']);
 		$statement[] = $geocode['lat'];
 		$statement[] = $geocode['lng'];

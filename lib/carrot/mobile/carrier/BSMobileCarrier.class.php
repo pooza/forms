@@ -4,11 +4,23 @@
  * @subpackage mobile.carrier
  */
 
+// MPC由来の定数
+define('MPC_FROM_FOMA', 'FOMA');
+define('MPC_FROM_EZWEB', 'EZWEB');
+define('MPC_FROM_SOFTBANK', 'SOFTBANK');
+define('MPC_FROM_OPTION_RAW', 'RAW');
+define('MPC_FROM_OPTION_WEB', 'WEB');
+define('MPC_FROM_OPTION_IMG', 'IMG');
+define('MPC_FROM_CHARSET_SJIS', 'SJIS');
+define('MPC_FROM_CHARSET_UTF8', 'UTF-8');
+define('MPC_TO_CHARSET_SJIS', 'SJIS');
+define('MPC_TO_CHARSET_UTF8', 'UTF-8');
+
 /**
  * 携帯電話キャリア
  *
  * @author 小石達也 <tkoishi@b-shock.co.jp>
- * @version $Id: BSMobileCarrier.class.php 1869 2010-02-17 10:33:30Z pooza $
+ * @version $Id: BSMobileCarrier.class.php 1872 2010-02-18 07:13:57Z pooza $
  * @abstract
  */
 abstract class BSMobileCarrier {
@@ -111,8 +123,7 @@ abstract class BSMobileCarrier {
 	 */
 	public function getMPC () {
 		if (!$this->mpc) {
-			require_once('MPC/MobilePictogramConverter.php');
-			require_once('MPC/Carrier/' . BSString::toLower($this->getMPCCode())) . '.php';
+			BSUtility::includeFile('MPC/Carrier/' . BSString::toLower($this->getMPCCode()));
 			$class = 'MPC_' . $this->getMPCCode();
 			$this->mpc = new $class;
 			$this->mpc->setFromCharset('SJIS');

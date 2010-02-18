@@ -8,12 +8,13 @@
  * メディアファイル
  *
  * @author 小石達也 <tkoishi@b-shock.co.jp>
- * @version $Id: BSMediaFile.class.php 1825 2010-02-05 13:18:55Z pooza $
+ * @version $Id: BSMediaFile.class.php 1873 2010-02-18 10:28:39Z pooza $
  * @abstract
  */
 abstract class BSMediaFile extends BSFile implements ArrayAccess {
 	protected $attributes;
 	protected $output;
+	protected $types;
 
 	/**
 	 * 属性を返す
@@ -60,24 +61,32 @@ abstract class BSMediaFile extends BSFile implements ArrayAccess {
 	}
 
 	/**
-	 * FFmpegの出力から、メディアタイプを調べる
+	 * FFmpegの出力からメディアタイプを調べ、候補一覧を返す
 	 *
 	 * @access protected
 	 * @param string $track トラック名。 (Video|Audio)
-	 * @return string メディアタイプ
+	 * @return BSArray メディアタイプ
 	 */
-	protected function analyzeMediaType ($track) {
-		$patterns = new BSArray(array(
-			$track . ': ([[:alnum:]]+)',
-			'Input #[[:digit:]]+, ([[:alnum:]]+)',
-		));
-		foreach ($patterns as $pattern) {
-			if (mb_ereg($pattern, $this->output, $matches)) {
-				if (!BSString::isBlank($type = self::getMediaType($matches[1]))) {
-					return $type;
+	protected function analyzeMediaTypes ($track) {
+		if (!$this->types) {
+			$this->types = new BSArray;
+			$patterns = new BSArray(array(
+				$track . ': ([[:alnum:]]+)',
+				'Input #[[:digit:]]+, ([[:alnum:],]+)',
+			));
+			foreach ($patterns as $pattern) {
+				if (mb_ereg($pattern, $this->output, $matches)) {
+					foreach (BSString::explode(',', $matches[1]) as $value) {
+						if (!BSString::isBlank($type = self::getMediaType($value))) {
+							$this->types[] = $type;
+						}
+					}
 				}
 			}
+			$this->types->uniquize();
+			$this->types->trim();
 		}
+		return $this->types;
 	}
 
 	/**

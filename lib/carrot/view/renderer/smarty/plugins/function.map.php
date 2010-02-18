@@ -8,7 +8,7 @@
  * GoogleMaps関数
  *
  * @author 小石達也 <tkoishi@b-shock.co.jp>
- * @version $Id: function.map.php 1870 2010-02-17 10:35:01Z pooza $
+ * @version $Id: function.map.php 1874 2010-02-18 10:33:41Z pooza $
  */
 function smarty_function_map ($params, &$smarty) {
 	$params = new BSArray($params);
