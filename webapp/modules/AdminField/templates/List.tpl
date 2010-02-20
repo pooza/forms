@@ -9,8 +9,8 @@
 <h2>■{$action.title}</h2>
 <table>
 	<tr>
-		<th width="150">名前</th>
-		<th width="150">ラベル</th>
+		<th width="120">名前</th>
+		<th width="180">ラベル</th>
 		<th width="90">種別</th>
 		<th width="30">必須</th>
 		<th width="30">確認</th>
@@ -29,14 +29,14 @@
 
 {foreach from=$fields item='field' name='fields'}
 	<tr class="{$field.status}">
-		<td width="150">
+		<td width="120">
 	{if $credentials.AdminEdit}
 			<a href="/{$module.name}/Detail/{$field.id}">{$field.name}</a>
 	{else}
 			{$field.name}
 	{/if}
 		</td>
-		<td width="150">{$field.label}</td>
+		<td width="180">{$field.label|truncate:48}</td>
 		<td width="90">{$field.field_type_id|translate:'FieldHandler'}</td>
 		<td width="30" align="center">{if $field.required}○{/if}</td>
 		<td width="30" align="center">{if $field.has_confirm_field}○{/if}</td>
