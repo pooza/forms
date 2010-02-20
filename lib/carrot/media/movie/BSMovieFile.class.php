@@ -8,7 +8,7 @@
  * 動画ファイル
  *
  * @author 小石達也 <tkoishi@b-shock.co.jp>
- * @version $Id: BSMovieFile.class.php 1873 2010-02-18 10:28:39Z pooza $
+ * @version $Id: BSMovieFile.class.php 1876 2010-02-19 12:15:00Z pooza $
  */
 class BSMovieFile extends BSMediaFile {
 
@@ -114,7 +114,10 @@ class BSMovieFile extends BSMediaFile {
 		$element = new BSScriptElement;
 		$body = new BSStringFormat('flowplayer(%s, %s, %s);');
 		$body[] = BSJavaScriptUtility::quote($params['container_id']);
-		$body[] = BSJavaScriptUtility::quote(BS_MOVIE_FLV_PLAYER_HREF);
+		$body[] = BSJavaScriptUtility::quote(array(
+			'src' => BS_MOVIE_FLV_PLAYER_HREF,
+			'wmode' => 'transparent',
+		));
 		$body[] = $this->getPlayerConfig($params);
 		$element->setBody($body->getContents());
 		return $element;
