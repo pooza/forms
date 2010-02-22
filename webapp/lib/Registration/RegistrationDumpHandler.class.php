@@ -100,6 +100,7 @@ class RegistrationDumpHandler extends RegistrationHandler implements BSExportabl
 		$header[] = '応募ID';
 		$header[] = 'フォーム';
 		$header[] = 'ブラウザ';
+		$header[] = '-';
 		$header[] = 'リモートホスト';
 		$header[] = '応募日';
 		foreach ($this->form->getFields() as $field) {
