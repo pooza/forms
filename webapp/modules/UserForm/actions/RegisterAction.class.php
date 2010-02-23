@@ -12,6 +12,11 @@ class RegisterAction extends BSRecordAction {
 		if ($id = $this->request['id']) {
 			$this->setRecordID($id);
 		}
+		foreach ($this->request->getParameters() as $key => $value) {
+			if ($value == ChoiceField::EMPTY_VALUE) {
+				$this->request[$key] = null;
+			}
+		}
 		$this->request->setAttribute('form', $this->getRecord());
 		$this->request->setAttribute('styleset', 'carrot.Detail');
 		return true;
