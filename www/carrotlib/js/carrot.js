@@ -3,7 +3,7 @@
  *
  * @package org.carrot-framework
  * @author 小石達也 <tkoishi@b-shock.co.jp>
- * @version $Id: carrot.js 1828 2010-02-05 14:49:05Z pooza $
+ * @version $Id: carrot.js 1879 2010-02-25 09:00:12Z pooza $
  */
 
 function redirect (m, a, id) {
@@ -36,7 +36,7 @@ function putSmartTag (tag, field, name, params) {
       var encoded = [];
       for(var key in params) {
         if (params[key] != null) {
-          encoded.push(key + '=' + encodeURI(params[key]));
+          encoded.push(key + '=' + encodeURIComponent(params[key]));
         }
       }
       if (0 < encoded.length) {
