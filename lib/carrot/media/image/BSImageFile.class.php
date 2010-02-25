@@ -8,7 +8,7 @@
  * 画像ファイル
  *
  * @author 小石達也 <tkoishi@b-shock.co.jp>
- * @version $Id: BSImageFile.class.php 1880 2010-02-25 10:32:45Z pooza $
+ * @version $Id: BSImageFile.class.php 1881 2010-02-25 11:14:20Z pooza $
  */
 class BSImageFile extends BSMediaFile implements BSImageContainer {
 	protected $renderer;
@@ -115,8 +115,7 @@ class BSImageFile extends BSMediaFile implements BSImageContainer {
 	public function setRenderer (BSImageRenderer $renderer) {
 		$this->renderer = $renderer;
 		$this->rendererClass = get_class($renderer);
-		$this->attributes->clear();
-		$this->analized = false;
+		$this->attributes = null;
 	}
 
 	/**
