@@ -8,7 +8,7 @@
  * データベースセッションストレージ
  *
  * @author 小石達也 <tkoishi@b-shock.co.jp>
- * @version $Id: BSDatabaseSessionStorage.class.php 1812 2010-02-03 15:15:09Z pooza $
+ * @version $Id: BSDatabaseSessionStorage.class.php 1885 2010-02-28 04:42:57Z pooza $
  */
 class BSDatabaseSessionStorage implements BSSessionStorage {
 	const TABLE_NAME = 'session_entry';
@@ -21,6 +21,7 @@ class BSDatabaseSessionStorage implements BSSessionStorage {
 	 * @return string 利用可能ならTrue
 	 */
 	public function initialize () {
+		session_write_close();
 		try {
 			return session_set_save_handler(
 				array($this->getTable(), 'open'),

@@ -4,7 +4,7 @@
  *
  * @package org.carrot-framework
  * @author 小石達也 <tkoishi@b-shock.co.jp>
- * @version $Id: carrot.php 1864 2010-02-16 08:26:11Z pooza $
+ * @version $Id: carrot.php 1885 2010-02-28 04:42:57Z pooza $
  */
 
 /**
@@ -126,6 +126,8 @@ date_default_timezone_set(BS_DATE_TIMEZONE);
 ini_set('realpath_cache_size', '128K');
 ini_set('log_errors', 1);
 ini_set('error_log', BS_VAR_DIR . '/tmp/error_' . BSDate::getNow('Y-m-d') . '.log');
+
+BSRequest::getInstance()->createSession();
 
 if (BS_DEBUG) {
 	error_reporting(E_ALL | E_STRICT);

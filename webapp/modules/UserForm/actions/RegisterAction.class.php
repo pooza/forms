@@ -66,11 +66,16 @@ class RegisterAction extends BSRecordAction {
 	}
 
 	public function handleError () {
+		if ($this->request->hasError('cookie')) {
+			return $this->controller->getAction('cookie_disabled')->forward();
+		}
 		return $this->getDefaultView();
 	}
 
 	public function registerValidators () {
-		$this->getRecord()->registerValidators();
+		if ($record = $this->getRecord()) {
+			$record->registerValidators();
+		}
 	}
 }
 

@@ -2,11 +2,11 @@
 #
 # @package org.carrot-framework
 # @author 小石達也 <tkoishi@b-shock.co.jp>
-# @version $Id: carrot.yaml 1879 2010-02-25 09:00:12Z pooza $
+# @version $Id: carrot.yaml 1885 2010-02-28 04:42:57Z pooza $
 
 carrot:
   name: carrot Framework
-  ver: 2.3.57
+  ver: 2.3.58
   bts:
     url: http://redmine.carrot-framework.org/projects/show/carrot
 
@@ -94,6 +94,9 @@ module:
   default:
     module: Default
     action: Default
+  cookie_disabled:
+    module: Default
+    action: CookieDisabled
   not_found:
     module: Default
     action: NotFound

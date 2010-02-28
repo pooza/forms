@@ -8,7 +8,7 @@
  * 規定セッションストレージ
  *
  * @author 小石達也 <tkoishi@b-shock.co.jp>
- * @version $Id: BSDefaultSessionStorage.class.php 1812 2010-02-03 15:15:09Z pooza $
+ * @version $Id: BSDefaultSessionStorage.class.php 1885 2010-02-28 04:42:57Z pooza $
  */
 class BSDefaultSessionStorage implements BSSessionStorage {
 
@@ -19,6 +19,7 @@ class BSDefaultSessionStorage implements BSSessionStorage {
 	 * @return string 利用可能ならTrue
 	 */
 	public function initialize () {
+		session_write_close();
 		ini_set('session.save_handler', 'files');
 		ini_set('session.auto_start', 0);
 		ini_set('session.use_cookies', 1);

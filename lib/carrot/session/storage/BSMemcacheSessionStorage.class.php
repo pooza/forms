@@ -8,7 +8,7 @@
  * memcacheセッションストレージ
  *
  * @author 小石達也 <tkoishi@b-shock.co.jp>
- * @version $Id: BSMemcacheSessionStorage.class.php 1812 2010-02-03 15:15:09Z pooza $
+ * @version $Id: BSMemcacheSessionStorage.class.php 1885 2010-02-28 04:42:57Z pooza $
  */
 class BSMemcacheSessionStorage implements BSSessionStorage {
 
@@ -22,6 +22,7 @@ class BSMemcacheSessionStorage implements BSSessionStorage {
 		if (!BSMemcacheManager::getInstance()->isEnabled()) {
 			return false;
 		}
+		session_write_close();
 		ini_set('session.save_handler', 'memcache');
 		ini_set('session.save_path', BS_MEMCACHE_HOST . ':' . BS_MEMCACHE_PORT);
 		return true;

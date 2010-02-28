@@ -8,7 +8,7 @@
  * HTTPスキーマのURL
  *
  * @author 小石達也 <tkoishi@b-shock.co.jp>
- * @version $Id: BSHTTPURL.class.php 1812 2010-02-03 15:15:09Z pooza $
+ * @version $Id: BSHTTPURL.class.php 1883 2010-02-28 04:41:36Z pooza $
  */
 class BSHTTPURL extends BSURL implements BSHTTPRedirector, BSImageContainer {
 	private $fullpath;
@@ -318,10 +318,20 @@ class BSHTTPURL extends BSURL implements BSHTTPRedirector, BSImageContainer {
 	 * 外部のURLか？
 	 *
 	 * @access public
+	 * @param mixed $host 対象ホスト
 	 * @return boolean 外部のURLならTrue
 	 */
-	public function isForeign () {
-		return $this['host']->isForeign();
+	public function isForeign ($host = null) {
+		if ($host) {
+			if ($host instanceof BSHTTPURL) {
+				$host = $host['host'];
+			} else if (!($host instanceof BSHost)) {
+				$host = new BSHost($host);
+			}
+		} else {
+			$host = BSController::getInstance()->getHost();
+		}
+		return $this['host']->isForeign($host);
 	}
 
 	/**

@@ -8,14 +8,52 @@
  * ソート可能なテーブルのレコード
  *
  * @author 小石達也 <tkoishi@b-shock.co.jp>
- * @version $Id: BSSortableRecord.class.php 1812 2010-02-03 15:15:09Z pooza $
+ * @version $Id: BSSortableRecord.class.php 1882 2010-02-28 04:40:53Z pooza $
  * @abstract
  */
 abstract class BSSortableRecord extends BSRecord {
+	protected $next;
+	protected $prev;
 	const RANK_UP = 'up';
 	const RANK_DOWN = 'down';
 	const RANK_TOP = 'top';
 	const RANK_BOTTOM = 'bottom';
+
+	/**
+	 * 前レコードを返す
+	 *
+	 * @access public
+	 * @return BSSortableRecord 前レコード
+	 */
+	public function getPrev () {
+		if (!$this->prev) {
+			$iterator = $this->getSimilars()->getIterator();
+			foreach ($iterator as $record) {
+				if ($this->getID() == $record->getID()) {
+					return $this->prev = $iterator->prev();
+				}
+			}
+		}
+		return $this->prev;
+	}
+
+	/**
+	 * 次レコードを返す
+	 *
+	 * @access public
+	 * @return BSSortableRecord 次レコード
+	 */
+	public function getNext () {
+		if (!$this->next) {
+			$iterator = $this->getSimilars()->getIterator();
+			foreach ($iterator as $record) {
+				if ($this->getID() == $record->getID()) {
+					return $this->next = $iterator->next();
+				}
+			}
+		}
+		return $this->next;
+	}
 
 	/**
 	 * 更新可能か？
