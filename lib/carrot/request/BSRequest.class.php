@@ -8,7 +8,7 @@
  * 抽象リクエスト
  *
  * @author 小石達也 <tkoishi@b-shock.co.jp>
- * @version $Id: BSRequest.class.php 1812 2010-02-03 15:15:09Z pooza $
+ * @version $Id: BSRequest.class.php 1893 2010-03-01 10:19:14Z pooza $
  * @abstract
  */
 abstract class BSRequest extends BSHTTPRequest {
@@ -351,7 +351,8 @@ abstract class BSRequest extends BSHTTPRequest {
 	 * @return boolean Ajax環境ならTrue
 	 */
 	public function isAjax () {
-		return !BSString::isBlank($this->controller->getAttribute('X-PROTOTYPE-VERSION'));
+		return $this->controller->getAttribute('X-REQUESTED-WITH')
+			|| $this->controller->getAttribute('X-PROTOTYPE-VERSION');
 	}
 
 	/**

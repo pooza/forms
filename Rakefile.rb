@@ -227,17 +227,17 @@ namespace :distribution do
     system 'svn pset svn:ignore \'*\' var/*'
     media_types.each do |extension, type|
       if type == nil
-        system 'svn pdel svn:mime-type `find . -name \'*.' + extension + '\'`'
+        system 'find . -name \'*.' + extension + '\' | xargs svn pdel svn:mime-type'
       else
-        system 'svn pset svn:mime-type ' + type + ' `find . -name \'*.' + extension + '\'`'
+        system 'find . -name \'*.' + extension + '\' | xargs svn pset svn:mime-type ' + type
       end
       if (type == nil) || (/^text\// =~ type)
         system 'svn pset svn:eol-style LF ./*.' + extension
-        system 'svn pset svn:eol-style LF `find bin -name \'*.' + extension + '\'`'
-        system 'svn pset svn:eol-style LF `find share -name \'*.' + extension + '\'`'
-        system 'svn pset svn:eol-style LF `find webapp -name \'*.' + extension + '\'`'
-        system 'svn pset svn:eol-style LF `find www -name \'*.' + extension + '\'`'
-        system 'svn pset svn:eol-style LF `find lib/carrot -name \'*.' + extension + '\'`'
+        system 'find bin -name \'*.' + extension + '\' | xargs svn pset svn:eol-style LF'
+        system 'find share -name \'*.' + extension + '\' | xargs svn pset svn:eol-style LF'
+        system 'find webapp -name \'*.' + extension + '\' | xargs svn pset svn:eol-style LF'
+        system 'find www -name \'*.' + extension + '\' | xargs svn pset svn:eol-style LF'
+        system 'find lib/carrot -name \'*.' + extension + '\' | xargs svn pset svn:eol-style LF'
       end
       system 'svn pdel svn:executable `find . -name \'*.' + extension + '\'`'
     end
