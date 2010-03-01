@@ -8,7 +8,7 @@
  * Cookieのサポートをチェックするフィルタ
  *
  * @author 小石達也 <tkoishi@b-shock.co.jp>
- * @version $Id: BSCookieFilter.class.php 1812 2010-02-03 15:15:09Z pooza $
+ * @version $Id: BSCookieFilter.class.php 1889 2010-02-28 10:52:44Z pooza $
  */
 class BSCookieFilter extends BSFilter {
 	private $cookieName;
@@ -49,7 +49,7 @@ class BSCookieFilter extends BSFilter {
 	 */
 	private function getCookieName () {
 		if (!$this->cookieName) {
-			$this->cookieName = BSCrypt::getSHA1($this->controller->getName('en'));
+			$this->cookieName = BSCrypt::getDigest($this->controller->getName('en'));
 		}
 		return $this->cookieName;
 	}

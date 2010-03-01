@@ -7,7 +7,7 @@
  * ユーティリティ
  *
  * @author 小石達也 <tkoishi@b-shock.co.jp>
- * @version $Id: BSUtility.class.php 1812 2010-02-03 15:15:09Z pooza $
+ * @version $Id: BSUtility.class.php 1889 2010-02-28 10:52:44Z pooza $
  */
 class BSUtility {
 
@@ -42,7 +42,7 @@ class BSUtility {
 	 * @static
 	 */
 	static public function getUniqueID () {
-		return BSCrypt::getSHA1(
+		return BSCrypt::getDigest(
 			BSDate::getNow('YmdHis') . uniqid(BSNumeric::getRandom(), true)
 		);
 	}

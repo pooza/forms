@@ -8,7 +8,7 @@
  * 画像キャッシュ
  *
  * @author 小石達也 <tkoishi@b-shock.co.jp>
- * @version $Id: BSImageCacheHandler.class.php 1825 2010-02-05 13:18:55Z pooza $
+ * @version $Id: BSImageCacheHandler.class.php 1889 2010-02-28 10:52:44Z pooza $
  */
 class BSImageCacheHandler {
 	private $useragent;
@@ -331,7 +331,7 @@ class BSImageCacheHandler {
 		$name = $name->getContents();
 
 		if (!BS_DEBUG) {
-			$name = BSCrypt::getSHA1($name . BS_CRYPT_SALT);
+			$name = BSCrypt::getDigest($name);
 		}
 		return $name;
 	}

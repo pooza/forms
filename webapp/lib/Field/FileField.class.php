@@ -77,8 +77,8 @@ class FileField extends Field {
 	 * @return string 一時ファイルの名前
 	 */
 	protected function getTemporaryFileName () {
-		return BSCrypt::getSHA1(
-			BSRequest::getInstance()->getSession()->getID() . $this->getName() . BS_CRYPT_SALT
+		return BSCrypt::getDigest(
+			BSRequest::getInstance()->getSession()->getID() . $this->getName()
 		);
 	}
 

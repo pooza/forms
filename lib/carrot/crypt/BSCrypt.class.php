@@ -8,7 +8,7 @@
  * 暗号化
  *
  * @author 小石達也 <tkoishi@b-shock.co.jp>
- * @version $Id: BSCrypt.class.php 1812 2010-02-03 15:15:09Z pooza $
+ * @version $Id: BSCrypt.class.php 1889 2010-02-28 10:52:44Z pooza $
  */
 class BSCrypt {
 	private $engine;
@@ -132,6 +132,25 @@ class BSCrypt {
 	}
 
 	/**
+	 * ダイジェストを返す
+	 *
+	 * @access public
+	 * @param string $value 対象文字列
+	 * @param string $method ダイジェスト方法
+	 * @param string $salt ソルト文字列
+	 * @return string ダイジェスト文字列
+	 * @static
+	 */
+	static public function getDigest ($value,
+		$method = BS_CRYPT_DIGEST_METHOD, $salt = BS_CRYPT_SALT) {
+
+		if (!extension_loaded('hash')) {
+			throw new BSFileException('hashモジュールがロードされていません。');
+		}
+		return hash($method, $value . $salt);
+	}
+
+	/**
 	 * md5ダイジェストを返す
 	 *
 	 * @access public
@@ -140,11 +159,7 @@ class BSCrypt {
 	 * @static
 	 */
 	static public function getMD5 ($value) {
-		if (extension_loaded('hash')) {
-			return hash('md5', $value);
-		} else {
-			return md5($value);
-		}
+		return self::getDigest($value, 'md5', null);
 	}
 
 	/**
@@ -156,11 +171,7 @@ class BSCrypt {
 	 * @static
 	 */
 	static public function getSHA1 ($value) {
-		if (extension_loaded('hash')) {
-			return hash('sha1', $value);
-		} else {
-			return sha1($value);
-		}
+		return self::getDigest($value, 'sha1', null);
 	}
 }
 

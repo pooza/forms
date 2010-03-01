@@ -8,7 +8,7 @@
  * Google Mapタグ
  *
  * @author 小石達也 <tkoishi@b-shock.co.jp>
- * @version $Id: BSMapTag.class.php 1870 2010-02-17 10:35:01Z pooza $
+ * @version $Id: BSMapTag.class.php 1889 2010-02-28 10:52:44Z pooza $
  */
 class BSMapTag extends BSSmartTag {
 	private $geocode;
@@ -54,7 +54,7 @@ class BSMapTag extends BSSmartTag {
 
 	private function getAjaxDivisionElement () {
 		$params = new BSArray($this->getQueryParameters());
-		$params['id'] = 'map_' . BSCrypt::getSHA1($this->tag[1] . BS_CRYPT_SALT);
+		$params['id'] = 'map_' . BSCrypt::getDigest($this->tag[1]);
 		return BSGoogleMapsService::getScriptElement($this->getGeocode(), $params);
 	}
 

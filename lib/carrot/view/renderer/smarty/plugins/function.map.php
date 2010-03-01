@@ -8,7 +8,7 @@
  * GoogleMaps関数
  *
  * @author 小石達也 <tkoishi@b-shock.co.jp>
- * @version $Id: function.map.php 1874 2010-02-18 10:33:41Z pooza $
+ * @version $Id: function.map.php 1889 2010-02-28 10:52:44Z pooza $
  */
 function smarty_function_map ($params, &$smarty) {
 	$params = new BSArray($params);
@@ -17,7 +17,7 @@ function smarty_function_map ($params, &$smarty) {
 		throw new BSGeocodeException('ジオコードが取得できません。');
 	}
 
-	$params['id'] = 'map_' . BSCrypt::getSHA1($params['addr'] . BS_CRYPT_SALT);
+	$params['id'] = 'map_' . BSCrypt::getDigest($params['addr']);
 	$element = BSGoogleMapsService::getScriptElement($geocode, $params);
 	return $element->getContents();
 }

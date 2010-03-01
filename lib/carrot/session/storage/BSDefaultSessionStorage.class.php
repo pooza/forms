@@ -8,7 +8,7 @@
  * 規定セッションストレージ
  *
  * @author 小石達也 <tkoishi@b-shock.co.jp>
- * @version $Id: BSDefaultSessionStorage.class.php 1885 2010-02-28 04:42:57Z pooza $
+ * @version $Id: BSDefaultSessionStorage.class.php 1888 2010-02-28 10:07:43Z pooza $
  */
 class BSDefaultSessionStorage implements BSSessionStorage {
 
@@ -19,14 +19,7 @@ class BSDefaultSessionStorage implements BSSessionStorage {
 	 * @return string 利用可能ならTrue
 	 */
 	public function initialize () {
-		session_write_close();
 		ini_set('session.save_handler', 'files');
-		ini_set('session.auto_start', 0);
-		ini_set('session.use_cookies', 1);
-		ini_set('session.use_only_cookies', 1);
-		ini_set('session.cookie_httponly', 1);
-		ini_set('session.use_trans_sid', 0);
-		ini_set('session.hash_function', 1);
 		ini_set('session.save_path', BSFileUtility::getPath('tmp'));
 		return true;
 	}

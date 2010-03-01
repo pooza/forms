@@ -8,7 +8,7 @@
  * モバイルユーザーエージェント
  *
  * @author 小石達也 <tkoishi@b-shock.co.jp>
- * @version $Id: BSMobileUserAgent.class.php 1812 2010-02-03 15:15:09Z pooza $
+ * @version $Id: BSMobileUserAgent.class.php 1889 2010-02-28 10:52:44Z pooza $
  * @abstract
  */
 abstract class BSMobileUserAgent extends BSUserAgent implements BSUserIdentifier {
@@ -154,9 +154,7 @@ abstract class BSMobileUserAgent extends BSUserAgent implements BSUserIdentifier
 	 */
 	public function getID () {
 		if (BS_DEBUG) {
-			return BSCrypt::getSHA1(
-				BSRequest::getInstance()->getHost()->getName() . BS_CRYPT_SALT
-			);
+			return BSCrypt::getDigest(BSRequest::getInstance()->getHost()->getName());
 		}
 	}
 

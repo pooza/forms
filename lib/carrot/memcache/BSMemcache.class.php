@@ -8,7 +8,7 @@
  * memcacheサーバ
  *
  * @author 小石達也 <tkoishi@b-shock.co.jp>
- * @version $Id: BSMemcache.class.php 1812 2010-02-03 15:15:09Z pooza $
+ * @version $Id: BSMemcache.class.php 1889 2010-02-28 10:52:44Z pooza $
  */
 class BSMemcache extends Memcache implements ArrayAccess {
 	private $attributes;
@@ -174,7 +174,7 @@ class BSMemcache extends Memcache implements ArrayAccess {
 			$name,
 			BS_CRYPT_SALT,
 		);
-		return BSCrypt::getSHA1(join('.', $name));
+		return BSCrypt::getDigest(join('.', $name));
 	}
 
 	/**

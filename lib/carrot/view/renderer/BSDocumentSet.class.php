@@ -10,7 +10,7 @@
  * BSJavaScriptSet/BSStyleSetの基底クラス
  *
  * @author 小石達也 <tkoishi@b-shock.co.jp>
- * @version $Id: BSDocumentSet.class.php 1849 2010-02-09 02:00:50Z pooza $
+ * @version $Id: BSDocumentSet.class.php 1889 2010-02-28 10:52:44Z pooza $
  * @abstract
  */
 abstract class BSDocumentSet implements BSTextRenderer, IteratorAggregate {
@@ -88,7 +88,7 @@ abstract class BSDocumentSet implements BSTextRenderer, IteratorAggregate {
 		if (!$this->cacheFile) {
 			$name = $this->getName();
 			if (!BS_DEBUG) {
-				$name = BSCrypt::getSHA1($name . BS_CRYPT_SALT);
+				$name = BSCrypt::getDigest($name);
 			}
 
 			$dir = $this->getCacheDirectory();

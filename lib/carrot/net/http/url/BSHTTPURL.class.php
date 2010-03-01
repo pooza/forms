@@ -8,7 +8,7 @@
  * HTTPスキーマのURL
  *
  * @author 小石達也 <tkoishi@b-shock.co.jp>
- * @version $Id: BSHTTPURL.class.php 1883 2010-02-28 04:41:36Z pooza $
+ * @version $Id: BSHTTPURL.class.php 1889 2010-02-28 10:52:44Z pooza $
  */
 class BSHTTPURL extends BSURL implements BSHTTPRedirector, BSImageContainer {
 	private $fullpath;
@@ -277,7 +277,7 @@ class BSHTTPURL extends BSURL implements BSHTTPRedirector, BSImageContainer {
 	 * @return string 画像ファイルベース名
 	 */
 	public function getImageFileBaseName ($size = 'favicon') {
-		return BSCrypt::getSHA1($this->getID());
+		return BSCrypt::getDigest($this->getID());
 	}
 
 	/**
