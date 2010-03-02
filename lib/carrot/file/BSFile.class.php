@@ -10,17 +10,17 @@ ini_set('auto_detect_line_endings', true);
  * ファイル
  *
  * @author 小石達也 <tkoishi@b-shock.co.jp>
- * @version $Id: BSFile.class.php 1845 2010-02-08 12:55:29Z pooza $
+ * @version $Id: BSFile.class.php 1897 2010-03-02 13:21:38Z pooza $
  */
 class BSFile extends BSDirectoryEntry implements BSRenderer, BSSerializable {
 	private $mode;
 	private $lines;
 	private $size;
 	private $handle;
-	private $compressed;
 	private $error;
 	const LINE_SEPARATOR = "\n";
 	const COMPRESSED_SUFFIX = '.gz';
+	const COMPRESSED_TYPE = 'application/x-gzip';
 
 	/**
 	 * @access public
@@ -56,7 +56,18 @@ class BSFile extends BSDirectoryEntry implements BSRenderer, BSSerializable {
 	 * @return string メディアタイプ
 	 */
 	public function analyzeType () {
-		return BSMIMEType::analyzeType($this);
+		if (!$this->isExists()) {
+			return null;
+		}
+
+		if (extension_loaded('fileinfo') && defined('FILEINFO_MIME_TYPE')) {
+			$finfo = new finfo(FILEINFO_MIME_TYPE);
+			return $finfo->file($this->getPath());
+		} else if (function_exists('mime_content_type')) {
+			return mime_content_type($this->getPath());
+		} else {
+			return exec('file -b --mime-type ' . $this->getPath());
+		}
 	}
 
 	/**
@@ -287,7 +298,6 @@ class BSFile extends BSDirectoryEntry implements BSRenderer, BSSerializable {
 		$contents = gzencode($this->getContents(), 9);
 		$this->setContents($contents);
 		$this->rename($this->getName() . self::COMPRESSED_SUFFIX);
-		$this->compressed = true;
 	}
 
 	/**
@@ -297,16 +307,11 @@ class BSFile extends BSDirectoryEntry implements BSRenderer, BSSerializable {
 	 * @return boolean gzip圧縮されていたらTrue
 	 */
 	public function isCompressed () {
-		if ($this->compressed === null) {
-			if (extension_loaded('fileinfo')) {
-				$header = new BSContentTypeMIMEHeader;
-				$header->setContents($this->analyzeType());
-				$this->compressed = ($header['type'] == 'application/x-gzip');
-			} else {
-				$this->compressed = ($this->getSuffix() == self::COMPRESSED_SUFFIX);
-			}
+		try {
+			return ($this->analyzeType() == self::COMPRESSED_TYPE);
+		} catch (Exception $e) {
+			return ($this->getSuffix() == self::COMPRESSED_SUFFIX);
 		}
-		return $this->compressed;
 	}
 
 	/**

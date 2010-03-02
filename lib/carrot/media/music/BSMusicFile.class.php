@@ -8,7 +8,7 @@
  * 楽曲ファイル
  *
  * @author 小石達也 <tkoishi@b-shock.co.jp>
- * @version $Id: BSMusicFile.class.php 1873 2010-02-18 10:28:39Z pooza $
+ * @version $Id: BSMusicFile.class.php 1897 2010-03-02 13:21:38Z pooza $
  */
 class BSMusicFile extends BSMediaFile {
 
@@ -22,18 +22,6 @@ class BSMusicFile extends BSMediaFile {
 		$this->attributes['width'] = BS_MUSIC_MP3_PLAYER_WIDTH;
 		$this->attributes['height'] = BS_MUSIC_MP3_PLAYER_HEIGHT;
 		$this->attributes['height_full'] = $this->attributes['height'];
-		$this->attributes['type'] = $this->analyzeMediaTypes()->getIterator()->getFirst();
-	}
-
-	/**
-	 * FFmpegの出力からメディアタイプを調べ、候補一覧を返す
-	 *
-	 * @access protected
-	 * @param string $track トラック名。 (Video|Audio)
-	 * @return BSArray メディアタイプ
-	 */
-	protected function analyzeMediaTypes ($track = 'Audio') {
-		return parent::analyzeMediaTypes($track);
 	}
 
 	/**

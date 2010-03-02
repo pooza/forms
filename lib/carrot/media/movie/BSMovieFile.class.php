@@ -8,7 +8,7 @@
  * 動画ファイル
  *
  * @author 小石達也 <tkoishi@b-shock.co.jp>
- * @version $Id: BSMovieFile.class.php 1876 2010-02-19 12:15:00Z pooza $
+ * @version $Id: BSMovieFile.class.php 1897 2010-03-02 13:21:38Z pooza $
  */
 class BSMovieFile extends BSMediaFile {
 
@@ -28,25 +28,6 @@ class BSMovieFile extends BSMediaFile {
 			$this->attributes['height_full'] = $matches[2] + $this->getPlayerHeight();
 			$this->attributes['pixel_size'] = $matches[1] . '×' . $matches[2];
 		}
-		$this->attributes['type'] = $this->analyzeMediaTypes()->getIterator()->getFirst();
-	}
-
-	/**
-	 * FFmpegの出力からメディアタイプを調べ、候補一覧を返す
-	 *
-	 * video/3gppを優先。
-	 *
-	 * @access protected
-	 * @param string $track トラック名。 (Video|Audio)
-	 * @return BSArray メディアタイプ
-	 */
-	protected function analyzeMediaTypes ($track = 'Video') {
-		$types = parent::analyzeMediaTypes($track);
-		if ($types->isContain($type = BSMIMEType::getType('3gp'))) {
-			$types->unshift($type);
-			$types->uniquize();
-		}
-		return $types;
 	}
 
 	/**

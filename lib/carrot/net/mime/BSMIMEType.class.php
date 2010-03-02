@@ -8,7 +8,7 @@
  * MIMEタイプ
  *
  * @author 小石達也 <tkoishi@b-shock.co.jp>
- * @version $Id: BSMIMEType.class.php 1850 2010-02-09 02:22:29Z pooza $
+ * @version $Id: BSMIMEType.class.php 1897 2010-03-02 13:21:38Z pooza $
  */
 class BSMIMEType extends BSParameterHolder implements BSSerializable {
 	static private $instance;
@@ -192,24 +192,6 @@ class BSMIMEType extends BSParameterHolder implements BSSerializable {
 			$type = self::DEFAULT_TYPE;
 		}
 		return $type;
-	}
-
-	/**
-	 * ファイル内容からメディアタイプを返す
-	 *
-	 * @access public
-	 * @param BSFile $file ファイル
-	 * @return string メディアタイプ
-	 * @static
-	 */
-	static public function analyzeType (BSFile $file) {
-		if (!extension_loaded('fileinfo')) {
-			throw new BSFileException('fileinfoモジュールがロードされていません。');
-		}
-		if ($file->isExists()) {
-			$finfo = new finfo(FILEINFO_MIME);
-			return $finfo->file($file->getPath());
-		}
 	}
 }
 
