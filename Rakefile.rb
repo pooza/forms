@@ -4,7 +4,7 @@
 #
 # @package org.carrot-framework
 # @author 小石達也 <tkoishi@b-shock.co.jp>
-# @version $Id: Rakefile.rb 1813 2010-02-03 15:20:23Z pooza $
+# @version $Id: Rakefile.rb 1891 2010-03-01 09:40:51Z pooza $
 
 $KCODE = 'u'
 require 'yaml'
@@ -226,23 +226,30 @@ namespace :distribution do
   task :pset do
     system 'svn pset svn:ignore \'*\' var/*'
     media_types.each do |extension, type|
+      extension_arg = '-name \'*.' + extension + '\''
       if type == nil
-        system 'find . -name \'*.' + extension + '\' | xargs svn pdel svn:mime-type'
+        system 'find . ' + extension_arg + ' | xargs svn pdel svn:mime-type'
       else
-        system 'find . -name \'*.' + extension + '\' | xargs svn pset svn:mime-type ' + type
+        system 'find . ' + extension_arg + ' | xargs svn pset svn:mime-type ' + type
       end
       if (type == nil) || (/^text\// =~ type)
-        system 'svn pset svn:eol-style LF ./*.' + extension
-        system 'find bin -name \'*.' + extension + '\' | xargs svn pset svn:eol-style LF'
-        system 'find share -name \'*.' + extension + '\' | xargs svn pset svn:eol-style LF'
-        system 'find webapp -name \'*.' + extension + '\' | xargs svn pset svn:eol-style LF'
-        system 'find www -name \'*.' + extension + '\' | xargs svn pset svn:eol-style LF'
-        system 'find lib/carrot -name \'*.' + extension + '\' | xargs svn pset svn:eol-style LF'
+        system 'find . -maxdepth 1 ' + extension_arg + ' | xargs svn pset svn:eol-style LF'
+        system 'find bin ' + extension_arg + ' | xargs svn pset svn:eol-style LF'
+        system 'find share ' + extension_arg + ' | xargs svn pset svn:eol-style LF'
+        system 'find webapp ' + extension_arg + ' | xargs svn pset svn:eol-style LF'
+        system 'find www ' + extension_arg + ' | xargs svn pset svn:eol-style LF'
+        system 'find lib/carrot ' + extension_arg + ' | xargs svn pset svn:eol-style LF'
       end
-      system 'svn pdel svn:executable `find . -name \'*.' + extension + '\'`'
+      system 'find . ' + extension_arg + ' | xargs svn pdel svn:executable'
     end
-    system 'svn pset svn:executable ON bin/*'
-    system 'svn pset svn:executable ON lib/*/*.pl'
+    ['pl', 'rb'].each do |extension|
+      extension_arg = '-name \'*.' + extension + '\''
+      system 'find lib -mindepth 2 ' + extension_arg + ' | xargs svn pset svn:executable ON'
+    end
+    ['pl', 'rb', 'php'].each do |extension|
+      extension_arg = '-name \'*.' + extension + '\''
+      system 'find bin -maxdepth 1 ' + extension_arg + ' | xargs svn pset svn:executable ON'
+    end
   end
 
   desc '配布アーカイブを作成'

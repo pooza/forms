@@ -7,7 +7,7 @@
  * ユーティリティ
  *
  * @author 小石達也 <tkoishi@b-shock.co.jp>
- * @version $Id: BSUtility.class.php 1889 2010-02-28 10:52:44Z pooza $
+ * @version $Id: BSUtility.class.php 1896 2010-03-02 11:25:53Z pooza $
  */
 class BSUtility {
 
@@ -26,10 +26,10 @@ class BSUtility {
 	 * @static
 	 */
 	static public function isPathAbsolute ($path) {
-		if (strpos($path, '..') !== false) {
-			return false;
-		} else if ($path[0] == DIRECTORY_SEPARATOR) {
+		if ($path[0] == DIRECTORY_SEPARATOR) {
 			return true;
+		} else if (strpos($path, '..') !== false) {
+			return false;
 		}
 		return !!mb_ereg('^[[:alpha:]]:' . preg_quote(DIRECTORY_SEPARATOR) . '.+', $path);
 	}
@@ -42,9 +42,10 @@ class BSUtility {
 	 * @static
 	 */
 	static public function getUniqueID () {
-		return BSCrypt::getDigest(
-			BSDate::getNow('YmdHis') . uniqid(BSNumeric::getRandom(), true)
-		);
+		return BSCrypt::getDigest(array(
+			BSDate::getNow('YmdHis'),
+			uniqid(BSNumeric::getRandom(), true),
+		));
 	}
 
 	/**

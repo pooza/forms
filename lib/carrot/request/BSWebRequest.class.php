@@ -8,7 +8,7 @@
  * Webリクエスト
  *
  * @author 小石達也 <tkoishi@b-shock.co.jp>
- * @version $Id: BSWebRequest.class.php 1812 2010-02-03 15:15:09Z pooza $
+ * @version $Id: BSWebRequest.class.php 1894 2010-03-02 11:24:04Z pooza $
  */
 class BSWebRequest extends BSRequest {
 	static private $instance;
@@ -163,6 +163,58 @@ class BSWebRequest extends BSRequest {
 			$this->url['path'] = $this->controller->getAttribute('REQUEST_URI');
 		}
 		return $this->url;
+	}
+
+	/**
+	 * Cookie対応環境か？
+	 *
+	 * 環境自体がCookieに対応するかではなく、carrot上でCookie対応とみなすかどうかを返す。
+	 *
+	 * @access public
+	 * @return boolean Cookie対応環境ならTrue
+	 */
+	public function isEnableCookie () {
+		return (!$this->isAjax() && !$this->isFlash() && !$this->isMobile());
+	}
+
+	/**
+	 * ケータイ環境か？
+	 *
+	 * @access public
+	 * @return boolean ケータイ環境ならTrue
+	 */
+	public function isMobile () {
+		return $this->getUserAgent()->isMobile();
+	}
+
+	/**
+	 * SSL環境か？
+	 *
+	 * @access public
+	 * @return boolean SSL環境ならTrue
+	 */
+	public function isSSL () {
+		return !!$this->getHeader('https');
+	}
+
+	/**
+	 * Ajax環境か？
+	 *
+	 * @access public
+	 * @return boolean Ajax環境ならTrue
+	 */
+	public function isAjax () {
+		return $this->getHeader('x-requested-with') || $this->getHeader('x-prototype-version');
+	}
+
+	/**
+	 * Flash環境か？
+	 *
+	 * @access public
+	 * @return boolean Flash環境ならTrue
+	 */
+	public function isFlash () {
+		return $this->getHeader('x-flash-version') || $this->getHeader('x-is-flash');
 	}
 
 	/**

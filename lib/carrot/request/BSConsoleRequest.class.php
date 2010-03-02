@@ -8,7 +8,7 @@
  * コンソールリクエスト
  *
  * @author 小石達也 <tkoishi@b-shock.co.jp>
- * @version $Id: BSConsoleRequest.class.php 1812 2010-02-03 15:15:09Z pooza $
+ * @version $Id: BSConsoleRequest.class.php 1894 2010-03-02 11:24:04Z pooza $
  */
 class BSConsoleRequest extends BSRequest {
 	private $options;
@@ -71,6 +71,16 @@ class BSConsoleRequest extends BSRequest {
 
 		$this->clear();
 		$this->setParameters(getopt($config));
+	}
+
+	/**
+	 * コマンドライン環境か？
+	 *
+	 * @access public
+	 * @return boolean コマンドライン環境ならTrue
+	 */
+	public function isCLI () {
+		return true;
 	}
 
 	/**

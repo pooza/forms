@@ -8,7 +8,7 @@
  * Cookieのサポートをチェックするフィルタ
  *
  * @author 小石達也 <tkoishi@b-shock.co.jp>
- * @version $Id: BSCookieFilter.class.php 1889 2010-02-28 10:52:44Z pooza $
+ * @version $Id: BSCookieFilter.class.php 1895 2010-03-02 11:24:28Z pooza $
  */
 class BSCookieFilter extends BSFilter {
 	private $cookieName;
@@ -19,11 +19,7 @@ class BSCookieFilter extends BSFilter {
 	}
 
 	public function execute () {
-		if ($this->request->isCLI()
-			|| $this->request->isAjax()
-			|| $this->request->isFlash()
-			|| $this->request->isMobile()) {
-
+		if (!$this->request->isEnableCookie()) {
 			return;
 		}
 
