@@ -8,7 +8,7 @@
  * 楽曲ファイル
  *
  * @author 小石達也 <tkoishi@b-shock.co.jp>
- * @version $Id: BSMusicFile.class.php 1897 2010-03-02 13:21:38Z pooza $
+ * @version $Id: BSMusicFile.class.php 1898 2010-03-03 03:48:43Z pooza $
  */
 class BSMusicFile extends BSMediaFile {
 
@@ -41,8 +41,8 @@ class BSMusicFile extends BSMediaFile {
 	 * @return BSMusicFile 変換後ファイル
 	 */
 	public function convert () {
-		$file = BSFileUtility::getTemporaryFile('.mp3', 'BSMusicFile');
-		if ($this->getType() == BSMIMEType::getType('.mp3')) {
+		$file = BSFileUtility::getTemporaryFile('mp3', 'BSMusicFile');
+		if ($this->getType() == BSMIMEType::getType('mp3')) {
 			$duplicated = $this->copyTo($file->getDirectory());
 			$duplicated->rename($file->getName());
 			$file = $duplicated;

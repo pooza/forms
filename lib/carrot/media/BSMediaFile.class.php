@@ -8,7 +8,7 @@
  * メディアファイル
  *
  * @author 小石達也 <tkoishi@b-shock.co.jp>
- * @version $Id: BSMediaFile.class.php 1897 2010-03-02 13:21:38Z pooza $
+ * @version $Id: BSMediaFile.class.php 1898 2010-03-03 03:48:43Z pooza $
  * @abstract
  */
 abstract class BSMediaFile extends BSFile implements ArrayAccess {
@@ -70,20 +70,6 @@ abstract class BSMediaFile extends BSFile implements ArrayAccess {
 	 */
 	public function getType () {
 		return $this->getAttributes()->getParameter('type');
-	}
-
-	/**
-	 * 規定のサフィックスを返す
-	 *
-	 * @access public
-	 * @return string 規定サフィックス
-	 */
-	public function getDefaultSuffix () {
-		// mime.typesを読み込まない。
-		$config = BSConfigManager::getInstance()->compile('mime');
-		$types = new BSArray($config['types']);
-		$suffixes = $types->getFlipped();
-		return '.' . $suffixes[$this->getType()];
 	}
 
 	/**
@@ -252,25 +238,6 @@ abstract class BSMediaFile extends BSFile implements ArrayAccess {
 		$command = new BSCommandLine('bin/ffmpeg');
 		$command->setDirectory(BSFileUtility::getDirectory('ffmpeg'));
 		return $command;
-	}
-
-	/**
-	 * MIMEタイプを返す
-	 *
-	 * @access public
-	 * @param string $name FFmpegのエンコード名等
-	 * @return string MIMEタイプ
-	 * @static
-	 */
-	static public function getMediaType ($name) {
-		$config = BSConfigManager::getInstance()->compile('mime');
-		$names = new BSArray($config['types']);
-
-		$header = new BSContentTypeMIMEHeader;
-		$header->setContents($names[BSString::toLower($name)]);
-		if (in_array($header['main_type'], array('audio', 'video'))) {
-			return $header['type'];
-		}
 	}
 
 	/**

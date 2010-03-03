@@ -10,7 +10,7 @@ ini_set('auto_detect_line_endings', true);
  * ファイルユーティリティ
  *
  * @author 小石達也 <tkoishi@b-shock.co.jp>
- * @version $Id: BSFileUtility.class.php 1812 2010-02-03 15:15:09Z pooza $
+ * @version $Id: BSFileUtility.class.php 1898 2010-03-03 03:48:43Z pooza $
  */
 class BSFileUtility {
 
@@ -91,6 +91,22 @@ class BSFileUtility {
 		return mb_ereg('^\\.', basename($name));
 	}
 
+	/**
+	 * 添付ファイルを検索
+	 *
+	 * @access public
+	 * @param BSDirectory $dir ディレクトリ
+	 * @param string $basename ベースファイル名
+	 * @return BSFile 添付ファイル
+	 * @static
+	 */
+	static public function searchAttachment (BSDirectory $dir, $basename) {
+		foreach (BSMIMEType::getAttachableTypes() as $suffix => $type) {
+			if ($file = $dir->getEntry($basename . $suffix)) {
+				return $file;
+			}
+		}
+	}
 
 	/**
 	 * 一時ファイルを生成して返す
@@ -102,9 +118,8 @@ class BSFileUtility {
 	 * @static
 	 */
 	static public function getTemporaryFile ($suffix = null, $class = 'BSFile') {
-		$dir = BSFileUtility::getDirectory('tmp');
-		$name = BSUtility::getUniqueID() . $suffix;
-		if (!$file = $dir->createEntry($name, $class)) {
+		$name = BSUtility::getUniqueID() . '.' . ltrim($suffix, '.');
+		if (!$file = BSFileUtility::getDirectory('tmp')->createEntry($name, $class)) {
 			throw new BSFileException('一時ファイルが生成できません。');
 		}
 		return $file;

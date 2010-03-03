@@ -128,12 +128,10 @@ class Registration extends BSRecord implements BSAttachmentContainer {
 	 * @return BSFile 添付ファイル
 	 */
 	public function getAttachment ($name = null) {
-		foreach (BSMIMEType::getAttachableTypes() as $suffix => $type) {
-			$filename = $this->getAttachmentBaseName($name) . $suffix;
-			if ($file = $this->getTable()->getDirectory()->getEntry($filename)) {
-				return $file;
-			}
-		}
+		return BSFileUtility::searchAttachment(
+			$this->getTable()->getDirectory(),
+			$this->getAttachmentBaseName($name)
+		);
 	}
 
 	/**

@@ -8,7 +8,7 @@
  * ZIPアーカイブ
  *
  * @author 小石達也 <tkoishi@b-shock.co.jp>
- * @version $Id: BSZipArchive.class.php 1812 2010-02-03 15:15:09Z pooza $
+ * @version $Id: BSZipArchive.class.php 1898 2010-03-03 03:48:43Z pooza $
  */
 class BSZipArchive extends ZipArchive implements BSrenderer {
 	private $file;
@@ -99,7 +99,7 @@ class BSZipArchive extends ZipArchive implements BSrenderer {
 	public function getFile () {
 		if (!$this->file) {
 			$this->temporaryFile = true;
-			$this->file = BSFileUtility::getTemporaryFile('.zip');
+			$this->file = BSFileUtility::getTemporaryFile('zip');
 		}
 		return $this->file;
 	}

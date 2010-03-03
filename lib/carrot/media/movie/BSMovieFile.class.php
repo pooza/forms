@@ -8,7 +8,7 @@
  * 動画ファイル
  *
  * @author 小石達也 <tkoishi@b-shock.co.jp>
- * @version $Id: BSMovieFile.class.php 1897 2010-03-02 13:21:38Z pooza $
+ * @version $Id: BSMovieFile.class.php 1898 2010-03-03 03:48:43Z pooza $
  */
 class BSMovieFile extends BSMediaFile {
 
@@ -47,8 +47,8 @@ class BSMovieFile extends BSMediaFile {
 	 * @return BSMovieFile 変換後ファイル
 	 */
 	public function convert () {
-		$file = BSFileUtility::getTemporaryFile('.flv', 'BSMovieFile');
-		if ($this->getType() == BSMIMEType::getType('.flv')) {
+		$file = BSFileUtility::getTemporaryFile('flv', 'BSMovieFile');
+		if ($this->getType() == BSMIMEType::getType('flv')) {
 			$duplicated = $this->copyTo($file->getDirectory());
 			$duplicated->rename($file->getName());
 			$file = $duplicated;

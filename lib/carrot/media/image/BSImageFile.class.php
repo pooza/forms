@@ -8,7 +8,7 @@
  * 画像ファイル
  *
  * @author 小石達也 <tkoishi@b-shock.co.jp>
- * @version $Id: BSImageFile.class.php 1881 2010-02-25 11:14:20Z pooza $
+ * @version $Id: BSImageFile.class.php 1900 2010-03-03 04:22:56Z pooza $
  */
 class BSImageFile extends BSMediaFile implements BSImageContainer {
 	protected $renderer;
@@ -70,25 +70,19 @@ class BSImageFile extends BSMediaFile implements BSImageContainer {
 			if (!$this->isExists() || !$this->getSize()) {
 				throw new BSImageException($this . 'の形式が不明です。');
 			}
-
 			$info = getimagesize($this->getPath());
-			switch ($type = $info['mime']) {
-				case 'image/jpeg':
-					$image = imagecreatefromjpeg($this->getPath());
-					break;
-				case 'image/gif':
-					$image = imagecreatefromgif($this->getPath());
-					break;
-				case 'image/png':
-					$image = imagecreatefrompng($this->getPath());
-					break;
-				default:
-					throw new BSImageException($this . 'の形式が不明です。');
+
+			foreach (array('jpeg', 'gif', 'png') as $suffix) {
+				if ($info['mime'] == BSMIMEType::getType($suffix)) {
+					$class = BSClassLoader::getInstance()->getClass($this->rendererClass);
+					$this->renderer = new $class($info[0], $info[1]);
+					$this->renderer->setType($info['mime']);
+					$function = 'imagecreatefrom' . $suffix;
+					$this->renderer->setImage($function($this->getPath()));
+					return $this->renderer;
+				}
 			}
-			$class = BSClassLoader::getInstance()->getClass($this->rendererClass);
-			$this->renderer = new $class($info[0], $info[1]);
-			$this->renderer->setType($type);
-			$this->renderer->setImage($image);
+			throw new BSImageException($this . 'の形式が不明です。');
 		}
 		return $this->renderer;
 	}
@@ -141,27 +135,21 @@ class BSImageFile extends BSMediaFile implements BSImageContainer {
 			throw new BSFileException($this . 'に書き込むことができません。');
 		}
 
-		$types = new BSArray;
-		$types[] = BSMIMEType::DEFAULT_TYPE;
+		$types = new BSArray(BSMIMEType::DEFAULT_TYPE);
 		$types[] = $this->getRenderer()->getType();
 		if (!$types->isContain($this->getType())) {
 			throw new BSImageException($this . 'のメディアタイプがレンダラーと一致しません。');
 		}
 
-		switch ($this->getRenderer()->getType()) {
-			case 'image/jpeg':
-				imagejpeg($this->getRenderer()->getImage(), $this->getPath());
-				break;
-			case 'image/gif':
-				imagegif($this->getRenderer()->getImage(), $this->getPath());
-				break;
-			case 'image/png':
-				imagepng($this->getRenderer()->getImage(), $this->getPath());
-				break;
-			default:
-				throw new BSImageException($this . 'のメディアタイプが正しくありません。');
+		foreach (array('jpeg', 'gif', 'png') as $suffix) {
+			if ($this->getRenderer()->getType() == BSMIMEType::getType($suffix)) {
+				$function = 'image' . $suffix;
+				$function($this->getRenderer()->getImage(), $this->getPath());
+				$this->clearImageCache();
+				return;
+			}
 		}
-		$this->clearImageCache();
+		throw new BSImageException($this . 'のメディアタイプが正しくありません。');
 	}
 
 	/**
