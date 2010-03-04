@@ -8,7 +8,7 @@
  * 動画ファイル
  *
  * @author 小石達也 <tkoishi@b-shock.co.jp>
- * @version $Id: BSMovieFile.class.php 1898 2010-03-03 03:48:43Z pooza $
+ * @version $Id: BSMovieFile.class.php 1901 2010-03-04 02:12:20Z pooza $
  */
 class BSMovieFile extends BSMediaFile {
 
@@ -28,6 +28,23 @@ class BSMovieFile extends BSMediaFile {
 			$this->attributes['height_full'] = $matches[2] + $this->getPlayerHeight();
 			$this->attributes['pixel_size'] = $matches[1] . '×' . $matches[2];
 		}
+	}
+
+	/**
+	 * ファイルの内容から、メディアタイプを返す
+	 *
+	 * fileinfoだけでは、wmvを認識できないことがある。
+	 *
+	 * @access public
+	 * @return string メディアタイプ
+	 */
+	public function analyzeType () {
+		if (($type = parent::analyzeType()) == BSMIMEType::DEFAULT_TYPE) {
+			if (BSString::isContain('Video: wmv', $this->output)) {
+				return BSMIMEType::getType('wmv');
+			}
+		}
+		return $type;
 	}
 
 	/**
