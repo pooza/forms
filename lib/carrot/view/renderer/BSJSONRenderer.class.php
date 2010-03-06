@@ -8,7 +8,7 @@
  * JSONレンダラー
  *
  * @author 小石達也 <tkoishi@b-shock.co.jp>
- * @version $Id: BSJSONRenderer.class.php 1812 2010-02-03 15:15:09Z pooza $
+ * @version $Id: BSJSONRenderer.class.php 1903 2010-03-06 06:43:36Z pooza $
  */
 class BSJSONRenderer implements BSRenderer {
 	private $serializer;
@@ -46,8 +46,8 @@ class BSJSONRenderer implements BSRenderer {
 	public function setContents ($contents) {
 		if (BSArray::isArray($contents)) {
 			$contents = new BSArray($contents);
-			$this->result = $contents->getParameters();
-			$contents = $this->getSerializer()->encode($contents->getParameters());
+			$this->result = $contents->decode();
+			$contents = $this->getSerializer()->encode($this->result);
 		}
 		$this->contents = $contents;
 	}
