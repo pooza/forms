@@ -8,7 +8,7 @@
  * CurlによるHTTP処理
  *
  * @author 小石達也 <tkoishi@b-shock.co.jp>
- * @version $Id: BSCurlHTTP.class.php 1868 2010-02-16 09:38:22Z pooza $
+ * @version $Id: BSCurlHTTP.class.php 1905 2010-03-09 05:26:42Z pooza $
  */
 class BSCurlHTTP extends BSHTTP {
 	private $engine;
@@ -125,13 +125,7 @@ class BSCurlHTTP extends BSHTTP {
 			$this->setAttribute('ssl_verifypeer', false);
 
 			if ($this->host->getName() == BSController::getInstance()->getHost()->getName()) {
-				$constants = BSConstantHandler::getInstance();
-				if ($constants['app_basic_auth_user'] && $constants['app_basic_auth_password']) {
-					$value = new BSStringFormat('%s:%s');
-					$value[] = $constants['app_basic_auth_user'];
-					$value[] = $constants['app_basic_auth_password'];
-					$this->setAttribute('userpwd', $value->getContents());
-				}
+				$this->setAuth(BS_APP_BASIC_AUTH_UID, BS_APP_BASIC_AUTH_PASSWORD);
 			}
 		}
 		return $this->engine;
@@ -172,6 +166,20 @@ class BSCurlHTTP extends BSHTTP {
 				return;
 			}
 		}
+	}
+
+	/**
+	 * HTTP認証のアカウントを設定
+	 *
+	 * @access public
+	 * @param string $uid ユーザー名
+	 * @param string $password BSCryptで暗号化されたパスワード
+	 */
+	public function setAuth ($uid, $password) {
+		if (BSString::isBlank($password)) {
+			return;
+		}
+		$this->setAttribute('userpwd', $uid . ':' . BSCrypt::getInstance()->decrypt($password));
 	}
 
 	/**
