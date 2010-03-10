@@ -2,7 +2,7 @@
 #
 # @package org.carrot-framework
 # @author 小石達也 <tkoishi@b-shock.co.jp>
-# @version $Id: mime.yaml 1901 2010-03-04 02:12:20Z pooza $
+# @version $Id: mime.yaml 1909 2010-03-10 05:21:29Z pooza $
 
 types:
   3gp: video/3gpp
@@ -79,4 +79,5 @@ suffixes:
   text/html: html
   text/yaml: yaml
   video/mpeg: mpeg
+  video/mp4: mp4
   video/quicktime: mov

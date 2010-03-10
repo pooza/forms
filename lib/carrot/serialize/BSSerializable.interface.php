@@ -8,7 +8,7 @@
  * シリアライズ可能なオブジェクトへのインターフェース
  *
  * @author 小石達也 <tkoishi@b-shock.co.jp>
- * @version $Id: BSSerializable.interface.php 1856 2010-02-09 04:25:34Z pooza $
+ * @version $Id: BSSerializable.interface.php 1907 2010-03-10 05:19:39Z pooza $
  */
 interface BSSerializable {
 
@@ -34,6 +34,11 @@ interface BSSerializable {
 	 * @access public
 	 */
 	public function serialize ();
+
+	/**
+	 * @access public
+	 */
+	public function __toString ();
 }
 
 /* vim:set tabstop=4: */
