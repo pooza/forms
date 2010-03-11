@@ -8,9 +8,9 @@
  * 3GP動画ファイル
  *
  * @author 小石達也 <tkoishi@b-shock.co.jp>
- * @version $Id: BS3GPMovieFile.class.php 1909 2010-03-10 05:21:29Z pooza $
+ * @version $Id: BS3GPMovieFile.class.php 1911 2010-03-11 01:52:28Z pooza $
  */
-class BS3GPMovieFile extends BSWindowsMediaMovieFile {
+class BS3GPMovieFile extends BSQuickTimeMovieFile {
 
 	/**
 	 * @access public

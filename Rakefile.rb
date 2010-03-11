@@ -4,7 +4,7 @@
 #
 # @package org.carrot-framework
 # @author 小石達也 <tkoishi@b-shock.co.jp>
-# @version $Id: Rakefile.rb 1891 2010-03-01 09:40:51Z pooza $
+# @version $Id: Rakefile.rb 1911 2010-03-11 01:52:28Z pooza $
 
 $KCODE = 'u'
 require 'yaml'
@@ -142,7 +142,7 @@ namespace :var do
 
     def keep_types
       types = []
-      ['carrot', 'application'].each do |name|
+      ['carrot', 'package', 'application'].each do |name|
         begin
           types += YAML.load_file('webapp/config/constant/' + name + '.yaml')['serialize']['keep']
         rescue
