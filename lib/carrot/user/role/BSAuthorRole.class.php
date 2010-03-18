@@ -8,11 +8,11 @@
  * 発行者ロール
  *
  * @author 小石達也 <tkoishi@b-shock.co.jp>
- * @version $Id: BSAuthorRole.class.php 1812 2010-02-03 15:15:09Z pooza $
+ * @version $Id: BSAuthorRole.class.php 1912 2010-03-17 08:47:30Z pooza $
  */
 class BSAuthorRole implements BSRole {
-	private $credentials;
-	static private $instance;
+	protected $credentials;
+	static protected $instance;
 	const CREDENTIAL = 'Author';
 
 	/**

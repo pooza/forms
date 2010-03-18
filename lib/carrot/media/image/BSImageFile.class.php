@@ -8,7 +8,7 @@
  * 画像ファイル
  *
  * @author 小石達也 <tkoishi@b-shock.co.jp>
- * @version $Id: BSImageFile.class.php 1900 2010-03-03 04:22:56Z pooza $
+ * @version $Id: BSImageFile.class.php 1913 2010-03-18 11:15:44Z pooza $
  */
 class BSImageFile extends BSMediaFile implements BSImageContainer {
 	protected $renderer;
@@ -81,6 +81,11 @@ class BSImageFile extends BSMediaFile implements BSImageContainer {
 					$this->renderer->setImage($function($this->getPath()));
 					return $this->renderer;
 				}
+			}
+			if (extension_loaded('imagick')) {
+				$this->renderer = new BSImagickImage;
+				$this->renderer->setImagick(new Imagick($this->getPath()));
+				return $this->renderer;
 			}
 			throw new BSImageException($this . 'の形式が不明です。');
 		}

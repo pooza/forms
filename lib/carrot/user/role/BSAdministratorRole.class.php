@@ -8,12 +8,12 @@
  * 管理者ロール
  *
  * @author 小石達也 <tkoishi@b-shock.co.jp>
- * @version $Id: BSAdministratorRole.class.php 1812 2010-02-03 15:15:09Z pooza $
+ * @version $Id: BSAdministratorRole.class.php 1912 2010-03-17 08:47:30Z pooza $
  */
 class BSAdministratorRole implements BSRole {
-	private $networks;
-	private $credentials;
-	static private $instance;
+	protected $networks;
+	protected $credentials;
+	static protected $instance;
 	const CREDENTIAL = 'Admin';
 
 	/**
