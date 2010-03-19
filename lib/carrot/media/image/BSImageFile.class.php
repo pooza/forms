@@ -8,7 +8,7 @@
  * 画像ファイル
  *
  * @author 小石達也 <tkoishi@b-shock.co.jp>
- * @version $Id: BSImageFile.class.php 1913 2010-03-18 11:15:44Z pooza $
+ * @version $Id: BSImageFile.class.php 1916 2010-03-19 02:06:30Z pooza $
  */
 class BSImageFile extends BSMediaFile implements BSImageContainer {
 	protected $renderer;
@@ -149,7 +149,7 @@ class BSImageFile extends BSMediaFile implements BSImageContainer {
 		foreach (array('jpeg', 'gif', 'png') as $suffix) {
 			if ($this->getRenderer()->getType() == BSMIMEType::getType($suffix)) {
 				$function = 'image' . $suffix;
-				$function($this->getRenderer()->getImage(), $this->getPath());
+				$function($this->getRenderer()->getGDHandle(), $this->getPath());
 				$this->clearImageCache();
 				return;
 			}

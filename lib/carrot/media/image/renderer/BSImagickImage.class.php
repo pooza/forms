@@ -8,10 +8,9 @@
  * ImageMagick画像レンダラー
  *
  * @author 小石達也 <tkoishi@b-shock.co.jp>
- * @version $Id: BSImagickImage.class.php 1913 2010-03-18 11:15:44Z pooza $
+ * @version $Id: BSImagickImage.class.php 1916 2010-03-19 02:06:30Z pooza $
  */
 class BSImagickImage extends BSImage {
-	private $imagick;
 
 	/**
 	 * @access public
@@ -66,7 +65,7 @@ class BSImagickImage extends BSImage {
 	 * @access public
 	 * @return resource GDイメージリソース
 	 */
-	public function getImage () {
+	public function getGDHandle () {
 		$header = new BSContentTypeMIMEHeader;
 		$header->setContents(BS_IMAGE_THUMBNAIL_TYPE);
 
@@ -75,7 +74,7 @@ class BSImagickImage extends BSImage {
 		$image = new BSImage;
 		$image->setType($header->getContents());
 		$image->setImage($converted->__toString());
-		return $image->getImage();
+		return $image->getGDHandle();
 	}
 
 	/**
@@ -188,7 +187,11 @@ class BSImagickImage extends BSImage {
 	 * @return boolean 出力可能ならTrue
 	 */
 	public function validate () {
-		return !BSString::isBlank($this->getContents());
+		if (BSString::isBlank($this->getContents())) {
+			$this->error = '画像リソースが正しくありません。';
+			return false;
+		}
+		return true;
 	}
 }
 

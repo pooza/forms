@@ -8,11 +8,12 @@
  * GD画像レンダラー
  *
  * @author 小石達也 <tkoishi@b-shock.co.jp>
- * @version $Id: BSImage.class.php 1913 2010-03-18 11:15:44Z pooza $
+ * @version $Id: BSImage.class.php 1916 2010-03-19 02:06:30Z pooza $
  */
 class BSImage implements BSImageRenderer {
 	protected $type;
-	protected $image;
+	protected $gd;
+	protected $imagick;
 	protected $height;
 	protected $width;
 	protected $origin;
@@ -35,6 +36,7 @@ class BSImage implements BSImageRenderer {
 		$this->setImage(imagecreatetruecolor($this->getWidth(), $this->getHeight()));
 		$this->setFont(BSFontManager::getInstance()->getFont());
 		$this->setFontSize(BSFontManager::DEFAULT_FONT_SIZE);
+		$this->fill($this->getCoordinate(0, 0), new BSColor(BS_IMAGE_THUMBNAIL_BGCOLOR));
 	}
 
 	/**
@@ -43,8 +45,8 @@ class BSImage implements BSImageRenderer {
 	 * @access public
 	 * @return resource GDイメージリソース
 	 */
-	public function getImage () {
-		return $this->image;
+	public function getGDHandle () {
+		return $this->gd;
 	}
 
 	/**
@@ -55,18 +57,38 @@ class BSImage implements BSImageRenderer {
 	 */
 	public function setImage ($image) {
 		if (is_resource($image)) {
-			$this->image = $image;
+			$this->gd = $image;
 		} else if ($image instanceof BSImageRenderer) {
-			$this->image = $image->getImage();
+			$this->gd = $image->getGDHandle();
 		} else if ($image instanceof BSImageFile) {
-			$this->image = $image->getEngine()->getImage();
+			$this->gd = $image->getEngine()->getGDHandle();
 		} else if ($image = imagecreatefromstring($image)) {
-			$this->image = $image;
+			$this->gd = $image;
 		} else {
 			throw new BSImageException('GDイメージリソースが正しくありません。');
 		}
-		$this->width = imagesx($this->image);
-		$this->height = imagesy($this->image);
+		$this->width = imagesx($this->gd);
+		$this->height = imagesy($this->gd);
+	}
+
+	/**
+	 * Imagickオブジェクトを返す
+	 *
+	 * @access public
+	 * @return Imagick
+	 */
+	public function getImagick () {
+		if (!$this->imagick) {
+			if (!extension_loaded('imagick')) {
+				throw new BSCryptException('imagickモジュールがロードされていません。');
+			}
+
+			$file = BSFileUtility::getTemporaryFile();
+			$file->setContents($this->getContents());
+			$this->imagick = new Imagick($file->getPath());
+			$file->delete();
+		}
+		return $this->imagick;
 	}
 
 	/**
@@ -134,7 +156,7 @@ class BSImage implements BSImageRenderer {
 	 */
 	protected function getColorID (BSColor $color) {
 		return imagecolorallocatealpha(
-			$this->getImage(),
+			$this->getGDHandle(),
 			$color['red'],
 			$color['green'],
 			$color['blue'],
@@ -177,14 +199,14 @@ class BSImage implements BSImageRenderer {
 		ob_start();
 		switch ($this->getType()) {
 			case 'image/jpeg':
-				imageinterlace($this->getImage(), 1);
-				imagejpeg($this->getImage(), null, 100);
+				imageinterlace($this->getGDHandle(), 1);
+				imagejpeg($this->getGDHandle(), null, 100);
 				break;
 			case 'image/gif':
-				imagegif($this->getImage());
+				imagegif($this->getGDHandle());
 				break;
 			case 'image/png':
-				imagepng($this->getImage());
+				imagepng($this->getGDHandle());
 				break;
 		}
 		$contents = ob_get_contents();
@@ -211,7 +233,7 @@ class BSImage implements BSImageRenderer {
 	 */
 	public function fill (BSCoordinate $coord, BSColor $color) {
 		imagefill(
-			$this->getImage(),
+			$this->getGDHandle(),
 			$coord->getX(),
 			$coord->getY(),
 			$this->getColorID($color)
@@ -231,7 +253,7 @@ class BSImage implements BSImageRenderer {
 			$color = new BSColor('black');
 		}
 		imagettftext(
-			$this->getImage(),
+			$this->getGDHandle(),
 			$this->getFontSize(),
 			0, //角度
 			$coord->getX(), $coord->getY(),
@@ -262,7 +284,7 @@ class BSImage implements BSImageRenderer {
 		} else {
 			$function = 'imagepolygon';
 		}
-		$function($this->getImage(), $polygon, $coords->count(), $this->getColorID($color));
+		$function($this->getGDHandle(), $polygon, $coords->count(), $this->getColorID($color));
 	}
 
 	/**
@@ -275,7 +297,7 @@ class BSImage implements BSImageRenderer {
 	 */
 	public function drawLine (BSCoordinate $start, BSCoordinate $end, BSColor $color) {
 		imageline(
-			$this->getImage(),
+			$this->getGDHandle(),
 			$start->getX(), $start->getY(),
 			$end->getX(), $end->getY(),
 			$this->getColorID($color)
@@ -392,7 +414,7 @@ class BSImage implements BSImageRenderer {
 	 * @return boolean 出力可能ならTrue
 	 */
 	public function validate () {
-		if (!is_resource($this->getImage())) {
+		if (!is_resource($this->getGDHandle())) {
 			$this->error = '画像リソースが正しくありません。';
 			return false;
 		}
@@ -410,7 +432,7 @@ class BSImage implements BSImageRenderer {
 	}
 
 	/**
-	 * 全機能を利用可能なメディアタイプを返す
+	 * 利用可能なメディアタイプを返す
 	 *
 	 * @access public
 	 * @return BSArray メディアタイプ
@@ -420,41 +442,22 @@ class BSImage implements BSImageRenderer {
 		foreach (array('.gif', '.jpg', '.png') as $suffix) {
 			$types[$suffix] = BSMIMEType::getType($suffix);
 		}
-		return $types;
-	}
-
-	/**
-	 * 一部機能を利用可能なメディアタイプを返す
-	 *
-	 * @access public
-	 * @return BSArray メディアタイプ
-	 */
-	static public function getAllTypes () {
-		$types = self::getTypes();
-		foreach (array('.tiff', '.eps') as $suffix) {
-			$types[$suffix] = BSMIMEType::getType($suffix);
+		if (extension_loaded('imagick')) {
+			foreach (array('.tiff', '.eps') as $suffix) {
+				$types[$suffix] = BSMIMEType::getType($suffix);
+			}
 		}
 		return $types;
 	}
 
 	/**
-	 * 全機能を利用可能な拡張子を返す
+	 * 利用可能な拡張子を返す
 	 *
 	 * @access public
 	 * @return BSArray 拡張子
 	 */
 	static public function getSuffixes () {
 		return self::getTypes()->getFlipped();
-	}
-
-	/**
-	 * 一部機能を用可能な拡張子を返す
-	 *
-	 * @access public
-	 * @return BSArray 拡張子
-	 */
-	static public function getAllSuffixes () {
-		return self::getAllTypes()->getFlipped();
 	}
 
 	/**

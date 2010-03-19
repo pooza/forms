@@ -10,10 +10,10 @@ BSUtility::includeFile('qrcode');
  * QRコードレンダラー
  *
  * @author 小石達也 <tkoishi@b-shock.co.jp>
- * @version $Id: BSQRCode.class.php 1812 2010-02-03 15:15:09Z pooza $
+ * @version $Id: BSQRCode.class.php 1916 2010-03-19 02:06:30Z pooza $
  */
 class BSQRCode implements BSImageRenderer {
-	private $image;
+	private $gd;
 	private $data;
 	private $error;
 	private $engine;
@@ -46,7 +46,7 @@ class BSQRCode implements BSImageRenderer {
 	 */
 	public function setData ($data) {
 		$this->data = $data;
-		$this->image = null;
+		$this->gd = null;
 	}
 
 	/**
@@ -75,13 +75,13 @@ class BSQRCode implements BSImageRenderer {
 	 * @access public
 	 * @return resource GDイメージリソース
 	 */
-	public function getImage () {
-		if (!$this->image && !BSString::isBlank($this->getData())) {
+	public function getGDHandle () {
+		if (!is_resource($this->gd) && !BSString::isBlank($this->getData())) {
 			$data = BSString::convertEncoding($this->getData(), 'sjis-win');
 			$qr = $this->engine->getMinimumQRCode($data, QR_ERROR_CORRECT_LEVEL_L);
-			$this->image = $qr->createImage($this->size, $this->margin);
+			$this->gd = $qr->createImage($this->size, $this->margin);
 		}
-		return $this->image;
+		return $this->gd;
 	}
 
 	/**
@@ -91,7 +91,7 @@ class BSQRCode implements BSImageRenderer {
 	 * @return integer 幅
 	 */
 	public function getWidth () {
-		return imagesx($this->getImage());
+		return imagesx($this->getGDHandle());
 	}
 
 	/**
@@ -101,7 +101,7 @@ class BSQRCode implements BSImageRenderer {
 	 * @return integer 高さ
 	 */
 	public function getHeight () {
-		return imagesy($this->getImage());
+		return imagesy($this->getGDHandle());
 	}
 
 	/**
@@ -113,7 +113,7 @@ class BSQRCode implements BSImageRenderer {
 	public function getContents () {
 		$image = new BSImage;
 		$image->setType($this->getType());
-		$image->setImage($this->getImage());
+		$image->setImage($this->getGDHandle());
 		return $image->getContents();
 	}
 

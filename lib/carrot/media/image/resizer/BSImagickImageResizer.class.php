@@ -8,7 +8,7 @@
  * ImageMagick画像リサイズ機能
  *
  * @author 小石達也 <tkoishi@b-shock.co.jp>
- * @version $Id: BSImagickImageResizer.class.php 1913 2010-03-18 11:15:44Z pooza $
+ * @version $Id: BSImagickImageResizer.class.php 1914 2010-03-18 13:35:15Z pooza $
  */
 class BSImagickImageResizer extends BSImageResizer {
 	private $file;
@@ -42,11 +42,7 @@ class BSImagickImageResizer extends BSImageResizer {
 			$coord = $dest->getCoordinate(0, $y);
 		}
 
-		if ($this->source instanceof BSImagickImage) {
-			$resized = clone $this->source->getImagick();
-		} else {
-			$resized = new Imagick($this->getFile()->getPath());
-		}
+		$resized = clone $this->source->getImagick();
 		$resized->thumbnailImage($width, $height, true);
 		$dest->getImagick()->compositeImage(
 			$resized,
@@ -54,14 +50,6 @@ class BSImagickImageResizer extends BSImageResizer {
 			$coord->getX(), $coord->getY()
 		);
 		return $dest;
-	}
-
-	private function getFile () {
-		if (!$this->file) {
-			$this->file = BSFileUtility::getTemporaryFile();
-			$this->file->setContents($this->source->getContents());
-		}
-		return $this->file;
 	}
 }
 

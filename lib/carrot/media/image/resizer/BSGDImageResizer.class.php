@@ -8,7 +8,7 @@
  * GD画像リサイズ機能
  *
  * @author 小石達也 <tkoishi@b-shock.co.jp>
- * @version $Id: BSGDImageResizer.class.php 1913 2010-03-18 11:15:44Z pooza $
+ * @version $Id: BSGDImageResizer.class.php 1916 2010-03-19 02:06:30Z pooza $
  */
 class BSGDImageResizer extends BSImageResizer {
 
@@ -22,8 +22,6 @@ class BSGDImageResizer extends BSImageResizer {
 	 */
 	public function execute ($width, $height) {
 		$dest = new BSImage($width, $height);
-		$dest->fill($this->source->getCoordinate(0, 0), new BSColor(BS_IMAGE_THUMBNAIL_BGCOLOR));
-
 		if ($this->source->getAspect() < $dest->getAspect()) {
 			$width = $dest->getHeight() * $this->source->getAspect();
 			$x = BSNumeric::round(($dest->getWidth() - $width) / 2);
@@ -35,8 +33,8 @@ class BSGDImageResizer extends BSImageResizer {
 		}
 
 		imagecopyresampled(
-			$dest->getImage(), //コピー先
-			$this->source->getImage(), //コピー元
+			$dest->getGDHandle(), //コピー先
+			$this->source->getGDHandle(), //コピー元
 			$coord->getX(), $coord->getY(),
 			$this->source->getOrigin()->getX(), $this->source->getOrigin()->getY(),
 			BSNumeric::round($width), BSNumeric::round($height), //コピー先サイズ

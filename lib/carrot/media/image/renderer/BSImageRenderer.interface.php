@@ -8,7 +8,7 @@
  * 画像レンダラー
  *
  * @author 小石達也 <tkoishi@b-shock.co.jp>
- * @version $Id: BSImageRenderer.interface.php 1812 2010-02-03 15:15:09Z pooza $
+ * @version $Id: BSImageRenderer.interface.php 1916 2010-03-19 02:06:30Z pooza $
  */
 interface BSImageRenderer extends BSRenderer {
 
@@ -18,7 +18,7 @@ interface BSImageRenderer extends BSRenderer {
 	 * @access public
 	 * @return resource GDイメージリソース
 	 */
-	public function getImage ();
+	public function getGDHandle ();
 
 	/**
 	 * 幅を返す
