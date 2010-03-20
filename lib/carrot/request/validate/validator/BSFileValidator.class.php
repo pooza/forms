@@ -8,7 +8,7 @@
  * ファイルバリデータ
  *
  * @author 小石達也 <tkoishi@b-shock.co.jp>
- * @version $Id: BSFileValidator.class.php 1812 2010-02-03 15:15:09Z pooza $
+ * @version $Id: BSFileValidator.class.php 1919 2010-03-20 00:20:50Z pooza $
  */
 class BSFileValidator extends BSValidator {
 	const ATTACHABLE = 'ATTACHABLE';
@@ -67,7 +67,7 @@ class BSFileValidator extends BSValidator {
 			} else if ($suffixes->count() && !$suffixes->isContain($suffix)) {
 				$this->error = $this['suffix_error'];
 				return false;
-			} else if ($value['error'] == 2) {
+			} else if (in_array($value['error'], range(1, 2))) {
 				$this->error = $this['size_error'];
 				return false;
 			} else if ($value['error']) {
