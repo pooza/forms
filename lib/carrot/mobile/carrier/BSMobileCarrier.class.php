@@ -20,7 +20,7 @@ define('MPC_TO_CHARSET_UTF8', 'UTF-8');
  * 携帯電話キャリア
  *
  * @author 小石達也 <tkoishi@b-shock.co.jp>
- * @version $Id: BSMobileCarrier.class.php 1872 2010-02-18 07:13:57Z pooza $
+ * @version $Id: BSMobileCarrier.class.php 1920 2010-03-21 09:16:06Z pooza $
  * @abstract
  */
 abstract class BSMobileCarrier {
@@ -80,7 +80,10 @@ abstract class BSMobileCarrier {
 				return $instance;
 			}
 		}
-		throw new BSMobileException('キャリア "%s" が見つかりません。', $name);
+
+		$message = new BSStringFormat('キャリア "%s" が見つかりません。');
+		$message[] = $name;
+		throw new BSMobileException($message);
 	}
 
 	/**

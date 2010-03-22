@@ -8,7 +8,7 @@
  * ソケット
  *
  * @author 小石達也 <tkoishi@b-shock.co.jp>
- * @version $Id: BSSocket.class.php 1917 2010-03-19 07:39:09Z pooza $
+ * @version $Id: BSSocket.class.php 1920 2010-03-21 09:16:06Z pooza $
  */
 class BSSocket {
 	protected $host;
@@ -76,8 +76,11 @@ class BSSocket {
 	public function open () {
 		$error = null;
 		$message = null;
-		if (!$this->client = stream_socket_client($this->getName(), $error, $message)) {
-			throw new BSNetException('%sに接続できません。(%s)', $this, $message);
+		if (!$this->client = stream_socket_client($this->getName(), $error, $result)) {
+			$message = new BSStringFormat('%sに接続できません。(%s)');
+			$message[] = $this;
+			$message[] = $result;
+			throw new BSNetException($message);
 		}
 		stream_set_timeout($this->client, 10);
 	}

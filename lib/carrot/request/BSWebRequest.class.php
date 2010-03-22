@@ -8,7 +8,7 @@
  * Webリクエスト
  *
  * @author 小石達也 <tkoishi@b-shock.co.jp>
- * @version $Id: BSWebRequest.class.php 1894 2010-03-02 11:24:04Z pooza $
+ * @version $Id: BSWebRequest.class.php 1926 2010-03-21 14:36:34Z pooza $
  */
 class BSWebRequest extends BSRequest {
 	static private $instance;
@@ -38,7 +38,7 @@ class BSWebRequest extends BSRequest {
 	 * @access public
 	 */
 	public function __clone () {
-		throw new BSSingletonException(__CLASS__ . 'はコピーできません。');
+		throw new BadFunctionCallException(__CLASS__ . 'はコピーできません。');
 	}
 
 	/**

@@ -8,7 +8,7 @@
  * CSSユーティリティ
  *
  * @author 小石達也 <tkoishi@b-shock.co.jp>
- * @version $Id: BSCSSUtility.class.php 1812 2010-02-03 15:15:09Z pooza $
+ * @version $Id: BSCSSUtility.class.php 1928 2010-03-22 03:32:58Z pooza $
  */
 class BSCSSUtility {
 
@@ -36,7 +36,6 @@ class BSCSSUtility {
 			$properties[] = 'font';
 			$properties[] = 'font-size';
 			$properties[] = 'font-family';
-			$properties[] = 'margin';
 		}
 		foreach ($properties as $property) {
 			$value = mb_ereg_replace($property . ' ?: ?[^;"]+([;"])', '\\1', $value);

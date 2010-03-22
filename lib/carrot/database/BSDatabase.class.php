@@ -8,7 +8,7 @@
  * データベース接続
  *
  * @author 小石達也 <tkoishi@b-shock.co.jp>
- * @version $Id: BSDatabase.class.php 1822 2010-02-05 02:04:19Z pooza $
+ * @version $Id: BSDatabase.class.php 1926 2010-03-21 14:36:34Z pooza $
  * @abstract
  */
 abstract class BSDatabase extends PDO implements ArrayAccess, BSAssignable {
@@ -45,7 +45,10 @@ abstract class BSDatabase extends PDO implements ArrayAccess, BSAssignable {
 						return self::$instances[$name] = BSODBCDatabase::connect($name);
 				}
 			}
-			throw new BSDatabaseException('"%s"のDSNが適切ではありません。', $name);
+
+			$message = new BSStringFormat('"%s"のDSNが適切ではありません。');
+			$message[] = $name;
+			throw new BSDatabaseException($message);
 		}
 		return self::$instances[$name];
 	}
@@ -54,7 +57,7 @@ abstract class BSDatabase extends PDO implements ArrayAccess, BSAssignable {
 	 * @access public
 	 */
 	public function __clone () {
-		throw new BSSingletonException(__CLASS__ . 'はコピーできません。');
+		throw new BadFunctionCallException(__CLASS__ . 'はコピーできません。');
 	}
 
 	/**
@@ -154,11 +157,10 @@ abstract class BSDatabase extends PDO implements ArrayAccess, BSAssignable {
 	 */
 	public function query ($query) {
 		if (!$rs = parent::query($this->encodeQuery($query))) {
-			throw new BSDatabaseException(
-				'実行不能なクエリーです。(%s) [%s]',
-				$this->getError(),
-				$query
-			);
+			$message = new BSStringFormat('実行不能なクエリーです。(%s) [%s]');
+			$message[] = $this->getError();
+			$message[] = $query;
+			throw new BSDatabaseException($message);
 		}
 		$rs->setFetchMode(PDO::FETCH_ASSOC);
 		return $rs;
@@ -174,11 +176,10 @@ abstract class BSDatabase extends PDO implements ArrayAccess, BSAssignable {
 	public function exec ($query) {
 		$r = parent::exec($this->encodeQuery($query));
 		if ($r === false) {
-			throw new BSDatabaseException(
-				'実行不能なクエリーです。(%s) [%s]',
-				$this->getError(),
-				$query
-			);
+			$message = new BSStringFormat('実行不能なクエリーです。(%s) [%s]');
+			$message[] = $this->getError();
+			$message[] = $query;
+			throw new BSDatabaseException($message);
 		}
 		if (BS_PDO_QUERY_LOG_ENABLE) {
 			$this->putLog($query);

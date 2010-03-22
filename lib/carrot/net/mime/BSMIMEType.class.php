@@ -8,7 +8,7 @@
  * MIMEタイプ
  *
  * @author 小石達也 <tkoishi@b-shock.co.jp>
- * @version $Id: BSMIMEType.class.php 1898 2010-03-03 03:48:43Z pooza $
+ * @version $Id: BSMIMEType.class.php 1926 2010-03-21 14:36:34Z pooza $
  */
 class BSMIMEType extends BSParameterHolder implements BSSerializable {
 	private $typesFile;
@@ -45,7 +45,7 @@ class BSMIMEType extends BSParameterHolder implements BSSerializable {
 	 * @access public
 	 */
 	public function __clone () {
-		throw new BSSingletonException(__CLASS__ . 'はコピーできません。');
+		throw new BadFunctionCallException(__CLASS__ . 'はコピーできません。');
 	}
 
 	/**

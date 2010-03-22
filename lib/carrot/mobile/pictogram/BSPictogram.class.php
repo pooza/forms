@@ -8,7 +8,7 @@
  * 絵文字
  *
  * @author 小石達也 <tkoishi@b-shock.co.jp>
- * @version $Id: BSPictogram.class.php 1825 2010-02-05 13:18:55Z pooza $
+ * @version $Id: BSPictogram.class.php 1920 2010-03-21 09:16:06Z pooza $
  */
 class BSPictogram implements BSAssignable, BSImageContainer {
 	private $id;
@@ -44,7 +44,9 @@ class BSPictogram implements BSAssignable, BSImageContainer {
 		}
 
 		if (BSString::isBlank($id = self::getPictogramCode($name))) {
-			throw new BSMobileException('絵文字 "%s" が見つかりません。', $name);
+			$message = new BSStringFormat('絵文字 "%s" が見つかりません。');
+			$message[] = $name;
+			throw new BSMobileException($message);
 		}
 		if (!self::$instances[$id]) {
 			self::$instances[$id] = new self($id);

@@ -8,7 +8,7 @@
  * DOBCデータベース接続
  *
  * @author 小石達也 <tkoishi@b-shock.co.jp>
- * @version $Id: BSODBCDatabase.class.php 1812 2010-02-03 15:15:09Z pooza $
+ * @version $Id: BSODBCDatabase.class.php 1920 2010-03-21 09:16:06Z pooza $
  */
 class BSODBCDatabase extends BSDatabase {
 
@@ -33,7 +33,10 @@ class BSODBCDatabase extends BSDatabase {
 			} catch (Exception $e) {
 			}
 		}
-		throw new BSDatabaseException('データベース "%s" に接続できません。', $name);
+
+		$message = new BSStringFormat('データベース "%s" に接続できません。');
+		$message[] = $name;
+		throw new BSDatabaseException($message);
 	}
 
 	/**

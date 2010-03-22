@@ -8,7 +8,7 @@
  * Carrotアプリケーションコントローラ
  *
  * @author 小石達也 <tkoishi@b-shock.co.jp>
- * @version $Id: BSController.class.php 1812 2010-02-03 15:15:09Z pooza $
+ * @version $Id: BSController.class.php 1926 2010-03-21 14:36:34Z pooza $
  * @abstract
  */
 abstract class BSController {
@@ -39,7 +39,9 @@ abstract class BSController {
 			case 'user':
 				return BSUser::getInstance();
 			default:
-				throw new BSMagicMethodException('仮想プロパティ"%s"は未定義です。', $name);
+				$message = new BSStringFormat('仮想プロパティ"%s"は未定義です。');
+				$message[] = $name;
+				throw new BadFunctionCallException($message);
 		}
 	}
 
@@ -128,7 +130,7 @@ abstract class BSController {
 	 */
 	public function registerAction (BSAction $action) {
 		if (self::ACTION_REGISTER_LIMIT < $this->getActionStack()->count()) {
-			throw new BSInitializeException('フォワードが多すぎます。');
+			throw new BadFunctionCallException('フォワードが多すぎます。');
 		}
 		$this->getActionStack()->push($action);
 	}

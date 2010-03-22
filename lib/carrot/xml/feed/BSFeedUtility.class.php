@@ -10,7 +10,7 @@ require_once('Zend/Feed.php');
  * フィードユーティリティ
  *
  * @author 小石達也 <tkoishi@b-shock.co.jp>
- * @version $Id: BSFeedUtility.class.php 1812 2010-02-03 15:15:09Z pooza $
+ * @version $Id: BSFeedUtility.class.php 1920 2010-03-21 09:16:06Z pooza $
  */
 class BSFeedUtility extends Zend_Feed {
 	const IGNORE_TITLE_PATTERN = '^(PR|AD):';
@@ -62,7 +62,9 @@ class BSFeedUtility extends Zend_Feed {
 
 		$type = Zend_Feed_Reader::detectType($feed->getDOM()->ownerDocument);
 		if (BSString::isBlank($class = $classes[$type])) {
-			throw new BSFeedException('フィード形式 "%s" は正しくありません。', $type);
+			$message = new BSStringFormat('フィード形式 "%s" は正しくありません。');
+			$message[] = $type;
+			throw new BSFeedException($message);
 		}
 
 		$document = new $class;
@@ -109,7 +111,7 @@ class BSFeedUtility extends Zend_Feed {
 	static public function import ($url) {
 		$url = BSURL::getInstance($url);
 		if (BSString::isBlank($contents = $url->fetch())) {
-			throw new BSFeedException('%sを取得できません。', $url);
+			throw new BSFeedException($url . 'を取得できません。');
 		}
 
 		$contents = BSString::convertEncoding($contents, 'utf-8');

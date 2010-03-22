@@ -8,7 +8,7 @@
  * HTTPプロトコル
  *
  * @author 小石達也 <tkoishi@b-shock.co.jp>
- * @version $Id: BSHTTP.class.php 1812 2010-02-03 15:15:09Z pooza $
+ * @version $Id: BSHTTP.class.php 1923 2010-03-21 12:02:11Z pooza $
  */
 class BSHTTP extends BSSocket {
 	private $headers = array();
@@ -92,11 +92,10 @@ class BSHTTP extends BSSocket {
 		$response->setURL($request->getURL());
 	
 		if (!$response->validate()) {
-			throw new BSHTTPException(
-				'不正なレスポンスです。 (%d %s)',
-				$response->getStatus(),
-				$response->getError()
-			);
+			$message = new BSStringFormat('不正なレスポンスです。 (%d %s)');
+			$message[] = $response->getStatus();
+			$message[] = $response->getError();
+			throw new BSHTTPException($message);
 		}
 		return $response;
 	}
@@ -142,7 +141,10 @@ class BSHTTP extends BSSocket {
 		if ($status = self::getAllStatus()->getParameter($code)) {
 			return $code . ' ' . $status['status'];
 		}
-		throw new BSHTTPException('%dは正しくないステータスコードです。', $code);
+
+		$message = new BSStringFormat('ステータスコード "%d" が正しくありません。');
+		$message[] = $code;
+		throw new BSHTTPException($message);
 	}
 }
 

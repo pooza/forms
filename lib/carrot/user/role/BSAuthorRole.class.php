@@ -8,7 +8,7 @@
  * 発行者ロール
  *
  * @author 小石達也 <tkoishi@b-shock.co.jp>
- * @version $Id: BSAuthorRole.class.php 1912 2010-03-17 08:47:30Z pooza $
+ * @version $Id: BSAuthorRole.class.php 1926 2010-03-21 14:36:34Z pooza $
  */
 class BSAuthorRole implements BSRole {
 	protected $credentials;
@@ -39,7 +39,7 @@ class BSAuthorRole implements BSRole {
 	 * @access public
 	 */
 	public function __clone () {
-		throw new BSSingletonException(__CLASS__ . 'はコピーできません。');
+		throw new BadFunctionCallException(__CLASS__ . 'はコピーできません。');
 	}
 
 	/**

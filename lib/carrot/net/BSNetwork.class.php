@@ -8,7 +8,7 @@
  * サブネットワーク
  *
  * @author 小石達也 <tkoishi@b-shock.co.jp>
- * @version $Id: BSNetwork.class.php 1812 2010-02-03 15:15:09Z pooza $
+ * @version $Id: BSNetwork.class.php 1920 2010-03-21 09:16:06Z pooza $
  */
 class BSNetwork extends BSHost {
 
@@ -46,7 +46,10 @@ class BSNetwork extends BSHost {
 		$this->setAddress($matches[1]);
 		$net = $this->address->parseAddress($address);
 		if ($net instanceof PEAR_Error) {
-			throw new BSNetException('%sをパースできません。(%s)', $this, $net->message);
+			$message = new BSStringFormat('%sをパースできません。(%s)');
+			$message[] = $this;
+			$message[] = $net->message;
+			throw new BSNetException($message);
 		}
 
 		foreach (array('bitmask', 'netmask', 'network', 'broadcast', 'long') as $var) {

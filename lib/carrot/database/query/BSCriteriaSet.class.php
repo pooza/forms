@@ -8,7 +8,7 @@
  * 抽出条件の集合
  *
  * @author 小石達也 <tkoishi@b-shock.co.jp>
- * @version $Id: BSCriteriaSet.class.php 1812 2010-02-03 15:15:09Z pooza $
+ * @version $Id: BSCriteriaSet.class.php 1926 2010-03-21 14:36:34Z pooza $
  */
 class BSCriteriaSet extends BSArray {
 	private $glue = 'AND';
@@ -73,7 +73,7 @@ class BSCriteriaSet extends BSArray {
 			case 'BETWEEN':
 				$values = new BSArray($value);
 				if ($values->count() != 2) {
-					throw new BSDatabaseException('BETWEEN演算子に与える引数は2個です。');
+					throw new InvalidArgumentException('BETWEEN演算子に与える引数は2個です。');
 				}
 				$this[] = $key . ' BETWEEN ' . $this->quote($values)->join(' AND ');
 				break;

@@ -8,7 +8,7 @@
  * 画像キャッシュ
  *
  * @author 小石達也 <tkoishi@b-shock.co.jp>
- * @version $Id: BSImageCacheHandler.class.php 1889 2010-02-28 10:52:44Z pooza $
+ * @version $Id: BSImageCacheHandler.class.php 1926 2010-03-21 14:36:34Z pooza $
  */
 class BSImageCacheHandler {
 	private $useragent;
@@ -44,7 +44,7 @@ class BSImageCacheHandler {
 	 * @access public
 	 */
 	public function __clone () {
-		throw new BSSingletonException(__CLASS__ . 'はコピーできません。');
+		throw new BadFunctionCallException(__CLASS__ . 'はコピーできません。');
 	}
 
 	/**
@@ -430,7 +430,9 @@ class BSImageCacheHandler {
 		$flags = 0;
 		foreach ($values as $value) {
 			if (BSString::isBlank($flag = $constants['BSImageCacheHandler::' . $value])) {
-				throw new BSImageException('BSImageCacheHandler::%sが未定義です。', $value);
+				$message = new BSStringFormat('BSImageCacheHandler::%sが未定義です。');
+				$message[] = $value;
+				throw new BSImageException($message);
 			}
 			$flags += $flag;
 		}

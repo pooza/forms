@@ -8,7 +8,7 @@
  * 複数の名刺を含むvCardレンダラー
  *
  * @author 小石達也 <tkoishi@b-shock.co.jp>
- * @version $Id: BSMultiVCardRenderer.class.php 1812 2010-02-03 15:15:09Z pooza $
+ * @version $Id: BSMultiVCardRenderer.class.php 1922 2010-03-21 11:22:53Z pooza $
  */
 class BSMultiVCardRenderer extends BSArray implements BSRenderer {
 	private $contents;
@@ -23,11 +23,10 @@ class BSMultiVCardRenderer extends BSArray implements BSRenderer {
 	 */
 	public function setParameter ($name, $value, $position = self::POSITION_BOTTOM) {
 		if (!($value instanceof BSVCardRenderer)) {
-			throw new BSViewException(
-				'%sに%sは加えられません。',
-				get_class($this),
-				get_class($value)
-			);
+			$message = new BSStringFormat('%sに%sは加えられません。');
+			$message[] = get_class($this);
+			$message[] = get_class($value);
+			throw new BSViewException($message);
 		}
 		parent::setParameter($name, $value, $position);
 	}

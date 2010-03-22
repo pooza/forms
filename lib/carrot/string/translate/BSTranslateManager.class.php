@@ -8,7 +8,7 @@
  * 単語翻訳機能
  *
  * @author 小石達也 <tkoishi@b-shock.co.jp>
- * @version $Id: BSTranslateManager.class.php 1812 2010-02-03 15:15:09Z pooza $
+ * @version $Id: BSTranslateManager.class.php 1926 2010-03-21 14:36:34Z pooza $
  */
 class BSTranslateManager implements IteratorAggregate {
 	private $language = 'ja';
@@ -46,7 +46,7 @@ class BSTranslateManager implements IteratorAggregate {
 	 * @access public
 	 */
 	public function __clone () {
-		throw new BSSingletonException(__CLASS__ . 'はコピーできません。');
+		throw new BadFunctionCallException(__CLASS__ . 'はコピーできません。');
 	}
 
 	/**
@@ -83,7 +83,9 @@ class BSTranslateManager implements IteratorAggregate {
 	 */
 	public function setDictionaryPriority ($name, $priority) {
 		if (!$dictionary = $this->dictionaries[$name]) {
-			throw new BSTranslateException('辞書 "%s" は登録されていません。', $name);
+			$message = new BSStringFormat('辞書 "%s" は登録されていません。');
+			$message[] = $name;
+			throw new BSTranslateException($message);
 		}
 		$this->dictionaries->removeParameter($name);
 		$this->dictionaries->setParameter($name, $dictionary, $priority);
@@ -123,7 +125,9 @@ class BSTranslateManager implements IteratorAggregate {
 			}
 		}
 		if (BS_DEBUG) {
-			throw new BSTranslateException('"%s"の訳語が見つかりません。', $string);
+			$message = new BSStringFormat('"%s"の訳語が見つかりません。');
+			$message[] = $string;
+			throw new BSTranslateException($message);
 		} else {
 			return $string;
 		}
@@ -181,7 +185,9 @@ class BSTranslateManager implements IteratorAggregate {
 	public function setLanguage ($language) {
 		$language = BSString::toLower($language);
 		if (!self::getLanguageNames()->isContain($language)) {
-			throw new BSTranslateException('言語コード"%s"が正しくありません。', $language);
+			$message = new BSStringFormat('言語コード"%s"が正しくありません。');
+			$message[] = $language;
+			throw new BSTranslateException($message);
 		}
 		$this->language = $language;
 	}

@@ -8,7 +8,7 @@
  * プロセス関連のユーティリティ
  *
  * @author 小石達也 <tkoishi@b-shock.co.jp>
- * @version $Id: BSProcess.class.php 1829 2010-02-07 07:07:21Z pooza $
+ * @version $Id: BSProcess.class.php 1920 2010-03-21 09:16:06Z pooza $
  */
 class BSProcess {
 
@@ -41,7 +41,9 @@ class BSProcess {
 		$command->addValue($name);
 		$command->setDirectory(BSFileUtility::getDirectory('proctools'));
 		if ($command->hasError()) {
-			throw new BSConsoleException('実行時エラーです。(%s)', $command->getContents());
+			$message = new BSStringFormat('実行時エラーです。(%s)');
+			$message[] = $command->getContents();
+			throw new BSConsoleException($message);
 		}
 
 		if ($result = $command->getResult()) {

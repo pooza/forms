@@ -8,7 +8,7 @@
  * ディレクトリエントリ
  *
  * @author 小石達也 <tkoishi@b-shock.co.jp>
- * @version $Id: BSDirectoryEntry.class.php 1812 2010-02-03 15:15:09Z pooza $
+ * @version $Id: BSDirectoryEntry.class.php 1920 2010-03-21 09:16:06Z pooza $
  * @abstract
  */
 abstract class BSDirectoryEntry {
@@ -104,7 +104,9 @@ abstract class BSDirectoryEntry {
 	 */
 	public function setPath ($path) {
 		if (!BSUtility::isPathAbsolute($path)) {
-			throw new BSFileException('パス"%s"が正しくありません。', $path);
+			$message = new BSStringFormat('パス"%s"が正しくありません。');
+			$message[] = $path;
+			throw new BSFileException($message);
 		}
 		$this->path = $path;
 		$this->name = null;

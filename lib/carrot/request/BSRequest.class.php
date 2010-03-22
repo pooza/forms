@@ -8,7 +8,7 @@
  * 抽象リクエスト
  *
  * @author 小石達也 <tkoishi@b-shock.co.jp>
- * @version $Id: BSRequest.class.php 1894 2010-03-02 11:24:04Z pooza $
+ * @version $Id: BSRequest.class.php 1926 2010-03-21 14:36:34Z pooza $
  * @abstract
  */
 abstract class BSRequest extends BSHTTPRequest {
@@ -39,7 +39,7 @@ abstract class BSRequest extends BSHTTPRequest {
 	 * @access public
 	 */
 	public function __clone () {
-		throw new BSSingletonException(__CLASS__ . 'はコピーできません。');
+		throw new BadFunctionCallException(__CLASS__ . 'はコピーできません。');
 	}
 
 	/**
@@ -54,7 +54,9 @@ abstract class BSRequest extends BSHTTPRequest {
 			case 'user':
 				return BSUser::getInstance();
 			default:
-				throw new BSMagicMethodException('仮想プロパティ"%s"は未定義です。', $name);
+				$message = new BSStringFormat('仮想プロパティ"%s"は未定義です。');
+				$message[] = $name;
+				throw new BadFunctionCallException($message);
 		}
 	}
 

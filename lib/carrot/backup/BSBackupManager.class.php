@@ -8,7 +8,7 @@
  * バックアップマネージャ
  *
  * @author 小石達也 <tkoishi@b-shock.co.jp>
- * @version $Id: BSBackupManager.class.php 1812 2010-02-03 15:15:09Z pooza $
+ * @version $Id: BSBackupManager.class.php 1926 2010-03-21 14:36:34Z pooza $
  */
 class BSBackupManager {
 	private $config;
@@ -44,7 +44,7 @@ class BSBackupManager {
 	 * @access public
 	 */
 	public function __clone () {
-		throw new BSSingletonException(__CLASS__ . 'はコピーできません。');
+		throw new BadFunctionCallException(__CLASS__ . 'はコピーできません。');
 	}
 
 	/**
@@ -81,13 +81,17 @@ class BSBackupManager {
 		$zip->open();
 		foreach ($this->config['databases'] as $name) {
 			if (!$db = BSDatabase::getInstance($name)) {
-				throw new BSDatabaseException('データベース "%s" が見つかりません。', $name);
+				$message = new BSStringFormat('データベース "%s" が見つかりません。');
+				$message[] = $name;
+				throw new BSDatabaseException($message);
 			}
 			$zip->register($db->getBackupTarget());
 		}
 		foreach ($this->config['directories'] as $name) {
 			if (!$dir = BSFileUtility::getDirectory($name)) {
-				throw new BSFileException('ディレクトリ "%s" が見つかりません。', $name);
+				$message = new BSStringFormat('ディレクトリ "%s" が見つかりません。');
+				$message[] = $name;
+				throw new BSFileException($message);
 			}
 			$zip->register($dir, null, BSDirectory::WITHOUT_ALL_IGNORE);
 		}

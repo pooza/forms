@@ -7,7 +7,7 @@
  * 定数ハンドラ
  *
  * @author 小石達也 <tkoishi@b-shock.co.jp>
- * @version $Id: BSConstantHandler.class.php 1812 2010-02-03 15:15:09Z pooza $
+ * @version $Id: BSConstantHandler.class.php 1926 2010-03-21 14:36:34Z pooza $
  */
 class BSConstantHandler extends BSParameterHolder implements BSDictionary {
 	static private $instance;
@@ -37,7 +37,7 @@ class BSConstantHandler extends BSParameterHolder implements BSDictionary {
 	 * @access public
 	 */
 	public function __clone () {
-		throw new BSSingletonException(__CLASS__ . 'はコピーできません。');
+		throw new BadFunctionCallException(__CLASS__ . 'はコピーできません。');
 	}
 
 	/**
@@ -64,7 +64,9 @@ class BSConstantHandler extends BSParameterHolder implements BSDictionary {
 	 */
 	public function setParameter ($name, $value) {
 		if (defined($name = BSString::toUpper((string)$name))) {
-			throw new BSInitializeException('定数 "%s" は定義済みです。', $name);
+			$message = new BSStringFormat('定数 "%s" は定義済みです。');
+			$message[] = $name;
+			throw new BadFunctionCallException($message);
 		}
 		define($name, $value);
 	}
@@ -123,7 +125,7 @@ class BSConstantHandler extends BSParameterHolder implements BSDictionary {
 	 * @param string $name パラメータ名
 	 */
 	public function removeParameter ($name) {
-		throw new BSInitializeException('定数は削除できません。');
+		throw new BadFunctionCallException('定数は削除できません。');
 	}
 
 	/**

@@ -8,7 +8,7 @@
  * memcacheを用いたSmartyキャッシュストレージ
  *
  * @author 小石達也 <tkoishi@b-shock.co.jp>
- * @version $Id: BSMemcacheSmartyCacheStorage.class.php 1812 2010-02-03 15:15:09Z pooza $
+ * @version $Id: BSMemcacheSmartyCacheStorage.class.php 1926 2010-03-21 14:36:34Z pooza $
  */
 class BSMemcacheSmartyCacheStorage implements BSSmartyCacheStorage {
 
@@ -36,7 +36,9 @@ class BSMemcacheSmartyCacheStorage implements BSSmartyCacheStorage {
 					case 'clear':
 						return true; //サポートしない
 					default:
-						throw new BSSmartyException('不正なアクション "%s" です。', $action);
+						$message = new BSStringFormat('不正なアクション "%s" です。');
+						$message[] = $action;
+						throw new BSViewException($message);
 				}
 			}
 		}

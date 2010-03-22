@@ -8,7 +8,7 @@
  * ログマネージャ
  *
  * @author 小石達也 <tkoishi@b-shock.co.jp>
- * @version $Id: BSLogManager.class.php 1812 2010-02-03 15:15:09Z pooza $
+ * @version $Id: BSLogManager.class.php 1926 2010-03-21 14:36:34Z pooza $
  */
 class BSLogManager implements IteratorAggregate {
 	private $loggers;
@@ -42,7 +42,7 @@ class BSLogManager implements IteratorAggregate {
 	 * @access public
 	 */
 	public function __clone () {
-		throw new BSSingletonException(__CLASS__ . 'はコピーできません。');
+		throw new BadFunctionCallException(__CLASS__ . 'はコピーできません。');
 	}
 
 	/**

@@ -8,7 +8,7 @@
  * HTTPスキーマのURL
  *
  * @author 小石達也 <tkoishi@b-shock.co.jp>
- * @version $Id: BSHTTPURL.class.php 1898 2010-03-03 03:48:43Z pooza $
+ * @version $Id: BSHTTPURL.class.php 1924 2010-03-21 12:15:43Z pooza $
  */
 class BSHTTPURL extends BSURL implements BSHTTPRedirector, BSImageContainer {
 	private $fullpath;
@@ -46,13 +46,14 @@ class BSHTTPURL extends BSURL implements BSHTTPRedirector, BSImageContainer {
 		$this->fullpath = null;
 		switch ($name) {
 			case 'path':
-				if ($values = @parse_url($value)) {
-					$values = new BSArray($values);
+				try {
+					$values = new BSArray(parse_url($value));
 					$this->attributes['path'] = $values['path'];
 					$this->attributes['fragment'] = $values['fragment'];
 					$this['query'] = $values['query'];
 					$this->dirty = false;
-				} else {
+				} catch (Exception $e) {
+					$this->attributes->clear();
 					$this->attributes['path'] = $value;
 					$this->dirty = true;
 				}

@@ -7,7 +7,7 @@
  * 基底イテレータ
  *
  * @author 小石達也 <tkoishi@b-shock.co.jp>
- * @version $Id: BSIterator.class.php 1812 2010-02-03 15:15:09Z pooza $
+ * @version $Id: BSIterator.class.php 1926 2010-03-21 14:36:34Z pooza $
  */
 class BSIterator implements Iterator, Countable {
 	protected $keys = array();
@@ -24,7 +24,7 @@ class BSIterator implements Iterator, Countable {
 		} else if (is_array($array)) {
 			$this->values = $array;
 		} else {
-			throw new BSInitializeException('引数は配列ではありません。');
+			throw new InvalidArgumentException('引数は配列ではありません。');
 		}
 		$this->keys = array_keys($this->values);
 	}

@@ -8,7 +8,7 @@
  * ディレクトリレイアウト
  *
  * @author 小石達也 <tkoishi@b-shock.co.jp>
- * @version $Id: BSDirectoryLayout.class.php 1812 2010-02-03 15:15:09Z pooza $
+ * @version $Id: BSDirectoryLayout.class.php 1926 2010-03-21 14:36:34Z pooza $
  */
 class BSDirectoryLayout extends BSParameterHolder {
 	static private $instance;
@@ -50,7 +50,7 @@ class BSDirectoryLayout extends BSParameterHolder {
 	 * @access public
 	 */
 	public function __clone () {
-		throw new BSSingletonException(__CLASS__ . 'はコピーできません。');
+		throw new BadFunctionCallException(__CLASS__ . 'はコピーできません。');
 	}
 
 	/**
@@ -62,7 +62,9 @@ class BSDirectoryLayout extends BSParameterHolder {
 	 */
 	public function getDirectory ($name) {
 		if (!$info = $this[$name]) {
-			throw new BSFileException('ディレクトリ "%s" が見つかりません。', $name);
+			$message = new BSStringFormat('ディレクトリ "%s" が見つかりません。');
+			$message[] = $name;
+			throw new BSFileException($message);
 		}
 		if (!$info['instance']) {
 			if (!BSString::isBlank($info['constant'])) {
@@ -73,7 +75,9 @@ class BSDirectoryLayout extends BSParameterHolder {
 				$dir = $this->getDirectory($info['parent'])->getEntry($name);
 			}
 			if (!$dir || !$dir->isDirectory()) {
-				throw new BSFileException('ディレクトリ "%s" が見つかりません。', $name);
+				$message = new BSStringFormat('ディレクトリ "%s" が見つかりません。');
+				$message[] = $name;
+				throw new BSFileException($message);
 			}
 
 			if (!BSString::isBlank($info['class'])) {
@@ -97,7 +101,9 @@ class BSDirectoryLayout extends BSParameterHolder {
 	 */
 	public function getURL ($name) {
 		if (!$info = $this[$name]) {
-			throw new BSFileException('ディレクトリ "%s" が見つかりません。', $name);
+			$message = new BSStringFormat('ディレクトリ "%s" が見つかりません。');
+			$message[] = $name;
+			throw new BSFileException($message);
 		}
 		if (!$info['url']) {
 			if (BSString::isBlank($info['href'])) {

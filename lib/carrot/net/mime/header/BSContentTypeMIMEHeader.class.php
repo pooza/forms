@@ -8,7 +8,7 @@
  * Content-Typeヘッダ
  *
  * @author 小石達也 <tkoishi@b-shock.co.jp>
- * @version $Id: BSContentTypeMIMEHeader.class.php 1812 2010-02-03 15:15:09Z pooza $
+ * @version $Id: BSContentTypeMIMEHeader.class.php 1920 2010-03-21 09:16:06Z pooza $
  */
 class BSContentTypeMIMEHeader extends BSMIMEHeader {
 
@@ -55,7 +55,9 @@ class BSContentTypeMIMEHeader extends BSMIMEHeader {
 		if ($renderer instanceof BSTextRenderer) {
 			$encoding = $renderer->getEncoding();
 			if (BSString::isBlank($charset = mb_preferred_mime_name($encoding))) {
-				throw new BSMIMEException('エンコード"%s"が正しくありません。', $encoding);
+				$message = new BSStringFormat('エンコード"%s"が正しくありません。');
+				$message[] = $encoding;
+				throw new BSMIMEException($message);
 			}
 			return sprintf('%s; charset=%s', $renderer->getType(), $charset);
 		}

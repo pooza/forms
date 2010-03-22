@@ -8,7 +8,7 @@
  * XML要素
  *
  * @author 小石達也 <tkoishi@b-shock.co.jp>
- * @version $Id: BSXMLElement.class.php 1812 2010-02-03 15:15:09Z pooza $
+ * @version $Id: BSXMLElement.class.php 1924 2010-03-21 12:15:43Z pooza $
  */
 class BSXMLElement implements IteratorAggregate {
 	protected $contents;
@@ -300,8 +300,10 @@ class BSXMLElement implements IteratorAggregate {
 		$this->contents = $contents;
 
 		$xml = new DOMDocument('1.0', 'utf-8');
-		if (@$xml->loadXML($contents) === false) {
-			throw new BSXMLException('パースエラーです。');
+		try {
+			$xml->loadXML($contents);
+		} catch (Exception $e) {
+			throw new BSXMLException($e->getMessage());
 		}
 
 		$stack = new BSArray;

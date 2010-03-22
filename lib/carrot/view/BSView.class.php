@@ -8,7 +8,7 @@
  * 基底ビュー
  *
  * @author 小石達也 <tkoishi@b-shock.co.jp>
- * @version $Id: BSView.class.php 1839 2010-02-08 10:56:52Z pooza $
+ * @version $Id: BSView.class.php 1926 2010-03-21 14:36:34Z pooza $
  */
 class BSView extends BSHTTPResponse {
 	protected $nameSuffix;
@@ -53,7 +53,9 @@ class BSView extends BSHTTPResponse {
 			case 'translator':
 				return BSTranslateManager::getInstance();
 			default:
-				throw new BSMagicMethodException('仮想プロパティ"%s"は未定義です。', $name);
+				$message = new BSStringFormat('仮想プロパティ"%s"は未定義です。');
+				$message[] = $name;
+				throw new BadFunctionCallException($message);
 		}
 	}
 

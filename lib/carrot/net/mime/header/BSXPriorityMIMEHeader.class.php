@@ -8,7 +8,7 @@
  * X-Priorityヘッダ
  *
  * @author 小石達也 <tkoishi@b-shock.co.jp>
- * @version $Id: BSXPriorityMIMEHeader.class.php 1812 2010-02-03 15:15:09Z pooza $
+ * @version $Id: BSXPriorityMIMEHeader.class.php 1923 2010-03-21 12:02:11Z pooza $
  */
 class BSXPriorityMIMEHeader extends BSMIMEHeader {
 
@@ -20,7 +20,9 @@ class BSXPriorityMIMEHeader extends BSMIMEHeader {
 	 */
 	public function setContents ($contents) {
 		if (!in_array($contents, range(1, 5))) {
-			throw new BSMailException('優先順位"%d"が正しくありません。', $contents);
+			$message = new BSStringFormat('優先順位"%d"が正しくありません。');
+			$message[] = $contents;
+			throw new BSMailException($message);
 		}
 		parent::setContents($contents);
 	}

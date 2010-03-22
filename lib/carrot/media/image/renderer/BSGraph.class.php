@@ -10,7 +10,7 @@ BSUtility::includeFile('phplot/phplot');
  * グラフレンダラー
  *
  * @author 小石達也 <tkoishi@b-shock.co.jp>
- * @version $Id: BSGraph.class.php 1916 2010-03-19 02:06:30Z pooza $
+ * @version $Id: BSGraph.class.php 1925 2010-03-21 14:07:55Z pooza $
  */
 class BSGraph extends PHPlot implements BSImageRenderer {
 	private $width;
@@ -111,21 +111,23 @@ class BSGraph extends PHPlot implements BSImageRenderer {
 			$type = $suggested;
 		}
 		if (BSString::isBlank($suffix = BSImage::getSuffixes()->getParameter($type))) {
-			throw new BSImageException('メディアタイプ"%s"が正しくありません。', $type);
+			$message = new BSStringFormat('メディアタイプ"%s"が正しくありません。');
+			$message[] = $type;
+			throw new BSImageException($message);
 		}
 		$this->setFileFormat(str_replace('.', '', $suffix));
 		$this->type = $type;
 	}
 
 	/**
-	 * GDイメージリソースを返す
+	 * GD画像リソースを返す
 	 *
 	 * @access public
-	 * @return resource GDイメージリソース
+	 * @return resource GD画像リソース
 	 */
 	public function getGDHandle () {
 		if (!is_resource($this->gd)) {
-			throw new BSImageException('有効な画像リソースがありません。');
+			throw new BSImageException('GD画像リソースが正しくありません。');
 		}
 		$this->getContents();
 		return $this->gd;
@@ -257,7 +259,9 @@ class BSGraph extends PHPlot implements BSImageRenderer {
 	 */
 	public function setDefaultTTFont ($font) {
 		if (!$file = BSFileUtility::getDirectory('font')->getEntry($font)) {
-			throw new BSImageException('フォントファイル名"%s"が正しくありません。', $font);
+			$message = new BSStringFormat('フォントファイル名"%s"が正しくありません。');
+			$message[] = $font;
+			throw new BSImageException($message);
 		}
 		$this->default_ttfont = $file->getName();
 		return $this->setDefaultFonts();

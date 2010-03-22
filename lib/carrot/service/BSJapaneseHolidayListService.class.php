@@ -17,7 +17,7 @@
  * p($holidays->getHolidays()); //当月のすべての祝日を配列で
  *
  * @author 小石達也 <tkoishi@b-shock.co.jp>
- * @version $Id: BSJapaneseHolidayListService.class.php 1852 2010-02-09 02:47:08Z pooza $
+ * @version $Id: BSJapaneseHolidayListService.class.php 1922 2010-03-21 11:22:53Z pooza $
  * @link http://www.finds.jp/wsdocs/calendar/
  */
 class BSJapaneseHolidayListService extends BSCurlHTTP implements BSHolidayList, BSSerializable {
@@ -47,9 +47,9 @@ class BSJapaneseHolidayListService extends BSCurlHTTP implements BSHolidayList, 
 	 */
 	public function getDate () {
 		if (!$this->date) {
-			throw new BSInitializationException(
-				get_class($this) . 'の対象日付が設定されていません。'
-			);
+			$message = new BSStringFormat('%sの対象日付が設定されていません。');
+			$message[] = get_class($this);
+			throw new BSInitializationException($message);
 		}
 		return $this->date;
 	}

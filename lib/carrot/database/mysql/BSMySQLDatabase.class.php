@@ -8,7 +8,7 @@
  * MySQLデータベース
  *
  * @author 小石達也 <tkoishi@b-shock.co.jp>
- * @version $Id: BSMySQLDatabase.class.php 1815 2010-02-04 10:54:12Z pooza $
+ * @version $Id: BSMySQLDatabase.class.php 1922 2010-03-21 11:22:53Z pooza $
  */
 class BSMySQLDatabase extends BSDatabase {
 	static private $configFile;
@@ -44,7 +44,10 @@ class BSMySQLDatabase extends BSDatabase {
 			} catch (Exception $e) {
 			}
 		}
-		throw new BSDatabaseException('データベース "%s" に接続できません。', $name);
+
+		$message = new BSStringFormat('データベース "%s" に接続できません。');
+		$message[] = $name;
+		throw new BSDatabaseException($message);
 	}
 
 	/**
@@ -204,10 +207,9 @@ class BSMySQLDatabase extends BSDatabase {
 			$query = 'SHOW VARIABLES LIKE ' . $this->quote('character_set');
 			$result = PDO::query($query)->fetch();
 			if (!$encoding = self::getEncodings()->getParameter($result['Value'])) {
-				throw new BSDatabaseException(
-					'文字セット"%s"は使用できません。',
-					$result['Value']
-				);
+				$message = new BSStringFormat('文字セット "%s" は使用できません。');
+				$message[] = $result['Value'];
+				throw new BSDatabaseException($message);
 			}
 			return $encoding;
 		} else {

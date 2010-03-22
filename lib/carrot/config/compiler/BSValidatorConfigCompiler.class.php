@@ -8,7 +8,7 @@
  * バリデータ設定コンパイラ
  *
  * @author 小石達也 <tkoishi@b-shock.co.jp>
- * @version $Id: BSValidatorConfigCompiler.class.php 1812 2010-02-03 15:15:09Z pooza $
+ * @version $Id: BSValidatorConfigCompiler.class.php 1920 2010-03-21 09:16:06Z pooza $
  */
 class BSValidatorConfigCompiler extends BSConfigCompiler {
 	private $methods;
@@ -100,7 +100,9 @@ class BSValidatorConfigCompiler extends BSConfigCompiler {
 		$this->validators->setParameters($config);
 		foreach ($this->validators as $name => $values) {
 			if (!$values) {
-				throw new BSConfigException('バリデータ "%s" が未定義です。', $name);
+				$message = new BSStringFormat('バリデータ "%s" が未定義です。');
+				$message[] = $name;
+				throw new BSConfigException($message);
 			}
 			$this->validators[$name] = new BSArray($values);
 		}

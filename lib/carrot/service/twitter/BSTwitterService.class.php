@@ -8,7 +8,7 @@
  * Twitterクライアント
  *
  * @author 小石達也 <tkoishi@b-shock.co.jp>
- * @version $Id: BSTwitterService.class.php 1812 2010-02-03 15:15:09Z pooza $
+ * @version $Id: BSTwitterService.class.php 1920 2010-03-21 09:16:06Z pooza $
  */
 class BSTwitterService extends BSCurlHTTP {
 	private $uid;
@@ -110,7 +110,9 @@ class BSTwitterService extends BSCurlHTTP {
 			$this->setAttribute('userpwd', $this->getUserID() . ':' . $this->getPassword());
 			return parent::sendGetRequest($path);
 		} catch (BSHTTPException $e) {
-			throw new BSTwitterException('認証エラーが発生した為、%sが実行できません。', $path);
+			$message = new BSStringFormat('認証エラーが発生した為、%sが実行できません。');
+			$message[] = $path;
+			throw new BSTwitterException($message);
 		}
 	}
 
@@ -133,7 +135,9 @@ class BSTwitterService extends BSCurlHTTP {
 			$this->setAttribute('userpwd', $this->getUserID() . ':' . $this->getPassword());
 			return parent::sendPostRequest($path, $params);
 		} catch (BSHTTPException $e) {
-			throw new BSTwitterException('認証エラーが発生した為、%sが実行できません。', $path);
+			$message = new BSStringFormat('認証エラーが発生した為、%sが実行できません。');
+			$message[] = $path;
+			throw new BSTwitterException($message);
 		}
 	}
 

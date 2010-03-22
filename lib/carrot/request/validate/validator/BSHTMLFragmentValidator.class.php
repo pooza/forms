@@ -8,7 +8,7 @@
  * HTMLフラグメントバリデータ
  *
  * @author 小石達也 <tkoishi@b-shock.co.jp>
- * @version $Id: BSHTMLFragmentValidator.class.php 1862 2010-02-15 11:00:37Z pooza $
+ * @version $Id: BSHTMLFragmentValidator.class.php 1920 2010-03-21 09:16:06Z pooza $
  */
 class BSHTMLFragmentValidator extends BSValidator {
 	private $allowedTags;
@@ -41,7 +41,10 @@ class BSHTMLFragmentValidator extends BSValidator {
 			$element = new BSXMLElement;
 			$element->setContents($body);
 			if (!self::isValidElement($element)) {
-				throw new BSXMLException('%s (%s)', $this['element_error'], $this->invalidNode);
+				$message = new BSString('%s (%s)');
+				$message[] = $this['element_error'];
+				$message[] = $this->invalidNode;
+				throw new BSXMLException($message);
 			}
 		} catch (BSXMLException $e) {
 			$this->error = $e->getMessage();

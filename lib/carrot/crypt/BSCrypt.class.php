@@ -8,7 +8,7 @@
  * 暗号化
  *
  * @author 小石達也 <tkoishi@b-shock.co.jp>
- * @version $Id: BSCrypt.class.php 1896 2010-03-02 11:25:53Z pooza $
+ * @version $Id: BSCrypt.class.php 1926 2010-03-21 14:36:34Z pooza $
  */
 class BSCrypt {
 	private $engine;
@@ -42,7 +42,7 @@ class BSCrypt {
 	 * @access public
 	 */
 	public function __clone () {
-		throw new BSSingletonException(__CLASS__ . 'はコピーできません。');
+		throw new BadFunctionCallException(__CLASS__ . 'はコピーできません。');
 	}
 
 	/**
@@ -149,7 +149,9 @@ class BSCrypt {
 			$method = BS_CRYPT_DIGEST_METHOD;
 		}
 		if (!in_array($method, hash_algos())) {
-			throw new BSCryptException('ハッシュ関数"%s"は正しくありません。');
+			$message = new BSStringFormat('ハッシュ関数 "%s"は正しくありません。');
+			$message[] = $method;
+			throw new BSCryptException($message);
 		}
 		if (BSArray::isArray($value)) {
 			$value = new BSArray($value);

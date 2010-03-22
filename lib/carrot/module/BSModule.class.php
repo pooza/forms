@@ -8,7 +8,7 @@
  * モジュール
  *
  * @author 小石達也 <tkoishi@b-shock.co.jp>
- * @version $Id: BSModule.class.php 1859 2010-02-14 06:54:04Z pooza $
+ * @version $Id: BSModule.class.php 1926 2010-03-21 14:36:34Z pooza $
  */
 class BSModule implements BSHTTPRedirector, BSAssignable {
 	protected $name;
@@ -56,7 +56,9 @@ class BSModule implements BSHTTPRedirector, BSAssignable {
 			case 'user':
 				return BSUser::getInstance();
 			default:
-				throw new BSMagicMethodException('仮想プロパティ"%s"は未定義です。', $name);
+				$message = new BSStringFormat('仮想プロパティ"%s"は未定義です。');
+				$message[] = $name;
+				throw new BadFunctionCallException($message);
 		}
 	}
 
@@ -375,7 +377,10 @@ class BSModule implements BSHTTPRedirector, BSAssignable {
 		if (!$dir = $this->getDirectory('actions')) {
 			throw new BSModuleException($this . 'にアクションディレクトリがありません。');
 		} else if (!$file = $dir->getEntry($class . '.class.php')) {
-			throw new BSModuleException('%sに "%s" がありません。', $this, $class);
+			$message = new BSStringFormat('%sに "%s" がありません。');
+			$message[] = $this;
+			$message[] = $class;
+			throw new BSModuleException($message);
 		}
 
 		if (!$this->actions) {

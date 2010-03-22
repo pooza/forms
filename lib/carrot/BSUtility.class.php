@@ -7,7 +7,7 @@
  * ユーティリティ
  *
  * @author 小石達也 <tkoishi@b-shock.co.jp>
- * @version $Id: BSUtility.class.php 1896 2010-03-02 11:25:53Z pooza $
+ * @version $Id: BSUtility.class.php 1926 2010-03-21 14:36:34Z pooza $
  */
 class BSUtility {
 
@@ -85,11 +85,10 @@ class BSUtility {
 	 */
 	static public function executeMethod ($object, $method, $values) {
 		if (!method_exists($object, $method)) {
-			throw new BSMagicMethodException(
-				'クラス"%s"のメソッド"%s"が未定義です。',
-				get_class($object),
-				$method
-			);
+			$message = new BSStringFormat('クラス "%s" のメソッド "%s" が未定義です。');
+			$message[] = get_class($object);
+			$message[] = $method;
+			throw new BadFunctionCallException($message);
 		}
 		return call_user_func_array(array($object, $method), $values);
 	}

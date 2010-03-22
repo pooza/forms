@@ -8,7 +8,7 @@
  * 抽象バリデータ
  *
  * @author 小石達也 <tkoishi@b-shock.co.jp>
- * @version $Id: BSValidator.class.php 1812 2010-02-03 15:15:09Z pooza $
+ * @version $Id: BSValidator.class.php 1926 2010-03-21 14:36:34Z pooza $
  * @abstract
  */
 abstract class BSValidator extends BSParameterHolder {
@@ -38,7 +38,9 @@ abstract class BSValidator extends BSParameterHolder {
 			case 'manager':
 				return BSValidateManager::getInstance();
 			default:
-				throw new BSMagicMethodException('仮想プロパティ"%s"は未定義です。', $name);
+				$message = new BSStringFormat('仮想プロパティ"%s"は未定義です。');
+				$message[] = $name;
+				throw new BadFunctionCallException($message);
 		}
 	}
 

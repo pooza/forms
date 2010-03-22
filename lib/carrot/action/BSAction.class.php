@@ -8,7 +8,7 @@
  * アクション
  *
  * @author 小石達也 <tkoishi@b-shock.co.jp>
- * @version $Id: BSAction.class.php 1812 2010-02-03 15:15:09Z pooza $
+ * @version $Id: BSAction.class.php 1926 2010-03-21 14:36:34Z pooza $
  * @abstract
  */
 abstract class BSAction implements BSHTTPRedirector, BSAssignable, BSValidatorContainer {
@@ -45,7 +45,9 @@ abstract class BSAction implements BSHTTPRedirector, BSAssignable, BSValidatorCo
 				}
 				return BSDatabase::getInstance();
 			default:
-				throw new BSMagicMethodException('仮想プロパティ"%s"は未定義です。', $name);
+				$message = new BSStringFormat('仮想プロパティ"%s"は未定義です。');
+				$message[] = $name;
+				throw new BadFunctionCallException($message);
 		}
 	}
 
@@ -162,10 +164,9 @@ abstract class BSAction implements BSHTTPRedirector, BSAssignable, BSValidatorCo
 	public function getName () {
 		if (BSString::isBlank($this->name)) {
 			if (!mb_ereg('^(.+)Action$', get_class($this), $matches)) {
-				throw new BSModuleException(
-					'アクションの名前が正しくありません。(%s)',
-					get_class($this)
-				);
+				$message = new BSStringFormat('アクション "%s" の名前が正しくありません。');
+				$message[] = get_class($this);
+				throw new BSModuleException($message);
 			}
 			$this->name = $matches[1];
 		}
@@ -394,7 +395,7 @@ abstract class BSAction implements BSHTTPRedirector, BSAssignable, BSValidatorCo
 	public function forward () {
 		$this->controller->registerAction($this);
 		if (!$this->initialize()) {
-			throw new BSInitializeException($this . 'が初期化できません。');
+			throw new BadFunctionCallException($this . 'が初期化できません。');
 		}
 
 		$filters = new BSFilterSet;

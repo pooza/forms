@@ -8,7 +8,7 @@
  * 座標
  *
  * @author 小石達也 <tkoishi@b-shock.co.jp>
- * @version $Id: BSCoordinate.class.php 1812 2010-02-03 15:15:09Z pooza $
+ * @version $Id: BSCoordinate.class.php 1923 2010-03-21 12:02:11Z pooza $
  */
 class BSCoordinate {
 	private $image;
@@ -56,9 +56,13 @@ class BSCoordinate {
 	 */
 	private function validate () {
 		if (($this->getX() < 0) || ($this->getImage()->getWidth() - 1 < $this->getX())) {
-			throw new BSImageException('X座標[%d]は領域外です。', $this->getX());
+			$message = new BSStringFormat('X座標 "%d" は領域外です。');
+			$message[] = $this->getX();
+			throw new BSImageException($message);
 		} else if (($this->getY() < 0) || ($this->getImage()->getHeight() - 1 < $this->getY())) {
-			throw new BSImageException('Y座標[%d]は領域外です。', $this->getY());
+			$message = new BSStringFormat('Y座標 "%d" は領域外です。');
+			$message[] = $this->getY();
+			throw new BSImageException($message);
 		}
 	}
 

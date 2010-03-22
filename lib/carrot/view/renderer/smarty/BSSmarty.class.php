@@ -10,7 +10,7 @@ BSUtility::includeFile('Smarty/Smarty.class');
  * Smartyラッパー
  *
  * @author 小石達也 <tkoishi@b-shock.co.jp>
- * @version $Id: BSSmarty.class.php 1812 2010-02-03 15:15:09Z pooza $
+ * @version $Id: BSSmarty.class.php 1922 2010-03-21 11:22:53Z pooza $
  */
 class BSSmarty extends Smarty implements BSTextRenderer {
 	private $type;
@@ -283,7 +283,9 @@ class BSSmarty extends Smarty implements BSTextRenderer {
 	 */
 	public function setTemplate ($template) {
 		if (!$file = $this->searchTemplate($template)) {
-			throw new BSViewException('テンプレート"%s"が見つかりません。', $template);
+			$message = new BSStringFormat('テンプレート "%s" が見つかりません。');
+			$message[] = $template;
+			throw new BSViewException($message);
 		}
 		$this->template = $file;
 		$this->template->setEngine($this);
@@ -381,10 +383,9 @@ class BSSmarty extends Smarty implements BSTextRenderer {
 		if (!$this->compiler) {
 			$this->compiler = new $this->compiler_class;
 			if (!$this->compiler->initialize($this)) {
-				throw new BSInitializationException(
-					'%sが初期化できません。',
-					$this->compiler_class
-				);
+				$message = new BSStringFormat('%sが初期化できません。');
+				$message[] = $this->compiler_class;
+				throw new BSInitializationException($message);
 			}
 		}
 		return $this->compiler;
@@ -443,7 +444,10 @@ class BSSmarty extends Smarty implements BSTextRenderer {
 			$template = $file->getPath();
 			return parent::_smarty_include($params);
 		}
-		throw new BSViewException('テンプレート"%s"が見つかりません。', $template);
+
+		$message = new BSStringFormat('テンプレート "%s"が見つかりません。');
+		$message[] = $template;
+		throw new BSViewException($message);
 	}
 
 	/**
@@ -467,10 +471,10 @@ class BSSmarty extends Smarty implements BSTextRenderer {
 	 * @return string
 	 */
 	public function _get_auto_filename ($base, $source = null, $id = null) {
-		// ソーステンプレート名をフルパス表記に修正
 		if (!BSUtility::isPathAbsolute($source)) {
-			$pattern = preg_quote(DIRECTORY_SEPARATOR) . '*$';
-			$source = mb_ereg_replace($pattern, DIRECTORY_SEPARATOR, $base) . $source;
+			$message = new BSStringFormat('テンプレート名 "%s" はフルパスではありません。');
+			$message[] = $source;
+			throw new BSViewException($message);
 		}
 		return parent::_get_auto_filename($base, $source, $id);
 	}
