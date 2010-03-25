@@ -2,11 +2,11 @@
 #
 # @package org.carrot-framework
 # @author 小石達也 <tkoishi@b-shock.co.jp>
-# @version $Id: carrot.yaml 1930 2010-03-24 02:02:26Z pooza $
+# @version $Id: carrot.yaml 1932 2010-03-25 09:11:10Z pooza $
 
 carrot:
   name: carrot Framework
-  ver: 2.3.71
+  ver: 2.3.72
   bts:
     url: http://redmine.carrot-framework.org/projects/show/carrot
 
@@ -171,6 +171,9 @@ service:
   google:
     maps:
       api_key: ABQIAAAATsMwobOX_2h6mtmVGXYj7hRDPMaTZsAqlqCvYqUSXVpA0IN8hBR3QFfr0mhWyh4H99uEfkf2XzBZyA
+    analytics:
+      id:
+      beacon_href: /carrotlib/php/ga.php
 session:
   storage: default
   regenerate_id: no

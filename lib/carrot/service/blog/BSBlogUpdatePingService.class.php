@@ -8,7 +8,7 @@
  * Blog更新Pingサービス
  *
  * @author 小石達也 <tkoishi@b-shock.co.jp>
- * @version $Id: BSBlogUpdatePingService.class.php 1867 2010-02-16 09:00:32Z pooza $
+ * @version $Id: BSBlogUpdatePingService.class.php 1932 2010-03-25 09:11:10Z pooza $
  */
 class BSBlogUpdatePingService extends BSCurlHTTP {
 
@@ -31,7 +31,7 @@ class BSBlogUpdatePingService extends BSCurlHTTP {
 
 		try {
 			$response = $this->execute($href);
-			$message = new BSStringFormat('%sへ更新Ping送信を送信しました。');
+			$message = new BSStringFormat('%sへ更新Pingを送信しました。');
 			$message[] = $url->getContents();
 			BSLogManager::getInstance()->put($message, $this);
 		} catch (Exception $e) {
