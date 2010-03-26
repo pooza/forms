@@ -8,7 +8,7 @@
  * ホスト認証
  *
  * @author 小石達也 <tkoishi@b-shock.co.jp>
- * @version $Id: BSHostSecurityFilter.class.php 1812 2010-02-03 15:15:09Z pooza $
+ * @version $Id: BSHostSecurityFilter.class.php 1936 2010-03-25 13:50:22Z pooza $
  */
 class BSHostSecurityFilter extends BSFilter {
 	public function execute () {
@@ -28,7 +28,7 @@ class BSHostSecurityFilter extends BSFilter {
 	 */
 	private function auth () {
 		foreach (BSAdministratorRole::getInstance()->getAllowedNetworks() as $network) {
-			if ($this->request->getHost()->isInNetwork($network)) {
+			if ($network->isContain($this->request->getHost())) {
 				return true;
 			}
 		}
