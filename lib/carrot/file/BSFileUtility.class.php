@@ -4,13 +4,11 @@
  * @subpackage file
  */
 
-ini_set('auto_detect_line_endings', true);
-
 /**
  * ファイルユーティリティ
  *
  * @author 小石達也 <tkoishi@b-shock.co.jp>
- * @version $Id: BSFileUtility.class.php 1898 2010-03-03 03:48:43Z pooza $
+ * @version $Id: BSFileUtility.class.php 1945 2010-03-27 16:19:03Z pooza $
  */
 class BSFileUtility {
 

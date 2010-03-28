@@ -8,7 +8,7 @@
  * MIMEタイプ
  *
  * @author 小石達也 <tkoishi@b-shock.co.jp>
- * @version $Id: BSMIMEType.class.php 1926 2010-03-21 14:36:34Z pooza $
+ * @version $Id: BSMIMEType.class.php 1946 2010-03-27 16:43:17Z pooza $
  */
 class BSMIMEType extends BSParameterHolder implements BSSerializable {
 	private $typesFile;
@@ -118,7 +118,6 @@ class BSMIMEType extends BSParameterHolder implements BSSerializable {
 	 */
 	public function serialize () {
 		foreach ($this->getTypesFile()->getLines() as $line) {
-			$line = rtrim($line);
 			$line = mb_ereg_replace('#.*$', '', $line);
 			$line = mb_split('[[:blank:]]+', $line);
 			for ($i = 1 ; $i < count($line) ; $i ++) {

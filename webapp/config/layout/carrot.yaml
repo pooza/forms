@@ -2,7 +2,7 @@
 #
 # @package org.carrot-framework
 # @author 小石達也 <tkoishi@b-shock.co.jp>
-# @version $Id: carrot.yaml 1831 2010-02-07 08:19:01Z pooza $
+# @version $Id: carrot.yaml 1939 2010-03-27 13:02:11Z pooza $
 
 awstats:
   parent: lib
@@ -104,6 +104,8 @@ request:
   purge:
     day: 7
 root:
+  constant: yes
+sendmail:
   constant: yes
 serialized:
   parent: var

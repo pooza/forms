@@ -10,7 +10,7 @@ ini_set('auto_detect_line_endings', true);
  * ファイル
  *
  * @author 小石達也 <tkoishi@b-shock.co.jp>
- * @version $Id: BSFile.class.php 1920 2010-03-21 09:16:06Z pooza $
+ * @version $Id: BSFile.class.php 1946 2010-03-27 16:43:17Z pooza $
  */
 class BSFile extends BSDirectoryEntry implements BSRenderer, BSSerializable {
 	private $mode;
@@ -239,26 +239,24 @@ class BSFile extends BSDirectoryEntry implements BSRenderer, BSSerializable {
 		if ($this->isEof()) {
 			return '';
 		}
-		$line = fgets($this->handle, $length);
-		$line = rtrim($line);
-		return $line;
+		return stream_get_line($this->handle, $length);
 	}
 
 	/**
 	 * 全ての行を返す
 	 *
 	 * @access public
-	 * @return string[] 読み込んだ内容の配列
+	 * @return BSArray 読み込んだ内容の配列
 	 */
 	public function getLines () {
 		if (!$this->lines) {
+			$this->lines = new BSArray;
 			if ($this->isCompressed()) {
-				$this->lines = gzfile($this->getPath());
+				foreach (gzfile($this->getPath()) as $line) {
+					$this->lines[] = rtrim($line);
+				}
 			} else {
-				$this->lines = file($this->getPath());
-			}
-			foreach ($this->lines as &$line) {
-				$line = rtrim($line);
+				$this->lines->merge(file($this->getPath(), FILE_IGNORE_NEW_LINES));
 			}
 		}
 		return $this->lines;

@@ -8,14 +8,15 @@
  * コマンドラインビルダー
  *
  * @author 小石達也 <tkoishi@b-shock.co.jp>
- * @version $Id: BSCommandLine.class.php 1812 2010-02-03 15:15:09Z pooza $
+ * @version $Id: BSCommandLine.class.php 1942 2010-03-27 13:23:37Z pooza $
  */
-class BSCommandLine extends BSParameterHolder {
+class BSCommandLine {
+	private $params;
+	private $pipes;
 	private $command;
 	private $directory;
-	private $result = array();
+	private $result;
 	private $returnCode = 0;
-	private $executed = false;
 	private $background = false;
 	private $sleepSeconds = 0;
 	const WITH_QUOTE = 1;
@@ -29,6 +30,8 @@ class BSCommandLine extends BSParameterHolder {
 			throw new BSConsoleException('コマンド名が空です。');
 		}
 		$this->command = $command;
+		$this->params = new BSArray;
+		$this->pipes = new BSArray;
 	}
 
 	/**
@@ -70,6 +73,16 @@ class BSCommandLine extends BSParameterHolder {
 	}
 
 	/**
+	 * パイプを加える
+	 *
+	 * @access public
+	 * @param BSCommandLine $pipe パイプ
+	 */
+	public function registerPipe (BSCommandLine $pipe) {
+		$this->pipes[] = $pipe;
+	}
+
+	/**
 	 * 実行後の待機秒数を設定
 	 *
 	 * @access public
@@ -77,6 +90,16 @@ class BSCommandLine extends BSParameterHolder {
 	 */
 	public function setSleepSeconds ($seconds) {
 		$this->sleepSeconds = $seconds;
+	}
+
+	/**
+	 * 実行されたか？
+	 *
+	 * @access public
+	 * @return boolean 実行されたならTrue
+	 */
+	public function isExecuted () {
+		return !!$this->result;
 	}
 
 	/**
@@ -106,7 +129,6 @@ class BSCommandLine extends BSParameterHolder {
 	 */
 	public function execute () {
 		exec($this->getContents(), $result, $this->returnCode);
-		$this->executed = true;
 		$this->result = new BSArray($result);
 
 		if ($seconds = $this->sleepSeconds) {
@@ -121,21 +143,27 @@ class BSCommandLine extends BSParameterHolder {
 	 * @return string コマンドライン
 	 */
 	public function getContents () {
+		$contents = clone $this->params;
+
 		if ($this->directory) {
 			if (!$file = $this->directory->getEntry($this->command)) {
 				throw new BSConsoleException($this->command . 'が見つかりません。');
 			}
-			$contents = $file->getPath();
+			$contents->unshift($file->getPath());
 		} else {
-			$contents = $this->command;
+			$contents->unshift($this->command);
 		}
-		$contents .= ' ' . implode(' ', $this->getParameters());
+
+		foreach ($this->pipes as $pipe) {
+			$contents[] = '|';
+			$contents[] = $pipe->getContents();
+		}
 
 		if ($this->isBackground()) {
-			$contents .= ' > /dev/null &';
+			$contents[] = '> /dev/null &';
 		}
 
-		return $contents;
+		return $contents->join(' ');
 	}
 
 	/**
@@ -145,7 +173,7 @@ class BSCommandLine extends BSParameterHolder {
 	 * @return string 標準出力
 	 */
 	public function getResult () {
-		if (!$this->executed) {
+		if (!$this->isExecuted()) {
 			$this->execute();
 		}
 		return $this->result;
@@ -158,7 +186,7 @@ class BSCommandLine extends BSParameterHolder {
 	 * @return integer 戻り値
 	 */
 	public function getReturnCode () {
-		if (!$this->executed) {
+		if (!$this->isExecuted()) {
 			$this->execute();
 		}
 		return $this->returnCode;
@@ -171,7 +199,7 @@ class BSCommandLine extends BSParameterHolder {
 	 * @return boolean エラーを含んでいたらTrue
 	 */
 	public function hasError () {
-		return ($this->getReturnCode() != 0);
+		return !!$this->getReturnCode();
 	}
 
 	/**

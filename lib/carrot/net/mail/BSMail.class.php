@@ -8,35 +8,35 @@
  * メール
  *
  * @author 小石達也 <tkoishi@b-shock.co.jp>
- * @version $Id: BSMail.class.php 1920 2010-03-21 09:16:06Z pooza $
+ * @version $Id: BSMail.class.php 1949 2010-03-27 17:22:29Z pooza $
  */
 class BSMail extends BSMIMEDocument {
 	private $error;
+	private $file;
 
 	/**
 	 * @access public
 	 */
 	public function __construct () {
-		$renderer = new BSPlainTextRenderer;
-		$renderer->setEncoding('iso-2022-jp');
-		$renderer->setWidth(78);
-		$renderer->setConvertKanaFlag('KV');
-		$renderer->setLineSeparator(self::LINE_SEPARATOR);
-		$renderer->setOptions(BSPlainTextRenderer::TAIL_LF);
-		$this->setRenderer($renderer);
-
+		$this->setRenderer($this->getDefaultRenderer());
 		$this->setHeader('Subject', 'untitled');
-		$this->setHeader('Content-Type', $renderer);
-		$this->setHeader('Content-Transfer-Encoding', $renderer);
 		$this->setHeader('Date', BSDate::getNow());
 		$this->setHeader('Mime-Version', '1.0');
 		$this->setHeader('X-Mailer', null);
 		$this->setHeader('X-Priority', 3);
 		$this->setHeader('From', BSAuthorRole::getInstance()->getMailAddress());
 		$this->setHeader('To', BSAdministratorRole::getInstance()->getMailAddress());
-
 		if (BS_DEBUG) {
 			$this->setHeader('X-Carrot-Debug-Mode', 'yes');
+		}
+	}
+
+	/**
+	 * @access public
+	 */
+	public function __destruct () {
+		if ($file = $this->getFile()) {
+			$file->delete();
 		}
 	}
 
@@ -45,8 +45,24 @@ class BSMail extends BSMIMEDocument {
 	 *
 	 * @access public
 	 */
-	public function updateMessageID () {
+	public function clearMessageID () {
 		$this->setHeader('Message-Id', null);
+	}
+
+	/**
+	 * 既定レンダラーを返す
+	 *
+	 * @access protected
+	 * @return BSRenderer 既定レンダラー
+	 */
+	protected function getDefaultRenderer () {
+		$renderer = new BSPlainTextRenderer;
+		$renderer->setEncoding('iso-2022-jp');
+		$renderer->setWidth(78);
+		$renderer->setConvertKanaFlag('KV');
+		$renderer->setLineSeparator(self::LINE_SEPARATOR);
+		$renderer->setOptions(BSPlainTextRenderer::TAIL_LF);
+		return $renderer;
 	}
 
 	/**
@@ -57,10 +73,21 @@ class BSMail extends BSMIMEDocument {
 	 * @param string $value 値
 	 */
 	public function send () {
-		$smtp = new BSSMTP;
-		$smtp->setMail($this);
-		$smtp->send();
-		$smtp->close();
+		self::getSender()->send($this);
+	}
+
+	/**
+	 * ファイルを生成して返す
+	 *
+	 * @access public
+	 * @return BSFile ファイル
+	 */
+	public function getFile () {
+		if (!$this->file || !$this->file->isExists()) {
+			$this->file = BSFileUtility::getTemporaryFile('.eml');
+			$this->file->setContents($this->getContents());
+		}
+		return $this->file;
 	}
 
 	/**
@@ -72,11 +99,10 @@ class BSMail extends BSMIMEDocument {
 	public function getRecipients () {
 		$recipients = new BSArray;
 		foreach (array('To', 'Cc', 'Bcc') as $key) {
-			if (!$header = $this->getHeader($key)) {
-				continue;
-			}
-			foreach ($header->getEntity() as $email) {
-				$recipients[$email->getContents()] = $email;
+			if ($header = $this->getHeader($key)) {
+				foreach ($header->getEntity() as $email) {
+					$recipients[$email->getContents()] = $email;
+				}
 			}
 		}
 		return $recipients;
@@ -93,7 +119,6 @@ class BSMail extends BSMIMEDocument {
 			if (BSString::isBlank($this->getHeader('From')->getContents())) {
 				throw new BSMailException('送信元アドレスが指定されていません。');
 			}
-
 			if (!$this->getRecipients()->count()) {
 				throw new BSMailException('宛先アドレスが指定されていません。');
 			}
@@ -127,6 +152,21 @@ class BSMail extends BSMIMEDocument {
 	 */
 	public function __toString () {
 		return sprintf('メール "%s"', $this->getMessageID());
+	}
+
+	/**
+	 * 送信機能を返す
+	 * 
+	 * @access public
+	 * @return BSMailSender 送信機能
+	 * @static
+	 */
+	static public function getSender () {
+		$sender = BSClassLoader::getInstance()->getObject(BS_MAIL_SENDER, 'MailSender');
+		if (!$sender || !$sender->initialize()) {
+			throw new BSConfigException('BS_MAIL_SENDERが正しくありません。');
+		}
+		return $sender;
 	}
 }
 

@@ -8,7 +8,7 @@
  * ソケット
  *
  * @author 小石達也 <tkoishi@b-shock.co.jp>
- * @version $Id: BSSocket.class.php 1920 2010-03-21 09:16:06Z pooza $
+ * @version $Id: BSSocket.class.php 1946 2010-03-27 16:43:17Z pooza $
  */
 class BSSocket {
 	protected $host;
@@ -82,7 +82,7 @@ class BSSocket {
 			$message[] = $result;
 			throw new BSNetException($message);
 		}
-		stream_set_timeout($this->client, 10);
+		stream_set_timeout($this->client, 1);
 	}
 
 	/**
@@ -123,8 +123,7 @@ class BSSocket {
 		} else if ($this->isEof()) {
 			return '';
 		}
-		$this->line = rtrim(fgets($this->client, $length));
-		return $this->line;
+		return $this->line = stream_get_line($this->client, $length);
 	}
 
 	/**
@@ -141,10 +140,10 @@ class BSSocket {
 	 * ストリームの終端まで読んで返す
 	 *
 	 * @access public
-	 * @return string[] 読み込んだ内容
+	 * @return BSArray 読み込んだ内容
 	 */
 	public function getLines () {
-		return explode(self::LINE_SEPARATOR, stream_get_contents($this->client));
+		return BSString::explode(self::LINE_SEPARATOR, stream_get_contents($this->client));
 	}
 
 	/**

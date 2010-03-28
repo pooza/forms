@@ -8,7 +8,7 @@
  * CSVファイル
  *
  * @author 小石達也 <tkoishi@b-shock.co.jp>
- * @version $Id: BSCSVFile.class.php 1812 2010-02-03 15:15:09Z pooza $
+ * @version $Id: BSCSVFile.class.php 1946 2010-03-27 16:43:17Z pooza $
  */
 class BSCSVFile extends BSFile {
 	private $engine;
@@ -59,7 +59,7 @@ class BSCSVFile extends BSFile {
 	public function setEngine (BSCSVData $engine) {
 		$this->engine = $engine;
 		if ($this->isExists()) {
-			$this->engine->setLines(new BSArray($this->getLines()));
+			$this->engine->setLines($this->getLines());
 		}
 	}
 

@@ -2,11 +2,11 @@
 #
 # @package org.carrot-framework
 # @author 小石達也 <tkoishi@b-shock.co.jp>
-# @version $Id: carrot.yaml 1937 2010-03-26 06:16:23Z pooza $
+# @version $Id: carrot.yaml 1949 2010-03-27 17:22:29Z pooza $
 
 carrot:
   name: carrot Framework
-  ver: 2.3.73
+  ver: 2.3.74
   bts:
     url: http://redmine.carrot-framework.org/projects/show/carrot
 
@@ -87,6 +87,8 @@ log:
       - BSDatabaseException
       - BSMailException
       - BSFileException
+mail:
+  sender: smtp
 memcache:
   daemon_name: memcached
   host: localhost
@@ -158,6 +160,8 @@ proctools:
 request:
   validate:
     strict: no
+sendmail:
+  dir: /usr
 serialize:
   storage: default
   serializer: JSON

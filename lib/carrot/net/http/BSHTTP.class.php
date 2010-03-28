@@ -8,11 +8,9 @@
  * HTTPプロトコル
  *
  * @author 小石達也 <tkoishi@b-shock.co.jp>
- * @version $Id: BSHTTP.class.php 1923 2010-03-21 12:02:11Z pooza $
+ * @version $Id: BSHTTP.class.php 1948 2010-03-27 16:51:11Z pooza $
  */
 class BSHTTP extends BSSocket {
-	private $headers = array();
-	private $status;
 
 	/**
 	 * HEADリクエスト
@@ -88,9 +86,9 @@ class BSHTTP extends BSSocket {
 		$this->putLine($request->getContents());
 
 		$response = new BSHTTPResponse;
-		$response->setContents(new BSArray($this->getLines()));
+		$response->setContents($this->getLines());
 		$response->setURL($request->getURL());
-	
+
 		if (!$response->validate()) {
 			$message = new BSStringFormat('不正なレスポンスです。 (%d %s)');
 			$message[] = $response->getStatus();

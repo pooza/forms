@@ -7,8 +7,10 @@
 /**
  * Smartyレンダラーによるメール送信
  *
+ * 非推奨。BSSmartyMailからの送信を推奨。
+ *
  * @author 小石達也 <tkoishi@b-shock.co.jp>
- * @version $Id: BSSmartySender.class.php 1812 2010-02-03 15:15:09Z pooza $
+ * @version $Id: BSSmartySender.class.php 1949 2010-03-27 17:22:29Z pooza $
  */
 class BSSmartySender extends BSSMTP {
 
@@ -22,23 +24,7 @@ class BSSmartySender extends BSSMTP {
 	 */
 	public function __construct ($host = null, $port = null, $protocol = BSNetworkService::TCP) {
 		parent::__construct($host, $port, $protocol);
-
-		$renderer = new BSSmarty;
-		$renderer->setType(BSMIMEType::getType('txt'));
-		$renderer->setEncoding('iso-2022-jp');
-		$renderer->addOutputFilter('mail');
-
-		if ($module = BSController::getInstance()->getModule()) {
-			if ($dir = $module->getDirectory('templates')) {
-				$renderer->setTemplatesDirectory($dir);
-			}
-		}
-
-		$renderer->setAttribute('date', BSDate::getNow());
-		$renderer->setAttribute('client_host', BSRequest::getInstance()->getHost());
-		$renderer->setAttribute('server_host', BSController::getInstance()->getHost());
-		$renderer->setAttribute('useragent', BSRequest::getInstance()->getUserAgent());
-		$this->getMail()->setRenderer($renderer);
+		$this->setMail(new BSSmartyMail);
 	}
 
 	/**
