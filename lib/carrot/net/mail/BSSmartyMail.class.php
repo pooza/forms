@@ -8,7 +8,7 @@
  * Smarty機能を内蔵したメールレンダラー
  *
  * @author 小石達也 <tkoishi@b-shock.co.jp>
- * @version $Id: BSSmartyMail.class.php 1950 2010-03-27 17:28:58Z pooza $
+ * @version $Id: BSSmartyMail.class.php 1952 2010-03-29 03:47:25Z pooza $
  */
 class BSSmartyMail extends BSMail {
 
@@ -63,10 +63,10 @@ class BSSmartyMail extends BSMail {
 		foreach ($this->getRenderer()->getHeaders() as $key => $value) {
 			$this->setHeader($key, $value);
 		}
-		parent::send();
 		if ($file = $this->getFile()) {
 			$file->delete();
 		}
+		parent::send();
 	}
 }
 

@@ -2,7 +2,7 @@
 #
 # @package org.carrot-framework
 # @author 小石達也 <tkoishi@b-shock.co.jp>
-# @version $Id: mime.yaml 1909 2010-03-10 05:21:29Z pooza $
+# @version $Id: mime.yaml 1953 2010-03-29 03:49:07Z pooza $
 
 types:
   3gp: video/3gpp
@@ -24,6 +24,7 @@ types:
   h264: video/quicktime
   htm: text/html
   html: text/html
+  ico: image/vnd.microsoft.icon
   ini: text/x-ini-file
   jpg: image/jpeg
   jpeg: image/jpeg

@@ -11,7 +11,6 @@
  */
 class Registration extends BSRecord implements BSAttachmentContainer {
 	private $answers;
-	static private $smtp;
 
 	/**
 	 * 回答を返す
@@ -81,25 +80,25 @@ class Registration extends BSRecord implements BSAttachmentContainer {
 	 * @param BSParameterHolder $params 追加パラメータ
 	 */
 	public function sendMail ($template, BSParameterHolder $params = null) {
-		$smtp = $this->getSender();
+		$mail = new BSSmartyMail;
+
 		if ($template instanceof BSTemplateFile) {
 			$file = $template;
-		} else if ($file = $smtp->getRenderer()->searchTemplate($template . '.mail')) {
+		} else if ($file = $mail->getRenderer()->searchTemplate($template . '.mail')) {
 		} else if ($file = $this->getForm()->getTemplateFile($template)) {
 		}
+		$mail->getRenderer()->setTemplate($file);
 
-		$smtp->setTemplate($file);
-		$smtp->setAttribute('registration', $this);
-		$smtp->setAttribute('form', $this->getForm());
-		$smtp->setAttribute('params', $params);
+		$mail->getRenderer()->setAttribute('registration', $this);
+		$mail->getRenderer()->setAttribute('form', $this->getForm());
+		$mail->getRenderer()->setAttribute('params', $params);
 
 		BSTranslateManager::getInstance()->register($this->getForm(), BSArray::POSITION_TOP);
 		if (BS_MAIL_INCLUDE_ANSWERS) {
-			$smtp->setAttribute('is_include_answers', true);
+			$mail->getRenderer()->setAttribute('is_include_answers', true);
 		}
 
-		$smtp->render();
-		$smtp->send();
+		$mail->send();
 	}
 
 	/**
@@ -203,13 +202,6 @@ class Registration extends BSRecord implements BSAttachmentContainer {
 		$values = $this->getAttributes();
 		$values['answers'] = $this->getAnswers();
 		return $values;
-	}
-
-	static private function getSender () {
-		if (!self::$smtp) {
-			self::$smtp = new BSSmartySender;
-		}
-		return self::$smtp;
 	}
 }
 
