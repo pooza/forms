@@ -8,7 +8,7 @@
  * 画像ファイル
  *
  * @author 小石達也 <tkoishi@b-shock.co.jp>
- * @version $Id: BSImageFile.class.php 1918 2010-03-20 00:20:08Z pooza $
+ * @version $Id: BSImageFile.class.php 1954 2010-03-30 14:39:03Z pooza $
  */
 class BSImageFile extends BSMediaFile implements BSImageContainer, BSAssignable {
 	protected $renderer;
@@ -254,6 +254,21 @@ class BSImageFile extends BSMediaFile implements BSImageContainer, BSAssignable 
 	 */
 	public function getImageFileBaseName ($size = null) {
 		$this->getBaseName();
+	}
+
+	/**
+	 * 出力可能か？
+	 *
+	 * @access public
+	 * @return boolean 出力可能ならTrue
+	 */
+	public function validate () {
+		if (!parent::validate()) {
+			return false;
+		}
+		$header = new BSContentTypeMIMEHeader;
+		$header->setContents($this->analyzeType());
+		return ($header['main_type'] == 'image');
 	}
 
 	/**

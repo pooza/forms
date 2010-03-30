@@ -8,7 +8,7 @@
  * 楽曲ファイル
  *
  * @author 小石達也 <tkoishi@b-shock.co.jp>
- * @version $Id: BSMusicFile.class.php 1898 2010-03-03 03:48:43Z pooza $
+ * @version $Id: BSMusicFile.class.php 1954 2010-03-30 14:39:03Z pooza $
  */
 class BSMusicFile extends BSMediaFile {
 
@@ -99,6 +99,21 @@ class BSMusicFile extends BSMediaFile {
 		$element->setFlashVar('showvolume', 1);
 		$element->setFlashVar('showloading', 'autohide');
 		return $element;
+	}
+
+	/**
+	 * 出力可能か？
+	 *
+	 * @access public
+	 * @return boolean 出力可能ならTrue
+	 */
+	public function validate () {
+		if (!parent::validate()) {
+			return false;
+		}
+		$header = new BSContentTypeMIMEHeader;
+		$header->setContents($this->analyzeType());
+		return ($header['main_type'] == 'audio');
 	}
 
 	/**

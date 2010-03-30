@@ -7,7 +7,7 @@
  * 例外
  *
  * @author 小石達也 <tkoishi@b-shock.co.jp>
- * @version $Id: BSException.class.php 1920 2010-03-21 09:16:06Z pooza $
+ * @version $Id: BSException.class.php 1954 2010-03-30 14:39:03Z pooza $
  */
 class BSException extends Exception {
 
@@ -21,8 +21,11 @@ class BSException extends Exception {
 		if ($message instanceof BSStringFormat) {
 			$message = $message->getContents();
 		}
-		parent::__construct($message, $code, $prev);
-
+		if (version_compare(PHP_VERSION, '5.3.0', '<')) {
+			parent::__construct($message, $code);
+		} else {
+			parent::__construct($message, $code, $prev);
+		}
 		if ($this->isLoggable()) {
 			BSLogManager::getInstance()->put($this);
 		}

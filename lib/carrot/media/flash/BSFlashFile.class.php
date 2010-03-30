@@ -8,7 +8,7 @@
  * Flashムービーファイル
  *
  * @author 小石達也 <tkoishi@b-shock.co.jp>
- * @version $Id: BSFlashFile.class.php 1862 2010-02-15 11:00:37Z pooza $
+ * @version $Id: BSFlashFile.class.php 1954 2010-03-30 14:39:03Z pooza $
  */
 class BSFlashFile extends BSMediaFile {
 
@@ -109,6 +109,19 @@ class BSFlashFile extends BSMediaFile {
 		$element = new BSFlashObjectElement;
 		$element->setURL($this->getMediaURL($params));
 		return $element;
+	}
+
+	/**
+	 * 出力可能か？
+	 *
+	 * @access public
+	 * @return boolean 出力可能ならTrue
+	 */
+	public function validate () {
+		if (!parent::validate()) {
+			return false;
+		}
+		return ($this->analyzeType() == BSMIMEType::getType('swf'));
 	}
 
 	/**
