@@ -2,11 +2,11 @@
 #
 # @package org.carrot-framework
 # @author 小石達也 <tkoishi@b-shock.co.jp>
-# @version $Id: carrot.yaml 1954 2010-03-30 14:39:03Z pooza $
+# @version $Id: carrot.yaml 1955 2010-03-31 07:10:22Z pooza $
 
 carrot:
   name: carrot Framework
-  ver: 2.3.76
+  ver: 2.3.77
   bts:
     url: http://redmine.carrot-framework.org/projects/show/carrot
 
