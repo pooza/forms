@@ -9,10 +9,6 @@ app:
     ja: forms
     en: forms
   ver: 1.1.3(2010-02-14)
-  bts:
-    url: http://redmine.carrot-framework.org/projects/show/forms
-  svn:
-    url: http://b-shock.co.jp/commons/forms/trunk
 
 author:
   name: 有限会社 ビーショック

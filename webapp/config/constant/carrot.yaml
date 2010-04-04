@@ -2,13 +2,11 @@
 #
 # @package org.carrot-framework
 # @author 小石達也 <tkoishi@b-shock.co.jp>
-# @version $Id: carrot.yaml 1955 2010-03-31 07:10:22Z pooza $
+# @version $Id: carrot.yaml 1959 2010-04-04 06:17:40Z pooza $
 
 carrot:
   name: carrot Framework
-  ver: 2.3.77
-  bts:
-    url: http://redmine.carrot-framework.org/projects/show/carrot
+  ver: 2.3.78
 
 admin:
   email:
@@ -20,8 +18,6 @@ app:
     ja: unknown
     en: unknown
   ver: unknown
-  bts:
-    url: http://redmine.carrot-framework.org/projects/show/carrot
   xmpp:
     jid:
     password:
@@ -51,7 +47,7 @@ file:
   types:
     file: /etc/httpd/mime.types
 flash:
-  player_ver: 8.0.0
+  player_ver: 9.0.0
   installer:
     href: /carrotlib/swf/expressInstall.swf
 home:
@@ -181,10 +177,6 @@ service:
 session:
   storage: default
   regenerate_id: no
-smarty:
-  cache:
-    storage: default
-    life_time: 300
 smtp:
   host: localhost
   check_addresses: no

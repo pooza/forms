@@ -110,7 +110,7 @@
 {/if}
 
 <script type="text/javascript">
-actions.onload.push(function(){ldelim}
+Event.observe(window, 'load', function(){ldelim}
   new ProtoTabs('Tabs', {ldelim}
     defaultPanel:'{$params.pane|default:'DetailForm'}',
     ajaxUrls: {ldelim}
