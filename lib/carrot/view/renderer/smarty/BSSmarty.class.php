@@ -10,13 +10,13 @@ BSUtility::includeFile('Smarty/Smarty.class');
  * Smartyラッパー
  *
  * @author 小石達也 <tkoishi@b-shock.co.jp>
- * @version $Id: BSSmarty.class.php 1957 2010-04-04 06:04:27Z pooza $
+ * @version $Id: BSSmarty.class.php 1963 2010-04-05 02:14:04Z pooza $
  */
 class BSSmarty extends Smarty implements BSTextRenderer {
 	private $type;
 	private $encoding;
 	private $template;
-	private $templatesDirectory;
+	private $directories;
 	private $error;
 	private $useragent;
 	private $headers;
@@ -27,6 +27,7 @@ class BSSmarty extends Smarty implements BSTextRenderer {
 	 * @access public
 	 */
 	public function __construct() {
+		$this->directories = new BSArray;
 		$this->compile_dir = BSFileUtility::getPath('compile');
 		$this->plugins_dir = array();
 		$this->plugins_dir[] = BSFileUtility::getPath('local_lib') . '/smarty';
@@ -34,22 +35,19 @@ class BSSmarty extends Smarty implements BSTextRenderer {
 		$this->plugins_dir[] = BSFileUtility::getPath('lib') . '/Smarty/plugins';
 		$this->force_compile = BS_DEBUG;
 		$this->error_reporting = E_ALL ^ E_NOTICE;
+		$this->registerDirectory(BSFileUtility::getDirectory('templates'));
 		$this->addModifier('encoding');
 		$this->setEncoding('utf-8');
 	}
 
 	/**
-	 * テンプレートディレクトリを返す
+	 * テンプレートディレクトリを全て返す
 	 *
 	 * @access public
-	 * @return BSDirectory テンプレートディレクトリ
+	 * @return BSArray テンプレートディレクトリの配列
 	 */
-	public function getTemplatesDirectory () {
-		if (!$this->templatesDirectory) {
-			$dir = BSFileUtility::getDirectory('templates');
-			$this->setTemplatesDirectory($dir);
-		}
-		return $this->templatesDirectory;
+	public function getDirectories () {
+		return $this->directories;
 	}
 
 	/**
@@ -57,11 +55,12 @@ class BSSmarty extends Smarty implements BSTextRenderer {
 	 *
 	 * @access public
 	 * @param BSDirectory $dir テンプレートディレクトリ
+	 * @param boolean $priority 優先順位 (BSArray::POSITION_TOP|BSArray::POSITION_BOTTOM)
 	 */
-	public function setTemplatesDirectory (BSDirectory $dir) {
+	public function registerDirectory (BSDirectory $dir, $priority = BSArray::POSITION_TOP) {
 		$dir->setDefaultSuffix('.tpl');
-		$this->template_dir = $dir->getPath();
-		$this->templatesDirectory = $dir;
+		$this->directories->setParameter(null, $dir, $priority);
+		$this->template_dir = $this->directories->getIterator()->getFirst()->getPath();
 	}
 
 	/**
@@ -340,24 +339,20 @@ class BSSmarty extends Smarty implements BSTextRenderer {
 			return new BSTemplateFile($name->getPath());
 		} else if (BSUtility::isPathAbsolute($name)) {
 			return new BSTemplateFile($name);
-		} else {
-			$name = mb_eregi_replace('\\.tpl$', '', $name);
-			$directories = new BSArray;
-			$directories[] = $this->getTemplatesDirectory();
-			$directories[] = BSFileUtility::getDirectory('templates');
-			$names = new BSArray($name);
-			if ($this->getUserAgent()) {
-				if ($this->getUserAgent()->isMobile()) {
-					$names[] = $name . '.mobile';
-				}
-				$names[] = $name . '.' . $this->getUserAgent()->getType();
-				$names->sort(BSArray::SORT_KEY_DESC);
+		}
+		$name = mb_eregi_replace('\\.tpl$', '', $name);
+		$names = new BSArray($name);
+		if ($this->getUserAgent()) {
+			if ($this->getUserAgent()->isMobile()) {
+				$names[] = $name . '.mobile';
 			}
-			foreach ($directories as $directory) {
-				foreach ($names as $name) {
-					if ($file = $directory->getEntry($name, 'BSTemplateFile')) {
-						return $file;
-					}
+			$names[] = $name . '.' . $this->getUserAgent()->getType();
+			$names->sort(BSArray::SORT_KEY_DESC);
+		}
+		foreach ($this->getDirectories() as $directory) {
+			foreach ($names as $name) {
+				if ($file = $directory->getEntry($name, 'BSTemplateFile')) {
+					return $file;
 				}
 			}
 		}

@@ -8,7 +8,7 @@
  * Smarty機能を内蔵したメールレンダラー
  *
  * @author 小石達也 <tkoishi@b-shock.co.jp>
- * @version $Id: BSSmartyMail.class.php 1952 2010-03-29 03:47:25Z pooza $
+ * @version $Id: BSSmartyMail.class.php 1962 2010-04-05 02:07:06Z pooza $
  */
 class BSSmartyMail extends BSMail {
 
@@ -25,7 +25,7 @@ class BSSmartyMail extends BSMail {
 		$renderer->addOutputFilter('mail');
 		if ($module = BSController::getInstance()->getModule()) {
 			if ($dir = $module->getDirectory('templates')) {
-				$renderer->setTemplatesDirectory($dir);
+				$renderer->registerDirectory($dir);
 			}
 		}
 		$renderer->setAttribute('date', BSDate::getNow());

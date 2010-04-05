@@ -8,7 +8,7 @@
  * 基底ビュー
  *
  * @author 小石達也 <tkoishi@b-shock.co.jp>
- * @version $Id: BSView.class.php 1926 2010-03-21 14:36:34Z pooza $
+ * @version $Id: BSView.class.php 1966 2010-04-05 03:47:29Z pooza $
  */
 class BSView extends BSHTTPResponse {
 	protected $nameSuffix;
@@ -174,10 +174,10 @@ class BSView extends BSHTTPResponse {
 		}
 
 		$this->setCacheControl(false);
-		if (!BSUser::getInstance()->isAdministrator()) {
+		if (!BSUser::getInstance()->getCredentials()->count()) {
 			$this->setCacheControl(true);
-		} else if (BSRequest::getInstance()->getUserAgent()->hasBug('cache_control')) {
-			if (BSRequest::getInstance()->isSSL() || !$this->isHTML()) {
+		} else if ($this->useragent->hasBug('cache_control')) {
+			if ($this->request->isSSL() || !$this->isHTML()) {
 				$this->setCacheControl(true);
 			}
 		}
@@ -194,11 +194,11 @@ class BSView extends BSHTTPResponse {
 	 * キャッシュ制御を設定
 	 *
 	 * @access public
-	 * @param Boolean $mode キャッシュONならTrue
+	 * @param boolean $mode キャッシュONならTrue
 	 */
 	public function setCacheControl ($mode) {
 		if (!!$mode) {
-			$this->setHeader('Cache-Control', 'private');
+			$this->setHeader('Cache-Control', 'private, max-age=60');
 			$this->setHeader('Pragma', 'private');
 		} else {
 			$this->setHeader('Cache-Control', 'no-cache, must-revalidate');

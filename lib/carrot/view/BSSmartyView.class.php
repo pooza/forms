@@ -8,7 +8,7 @@
  * Smartyレンダラー用の基底ビュー
  *
  * @author 小石達也 <tkoishi@b-shock.co.jp>
- * @version $Id: BSSmartyView.class.php 1812 2010-02-03 15:15:09Z pooza $
+ * @version $Id: BSSmartyView.class.php 1964 2010-04-05 03:07:45Z pooza $
  * @link http://ozaki.kyoichi.jp/mojavi3/smarty.html 参考
  */
 class BSSmartyView extends BSView {
@@ -52,9 +52,9 @@ class BSSmartyView extends BSView {
 		}
 
 		if ($dir = $this->controller->getModule()->getDirectory('templates')) {
-			$this->renderer->setTemplatesDirectory($dir);
+			$this->renderer->registerDirectory($dir);
 		}
-		if ($file = $this->getDefaultTemplateFile()) {
+		if ($file = $this->getDefaultTemplate()) {
 			$this->renderer->setTemplate($file);
 		}
 	}
@@ -62,10 +62,10 @@ class BSSmartyView extends BSView {
 	/**
 	 * 規定のテンプレートを返す
 	 *
-	 * @access public
+	 * @access protected
 	 * @param BSTemplateFile テンプレートファイル
 	 */
-	public function getDefaultTemplateFile () {
+	protected function getDefaultTemplate () {
 		$names = array(
 			$this->getAction()->getName() . '.' . $this->getNameSuffix(),
 			$this->getAction()->getName(),
