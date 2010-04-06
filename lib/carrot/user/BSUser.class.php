@@ -8,7 +8,7 @@
  * ユーザー
  *
  * @author 小石達也 <tkoishi@b-shock.co.jp>
- * @version $Id: BSUser.class.php 1926 2010-03-21 14:36:34Z pooza $
+ * @version $Id: BSUser.class.php 1969 2010-04-06 08:14:54Z pooza $
  */
 class BSUser extends BSParameterHolder {
 	protected $id;
@@ -269,6 +269,16 @@ class BSUser extends BSParameterHolder {
 	 */
 	public function isAuthor () {
 		return $this->hasCredential(BSAuthorRole::CREDENTIAL);
+	}
+
+	/**
+	 * ゲストユーザーか？
+	 *
+	 * @access public
+	 * @return boolean ゲストユーザーならばTrue
+	 */
+	public function isGuest () {
+		return !$this->getCredentials()->count();
 	}
 }
 
