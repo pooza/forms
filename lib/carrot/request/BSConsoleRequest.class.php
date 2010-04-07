@@ -8,34 +8,19 @@
  * コンソールリクエスト
  *
  * @author 小石達也 <tkoishi@b-shock.co.jp>
- * @version $Id: BSConsoleRequest.class.php 1926 2010-03-21 14:36:34Z pooza $
+ * @version $Id: BSConsoleRequest.class.php 1973 2010-04-07 02:27:22Z pooza $
  */
 class BSConsoleRequest extends BSRequest {
 	private $options;
-	static private $instance;
 
 	/**
-	 * @access private
+	 * @access protected
 	 */
-	private function __construct () {
+	protected function __construct () {
 		$this->options = new BSArray;
 		$this->addOption(BSController::MODULE_ACCESSOR);
 		$this->addOption(BSController::ACTION_ACCESSOR);
 		$this->parse();
-	}
-
-	/**
-	 * シングルトンインスタンスを返す
-	 *
-	 * @access public
-	 * @return BSConsoleRequest インスタンス
-	 * @static
-	 */
-	static public function getInstance () {
-		if (!self::$instance) {
-			self::$instance = new self;
-		}
-		return self::$instance;
 	}
 
 	/**

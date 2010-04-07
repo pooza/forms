@@ -8,7 +8,7 @@
  * 抽象リクエスト
  *
  * @author 小石達也 <tkoishi@b-shock.co.jp>
- * @version $Id: BSRequest.class.php 1926 2010-03-21 14:36:34Z pooza $
+ * @version $Id: BSRequest.class.php 1973 2010-04-07 02:27:22Z pooza $
  * @abstract
  */
 abstract class BSRequest extends BSHTTPRequest {
@@ -19,6 +19,13 @@ abstract class BSRequest extends BSHTTPRequest {
 	private $session;
 	private $attributes;
 	private $errors;
+	static private $instance;
+
+	/**
+	 * @access protected
+	 */
+	protected function __construct () {
+	}
 
 	/**
 	 * シングルトンインスタンスを返す
@@ -28,11 +35,14 @@ abstract class BSRequest extends BSHTTPRequest {
 	 * @static
 	 */
 	static public function getInstance () {
-		if (PHP_SAPI == 'cli') {
-			return BSConsoleRequest::getInstance();
-		} else {
-			return BSWebRequest::getInstance();
+		if (!self::$instance) {
+			if (PHP_SAPI == 'cli') {
+				self::$instance = new BSConsoleRequest;
+			} else {
+				self::$instance = new BSWebRequest;
+			}
 		}
+		return self::$instance;
 	}
 
 	/**
@@ -225,9 +235,11 @@ abstract class BSRequest extends BSHTTPRequest {
 	 */
 	public function getHost () {
 		if (!$this->host) {
-			$this->host = new BSHost(
-				$this->controller->getAttribute('REMOTE_ADDR')
-			);
+			foreach (array('X-FORWARDED-FOR', 'REMOTE_ADDR') as $name) {
+				if (!BSString::isBlank($host = $this->controller->getAttribute($name))) {
+					return $this->host = new BSHost($host);
+				}
+			}
 		}
 		return $this->host;
 	}

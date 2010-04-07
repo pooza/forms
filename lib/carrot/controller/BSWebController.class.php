@@ -8,24 +8,9 @@
  * Webコントローラー
  *
  * @author 小石達也 <tkoishi@b-shock.co.jp>
- * @version $Id: BSWebController.class.php 1926 2010-03-21 14:36:34Z pooza $
+ * @version $Id: BSWebController.class.php 1973 2010-04-07 02:27:22Z pooza $
  */
 class BSWebController extends BSController {
-	static private $instance;
-
-	/**
-	 * シングルトンインスタンスを返す
-	 *
-	 * @access public
-	 * @return BSWebController インスタンス
-	 * @static
-	 */
-	static public function getInstance () {
-		if (!self::$instance) {
-			self::$instance = new self;
-		}
-		return self::$instance;
-	}
 
 	/**
 	 * @access public
