@@ -8,7 +8,7 @@
  * ログマネージャ
  *
  * @author 小石達也 <tkoishi@b-shock.co.jp>
- * @version $Id: BSLogManager.class.php 1926 2010-03-21 14:36:34Z pooza $
+ * @version $Id: BSLogManager.class.php 1976 2010-04-07 07:28:49Z pooza $
  */
 class BSLogManager implements IteratorAggregate {
 	private $loggers;
@@ -106,13 +106,18 @@ class BSLogManager implements IteratorAggregate {
 	 * @static
 	 */
 	static public function formatMessage ($message, $priority) {
-		$message = array(
-			'[' . date('Y-m-d H:i:s') . ']',
-			'[' . gethostbyaddr($_SERVER['REMOTE_ADDR']) . ']', //BSRequest::getHostは使わない
-			'[' . $priority . ']',
-			$message,
-		);
-		return implode(' ', $message);
+		// 初期化中のエラーでログが吐かれることも想定し、標準関数のみで実装。
+		foreach (array('HTTP_X_FORWARDED_FOR', 'REMOTE_ADDR') as $name) {
+			if (isset($_SEERVER[$name]) && ($host = $_SEERVER[$name])) {
+				$message = array(
+					'[' . date('Y-m-d H:i:s') . ']',
+					'[' . gethostbyaddr($host) . ']', 
+					'[' . $priority . ']',
+					$message,
+				);
+				return implode(' ', $message);
+			}
+		}
 	}
 }
 

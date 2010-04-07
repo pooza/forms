@@ -8,7 +8,7 @@
  * 設定マネージャ
  *
  * @author 小石達也 <tkoishi@b-shock.co.jp>
- * @version $Id: BSConfigManager.class.php 1926 2010-03-21 14:36:34Z pooza $
+ * @version $Id: BSConfigManager.class.php 1975 2010-04-07 07:19:04Z pooza $
  */
 class BSConfigManager {
 	private $compilers;
@@ -27,7 +27,7 @@ class BSConfigManager {
 	 * シングルトンインスタンスを返す
 	 *
 	 * @access public
-	 * @return BSSerializeHandler インスタンス
+	 * @return BSConfigManager インスタンス
 	 * @static
 	 */
 	static public function getInstance () {
