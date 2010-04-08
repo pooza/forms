@@ -2,11 +2,11 @@
 #
 # @package org.carrot-framework
 # @author 小石達也 <tkoishi@b-shock.co.jp>
-# @version $Id: carrot.yaml 1977 2010-04-07 14:23:29Z pooza $
+# @version $Id: carrot.yaml 1979 2010-04-08 09:20:55Z pooza $
 
 carrot:
   name: carrot Framework
-  ver: 2.3.82
+  ver: 2.3.83
 
 admin:
   email:
@@ -109,6 +109,9 @@ module:
   secure:
     module: Default
     action: NotFound
+  empty_site:
+    module: Default
+    action: EmptySite
 movie:
   video_codec: flv
   audio_codec: libfaac
