@@ -8,7 +8,7 @@
  * 楽曲ファイル
  *
  * @author 小石達也 <tkoishi@b-shock.co.jp>
- * @version $Id: BSMusicFile.class.php 1954 2010-03-30 14:39:03Z pooza $
+ * @version $Id: BSMusicFile.class.php 1981 2010-04-09 03:24:07Z pooza $
  */
 class BSMusicFile extends BSMediaFile {
 
@@ -64,10 +64,14 @@ class BSMusicFile extends BSMediaFile {
 	 *
 	 * @access public
 	 * @param BSParameterHolder $params パラメータ配列
-	 * @return BSXMLElement 要素
+	 * @return BSDivisionElement 要素
 	 */
 	public function getElement (BSParameterHolder $params) {
-		return $this->getObjectElement($params);
+		$container = new BSDivisionElement;
+		$container->setAttribute('width', $this['width']);
+		$container->setAttribute('height', $this['height']);
+		$container->addElement($this->getObjectElement($params));
+		return $container;
 	}
 
 	/**
@@ -75,7 +79,7 @@ class BSMusicFile extends BSMediaFile {
 	 *
 	 * @access protected
 	 * @param BSParameterHolder $params パラメータ配列
-	 * @return BSXMLElement 要素
+	 * @return BSScriptElement 要素
 	 */
 	protected function getScriptElement (BSParameterHolder $params) {
 		throw new BSMediaException($this . 'はgetScriptElementに対応していません。');
@@ -86,7 +90,7 @@ class BSMusicFile extends BSMediaFile {
 	 *
 	 * @access protected
 	 * @param BSParameterHolder $params パラメータ配列
-	 * @return BSXMLElement 要素
+	 * @return BSObjectElement 要素
 	 */
 	protected function getObjectElement (BSParameterHolder $params) {
 		$element = new BSFlashObjectElement;

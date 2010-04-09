@@ -272,7 +272,7 @@
 {/if}
 
 <script type="text/javascript">
-Event.observe(window, 'load', function(){ldelim}
+document.observe('dom:loaded', function(){ldelim}
   new ProtoTabs('Tabs', {ldelim}
     defaultPanel:'{$params.pane|default:'DetailForm'}',
     ajaxUrls: {ldelim}

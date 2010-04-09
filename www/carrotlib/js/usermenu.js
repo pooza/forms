@@ -21,7 +21,7 @@
  *   </dl>
  * </div>
  * <script type="text/javascript">
- * Event.observe(window, 'load', function () {
+ * document.observe('dom:loaded', function () {
  *   new UserMenu('sample1'); //#usermenu_sample1に対応
  *   new UserMenu('sample2'); //#usermenu_sample2に対応
  * });
@@ -29,7 +29,7 @@
  *
  * @package org.carrot-framework
  * @author 小石達也 <tkoishi@b-shock.co.jp>
- * @version $Id: usermenu.js 1961 2010-04-04 06:43:27Z pooza $
+ * @version $Id: usermenu.js 1982 2010-04-09 03:25:02Z pooza $
  * @see http://www.leigeber.com/2008/04/sliding-javascript-dropdown-menu/ 改造もと
  */
 

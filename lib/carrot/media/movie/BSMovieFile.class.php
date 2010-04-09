@@ -8,7 +8,7 @@
  * 動画ファイル
  *
  * @author 小石達也 <tkoishi@b-shock.co.jp>
- * @version $Id: BSMovieFile.class.php 1954 2010-03-30 14:39:03Z pooza $
+ * @version $Id: BSMovieFile.class.php 1981 2010-04-09 03:24:07Z pooza $
  */
 class BSMovieFile extends BSMediaFile {
 
@@ -93,14 +93,14 @@ class BSMovieFile extends BSMediaFile {
 	 *
 	 * @access public
 	 * @param BSParameterHolder $params パラメータ配列
-	 * @return BSXMLElement 要素
+	 * @return BSDivisionElement 要素
 	 */
 	public function getElement (BSParameterHolder $params) {
-		$element = parent::getElement($params);
-		if ($inner = $element->getElement('div')) { //Gecko対応
+		$container = parent::getElement($params);
+		if ($inner = $container->getElement('div')) { //Gecko対応
 			$inner->setStyles($this->getStyles($params));
 		}
-		return $element;
+		return $container;
 	}
 
 	/**
@@ -108,7 +108,7 @@ class BSMovieFile extends BSMediaFile {
 	 *
 	 * @access protected
 	 * @param BSParameterHolder $params パラメータ配列
-	 * @return BSXMLElement 要素
+	 * @return BSScriptElement 要素
 	 */
 	protected function getScriptElement (BSParameterHolder $params) {
 		$element = new BSScriptElement;
@@ -128,7 +128,7 @@ class BSMovieFile extends BSMediaFile {
 	 *
 	 * @access protected
 	 * @param BSParameterHolder $params パラメータ配列
-	 * @return BSXMLElement 要素
+	 * @return BSObjectElement 要素
 	 */
 	protected function getObjectElement (BSParameterHolder $params) {
 		$element = new BSFlashObjectElement;

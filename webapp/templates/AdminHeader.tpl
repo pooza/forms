@@ -3,7 +3,7 @@
 
 @package org.carrot-framework
 @author 小石達也 <tkoishi@b-shock.co.jp>
-@version $Id: AdminHeader.tpl 1961 2010-04-04 06:43:27Z pooza $
+@version $Id: AdminHeader.tpl 1982 2010-04-09 03:25:02Z pooza $
 *}
 <?xml version="1.0" encoding="UTF-8" ?>
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
@@ -35,7 +35,7 @@ body {ldelim}background: url(/carrotlib/images/background/test.gif) repeat-y;{rd
 	</ul>
 </div>
 <script type="text/javascript">
-Event.observe(window, 'load', function () {ldelim}
+document.observe('dom:loaded', function () {ldelim}
   new Elevator($('Menu'), 10, 10, 10);
 {rdelim});
 </script>

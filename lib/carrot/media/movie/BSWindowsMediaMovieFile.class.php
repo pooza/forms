@@ -8,7 +8,7 @@
  * WindowsMedia動画ファイル
  *
  * @author 小石達也 <tkoishi@b-shock.co.jp>
- * @version $Id: BSWindowsMediaMovieFile.class.php 1911 2010-03-11 01:52:28Z pooza $
+ * @version $Id: BSWindowsMediaMovieFile.class.php 1981 2010-04-09 03:24:07Z pooza $
  */
 class BSWindowsMediaMovieFile extends BSMovieFile {
 
@@ -17,18 +17,18 @@ class BSWindowsMediaMovieFile extends BSMovieFile {
 	 *
 	 * @access public
 	 * @param BSParameterHolder $params パラメータ配列
-	 * @return BSXMLElement 要素
+	 * @return BSDivisionElement 要素
 	 */
 	public function getElement (BSParameterHolder $params) {
-		$element = new BSDivisionElement;
-		$element->registerStyleClass($params['style_class']);
-		$element->setStyles($this->getStyles($params));
-		$object = $element->addElement(new BSWindowsMediaObjectElement);
+		$container = new BSDivisionElement;
+		$container->registerStyleClass($params['style_class']);
+		$container->setStyles($this->getStyles($params));
+		$object = $container->addElement(new BSWindowsMediaObjectElement);
 		$object->setAttribute('type', $this->getType());
 		$object->setAttribute('width', $params['width']);
 		$object->setAttribute('height', $params['height']);
 		$object->setURL($this->getMediaURL($params));
-		return $element;
+		return $container;
 	}
 
 	/**

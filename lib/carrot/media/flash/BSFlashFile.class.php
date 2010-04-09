@@ -8,7 +8,7 @@
  * Flashムービーファイル
  *
  * @author 小石達也 <tkoishi@b-shock.co.jp>
- * @version $Id: BSFlashFile.class.php 1954 2010-03-30 14:39:03Z pooza $
+ * @version $Id: BSFlashFile.class.php 1981 2010-04-09 03:24:07Z pooza $
  */
 class BSFlashFile extends BSMediaFile {
 
@@ -35,7 +35,7 @@ class BSFlashFile extends BSMediaFile {
 	 *
 	 * @access public
 	 * @param BSParameterHolder $params パラメータ配列
-	 * @return BSXMLElement 要素
+	 * @return BSDivisionElement 要素
 	 */
 	public function getElement (BSParameterHolder $params) {
 		if ($params['flash_light']) {
@@ -56,14 +56,14 @@ class BSFlashFile extends BSMediaFile {
 	 *
 	 * @access public
 	 * @param BSParameterHolder $params パラメータ配列
-	 * @return BSXMLElement 要素
+	 * @return BSDivisionElement 要素
 	 */
 	public function getFlashLightElement (BSParameterHolder $params) {
-		$div = new BSDivisionElement;
-		$object = $div->addElement(new BSFlashLightObjectElement);
+		$container = new BSDivisionElement;
+		$object = $container->addElement(new BSFlashLightObjectElement);
 		$object->setURL($this->getMediaURL($params));
 		$object->setAttribute('id', 'swf' . $this->getID());
-		$anchor = $div->addElement(new BSDivisionElement);
+		$anchor = $container->addElement(new BSDivisionElement);
 		$anchor = $anchor->addElement(new BSAnchorElement);
 		$anchor->setAttribute('iswf', 'swf' . $this->getID());
 		$anchor->setURL($this->getMediaURL($params));
@@ -73,7 +73,7 @@ class BSFlashFile extends BSMediaFile {
 		}
 		$anchor->setBody($params['label']);
 
-		return $div;
+		return $container;
 	}
 
 	/**
@@ -81,7 +81,7 @@ class BSFlashFile extends BSMediaFile {
 	 *
 	 * @access protected
 	 * @param BSParameterHolder $params パラメータ配列
-	 * @return BSXMLElement 要素
+	 * @return BSScriptElement 要素
 	 */
 	protected function getScriptElement (BSParameterHolder $params) {
 		$element = new BSScriptElement;
@@ -103,7 +103,7 @@ class BSFlashFile extends BSMediaFile {
 	 *
 	 * @access protected
 	 * @param BSParameterHolder $params パラメータ配列
-	 * @return BSXMLElement 要素
+	 * @return BSObjectElement 要素
 	 */
 	protected function getObjectElement (BSParameterHolder $params) {
 		$element = new BSFlashObjectElement;

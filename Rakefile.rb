@@ -4,7 +4,7 @@
 #
 # @package org.carrot-framework
 # @author 小石達也 <tkoishi@b-shock.co.jp>
-# @version $Id: Rakefile.rb 1974 2010-04-07 02:39:35Z pooza $
+# @version $Id: Rakefile.rb 1983 2010-04-09 03:31:42Z pooza $
 
 $KCODE = 'u'
 require 'yaml'
@@ -95,7 +95,7 @@ namespace :var do
 
   namespace :classes do
     desc 'クラスヒント情報をクリア'
-    task :clear do
+    task :clean do
       sh 'rm var/serialized/BSClassLoader.*'
     end
   end
