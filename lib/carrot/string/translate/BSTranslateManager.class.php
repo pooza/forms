@@ -8,7 +8,7 @@
  * 単語翻訳機能
  *
  * @author 小石達也 <tkoishi@b-shock.co.jp>
- * @version $Id: BSTranslateManager.class.php 1926 2010-03-21 14:36:34Z pooza $
+ * @version $Id: BSTranslateManager.class.php 1987 2010-04-11 02:49:50Z pooza $
  */
 class BSTranslateManager implements IteratorAggregate {
 	private $language = 'ja';
@@ -209,8 +209,6 @@ class BSTranslateManager implements IteratorAggregate {
 	}
 
 	/**
-	 * イテレータを返す
-	 *
 	 * @access public
 	 * @return BSIterator イテレータ
 	 */

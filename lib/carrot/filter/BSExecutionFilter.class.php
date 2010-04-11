@@ -8,7 +8,7 @@
  * アクション実行
  *
  * @author 小石達也 <tkoishi@b-shock.co.jp>
- * @version $Id: BSExecutionFilter.class.php 1812 2010-02-03 15:15:09Z pooza $
+ * @version $Id: BSExecutionFilter.class.php 1986 2010-04-11 02:38:14Z pooza $
  */
 class BSExecutionFilter extends BSFilter {
 	public function execute () {
@@ -47,7 +47,7 @@ class BSExecutionFilter extends BSFilter {
 	private function executeView ($name) {
 		$view = $this->action->getView($name);
 		if (!$view->initialize()) {
-			throw new BSInitializationException($view . 'が初期化できません。');
+			throw new BSViewException($view . 'が初期化できません。');
 		}
 		$view->execute();
 		$view->render();

@@ -10,7 +10,7 @@ BSUtility::includeFile('Smarty/Smarty.class');
  * Smartyラッパー
  *
  * @author 小石達也 <tkoishi@b-shock.co.jp>
- * @version $Id: BSSmarty.class.php 1963 2010-04-05 02:14:04Z pooza $
+ * @version $Id: BSSmarty.class.php 1986 2010-04-11 02:38:14Z pooza $
  */
 class BSSmarty extends Smarty implements BSTextRenderer {
 	private $type;
@@ -369,7 +369,7 @@ class BSSmarty extends Smarty implements BSTextRenderer {
 			if (!$this->compiler->initialize($this)) {
 				$message = new BSStringFormat('%sが初期化できません。');
 				$message[] = $this->compiler_class;
-				throw new BSInitializationException($message);
+				throw new BSViewException($message);
 			}
 		}
 		return $this->compiler;

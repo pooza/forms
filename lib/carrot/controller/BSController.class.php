@@ -8,7 +8,7 @@
  * Carrotアプリケーションコントローラ
  *
  * @author 小石達也 <tkoishi@b-shock.co.jp>
- * @version $Id: BSController.class.php 1973 2010-04-07 02:27:22Z pooza $
+ * @version $Id: BSController.class.php 1985 2010-04-11 02:18:21Z pooza $
  * @abstract
  */
 abstract class BSController {
@@ -62,6 +62,13 @@ abstract class BSController {
 			}
 		}
 		return self::$instance;
+	}
+
+	/**
+	 * @access public
+	 */
+	public function __clone () {
+		throw new BadFunctionCallException(__CLASS__ . 'はコピーできません。');
 	}
 
 	/**

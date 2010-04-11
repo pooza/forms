@@ -3,7 +3,7 @@
  *
  * @package org.carrot-framework
  * @author 小石達也 <tkoishi@b-shock.co.jp>
- * @version $Id: carrot.js 1982 2010-04-09 03:25:02Z pooza $
+ * @version $Id: carrot.js 1996 2010-04-11 11:44:34Z pooza $
  */
 
 function redirect (m, a, id) {
@@ -56,6 +56,23 @@ function putSmartTag (tag, field, name, params) {
     field.selectionStart = position + tag.length;
     field.selectionEnd = field.selectionStart;
   }
+}
+
+function handleUploadProgress (element) {
+  var progress = new JS_BRAMUS.jsProgressBar(element, 0);
+  function updateProgress (request) {
+    if (request.responseText) {
+      var json = request.responseText.evalJSON();
+      progress.setPercentage(json.current / json.total * 100);
+    }
+  }
+  new PeriodicalExecuter(function () {
+    new Ajax.Request('/UploadProgress', {
+      method: 'get',
+      parameters: 'd=' + new Date().getTime(),
+      onComplete: updateProgress
+    });
+  }, 1);
 }
 
 // SafariのString.trim対応

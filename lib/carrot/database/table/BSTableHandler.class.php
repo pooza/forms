@@ -8,7 +8,7 @@
  * データベーステーブル
  *
  * @author 小石達也 <tkoishi@b-shock.co.jp>
- * @version $Id: BSTableHandler.class.php 1822 2010-02-05 02:04:19Z pooza $
+ * @version $Id: BSTableHandler.class.php 1987 2010-04-11 02:49:50Z pooza $
  * @abstract
  */
 abstract class BSTableHandler implements IteratorAggregate, BSDictionary, BSAssignable {
@@ -459,8 +459,6 @@ abstract class BSTableHandler implements IteratorAggregate, BSDictionary, BSAssi
 	}
 
 	/**
-	 * イテレータを返す
-	 *
 	 * @access public
 	 * @return BSTableIterator イテレータ
 	 */
@@ -536,8 +534,6 @@ abstract class BSTableHandler implements IteratorAggregate, BSDictionary, BSAssi
 	}
 
 	/**
-	 * レコード数を返す
-	 *
 	 * @access public
 	 * @return integer レコード数
 	 */

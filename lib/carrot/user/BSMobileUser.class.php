@@ -8,24 +8,9 @@
  * ケータイユーザー
  *
  * @author 小石達也 <tkoishi@b-shock.co.jp>
- * @version $Id: BSMobileUser.class.php 1812 2010-02-03 15:15:09Z pooza $
+ * @version $Id: BSMobileUser.class.php 1985 2010-04-11 02:18:21Z pooza $
  */
 class BSMobileUser extends BSUser {
-	static private $instance;
-
-	/**
-	 * シングルトンインスタンスを返す
-	 *
-	 * @access public
-	 * @return BSMobileUser インスタンス
-	 * @static
-	 */
-	static public function getInstance () {
-		if (!self::$instance) {
-			self::$instance = new self;
-		}
-		return self::$instance;
-	}
 
 	/**
 	 * ログイン

@@ -8,7 +8,7 @@
  * Smartyレンダラー用の基底ビュー
  *
  * @author 小石達也 <tkoishi@b-shock.co.jp>
- * @version $Id: BSSmartyView.class.php 1964 2010-04-05 03:07:45Z pooza $
+ * @version $Id: BSSmartyView.class.php 1989 2010-04-11 03:06:52Z pooza $
  * @link http://ozaki.kyoichi.jp/mojavi3/smarty.html 参考
  */
 class BSSmartyView extends BSView {
@@ -23,11 +23,7 @@ class BSSmartyView extends BSView {
 		$this->action = $action;
 		$this->nameSuffix = $suffix;
 
-		if ($renderer) {
-			if (!($renderer instanceof BSSmarty)) {
-				throw new BSViewException(get_class($renderer) . 'をセットできません。');
-			}
-		} else {
+		if (!$renderer) {
 			$renderer = new BSSmarty;
 		}
 		$this->setRenderer($renderer);
@@ -46,6 +42,10 @@ class BSSmartyView extends BSView {
 	 *   BSMIMEUtility::WITH_HEADER ヘッダも修正
 	 */
 	public function setRenderer (BSRenderer $renderer, $flags = BSMIMEUtility::WITH_HEADER) {
+		if (!($renderer instanceof BSSmarty)) {
+			throw new BSViewException(get_class($renderer) . 'をセットできません。');
+		}
+
 		parent::setRenderer($renderer, $flags);
 		if (!$this->useragent->initializeView($this)) {
 			throw new BSViewException('ビューを初期化できません。');

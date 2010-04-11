@@ -8,7 +8,7 @@
  * メディアファイル
  *
  * @author 小石達也 <tkoishi@b-shock.co.jp>
- * @version $Id: BSMediaFile.class.php 1981 2010-04-09 03:24:07Z pooza $
+ * @version $Id: BSMediaFile.class.php 1987 2010-04-11 02:49:50Z pooza $
  * @abstract
  */
 abstract class BSMediaFile extends BSFile implements ArrayAccess {
@@ -185,8 +185,6 @@ abstract class BSMediaFile extends BSFile implements ArrayAccess {
 	}
 
 	/**
-	 * 要素が存在するか？
-	 *
 	 * @access public
 	 * @param string $key 添え字
 	 * @return boolean 要素が存在すればTrue
@@ -196,8 +194,6 @@ abstract class BSMediaFile extends BSFile implements ArrayAccess {
 	}
 
 	/**
-	 * 要素を返す
-	 *
 	 * @access public
 	 * @param string $key 添え字
 	 * @return mixed 要素
@@ -207,8 +203,6 @@ abstract class BSMediaFile extends BSFile implements ArrayAccess {
 	}
 
 	/**
-	 * 要素を設定
-	 *
 	 * @access public
 	 * @param string $key 添え字
 	 * @param mixed 要素
@@ -218,8 +212,6 @@ abstract class BSMediaFile extends BSFile implements ArrayAccess {
 	}
 
 	/**
-	 * 要素を削除
-	 *
 	 * @access public
 	 * @param string $key 添え字
 	 */

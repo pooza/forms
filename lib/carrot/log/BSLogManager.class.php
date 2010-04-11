@@ -8,7 +8,7 @@
  * ログマネージャ
  *
  * @author 小石達也 <tkoishi@b-shock.co.jp>
- * @version $Id: BSLogManager.class.php 1984 2010-04-09 08:10:29Z pooza $
+ * @version $Id: BSLogManager.class.php 1987 2010-04-11 02:49:50Z pooza $
  */
 class BSLogManager implements IteratorAggregate {
 	private $loggers;
@@ -87,8 +87,6 @@ class BSLogManager implements IteratorAggregate {
 	}
 
 	/**
-	 * イテレータを返す
-	 *
 	 * @access public
 	 * @return BSIterator イテレータ
 	 */

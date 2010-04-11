@@ -8,7 +8,7 @@
  * Webリクエスト
  *
  * @author 小石達也 <tkoishi@b-shock.co.jp>
- * @version $Id: BSWebRequest.class.php 1973 2010-04-07 02:27:22Z pooza $
+ * @version $Id: BSWebRequest.class.php 1985 2010-04-11 02:18:21Z pooza $
  */
 class BSWebRequest extends BSRequest {
 
@@ -17,13 +17,6 @@ class BSWebRequest extends BSRequest {
 	 */
 	protected function __construct () {
 		$this->setMethod($this->controller->getAttribute('REQUEST_METHOD'));
-	}
-
-	/**
-	 * @access public
-	 */
-	public function __clone () {
-		throw new BadFunctionCallException(__CLASS__ . 'はコピーできません。');
 	}
 
 	/**

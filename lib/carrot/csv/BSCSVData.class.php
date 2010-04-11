@@ -10,7 +10,7 @@
  * @author 小石達也 <tkoishi@b-shock.co.jp>
  * @link http://project-p.jp/halt/kinowiki/php/Tips/csv 参考
  * @link http://www.din.or.jp/~ohzaki/perl.htm#CSV2Values 参考
- * @version $Id: BSCSVData.class.php 1812 2010-02-03 15:15:09Z pooza $
+ * @version $Id: BSCSVData.class.php 1987 2010-04-11 02:49:50Z pooza $
  */
 class BSCSVData implements BSTextRenderer, IteratorAggregate {
 	protected $contents;
@@ -276,8 +276,6 @@ class BSCSVData implements BSTextRenderer, IteratorAggregate {
 	}
 
 	/**
-	 * イテレータを返す
-	 *
 	 * @access public
 	 * @return BSIterator イテレータ
 	 */

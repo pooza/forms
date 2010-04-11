@@ -8,7 +8,7 @@
  * CSSファイル
  *
  * @author 小石達也 <tkoishi@b-shock.co.jp>
- * @version $Id: BSCSSFile.class.php 1848 2010-02-09 01:55:30Z pooza $
+ * @version $Id: BSCSSFile.class.php 1990 2010-04-11 07:17:52Z pooza $
  */
 class BSCSSFile extends BSFile {
 
@@ -47,9 +47,9 @@ class BSCSSFile extends BSFile {
 		$contents = mb_ereg_replace('\\n+', "\n", $contents);
 		$contents = mb_ereg_replace('^\\n', null, $contents);
 		$contents = mb_ereg_replace('\\n$', null, $contents);
-		$contents = mb_ereg_replace(' *{ *', ' {', $contents);
-		$contents = mb_ereg_replace(' *}', '}', $contents);
-		$contents = mb_ereg_replace(' *: *', ':', $contents);
+		$contents = mb_ereg_replace('[[ \\t]]*{[[ \\t]]*', ' {', $contents);
+		$contents = mb_ereg_replace('[[ \\t]]*}', '}', $contents);
+		$contents = mb_ereg_replace('[[ \\t]]*:[[ \\t]]*', ':', $contents);
 		BSController::getInstance()->setAttribute($this, $contents);
 	}
 

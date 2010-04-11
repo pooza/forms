@@ -8,7 +8,7 @@
  * ユーザー
  *
  * @author 小石達也 <tkoishi@b-shock.co.jp>
- * @version $Id: BSUser.class.php 1969 2010-04-06 08:14:54Z pooza $
+ * @version $Id: BSUser.class.php 1985 2010-04-11 02:18:21Z pooza $
  */
 class BSUser extends BSParameterHolder {
 	protected $id;
@@ -41,19 +41,17 @@ class BSUser extends BSParameterHolder {
 	/**
 	 * シングルトンインスタンスを返す
 	 *
-	 * ケータイからのリクエストの場合は、BSMobileUserを返す。
-	 *
 	 * @access public
 	 * @return BSUser インスタンス
 	 * @static
 	 */
 	static public function getInstance () {
-		if (BSRequest::getInstance()->isMobile()) {
-			return BSMobileUser::getInstance();
-		}
-
 		if (!self::$instance) {
-			self::$instance = new self;
+			if (BSRequest::getInstance()->isMobile()) {
+				self::$instance = new BSMobileUser;
+			} else {
+				self::$instance = new self;
+			}
 		}
 		return self::$instance;
 	}

@@ -8,7 +8,7 @@
  * 基底ビュー
  *
  * @author 小石達也 <tkoishi@b-shock.co.jp>
- * @version $Id: BSView.class.php 1977 2010-04-07 14:23:29Z pooza $
+ * @version $Id: BSView.class.php 1988 2010-04-11 03:02:06Z pooza $
  */
 class BSView extends BSHTTPResponse {
 	protected $nameSuffix;
@@ -258,7 +258,7 @@ class BSView extends BSHTTPResponse {
 			return;
 		}
 		if (headers_sent()) {
-			throw new BSHTTPException('レスポンスヘッダを送信できません。');
+			throw new BSViewException('レスポンスヘッダを送信できません。');
 		}
 		header($header);
 	}

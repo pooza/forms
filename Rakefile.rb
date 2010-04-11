@@ -4,7 +4,7 @@
 #
 # @package org.carrot-framework
 # @author 小石達也 <tkoishi@b-shock.co.jp>
-# @version $Id: Rakefile.rb 1983 2010-04-09 03:31:42Z pooza $
+# @version $Id: Rakefile.rb 1992 2010-04-11 07:51:43Z pooza $
 
 $KCODE = 'u'
 require 'yaml'
@@ -50,7 +50,7 @@ namespace :var do
 
       desc 'イメージキャッシュをクリア'
       task :clean do
-        sh 'rm -R var/image_cache/*'
+        sh 'sudo rm -R var/image_cache/*'
       end
 
       file 'www/carrotlib/images/cache' do
@@ -72,7 +72,7 @@ namespace :var do
 
     desc 'cssキャッシュをクリア'
     task :clean do
-      sh 'rm var/css_cache/*'
+      sh 'sudo rm var/css_cache/*'
     end
 
     file 'www/carrotlib/css/cache' do
@@ -85,7 +85,7 @@ namespace :var do
 
     desc 'jsキャッシュをクリア'
     task :clean do
-      sh 'rm var/js_cache/*'
+      sh 'sudo rm var/js_cache/*'
     end
 
     file 'www/carrotlib/js/cache' do
@@ -96,7 +96,7 @@ namespace :var do
   namespace :classes do
     desc 'クラスヒント情報をクリア'
     task :clean do
-      sh 'rm var/serialized/BSClassLoader.*'
+      sh 'sudo rm var/serialized/BSClassLoader.*'
     end
   end
 
@@ -217,22 +217,17 @@ namespace :svn do
         system 'find . ' + extension_arg + ' | xargs svn pset svn:mime-type ' + type
       end
       if (type == nil) || (/^text\// =~ type)
-        system 'find . -maxdepth 1 ' + extension_arg + ' | xargs svn pset svn:eol-style LF'
-        system 'find bin ' + extension_arg + ' | xargs svn pset svn:eol-style LF'
-        system 'find share ' + extension_arg + ' | xargs svn pset svn:eol-style LF'
-        system 'find webapp ' + extension_arg + ' | xargs svn pset svn:eol-style LF'
-        system 'find www ' + extension_arg + ' | xargs svn pset svn:eol-style LF'
-        system 'find lib/carrot ' + extension_arg + ' | xargs svn pset svn:eol-style LF'
+        system 'find . ' + extension_arg + ' | xargs svn pset svn:eol-style LF'
       end
       system 'find . ' + extension_arg + ' | xargs svn pdel svn:executable'
     end
     ['pl', 'rb'].each do |extension|
       extension_arg = '-name \'*.' + extension + '\''
-      system 'find lib -mindepth 2 ' + extension_arg + ' | xargs svn pset svn:executable ON'
+      system 'find lib ' + extension_arg + ' | xargs svn pset svn:executable ON'
     end
     ['pl', 'rb', 'php'].each do |extension|
       extension_arg = '-name \'*.' + extension + '\''
-      system 'find bin -maxdepth 1 ' + extension_arg + ' | xargs svn pset svn:executable ON'
+      system 'find bin ' + extension_arg + ' | xargs svn pset svn:executable ON'
     end
   end
 

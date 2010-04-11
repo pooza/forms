@@ -8,7 +8,7 @@
  * form要素
  *
  * @author 小石達也 <tkoishi@b-shock.co.jp>
- * @version $Id: BSFormElement.class.php 1812 2010-02-03 15:15:09Z pooza $
+ * @version $Id: BSFormElement.class.php 1995 2010-04-11 11:33:43Z pooza $
  */
 class BSFormElement extends BSXHTMLElement {
 	const ATTACHABLE_TYPE = 'multipart/form-data';
@@ -103,6 +103,9 @@ class BSFormElement extends BSXHTMLElement {
 	public function setAttachable ($flag) {
 		if ($flag) {
 			$this->setAttribute('enctype', self::ATTACHABLE_TYPE);
+			if (extension_loaded('apc')) {
+				$this->addHiddenField('APC_UPLOAD_PROGRESS', BS_UPLOAD_PROGRESS_KEY);
+			}
 		} else {
 			$this->removeAttribute('enctype');
 		}

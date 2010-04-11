@@ -10,7 +10,7 @@
  * BSJavaScriptSet/BSStyleSetの基底クラス
  *
  * @author 小石達也 <tkoishi@b-shock.co.jp>
- * @version $Id: BSDocumentSet.class.php 1889 2010-02-28 10:52:44Z pooza $
+ * @version $Id: BSDocumentSet.class.php 1987 2010-04-11 02:49:50Z pooza $
  * @abstract
  */
 abstract class BSDocumentSet implements BSTextRenderer, IteratorAggregate {
@@ -174,7 +174,7 @@ abstract class BSDocumentSet implements BSTextRenderer, IteratorAggregate {
 	protected function register ($entry) {
 		if (is_string($entry)) {
 			if (!$dir = $this->getSourceDirectory()) {
-				throw new BSInitializationException($this . 'のソースディレクトリが未定義です。');
+				throw new BSConfigException($this . 'のソースディレクトリが未定義です。');
 			}
 			if (!$entry = $dir->getEntry($entry, $this->getDocumentClass())) {
 				return;
@@ -340,8 +340,6 @@ abstract class BSDocumentSet implements BSTextRenderer, IteratorAggregate {
 	}
 
 	/**
-	 * イテレータを返す
-	 *
 	 * @access public
 	 * @return BSIterator イテレータ
 	 */

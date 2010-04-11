@@ -7,7 +7,7 @@
  * パラメータホルダ
  *
  * @author 小石達也 <tkoishi@b-shock.co.jp>
- * @version $Id: BSParameterHolder.class.php 1812 2010-02-03 15:15:09Z pooza $
+ * @version $Id: BSParameterHolder.class.php 1987 2010-04-11 02:49:50Z pooza $
  * @abstract
  */
 abstract class BSParameterHolder implements IteratorAggregate, ArrayAccess, Countable {
@@ -116,8 +116,6 @@ abstract class BSParameterHolder implements IteratorAggregate, ArrayAccess, Coun
 	}
 
 	/**
-	 * イテレータを返す
-	 *
 	 * @access public
 	 * @return BSIterator イテレータ
 	 */
@@ -126,8 +124,6 @@ abstract class BSParameterHolder implements IteratorAggregate, ArrayAccess, Coun
 	}
 
 	/**
-	 * 要素数を返す
-	 *
 	 * @access public
 	 * @return integer 要素数
 	 */
@@ -136,8 +132,6 @@ abstract class BSParameterHolder implements IteratorAggregate, ArrayAccess, Coun
 	}
 
 	/**
-	 * 要素が存在するか？
-	 *
 	 * @access public
 	 * @param string $key 添え字
 	 * @return boolean 要素が存在すればTrue
@@ -147,8 +141,6 @@ abstract class BSParameterHolder implements IteratorAggregate, ArrayAccess, Coun
 	}
 
 	/**
-	 * 要素を返す
-	 *
 	 * @access public
 	 * @param string $key 添え字
 	 * @return mixed 要素
@@ -158,8 +150,6 @@ abstract class BSParameterHolder implements IteratorAggregate, ArrayAccess, Coun
 	}
 
 	/**
-	 * 要素を設定
-	 *
 	 * @access public
 	 * @param string $key 添え字
 	 * @param mixed 要素
@@ -169,8 +159,6 @@ abstract class BSParameterHolder implements IteratorAggregate, ArrayAccess, Coun
 	}
 
 	/**
-	 * 要素を削除
-	 *
 	 * @access public
 	 * @param string $key 添え字
 	 */

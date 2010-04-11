@@ -17,7 +17,7 @@
  * p($holidays->getHolidays()); //当月のすべての祝日を配列で
  *
  * @author 小石達也 <tkoishi@b-shock.co.jp>
- * @version $Id: BSJapaneseHolidayListService.class.php 1922 2010-03-21 11:22:53Z pooza $
+ * @version $Id: BSJapaneseHolidayListService.class.php 1987 2010-04-11 02:49:50Z pooza $
  * @link http://www.finds.jp/wsdocs/calendar/
  */
 class BSJapaneseHolidayListService extends BSCurlHTTP implements BSHolidayList, BSSerializable {
@@ -49,7 +49,7 @@ class BSJapaneseHolidayListService extends BSCurlHTTP implements BSHolidayList, 
 		if (!$this->date) {
 			$message = new BSStringFormat('%sの対象日付が設定されていません。');
 			$message[] = get_class($this);
-			throw new BSInitializationException($message);
+			throw new BSConfigException($message);
 		}
 		return $this->date;
 	}
@@ -113,8 +113,6 @@ class BSJapaneseHolidayListService extends BSCurlHTTP implements BSHolidayList, 
 	}
 
 	/**
-	 * 要素が存在するか？
-	 *
 	 * @access public
 	 * @param string $key 添え字
 	 * @return boolean 要素が存在すればTrue
@@ -124,8 +122,6 @@ class BSJapaneseHolidayListService extends BSCurlHTTP implements BSHolidayList, 
 	}
 
 	/**
-	 * 要素を返す
-	 *
 	 * @access public
 	 * @param string $key 添え字
 	 * @return mixed 要素
@@ -135,24 +131,20 @@ class BSJapaneseHolidayListService extends BSCurlHTTP implements BSHolidayList, 
 	}
 
 	/**
-	 * 要素を設定
-	 *
 	 * @access public
 	 * @param string $key 添え字
 	 * @param mixed 要素
 	 */
 	public function offsetSet ($key, $value) {
-		throw new BSInitializationException(get_class($this) . 'は更新できません。');
+		throw new BadFunctionCallException(get_class($this) . 'は更新できません。');
 	}
 
 	/**
-	 * 要素を削除
-	 *
 	 * @access public
 	 * @param string $key 添え字
 	 */
 	public function offsetUnset ($key) {
-		throw new BSInitializationException(get_class($this) . 'は更新できません。');
+		throw new BadFunctionCallException(get_class($this) . 'は更新できません。');
 	}
 
 	/**
