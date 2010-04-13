@@ -8,11 +8,10 @@
  * 抽象リクエスト
  *
  * @author 小石達也 <tkoishi@b-shock.co.jp>
- * @version $Id: BSRequest.class.php 1973 2010-04-07 02:27:22Z pooza $
+ * @version $Id: BSRequest.class.php 1998 2010-04-13 10:24:35Z pooza $
  * @abstract
  */
 abstract class BSRequest extends BSHTTPRequest {
-	const USER_AGENT_ACCESSOR = 'ua';
 	protected $version = null;
 	private $host;
 	private $useragent;

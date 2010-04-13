@@ -4,7 +4,7 @@
 #
 # @package org.carrot-framework
 # @author 小石達也 <tkoishi@b-shock.co.jp>
-# @version $Id: Rakefile.rb 1992 2010-04-11 07:51:43Z pooza $
+# @version $Id: Rakefile.rb 1997 2010-04-13 08:55:05Z pooza $
 
 $KCODE = 'u'
 require 'yaml'
@@ -201,7 +201,7 @@ namespace :docomo do
 
   desc 'DoCoMoの端末リストを更新'
   task :update do
-    sh ' update webapp/config/docomo_atents.xml'
+    sh 'svn update webapp/config/docomo_atents.xml'
   end
 end
 

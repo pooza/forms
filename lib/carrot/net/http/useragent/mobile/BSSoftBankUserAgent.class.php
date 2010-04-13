@@ -8,7 +8,7 @@
  * SoftBankユーザーエージェント
  *
  * @author 小石達也 <tkoishi@b-shock.co.jp>
- * @version $Id: BSSoftBankUserAgent.class.php 1812 2010-02-03 15:15:09Z pooza $
+ * @version $Id: BSSoftBankUserAgent.class.php 2001 2010-04-13 10:41:23Z pooza $
  */
 class BSSoftBankUserAgent extends BSMobileUserAgent {
 
@@ -63,10 +63,7 @@ class BSSoftBankUserAgent extends BSMobileUserAgent {
 	public function getDisplayInfo () {
 		$controller = BSController::getInstance();
 		if (BSString::isBlank($info = $controller->getAttribute('X-JPHONE-DISPLAY'))) {
-			return new BSArray(array(
-				'width' => self::DEFAULT_DISPLAY_WIDTH,
-				'height' => self::DEFAULT_DISPLAY_HEIGHT,
-			));
+			return parent::getDisplayInfo();
 		}
 		$info = BSString::explode('*', $info);
 

@@ -8,7 +8,7 @@
  * ユーザーエージェント
  *
  * @author 小石達也 <tkoishi@b-shock.co.jp>
- * @version $Id: BSUserAgent.class.php 1812 2010-02-03 15:15:09Z pooza $
+ * @version $Id: BSUserAgent.class.php 1998 2010-04-13 10:24:35Z pooza $
  * @abstract
  */
 abstract class BSUserAgent implements BSAssignable {
@@ -16,6 +16,7 @@ abstract class BSUserAgent implements BSAssignable {
 	protected $attributes;
 	protected $bugs;
 	static private $denied;
+	const ACCESSOR = 'ua';
 
 	/**
 	 * @access public
@@ -145,7 +146,17 @@ abstract class BSUserAgent implements BSAssignable {
 	 * @return BSWWWFormRenderer
 	 */
 	public function getQuery () {
-		return new BSWWWFormRenderer;
+		$query = new BSWWWFormRenderer;
+		if (BS_DEBUG || BSUser::getInstance()->isAdministrator()) {
+			$request = BSRequest::getInstance();
+			if (!BSString::isBlank($name = $request[self::ACCESSOR])) {
+				$query[self::ACCESSOR] = $name;
+			}
+			if (!!$request['preview']) {
+				$query['preview'] = 1;
+			}
+		}
+		return $query;
 	}
 
 	/**
@@ -288,8 +299,6 @@ abstract class BSUserAgent implements BSAssignable {
 	 * @return mixed アサインすべき値
 	 */
 	public function getAssignValue () {
-		$this->attributes['query'] = $this->getQuery();
-		$this->attributes['query_params'] = $this->getQuery()->getContents();
 		return $this->attributes;
 	}
 

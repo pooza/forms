@@ -8,7 +8,7 @@
  * メニュー構築フィルタ
  *
  * @author 小石達也 <tkoishi@b-shock.co.jp>
- * @version $Id: BSMenuFilter.class.php 1927 2010-03-22 02:44:10Z pooza $
+ * @version $Id: BSMenuFilter.class.php 1998 2010-04-13 10:24:35Z pooza $
  */
 class BSMenuFilter extends BSFilter {
 	private $menu;
@@ -65,6 +65,12 @@ class BSMenuFilter extends BSFilter {
 			if (BSString::isBlank($values['credential'])) {
 				$values['credential'] = $module->getCredential();
 			}
+		}
+		if (!BSString::isBlank($values['href'])) {
+			$url = BSURL::getInstance();
+			$url['path'] = $values['href'];
+			$url->setParameters($this->request->getUserAgent()->getQuery());
+			$values['href'] = $url->getFullPath();
 		}
 		if ($this->user->hasCredential($values['credential'])) {
 			return $values;

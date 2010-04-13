@@ -8,7 +8,7 @@
  * Webリクエスト
  *
  * @author 小石達也 <tkoishi@b-shock.co.jp>
- * @version $Id: BSWebRequest.class.php 1985 2010-04-11 02:18:21Z pooza $
+ * @version $Id: BSWebRequest.class.php 1999 2010-04-13 10:32:09Z pooza $
  */
 class BSWebRequest extends BSRequest {
 
@@ -107,7 +107,7 @@ class BSWebRequest extends BSRequest {
 			$this->headers = new BSArray;
 			if (extension_loaded('http')) {
 				$headers = http_get_request_headers();
-			} else if (function_exists('apache_request_headers')) {
+			} else if (BSString::isContain('apache', PHP_SAPI)) {
 				$headers = apache_request_headers();
 			} else {
 				$headers = array();
@@ -203,7 +203,7 @@ class BSWebRequest extends BSRequest {
 	 */
 	public function getUserAgentName () {
 		if (BS_DEBUG || ($this->user && $this->user->isAdministrator())) {
-			if (!BSString::isBlank($name = $this[BSRequest::USER_AGENT_ACCESSOR])) {
+			if (!BSString::isBlank($name = $this[BSUserAgent::ACCESSOR])) {
 				return $name;
 			}
 		}

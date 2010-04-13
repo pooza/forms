@@ -8,7 +8,7 @@
  * Docomoユーザーエージェント
  *
  * @author 小石達也 <tkoishi@b-shock.co.jp>
- * @version $Id: BSDocomoUserAgent.class.php 1855 2010-02-09 04:01:25Z pooza $
+ * @version $Id: BSDocomoUserAgent.class.php 2001 2010-04-13 10:41:23Z pooza $
  */
 class BSDocomoUserAgent extends BSMobileUserAgent {
 
@@ -18,7 +18,6 @@ class BSDocomoUserAgent extends BSMobileUserAgent {
 	 */
 	public function __construct ($name = null) {
 		parent::__construct($name);
-		$this->attributes['query']['guid'] = 'ON';
 		$this->attributes['is_foma'] = $this->isFOMA();
 	}
 
@@ -66,6 +65,18 @@ class BSDocomoUserAgent extends BSMobileUserAgent {
 	}
 
 	/**
+	 * クエリーパラメータを返す
+	 *
+	 * @access public
+	 * @return BSWWWFormRenderer
+	 */
+	public function getQuery () {
+		$query = parent::getQuery();
+		$query['guid'] = 'ON';
+		return $query;
+	}
+
+	/**
 	 * 画面情報を返す
 	 *
 	 * @access public
@@ -77,10 +88,7 @@ class BSDocomoUserAgent extends BSMobileUserAgent {
 				return new BSArray($values);
 			}
 		}
-		return new BSArray(array(
-			'width' => self::DEFAULT_DISPLAY_WIDTH,
-			'height' => self::DEFAULT_DISPLAY_HEIGHT,
-		));
+		return parent::getDisplayInfo();
 	}
 
 	/**

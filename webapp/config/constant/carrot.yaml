@@ -2,11 +2,11 @@
 #
 # @package org.carrot-framework
 # @author 小石達也 <tkoishi@b-shock.co.jp>
-# @version $Id: carrot.yaml 1995 2010-04-11 11:33:43Z pooza $
+# @version $Id: carrot.yaml 2000 2010-04-13 10:38:42Z pooza $
 
 carrot:
   name: carrot Framework
-  ver: 2.3.85
+  ver: 2.3.86
 
 admin:
   email:
@@ -57,6 +57,9 @@ home:
   href: /index.html
 image:
   mobile:
+    size:
+      width: 240
+      height: 320
     type:
       docomo: image/jpeg
       au: image/png

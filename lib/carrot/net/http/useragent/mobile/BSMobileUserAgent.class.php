@@ -8,14 +8,11 @@
  * モバイルユーザーエージェント
  *
  * @author 小石達也 <tkoishi@b-shock.co.jp>
- * @version $Id: BSMobileUserAgent.class.php 1889 2010-02-28 10:52:44Z pooza $
+ * @version $Id: BSMobileUserAgent.class.php 2001 2010-04-13 10:41:23Z pooza $
  * @abstract
  */
 abstract class BSMobileUserAgent extends BSUserAgent implements BSUserIdentifier {
 	private $carrier;
-	private $query;
-	const DEFAULT_DISPLAY_WIDTH = 240;
-	const DEFAULT_DISPLAY_HEIGHT = 320;
 
 	/**
 	 * @access public
@@ -27,7 +24,6 @@ abstract class BSMobileUserAgent extends BSUserAgent implements BSUserIdentifier
 		$this->attributes['id'] = $this->getID();
 		$this->attributes['is_attachable'] = $this->isAttachable();
 		$this->attributes['display'] = $this->getDisplayInfo();
-		$this->attributes['query'] = new BSArray;
 	}
 
 	/**
@@ -63,18 +59,10 @@ abstract class BSMobileUserAgent extends BSUserAgent implements BSUserIdentifier
 	 * @return BSWWWFormRenderer
 	 */
 	public function getQuery () {
-		if (!$this->query) {
-			$this->query = new BSWWWFormRenderer;
-			$this->query->setParameters($this->attributes['query']);
-
-			$session = BSRequest::getInstance()->getSession();
-			$this->query[$session->getName()] = $session->getID();
-			if (BS_DEBUG) {
-				$this->query[BSRequest::USER_AGENT_ACCESSOR] = $this->getName();
-				$this->query['mobile_agent_id'] = $this->getID();
-			}
-		}
-		return $this->query;
+		$query = parent::getQuery();
+		$session = BSRequest::getInstance()->getSession();
+		$query[$session->getName()] = $session->getID();
+		return $query;
 	}
 
 	/**
@@ -132,9 +120,13 @@ abstract class BSMobileUserAgent extends BSUserAgent implements BSUserIdentifier
 	 *
 	 * @access public
 	 * @return BSArray 画面情報
-	 * @abstract
 	 */
-	abstract public function getDisplayInfo ();
+	public function getDisplayInfo () {
+		return new BSArray(array(
+			'width' => BS_IMAGE_MOBILE_SIZE_WIDTH,
+			'height' => BS_IMAGE_MOBILE_SIZE_HEIGHT,
+		));
+	}
 
 	/**
 	 * 添付可能か？
