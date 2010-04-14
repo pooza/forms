@@ -8,7 +8,7 @@
  * QuickTime動画ファイル
  *
  * @author 小石達也 <tkoishi@b-shock.co.jp>
- * @version $Id: BSQuickTimeMovieFile.class.php 1981 2010-04-09 03:24:07Z pooza $
+ * @version $Id: BSQuickTimeMovieFile.class.php 2002 2010-04-14 02:56:19Z pooza $
  */
 class BSQuickTimeMovieFile extends BSMovieFile {
 
@@ -28,6 +28,11 @@ class BSQuickTimeMovieFile extends BSMovieFile {
 		$object->setAttribute('width', $params['width']);
 		$object->setAttribute('height', $params['height']);
 		$object->setURL($this->getMediaURL($params));
+		foreach (array('kioskmode') as $key) {
+			if ($params->hasParameter($key)) {
+				$object->setParameter($key, $params[$key]);
+			}
+		}
 		return $container;
 	}
 

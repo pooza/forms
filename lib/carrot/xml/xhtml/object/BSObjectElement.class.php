@@ -8,7 +8,7 @@
  * object要素
  *
  * @author 小石達也 <tkoishi@b-shock.co.jp>
- * @version $Id: BSObjectElement.class.php 1812 2010-02-03 15:15:09Z pooza $
+ * @version $Id: BSObjectElement.class.php 2002 2010-04-14 02:56:19Z pooza $
  */
 class BSObjectElement extends BSXHTMLElement {
 	protected $inner;
@@ -45,11 +45,11 @@ class BSObjectElement extends BSXHTMLElement {
 	/**
 	 * param要素を加える
 	 *
-	 * @access protected
+	 * @access public
 	 * @param string $name 名前
 	 * @param string $value 値
 	 */
-	protected function setParameter ($name, $value) {
+	public function setParameter ($name, $value) {
 		foreach ($this->elements as $index => $element) {
 			if (($element->getName() == 'param') && ($element->getAttribute('name') == $name)) {
 				$this->elements->removeParameter($index);
