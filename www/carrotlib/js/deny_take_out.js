@@ -3,7 +3,7 @@
  *
  * @package org.carrot-framework
  * @author 小石達也 <tkoishi@b-shock.co.jp>
- * @version $Id: deny_take_out.js 1808 2010-02-03 03:55:50Z pooza $
+ * @version $Id: deny_take_out.js 2004 2010-04-14 08:38:00Z pooza $
  */
 
 function denyTakeOut (selector_name) {
@@ -16,6 +16,17 @@ function denyTakeOut (selector_name) {
       element.unselectable = 'on';
       element.galleryimg = 'no';
     }
+
+    var cover = document.createElement('img');
+    cover.src = '/carrotlib/images/spacer.gif';
+    Element.setStyle(cover, {
+      'left': element.offsetLeft + 'px',
+      'top': element.offsetTop + 'px',
+      'width': element.width + 'px',
+      'height': element.height + 'px',
+      'position': 'absolute'
+    });
+    element.parentNode.appendChild(cover);
   }
 
   if (!selector_name) {
