@@ -8,7 +8,7 @@
  * memcacheサーバ
  *
  * @author 小石達也 <tkoishi@b-shock.co.jp>
- * @version $Id: BSMemcache.class.php 1987 2010-04-11 02:49:50Z pooza $
+ * @version $Id: BSMemcache.class.php 2008 2010-04-16 10:45:44Z pooza $
  */
 class BSMemcache extends Memcache implements ArrayAccess {
 	private $attributes;
@@ -143,7 +143,10 @@ class BSMemcache extends Memcache implements ArrayAccess {
 	 * @return boolean 処理の成否
 	 */
 	public function set ($name, $value, $flag = null, $expire = null) {
-		if (is_object($value)) {
+		if ($value instanceof BSParameterHolder) {
+			$value = new BSArray($value);
+			$value = $value->decode();
+		} else if (is_object($value)) {
 			throw new BSMemcacheException('オブジェクトを登録できません。');
 		}
 		return parent::set($this->serializeName($name), $value, $flag, $expire);

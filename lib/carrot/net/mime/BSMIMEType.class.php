@@ -8,11 +8,10 @@
  * MIMEタイプ
  *
  * @author 小石達也 <tkoishi@b-shock.co.jp>
- * @version $Id: BSMIMEType.class.php 1946 2010-03-27 16:43:17Z pooza $
+ * @version $Id: BSMIMEType.class.php 2007 2010-04-16 10:23:26Z pooza $
  */
 class BSMIMEType extends BSParameterHolder implements BSSerializable {
 	private $typesFile;
-	private $magicFile;
 	private $suffixes;
 	static private $instance;
 	const DEFAULT_TYPE = 'application/octet-stream';
@@ -62,22 +61,6 @@ class BSMIMEType extends BSParameterHolder implements BSSerializable {
 			}
 		}
 		return $this->typesFile;
-	}
-
-	/**
-	 * magicファイルを返す
-	 *
-	 * @access private
-	 * @return BSFile magicファイル
-	 */
-	private function getMagicFile () {
-		if (!$this->magicFile) {
-			$this->magicFile = new BSFile(BS_FILE_MAGIC_FILE);
-			if (!$this->magicFile->isReadable()) {
-				throw new BSConfigException($file . 'を開くことができません。');
-			}
-		}
-		return $this->magicFile;
 	}
 
 	/**

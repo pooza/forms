@@ -8,7 +8,7 @@
  * Webリクエスト
  *
  * @author 小石達也 <tkoishi@b-shock.co.jp>
- * @version $Id: BSWebRequest.class.php 1999 2010-04-13 10:32:09Z pooza $
+ * @version $Id: BSWebRequest.class.php 2006 2010-04-16 10:02:15Z pooza $
  */
 class BSWebRequest extends BSRequest {
 
@@ -172,7 +172,7 @@ class BSWebRequest extends BSRequest {
 	 * @return boolean SSL環境ならTrue
 	 */
 	public function isSSL () {
-		return !!$this->getHeader('https');
+		return !!$this->controller->getAttribute('HTTPS');
 	}
 
 	/**

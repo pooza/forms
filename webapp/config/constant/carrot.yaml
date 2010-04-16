@@ -2,11 +2,11 @@
 #
 # @package org.carrot-framework
 # @author 小石達也 <tkoishi@b-shock.co.jp>
-# @version $Id: carrot.yaml 2002 2010-04-14 02:56:19Z pooza $
+# @version $Id: carrot.yaml 2007 2010-04-16 10:23:26Z pooza $
 
 carrot:
   name: carrot Framework
-  ver: 2.3.87
+  ver: 2.3.88
 
 admin:
   email:
@@ -45,8 +45,6 @@ debug: yes
 ffmpeg:
   dir: /usr/local
 file:
-  magic:
-    file: /etc/httpd/magic
   types:
     file: /etc/httpd/mime.types
 flash:
