@@ -19,9 +19,9 @@ author:
 
 pdo:
   default:
-    dsn: mysql:host=61.58.40.184;dbname=forms_test
+    dsn: mysql:host=localhost;dbname=forms_test
     uid: httpd
-    password: WW18ynwKOtzOzqxyTma3og==
+    password: 4x69ITuoRCJL6u1l2zc1sA==
 
 smtp:
   host: mail.uenogakuen.ed.jp
