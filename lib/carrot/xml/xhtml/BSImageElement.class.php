@@ -8,7 +8,7 @@
  * img要素
  *
  * @author 小石達也 <tkoishi@b-shock.co.jp>
- * @version $Id: BSImageElement.class.php 1812 2010-02-03 15:15:09Z pooza $
+ * @version $Id: BSImageElement.class.php 2009 2010-04-17 07:27:55Z pooza $
  */
 class BSImageElement extends BSXHTMLElement {
 
@@ -72,17 +72,14 @@ class BSImageElement extends BSXHTMLElement {
 			case 'border':
 			case 'class':
 			case 'style':
-				break;
+				return parent::setAttribute($name, $value);
 			case 'alt':
 				return $this->setAlt($value);
 			case 'href':
 			case 'url':
 			case 'src':
 				return $this->setURL($value);
-			default:
-				return;
 		}
-		parent::setAttribute($name, $value);
 	}
 }
 

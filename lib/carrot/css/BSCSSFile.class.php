@@ -8,7 +8,7 @@
  * CSSファイル
  *
  * @author 小石達也 <tkoishi@b-shock.co.jp>
- * @version $Id: BSCSSFile.class.php 1990 2010-04-11 07:17:52Z pooza $
+ * @version $Id: BSCSSFile.class.php 2009 2010-04-17 07:27:55Z pooza $
  */
 class BSCSSFile extends BSFile {
 
@@ -38,18 +38,8 @@ class BSCSSFile extends BSFile {
 	 * @access public
 	 */
 	public function serialize () {
-		$renderer = new BSPlainTextRenderer;
-		$renderer->setContents(mb_ereg_replace('/\\*.*?\\*/', null, $this->getContents()));
-		$contents = null;
-		foreach ($renderer as $line) {
-			$contents .= trim($line) . "\n";
-		}
-		$contents = mb_ereg_replace('\\n+', "\n", $contents);
-		$contents = mb_ereg_replace('^\\n', null, $contents);
-		$contents = mb_ereg_replace('\\n$', null, $contents);
-		$contents = mb_ereg_replace('[[ \\t]]*{[[ \\t]]*', ' {', $contents);
-		$contents = mb_ereg_replace('[[ \\t]]*}', '}', $contents);
-		$contents = mb_ereg_replace('[[ \\t]]*:[[ \\t]]*', ':', $contents);
+		BSUtility::includeFile('Minify/CSS/Compressor.php');
+		$contents = Minify_CSS_Compressor::process($this->getContents());
 		BSController::getInstance()->setAttribute($this, $contents);
 	}
 

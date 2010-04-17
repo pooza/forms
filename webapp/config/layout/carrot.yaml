@@ -2,7 +2,7 @@
 #
 # @package org.carrot-framework
 # @author 小石達也 <tkoishi@b-shock.co.jp>
-# @version $Id: carrot.yaml 1939 2010-03-27 13:02:11Z pooza $
+# @version $Id: carrot.yaml 2013 2010-04-17 09:42:06Z pooza $
 
 awstats:
   parent: lib
@@ -80,6 +80,10 @@ log:
     month: 3
 man:
   parent: share
+maps:
+  parent: var
+  suffix: .gif
+  href: /carrotlib/images/maps/
 menu:
   parent: config
 modules:

@@ -8,7 +8,7 @@
  * CurlによるHTTP処理
  *
  * @author 小石達也 <tkoishi@b-shock.co.jp>
- * @version $Id: BSCurlHTTP.class.php 1905 2010-03-09 05:26:42Z pooza $
+ * @version $Id: BSCurlHTTP.class.php 2014 2010-04-17 10:00:23Z pooza $
  */
 class BSCurlHTTP extends BSHTTP {
 	private $engine;
@@ -69,11 +69,13 @@ class BSCurlHTTP extends BSHTTP {
 
 		$response = new BSHTTPResponse;
 		$response->setURL($url);
-		$contents = BSString::convertLineSeparator(curl_exec($this->getEngine()), "\n");
-		if ($contents === false) {
+		if (($contents = curl_exec($this->getEngine())) === false) {
 			throw new BSHTTPException($url . 'へ送信できません。');
 		}
-		$response->setContents($contents);
+
+		$contents = BSString::explode(self::LINE_SEPARATOR . self::LINE_SEPARATOR, $contents);
+		$response->setContents($contents->shift());
+		$response->setBody($contents->shift());
 
 		if (!$response->validate()) {
 			$message = new BSStringFormat('不正なレスポンスです。 (%d %s)');

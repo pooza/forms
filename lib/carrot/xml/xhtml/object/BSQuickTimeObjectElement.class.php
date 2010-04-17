@@ -8,7 +8,7 @@
  * QuickTime用object要素
  *
  * @author 小石達也 <tkoishi@b-shock.co.jp>
- * @version $Id: BSQuickTimeObjectElement.class.php 1812 2010-02-03 15:15:09Z pooza $
+ * @version $Id: BSQuickTimeObjectElement.class.php 2010 2010-04-17 07:33:40Z pooza $
  */
 class BSQuickTimeObjectElement extends BSObjectElement {
 
@@ -31,7 +31,7 @@ class BSQuickTimeObjectElement extends BSObjectElement {
 	 * URLを設定
 	 *
 	 * @access public
-	 * @param BSHTTPRedirector $url FlashムービーのURL
+	 * @param BSHTTPRedirector $url メディアのURL
 	 */
 	public function setURL (BSHTTPRedirector $url) {
 		$this->setParameter('src', $url->getContents());

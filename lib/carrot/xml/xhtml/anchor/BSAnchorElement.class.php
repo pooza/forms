@@ -8,7 +8,7 @@
  * a要素
  *
  * @author 小石達也 <tkoishi@b-shock.co.jp>
- * @version $Id: BSAnchorElement.class.php 1978 2010-04-08 09:19:47Z pooza $
+ * @version $Id: BSAnchorElement.class.php 2016 2010-04-17 12:50:11Z pooza $
  */
 class BSAnchorElement extends BSXHTMLElement {
 
@@ -36,14 +36,14 @@ class BSAnchorElement extends BSXHTMLElement {
 	}
 
 	/**
-	 * 対象をラップして返す
+	 * 対象にリンクを設定
 	 *
 	 * @access public
 	 * @param BSXMLElement $element 対象要素
 	 * @param BSHTTPRedirector $url リンク先
 	 * @return BSAnchorElement 自身
 	 */
-	public function wrap (BSXMLElement $element, BSHTTPRedirector $url) {
+	public function link (BSXMLElement $element, BSHTTPRedirector $url) {
 		$this->addElement($element);
 		$this->setURL($url);
 		if (!$this->useragent->isMobile() && $url->isForeign()) {
