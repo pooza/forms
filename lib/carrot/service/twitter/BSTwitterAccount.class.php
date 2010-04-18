@@ -8,93 +8,149 @@
  * Twitterアカウント
  *
  * @author 小石達也 <tkoishi@b-shock.co.jp>
- * @version $Id: BSTwitterAccount.class.php 1812 2010-02-03 15:15:09Z pooza $
+ * @version $Id: BSTwitterAccount.class.php 2025 2010-04-18 07:28:40Z pooza $
  */
-class BSTwitterAccount {
-	private $source;
-	private $attributes = array();
-	private $url;
-	private $icon;
+class BSTwitterAccount implements BSImageContainer {
+	private $profile;
 
 	/**
 	 * @access public
-	 * @param BSXMLElement $source status要素
+	 * @param mixed[] $profile status要素
 	 */
-	public function __construct (BSXMLElement $source = null) {
-		$this->source = $source;
+	public function __construct ($profile = null) {
+		$this->profile = $profile;
+	}
+
+	/**
+	 * @access public
+	 * @param string $method メソッド名
+	 * @param mixed[] $values 引数
+	 */
+	public function __call ($method, $values) {
+		if (mb_ereg('^get([[:upper:]][[:alnum:]]+)$', $method, $matches)) {
+			$name = BSString::underscorize($matches[1]);
+			if (isset($this->profile[$name])) {
+				return $this->profile[$name];
+			}
+		} 
+		$message = new BSStringFormat('仮想メソッド"%s"は未定義です。');
+		$message[] = $method;
+		throw new BadFunctionCallException($message);
+	}
+
+	/**
+	 * プロフィールアイコン画像を返す
+	 *
+	 * @access public
+	 * @return BSImage プロフィールアイコン画像
+	 */
+	public function getIcon () {
+		try {
+			$url = BSURL::getInstance($this->profile['profile_image_url']);
+			$image = new BSImage;
+			$image->setImage($url->fetch());
+			$image->setType(BSMIMEType::getType('png'));
+			return $image;
+		} catch (BSHTTPException $e) {
+			return null;
+		} catch (BSImageException $e) {
+			return null;
+		}
+	}
+
+	/**
+	 * 画像の情報を返す
+	 *
+	 * @access public
+	 * @param string $size サイズ名
+	 * @param integer $pixel ピクセルサイズ
+	 * @param integer $flags フラグのビット列
+	 * @return BSArray 画像の情報
+	 */
+	public function getImageInfo ($size = 'icon', $pixel = null, $flags = null) {
+		if ($file = $this->getImageFile()) {
+			$caches = BSImageCacheHandler::getInstance();
+			$info = $caches->getImageInfo($file, $size, $pixel, $flags);
+			$info['alt'] = $this->getLabel();
+			return $info;
+		}
+	}
+
+	/**
+	 * 画像ファイルを返す
+	 *
+	 * @access public
+	 * @param string $size サイズ名
+	 * @return BSImageFile 画像ファイル
+	 */
+	public function getImageFile ($size = 'icon') {
+		$dir = BSFileUtility::getDirectory('twitter_account');
+		$name = $this->getImageFileBaseName();
+		if (!$file = $dir->getEntry($name, 'BSImageFile')) {
+			if (!$icon = $this->getIcon()) {
+				return null;
+			}
+
+			$file = BSFileUtility::getTemporaryFile('png', 'BSImageFile');
+			$file->setEngine($icon);
+			$file->save();
+			$file->setName($name);
+			$file->moveTo($dir);
+		}
+		return $file;
+	}
+
+	/**
+	 * 画像ファイルを設定する
+	 *
+	 * @access public
+	 * @param BSImageFile $file 画像ファイル
+	 * @param string $size サイズ名
+	 */
+	public function setImageFile (BSImageFile $file, $size = 'icon') {
+		throw new BSImageException($this . 'の画像ファイルを設定できません。');
+	}
+
+	/**
+	 * 画像ファイルベース名を返す
+	 *
+	 * @access public
+	 * @param string $size サイズ名
+	 * @return string 画像ファイルベース名
+	 */
+	public function getImageFileBaseName ($size = 'icon') {
+		return sprintf('%010d_%s', $this->getID(), $size);
 	}
 
 	/**
 	 * アカウントIDを返す
 	 *
 	 * @access public
-	 * @return integer アカウントID
+	 * @return integer ID
 	 */
 	public function getID () {
-		return $this->getAttribute('id');
+		return (int)$this->profile['id'];
 	}
 
 	/**
-	 * アカウントIDを設定
+	 * スクリーン名を返す
 	 *
 	 * @access public
-	 * @param integer $id アカウントID
+	 * @return string スクリーン名
 	 */
-	public function setID ($id) {
-		if ($this->getID() != $id) {
-			$this->attributes = array('id' => $id);
-			$this->source = null;
-			$this->url = null;
-			$this->icon = null;
-		}
+	public function getName () {
+		return $this->profile['screen_name'];
 	}
 
 	/**
-	 * URLを返す
+	 * コンテナのラベルを返す
 	 *
 	 * @access public
-	 * @return BSURL URL
+	 * @param string $language 言語
+	 * @return string ラベル
 	 */
-	public function getURL () {
-		if (!$this->url && $this->getAttribute('url')) {
-			$this->url = BSURL::getInstance($this->getAttribute('url'));
-		}
-		return $this->url;
-	}
-
-	/**
-	 * アイコン画像を返す
-	 *
-	 * @access public
-	 * @return BSImage アイコン画像
-	 */
-	public function getIcon () {
-		if (!$this->icon && $this->getAttribute('profile_image_url')) {
-			try {
-				$url = BSURL::getInstance($this->getAttribute('profile_image_url'));
-				$this->icon = new BSImage;
-				$this->icon->setImage($url->fetch());
-			} catch (BSException $e) {
-				return null;
-			}
-		}
-		return $this->icon;
-	}
-
-	/**
-	 * 属性値を返す
-	 *
-	 * @access public
-	 * @param string $name 属性名
-	 * @return string 属性値
-	 */
-	public function getAttribute ($name) {
-		if (!isset($this->attributes[$name]) && $this->source) {
-			if ($element = $this->source->getElement($name)) {
-				$this->attributes[$name] = $element->getBody();
-			}
-		}
-		return $this->attributes[$name];
+	public function getLabel ($language = 'ja') {
+		return $this->profile['name'];
 	}
 
 	/**
@@ -102,7 +158,7 @@ class BSTwitterAccount {
 	 * @return string 基本情報
 	 */
 	public function __toString () {
-		return sprintf('Twitterアカウント "%d"', $this->getID());
+		return sprintf('Twitterアカウント "%s"', $this->getScreenName());
 	}
 }
 

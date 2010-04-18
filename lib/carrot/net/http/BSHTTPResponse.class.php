@@ -8,7 +8,7 @@
  * httpレスポンス
  *
  * @author 小石達也 <tkoishi@b-shock.co.jp>
- * @version $Id: BSHTTPResponse.class.php 1812 2010-02-03 15:15:09Z pooza $
+ * @version $Id: BSHTTPResponse.class.php 2025 2010-04-18 07:28:40Z pooza $
  */
 class BSHTTPResponse extends BSMIMEDocument {
 	protected $version;
@@ -16,30 +16,6 @@ class BSHTTPResponse extends BSMIMEDocument {
 	protected $message;
 	protected $url;
 	const STATUS_PATTERN = '^HTTP/([[:digit:]]+\\.[[:digit:]]+) ([[:digit:]]{3}) (.*)$';
-
-	/**
-	 * 出力内容を設定
-	 *
-	 * @param string $contents 出力内容
-	 * @access public
-	 */
-	public function setContents ($contents) {
-		$this->contents = $contents;
-		try {
-			$contents = BSString::explode("\n\n", $contents);
-			foreach ($contents as $index => $value) {
-				if (mb_ereg(self::STATUS_PATTERN, $value)) {
-					$this->parseHeaders($value);
-					$contents->removeParameter($index);
-				} else {
-					break;
-				}
-			}
-			$this->parseBody($contents->join("\n\n"));
-		} catch (Exception $e) {
-			throw new BSHTTPException('HTTPレスポンスがパースできません。');
-		}
-	}
 
 	/**
 	 * ヘッダ部をパース

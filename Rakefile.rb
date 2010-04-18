@@ -4,7 +4,7 @@
 #
 # @package org.carrot-framework
 # @author 小石達也 <tkoishi@b-shock.co.jp>
-# @version $Id: Rakefile.rb 2013 2010-04-17 09:42:06Z pooza $
+# @version $Id: Rakefile.rb 2018 2010-04-17 17:39:04Z pooza $
 
 $KCODE = 'u'
 require 'yaml'
@@ -230,7 +230,7 @@ namespace :svn do
       end
       system 'find . ' + extension_arg + ' | xargs svn pdel svn:executable'
     end
-    ['pl', 'rb'].each do |extension|
+    ['pl', 'rb', 'cgi'].each do |extension|
       extension_arg = '-name \'*.' + extension + '\''
       system 'find lib ' + extension_arg + ' | xargs svn pset svn:executable ON'
     end

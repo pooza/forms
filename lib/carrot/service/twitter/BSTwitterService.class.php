@@ -8,12 +8,12 @@
  * Twitterクライアント
  *
  * @author 小石達也 <tkoishi@b-shock.co.jp>
- * @version $Id: BSTwitterService.class.php 1920 2010-03-21 09:16:06Z pooza $
+ * @version $Id: BSTwitterService.class.php 2025 2010-04-18 07:28:40Z pooza $
  */
 class BSTwitterService extends BSCurlHTTP {
-	private $uid;
-	private $password;
 	const DEFAULT_HOST = 'twitter.com';
+	private $account;
+	private $suffix = BS_SERVICE_TWITTER_SUFFIX;
 
 	/**
 	 * @access public
@@ -30,66 +30,43 @@ class BSTwitterService extends BSCurlHTTP {
 	}
 
 	/**
-	 * ユーザーIDを返す
+	 * アカウントを返す
 	 *
 	 * @access public
-	 * @return string ユーザーID
+	 * @return BSTwitterAccount アカウント
 	 */
-	public function getUserID () {
-		return $this->uid;
+	public function getAccount () {
+		if (!$this->account) {
+			$auth = BSString::explode(':', $this->getAttribute('userpwd'));
+			$response = $this->sendGetRequest('/users/show/' . $auth[0] . $this->suffix);
+			$json = new BSJSONRenderer;
+			$json->setContents($response->getRenderer()->getContents());
+			$this->account = new BSTwitterAccount($json->getResult());
+		}
+		return $this->account;
 	}
 
 	/**
-	 * ユーザーIDを設定
+	 * 最近のつぶやきを返す
 	 *
 	 * @access public
-	 * @param string $id ユーザーID又はメールアドレス
+	 * @return BSJSONRenderer JSON文書
 	 */
-	public function setUserID ($id) {
-		$this->uid = $id;
+	public function getUserTimeline () {
+		$response = $this->sendGetRequest('/statuses/user_timeline' . $this->suffix);
+		$json = new BSJSONRenderer;
+		$json->setContents($response->getRenderer()->getContents());
+		return $json;
 	}
 
 	/**
-	 * パスワードを返す
+	 * つぶやく
 	 *
 	 * @access public
-	 * @return string パスワード
+	 * @param string $tweet つぶやき
 	 */
-	public function getPassword () {
-		return $this->password;
-	}
-
-	/**
-	 * パスワードを設定
-	 *
-	 * @access public
-	 * @param string $password パスワード
-	 */
-	public function setPassword ($password) {
-		$this->password = $password;
-	}
-
-	/**
-	 * 最新ステータスを返す
-	 *
-	 * @access public
-	 * @return BSTwitterStatus ステータス
-	 */
-	public function getStatus () {
-		$response = $this->sendGetRequest('/statuses/user_timeline.xml');
-		$xml = new BSXMLDocument;
-		$xml->setContents($response->getRenderer()->getContents());
-		return new BSTwitterStatus($xml->getElement('status'));
-	}
-
-	/**
-	 * ステータスを設定
-	 *
-	 * @access public
-	 * @param string $status ステータス
-	 */
-	public function setStatus ($status) {
-		$this->sendPostRequest('/statuses/update.xml', array('status' => $status));
+	public function tweet ($tweet) {
+		$this->sendPostRequest('/statuses/update' . $this->suffix, array('status' => $tweet));
 	}
 
 	/**
@@ -100,17 +77,13 @@ class BSTwitterService extends BSCurlHTTP {
 	 * @return BSHTTPResponse レスポンス
 	 */
 	public function sendGetRequest ($path = '/') {
-		if (!$this->getUserID()) {
-			throw new BSTwitterException('ユーザーID又はメールアドレスが未定義です。');
-		} else if (!$this->getPassword()) {
-			throw new BSTwitterException('パスワードが未定義です。');
+		if (BSString::isBlank($this->getAttribute('userpwd'))) {
+			throw new BSTwitterException('認証情報が未定義です。');
 		}
-
 		try {
-			$this->setAttribute('userpwd', $this->getUserID() . ':' . $this->getPassword());
 			return parent::sendGetRequest($path);
 		} catch (BSHTTPException $e) {
-			$message = new BSStringFormat('認証エラーが発生した為、%sが実行できません。');
+			$message = new BSStringFormat('認証エラーが発生した為、 "%s" をGETできません。');
 			$message[] = $path;
 			throw new BSTwitterException($message);
 		}
@@ -125,17 +98,13 @@ class BSTwitterService extends BSCurlHTTP {
 	 * @return BSHTTPResponse レスポンス
 	 */
 	public function sendPostRequest ($path = '/', $params = array()) {
-		if (BSString::isBlank($this->getUserID())) {
-			throw new BSTwitterException('ユーザーID又はメールアドレスが未定義です。');
-		} else if (BSString::isBlank($this->getPassword())) {
-			throw new BSTwitterException('パスワードが未定義です。');
+		if (BSString::isBlank($this->getAttribute('userpwd'))) {
+			throw new BSTwitterException('認証情報が未定義です。');
 		}
-
 		try {
-			$this->setAttribute('userpwd', $this->getUserID() . ':' . $this->getPassword());
 			return parent::sendPostRequest($path, $params);
 		} catch (BSHTTPException $e) {
-			$message = new BSStringFormat('認証エラーが発生した為、%sが実行できません。');
+			$message = new BSStringFormat('認証エラーが発生した為、 "%s" をPOSTできません。');
 			$message[] = $path;
 			throw new BSTwitterException($message);
 		}
@@ -144,10 +113,10 @@ class BSTwitterService extends BSCurlHTTP {
 	/**
 	 * 追加分リクエストヘッダを返す
 	 *
-	 * @access private
+	 * @access protected
 	 * @return string[] 追加分リクエストヘッダ
 	 */
-	private function getRequestHeaders () {
+	protected function getRequestHeaders () {
 		return array(
 			'X-Twitter-Client' => BSController::getName('en'),
 		);

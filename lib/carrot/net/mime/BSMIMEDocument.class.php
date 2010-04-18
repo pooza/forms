@@ -8,7 +8,7 @@
  * 基底MIME文書
  *
  * @author 小石達也 <tkoishi@b-shock.co.jp>
- * @version $Id: BSMIMEDocument.class.php 1812 2010-02-03 15:15:09Z pooza $
+ * @version $Id: BSMIMEDocument.class.php 2025 2010-04-18 07:28:40Z pooza $
  */
 class BSMIMEDocument extends BSParameterHolder implements BSRenderer {
 	protected $headers;
@@ -231,13 +231,11 @@ class BSMIMEDocument extends BSParameterHolder implements BSRenderer {
 	 * @access public
 	 */
 	public function setContents ($contents) {
-		$this->contents = $contents;
 		try {
-			$contents = BSString::convertLineSeparator($contents);
-			$contents = BSString::explode("\n\n", $contents);
+			$delimiter = self::LINE_SEPARATOR . self::LINE_SEPARATOR;
+			$contents = BSString::explode($delimiter, $contents);
 			$this->parseHeaders($contents->shift());
-			$contents = $contents->join("\n\n");
-			$this->parseBody($contents);
+			$this->parseBody($contents->join($delimiter));
 		} catch (Exception $e) {
 			throw new BSMIMEException('MIME文書がパースできません。');
 		}
@@ -261,6 +259,7 @@ class BSMIMEDocument extends BSParameterHolder implements BSRenderer {
 	 */
 	protected function parseHeaders ($headers) {
 		$this->getHeaders()->clear();
+		$headers = BSString::convertLineSeparator($headers);
 		foreach (BSString::explode("\n", $headers) as $line) {
 			if (mb_ereg('^([-[:alnum:]]+): *(.*)$', $line, $matches)) {
 				$key = $matches[1];
@@ -293,6 +292,7 @@ class BSMIMEDocument extends BSParameterHolder implements BSRenderer {
 				if ($header['main_type'] == 'text') {
 					$renderer = new BSPlainTextRenderer;
 					$renderer->setLineSeparator(self::LINE_SEPARATOR);
+					$body = BSString::convertLineSeparator($body);
 					if ($encoding = $header['charset']) {
 						$renderer->setEncoding($encoding);
 						$body = BSString::convertEncoding($body, 'utf-8', $encoding);
@@ -402,8 +402,7 @@ class BSMIMEDocument extends BSParameterHolder implements BSRenderer {
 			$part->setFileName($name, BSMIMEUtility::ATTACHMENT);
 		}
 
-		$parts = $this->getParts();
-		$parts[] = $part;
+		$this->getParts()->push($part);
 		$this->body = null;
 		$this->contents = null;
 

@@ -2,11 +2,11 @@
 #
 # @package org.carrot-framework
 # @author 小石達也 <tkoishi@b-shock.co.jp>
-# @version $Id: carrot.yaml 2015 2010-04-17 12:12:17Z pooza $
+# @version $Id: carrot.yaml 2023 2010-04-18 04:11:26Z pooza $
 
 carrot:
   name: carrot Framework
-  ver: 2.3.89
+  ver: 2.3.90
 
 admin:
   email:
@@ -27,6 +27,7 @@ app:
   http_cache:
     mode: private
     seconds: 60
+    send_expires: no
 author:
   name:
   email:
@@ -183,6 +184,8 @@ service:
     analytics:
       id:
       beacon_href: /carrotlib/php/ga.php
+  twitter:
+    suffix: .json
 session:
   storage: default
   regenerate_id: no

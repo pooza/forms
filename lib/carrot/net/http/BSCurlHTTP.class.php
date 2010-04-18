@@ -8,12 +8,25 @@
  * CurlによるHTTP処理
  *
  * @author 小石達也 <tkoishi@b-shock.co.jp>
- * @version $Id: BSCurlHTTP.class.php 2014 2010-04-17 10:00:23Z pooza $
+ * @version $Id: BSCurlHTTP.class.php 2023 2010-04-18 04:11:26Z pooza $
  */
 class BSCurlHTTP extends BSHTTP {
-	private $engine;
-	private $attributes = array();
-	private $ssl = false;
+	protected $engine;
+	protected $attributes;
+	protected $ssl = false;
+
+	/**
+	 * @access public
+	 * @param mixed $host ホスト
+	 * @param integer $port ポート
+	 * @param string $protocol プロトコル
+	 *   BSNetworkService::TCP
+	 *   BSNetworkService::UDP
+	 */
+	public function __construct ($host, $port = null, $protocol = BSNetworkService::TCP) {
+		parent::__construct($host, $port, $protocol);
+		$this->attributes = new BSArray;
+	}
 
 	/**
 	 * HEADリクエスト
@@ -72,10 +85,7 @@ class BSCurlHTTP extends BSHTTP {
 		if (($contents = curl_exec($this->getEngine())) === false) {
 			throw new BSHTTPException($url . 'へ送信できません。');
 		}
-
-		$contents = BSString::explode(self::LINE_SEPARATOR . self::LINE_SEPARATOR, $contents);
-		$response->setContents($contents->shift());
-		$response->setBody($contents->shift());
+		$response->setContents($contents);
 
 		if (!$response->validate()) {
 			$message = new BSStringFormat('不正なレスポンスです。 (%d %s)');
@@ -134,13 +144,23 @@ class BSCurlHTTP extends BSHTTP {
 	}
 
 	/**
-	 * 全ての属性を返す
+	 * 属性を返す
 	 *
 	 * @access public
-	 * @return mixed[] 全ての属性
+	 * @param string $name 属性名
+	 * @return mixed 属性値
 	 */
-	public function getAttributes () {
-		return $this->attributes;
+	public function getAttribute ($name) {
+		$names = array(
+			'curlopt_' . $name,
+			'curl_' . $name,
+			$name,
+		);
+		foreach ($names as $name) {
+			if ($this->attributes->hasParameter($name)) {
+				return $this->attributes[$name];
+			}
+		}
 	}
 
 	/**
