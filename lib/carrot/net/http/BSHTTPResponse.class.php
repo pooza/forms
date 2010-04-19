@@ -8,7 +8,7 @@
  * httpレスポンス
  *
  * @author 小石達也 <tkoishi@b-shock.co.jp>
- * @version $Id: BSHTTPResponse.class.php 2025 2010-04-18 07:28:40Z pooza $
+ * @version $Id: BSHTTPResponse.class.php 2026 2010-04-19 06:05:18Z pooza $
  */
 class BSHTTPResponse extends BSMIMEDocument {
 	protected $version;
@@ -25,6 +25,7 @@ class BSHTTPResponse extends BSMIMEDocument {
 	 */
 	protected function parseHeaders ($headers) {
 		$this->getHeaders()->clear();
+		$headers = BSString::convertLineSeparator($headers);
 		foreach (BSString::explode("\n", $headers) as $line) {
 			if (mb_ereg(self::STATUS_PATTERN, $line, $matches)) {
 				$this->version = $matches[1];

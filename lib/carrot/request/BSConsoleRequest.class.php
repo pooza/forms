@@ -8,7 +8,7 @@
  * コンソールリクエスト
  *
  * @author 小石達也 <tkoishi@b-shock.co.jp>
- * @version $Id: BSConsoleRequest.class.php 1985 2010-04-11 02:18:21Z pooza $
+ * @version $Id: BSConsoleRequest.class.php 2026 2010-04-19 06:05:18Z pooza $
  */
 class BSConsoleRequest extends BSRequest {
 	private $options;
@@ -21,6 +21,10 @@ class BSConsoleRequest extends BSRequest {
 		$this->addOption(BSController::MODULE_ACCESSOR);
 		$this->addOption(BSController::ACTION_ACCESSOR);
 		$this->parse();
+
+		if (BSString::isBlank($this[BSController::MODULE_ACCESSOR])) {
+			$this[BSController::MODULE_ACCESSOR] = 'Console';
+		}
 	}
 
 	/**
@@ -45,10 +49,9 @@ class BSConsoleRequest extends BSRequest {
 		foreach ($this->options as $option) {
 			$config[] = $option['name'] . ':';
 		}
-		$config = $config->join('');
 
 		$this->clear();
-		$this->setParameters(getopt($config));
+		$this->setParameters(getopt($config->join('')));
 	}
 
 	/**

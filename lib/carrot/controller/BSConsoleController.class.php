@@ -8,19 +8,9 @@
  * コンソールコントローラー
  *
  * @author 小石達也 <tkoishi@b-shock.co.jp>
- * @version $Id: BSConsoleController.class.php 1985 2010-04-11 02:18:21Z pooza $
+ * @version $Id: BSConsoleController.class.php 2026 2010-04-19 06:05:18Z pooza $
  */
 class BSConsoleController extends BSController {
-
-	/**
-	 * @access protected
-	 */
-	protected function __construct () {
-		parent::__construct();
-		if (BSString::isBlank($this->request[self::MODULE_ACCESSOR])) {
-			$this->request[self::MODULE_ACCESSOR] = 'Console';
-		}
-	}
 }
 
 /* vim:set tabstop=4: */
