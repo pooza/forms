@@ -8,7 +8,7 @@
  * ホストコンピュータ
  *
  * @author 小石達也 <tkoishi@b-shock.co.jp>
- * @version $Id: BSHost.class.php 1936 2010-03-25 13:50:22Z pooza $
+ * @version $Id: BSHost.class.php 2031 2010-04-21 02:49:36Z pooza $
  */
 class BSHost implements BSAssignable {
 	protected $ipv4;
@@ -46,9 +46,16 @@ class BSHost implements BSAssignable {
 	 * @param string $address IPアドレス
 	 */
 	public function setAddress ($address) {
+		// ポート番号が付記されていたら、取り除く。
+		$parts = BSString::explode(':', $address);
+		$address = $parts[0];
+
 		$this->setAttribute('ip', $address);
 		if (!$this->ipv4->validateIP($address)) {
-			throw new BSNetException($this . 'を名前解決できません。');
+			$message = new BSStringFormat('"%s"(%s) を名前解決できません。');
+			$message[] = $this;
+			$message[] = $address;
+			throw new BSNetException($message);
 		}
 	}
 
@@ -76,9 +83,14 @@ class BSHost implements BSAssignable {
 	 * @param string $name FQDNホスト名
 	 */
 	public function setName ($name) {
+		// ポート番号が付記されていたら、取り除く。
+		$parts = BSString::explode(':', $name);
+		$name = $parts[0];
+
 		if (BSString::isBlank($address = gethostbyname($name))) {
 			throw new BSNetException($name . 'は正しくないFQDN名です。');
 		}
+
 		$this->name = $name;
 		$this->setAddress($address);
 	}

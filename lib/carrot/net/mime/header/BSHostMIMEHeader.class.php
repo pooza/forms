@@ -8,10 +8,11 @@
  * Hostヘッダ
  *
  * @author 小石達也 <tkoishi@b-shock.co.jp>
- * @version $Id: BSHostMIMEHeader.class.php 1812 2010-02-03 15:15:09Z pooza $
+ * @version $Id: BSHostMIMEHeader.class.php 2031 2010-04-21 02:49:36Z pooza $
  */
 class BSHostMIMEHeader extends BSMIMEHeader {
 	private $host;
+	private $port;
 
 	/**
 	 * 実体を返す
@@ -44,7 +45,9 @@ class BSHostMIMEHeader extends BSMIMEHeader {
 	protected function parse () {
 		parent::parse();
 		try {
-			$this->host = new BSHost($this->contents);
+			$parts = BSString::explode(':', $this->contents);
+			$this->host = new BSHost($parts[0]);
+			$this->port = $parts[1];
 		} catch (BSNetException $e) {
 		}
 	}
