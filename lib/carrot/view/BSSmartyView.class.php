@@ -8,7 +8,7 @@
  * Smartyレンダラー用の基底ビュー
  *
  * @author 小石達也 <tkoishi@b-shock.co.jp>
- * @version $Id: BSSmartyView.class.php 1989 2010-04-11 03:06:52Z pooza $
+ * @version $Id: BSSmartyView.class.php 2034 2010-04-25 01:30:09Z pooza $
  * @link http://ozaki.kyoichi.jp/mojavi3/smarty.html 参考
  */
 class BSSmartyView extends BSView {
@@ -30,6 +30,7 @@ class BSSmartyView extends BSView {
 
 		$this->setHeader('Content-Script-Type', BSMIMEType::getType('js'));
 		$this->setHeader('Content-Style-Type', BSMIMEType::getType('css'));
+		$this->setHeader('X-Frame-Options', 'deny');
 	}
 
 	/**
@@ -81,25 +82,25 @@ class BSSmartyView extends BSView {
 	 * 配列をカラム数で分割する
 	 *
 	 * @access public
-	 * @param mixed[] $array 対象配列
+	 * @param mixed[] $items 対象配列
 	 * @param integer $columns カラム数
 	 * @return mixed[] 分割後の配列
 	 * @static
 	 */
-	static public function columnize ($array, $columns = 3) {
-		if ($array instanceof BSParameterHolder) {
-			$array = $array->getParameters();
+	static public function columnize ($items, $columns = 3) {
+		if ($items instanceof BSParameterHolder) {
+			$items = $items->getParameters();
 		}
 
-		$array = new BSArray(array_chunk($array, $columns));
-		$last = new BSArray($array->pop());
+		$items = new BSArray(array_chunk($items, $columns));
+		$last = new BSArray($items->pop());
 
 		for ($i = $last->count() ; $i < $columns ; $i ++) {
 			$last[] = null;
 		}
-		$array[] = $last;
+		$items[] = $last;
 
-		return $array;
+		return $items;
 	}
 }
 

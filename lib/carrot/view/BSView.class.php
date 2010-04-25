@@ -8,7 +8,7 @@
  * 基底ビュー
  *
  * @author 小石達也 <tkoishi@b-shock.co.jp>
- * @version $Id: BSView.class.php 2023 2010-04-18 04:11:26Z pooza $
+ * @version $Id: BSView.class.php 2032 2010-04-25 01:23:01Z pooza $
  */
 class BSView extends BSHTTPResponse {
 	protected $nameSuffix;
@@ -197,13 +197,13 @@ class BSView extends BSHTTPResponse {
 	 * @param boolean $mode キャッシュONならTrue
 	 */
 	public function setCacheControl ($mode) {
-		if (!!$mode) {
+		if (!!$mode || (BS_APP_HTTP_CACHE_MODE == 'no-cache')) {
 			$value = new BSStringFormat('%s, max-age=%d');
 			$value[] = BS_APP_HTTP_CACHE_MODE;
 			$value[] = BS_APP_HTTP_CACHE_SECONDS;
 			$this->setHeader('Cache-Control', $value->getContents());
 			$this->setHeader('Pragma', BS_APP_HTTP_CACHE_MODE);
-			if (BS_APP_HTTP_CACHE_SEND_EXPIRES) {
+			if (BS_APP_HTTP_CACHE_SEND_EXPIRES || (BS_APP_HTTP_CACHE_MODE == 'public')) {
 				$date = BSDate::getNow();
 				$date['second'] = '+' . BS_APP_HTTP_CACHE_SECONDS;
 				$this->setHeader('Expires', $date->format(DATE_RFC1123));
