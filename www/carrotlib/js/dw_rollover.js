@@ -1,8 +1,10 @@
 /**
- * ロールオーバーJavaScript （DreamWeaver用）
+ * ロールオーバーJavaScript （DreamWeaverにバンドルされているもの）
+ *
+ * rollover.jsか、jQueryによる実装を推奨。
  *
  * @package org.carrot-framework
- * @version $Id: dw_rollover.js 1808 2010-02-03 03:55:50Z pooza $
+ * @version $Id: dw_rollover.js 2036 2010-04-25 04:04:18Z pooza $
  */
 
 function MM_swapImgRestore() { 

@@ -1,9 +1,11 @@
 /**
  * AHAHエンジン
  *
+ * prototype.jsのAjax.Updaterへの移行を推奨。
+ *
  * @package org.carrot-framework
  * @author 小石達也 <tkoishi@b-shock.co.jp>
- * @version $Id: ahah.js 1808 2010-02-03 03:55:50Z pooza $
+ * @version $Id: ahah.js 2036 2010-04-25 04:04:18Z pooza $
  */
 
 function ahah (id, href) {
