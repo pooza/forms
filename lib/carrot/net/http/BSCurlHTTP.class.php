@@ -8,11 +8,13 @@
  * CurlによるHTTP処理
  *
  * @author 小石達也 <tkoishi@b-shock.co.jp>
- * @version $Id: BSCurlHTTP.class.php 2023 2010-04-18 04:11:26Z pooza $
+ * @version $Id: BSCurlHTTP.class.php 2037 2010-04-26 11:43:01Z pooza $
  */
 class BSCurlHTTP extends BSHTTP {
 	protected $engine;
 	protected $attributes;
+	protected $uid;
+	protected $password;
 	protected $ssl = false;
 
 	/**
@@ -201,6 +203,8 @@ class BSCurlHTTP extends BSHTTP {
 		if (BSString::isBlank($password)) {
 			return;
 		}
+		$this->uid = $uid;
+		$this->password = $password;
 		$this->setAttribute('userpwd', $uid . ':' . BSCrypt::getInstance()->decrypt($password));
 	}
 
