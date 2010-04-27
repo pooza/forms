@@ -8,7 +8,7 @@
  * 抽象リクエスト
  *
  * @author 小石達也 <tkoishi@b-shock.co.jp>
- * @version $Id: BSRequest.class.php 1998 2010-04-13 10:24:35Z pooza $
+ * @version $Id: BSRequest.class.php 2041 2010-04-27 01:05:49Z pooza $
  * @abstract
  */
 abstract class BSRequest extends BSHTTPRequest {
@@ -19,6 +19,8 @@ abstract class BSRequest extends BSHTTPRequest {
 	private $attributes;
 	private $errors;
 	static private $instance;
+	const MODULE_ACCESSOR = 'm';
+	const ACTION_ACCESSOR = 'a';
 
 	/**
 	 * @access protected

@@ -8,7 +8,7 @@
  * 画像キャッシュ
  *
  * @author 小石達也 <tkoishi@b-shock.co.jp>
- * @version $Id: BSImageCacheHandler.class.php 1926 2010-03-21 14:36:34Z pooza $
+ * @version $Id: BSImageCacheHandler.class.php 2038 2010-04-26 13:09:16Z pooza $
  */
 class BSImageCacheHandler {
 	private $useragent;
@@ -398,11 +398,21 @@ class BSImageCacheHandler {
 				}
 			}
 		}
+
 		if (BSString::isBlank($params['size'])) {
 			$params['size'] = 'thumbnail';
 		}
-
-		return BSController::getInstance()->getModule()->searchRecord($params);
+		if ($record = BSController::getInstance()->getModule()->searchRecord($params)) {
+			return $record;
+		}
+		try {
+			$class = $params['class'];
+			return new $class($params['id']);
+		} catch (Exception $e) {
+			$message = new BSStringFormat('コンテナが取得できません。(%s)');
+			$message[] = $e->getMessage();
+			throw new BSImageException($message);
+		}
 	}
 
 	/**

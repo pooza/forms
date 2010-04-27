@@ -8,7 +8,7 @@
  * モジュール
  *
  * @author 小石達也 <tkoishi@b-shock.co.jp>
- * @version $Id: BSModule.class.php 1926 2010-03-21 14:36:34Z pooza $
+ * @version $Id: BSModule.class.php 2041 2010-04-27 01:05:49Z pooza $
  */
 class BSModule implements BSHTTPRedirector, BSAssignable {
 	protected $name;
@@ -198,8 +198,8 @@ class BSModule implements BSHTTPRedirector, BSAssignable {
 	 */
 	public function setParameterCache (BSArray $params) {
 		$this->params = clone $params;
-		$this->params->removeParameter(BSController::MODULE_ACCESSOR);
-		$this->params->removeParameter(BSController::ACTION_ACCESSOR);
+		$this->params->removeParameter(BSRequest::MODULE_ACCESSOR);
+		$this->params->removeParameter(BSRequest::ACTION_ACCESSOR);
 		$this->user->setAttribute($this->getParameterCacheName(), $this->params);
 	}
 
@@ -313,8 +313,11 @@ class BSModule implements BSHTTPRedirector, BSAssignable {
 			} 
 		}
 
-		if ($table = BSTableHandler::getInstance($params['class'])) {
-			return $table->getRecord($params['id']);
+		try {
+			if ($table = BSTableHandler::getInstance($params['class'])) {
+				return $table->getRecord($params['id']);
+			}
+		} catch (Exception $e) {
 		}
 	}
 
