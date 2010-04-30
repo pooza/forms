@@ -8,7 +8,7 @@
  * Twitterアカウント
  *
  * @author 小石達也 <tkoishi@b-shock.co.jp>
- * @version $Id: BSTwitterAccount.class.php 2040 2010-04-26 17:36:57Z pooza $
+ * @version $Id: BSTwitterAccount.class.php 2046 2010-04-28 14:36:30Z pooza $
  */
 class BSTwitterAccount
 	implements BSImageContainer, BSSerializable, BSAssignable, BSHTTPRedirector {
@@ -72,6 +72,23 @@ class BSTwitterAccount
 	}
 
 	/**
+	 * つぶやく
+	 *
+	 * @access public
+	 * @param string $message メッセージ
+	 * @return BSJSONRenderer 結果文書
+	 */
+	public function tweet ($message) {
+		$response = self::getService()->sendPostRequest(
+			'/statuses/update' . BS_SERVICE_TWITTER_SUFFIX,
+			new BSArray(array('status' => $message))
+		);
+		$json = new BSJSONRenderer;
+		$json->setContents($response->getRenderer()->getContents());
+		return $json;
+	}
+
+	/**
 	 * プロフィールアイコン画像を返す
 	 *
 	 * @access public
@@ -118,18 +135,23 @@ class BSTwitterAccount
 	 */
 	public function getImageFile ($size = 'icon') {
 		$dir = BSFileUtility::getDirectory('twitter_account');
-		$name = $this->getImageFileBaseName();
-		if (!$file = $dir->getEntry($name, 'BSImageFile')) {
-			if (!$icon = $this->getIcon()) {
-				return null;
+		if ($file = $dir->getEntry($this->getImageFileBaseName(), 'BSImageFile')) {
+			$date = BSDate::getNow()->setAttribute('hour', '-1');
+			if (!$file->getUpdateDate()->isPast($date)) {
+				return $file;
 			}
-
-			$file = BSFileUtility::getTemporaryFile('png', 'BSImageFile');
-			$file->setEngine($icon);
-			$file->save();
-			$file->setName($name);
-			$file->moveTo($dir);
+			$file->clearImageCache($size);
+			$file->delete();
 		}
+
+		if (!$icon = $this->getIcon()) {
+			return null;
+		}
+		$file = BSFileUtility::getTemporaryFile('png', 'BSImageFile');
+		$file->setEngine($icon);
+		$file->save();
+		$file->setName($this->getImageFileBaseName());
+		$file->moveTo($dir);
 		return $file;
 	}
 

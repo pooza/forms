@@ -2,11 +2,11 @@
 #
 # @package org.carrot-framework
 # @author 小石達也 <tkoishi@b-shock.co.jp>
-# @version $Id: carrot.yaml 2040 2010-04-26 17:36:57Z pooza $
+# @version $Id: carrot.yaml 2049 2010-04-29 09:35:07Z pooza $
 
 carrot:
   name: carrot Framework
-  ver: 2.3.95
+  ver: 2.3.96
 
 admin:
   email:
@@ -28,6 +28,7 @@ app:
     mode: private
     seconds: 60
     send_expires: no
+  force_https: no
 author:
   name:
   email:
@@ -171,6 +172,7 @@ serialize:
   serializer: JSON
   keep:
     - BSCounter.*
+    - BSTwitterService.*
 service:
   bitly:
     version: 2.0.1
@@ -185,6 +187,9 @@ service:
       id:
       beacon_href: /carrotlib/php/ga.php
   twitter:
+    consumer:
+      key: bQh2Ak7g2yZtDjbinI4lAA
+      secret: mtmQKomIEytBrUu7K2YxxyFK8T5h9H03EsAT7xryg
     suffix: .json
     minutes: 5
 session:

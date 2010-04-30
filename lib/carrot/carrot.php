@@ -4,7 +4,7 @@
  *
  * @package org.carrot-framework
  * @author 小石達也 <tkoishi@b-shock.co.jp>
- * @version $Id: carrot.php 1885 2010-02-28 04:42:57Z pooza $
+ * @version $Id: carrot.php 2044 2010-04-28 11:51:24Z pooza $
  */
 
 /**
@@ -30,7 +30,13 @@ function __autoload ($name) {
  */
 function handleError ($errno, $errstr, $errfile, $errline) {
 	if ($errno & error_reporting()) {
-		throw new RuntimeException($errstr, $errno);
+		$message = sprintf(
+			'%s (file:%s line:%d)',
+			$errstr,
+			str_replace(BS_ROOT_DIR . '/', '', $errfile),
+			$errline
+		);
+		throw new RuntimeException($message, $errno);
 	}
 }
 
