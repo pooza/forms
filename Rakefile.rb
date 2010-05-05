@@ -4,7 +4,7 @@
 #
 # @package org.carrot-framework
 # @author 小石達也 <tkoishi@b-shock.co.jp>
-# @version $Id: Rakefile.rb 2018 2010-04-17 17:39:04Z pooza $
+# @version $Id: Rakefile.rb 2052 2010-05-02 16:35:03Z pooza $
 
 $KCODE = 'u'
 require 'yaml'
@@ -30,8 +30,6 @@ namespace :var do
   task :init => [
     :chmod,
     'images:cache:init',
-    'images:favicon:init',
-    'images:maps:init',
     'css:init',
     'js:init',
   ]
@@ -56,22 +54,6 @@ namespace :var do
 
       file 'www/carrotlib/images/cache' do
         sh 'ln -s ../../../var/image_cache www/carrotlib/images/cache'
-      end
-    end
-
-    namespace :favicon do
-      task :init => ['www/carrotlib/images/favicon']
-
-      file 'www/carrotlib/images/favicon' do
-        sh 'ln -s ../../../var/favicon www/carrotlib/images/favicon'
-      end
-    end
-
-    namespace :maps do
-      task :init => ['www/carrotlib/images/maps']
-
-      file 'www/carrotlib/images/maps' do
-        sh 'ln -s ../../../var/maps www/carrotlib/images/maps'
       end
     end
   end

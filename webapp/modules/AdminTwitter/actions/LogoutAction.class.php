@@ -1,16 +1,16 @@
 <?php
 /**
- * Loginアクション
+ * Logoutアクション
  *
  * @package org.carrot-framework
  * @subpackage AdminTwitter
  * @author 小石達也 <tkoishi@b-shock.co.jp>
- * @version $Id: LoginAction.class.php 2058 2010-05-04 07:31:07Z pooza $
+ * @version $Id: LogoutAction.class.php 2059 2010-05-04 07:45:36Z pooza $
  */
-class LoginAction extends BSAction {
+class LogoutAction extends BSAction {
 	public function execute () {
 		$account = BSAuthorRole::getInstance()->getTwitterAccount();
-		$account->login($this->request['verifier']);
+		$account->logout();
 		return $this->getModule()->redirect();
 	}
 }

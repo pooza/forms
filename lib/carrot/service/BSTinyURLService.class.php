@@ -8,7 +8,7 @@
  * TinyURLクライアント
  *
  * @author 小石達也 <tkoishi@b-shock.co.jp>
- * @version $Id: BSTinyURLService.class.php 1812 2010-02-03 15:15:09Z pooza $
+ * @version $Id: BSTinyURLService.class.php 2063 2010-05-04 10:45:09Z pooza $
  */
 class BSTinyURLService extends BSCurlHTTP implements BSURLShorter {
 	const DEFAULT_HOST = 'tinyurl.com';
@@ -34,7 +34,7 @@ class BSTinyURLService extends BSCurlHTTP implements BSURLShorter {
 	 */
 	public function getShortURL (BSHTTPRedirector $url) {
 		$path = '/api-create.php?url=' . BSURL::encode($url->getURL()->getContents());
-		$response = $this->sendGetRequest($path);
+		$response = $this->sendGET($path);
 		return BSURL::getInstance($response->getRenderer()->getContents());
 	}
 }

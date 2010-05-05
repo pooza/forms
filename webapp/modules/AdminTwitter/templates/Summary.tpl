@@ -4,18 +4,20 @@
 @package org.carrot-framework
 @subpackage AdminTwitter
 @author 小石達也 <tkoishi@b-shock.co.jp>
-@version $Id: Summary.tpl 2047 2010-04-29 08:08:57Z pooza $
+@version $Id: Summary.tpl 2059 2010-05-04 07:45:36Z pooza $
 *}
 {include file='AdminHeader'}
 
 <h1>{$action.title}</h1>
-<table class="Detail">
 
 {if $account}
-	{image_cache class='BSTwitterAccount' id=$account.screen_name size='icon'}<br/>
-	<a href="{$account.timeline_url}" target="_blank">{$account.screen_name}</a>
-	({$account.name})
-	としてログイン中。
+	{form module=$module.name action='Logout'}
+		{image_cache class='BSTwitterAccount' id=$account.screen_name size='icon'}<br/>
+		<a href="{$account.timeline_url}" target="_blank">{$account.screen_name}</a>
+		({$account.name})
+		としてログイン中。<br/>
+		<input type="submit" value="ログアウト" />
+	{/form}
 {else}
 	{form module=$module.name action='Login'}
 		<a href="{$oauth.url}" target="_blank">認証コードを取得</a><br/>
@@ -23,8 +25,6 @@
 		<input type="submit" value="ログイン" />
 	{/form}
 {/if}
-
-</table>
 
 {include file='AdminFooter'}
 

@@ -8,7 +8,7 @@
  * HTTPプロトコル
  *
  * @author 小石達也 <tkoishi@b-shock.co.jp>
- * @version $Id: BSHTTP.class.php 1948 2010-03-27 16:51:11Z pooza $
+ * @version $Id: BSHTTP.class.php 2068 2010-05-04 15:03:28Z pooza $
  */
 class BSHTTP extends BSSocket {
 
@@ -19,7 +19,7 @@ class BSHTTP extends BSSocket {
 	 * @param string $path パス
 	 * @return BSHTTPResponse レスポンス
 	 */
-	public function sendHeadRequest ($path = '/') {
+	public function sendHEAD ($path = '/') {
 		$url = BSURL::getInstance();
 		$url['host'] = $this->getHost();
 		$url['path'] = $path;
@@ -37,7 +37,7 @@ class BSHTTP extends BSSocket {
 	 * @param string $path パス
 	 * @return BSHTTPResponse レスポンス
 	 */
-	public function sendGetRequest ($path = '/') {
+	public function sendGET ($path = '/') {
 		$url = BSURL::getInstance();
 		$url['host'] = $this->getHost();
 		$url['path'] = $path;
@@ -53,10 +53,10 @@ class BSHTTP extends BSSocket {
 	 *
 	 * @access public
 	 * @param string $path パス
-	 * @param string[] $params パラメータの配列
+	 * @param BSParameterHolder $params パラメータの配列
 	 * @return BSHTTPResponse レスポンス
 	 */
-	public function sendPostRequest ($path = '/', $params = array()) {
+	public function sendPOST ($path = '/', BSParameterHolder $params = null) {
 		$url = BSURL::getInstance();
 		$url['host'] = $this->getHost();
 		$url['path'] = $path;

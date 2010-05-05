@@ -4,7 +4,7 @@
  *
  * @package org.carrot-framework
  * @author 小石達也 <tkoishi@b-shock.co.jp>
- * @version $Id: carrot.php 2044 2010-04-28 11:51:24Z pooza $
+ * @version $Id: carrot.php 2066 2010-05-04 14:25:29Z pooza $
  */
 
 /**
@@ -46,7 +46,7 @@ function handleError ($errno, $errstr, $errfile, $errline) {
  * @access public
  * @param mixed[] $values 保護の対象
  * @return mixed[] サニタイズ後の配列
- * @see http://www.peak.ne.jp/support/phpcyber/ 参考
+ * @link http://www.peak.ne.jp/support/phpcyber/ 参考
  */
 function protect ($values) {
 	if (is_array($values)) {
@@ -87,7 +87,7 @@ function p ($var) {
  * ここから処理開始
  */
 
-// @see http://www.peak.ne.jp/support/phpcyber/ 参考
+// @link http://www.peak.ne.jp/support/phpcyber/ 参考
 $_GET = protect($_GET);
 $_POST = protect($_POST);
 $_COOKIE = protect($_COOKIE);

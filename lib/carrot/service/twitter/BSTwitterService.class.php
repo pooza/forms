@@ -8,13 +8,10 @@
  * Twitterクライアント
  *
  * @author 小石達也 <tkoishi@b-shock.co.jp>
- * @version $Id: BSTwitterService.class.php 2050 2010-04-29 09:43:05Z pooza $
+ * @version $Id: BSTwitterService.class.php 2068 2010-05-04 15:03:28Z pooza $
  */
-class BSTwitterService extends BSCurlHTTP implements BSSerializable, BSAssignable {
-	protected $requestToken;
-	protected $accessToken;
+class BSTwitterService extends BSCurlHTTP {
 	private $oauth;
-	private $account;
 	const DEFAULT_HOST = 'twitter.com';
 
 	/**
@@ -27,68 +24,26 @@ class BSTwitterService extends BSCurlHTTP implements BSSerializable, BSAssignabl
 			$host = new BSHost(self::DEFAULT_HOST);
 		}
 		parent::__construct($host, $port);
-
-		$this->requestToken = new BSArray;
-		$this->accessToken = new BSArray;
-		if ($tokens = $this->getSerialized()) {
-			foreach ($tokens as $key => $values) {
-				$this->$key->setParameters($values);;
-			}
-		}
 	}
 
 	/**
-	 * OAuth認証ページのURLを返す
+	 * OAuthオブジェクトを返す
 	 *
 	 * @access public
-	 * @return BSHTTPURL 認証ページのURL
+	 * @return TwitterOAuth
 	 */
-	public function getOAuthURL () {
-		BSUtility::includeFile('twitteroauth/twitteroauth.php');
-		$oauth = new TwitterOAuth(
-			BS_SERVICE_TWITTER_CONSUMER_KEY,
-			BS_SERVICE_TWITTER_CONSUMER_SECRET
-		);
-		$this->requestToken = new BSArray($oauth->getRequestToken());
-		$this->accessToken = null;
-		$this->serialize();
-
-		return BSURL::getInstance($oauth->getAuthorizeURL($this->requestToken['oauth_token']));
+	public function getOAuth () {
+		return $this->oauth;
 	}
 
 	/**
-	 * OAuth認証
+	 * OAuthオブジェクトを設定
 	 *
 	 * @access public
-	 * @param string $verifier 認証ページが返したトークン
+	 * @param TwitterOAuth $oauth
 	 */
-	public function login ($verifier) {
-		if (!$this->requestToken) {
-			return false;
-		}
-
-		BSUtility::includeFile('twitteroauth/twitteroauth.php');
-		$oauth = new TwitterOAuth(
-			BS_SERVICE_TWITTER_CONSUMER_KEY,
-			BS_SERVICE_TWITTER_CONSUMER_SECRET,
-			$this->requestToken['oauth_token'],
-			$this->requestToken['oauth_token_secret']
-		);
-		$this->accessToken = new BSArray($oauth->getAccessToken($verifier));
-		$this->serialize();
-	}
-
-	/**
-	 * ログイン中のアカウントを返す
-	 *
-	 * @access public
-	 * @return BSTwitterAccount アカウント
-	 */
-	public function getAccount () {
-		if (!$this->account && ($name = $this->accessToken['screen_name'])) {
-			$this->account = new BSTwitterAccount($name);
-		}
-		return $this->account;
+	public function setOAuth (TwitterOAuth $oauth) {
+		$this->oauth = $oauth;
 	}
 
 	/**
@@ -98,9 +53,13 @@ class BSTwitterService extends BSCurlHTTP implements BSSerializable, BSAssignabl
 	 * @param string $path パス
 	 * @return BSHTTPResponse レスポンス
 	 */
-	public function sendGetRequest ($path = '/') {
-		if (BSString::isBlank($this->accessToken['oauth_token'])) {
-			return parent::sendGetRequest($path);
+	public function sendGET ($path = '/') {
+		if (!BSString::isContain('.', $path)) {
+			$path .= BS_SERVICE_TWITTER_SUFFIX;
+		}
+
+		if (!$this->oauth) {
+			return parent::sendGET($path);
 		}
 
 		$url = BSURL::getInstance('https://' . self::DEFAULT_HOST);
@@ -113,100 +72,39 @@ class BSTwitterService extends BSCurlHTTP implements BSSerializable, BSAssignabl
 	 *
 	 * @access public
 	 * @param string $path パス
-	 * @param string[] $params パラメータの配列
+	 * @param BSParameterHolder $params パラメータの配列
 	 * @return BSHTTPResponse レスポンス
 	 */
-	public function sendPostRequest ($path = '/', $params = null) {
-		if (BSString::isBlank($this->accessToken['oauth_token'])) {
-			return parent::sendPostRequest($path);
+	public function sendPOST ($path = '/', BSParameterHolder $params = null) {
+		if (!BSString::isContain('.', $path)) {
+			$path .= BS_SERVICE_TWITTER_SUFFIX;
+		}
+		$params = new BSArray($params);
+
+		if (!$this->oauth) {
+			return parent::sendPOST($path, $params);
 		}
 
-		if ($params) {
-			$params = new BSArray;
-		}
 		$url = BSURL::getInstance('https://' . self::DEFAULT_HOST);
 		$url['path'] = $path;
 		return $this->sendOauthRequest($url, 'POST', $params);
 	}
 
 	private function sendOauthRequest (BSHTTPURL $url, $method, BSArray $params) {
-		$contents = $this->getOAuth()->OAuthRequest(
+		$contents = $this->oauth->OAuthRequest(
 			$url->getContents(),
 			$method,
 			$params->getParameters()
 		);
 
 		$response = new BSHTTPResponse;
-		$response->setStatus($this->getOAuth()->http_code);
+		$response->setStatus($this->oauth->http_code);
 		$response->getRenderer()->setContents($contents);
-		foreach ($this->getOAuth()->http_header as $key => $value) {
+		foreach ($this->oauth->http_header as $key => $value) {
 			$key = str_replace('_', '-', $key);
 			$response->setHeader($key, $value);
 		}
 		return $response;
-	}
-
-	private function getOAuth () {
-		if (!$this->oauth) {
-			if (BSString::isBlank($this->accessToken['oauth_token'])) {
-				throw new BSTwitterException('OAuth認証が行われていません。');
-			}
-
-			BSUtility::includeFile('twitteroauth/twitteroauth.php');
-			$this->oauth = new TwitterOAuth(
-				BS_SERVICE_TWITTER_CONSUMER_KEY,
-				BS_SERVICE_TWITTER_CONSUMER_SECRET,
-				$this->accessToken['oauth_token'],
-				$this->accessToken['oauth_token_secret']
-			);
-		}
-		return $this->oauth;
-	}
-
-	/**
-	 * 属性名へシリアライズ
-	 *
-	 * @access public
-	 * @return string 属性名
-	 */
-	public function serializeName () {
-		return get_class($this);
-	}
-
-	/**
-	 * シリアライズ
-	 *
-	 * @access public
-	 */
-	public function serialize () {
-		$values = array();
-		foreach (array('requestToken', 'accessToken') as $key) {
-			$values[$key] = $this->$key;
-		}
-		BSController::getInstance()->setAttribute($this, $values);
-	}
-
-	/**
-	 * シリアライズ時の値を返す
-	 *
-	 * @access public
-	 * @return mixed シリアライズ時の値
-	 */
-	public function getSerialized () {
-		return BSController::getInstance()->getAttribute($this);
-	}
-
-	/**
-	 * アサインすべき値を返す
-	 *
-	 * @access public
-	 * @return mixed アサインすべき値
-	 */
-	public function getAssignValue () {
-		return new BSArray(array(
-			'request_token' => $this->requestToken,
-			'access_token' => $this->accessToken,
-		));
 	}
 
 	/**

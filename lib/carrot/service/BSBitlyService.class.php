@@ -8,7 +8,7 @@
  * bit.lyクライアント
  *
  * @author 小石達也 <tkoishi@b-shock.co.jp>
- * @version $Id: BSBitlyService.class.php 1812 2010-02-03 15:15:09Z pooza $
+ * @version $Id: BSBitlyService.class.php 2063 2010-05-04 10:45:09Z pooza $
  */
 class BSBitlyService extends BSCurlHTTP implements BSURLShorter {
 	const DEFAULT_HOST = 'api.bit.ly';
@@ -45,7 +45,7 @@ class BSBitlyService extends BSCurlHTTP implements BSURLShorter {
 	public function getShortURL (BSHTTPRedirector $url) {
 		$request = $this->createAPIURL('shorten');
 		$request->setParameter('longUrl', $url->getContents());
-		$response = $this->sendGetRequest($request->getFullPath());
+		$response = $this->sendGET($request->getFullPath());
 
 		$json = new BSJSONSerializer;
 		$result = $json->decode($response->getRenderer()->getContents());

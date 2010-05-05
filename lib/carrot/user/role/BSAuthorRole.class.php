@@ -8,10 +8,11 @@
  * 発行者ロール
  *
  * @author 小石達也 <tkoishi@b-shock.co.jp>
- * @version $Id: BSAuthorRole.class.php 1926 2010-03-21 14:36:34Z pooza $
+ * @version $Id: BSAuthorRole.class.php 2057 2010-05-04 06:32:30Z pooza $
  */
 class BSAuthorRole implements BSRole {
 	protected $credentials;
+	protected $twitterAccount;
 	static protected $instance;
 	const CREDENTIAL = 'Author';
 
@@ -61,6 +62,19 @@ class BSAuthorRole implements BSRole {
 	 */
 	public function getMailAddress ($language = 'ja') {
 		return BSMailAddress::getInstance(BS_AUTHOR_EMAIL, self::getName($language));
+	}
+
+	/**
+	 * Twitterアカウントを返す
+	 *
+	 * @access public
+	 * @return BSTwitterAccount アカウント
+	 */
+	public function getTwitterAccount () {
+		if (!$this->twitterAccount && !BSString::isBlank(BS_AUTHOR_TWITTER)) {
+			$this->twitterAccount = new BSTwitterAccount(BS_AUTHOR_TWITTER);
+		}
+		return $this->twitterAccount;
 	}
 
 	/**

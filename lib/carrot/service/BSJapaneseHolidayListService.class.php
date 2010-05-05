@@ -17,7 +17,7 @@
  * p($holidays->getHolidays()); //当月のすべての祝日を配列で
  *
  * @author 小石達也 <tkoishi@b-shock.co.jp>
- * @version $Id: BSJapaneseHolidayListService.class.php 1987 2010-04-11 02:49:50Z pooza $
+ * @version $Id: BSJapaneseHolidayListService.class.php 2063 2010-05-04 10:45:09Z pooza $
  * @link http://www.finds.jp/wsdocs/calendar/
  */
 class BSJapaneseHolidayListService extends BSCurlHTTP implements BSHolidayList, BSSerializable {
@@ -102,7 +102,7 @@ class BSJapaneseHolidayListService extends BSCurlHTTP implements BSHolidayList, 
 			$url->setParameter('y', $this->getDate()->getAttribute('year'));
 			$url->setParameter('m', $this->getDate()->getAttribute('month'));
 			$url->setParameter('t', 'h');
-			$response = $this->sendGetRequest($url->getFullPath());
+			$response = $this->sendGET($url->getFullPath());
 
 			$xml = new BSXMLDocument;
 			$xml->setContents($response->getRenderer()->getContents());

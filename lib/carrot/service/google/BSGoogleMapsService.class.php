@@ -8,7 +8,7 @@
  * Google Mapsクライアント
  *
  * @author 小石達也 <tkoishi@b-shock.co.jp>
- * @version $Id: BSGoogleMapsService.class.php 2018 2010-04-17 17:39:04Z pooza $
+ * @version $Id: BSGoogleMapsService.class.php 2066 2010-05-04 14:25:29Z pooza $
  */
 class BSGoogleMapsService extends BSCurlHTTP {
 	private $table;
@@ -118,7 +118,7 @@ class BSGoogleMapsService extends BSCurlHTTP {
 		$params['output'] = 'json';
 		$params['key'] = BS_SERVICE_GOOGLE_MAPS_API_KEY;
 		$path = '/maps/geo?' . $params->getContents();
-		$response = $this->sendGetRequest($path);
+		$response = $this->sendGET($path);
 
 		$serializer = new BSJSONSerializer;
 		$result = $serializer->decode($response->getBody());
@@ -149,13 +149,11 @@ class BSGoogleMapsService extends BSCurlHTTP {
 	protected function getImageElement (BSGeocodeEntry $geocode, BSArray $params) {
 		$address = $params['address'];
 		$params->removeParameter('address');
+		$file = $this->getImageFile($geocode, $params);
+		$info = $file->getImageInfo('roadmap', null, BSImageCacheHandler::FORCE_GIF);
 
 		$image = new BSImageElement;
-		$file = $this->getImageFile($geocode, $params);
-		$url = BSFileUtility::getURL('maps');
-		$url['path'] .= $file->getName();
-		$image->setURL($url);
-
+		$image->setURL(BSURL::getInstance($info['url']));
 		$container = new BSDivisionElement;
 		$anchor = $container->addElement(new BSAnchorElement);
 		$anchor->link($image, self::getURL($address, $this->useragent));
@@ -174,7 +172,7 @@ class BSGoogleMapsService extends BSCurlHTTP {
 		$dir = BSFileUtility::getDirectory('maps');
 		$name = BSCrypt::getDigest(array($geocode->format(), $params->join('|')));
 		if (!$file = $dir->getEntry($name, 'BSImageFile')) {
-			$response = $this->sendGetRequest($this->getImageQuery($geocode, $params));
+			$response = $this->sendGET($this->getImageQuery($geocode, $params));
 			$image = new BSImage;
 			$image->setImage($response->getRenderer()->getContents());
 			$file = $dir->createEntry($name, 'BSImageFile');
@@ -191,7 +189,7 @@ class BSGoogleMapsService extends BSCurlHTTP {
 	 * @param BSGeocodeEntry $geocode ジオコード
 	 * @param BSArray $params パラメータ配列
 	 * @return BSString クエリー文字列
-	 * @see http://code.google.com/intl/ja/apis/maps/documentation/staticmaps/
+	 * @link http://code.google.com/intl/ja/apis/maps/documentation/staticmaps/
 	 */
 	protected function getImageQuery (BSGeocodeEntry $geocode, BSArray $params) {
 		$info = $this->useragent->getDisplayInfo();

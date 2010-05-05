@@ -2,11 +2,11 @@
 #
 # @package org.carrot-framework
 # @author 小石達也 <tkoishi@b-shock.co.jp>
-# @version $Id: carrot.yaml 2049 2010-04-29 09:35:07Z pooza $
+# @version $Id: carrot.yaml 2062 2010-05-04 10:30:47Z pooza $
 
 carrot:
   name: carrot Framework
-  ver: 2.3.96
+  ver: 2.3.97
 
 admin:
   email:
@@ -33,6 +33,7 @@ author:
   name:
   email:
   password:
+  twitter: carrot_fw
 awstats:
   daily: yes
   server_name_aliases:
@@ -157,6 +158,8 @@ pdo:
     dsn: sqlite:%BS_VAR_DIR%/db/log.sqlite3
   serialize:
     dsn: sqlite:%BS_VAR_DIR%/db/serialize.sqlite3
+  twitter:
+    dsn: sqlite:%BS_VAR_DIR%/db/twitter.sqlite3
 pictogram:
 pgsql:
   dir: /usr/local
@@ -172,7 +175,6 @@ serialize:
   serializer: JSON
   keep:
     - BSCounter.*
-    - BSTwitterService.*
 service:
   bitly:
     version: 2.0.1
@@ -188,8 +190,8 @@ service:
       beacon_href: /carrotlib/php/ga.php
   twitter:
     consumer:
-      key: bQh2Ak7g2yZtDjbinI4lAA
-      secret: mtmQKomIEytBrUu7K2YxxyFK8T5h9H03EsAT7xryg
+      key: hhXdKP3kEwvWumb1AFbTlQ
+      secret: m5dkKU4xnuLfD5WHOpctisvR08rSfB80x9Bfy0nnlk
     suffix: .json
     minutes: 5
 session:

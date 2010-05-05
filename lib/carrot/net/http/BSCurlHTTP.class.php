@@ -8,7 +8,7 @@
  * CurlによるHTTP処理
  *
  * @author 小石達也 <tkoishi@b-shock.co.jp>
- * @version $Id: BSCurlHTTP.class.php 2040 2010-04-26 17:36:57Z pooza $
+ * @version $Id: BSCurlHTTP.class.php 2068 2010-05-04 15:03:28Z pooza $
  */
 class BSCurlHTTP extends BSHTTP {
 	protected $engine;
@@ -37,7 +37,7 @@ class BSCurlHTTP extends BSHTTP {
 	 * @param string $path パス
 	 * @return BSHTTPResponse レスポンス
 	 */
-	public function sendHeadRequest ($path = '/') {
+	public function sendHEAD ($path = '/') {
 		$this->setAttribute('nobody', true);
 		return $this->execute($path);
 	}
@@ -49,7 +49,7 @@ class BSCurlHTTP extends BSHTTP {
 	 * @param string $path パス
 	 * @return BSHTTPResponse レスポンス
 	 */
-	public function sendGetRequest ($path = '/') {
+	public function sendGET ($path = '/') {
 		$this->setAttribute('httpget', true);
 		return $this->execute($path);
 	}
@@ -59,10 +59,10 @@ class BSCurlHTTP extends BSHTTP {
 	 *
 	 * @access public
 	 * @param string $path パス
-	 * @param string[] $params パラメータの配列
+	 * @param BSParameterHolder $params パラメータの配列
 	 * @return BSHTTPResponse レスポンス
 	 */
-	public function sendPostRequest ($path = '/', $params = array()) {
+	public function sendPOST ($path = '/', BSParameterHolder $params = null) {
 		$renderer = new BSWWWFormRenderer;
 		$renderer->setParameters($params);
 
@@ -90,7 +90,8 @@ class BSCurlHTTP extends BSHTTP {
 		$response->setContents($contents);
 
 		if (!$response->validate()) {
-			$message = new BSStringFormat('不正なレスポンスです。 (%d %s)');
+			$message = new BSStringFormat('%sからのレスポンスが不正です。 (%d %s)');
+			$message[] = $this;
 			$message[] = $response->getStatus();
 			$message[] = $response->getError();
 			throw new BSHTTPException($message);
@@ -138,7 +139,7 @@ class BSCurlHTTP extends BSHTTP {
 			$this->setAttribute('maxredirs', 32);
 			$this->setAttribute('ssl_verifypeer', false);
 
-			if ($this->host->getName() == BSController::getInstance()->getHost()->getName()) {
+			if (!$this->host->isForeign(BSController::getInstance()->getHost())) {
 				$this->setAuth(BS_APP_BASIC_AUTH_UID, BS_APP_BASIC_AUTH_PASSWORD);
 			}
 		}

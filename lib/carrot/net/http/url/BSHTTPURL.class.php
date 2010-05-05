@@ -8,7 +8,7 @@
  * HTTPスキーマのURL
  *
  * @author 小石達也 <tkoishi@b-shock.co.jp>
- * @version $Id: BSHTTPURL.class.php 1924 2010-03-21 12:15:43Z pooza $
+ * @version $Id: BSHTTPURL.class.php 2063 2010-05-04 10:45:09Z pooza $
  */
 class BSHTTPURL extends BSURL implements BSHTTPRedirector, BSImageContainer {
 	private $fullpath;
@@ -176,7 +176,7 @@ class BSHTTPURL extends BSURL implements BSHTTPRedirector, BSImageContainer {
 	public function fetch ($class = 'BSCurlHTTP') {
 		try {
 			$http = new $class($this['host']);
-			$response = $http->sendGetRequest($this->getFullPath());
+			$response = $http->sendGET($this->getFullPath());
 			return $response->getRenderer()->getContents();
 		} catch (BSException $e) {
 			throw new BSHTTPException($this . 'を取得できません。');
@@ -222,16 +222,11 @@ class BSHTTPURL extends BSURL implements BSHTTPRedirector, BSImageContainer {
 	 * @return BSArray 画像の情報
 	 */
 	public function getImageInfo ($size = 'favicon', $pixel = null, $flags = null) {
-		if ($file = $this->getImageFile()) {
-			$url = BSFileUtility::getURL('favicon');
-			$url['path'] .= $file->getName();
-			return new BSArray(array(
-				'width' => $file->getEngine()->getWidth(),
-				'height' => $file->getEngine()->getHeight(),
-				'type' => $file->getEngine()->getType(),
-				'url' => $url->getContents(),
-				'alt' => $this->getID(),
-			));
+		if ($file = $this->getImageFile($size)) {
+			$caches = BSImageCacheHandler::getInstance();
+			$info = $caches->getImageInfo($file, $size, $pixel, $flags);
+			$info['alt'] = $this->getID();
+			return $info;
 		}
 	}
 

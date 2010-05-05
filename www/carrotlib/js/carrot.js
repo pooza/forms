@@ -3,7 +3,7 @@
  *
  * @package org.carrot-framework
  * @author 小石達也 <tkoishi@b-shock.co.jp>
- * @version $Id: carrot.js 1996 2010-04-11 11:44:34Z pooza $
+ * @version $Id: carrot.js 2055 2010-05-04 05:04:21Z pooza $
  */
 
 function redirect (m, a, id) {
@@ -31,7 +31,7 @@ function openPictogramPallet (id) {
 function putSmartTag (tag, field, name, params) {
   var tag = '[[' + tag;
   if (name) {
-    tag += ':' + name;
+    tag += ':' + name.replace(':', '\\:');
     if (params) {
       var encoded = [];
       for(var key in params) {
