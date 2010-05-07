@@ -2,11 +2,11 @@
 #
 # @package org.carrot-framework
 # @author 小石達也 <tkoishi@b-shock.co.jp>
-# @version $Id: carrot.yaml 2062 2010-05-04 10:30:47Z pooza $
+# @version $Id: carrot.yaml 2072 2010-05-07 03:46:54Z pooza $
 
 carrot:
   name: carrot Framework
-  ver: 2.3.97
+  ver: 2.3.98
 
 admin:
   email:
@@ -121,8 +121,10 @@ movie:
   audio_codec: libfaac
   flv:
     player:
-      height: 24
-      href: /carrotlib/swf/flowplayer-3.1.5.swf
+      height: 0
+      href: /carrotlib/swf/flowplayer-3.2.0.swf
+      control_bar:
+        href: /carrotlib/swf/flowplayer.controls-3.2.0.swf
   wmv:
     player:
       clsid: 6BF52A52-394A-11d3-B153-00C04F79FAA6

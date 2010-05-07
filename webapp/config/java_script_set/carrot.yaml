@@ -2,7 +2,7 @@
 #
 # @package org.carrot-framework
 # @author 小石達也 <tkoishi@b-shock.co.jp>
-# @version $Id: carrot.yaml 1994 2010-04-11 08:49:02Z pooza $
+# @version $Id: carrot.yaml 2072 2010-05-07 03:46:54Z pooza $
 
 carrot:
   files:
@@ -17,6 +17,6 @@ carrot:
     - usermenu
     - elevator
     - jsProgressBarHandler
-    - flowplayer-3.1.4.min
+    - flowplayer-3.2.0
     - carrot
     - application

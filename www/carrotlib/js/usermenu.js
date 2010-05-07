@@ -29,8 +29,8 @@
  *
  * @package org.carrot-framework
  * @author 小石達也 <tkoishi@b-shock.co.jp>
- * @version $Id: usermenu.js 1982 2010-04-09 03:25:02Z pooza $
- * @see http://www.leigeber.com/2008/04/sliding-javascript-dropdown-menu/ 改造もと
+ * @version $Id: usermenu.js 2069 2010-05-06 16:19:41Z pooza $
+ * @link http://www.leigeber.com/2008/04/sliding-javascript-dropdown-menu/ 改造もと
  */
 
 function UserMenu (id, options) {

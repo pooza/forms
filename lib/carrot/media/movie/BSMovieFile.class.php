@@ -8,7 +8,7 @@
  * 動画ファイル
  *
  * @author 小石達也 <tkoishi@b-shock.co.jp>
- * @version $Id: BSMovieFile.class.php 1981 2010-04-09 03:24:07Z pooza $
+ * @version $Id: BSMovieFile.class.php 2072 2010-05-07 03:46:54Z pooza $
  */
 class BSMovieFile extends BSMediaFile {
 
@@ -154,7 +154,8 @@ class BSMovieFile extends BSMediaFile {
 			),
 			'plugins' => array(
 				'controls' => array(
-					'height' => BS_MOVIE_FLV_PLAYER_HEIGHT,
+					'url' => BS_MOVIE_FLV_PLAYER_CONTROL_BAR_HREF,
+					'opacity' => 0.9,
 					'fullscreen' => ($params['mode'] != 'noscript'),
 				),
 			),

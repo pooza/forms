@@ -4,8 +4,8 @@
  * prototype.jsを使った実装。
  *
  * @package org.carrot-framework
- * @version $Id: rollover.js 2036 2010-04-25 04:04:18Z pooza $
- * @see http://d.hatena.ne.jp/kazeburo/20051227/p1
+ * @version $Id: rollover.js 2069 2010-05-06 16:19:41Z pooza $
+ * @link http://d.hatena.ne.jp/kazeburo/20051227/p1
  */
 
 var RollOverImage = Class.create();
