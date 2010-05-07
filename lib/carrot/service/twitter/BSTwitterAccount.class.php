@@ -8,7 +8,7 @@
  * Twitterアカウント
  *
  * @author 小石達也 <tkoishi@b-shock.co.jp>
- * @version $Id: BSTwitterAccount.class.php 2064 2010-05-04 10:52:08Z pooza $
+ * @version $Id: BSTwitterAccount.class.php 2073 2010-05-07 10:39:24Z pooza $
  */
 class BSTwitterAccount
 	implements BSImageContainer, BSSerializable, BSAssignable, BSHTTPRedirector {
@@ -382,10 +382,10 @@ class BSTwitterAccount
 				if (!$values['profile']) {
 					$values['profile'] = $tweet['user'];
 				}
-				$tweet->removeParameter('user');
 				$url = BSURL::getInstance('http://' . BSTwitterService::DEFAULT_HOST);
-				$url['path'] = '/' . $this->getScreenName() . '/status/' . $entry['id'];
+				$url['path'] = '/' . $tweet['user']['screen_name'] . '/status/' . $entry['id'];
 				$tweet['url'] = $url->getContents();
+				$tweet->removeParameter('user');
 				$values['tweets'][] = $tweet->getParameters();
 			}
 		} else { //ツイートがひとつもない場合は、プロフィールを取得
