@@ -4,7 +4,7 @@
 // Multi-Byte FPDF                                       version: 1.26-kzhk
 //                                          $LastChangedRevision: 296 $
 // ※Carrot環境に合わせて一部修正
-// $Id: mbfpdf.php 5 2007-07-25 08:04:01Z pooza $
+// $Id: mbfpdf.php 1992 2010-04-11 07:51:43Z pooza $
 //--------------------------------------------------------------------------
 // Usage: AddMBFont(FontName,Encoding);
 //

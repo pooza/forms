@@ -8,7 +8,7 @@
  * Cookieのサポートをチェックするフィルタ
  *
  * @author 小石達也 <tkoishi@b-shock.co.jp>
- * @version $Id: BSCookieFilter.class.php 1895 2010-03-02 11:24:28Z pooza $
+ * @version $Id: BSCookieFilter.class.php 2074 2010-05-13 11:44:27Z pooza $
  */
 class BSCookieFilter extends BSFilter {
 	private $cookieName;
@@ -28,7 +28,7 @@ class BSCookieFilter extends BSFilter {
 		$methods[] = 'GET';
 
 		if ($methods->isContain($this->request->getMethod())) {
-			$expire = BSDate::getNow()->setAttribute('hour', '+1');
+			$expire = BSDate::getNow()->setAttribute('hour', '+' . BS_COOKIE_CHECKER_HOURS);
 			$this->user->setAttribute($this->getCookieName(), true, $expire);
 		} else {
 			if (BSString::isBlank($this->user->getAttribute($this->getCookieName()))) {

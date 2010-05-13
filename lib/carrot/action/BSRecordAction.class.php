@@ -8,7 +8,7 @@
  * 詳細画面用 アクションひな形
  *
  * @author 小石達也 <tkoishi@b-shock.co.jp>
- * @version $Id: BSRecordAction.class.php 1812 2010-02-03 15:15:09Z pooza $
+ * @version $Id: BSRecordAction.class.php 2076 2010-05-13 11:53:27Z pooza $
  * @abstract
  */
 abstract class BSRecordAction extends BSAction {
@@ -26,7 +26,7 @@ abstract class BSRecordAction extends BSAction {
 			$this->setRecordID($id);
 		}
 
-		if ($record = $this->getRecord()) {
+		if (!$this->isCreateAction() && ($record = $this->getRecord())) {
 			$name = BSString::underscorize($this->getModule()->getRecordClass());
 			$this->request->setAttribute($name, $record);
 			if (!$this->isExecutable() && BSString::isBlank($this->request['submit'])) {

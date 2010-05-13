@@ -9,7 +9,7 @@
  * PHP5でE_STRICTが出ない様、色々修正。
  *
  * @author 小石達也 <tkoishi@b-shock.co.jp>
- * @version $Id: qrcode.php 1610 2009-11-10 02:37:07Z pooza $
+ * @version $Id: qrcode.php 1992 2010-04-11 07:51:43Z pooza $
  * @copyright (C) Kazuhiko Arase all rights reserved.
  * @see http://www.d-project.com/qrcode/
  */
