@@ -8,9 +8,10 @@
  * Google Analytics
  *
  * @author 小石達也 <tkoishi@b-shock.co.jp>
- * @version $Id: BSGoogleAnalyticsService.class.php 1934 2010-03-25 09:37:36Z pooza $
+ * @version $Id: BSGoogleAnalyticsService.class.php 2078 2010-05-14 07:37:54Z pooza $
  */
 class BSGoogleAnalyticsService implements BSAssignable {
+	private $id;
 	static private $instance;
 
 	/**
@@ -47,10 +48,23 @@ class BSGoogleAnalyticsService implements BSAssignable {
 	 * @return string アカウントID
 	 */
 	public function getID () {
-		if (BSString::isBlank($id = BS_SERVICE_GOOGLE_ANALYTICS_ID)) {
-			throw new BSConfigException('GoogleAnalyticsのアカウントIDが未定義です。');
+		if (!$this->id) {
+			if (BSString::isBlank($id = BS_SERVICE_GOOGLE_ANALYTICS_ID)) {
+				throw new BSConfigException('GoogleAnalyticsのアカウントIDが未定義です。');
+			}
+			$this->id = $id;
 		}
-		return $id;
+		return $this->id;
+	}
+
+	/**
+	 * アカウントIDを設定
+	 *
+	 * @access public
+	 * @param string $id アカウントID
+	 */
+	public function setID ($id) {
+		$this->id = $id;
 	}
 
 	/**

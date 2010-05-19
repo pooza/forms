@@ -8,10 +8,15 @@
  * GoogleAnalytics関数
  *
  * @author 小石達也 <tkoishi@b-shock.co.jp>
- * @version $Id: function.analytics.php 1933 2010-03-25 09:12:06Z pooza $
+ * @version $Id: function.analytics.php 2078 2010-05-14 07:37:54Z pooza $
  */
 function smarty_function_analytics ($params, &$smarty) {
-	return BSGoogleAnalyticsService::getInstance()->getTrackingCode();
+	$params = new BSArray($params);
+	$service = BSGoogleAnalyticsService::getInstance();
+	if ($id = $params['id']) {
+		$service->setID($id);
+	}
+	return $service->getTrackingCode();
 }
 
 /* vim:set tabstop=4: */
