@@ -8,9 +8,9 @@
  * SMTPによるメール送信機能
  *
  * @author 小石達也 <tkoishi@b-shock.co.jp>
- * @version $Id: BSSMTPMailSender.class.php 1950 2010-03-27 17:28:58Z pooza $
+ * @version $Id: BSSMTPMailSender.class.php 2088 2010-05-21 09:23:09Z pooza $
  */
-class BSSMTPMailSender {
+class BSSMTPMailSender extends BSMailSender {
 	static private $smtp;
 
 	/**
@@ -36,7 +36,29 @@ class BSSMTPMailSender {
 	public function send (BSMail $mail) {
 		$smtp = self::getServer();
 		$smtp->setMail($mail);
-		$smtp->send();
+		$response = $smtp->send();
+		$this->putLog($mail, $response);
+	}
+
+	/**
+	 * 送信ログを出力する
+	 *
+	 * @access protected
+	 * @param BSMail $mail 対象メール
+	 * @param string $response レスポンス行
+	 */
+	protected function putLog (BSMail $mail, $response = null) {
+		$recipients = new BSArray;
+		foreach ($mail->getRecipients() as $email) {
+			$recipients[] = $email->getContents();
+		}
+
+		$message = new BSStringFormat('%sから%s宛に、メールを送信しました。(%s)');
+		$message[] = $mail->getHeader('From')->getEntity()->getContents();
+		$message[] = $recipients->join(',');
+		$message[] = $response;
+
+		BSLogManager::getInstance()->put($message, $this);
 	}
 
 	/**

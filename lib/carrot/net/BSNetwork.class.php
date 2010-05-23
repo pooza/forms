@@ -8,18 +8,35 @@
  * サブネットワーク
  *
  * @author 小石達也 <tkoishi@b-shock.co.jp>
- * @version $Id: BSNetwork.class.php 1936 2010-03-25 13:50:22Z pooza $
+ * @version $Id: BSNetwork.class.php 2094 2010-05-23 04:17:16Z pooza $
+ * @link http://pear.php.net/package/Net_IPv4/ 参考
  */
 class BSNetwork extends BSHost {
+	protected $bitmask;
+	protected $netmask;
+	protected $broadcast;
 
 	/**
 	 * @access public
 	 * @param string $address CIDR形式のIPアドレス
 	 */
 	public function __construct ($address) {
-		require_once('Net/IPv4.php');
-		$this->ipv4 = new Net_IPv4;
-		$this->setCIDR($address);
+		if (!mb_ereg('^([.[:digit:]]+)/([[:digit:]]+)$', $address, $matches)) {
+			throw new BSNetException($address . 'をパースできません。');
+		} else if (!long2ip(ip2long($matches[1]))) {
+			throw new BSNetException($address . 'をパースできません。');
+		}
+		$this->address = $matches[1];
+		$this->bitmask = (int)$matches[2];
+
+		$config = BSConfigManager::getInstance()->compile('netmask');
+		if (BSString::isBlank($this->netmask = $config['netmasks'][$this->bitmask])) {
+			throw new BSNetException($address . 'をパースできません。');
+		}
+
+		$this->broadcast = long2ip(ip2long($this->address) |
+			(ip2long($this->netmask) ^ ip2long("255.255.255.255"))
+		);
 	}
 
 	/**
@@ -29,32 +46,17 @@ class BSNetwork extends BSHost {
 	 * @return string CIDR形式ネットワークアドレス
 	 */
 	public function getCIDR () {
-		return $this->getAddress() . '/' . $this->getAttribute('bitmask');
+		return $this->address . '/' . $this->bitmask;
 	}
 
 	/**
-	 * CIDR形式IPアドレスを設定
+	 * ブロードキャストアドレスを返す
 	 *
 	 * @access public
-	 * @param string $address CIDR形式ネットワークアドレス
+	 * @return string ブロードキャストアドレス
 	 */
-	public function setCIDR ($address) {
-		if (!mb_ereg('^([.[:digit:]]+)/([[:digit:]]+)$', $address, $matches)) {
-			throw new BSNetException($address . 'をパースできません。');
-		}
-
-		$this->setAddress($matches[1]);
-		$net = $this->ipv4->parseAddress($address);
-		if ($net instanceof PEAR_Error) {
-			$message = new BSStringFormat('%sをパースできません。(%s)');
-			$message[] = $this;
-			$message[] = $net->message;
-			throw new BSNetException($message);
-		}
-
-		foreach (array('bitmask', 'netmask', 'network', 'broadcast', 'long') as $var) {
-			$this->setAttribute($var, $net->$var);
-		}
+	public function getBroadcastAddress () {
+		return $this->broadcast;
 	}
 
 	/**
@@ -65,7 +67,13 @@ class BSNetwork extends BSHost {
 	 * @return boolean ネットワーク内ならTrue
 	 */
 	public function isContain (BSHost $host) {
-		return $this->ipv4->ipInNetwork($this->getCIDR(), $host->getAddress());
+		$network = self::ip2double($this->address);
+		$broadcast = self::ip2double($this->broadcast);
+		$address = self::ip2double($host->getAddress());
+		return ($network <= $address) && ($address <= $broadcast);
+	}
+	static private function ip2double ($address) {
+		return (double)(sprintf("%u", ip2long($address)));
 	}
 
 	/**

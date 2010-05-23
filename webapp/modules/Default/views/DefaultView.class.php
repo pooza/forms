@@ -1,13 +1,13 @@
 <?php
 /**
- * DefaultSuccessビュー
+ * Defaultビュー
  *
  * @package org.carrot-framework
  * @subpackage Default
  * @author 小石達也 <tkoishi@b-shock.co.jp>
- * @version $Id: DefaultSuccessView.class.php 1812 2010-02-03 15:15:09Z pooza $
+ * @version $Id: DefaultView.class.php 2085 2010-05-21 07:06:13Z pooza $
  */
-class DefaultSuccessView extends BSSmartyView {
+class DefaultView extends BSSmartyView {
 	public function execute () {
 		$this->setTemplate($this->request['document']);
 	}

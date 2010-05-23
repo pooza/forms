@@ -1,13 +1,13 @@
 <?php
 /**
- * SummarySuccessViewビュー
+ * Tableビュー
  *
  * @package org.carrot-framework
- * @subpackage AdminMemcache
+ * @subpackage DevelopTableReport
  * @author 小石達也 <tkoishi@b-shock.co.jp>
- * @version $Id: SummarySuccessView.class.php 1812 2010-02-03 15:15:09Z pooza $
+ * @version $Id: TableView.class.php 2085 2010-05-21 07:06:13Z pooza $
  */
-class SummarySuccessView extends BSSmartyView {
+class TableView extends BSSmartyView {
 	public function execute () {
 		$this->setAttribute('styleset', 'carrot.Detail');
 	}

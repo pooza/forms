@@ -8,7 +8,7 @@
  * テーブルのプロフィール
  *
  * @author 小石達也 <tkoishi@b-shock.co.jp>
- * @version $Id: BSTableProfile.class.php 1847 2010-02-08 13:11:47Z pooza $
+ * @version $Id: BSTableProfile.class.php 2091 2010-05-22 08:27:57Z pooza $
  * @abstract
  */
 abstract class BSTableProfile implements BSAssignable, BSSerializable {
@@ -114,7 +114,7 @@ abstract class BSTableProfile implements BSAssignable, BSSerializable {
 	 */
 	public function getRecordClassNames () {
 		try {
-			$name = BSString::pascalize($this->getName());
+			$name = BSClassLoader::getInstance()->getClass($this->getName());
 			return new BSArray(BSClassLoader::getParentClasses($name));
 		} catch (Exception $e) {
 			return new BSArray;

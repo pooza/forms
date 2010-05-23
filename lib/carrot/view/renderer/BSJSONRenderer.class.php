@@ -8,20 +8,20 @@
  * JSONレンダラー
  *
  * @author 小石達也 <tkoishi@b-shock.co.jp>
- * @version $Id: BSJSONRenderer.class.php 1903 2010-03-06 06:43:36Z pooza $
+ * @version $Id: BSJSONRenderer.class.php 2083 2010-05-21 06:36:56Z pooza $
  */
 class BSJSONRenderer implements BSRenderer {
-	private $serializer;
-	private $contents;
-	private $result;
+	protected $serializer;
+	protected $contents;
+	protected $result;
 
 	/**
 	 * シリアライザーを返す
 	 *
-	 * @access private
+	 * @access protected
 	 * @return BSJSONSerializer
 	 */
-	private function getSerializer () {
+	protected function getSerializer () {
 		if (!$this->serializer) {
 			$this->serializer = new BSJSONSerializer;
 		}

@@ -1,13 +1,13 @@
 <?php
 /**
- * EmptySiteErrorビュー
+ * EmptySiteビュー
  *
  * @package org.carrot-framework
  * @subpackage Default
  * @author 小石達也 <tkoishi@b-shock.co.jp>
- * @version $Id: EmptySiteErrorView.class.php 1980 2010-04-08 09:21:40Z pooza $
+ * @version $Id: EmptySiteView.class.php 2085 2010-05-21 07:06:13Z pooza $
  */
-class EmptySiteErrorView extends BSSmartyView {
+class EmptySiteView extends BSSmartyView {
 	public function execute () {
 		$this->setStatus(404);
 	}

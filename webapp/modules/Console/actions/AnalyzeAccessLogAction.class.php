@@ -5,7 +5,7 @@
  * @package org.carrot-framework
  * @subpackage Console
  * @author 小石達也 <tkoishi@b-shock.co.jp>
- * @version $Id: AnalyzeAccessLogAction.class.php 1812 2010-02-03 15:15:09Z pooza $
+ * @version $Id: AnalyzeAccessLogAction.class.php 2094 2010-05-23 04:17:16Z pooza $
  */
 class AnalyzeAccessLogAction extends BSAction {
 	protected $awstatsConfig;
@@ -29,8 +29,8 @@ class AnalyzeAccessLogAction extends BSAction {
 			foreach (BSAdministratorRole::getInstance()->getAllowedNetworks() as $network) {
 				$networks[] = sprintf(
 					'%s-%s',
-					$network->getAttribute('network'),
-					$network->getAttribute('broadcast')
+					$network->getAddress(),
+					$network->getBroadcastAddress()
 				);
 			}
 			$this->awstatsConfig['admin_networks'] = $networks->join(' ');

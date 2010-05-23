@@ -1,13 +1,13 @@
 <?php
 /**
- * DeniedUserAgentErrorビュー
+ * CookieDisabledビュー
  *
  * @package org.carrot-framework
  * @subpackage Default
  * @author 小石達也 <tkoishi@b-shock.co.jp>
- * @version $Id: DeniedUserAgentErrorView.class.php 1812 2010-02-03 15:15:09Z pooza $
+ * @version $Id: CookieDisabledView.class.php 2085 2010-05-21 07:06:13Z pooza $
  */
-class DeniedUserAgentErrorView extends BSSmartyView {
+class CookieDisabledView extends BSSmartyView {
 	public function execute () {
 		$this->setStatus(400);
 	}

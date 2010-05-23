@@ -8,7 +8,7 @@
  * 設定マネージャ
  *
  * @author 小石達也 <tkoishi@b-shock.co.jp>
- * @version $Id: BSConfigManager.class.php 1975 2010-04-07 07:19:04Z pooza $
+ * @version $Id: BSConfigManager.class.php 2093 2010-05-23 04:11:21Z pooza $
  */
 class BSConfigManager {
 	private $compilers;
@@ -20,7 +20,7 @@ class BSConfigManager {
 	private function __construct () {
 		$file = self::getConfigFile('config_compilers', 'BSRootConfigFile');
 		$this->compilers = new BSArray($this->compile($file));
-		$this->compilers[] = new BSDefaultConfigCompiler(array('pattern' => '.'));;
+		$this->compilers[] = new BSDefaultConfigCompiler(array('pattern' => '.'));
 	}
 
 	/**

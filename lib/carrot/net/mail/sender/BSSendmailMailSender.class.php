@@ -8,9 +8,9 @@
  * sendmailコマンドによるメール送信機能
  *
  * @author 小石達也 <tkoishi@b-shock.co.jp>
- * @version $Id: BSSendmailMailSender.class.php 1949 2010-03-27 17:22:29Z pooza $
+ * @version $Id: BSSendmailMailSender.class.php 2084 2010-05-21 06:37:57Z pooza $
  */
-class BSSendmailMailSender {
+class BSSendmailMailSender extends BSMailSender {
 
 	/**
 	 * 初期化
@@ -35,12 +35,23 @@ class BSSendmailMailSender {
 	 */
 	public function send (BSMail $mail) {
 		$sendmail = self::getSendmailCommand();
-		$sendmail->addValue('-f' . $mail->getHeader('from')->getEntity()->getContents());
+		$sendmail->addValue('-f');
+		$sendmail->addValue($mail->getHeader('from')->getEntity()->getContents());
+
+		if (BS_DEBUG) {
+			$to = BSAdministratorRole::getInstance()->getMailAddress();
+			$sendmail->addValue($to->getContents());
+		} else {
+			$sendmail->addValue('-t');
+		}
+
 		$command = new BSCommandLine('cat');
 		$command->addValue($mail->getFile()->getPath());
 		$command->registerPipe($sendmail);
 		$command->setBackground(true);
 		$command->execute();
+
+		$this->putLog($mail);
 	}
 
 	/**
@@ -53,7 +64,6 @@ class BSSendmailMailSender {
 	static public function getSendmailCommand () {
 		$command = new BSCommandLine('sbin/sendmail');
 		$command->setDirectory(BSFileUtility::getDirectory('sendmail'));
-		$command->addValue('-t');
 		$command->addValue('-i');
 		return $command;
 	}
