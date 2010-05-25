@@ -8,7 +8,7 @@
  * ログマネージャ
  *
  * @author 小石達也 <tkoishi@b-shock.co.jp>
- * @version $Id: BSLogManager.class.php 2089 2010-05-22 08:06:19Z pooza $
+ * @version $Id: BSLogManager.class.php 2100 2010-05-25 04:36:04Z pooza $
  */
 class BSLogManager implements IteratorAggregate {
 	private $loggers;
@@ -110,7 +110,7 @@ class BSLogManager implements IteratorAggregate {
 			if (isset($_SERVER[$key]) && ($value = $_SERVER[$key])) {
 				try {
 					$parts = mb_split('[:,]', $value);
-					$host = gethostbyaddr($parts[0]);
+					$host = gethostbyaddr(trim($parts[0]));
 				} catch (Exception $e) {
 					$host = $value;
 				}

@@ -8,7 +8,7 @@
  * ホストコンピュータ
  *
  * @author 小石達也 <tkoishi@b-shock.co.jp>
- * @version $Id: BSHost.class.php 2096 2010-05-23 04:22:45Z pooza $
+ * @version $Id: BSHost.class.php 2099 2010-05-25 04:33:45Z pooza $
  */
 class BSHost implements BSAssignable {
 	protected $name;
@@ -35,9 +35,7 @@ class BSHost implements BSAssignable {
 			}
 		} else {
 			$this->name = $address;
-			if (BSString::isBlank($this->address = gethostbyname($this->name))) {
-				throw new BSNetException($name . 'は正しくないFQDN名です。');
-			}
+			$this->address = gethostbyname($this->name);
 		}
 	}
 

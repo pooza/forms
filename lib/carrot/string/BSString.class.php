@@ -8,7 +8,7 @@
  * 文字列に関するユーティリティ
  *
  * @author 小石達也 <tkoishi@b-shock.co.jp>
- * @version $Id: BSString.class.php 2081 2010-05-19 11:31:56Z pooza $
+ * @version $Id: BSString.class.php 2097 2010-05-25 03:18:27Z pooza $
  */
 class BSString {
 
@@ -180,6 +180,7 @@ class BSString {
 				$value[$key] = self::truncate($item, $length, $suffix);
 			}
 		} else if ($length < self::getWidth($value)) {
+			$value = mb_ereg_replace('[[:space:]]', null, $value);
 			$value = self::convertEncoding($value, 'eucjp-win', 'utf-8');
 			$value = mb_strcut($value, 0, $length, 'eucjp-win') . $suffix;
 			$value = self::convertEncoding($value, 'utf-8', 'eucjp-win');
