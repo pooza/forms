@@ -8,7 +8,7 @@
  * ユーザーエージェント
  *
  * @author 小石達也 <tkoishi@b-shock.co.jp>
- * @version $Id: BSUserAgent.class.php 1998 2010-04-13 10:24:35Z pooza $
+ * @version $Id: BSUserAgent.class.php 2102 2010-05-25 09:12:10Z pooza $
  * @abstract
  */
 abstract class BSUserAgent implements BSAssignable {
@@ -124,6 +124,7 @@ abstract class BSUserAgent implements BSAssignable {
 		$view->setAttribute('credentials', BSUser::getInstance()->getCredentials());
 		$view->setAttribute('client_host', BSRequest::getInstance()->getHost());
 		$view->setAttribute('server_host', BSController::getInstance()->getHost());
+		$view->setAttribute('has_proxy_server', $view->hasProxyServer());
 		$view->setAttribute('is_ssl', BSRequest::getInstance()->isSSL());
 		$view->setAttribute('is_debug', BS_DEBUG);
 		return true;
