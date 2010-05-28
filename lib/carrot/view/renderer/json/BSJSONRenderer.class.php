@@ -1,14 +1,14 @@
 <?php
 /**
  * @package org.carrot-framework
- * @subpackage view.renderer
+ * @subpackage view.renderer.json
  */
 
 /**
  * JSONレンダラー
  *
  * @author 小石達也 <tkoishi@b-shock.co.jp>
- * @version $Id: BSJSONRenderer.class.php 2083 2010-05-21 06:36:56Z pooza $
+ * @version $Id: BSJSONRenderer.class.php 2110 2010-05-28 12:04:14Z pooza $
  */
 class BSJSONRenderer implements BSRenderer {
 	protected $serializer;

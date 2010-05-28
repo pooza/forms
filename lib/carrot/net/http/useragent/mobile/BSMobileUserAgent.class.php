@@ -8,11 +8,12 @@
  * モバイルユーザーエージェント
  *
  * @author 小石達也 <tkoishi@b-shock.co.jp>
- * @version $Id: BSMobileUserAgent.class.php 2001 2010-04-13 10:41:23Z pooza $
+ * @version $Id: BSMobileUserAgent.class.php 2106 2010-05-28 10:46:47Z pooza $
  * @abstract
  */
 abstract class BSMobileUserAgent extends BSUserAgent implements BSUserIdentifier {
 	private $carrier;
+	const DEFAULT_NAME = 'DoCoMo/2.0';
 
 	/**
 	 * @access public

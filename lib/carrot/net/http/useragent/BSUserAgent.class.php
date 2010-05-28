@@ -8,7 +8,7 @@
  * ユーザーエージェント
  *
  * @author 小石達也 <tkoishi@b-shock.co.jp>
- * @version $Id: BSUserAgent.class.php 2102 2010-05-25 09:12:10Z pooza $
+ * @version $Id: BSUserAgent.class.php 2106 2010-05-28 10:46:47Z pooza $
  * @abstract
  */
 abstract class BSUserAgent implements BSAssignable {
@@ -17,6 +17,7 @@ abstract class BSUserAgent implements BSAssignable {
 	protected $bugs;
 	static private $denied;
 	const ACCESSOR = 'ua';
+	const DEFAULT_NAME = 'Mozilla/4.0 (compatible; MSIE 8.0; Windows NT 6.0; Trident/4.0)';
 
 	/**
 	 * @access public
@@ -301,6 +302,20 @@ abstract class BSUserAgent implements BSAssignable {
 	 */
 	public function getAssignValue () {
 		return $this->attributes;
+	}
+
+	/**
+	 * 既定のユーザーエージェント名を返す
+	 *
+	 * @access public
+	 * @return BSArray ユーザーエージェント名
+	 * @static
+	 */
+	static public function getDefaultNames () {
+		return new BSArray(array(
+			'pc' => self::DEFAULT_NAME,
+			'mobile' => BSMobileUserAgent::DEFAULT_NAME,
+		));
 	}
 
 	/**
