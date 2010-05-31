@@ -8,15 +8,15 @@
  * レガシーMozillaユーザーエージェント
  *
  * @author 小石達也 <tkoishi@b-shock.co.jp>
- * @version $Id: BSLegacyMozillaUserAgent.class.php 1812 2010-02-03 15:15:09Z pooza $
+ * @version $Id: BSLegacyMozillaUserAgent.class.php 2113 2010-05-29 16:54:14Z pooza $
  */
 class BSLegacyMozillaUserAgent extends BSUserAgent {
 
 	/**
-	 * @access public
+	 * @access protected
 	 * @param string $name ユーザーエージェント名
 	 */
-	public function __construct ($name = null) {
+	protected function __construct ($name = null) {
 		parent::__construct($name);
 		$this->bugs['css'] = true;
 		$this->attributes['is_kuso'] = true;

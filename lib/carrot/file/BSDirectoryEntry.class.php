@@ -8,7 +8,7 @@
  * ディレクトリエントリ
  *
  * @author 小石達也 <tkoishi@b-shock.co.jp>
- * @version $Id: BSDirectoryEntry.class.php 1945 2010-03-27 16:19:03Z pooza $
+ * @version $Id: BSDirectoryEntry.class.php 2112 2010-05-29 16:37:08Z pooza $
  * @abstract
  */
 abstract class BSDirectoryEntry {
@@ -333,4 +333,3 @@ abstract class BSDirectoryEntry {
 }
 
 /* vim:set tabstop=4: */
-

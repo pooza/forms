@@ -8,15 +8,15 @@
  * SoftBankユーザーエージェント
  *
  * @author 小石達也 <tkoishi@b-shock.co.jp>
- * @version $Id: BSSoftBankUserAgent.class.php 2001 2010-04-13 10:41:23Z pooza $
+ * @version $Id: BSSoftBankUserAgent.class.php 2113 2010-05-29 16:54:14Z pooza $
  */
 class BSSoftBankUserAgent extends BSMobileUserAgent {
 
 	/**
-	 * @access public
+	 * @access protected
 	 * @param string $name ユーザーエージェント名
 	 */
-	public function __construct ($name = null) {
+	protected function __construct ($name = null) {
 		parent::__construct($name);
 		$this->attributes['is_3gc'] = $this->is3GC();
 	}

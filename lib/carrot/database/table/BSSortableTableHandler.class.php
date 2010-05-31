@@ -8,7 +8,7 @@
  * ソート可能なテーブル
  *
  * @author 小石達也 <tkoishi@b-shock.co.jp>
- * @version $Id: BSSortableTableHandler.class.php 1812 2010-02-03 15:15:09Z pooza $
+ * @version $Id: BSSortableTableHandler.class.php 2112 2010-05-29 16:37:08Z pooza $
  * @abstract
  */
 abstract class BSSortableTableHandler extends BSTableHandler {
@@ -97,4 +97,3 @@ abstract class BSSortableTableHandler extends BSTableHandler {
 }
 
 /* vim:set tabstop=4: */
-

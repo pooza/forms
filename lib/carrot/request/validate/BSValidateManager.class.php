@@ -8,7 +8,7 @@
  * バリデートマネージャ
  *
  * @author 小石達也 <tkoishi@b-shock.co.jp>
- * @version $Id: BSValidateManager.class.php 1987 2010-04-11 02:49:50Z pooza $
+ * @version $Id: BSValidateManager.class.php 2112 2010-05-29 16:37:08Z pooza $
  */
 class BSValidateManager implements IteratorAggregate {
 	private $fields;
@@ -128,4 +128,3 @@ class BSValidateManager implements IteratorAggregate {
 }
 
 /* vim:set tabstop=4: */
-

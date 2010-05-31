@@ -5,7 +5,7 @@
  * @package org.carrot-framework
  * @subpackage Console
  * @author 小石達也 <tkoishi@b-shock.co.jp>
- * @version $Id: AnalyzeAccessLogAction.class.php 2094 2010-05-23 04:17:16Z pooza $
+ * @version $Id: AnalyzeAccessLogAction.class.php 2112 2010-05-29 16:37:08Z pooza $
  */
 class AnalyzeAccessLogAction extends BSAction {
 	protected $awstatsConfig;
@@ -120,4 +120,3 @@ class AnalyzeAccessLogAction extends BSAction {
 }
 
 /* vim:set tabstop=4: */
-

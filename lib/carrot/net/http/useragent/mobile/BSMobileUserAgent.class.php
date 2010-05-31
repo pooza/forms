@@ -8,7 +8,7 @@
  * モバイルユーザーエージェント
  *
  * @author 小石達也 <tkoishi@b-shock.co.jp>
- * @version $Id: BSMobileUserAgent.class.php 2106 2010-05-28 10:46:47Z pooza $
+ * @version $Id: BSMobileUserAgent.class.php 2113 2010-05-29 16:54:14Z pooza $
  * @abstract
  */
 abstract class BSMobileUserAgent extends BSUserAgent implements BSUserIdentifier {
@@ -16,10 +16,10 @@ abstract class BSMobileUserAgent extends BSUserAgent implements BSUserIdentifier
 	const DEFAULT_NAME = 'DoCoMo/2.0';
 
 	/**
-	 * @access public
+	 * @access protected
 	 * @param string $name ユーザーエージェント名
 	 */
-	public function __construct ($name = null) {
+	protected function __construct ($name = null) {
 		parent::__construct($name);
 		$this->attributes['is_mobile'] = $this->isMobile();
 		$this->attributes['id'] = $this->getID();

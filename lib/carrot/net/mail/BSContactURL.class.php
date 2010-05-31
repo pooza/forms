@@ -10,11 +10,10 @@
  * mailtoとかtelとか。
  *
  * @author 小石達也 <tkoishi@b-shock.co.jp>
- * @version $Id: BSContactURL.class.php 1812 2010-02-03 15:15:09Z pooza $
+ * @version $Id: BSContactURL.class.php 2112 2010-05-29 16:37:08Z pooza $
  */
 class BSContactURL extends BSURL {
 	private $query;
-
 
 	/**
 	 * @access protected

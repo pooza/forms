@@ -8,7 +8,7 @@
  * ユーザーエージェント
  *
  * @author 小石達也 <tkoishi@b-shock.co.jp>
- * @version $Id: BSUserAgent.class.php 2106 2010-05-28 10:46:47Z pooza $
+ * @version $Id: BSUserAgent.class.php 2113 2010-05-29 16:54:14Z pooza $
  * @abstract
  */
 abstract class BSUserAgent implements BSAssignable {
@@ -17,13 +17,12 @@ abstract class BSUserAgent implements BSAssignable {
 	protected $bugs;
 	static private $denied;
 	const ACCESSOR = 'ua';
-	const DEFAULT_NAME = 'Mozilla/4.0 (compatible; MSIE 8.0; Windows NT 6.0; Trident/4.0)';
 
 	/**
-	 * @access public
+	 * @access protected
 	 * @param string $name ユーザーエージェント名
 	 */
-	public function __construct ($name = null) {
+	protected function __construct ($name = null) {
 		$this->attributes = new BSArray;
 		$this->attributes['name'] = $name;
 		$this->attributes['type'] = $this->getType();
@@ -54,14 +53,15 @@ abstract class BSUserAgent implements BSAssignable {
 	 * 規定タイプ名を返す
 	 *
 	 * @access public
-	 * @param string $useragent UserAgent名
+	 * @param string $name UserAgent名
 	 * @return string タイプ名
 	 * @static
 	 */
-	static public function getDefaultType ($useragent) {
+	static public function getDefaultType ($name) {
 		foreach (self::getTypes() as $type) {
-			$instance = BSClassLoader::getInstance()->getObject($type, 'UserAgent');
-			if (mb_ereg($instance->getPattern(), $useragent)) {
+			$class = BSClassLoader::getInstance()->getClass($type, 'UserAgent');
+			$instance = new $class;
+			if (mb_ereg($instance->getPattern(), $name)) {
 				return $type;
 			}
 		}
@@ -302,20 +302,6 @@ abstract class BSUserAgent implements BSAssignable {
 	 */
 	public function getAssignValue () {
 		return $this->attributes;
-	}
-
-	/**
-	 * 既定のユーザーエージェント名を返す
-	 *
-	 * @access public
-	 * @return BSArray ユーザーエージェント名
-	 * @static
-	 */
-	static public function getDefaultNames () {
-		return new BSArray(array(
-			'pc' => self::DEFAULT_NAME,
-			'mobile' => BSMobileUserAgent::DEFAULT_NAME,
-		));
 	}
 
 	/**

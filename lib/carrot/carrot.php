@@ -4,7 +4,7 @@
  *
  * @package org.carrot-framework
  * @author 小石達也 <tkoishi@b-shock.co.jp>
- * @version $Id: carrot.php 2066 2010-05-04 14:25:29Z pooza $
+ * @version $Id: carrot.php 2112 2010-05-29 16:37:08Z pooza $
  */
 
 /**
@@ -82,7 +82,6 @@ function p ($var) {
 	}
 }
 
-
 /*
  * ここから処理開始
  */
@@ -154,4 +153,3 @@ if (BS_DEBUG) {
 }
 
 /* vim:set tabstop=4: */
-

@@ -8,15 +8,15 @@
  * Auユーザーエージェント
  *
  * @author 小石達也 <tkoishi@b-shock.co.jp>
- * @version $Id: BSAuUserAgent.class.php 2001 2010-04-13 10:41:23Z pooza $
+ * @version $Id: BSAuUserAgent.class.php 2113 2010-05-29 16:54:14Z pooza $
  */
 class BSAuUserAgent extends BSMobileUserAgent {
 
 	/**
-	 * @access public
+	 * @access protected
 	 * @param string $name ユーザーエージェント名
 	 */
-	public function __construct ($name = null) {
+	protected function __construct ($name = null) {
 		parent::__construct($name);
 		$this->bugs['multipart_form'] = true;
 		$this->attributes['is_wap2'] = $this->isWAP2();
