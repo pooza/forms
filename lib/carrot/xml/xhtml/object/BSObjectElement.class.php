@@ -8,7 +8,7 @@
  * object要素
  *
  * @author 小石達也 <tkoishi@b-shock.co.jp>
- * @version $Id: BSObjectElement.class.php 2002 2010-04-14 02:56:19Z pooza $
+ * @version $Id: BSObjectElement.class.php 2114 2010-05-31 16:29:54Z pooza $
  */
 class BSObjectElement extends BSXHTMLElement {
 	protected $inner;
@@ -62,6 +62,7 @@ class BSObjectElement extends BSXHTMLElement {
 		$param->setEmptyElement(true);
 		$param->setAttribute('name', $name);
 		$param->setAttribute('value', $value);
+		$param->setAttribute('valuetype', 'data');
 
 		if ($this->inner) {
 			$this->inner->setAttribute($name, $value);

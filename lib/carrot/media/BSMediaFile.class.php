@@ -8,7 +8,7 @@
  * メディアファイル
  *
  * @author 小石達也 <tkoishi@b-shock.co.jp>
- * @version $Id: BSMediaFile.class.php 1987 2010-04-11 02:49:50Z pooza $
+ * @version $Id: BSMediaFile.class.php 2114 2010-05-31 16:29:54Z pooza $
  * @abstract
  */
 abstract class BSMediaFile extends BSFile implements ArrayAccess {
@@ -73,13 +73,14 @@ abstract class BSMediaFile extends BSFile implements ArrayAccess {
 	}
 
 	/**
-	 * ムービー表示用のXHTML要素を返す
+	 * 表示用のXHTML要素を返す
 	 *
 	 * @access public
 	 * @param BSParameterHolder $params パラメータ配列
+	 * @param BSUserAgent $useragent 対象ブラウザ
 	 * @return BSDivisionElement 要素
 	 */
-	public function getElement (BSParameterHolder $params) {
+	public function getElement (BSParameterHolder $params, BSUserAgent $useragent = null) {
 		$container = new BSDivisionElement;
 		$container->registerStyleClass($params['style_class']);
 		if ($params['mode'] == 'noscript') {

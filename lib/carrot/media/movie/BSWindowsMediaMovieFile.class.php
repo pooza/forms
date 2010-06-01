@@ -8,18 +8,19 @@
  * WindowsMedia動画ファイル
  *
  * @author 小石達也 <tkoishi@b-shock.co.jp>
- * @version $Id: BSWindowsMediaMovieFile.class.php 1981 2010-04-09 03:24:07Z pooza $
+ * @version $Id: BSWindowsMediaMovieFile.class.php 2114 2010-05-31 16:29:54Z pooza $
  */
 class BSWindowsMediaMovieFile extends BSMovieFile {
 
 	/**
-	 * ムービー表示用のXHTML要素を返す
+	 * 表示用のXHTML要素を返す
 	 *
 	 * @access public
 	 * @param BSParameterHolder $params パラメータ配列
+	 * @param BSUserAgent $useragent 対象ブラウザ
 	 * @return BSDivisionElement 要素
 	 */
-	public function getElement (BSParameterHolder $params) {
+	public function getElement (BSParameterHolder $params, BSUserAgent $useragent = null) {
 		$container = new BSDivisionElement;
 		$container->registerStyleClass($params['style_class']);
 		$container->setStyles($this->getStyles($params));

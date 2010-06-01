@@ -8,15 +8,19 @@
  * SoftBankユーザーエージェント
  *
  * @author 小石達也 <tkoishi@b-shock.co.jp>
- * @version $Id: BSSoftBankUserAgent.class.php 2113 2010-05-29 16:54:14Z pooza $
+ * @version $Id: BSSoftBankUserAgent.class.php 2114 2010-05-31 16:29:54Z pooza $
  */
 class BSSoftBankUserAgent extends BSMobileUserAgent {
+	const DEFAULT_NAME = 'SoftBank';
 
 	/**
 	 * @access protected
 	 * @param string $name ユーザーエージェント名
 	 */
 	protected function __construct ($name = null) {
+		if (BSString::isBlank($name)) {
+			$name = self::DEFAULT_NAME;
+		}
 		parent::__construct($name);
 		$this->attributes['is_3gc'] = $this->is3GC();
 	}

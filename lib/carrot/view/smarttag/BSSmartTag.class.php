@@ -8,7 +8,7 @@
  * スマートタグ
  *
  * @author 小石達也 <tkoishi@b-shock.co.jp>
- * @version $Id: BSSmartTag.class.php 2056 2010-05-04 05:17:38Z pooza $
+ * @version $Id: BSSmartTag.class.php 2114 2010-05-31 16:29:54Z pooza $
  */
 abstract class BSSmartTag extends BSParameterHolder {
 	private $useragent;
@@ -120,6 +120,9 @@ abstract class BSSmartTag extends BSParameterHolder {
 			foreach ($tags as $tag) {
 				$class = BSClassLoader::getInstance()->getClass($tag, 'Tag');
 				$tag = new $class($matches[1]);
+				if ($useragent = $params['useragent']) {
+					$tag->setUserAgent($useragent);
+				}
 				if ($tag->isMatched()) {
 					$tag->setParameters($params);
 					$text = $tag->execute($text);

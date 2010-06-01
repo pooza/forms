@@ -8,7 +8,7 @@
  * モバイルユーザーエージェント
  *
  * @author 小石達也 <tkoishi@b-shock.co.jp>
- * @version $Id: BSMobileUserAgent.class.php 2113 2010-05-29 16:54:14Z pooza $
+ * @version $Id: BSMobileUserAgent.class.php 2114 2010-05-31 16:29:54Z pooza $
  * @abstract
  */
 abstract class BSMobileUserAgent extends BSUserAgent implements BSUserIdentifier {
@@ -127,6 +127,22 @@ abstract class BSMobileUserAgent extends BSUserAgent implements BSUserIdentifier
 			'width' => BS_IMAGE_MOBILE_SIZE_WIDTH,
 			'height' => BS_IMAGE_MOBILE_SIZE_HEIGHT,
 		));
+	}
+
+	/**
+	 * ムービー表示用のXHTML要素を返す
+	 *
+	 * @access public
+	 * @param BSParameterHolder $params パラメータ配列
+	 * @param BSUserAgent $useragent 対象ブラウザ
+	 * @return BSDivisionElement 要素
+	 */
+	public function getMovieElement (BSParameterHolder $params) {
+		$container = new BSDivisionElement;
+		$container->addElement($anchor = new BSAnchorElement);
+		$anchor->setURL($params['url']);
+		$anchor->setBody($params['label']);
+		return $container;
 	}
 
 	/**
