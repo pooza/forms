@@ -10,7 +10,7 @@
  * BSJavaScriptSet/BSStyleSetの基底クラス
  *
  * @author 小石達也 <tkoishi@b-shock.co.jp>
- * @version $Id: BSDocumentSet.class.php 2118 2010-06-03 04:08:42Z pooza $
+ * @version $Id: BSDocumentSet.class.php 2120 2010-06-03 05:47:47Z pooza $
  * @abstract
  */
 abstract class BSDocumentSet implements BSTextRenderer, BSHTTPRedirector, IteratorAggregate {
@@ -65,9 +65,9 @@ abstract class BSDocumentSet implements BSTextRenderer, BSHTTPRedirector, Iterat
 	 *
 	 * @access protected
 	 * @return BSDirectory ソースディレクトリ
+	 * @abstract
 	 */
-	protected function getSourceDirectory () {
-	}
+	abstract protected function getSourceDirectory ();
 
 	/**
 	 * キャッシュディレクトリを返す
@@ -172,7 +172,7 @@ abstract class BSDocumentSet implements BSTextRenderer, BSHTTPRedirector, Iterat
 	 * @param mixed $entry エントリー
 	 */
 	public function register ($entry) {
-		if (!($entry instanceof BSSerializable)) {
+		if (is_string($entry)) {
 			$dir = $this->getSourceDirectory();
 			if ($file = $dir->getEntry($entry, $this->getDocumentClass())) {
 				$entry = $file;

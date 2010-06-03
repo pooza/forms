@@ -8,17 +8,17 @@
  * JavaScriptセット
  *
  * @author 小石達也 <tkoishi@b-shock.co.jp>
- * @version $Id: BSJavaScriptSet.class.php 2118 2010-06-03 04:08:42Z pooza $
+ * @version $Id: BSJavaScriptSet.class.php 2120 2010-06-03 05:47:47Z pooza $
  */
 class BSJavaScriptSet extends BSDocumentSet {
 
 	/**
 	 * 書類のクラス名を返す
 	 *
-	 * @access protected
+	 * @access public
 	 * @return string $name 書類のクラス名
 	 */
-	protected function getDocumentClass () {
+	public function getDocumentClass () {
 		return 'BSJavaScriptFile';
 	}
 
