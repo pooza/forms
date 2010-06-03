@@ -8,7 +8,7 @@
  * スマートタグ
  *
  * @author 小石達也 <tkoishi@b-shock.co.jp>
- * @version $Id: BSSmartTag.class.php 2114 2010-05-31 16:29:54Z pooza $
+ * @version $Id: BSSmartTag.class.php 2116 2010-06-01 14:40:20Z pooza $
  */
 abstract class BSSmartTag extends BSParameterHolder {
 	private $useragent;
@@ -23,6 +23,22 @@ abstract class BSSmartTag extends BSParameterHolder {
 		$this->contents = '[[' . $contents . ']]';
 		$this->tag = BSString::explode(':', str_replace('\\:', '__COLON__', $contents));
 		$this->tag[1] = str_replace('__COLON__', ':', $this->tag[1]);
+	}
+
+	/**
+	 * パラメータを設定
+	 *
+	 * @access public
+	 * @param string $name パラメータ名
+	 * @param mixed $value 値
+	 */
+	public function setParameter ($name, $value) {
+		switch ($name) {
+			case 'useragent':
+				return $this->setUserAgent($value);
+			default:
+				return parent::setParameter($name, $value);
+		}
 	}
 
 	/**
@@ -120,9 +136,6 @@ abstract class BSSmartTag extends BSParameterHolder {
 			foreach ($tags as $tag) {
 				$class = BSClassLoader::getInstance()->getClass($tag, 'Tag');
 				$tag = new $class($matches[1]);
-				if ($useragent = $params['useragent']) {
-					$tag->setUserAgent($useragent);
-				}
 				if ($tag->isMatched()) {
 					$tag->setParameters($params);
 					$text = $tag->execute($text);

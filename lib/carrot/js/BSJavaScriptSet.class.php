@@ -8,7 +8,7 @@
  * JavaScriptセット
  *
  * @author 小石達也 <tkoishi@b-shock.co.jp>
- * @version $Id: BSJavaScriptSet.class.php 1812 2010-02-03 15:15:09Z pooza $
+ * @version $Id: BSJavaScriptSet.class.php 2118 2010-06-03 04:08:42Z pooza $
  */
 class BSJavaScriptSet extends BSDocumentSet {
 
@@ -40,6 +40,20 @@ class BSJavaScriptSet extends BSDocumentSet {
 	 */
 	protected function getCacheDirectory () {
 		return BSFileUtility::getDirectory('js_cache');
+	}
+
+	/**
+	 * リダイレクト対象
+	 *
+	 * URLを加工するケースが多い為、毎回生成する。
+	 *
+	 * @access public
+	 * @return BSURL
+	 */
+	public function getURL () {
+		$url = BSFileUtility::getURL('js_cache');
+		$url['path'] .= $this->getCacheFile()->getName();
+		return $url;
 	}
 
 	/**
