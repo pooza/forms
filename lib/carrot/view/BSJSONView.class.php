@@ -8,7 +8,7 @@
  * API結果文書用 既定ビュー
  *
  * @author 小石達也 <tkoishi@b-shock.co.jp>
- * @version $Id: BSJSONView.class.php 2108 2010-05-28 12:01:36Z pooza $
+ * @version $Id: BSJSONView.class.php 2122 2010-06-05 12:21:52Z pooza $
  */
 class BSJSONView extends BSView {
 
@@ -43,7 +43,11 @@ class BSJSONView extends BSView {
 	 */
 	public function setRenderer (BSRenderer $renderer, $flags = BSMIMEUtility::WITH_HEADER) {
 		if (!($renderer instanceof BSResultJSONRenderer)) {
-			$renderer = new BSResultJSONRenderer;
+			$dest = new BSResultJSONRenderer;
+			if ($renderer instanceof BSJSONRenderer) {
+				$dest->setContents(new BSArray($renderer->getResult()));
+			}
+			$renderer = $dest;
 		}
 		parent::setRenderer($renderer, $flags);
 	}

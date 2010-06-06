@@ -8,7 +8,7 @@
  * 抽象リクエスト
  *
  * @author 小石達也 <tkoishi@b-shock.co.jp>
- * @version $Id: BSRequest.class.php 2099 2010-05-25 04:33:45Z pooza $
+ * @version $Id: BSRequest.class.php 2121 2010-06-05 12:21:11Z pooza $
  * @abstract
  */
 abstract class BSRequest extends BSHTTPRequest {
@@ -215,6 +215,9 @@ abstract class BSRequest extends BSHTTPRequest {
 	 * @param mixed $value 値
 	 */
 	public function setError ($name, $value) {
+		if ($value instanceof BSStringFormat) {
+			$value = $value->getContents();
+		}
 		$this->getErrors()->setParameter($name, $value);
 	}
 

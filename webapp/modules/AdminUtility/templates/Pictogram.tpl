@@ -4,7 +4,7 @@
 @package org.carrot-framework
 @subpackage AdminUtility
 @author 小石達也 <tkoishi@b-shock.co.jp>
-@version $Id: Pictogram.tpl 1820 2010-02-04 11:15:28Z pooza $
+@version $Id: Pictogram.tpl 2125 2010-06-06 04:26:12Z pooza $
 *}
 <?xml version="1.0" encoding="UTF-8" ?>
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
@@ -19,11 +19,13 @@
 
 	<table>
 
-{foreach from=$pictograms item='pictogram'}
+{foreach from=$pictograms item='picto'}
 		<tr>
-			<td width="15" align="center">{picto name=$pictogram}</td>
+			<td width="15" align="center">
+				<img src="{$picto.image.url}" width="{$picto.image.width}" height="{$picto.image.height}" alt="{$picto.image.alt}" />
+			</td>
 			<td width="180">
-				<a href="javascript:void(putSmartTag('picto',window.opener.$('{$params.field|default:'body'}'),'{$pictogram}'))">{$pictogram}</a>
+				<a href="javascript:void(putSmartTag('picto',window.opener.$('{$params.field|default:'body'}'),'{$picto.name}'))">{$picto.name}</a>
 			</td>
 		</tr>
 {/foreach}

@@ -5,7 +5,7 @@
  * @package org.carrot-framework
  * @subpackage AdminUtility
  * @author 小石達也 <tkoishi@b-shock.co.jp>
- * @version $Id: BackupAction.class.php 1812 2010-02-03 15:15:09Z pooza $
+ * @version $Id: BackupAction.class.php 2123 2010-06-05 14:28:03Z pooza $
  */
 class BackupAction extends BSAction {
 	public function execute () {
@@ -19,7 +19,7 @@ class BackupAction extends BSAction {
 		} catch (BSFileException $e) {
 			$message = new BSStringFormat('バックアップに失敗しました。 (%s)');
 			$message[] = $e->getMessage();
-			$this->request->setError('bsutility', $message->getContents());
+			$this->request->setError('bsutility', $message);
 			return $this->handleError();
 		}
 	}
