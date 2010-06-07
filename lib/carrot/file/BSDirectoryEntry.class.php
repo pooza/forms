@@ -8,7 +8,7 @@
  * ディレクトリエントリ
  *
  * @author 小石達也 <tkoishi@b-shock.co.jp>
- * @version $Id: BSDirectoryEntry.class.php 2112 2010-05-29 16:37:08Z pooza $
+ * @version $Id: BSDirectoryEntry.class.php 2126 2010-06-06 08:57:25Z pooza $
  * @abstract
  */
 abstract class BSDirectoryEntry {
@@ -226,6 +226,26 @@ abstract class BSDirectoryEntry {
 			$this->linkTarget = new $class(readlink($this->getPath()));
 		}
 		return $this->linkTarget;
+	}
+
+	/**
+	 * シンボリックリンクを作成
+	 *
+	 * @access public
+	 * @param BSDirectory $dir 作成先ディレクトリ
+	 * @param string $name リンクのファイル名。空欄の場合は、元ファイルと同じ。
+	 * @return BSDirectoryEntry リンク先
+	 */
+	public function createLink (BSDirectory $dir, $name = null) {
+		if (BSString::isBlank($name)) {
+			$name = $this->getName();
+		}
+
+		if ($file = $dir->getEntry($name)) {
+			throw new BSFileException($file . 'が既に存在します。');
+		}
+		symlink($this->getPath(), $dir->getPath() . DIRECTORY_SEPARATOR . $name);
+		return $dir->getEntry($name);
 	}
 
 	/**
