@@ -8,7 +8,7 @@
  * 文字列に関するユーティリティ
  *
  * @author 小石達也 <tkoishi@b-shock.co.jp>
- * @version $Id: BSString.class.php 2097 2010-05-25 03:18:27Z pooza $
+ * @version $Id: BSString.class.php 2129 2010-06-09 13:34:48Z pooza $
  */
 class BSString {
 
@@ -268,6 +268,31 @@ class BSString {
 			$value = mb_ereg_replace('_{2,}', '_', $value);
 			$value = ltrim($value, '_');
 			$value = self::toLower($value);
+		}
+		return $value;
+	}
+
+	/**
+	 * 名前をインクリメント
+	 *
+	 * 末尾が数値ならインクリメント。そうでなければ末尾に "2" を加える。
+	 *
+	 * @access public
+	 * @param mixed $value 変換対象の文字列又は配列
+	 * @return mixed 変換後
+	 * @static
+	 */
+	static public function increment ($value) {
+		if (BSArray::isArray($value)) {
+			foreach ($value as $key => $item) {
+				$value[$key] = self::underscorize($item);
+			}
+		} else {
+			if (mb_ereg('^(.*)([0-9]+)$', $value, $matches)) {
+				$value = $matches[1] . ($matches[2] + 1);
+			} else {
+				$value .= '2';
+			}
 		}
 		return $value;
 	}

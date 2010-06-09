@@ -8,7 +8,7 @@
  * ディレクトリエントリ
  *
  * @author 小石達也 <tkoishi@b-shock.co.jp>
- * @version $Id: BSDirectoryEntry.class.php 2126 2010-06-06 08:57:25Z pooza $
+ * @version $Id: BSDirectoryEntry.class.php 2129 2010-06-09 13:34:48Z pooza $
  * @abstract
  */
 abstract class BSDirectoryEntry {
@@ -99,10 +99,10 @@ abstract class BSDirectoryEntry {
 	/**
 	 * パスを設定
 	 *
-	 * @access public
+	 * @access protected
 	 * @param string $path パス
 	 */
-	public function setPath ($path) {
+	protected function setPath ($path) {
 		if (!BSUtility::isPathAbsolute($path)) {
 			$message = new BSStringFormat('パス"%s"が正しくありません。');
 			$message[] = $path;
@@ -149,6 +149,33 @@ abstract class BSDirectoryEntry {
 			throw new BSFileException($this . 'を移動できません。');
 		}
 		$this->setPath($path);
+	}
+
+	/**
+	 * コピー
+	 *
+	 * @access public
+	 * @param BSDirectory $dir コピー先ディレクトリ
+	 * @return BSFile コピーされたファイル
+	 */
+	public function copyTo (BSDirectory $dir) {
+		$path = $dir->getPath() . DIRECTORY_SEPARATOR . $this->getName();
+		if (!copy($this->getPath(), $path)) {
+			throw new BSFileException($this . 'をコピーできません。');
+		}
+		$class = get_class($this);
+		return new $class($path);
+	}
+
+	/**
+	 * ドットファイル等を削除
+	 *
+	 * @access public
+	 */
+	public function clearIgnoreFiles () {
+		if ($this->isIgnore() || $this->isDotted()) {
+			$this->delete();
+		}
 	}
 
 	/**
@@ -241,10 +268,11 @@ abstract class BSDirectoryEntry {
 			$name = $this->getName();
 		}
 
-		if ($file = $dir->getEntry($name)) {
-			throw new BSFileException($file . 'が既に存在します。');
+		$path = $dir->getPath() . DIRECTORY_SEPARATOR . $name;
+		if (is_link($path)) {
+			unlink($path);
 		}
-		symlink($this->getPath(), $dir->getPath() . DIRECTORY_SEPARATOR . $name);
+		symlink($this->getPath(), $path);
 		return $dir->getEntry($name);
 	}
 
@@ -326,8 +354,9 @@ abstract class BSDirectoryEntry {
 	 *
 	 * @access public
 	 * @param integer $mode ファイルモード
+	 * @param integer $flags フラグのビット列
 	 */
-	public function setMode ($mode) {
+	public function setMode ($mode, $flags = null) {
 		if (!$this->isWritable() || !chmod($this->getPath(), $mode)) {
 			throw new BSFileException($this . 'のファイルモードを変更できません。');
 		}
