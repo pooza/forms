@@ -8,7 +8,7 @@
  * データベーステーブル
  *
  * @author 小石達也 <tkoishi@b-shock.co.jp>
- * @version $Id: BSTableHandler.class.php 1987 2010-04-11 02:49:50Z pooza $
+ * @version $Id: BSTableHandler.class.php 2134 2010-06-11 09:06:59Z pooza $
  * @abstract
  */
 abstract class BSTableHandler implements IteratorAggregate, BSDictionary, BSAssignable {
@@ -263,6 +263,20 @@ abstract class BSTableHandler implements IteratorAggregate, BSDictionary, BSAssi
 			$this->pagesize = $pagesize;
 			$this->setExecuted(false);
 		}
+	}
+
+	/**
+	 * 上位のレコードを返す
+	 *
+	 * @access public
+	 * @param integer $limit 件数
+	 * @return BSTableHandler 上位のレコード
+	 */
+	public function getRecent ($limit) {
+		$table = clone $this;
+		$table->setPage(1);
+		$table->setPageSize($limit);
+		return $table;
 	}
 
 	/**

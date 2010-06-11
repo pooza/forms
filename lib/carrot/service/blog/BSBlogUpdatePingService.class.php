@@ -8,7 +8,7 @@
  * Blog更新Pingサービス
  *
  * @author 小石達也 <tkoishi@b-shock.co.jp>
- * @version $Id: BSBlogUpdatePingService.class.php 1932 2010-03-25 09:11:10Z pooza $
+ * @version $Id: BSBlogUpdatePingService.class.php 2133 2010-06-11 09:06:32Z pooza $
  */
 class BSBlogUpdatePingService extends BSCurlHTTP {
 
@@ -46,9 +46,10 @@ class BSBlogUpdatePingService extends BSCurlHTTP {
 	 * 更新Pingをまとめて送る
 	 *
 	 * @access public
+	 * @param BSHTTPRedirector $url ホームページとして申告するURL
 	 * @static
 	 */
-	static public function sendPings () {
+	static public function sendPings (BSHTTPRedirector $url = null) {
 		$config = BSConfigManager::getInstance()->compile('blog');
 		if (!isset($config['ping']['urls'])) {
 			throw new BSBlogException('更新Pingの送信先を取得できません。');
@@ -57,7 +58,11 @@ class BSBlogUpdatePingService extends BSCurlHTTP {
 
 		$request = new BSBlogUpdatePingRequest;
 		$request->registerParameter(BS_APP_NAME_JA);
-		$request->registerParameter(BS_ROOT_URL);
+		if (BSString::isBlank($url)) {
+			$request->registerParameter(BS_ROOT_URL);
+		} else {
+			$request->registerParameter($url->getURL()->getContents());
+		}
 
 		foreach ($urls as $url) {
 			try {
