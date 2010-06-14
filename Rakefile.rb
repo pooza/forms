@@ -4,7 +4,7 @@
 #
 # @package org.carrot-framework
 # @author 小石達也 <tkoishi@b-shock.co.jp>
-# @version $Id: Rakefile.rb 2052 2010-05-02 16:35:03Z pooza $
+# @version $Id: Rakefile.rb 2135 2010-06-12 08:39:20Z pooza $
 
 $KCODE = 'u'
 require 'yaml'
@@ -152,35 +152,6 @@ namespace :awstats do
 
   file 'lib/AWStats/awstats.conf' do
     sh 'ln -s ../../var/tmp/awstats.conf lib/AWStats/awstats.conf'
-  end
-end
-
-namespace :ajaxzip2 do
-  desc 'ajaxzip2を初期化'
-  task :init => ['www/carrotlib/js/ajaxzip2/data', 'lib/ajaxzip2/data', :json, :clean]
-
-  task :json => ['lib/ajaxzip2/data/ken_all.csv'] do
-    sh 'cd lib/ajaxzip2; ./csv2jsonzip.pl data/ken_all.csv'
-  end
-
-  task :clean do
-    system 'rm lib/ajaxzip2/data/ken_all.*'
-  end
-
-  file 'www/carrotlib/js/ajaxzip2/data' do
-    sh 'ln -s ../../../../var/zipcode www/carrotlib/js/ajaxzip2/data'
-  end
-
-  file 'lib/ajaxzip2/data' do
-    sh 'ln -s ../../var/zipcode lib/ajaxzip2/data'
-  end
-
-  file 'lib/ajaxzip2/data/ken_all.csv' => ['lib/ajaxzip2/data/ken_all.lzh'] do
-    sh 'cd lib/ajaxzip2/data; lha x ken_all.lzh'
-  end
-
-  file 'lib/ajaxzip2/data/ken_all.lzh' do
-    sh 'cd lib/ajaxzip2/data; wget http://www.post.japanpost.jp/zipcode/dl/kogaki/lzh/ken_all.lzh'
   end
 end
 

@@ -3,7 +3,7 @@
  *
  * @package org.carrot-framework
  * @author 小石達也 <tkoishi@b-shock.co.jp>
- * @version $Id: carrot.js 2055 2010-05-04 05:04:21Z pooza $
+ * @version $Id: carrot.js 2135 2010-06-12 08:39:20Z pooza $
  */
 
 function redirect (m, a, id) {
@@ -97,7 +97,8 @@ if (!Number.prototype.suppressZero) {
 
 document.observe('dom:loaded', function () {
   try {
-    AjaxZip2.JSONDATA = '/carrotlib/js/ajaxzip2/data';
+    AjaxZip3.JSONDATA = document.location.protocol
+      + '//ajaxzip3.googlecode.com/svn/trunk/ajaxzip3/zipdata';
   } catch (e) {
   }
 });

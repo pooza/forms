@@ -2,7 +2,7 @@
 #
 # @package org.carrot-framework
 # @author 小石達也 <tkoishi@b-shock.co.jp>
-# @version $Id: carrot.yaml 2025 2010-04-18 07:28:40Z pooza $
+# @version $Id: carrot.yaml 2135 2010-06-12 08:39:20Z pooza $
 
 awstats:
   parent: lib
@@ -147,6 +147,3 @@ webapp:
   constant: yes
 www:
   constant: yes
-zipcode:
-  parent: var
-  suffix: .json

@@ -8,7 +8,7 @@
  * ディレクトリ
  *
  * @author 小石達也 <tkoishi@b-shock.co.jp>
- * @version $Id: BSDirectory.class.php 2129 2010-06-09 13:34:48Z pooza $
+ * @version $Id: BSDirectory.class.php 2135 2010-06-12 08:39:20Z pooza $
  */
 class BSDirectory extends BSDirectoryEntry implements IteratorAggregate {
 	private $suffix;
@@ -229,6 +229,7 @@ class BSDirectory extends BSDirectoryEntry implements IteratorAggregate {
 			$entry->clearIgnoreFiles();
 		}
 		parent::clearIgnoreFiles();
+		$this->entries = null;
 	}
 
 	/**
