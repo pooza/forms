@@ -8,7 +8,7 @@
  * 動画ファイル
  *
  * @author 小石達也 <tkoishi@b-shock.co.jp>
- * @version $Id: BSMovieFile.class.php 2114 2010-05-31 16:29:54Z pooza $
+ * @version $Id: BSMovieFile.class.php 2143 2010-06-15 02:46:02Z pooza $
  */
 class BSMovieFile extends BSMediaFile {
 
@@ -33,13 +33,18 @@ class BSMovieFile extends BSMediaFile {
 	/**
 	 * ファイルの内容から、メディアタイプを返す
 	 *
-	 * fileinfoだけでは、wmvを認識できないことがある。
+	 * fileinfoだけでは認識できないメディアタイプがある。
 	 *
 	 * @access public
 	 * @return string メディアタイプ
 	 */
 	public function analyzeType () {
 		if (($type = parent::analyzeType()) == BSMIMEType::DEFAULT_TYPE) {
+			if (mb_ereg('Audio: [ ,[:alnum:]]*(amr|aac)', $this->output)
+				&& BSString::isContain('Video: mpeg4', $this->output)) {
+				//3GPPの場合は BSMIMEType::DEFAULT_TYPE にマッチしない為、3GPP2で確定。
+				return BSMIMEType::getType('3g2');
+			}
 			foreach (array('wmv', 'mpeg') as $type) {
 				if (BSString::isContain('Video: ' . $type, $this->output)) {
 					return BSMIMEType::getType($type);
@@ -201,8 +206,10 @@ class BSMovieFile extends BSMediaFile {
 			return;
 		}
 		switch ($file->getType()) {
+			case BSMIMEType::getType('3g2'):
+				return parent::search($file, 'BS3GPP2MovieFile');
 			case BSMIMEType::getType('3gp'):
-				return parent::search($file, 'BS3GPMovieFile');
+				return parent::search($file, 'BS3GPPMovieFile');
 			case BSMIMEType::getType('mov'):
 				return parent::search($file, 'BSQuickTimeMovieFile');
 			case BSMIMEType::getType('mpeg'):

@@ -2,10 +2,11 @@
 #
 # @package org.carrot-framework
 # @author 小石達也 <tkoishi@b-shock.co.jp>
-# @version $Id: mime.yaml 2019 2010-04-17 17:58:17Z pooza $
+# @version $Id: mime.yaml 2138 2010-06-14 17:02:54Z pooza $
 
 types:
   3gp: video/3gpp
+  3g2: video/3gpp2
   aac: audio/x-aac
   aif: audio/x-aiff
   aifc: audio/x-aiff

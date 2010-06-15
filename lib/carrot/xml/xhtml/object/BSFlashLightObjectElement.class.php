@@ -8,7 +8,7 @@
  * FlashLight用object要素
  *
  * @author 小石達也 <tkoishi@b-shock.co.jp>
- * @version $Id: BSFlashLightObjectElement.class.php 1862 2010-02-15 11:00:37Z pooza $
+ * @version $Id: BSFlashLightObjectElement.class.php 2144 2010-06-15 02:59:43Z pooza $
  */
 class BSFlashLightObjectElement extends BSFlashObjectElement {
 
@@ -20,7 +20,6 @@ class BSFlashLightObjectElement extends BSFlashObjectElement {
 	public function __construct ($name = null, BSUserAgent $useragent = null) {
 		BSXHTMLElement::__construct($name, $useragent);
 		$this->setAttribute('type', BSMIMEType::getType('swf'));
-		$this->setAttribute('declare', 'declare');
 	}
 
 	/**
