@@ -5,10 +5,10 @@
  */
 
 /**
- * 3GP動画ファイル
+ * 3GPP動画ファイル
  *
  * @author 小石達也 <tkoishi@b-shock.co.jp>
- * @version $Id: BS3GPPMovieFile.class.php 2139 2010-06-14 17:09:35Z pooza $
+ * @version $Id: BS3GPPMovieFile.class.php 2145 2010-06-15 15:51:53Z pooza $
  */
 class BS3GPPMovieFile extends BSQuickTimeMovieFile {
 
