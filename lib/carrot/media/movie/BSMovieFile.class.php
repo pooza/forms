@@ -8,7 +8,7 @@
  * 動画ファイル
  *
  * @author 小石達也 <tkoishi@b-shock.co.jp>
- * @version $Id: BSMovieFile.class.php 2145 2010-06-15 15:51:53Z pooza $
+ * @version $Id: BSMovieFile.class.php 2148 2010-06-18 09:41:21Z pooza $
  */
 class BSMovieFile extends BSMediaFile {
 
@@ -26,7 +26,8 @@ class BSMovieFile extends BSMediaFile {
 			$this->attributes['width'] = $matches[1];
 			$this->attributes['height'] = $matches[2];
 			$this->attributes['height_full'] = $matches[2] + $this->getPlayerHeight();
-			$this->attributes['pixel_size'] = $matches[1] . '×' . $matches[2];
+			$this->attributes['pixel_size'] = $this['width'] . '×' . $this['height'];
+			$this->attributes['aspect'] = $this['width'] / $this['height'];
 		}
 	}
 

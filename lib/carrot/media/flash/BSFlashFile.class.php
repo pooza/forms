@@ -8,7 +8,7 @@
  * Flashムービーファイル
  *
  * @author 小石達也 <tkoishi@b-shock.co.jp>
- * @version $Id: BSFlashFile.class.php 2140 2010-06-15 02:24:34Z pooza $
+ * @version $Id: BSFlashFile.class.php 2148 2010-06-18 09:41:21Z pooza $
  */
 class BSFlashFile extends BSMediaFile {
 
@@ -28,6 +28,7 @@ class BSFlashFile extends BSMediaFile {
 		$this->attributes['height'] = $info[1];
 		$this->attributes['height_full'] = $info[1];
 		$this->attributes['pixel_size'] = $this['width'] . '×' . $this['height'];
+		$this->attributes['aspect'] = $this['width'] / $this['height'];
 	}
 
 	/**
