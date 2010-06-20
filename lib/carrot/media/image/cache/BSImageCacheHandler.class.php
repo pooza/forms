@@ -8,7 +8,7 @@
  * 画像キャッシュ
  *
  * @author 小石達也 <tkoishi@b-shock.co.jp>
- * @version $Id: BSImageCacheHandler.class.php 2038 2010-04-26 13:09:16Z pooza $
+ * @version $Id: BSImageCacheHandler.class.php 2165 2010-06-20 15:36:01Z pooza $
  */
 class BSImageCacheHandler {
 	private $useragent;
@@ -387,31 +387,27 @@ class BSImageCacheHandler {
 	 * @return BSImageContainer 画像コンテナ
 	 */
 	public function getContainer (BSParameterHolder $params) {
-		if (!BSString::isBlank($params['src'])) {
-			if (BSUtility::isPathAbsolute($params['src'])) {
-				return new BSImageFile($params['src']);
-			}
-			foreach (array('images', 'www', 'root') as $name) {
-				$dir = BSFileUtility::getDirectory($name);
-				if ($entry = $dir->getEntry($params['src'], 'BSImageFile')) {
-					return $entry;
-				}
-			}
-		}
-
+		$params = new BSArray($params);
 		if (BSString::isBlank($params['size'])) {
 			$params['size'] = 'thumbnail';
 		}
-		if ($record = BSController::getInstance()->getModule()->searchRecord($params)) {
-			return $record;
+
+		if (!BSString::isBlank($path = $params['src'])) {
+			$finder = new BSFileFinder('BSImageFile');
+			if ($dir = $params['dir']) {
+				$finder->registerDirectory($dir);
+			}
+			if ($file = $finder->execute($path)) {
+				return $file;
+			}
 		}
-		try {
-			$class = $params['class'];
-			return new $class($params['id']);
-		} catch (Exception $e) {
-			$message = new BSStringFormat('コンテナが取得できません。(%s)');
-			$message[] = $e->getMessage();
-			throw new BSImageException($message);
+
+		$finder = new BSRecordFinder($params);
+		if (!($container = $finder->execute()) && ($class = $params['class'])) {
+			$container = new $class($params['id']);
+		}
+		if ($container && ($container instanceof BSImageContainer)) {
+			return $container;
 		}
 	}
 

@@ -8,7 +8,7 @@
  * 楽曲関数
  *
  * @author 小石達也 <tkoishi@b-shock.co.jp>
- * @version $Id: function.music.php 1825 2010-02-05 13:18:55Z pooza $
+ * @version $Id: function.music.php 2158 2010-06-19 14:18:56Z pooza $
  */
 function smarty_function_music ($params, &$smarty) {
 	$params = new BSArray($params);
@@ -23,7 +23,8 @@ function smarty_function_music ($params, &$smarty) {
 			return $file[$mode];
 		default:
 			if (BSString::isBlank($params['href_prefix'])) {
-				if ($record = BSController::getInstance()->getModule()->searchRecord($params)) {
+				$finder = new BSRecordFinder($params);
+				if ($record = $finder->execute()) {
 					$url = BSFileUtility::getURL('musics');
 					$url['path'] .= $record->getTable()->getDirectory()->getName() . '/';
 					$params['href_prefix'] = $url['path'];

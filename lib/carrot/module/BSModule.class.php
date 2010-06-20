@@ -8,7 +8,7 @@
  * モジュール
  *
  * @author 小石達也 <tkoishi@b-shock.co.jp>
- * @version $Id: BSModule.class.php 2041 2010-04-27 01:05:49Z pooza $
+ * @version $Id: BSModule.class.php 2158 2010-06-19 14:18:56Z pooza $
  */
 class BSModule implements BSHTTPRedirector, BSAssignable {
 	protected $name;
@@ -292,33 +292,6 @@ class BSModule implements BSHTTPRedirector, BSAssignable {
 	 */
 	private function getRecordIDName () {
 		return $this->getName() . 'ID';
-	}
-
-	/**
-	 * パラメータ配列からレコードを返す
-	 *
-	 * パラメータが不足していたら、モジュールの情報で補い、検索する。
-	 *
-	 * @access public
-	 * @param BSParameterHolder $params パラメータ配列
-	 * @return BSRecord レコード
-	 */
-	public function searchRecord (BSParameterHolder $params) {
-		if (BSString::isBlank($params['class'])) {
-			$params['class'] = $this->getRecordClass();
-
-			if (BSString::isBlank($params['id'])) {
-				$params['id'] = $this->getRecord()->getID();
-				return $this->getRecord();
-			} 
-		}
-
-		try {
-			if ($table = BSTableHandler::getInstance($params['class'])) {
-				return $table->getRecord($params['id']);
-			}
-		} catch (Exception $e) {
-		}
 	}
 
 	/**

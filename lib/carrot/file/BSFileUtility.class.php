@@ -8,7 +8,7 @@
  * ファイルユーティリティ
  *
  * @author 小石達也 <tkoishi@b-shock.co.jp>
- * @version $Id: BSFileUtility.class.php 1945 2010-03-27 16:19:03Z pooza $
+ * @version $Id: BSFileUtility.class.php 2154 2010-06-19 12:19:39Z pooza $
  */
 class BSFileUtility {
 
@@ -95,15 +95,16 @@ class BSFileUtility {
 	 * @access public
 	 * @param BSDirectory $dir ディレクトリ
 	 * @param string $basename ベースファイル名
+	 * @param string $class 出力クラス名
 	 * @return BSFile 添付ファイル
 	 * @static
 	 */
-	static public function searchAttachment (BSDirectory $dir, $basename) {
-		foreach (BSMIMEType::getAttachableTypes() as $suffix => $type) {
-			if ($file = $dir->getEntry($basename . $suffix)) {
-				return $file;
-			}
-		}
+	static public function searchAttachment (BSDirectory $dir, $basename, $class = 'BSFile') {
+		$finder = new BSFileFinder($class);
+		$finder->clearDirectories();
+		$finder->registerDirectory($dir);
+		$finder->registerAllAttachableSuffixes();
+		return $finder->execute($basename);
 	}
 
 	/**

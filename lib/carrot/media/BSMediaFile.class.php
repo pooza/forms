@@ -8,7 +8,7 @@
  * メディアファイル
  *
  * @author 小石達也 <tkoishi@b-shock.co.jp>
- * @version $Id: BSMediaFile.class.php 2114 2010-05-31 16:29:54Z pooza $
+ * @version $Id: BSMediaFile.class.php 2162 2010-06-19 15:28:58Z pooza $
  * @abstract
  */
 abstract class BSMediaFile extends BSFile implements ArrayAccess {
@@ -243,32 +243,22 @@ abstract class BSMediaFile extends BSFile implements ArrayAccess {
 	 * @static
 	 */
 	static public function search ($file, $class = 'BSFile') {
-		if ($file instanceof BSFile) {
-			return new $class($file->getPath());
-		}
 		if (BSArray::isArray($file)) {
 			$params = new BSArray($file);
-			if (!BSString::isBlank($path = $params['src'])) {
+			if (BSString::isBlank($path = $params['src'])) {
+				$finder = new BSRecordFinder($params);
+				if (($record = $finder->execute())
+					&& ($record instanceof BSAttachmentContainer)
+					&& ($attachment = $record->getAttachment($params['size']))) {
+
+					return self::search($attachment, $class);
+				}
+			} else {
 				return self::search($path, $class);
 			}
-			$module = BSController::getInstance()->getModule();
-			if ($record = $module->searchRecord($params)) {
-				if ($attachment = $record->getAttachment($params['size'])) {
-					return new $class($attachment->getPath());
-				}
-			}
-			return null;
-		} 
-
-		if (BSUtility::isPathAbsolute($path = $file)) {
-			return new $class($path);
 		} else {
-			foreach (array('carrotlib', 'www', 'root') as $dir) {
-				$dir = BSFileUtility::getDirectory($dir);
-				if ($entry = $dir->getEntry($path, $class)) {
-					return $entry;
-				}
-			}
+			$finder = new BSFileFinder($class);
+			return $finder->execute($file);
 		}
 	}
 }
