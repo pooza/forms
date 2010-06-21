@@ -10,11 +10,14 @@
  * BSImageCacheHandlerのフロントエンド
  *
  * @author 小石達也 <tkoishi@b-shock.co.jp>
- * @version $Id: function.image_cache.php 1825 2010-02-05 13:18:55Z pooza $
+ * @version $Id: function.image_cache.php 2167 2010-06-21 08:21:05Z pooza $
  */
 function smarty_function_image_cache ($params, &$smarty) {
 	$caches = BSImageCacheHandler::getInstance();
 	$params = new BSArray($params);
+	if (BSString::isBlank($params['size'])) {
+		$params['size'] = 'thumbnail';
+	}
 	$flags = $caches->convertFlags($params['flags']);
 	if (!$container = $caches->getContainer($params)) {
 		return null;

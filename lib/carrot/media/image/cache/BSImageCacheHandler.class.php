@@ -8,7 +8,7 @@
  * 画像キャッシュ
  *
  * @author 小石達也 <tkoishi@b-shock.co.jp>
- * @version $Id: BSImageCacheHandler.class.php 2165 2010-06-20 15:36:01Z pooza $
+ * @version $Id: BSImageCacheHandler.class.php 2167 2010-06-21 08:21:05Z pooza $
  */
 class BSImageCacheHandler {
 	private $useragent;
@@ -388,9 +388,6 @@ class BSImageCacheHandler {
 	 */
 	public function getContainer (BSParameterHolder $params) {
 		$params = new BSArray($params);
-		if (BSString::isBlank($params['size'])) {
-			$params['size'] = 'thumbnail';
-		}
 
 		if (!BSString::isBlank($path = $params['src'])) {
 			$finder = new BSFileFinder('BSImageFile');

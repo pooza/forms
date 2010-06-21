@@ -8,7 +8,7 @@
  * Webコントローラー
  *
  * @author 小石達也 <tkoishi@b-shock.co.jp>
- * @version $Id: BSWebController.class.php 1985 2010-04-11 02:18:21Z pooza $
+ * @version $Id: BSWebController.class.php 2166 2010-06-21 08:20:37Z pooza $
  */
 class BSWebController extends BSController {
 
@@ -26,7 +26,13 @@ class BSWebController extends BSController {
 			$url = BSURL::getInstance();
 			$url['path'] = $redirectTo;
 		}
-		$url->setParameters($this->request->getUserAgent()->getQuery());
+
+		$useragent = $this->request->getUserAgent();
+		$url->setParameters($useragent->getQuery());
+		if ($useragent->hasBug('cache_control')) {
+			$url->setParameter('at', BSNumeric::getRandom());
+		}
+
 		$this->setHeader('Location', $url->getContents());
 		return BSView::NONE;
 	}
