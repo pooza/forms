@@ -8,9 +8,25 @@
  * Webコントローラー
  *
  * @author 小石達也 <tkoishi@b-shock.co.jp>
- * @version $Id: BSWebController.class.php 2166 2010-06-21 08:20:37Z pooza $
+ * @version $Id: BSWebController.class.php 2168 2010-06-22 08:06:27Z pooza $
  */
 class BSWebController extends BSController {
+
+	/**
+	 * 検索対象ディレクトリを返す
+	 *
+	 * @access public
+	 * @return BSArray ディレクトリの配列
+	 */
+	public function getSearchDirectories () {
+		if (!$this->searchDirectories) {
+			$this->searchDirectories = new BSArray;
+			foreach (array('images', 'carrotlib', 'www', 'root') as $name) {
+				$this->searchDirectories[] = BSFileUtility::getDirectory($name);
+			}
+		}
+		return $this->searchDirectories;
+	}
 
 	/**
 	 * リダイレクト

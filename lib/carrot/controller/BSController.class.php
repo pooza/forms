@@ -8,13 +8,14 @@
  * Carrotアプリケーションコントローラ
  *
  * @author 小石達也 <tkoishi@b-shock.co.jp>
- * @version $Id: BSController.class.php 2041 2010-04-27 01:05:49Z pooza $
+ * @version $Id: BSController.class.php 2168 2010-06-22 08:06:27Z pooza $
  * @abstract
  */
 abstract class BSController {
 	protected $host;
 	protected $headers;
 	protected $actions;
+	protected $searchDirectories;
 	static private $instance;
 	const ACTION_REGISTER_LIMIT = 20;
 
@@ -241,6 +242,20 @@ abstract class BSController {
 	 */
 	public function setMemoryLimit ($size) {
 		ini_set('memory_limit', $size);
+	}
+
+	/**
+	 * 検索対象ディレクトリを返す
+	 *
+	 * @access public
+	 * @return BSArray ディレクトリの配列
+	 */
+	public function getSearchDirectories () {
+		if (!$this->searchDirectories) {
+			$this->searchDirectories = new BSArray;
+			$this->searchDirectories[] = BSFileUtility::getDirectory('root');
+		}
+		return $this->searchDirectories;
 	}
 
 	/**
