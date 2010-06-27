@@ -8,7 +8,7 @@
  * URLバリデータ
  *
  * @author 小石達也 <tkoishi@b-shock.co.jp>
- * @version $Id: BSURLValidator.class.php 1812 2010-02-03 15:15:09Z pooza $
+ * @version $Id: BSURLValidator.class.php 2176 2010-06-27 07:16:07Z pooza $
  */
 class BSURLValidator extends BSValidator {
 
@@ -50,7 +50,7 @@ class BSURLValidator extends BSValidator {
 			if (!$this->getSchemes()->isContain($url['scheme'])) {
 				$this->error = $this['scheme_error'];
 			}
-		} catch (BSNetException $e) {
+		} catch (Exception $e) {
 			$this->error = $this['net_error'];
 		}
 		return BSString::isBlank($this->error);

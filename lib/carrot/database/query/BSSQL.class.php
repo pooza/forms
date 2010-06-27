@@ -8,7 +8,7 @@
  * SQL生成に関するユーティリティ
  *
  * @author 小石達也 <tkoishi@b-shock.co.jp>
- * @version $Id: BSSQL.class.php 1812 2010-02-03 15:15:09Z pooza $
+ * @version $Id: BSSQL.class.php 2172 2010-06-24 15:02:48Z pooza $
  */
 class BSSQL {
 
@@ -67,7 +67,7 @@ class BSSQL {
 	 * INSERTクエリー文字列を返す
 	 *
 	 * @access public
-	 * @param string $table テーブル名
+	 * @param mixed $table テーブル名又はテーブル
 	 * @param mixed $values フィールドの値
 	 * @param BSDatabase $db 対象データベース
 	 * @return string クエリー文字列
@@ -76,6 +76,9 @@ class BSSQL {
 	static public function getInsertQueryString ($table, $values, BSDatabase $db = null) {
 		if (!$db) {
 			$db = BSDatabase::getInstance();
+		}
+		if ($table instanceof BSTableHandler) {
+			$table = $table->getName();
 		}
 		if (is_array($values)) {
 			$values = new BSArray($values);
@@ -96,7 +99,7 @@ class BSSQL {
 	 * UPDATEクエリー文字列を返す
 	 *
 	 * @access public
-	 * @param string $table テーブル名
+	 * @param mixed $table テーブル名又はテーブル
 	 * @param mixed $values フィールドの値
 	 * @param mixed $criteria 抽出条件
 	 * @param BSDatabase $db 対象データベース
@@ -109,6 +112,9 @@ class BSSQL {
 		}
 		if (!$db) {
 			$db = BSDatabase::getInstance();
+		}
+		if ($table instanceof BSTableHandler) {
+			$table = $table->getName();
 		}
 
 		if (is_array($values)) {
@@ -129,7 +135,7 @@ class BSSQL {
 	 * DELETEクエリー文字列を返す
 	 *
 	 * @access public
-	 * @param string $table テーブル名
+	 * @param mixed $table テーブル名又はテーブル
 	 * @param mixed $criteria 抽出条件
 	 * @return string クエリー文字列
 	 * @static
@@ -137,6 +143,9 @@ class BSSQL {
 	static public function getDeleteQueryString ($table, $criteria) {
 		if (BSString::isBlank($criteria = self::getCriteriaString($criteria))) {
 			throw new BSDatabaseException('抽出条件がありません。');
+		}
+		if ($table instanceof BSTableHandler) {
+			$table = $table->getName();
 		}
 		return sprintf('DELETE %s %s', self::getFromString($table), $criteria);
 	}
@@ -165,10 +174,13 @@ class BSSQL {
 	 * DROP TABLEクエリー文字列を返す
 	 *
 	 * @access public
-	 * @param string $table テーブル名
+	 * @param mixed $table テーブル名又はテーブル
 	 * @static
 	 */
 	static public function getDropTableQueryString ($table) {
+		if ($table instanceof BSTableHandler) {
+			$table = $table->getName();
+		}
 		return sprintf('DROP TABLE %s', $table);
 	}
 

@@ -8,7 +8,7 @@
  * データベーステーブル
  *
  * @author 小石達也 <tkoishi@b-shock.co.jp>
- * @version $Id: BSTableHandler.class.php 2134 2010-06-11 09:06:59Z pooza $
+ * @version $Id: BSTableHandler.class.php 2171 2010-06-24 14:59:49Z pooza $
  * @abstract
  */
 abstract class BSTableHandler implements IteratorAggregate, BSDictionary, BSAssignable {
@@ -369,14 +369,12 @@ abstract class BSTableHandler implements IteratorAggregate, BSDictionary, BSAssi
 		}
 
 		$db = $this->getDatabase();
-		$query = BSSQL::getInsertQueryString($this->getName(), $values, $db);
-		$db->exec($query);
+		$db->exec(BSSQL::getInsertQueryString($this, $values, $db));
 		if ($this->hasSurrogateKey()) {
 			$id = $db->lastInsertId($db->getSequenceName($this->getName(), $this->getKeyField()));
 		} else {
 			$id = $values[$this->getKeyField()];
 		}
-
 		$this->setExecuted(false);
 		if (!($flags & BSDatabase::WITHOUT_LOGGING)) {
 			$message = new BSStringFormat('%s(%d)を作成しました。');

@@ -8,7 +8,7 @@
  * Google Mapsクライアント
  *
  * @author 小石達也 <tkoishi@b-shock.co.jp>
- * @version $Id: BSGoogleMapsService.class.php 2066 2010-05-04 14:25:29Z pooza $
+ * @version $Id: BSGoogleMapsService.class.php 2173 2010-06-24 15:29:03Z pooza $
  */
 class BSGoogleMapsService extends BSCurlHTTP {
 	private $table;
@@ -113,6 +113,10 @@ class BSGoogleMapsService extends BSCurlHTTP {
 	}
 
 	protected function queryGeocode ($address) {
+		if ($info = BSGeocodeEntryHandler::parse($address)) {
+			return $info;
+		}
+
 		$params = new BSWWWFormRenderer;
 		$params['q'] = $address;
 		$params['output'] = 'json';
