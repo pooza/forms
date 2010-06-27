@@ -8,7 +8,7 @@
  * 動画ファイル
  *
  * @author 小石達也 <tkoishi@b-shock.co.jp>
- * @version $Id: BSMovieFile.class.php 2178 2010-06-27 13:57:25Z pooza $
+ * @version $Id: BSMovieFile.class.php 2181 2010-06-27 14:40:23Z pooza $
  */
 class BSMovieFile extends BSMediaFile {
 
@@ -41,7 +41,7 @@ class BSMovieFile extends BSMediaFile {
 	 */
 	public function analyzeType () {
 		if (($type = parent::analyzeType()) == BSMIMEType::DEFAULT_TYPE) {
-			if (BSString::isBlank($this->output)) {
+			if (!$this->attributes->count()) {
 				$this->analyze();
 			}
 			if (mb_ereg('Audio: [ ,[:alnum:]]*(amr|aac)', $this->output)

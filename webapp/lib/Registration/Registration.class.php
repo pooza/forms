@@ -133,19 +133,6 @@ class Registration extends BSRecord {
 	}
 
 	/**
-	 * 添付ファイルのダウンロード時の名を返す
-	 *
-	 * @access public
-	 * @param string $name 名前
-	 * @return string 添付ファイルベース名
-	 */
-	public function getAttachmentFileName ($name = null) {
-		if ($file = $this->getAttachment($name)) {
-			return $this->getAttachmentBaseName($name) . $file->getSuffix();
-		}
-	}
-
-	/**
 	 * 全てのファイル属性
 	 *
 	 * @access protected

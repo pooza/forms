@@ -8,7 +8,7 @@
  * テーブルのレコード
  *
  * @author 小石達也 <tkoishi@b-shock.co.jp>
- * @version $Id: BSRecord.class.php 2178 2010-06-27 13:57:25Z pooza $
+ * @version $Id: BSRecord.class.php 2182 2010-06-27 15:02:09Z pooza $
  * @abstract
  */
 abstract class BSRecord
@@ -258,9 +258,7 @@ abstract class BSRecord
 			$info['path'] = $file->getPath();
 			$info['size'] = $file->getSize();
 			$info['type'] = $file->getType();
-			if (!BSString::isBlank($filename = $this->getAttachmentFileName($name))) {
-				$info['filename'] = $filename;
-			}
+			$info['filename'] = $this->getAttachmentFileName($name);
 			if ($url = $this->getAttachmentURL($name)) {
 				$info['url'] = $url->getContents();
 			}
@@ -316,9 +314,12 @@ abstract class BSRecord
 	 *
 	 * @access public
 	 * @param string $name 名前
-	 * @return string 添付ファイルベース名
+	 * @return string ダウンロード時ファイル名
 	 */
 	public function getAttachmentFileName ($name = null) {
+		if ($file = $this->getAttachment($name)) {
+			return $this->getAttachmentBaseName($name) . $file->getSuffix();
+		}
 	}
 
 	/**
