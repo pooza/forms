@@ -28,8 +28,7 @@ class DetailAction extends BSRecordAction {
 			$this->database->beginTransaction();
 			foreach (FormHandler::getAttachmentNames() as $name) {
 				if ($info = $this->request[$name]) {
-					$file = new BSFile($info['tmp_name']);
-					$this->getRecord()->setAttachment($file, $info['name'], $name);
+					$this->getRecord()->setAttachment(new BSFile($info['tmp_name']), $name);
 				}
 			}
 			$this->updateRecord();

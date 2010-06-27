@@ -8,7 +8,7 @@
  * 添付ファイルコンテナ
  *
  * @author 小石達也 <tkoishi@b-shock.co.jp>
- * @version $Id: BSAttachmentContainer.interface.php 1812 2010-02-03 15:15:09Z pooza $
+ * @version $Id: BSAttachmentContainer.interface.php 2177 2010-06-27 12:59:42Z pooza $
  */
 interface BSAttachmentContainer {
 
@@ -35,10 +35,9 @@ interface BSAttachmentContainer {
 	 *
 	 * @access public
 	 * @param BSFile $file 添付ファイル
-	 * @param string $filename 添付ファイルの名前
 	 * @param string $name 名前
 	 */
-	public function setAttachment (BSFile $file, $filename, $name = null);
+	public function setAttachment (BSFile $file, $name = null);
 
 	/**
 	 * 添付ファイルベース名を返す
@@ -57,6 +56,15 @@ interface BSAttachmentContainer {
 	 * @return string 添付ファイルベース名
 	 */
 	public function getAttachmentFileName ($name = null);
+
+	/**
+	 * 添付ファイルのURLを返す
+	 *
+	 * @access public
+	 * @param string $name 名前
+	 * @return BSURL 添付ファイルURL
+	 */
+	public function getAttachmentURL ($name = null);
 }
 
 /* vim:set tabstop=4: */
