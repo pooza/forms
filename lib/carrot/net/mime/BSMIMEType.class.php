@@ -8,7 +8,7 @@
  * MIMEタイプ
  *
  * @author 小石達也 <tkoishi@b-shock.co.jp>
- * @version $Id: BSMIMEType.class.php 2007 2010-04-16 10:23:26Z pooza $
+ * @version $Id: BSMIMEType.class.php 2184 2010-06-28 02:32:56Z pooza $
  */
 class BSMIMEType extends BSParameterHolder implements BSSerializable {
 	private $typesFile;
@@ -172,9 +172,29 @@ class BSMIMEType extends BSParameterHolder implements BSSerializable {
 		$types = new BSArray;
 		$config = BSConfigManager::getInstance()->compile(self::getInstance()->getConfigFile());
 		foreach ($config['types'] as $key => $value) {
-			$types['.' . $key] = $value;
+			if ($key && $value) {
+				$types['.' . $key] = $value;
+			}
 		}
 		return $types;
+	}
+
+	/**
+	 * アップロード可能なサフィックスを返す
+	 *
+	 * @access public
+	 * @return BSArray サフィックスの配列
+	 * @static
+	 */
+	static public function getAttachableSuffixes () {
+		$suffixes = self::getAttachableTypes()->getFlipped();
+		$config = BSConfigManager::getInstance()->compile(self::getInstance()->getConfigFile());
+		foreach ($config['suffixes'] as $key => $value) {
+			if ($key && $value) {
+				$suffixes[$key] = '.' . $value;
+			}
+		}
+		return $suffixes;
 	}
 
 	/**

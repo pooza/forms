@@ -8,7 +8,7 @@
  * 画像ファイル
  *
  * @author 小石達也 <tkoishi@b-shock.co.jp>
- * @version $Id: BSImageFile.class.php 2114 2010-05-31 16:29:54Z pooza $
+ * @version $Id: BSImageFile.class.php 2184 2010-06-28 02:32:56Z pooza $
  */
 class BSImageFile extends BSMediaFile implements BSImageContainer, BSAssignable {
 	protected $renderer;
@@ -21,7 +21,7 @@ class BSImageFile extends BSMediaFile implements BSImageContainer, BSAssignable 
 	 * @param string $class レンダラーのクラス名
 	 */
 	public function __construct ($path, $class = self::DEFAULT_RENDERER_CLASS) {
-		parent::__construct($path);
+		$this->setPath($path);
 		$this->rendererClass = $class;
 	}
 

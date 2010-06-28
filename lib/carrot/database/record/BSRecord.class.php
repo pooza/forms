@@ -8,7 +8,7 @@
  * テーブルのレコード
  *
  * @author 小石達也 <tkoishi@b-shock.co.jp>
- * @version $Id: BSRecord.class.php 2182 2010-06-27 15:02:09Z pooza $
+ * @version $Id: BSRecord.class.php 2184 2010-06-28 02:32:56Z pooza $
  * @abstract
  */
 abstract class BSRecord
@@ -277,7 +277,7 @@ abstract class BSRecord
 		$finder = new BSFileFinder;
 		$finder->clearDirectories();
 		$finder->registerDirectory($this->getTable()->getDirectory());
-		$finder->registerAllAttachableSuffixes();
+		$finder->registerSuffixes(BSMIMEType::getAttachableSuffixes());
 		return $finder->execute($this->getAttachmentBaseName($name));
 	}
 

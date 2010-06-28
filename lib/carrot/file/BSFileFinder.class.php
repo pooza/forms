@@ -8,7 +8,7 @@
  * ファイル検索
  *
  * @author 小石達也 <tkoishi@b-shock.co.jp>
- * @version $Id: BSFileFinder.class.php 2168 2010-06-22 08:06:27Z pooza $
+ * @version $Id: BSFileFinder.class.php 2184 2010-06-28 02:32:56Z pooza $
  */
 class BSFileFinder {
 	private $directories;
@@ -96,15 +96,6 @@ class BSFileFinder {
 			$this->registerSuffix($suffix);
 		}
 		$this->suffixes->uniquize();
-	}
-
-	/**
-	 * 添付可能な全ての拡張子を登録
-	 *
-	 * @access public
-	 */
-	public function registerAllAttachableSuffixes () {
-		$this->registerSuffixes(BSMIMEType::getAttachableTypes()->getFlipped());
 	}
 
 	/**

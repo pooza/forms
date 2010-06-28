@@ -8,7 +8,7 @@
  * SQL生成に関するユーティリティ
  *
  * @author 小石達也 <tkoishi@b-shock.co.jp>
- * @version $Id: BSSQL.class.php 2172 2010-06-24 15:02:48Z pooza $
+ * @version $Id: BSSQL.class.php 2183 2010-06-27 17:10:42Z pooza $
  */
 class BSSQL {
 
@@ -16,25 +16,6 @@ class BSSQL {
 	 * @access private
 	 */
 	private function __construct () {
-	}
-
-	/**
-	 * 文字列をクォート
-	 *
-	 * 極力使わない。
-	 * BSCriteriaSet等、クォート処理をラップした機能を使用すること。
-	 *
-	 * @access public
-	 * @param string $str クォートの対象
-	 * @param BSDatabase $db データベース
-	 * @return string クォートされた文字列
-	 * @static
-	 */
-	static public function quote ($str, BSDatabase $db = null) {
-		if (!$db) {
-			$db = BSDatabase::getInstance();
-		}
-		return $db->quote($str);
 	}
 
 	/**

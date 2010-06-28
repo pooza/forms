@@ -8,7 +8,7 @@
  * メディアファイル
  *
  * @author 小石達也 <tkoishi@b-shock.co.jp>
- * @version $Id: BSMediaFile.class.php 2181 2010-06-27 14:40:23Z pooza $
+ * @version $Id: BSMediaFile.class.php 2184 2010-06-28 02:32:56Z pooza $
  * @abstract
  */
 abstract class BSMediaFile extends BSFile implements ArrayAccess {
@@ -21,8 +21,9 @@ abstract class BSMediaFile extends BSFile implements ArrayAccess {
 	 * @param string $path パス
 	 */
 	public function __construct ($path) {
-		parent::__construct($path);
+		$this->setPath($path);
 		$this->attributes = new BSArray;
+		$this->analyze();
 	}
 
 	/**
