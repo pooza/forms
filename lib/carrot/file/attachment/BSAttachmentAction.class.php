@@ -8,7 +8,7 @@
  * 添付ファイルのダウンロードアクション
  *
  * @author 小石達也 <tkoishi@b-shock.co.jp>
- * @version $Id: BSAttachmentAction.class.php 2177 2010-06-27 12:59:42Z pooza $
+ * @version $Id: BSAttachmentAction.class.php 2189 2010-06-29 03:05:49Z pooza $
  * @abstract
  */
 abstract class BSAttachmentAction extends BSRecordAction {
@@ -31,7 +31,7 @@ abstract class BSAttachmentAction extends BSRecordAction {
 	public function validate () {
 		return (parent::validate()
 			&& ($this->getRecord() instanceof BSAttachmentContainer)
-			&& $this->getRecord()->getAttachment($this->request['name']
+			&& $this->getRecord()->getAttachment($this->request['name'])
 		);
 	}
 }

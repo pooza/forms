@@ -20,7 +20,7 @@ define('MPC_TO_CHARSET_UTF8', 'UTF-8');
  * 携帯電話キャリア
  *
  * @author 小石達也 <tkoishi@b-shock.co.jp>
- * @version $Id: BSMobileCarrier.class.php 1920 2010-03-21 09:16:06Z pooza $
+ * @version $Id: BSMobileCarrier.class.php 2190 2010-06-29 06:35:41Z pooza $
  * @abstract
  */
 abstract class BSMobileCarrier {
@@ -135,6 +135,33 @@ abstract class BSMobileCarrier {
 			$this->mpc->setImagePath(BSFileUtility::getURL('pictogram')->getAttribute('path'));
 		}
 		return $this->mpc;
+	}
+
+	/**
+	 * GPS情報を取得するリンクを返す
+	 *
+	 * @access public
+	 * @param BSHTTPRedirector $url 対象リンク
+	 * @param string $label ラベル
+	 * @return BSAnchorElement リンク
+	 * @abstract
+	 */
+	abstract public function getGPSAnchorElement (BSHTTPRedirector $url, $label);
+
+	/**
+	 * GPS情報を返す
+	 *
+	 * @access public
+	 * @return BSArray GPS情報
+	 */
+	public function getGPSInfo () {
+		$request = BSRequest::getInstance();
+		if ($request['lat'] && $request['lon']) {
+			return new BSArray(array(
+				'lat' => BSGeocodeEntryHandler::dms2deg($request['lat']),
+				'lng' => BSGeocodeEntryHandler::dms2deg($request['lon']),
+			));
+		}
 	}
 
 	/**

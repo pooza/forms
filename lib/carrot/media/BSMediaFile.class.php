@@ -8,7 +8,7 @@
  * メディアファイル
  *
  * @author 小石達也 <tkoishi@b-shock.co.jp>
- * @version $Id: BSMediaFile.class.php 2184 2010-06-28 02:32:56Z pooza $
+ * @version $Id: BSMediaFile.class.php 2186 2010-06-28 09:17:17Z pooza $
  * @abstract
  */
 abstract class BSMediaFile extends BSFile implements ArrayAccess {
@@ -73,6 +73,9 @@ abstract class BSMediaFile extends BSFile implements ArrayAccess {
 	 * @return string メディアタイプ
 	 */
 	public function getType () {
+		if (BSString::isBlank($this->attributes['type'])) {
+			$this->analyze();
+		}
 		return $this->attributes['type'];
 	}
 

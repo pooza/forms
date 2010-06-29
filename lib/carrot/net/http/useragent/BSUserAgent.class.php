@@ -8,7 +8,7 @@
  * ユーザーエージェント
  *
  * @author 小石達也 <tkoishi@b-shock.co.jp>
- * @version $Id: BSUserAgent.class.php 2113 2010-05-29 16:54:14Z pooza $
+ * @version $Id: BSUserAgent.class.php 2188 2010-06-28 15:16:23Z pooza $
  * @abstract
  */
 abstract class BSUserAgent implements BSAssignable {
@@ -259,6 +259,23 @@ abstract class BSUserAgent implements BSAssignable {
 	public function encodeFileName ($name) {
 		$name = BSMIMEUtility::encode($name);
 		return BSString::sanitize($name);
+	}
+
+	/**
+	 * 外向けURLを調整して返す
+	 *
+	 * @access public
+	 * @param BSHTTPRedirector $url 対象URL
+	 * @return string エンコード済みファイル名
+	 */
+	public function modifyURL (BSHTTPRedirector $url) {
+		$url = $url->getURL();
+		$query = new BSArray($this->getQuery());
+		if ($url->isForeign()) {
+			$query->removeParameter(BSRequest::getInstance()->getSession()->getName());
+		}
+		$url->setParameters($query);
+		return $url;
 	}
 
 	/**
