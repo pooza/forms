@@ -8,7 +8,7 @@
  * 楽曲ファイル
  *
  * @author 小石達也 <tkoishi@b-shock.co.jp>
- * @version $Id: BSMusicFile.class.php 2179 2010-06-27 14:08:11Z pooza $
+ * @version $Id: BSMusicFile.class.php 2192 2010-06-30 09:15:45Z pooza $
  */
 class BSMusicFile extends BSMediaFile {
 
@@ -34,6 +34,9 @@ class BSMusicFile extends BSMediaFile {
 	 */
 	public function analyzeType () {
 		if (($type = parent::analyzeType()) == BSMIMEType::DEFAULT_TYPE) {
+			if (!$this->attributes->count()) {
+				$this->analyze();
+			}
 			foreach (array('wma') as $musictype) {
 				if (BSString::isContain('Audio: ' . $musictype, $this->output)) {
 					return BSMIMEType::getType($musictype);

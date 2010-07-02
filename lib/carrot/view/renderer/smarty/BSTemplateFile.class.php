@@ -8,26 +8,11 @@
  * テンプレートファイル
  *
  * @author 小石達也 <tkoishi@b-shock.co.jp>
- * @version $Id: BSTemplateFile.class.php 2185 2010-06-28 09:16:24Z pooza $
+ * @version $Id: BSTemplateFile.class.php 2192 2010-06-30 09:15:45Z pooza $
  */
 class BSTemplateFile extends BSFile {
 	private $engine;
 	private $compiled;
-
-	/**
-	 * ファイルの内容から、メディアタイプを返す
-	 *
-	 * テキストファイルの分析は出来ない。getTypeの戻り値をそのまま返す。
-	 *
-	 * @access public
-	 * @return string メディアタイプ
-	 */
-	public function analyzeType () {
-		if (!$this->isExists()) {
-			return null;
-		}
-		return $this->getType();
-	}
 
 	/**
 	 * テンプレートエンジンを設定

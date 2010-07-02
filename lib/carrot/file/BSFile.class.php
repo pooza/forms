@@ -10,7 +10,7 @@ ini_set('auto_detect_line_endings', true);
  * ファイル
  *
  * @author 小石達也 <tkoishi@b-shock.co.jp>
- * @version $Id: BSFile.class.php 2128 2010-06-09 11:46:21Z pooza $
+ * @version $Id: BSFile.class.php 2192 2010-06-30 09:15:45Z pooza $
  */
 class BSFile extends BSDirectoryEntry implements BSRenderer, BSSerializable {
 	private $mode;
@@ -50,6 +50,16 @@ class BSFile extends BSDirectoryEntry implements BSRenderer, BSSerializable {
 	}
 
 	/**
+	 * バイナリファイルか？
+	 *
+	 * @access public
+	 * @return boolean バイナリファイルならTrue
+	 */
+	public function isBinary () {
+		return false;
+	}
+
+	/**
 	 * ファイルの内容から、メディアタイプを返す
 	 *
 	 * @access public
@@ -60,6 +70,9 @@ class BSFile extends BSDirectoryEntry implements BSRenderer, BSSerializable {
 			return null;
 		}
 
+		if (!$this->isBinary()) {
+			return $this->getType();
+		}
 		if (extension_loaded('fileinfo') && defined('FILEINFO_MIME_TYPE')) {
 			$finfo = new finfo(FILEINFO_MIME_TYPE);
 			return $finfo->file($this->getPath());

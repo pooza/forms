@@ -8,7 +8,7 @@
  * メディアファイル
  *
  * @author 小石達也 <tkoishi@b-shock.co.jp>
- * @version $Id: BSMediaFile.class.php 2186 2010-06-28 09:17:17Z pooza $
+ * @version $Id: BSMediaFile.class.php 2192 2010-06-30 09:15:45Z pooza $
  * @abstract
  */
 abstract class BSMediaFile extends BSFile implements ArrayAccess {
@@ -45,6 +45,16 @@ abstract class BSMediaFile extends BSFile implements ArrayAccess {
 	 */
 	public function getAttributes () {
 		return $this->attributes;
+	}
+
+	/**
+	 * バイナリファイルか？
+	 *
+	 * @access public
+	 * @return boolean バイナリファイルならTrue
+	 */
+	public function isBinary () {
+		return true;
 	}
 
 	/**
