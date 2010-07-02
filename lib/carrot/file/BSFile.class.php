@@ -10,7 +10,7 @@ ini_set('auto_detect_line_endings', true);
  * ファイル
  *
  * @author 小石達也 <tkoishi@b-shock.co.jp>
- * @version $Id: BSFile.class.php 2193 2010-07-02 08:30:09Z pooza $
+ * @version $Id: BSFile.class.php 2194 2010-07-02 12:17:42Z pooza $
  */
 class BSFile extends BSDirectoryEntry implements BSRenderer, BSSerializable {
 	private $mode;
@@ -18,6 +18,7 @@ class BSFile extends BSDirectoryEntry implements BSRenderer, BSSerializable {
 	private $size;
 	private $handle;
 	private $error;
+	private $binary = false;
 	const LINE_SEPARATOR = "\n";
 
 	/**
@@ -54,7 +55,17 @@ class BSFile extends BSDirectoryEntry implements BSRenderer, BSSerializable {
 	 * @return boolean バイナリファイルならTrue
 	 */
 	public function isBinary () {
-		return false;
+		return $this->binary;
+	}
+
+	/**
+	 * バイナリファイルかどうかのフラグを設定
+	 *
+	 * @access public
+	 * @param boolean $flag バイナリファイルならTrue
+	 */
+	public function setBinary ($flag) {
+		return $this->binary = !!$flag;
 	}
 
 	/**
