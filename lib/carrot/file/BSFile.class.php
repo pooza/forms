@@ -10,7 +10,7 @@ ini_set('auto_detect_line_endings', true);
  * ファイル
  *
  * @author 小石達也 <tkoishi@b-shock.co.jp>
- * @version $Id: BSFile.class.php 2192 2010-06-30 09:15:45Z pooza $
+ * @version $Id: BSFile.class.php 2193 2010-07-02 08:30:09Z pooza $
  */
 class BSFile extends BSDirectoryEntry implements BSRenderer, BSSerializable {
 	private $mode;
@@ -19,8 +19,6 @@ class BSFile extends BSDirectoryEntry implements BSRenderer, BSSerializable {
 	private $handle;
 	private $error;
 	const LINE_SEPARATOR = "\n";
-	const COMPRESSED_SUFFIX = '.gz';
-	const COMPRESSED_TYPE = 'application/x-gzip';
 
 	/**
 	 * @access public
@@ -321,11 +319,7 @@ class BSFile extends BSDirectoryEntry implements BSRenderer, BSSerializable {
 	 * @return boolean gzip圧縮されていたらTrue
 	 */
 	public function isCompressed () {
-		try {
-			return ($this->analyzeType() == self::COMPRESSED_TYPE);
-		} catch (Exception $e) {
-			return ($this->getSuffix() == self::COMPRESSED_SUFFIX);
-		}
+		return ($this->getSuffix() == '.gz');
 	}
 
 	/**
