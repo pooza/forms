@@ -20,7 +20,7 @@ define('MPC_TO_CHARSET_UTF8', 'UTF-8');
  * 携帯電話キャリア
  *
  * @author 小石達也 <tkoishi@b-shock.co.jp>
- * @version $Id: BSMobileCarrier.class.php 2190 2010-06-29 06:35:41Z pooza $
+ * @version $Id: BSMobileCarrier.class.php 2200 2010-07-05 10:23:58Z pooza $
  * @abstract
  */
 abstract class BSMobileCarrier {
@@ -245,6 +245,17 @@ abstract class BSMobileCarrier {
 	public function trimPictogram ($body) {
 		$this->getMPC()->setString($body);
 		return $this->getMPC()->except();
+	}
+
+	/**
+	 * デコメールの形式を返す
+	 *
+	 * @access public
+	 * @return string デコメールの形式
+	 */
+	public function getDecorationMailType () {
+		$constants = BSConstantHandler::getInstance();
+		return $constants['DECORATION_MAIL_TYPE_' . $this->getName()];
 	}
 
 	/**

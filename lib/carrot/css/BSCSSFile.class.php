@@ -8,9 +8,19 @@
  * CSSファイル
  *
  * @author 小石達也 <tkoishi@b-shock.co.jp>
- * @version $Id: BSCSSFile.class.php 2009 2010-04-17 07:27:55Z pooza $
+ * @version $Id: BSCSSFile.class.php 2202 2010-07-05 11:37:30Z pooza $
  */
 class BSCSSFile extends BSFile {
+
+	/**
+	 * バイナリファイルか？
+	 *
+	 * @access public
+	 * @return boolean バイナリファイルならTrue
+	 */
+	public function isBinary () {
+		return false;
+	}
 
 	/**
 	 * メディアタイプを返す

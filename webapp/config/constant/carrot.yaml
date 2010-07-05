@@ -2,11 +2,11 @@
 #
 # @package org.carrot-framework
 # @author 小石達也 <tkoishi@b-shock.co.jp>
-# @version $Id: carrot.yaml 2195 2010-07-05 04:11:02Z pooza $
+# @version $Id: carrot.yaml 2203 2010-07-05 11:44:19Z pooza $
 
 carrot:
   name: carrot Framework
-  ver: 2.3.125
+  ver: 2.3.126
 
 admin:
   email:
@@ -48,6 +48,11 @@ crypt:
 date:
   timezone: Asia/Tokyo
 debug: yes
+decoration_mail:
+  type:
+    docomo: application/x-decomail-template
+    au: application/x-kddi-htmlmail
+    softbank: application/x-htmlmail-template
 ffmpeg:
   dir: /usr/local
   convert:

@@ -8,7 +8,7 @@
  * ディレクトリエントリ
  *
  * @author 小石達也 <tkoishi@b-shock.co.jp>
- * @version $Id: BSDirectoryEntry.class.php 2129 2010-06-09 13:34:48Z pooza $
+ * @version $Id: BSDirectoryEntry.class.php 2197 2010-07-05 10:13:37Z pooza $
  * @abstract
  */
 abstract class BSDirectoryEntry {
@@ -186,10 +186,7 @@ abstract class BSDirectoryEntry {
 	 */
 	public function getSuffix () {
 		if (!$this->suffix) {
-			$name = BSString::explode('.', $this->getName());
-			if (1 < $name->count()) {
-				$this->suffix = '.' . $name->getIterator()->getLast();
-			}
+			$this->suffix = BSFileUtility::getSuffix($this->getName());
 		}
 		return $this->suffix;
 	}

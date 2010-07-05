@@ -8,7 +8,7 @@
  * CSVファイル
  *
  * @author 小石達也 <tkoishi@b-shock.co.jp>
- * @version $Id: BSCSVFile.class.php 1946 2010-03-27 16:43:17Z pooza $
+ * @version $Id: BSCSVFile.class.php 2202 2010-07-05 11:37:30Z pooza $
  */
 class BSCSVFile extends BSFile {
 	private $engine;
@@ -35,6 +35,16 @@ class BSCSVFile extends BSFile {
 	 */
 	public function __call ($method, $values) {
 		return BSUtility::executeMethod($this->getEngine(), $method, $values);
+	}
+
+	/**
+	 * バイナリファイルか？
+	 *
+	 * @access public
+	 * @return boolean バイナリファイルならTrue
+	 */
+	public function isBinary () {
+		return false;
 	}
 
 	/**

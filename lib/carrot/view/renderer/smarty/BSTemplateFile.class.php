@@ -8,11 +8,21 @@
  * テンプレートファイル
  *
  * @author 小石達也 <tkoishi@b-shock.co.jp>
- * @version $Id: BSTemplateFile.class.php 2192 2010-06-30 09:15:45Z pooza $
+ * @version $Id: BSTemplateFile.class.php 2202 2010-07-05 11:37:30Z pooza $
  */
 class BSTemplateFile extends BSFile {
 	private $engine;
 	private $compiled;
+
+	/**
+	 * バイナリファイルか？
+	 *
+	 * @access public
+	 * @return boolean バイナリファイルならTrue
+	 */
+	public function isBinary () {
+		return false;
+	}
 
 	/**
 	 * テンプレートエンジンを設定

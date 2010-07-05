@@ -8,10 +8,20 @@
  * ログファイル
  *
  * @author 小石達也 <tkoishi@b-shock.co.jp>
- * @version $Id: BSLogFile.class.php 1812 2010-02-03 15:15:09Z pooza $
+ * @version $Id: BSLogFile.class.php 2202 2010-07-05 11:37:30Z pooza $
  */
 class BSLogFile extends BSFile {
 	private $entries = array();
+
+	/**
+	 * バイナリファイルか？
+	 *
+	 * @access public
+	 * @return boolean バイナリファイルならTrue
+	 */
+	public function isBinary () {
+		return false;
+	}
 
 	/**
 	 * ログの内容を返す

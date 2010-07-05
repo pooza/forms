@@ -8,7 +8,7 @@
  * モバイルユーザーエージェント
  *
  * @author 小石達也 <tkoishi@b-shock.co.jp>
- * @version $Id: BSMobileUserAgent.class.php 2190 2010-06-29 06:35:41Z pooza $
+ * @version $Id: BSMobileUserAgent.class.php 2200 2010-07-05 10:23:58Z pooza $
  * @abstract
  */
 abstract class BSMobileUserAgent extends BSUserAgent implements BSUserIdentifier {
@@ -116,6 +116,16 @@ abstract class BSMobileUserAgent extends BSUserAgent implements BSUserIdentifier
 	public function getDefaultImageType () {
 		$constants = BSConstantHandler::getInstance();
 		return $constants['IMAGE_MOBILE_TYPE_' . $this->getCarrier()->getName()];
+	}
+
+	/**
+	 * デコメールの形式を返す
+	 *
+	 * @access public
+	 * @return string デコメールの形式
+	 */
+	public function getDecorationMailType () {
+		return $this->getModule()->getDecorationMailType();
 	}
 
 	/**

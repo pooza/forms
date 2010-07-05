@@ -8,7 +8,7 @@
  * ファイルユーティリティ
  *
  * @author 小石達也 <tkoishi@b-shock.co.jp>
- * @version $Id: BSFileUtility.class.php 2177 2010-06-27 12:59:42Z pooza $
+ * @version $Id: BSFileUtility.class.php 2197 2010-07-05 10:13:37Z pooza $
  */
 class BSFileUtility {
 
@@ -75,6 +75,35 @@ class BSFileUtility {
 			}
 		}
 		return false;
+	}
+
+	/**
+	 * 拡張子を返す
+	 *
+	 * @access public
+	 * @param string $name ファイル名、またはパス
+	 * @return string 拡張子
+	 * @static
+	 */
+	static public function getSuffix ($name) {
+		$parts = BSString::explode('.', $name);
+		if (1 < $parts->count()) {
+			return '.' . $parts->getIterator()->getLast();
+		}
+	}
+
+	/**
+	 * ファイル名の拡張子から、規定のMIMEタイプを返す
+	 *
+	 * BSMIMEType::getTypeのエイリアス
+	 *
+	 * @access public
+	 * @param string $name ファイル名、またはパス
+	 * @return string MIMEタイプ
+	 * @static
+	 */
+	static public function getDefaultType ($name) {
+		return BSMIMEType::getType($name);
 	}
 
 	/**
