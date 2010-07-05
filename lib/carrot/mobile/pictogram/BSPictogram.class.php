@@ -8,7 +8,7 @@
  * 絵文字
  *
  * @author 小石達也 <tkoishi@b-shock.co.jp>
- * @version $Id: BSPictogram.class.php 2125 2010-06-06 04:26:12Z pooza $
+ * @version $Id: BSPictogram.class.php 2195 2010-07-05 04:11:02Z pooza $
  */
 class BSPictogram implements BSAssignable, BSImageContainer {
 	private $id;
@@ -211,7 +211,7 @@ class BSPictogram implements BSAssignable, BSImageContainer {
 	public function getImageFile ($size = null) {
 		if (!$this->imagefile) {
 			$dir = BSMobileCarrier::getInstance()->getPictogramDirectory();
-			$this->imagefile = $dir->getEntry($this->getImageFileBaseName(), 'BSImageFile');
+			$this->imagefile = $dir->getEntry($this->getImageFileBaseName($size), 'BSImageFile');
 		}
 		return $this->imagefile;
 	}
@@ -219,11 +219,11 @@ class BSPictogram implements BSAssignable, BSImageContainer {
 	/**
 	 * 画像ファイルベース名を返す
 	 *
-	 * @access public
+	 * @access protected
 	 * @param string $size サイズ名
 	 * @return string 画像ファイルベース名
 	 */
-	public function getImageFileBaseName ($size = null) {
+	protected function getImageFileBaseName ($size) {
 		return $this->getID();
 	}
 

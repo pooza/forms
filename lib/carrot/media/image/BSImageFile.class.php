@@ -8,7 +8,7 @@
  * 画像ファイル
  *
  * @author 小石達也 <tkoishi@b-shock.co.jp>
- * @version $Id: BSImageFile.class.php 2194 2010-07-02 12:17:42Z pooza $
+ * @version $Id: BSImageFile.class.php 2195 2010-07-05 04:11:02Z pooza $
  */
 class BSImageFile extends BSMediaFile implements BSImageContainer, BSAssignable {
 	protected $renderer;
@@ -258,11 +258,11 @@ class BSImageFile extends BSMediaFile implements BSImageContainer, BSAssignable 
 	/**
 	 * 画像ファイルベース名を返す
 	 *
-	 * @access public
+	 * @access protected
 	 * @param string $size サイズ名
 	 * @return string 画像ファイルベース名
 	 */
-	public function getImageFileBaseName ($size = null) {
+	protected function getImageFileBaseName ($size) {
 		$this->getBaseName();
 	}
 
