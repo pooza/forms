@@ -8,7 +8,7 @@
  * 画像コンテナ
  *
  * @author 小石達也 <tkoishi@b-shock.co.jp>
- * @version $Id: BSImageContainer.interface.php 2195 2010-07-05 04:11:02Z pooza $
+ * @version $Id: BSImageContainer.interface.php 2196 2010-07-05 06:41:52Z pooza $
  */
 interface BSImageContainer {
 
@@ -43,11 +43,11 @@ interface BSImageContainer {
 	/**
 	 * 画像ファイルベース名を返す
 	 *
-	 * @access protected
+	 * @access public
 	 * @param string $size サイズ名
 	 * @return string 画像ファイルベース名
 	 */
-	protected function getImageFileBaseName ($size);
+	public function getImageFileBaseName ($size);
 
 	/**
 	 * コンテナのIDを返す

@@ -8,7 +8,7 @@
  * Twitterアカウント
  *
  * @author 小石達也 <tkoishi@b-shock.co.jp>
- * @version $Id: BSTwitterAccount.class.php 2195 2010-07-05 04:11:02Z pooza $
+ * @version $Id: BSTwitterAccount.class.php 2196 2010-07-05 06:41:52Z pooza $
  */
 class BSTwitterAccount
 	implements BSImageContainer, BSSerializable, BSAssignable, BSHTTPRedirector {
@@ -256,6 +256,15 @@ class BSTwitterAccount
 	}
 
 	/**
+	 * キャッシュをクリア
+	 *
+	 * @access public
+	 * @param string $size
+	 */
+	public function clearImageCache ($size = null) {
+	}
+
+	/**
 	 * 画像の情報を返す
 	 *
 	 * @access public
@@ -316,11 +325,11 @@ class BSTwitterAccount
 	/**
 	 * 画像ファイルベース名を返す
 	 *
-	 * @access protected
+	 * @access public
 	 * @param string $size サイズ名
 	 * @return string 画像ファイルベース名
 	 */
-	protected function getImageFileBaseName ($size) {
+	public function getImageFileBaseName ($size) {
 		return sprintf('%010d_%s', $this->getID(), $size);
 	}
 

@@ -8,7 +8,7 @@
  * テーブルのレコード
  *
  * @author 小石達也 <tkoishi@b-shock.co.jp>
- * @version $Id: BSRecord.class.php 2195 2010-07-05 04:11:02Z pooza $
+ * @version $Id: BSRecord.class.php 2196 2010-07-05 06:41:52Z pooza $
  * @abstract
  */
 abstract class BSRecord implements ArrayAccess,
@@ -301,11 +301,11 @@ abstract class BSRecord implements ArrayAccess,
 	/**
 	 * 添付ファイルベース名を返す
 	 *
-	 * @access protected
+	 * @access public
 	 * @param string $name 名前
 	 * @return string 添付ファイルベース名
 	 */
-	protected function getAttachmentBaseName ($name) {
+	public function getAttachmentBaseName ($name) {
 		return sprintf('%06d_%s', $this->getID(), $name);
 	}
 
@@ -391,11 +391,11 @@ abstract class BSRecord implements ArrayAccess,
 	/**
 	 * 画像ファイルベース名を返す
 	 *
-	 * @access protected
+	 * @access public
 	 * @param string $size サイズ名
 	 * @return string 画像ファイルベース名
 	 */
-	protected function getImageFileBaseName ($size) {
+	public function getImageFileBaseName ($size) {
 		return sprintf('%06d_%s', $this->getID(), $size);
 	}
 

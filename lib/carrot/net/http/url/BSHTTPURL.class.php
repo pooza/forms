@@ -8,7 +8,7 @@
  * HTTPスキーマのURL
  *
  * @author 小石達也 <tkoishi@b-shock.co.jp>
- * @version $Id: BSHTTPURL.class.php 2195 2010-07-05 04:11:02Z pooza $
+ * @version $Id: BSHTTPURL.class.php 2196 2010-07-05 06:41:52Z pooza $
  */
 class BSHTTPURL extends BSURL implements BSHTTPRedirector, BSImageContainer {
 	private $fullpath;
@@ -213,6 +213,15 @@ class BSHTTPURL extends BSURL implements BSHTTPRedirector, BSImageContainer {
 	}
 
 	/**
+	 * キャッシュをクリア
+	 *
+	 * @access public
+	 * @param string $size
+	 */
+	public function clearImageCache ($size = null) {
+	}
+
+	/**
 	 * 画像の情報を返す
 	 *
 	 * @access public
@@ -268,11 +277,11 @@ class BSHTTPURL extends BSURL implements BSHTTPRedirector, BSImageContainer {
 	/**
 	 * 画像ファイルベース名を返す
 	 *
-	 * @access protected
+	 * @access public
 	 * @param string $size サイズ名
 	 * @return string 画像ファイルベース名
 	 */
-	protected function getImageFileBaseName ($size) {
+	public function getImageFileBaseName ($size) {
 		return BSCrypt::getDigest($this->getID());
 	}
 

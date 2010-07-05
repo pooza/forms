@@ -8,7 +8,7 @@
  * 添付ファイルコンテナ
  *
  * @author 小石達也 <tkoishi@b-shock.co.jp>
- * @version $Id: BSAttachmentContainer.interface.php 2195 2010-07-05 04:11:02Z pooza $
+ * @version $Id: BSAttachmentContainer.interface.php 2196 2010-07-05 06:41:52Z pooza $
  */
 interface BSAttachmentContainer {
 
@@ -42,11 +42,11 @@ interface BSAttachmentContainer {
 	/**
 	 * 添付ファイルベース名を返す
 	 *
-	 * @access protected
+	 * @access public
 	 * @param string $name 名前
 	 * @return string 添付ファイルベース名
 	 */
-	protected function getAttachmentBaseName ($name);
+	public function getAttachmentBaseName ($name);
 
 	/**
 	 * 添付ファイルのダウンロード時の名を返す
