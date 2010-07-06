@@ -8,7 +8,7 @@
  * 3GPP動画ファイル
  *
  * @author 小石達也 <tkoishi@b-shock.co.jp>
- * @version $Id: BS3GPPMovieFile.class.php 2145 2010-06-15 15:51:53Z pooza $
+ * @version $Id: BS3GPPMovieFile.class.php 2204 2010-07-06 06:24:58Z pooza $
  */
 class BS3GPPMovieFile extends BSQuickTimeMovieFile {
 
@@ -27,6 +27,9 @@ class BS3GPPMovieFile extends BSQuickTimeMovieFile {
 		if ($useragent->isMobile()) {
 			$params = new BSArray($params);
 			$params['url'] = $this->getMediaURL($params)->getContents();
+			if (BSString::isBlank($params['type'])) {
+				$params['type'] = $this->getType();
+			}
 			if (BSString::isBlank($params['label'])) {
 				$params['label'] = $this->getBaseName();
 			}

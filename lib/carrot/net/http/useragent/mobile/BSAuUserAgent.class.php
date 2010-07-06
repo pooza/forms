@@ -8,7 +8,7 @@
  * Auユーザーエージェント
  *
  * @author 小石達也 <tkoishi@b-shock.co.jp>
- * @version $Id: BSAuUserAgent.class.php 2114 2010-05-31 16:29:54Z pooza $
+ * @version $Id: BSAuUserAgent.class.php 2204 2010-07-06 06:24:58Z pooza $
  */
 class BSAuUserAgent extends BSMobileUserAgent {
 	const DEFAULT_NAME = 'KDDI';
@@ -90,7 +90,7 @@ class BSAuUserAgent extends BSMobileUserAgent {
 		$container = new BSDivisionElement;
 		$object = $container->addElement(new BSObjectElement);
 		$object->setAttribute('type', $params['type']);
-		$object->setAttribute('standby', $params['title']);
+		$object->setAttribute('standby', $params['label']);
 		$object->setAttribute('copyright', 'no');
 		$object->setAttribute('data', $params['url']);
 		$object->setParameter('disposition', 'devmpzz');

@@ -8,7 +8,7 @@
  * 動画ファイル
  *
  * @author 小石達也 <tkoishi@b-shock.co.jp>
- * @version $Id: BSMovieFile.class.php 2184 2010-06-28 02:32:56Z pooza $
+ * @version $Id: BSMovieFile.class.php 2204 2010-07-06 06:24:58Z pooza $
  */
 class BSMovieFile extends BSMediaFile {
 
@@ -44,9 +44,7 @@ class BSMovieFile extends BSMediaFile {
 			if (!$this->attributes->count()) {
 				$this->analyze();
 			}
-			if (mb_ereg('Audio: [ ,[:alnum:]]*(amr|aac)', $this->output)
-				&& BSString::isContain('Video: mpeg4', $this->output)) {
-				//3GPPの場合は BSMIMEType::DEFAULT_TYPE にマッチしない為、3GPP2で確定。
+			if ($this->getSuffix() == '.3g2') {
 				return BSMIMEType::getType('3g2');
 			}
 			foreach (array('wmv', 'mpeg') as $movietype) {
@@ -56,6 +54,19 @@ class BSMovieFile extends BSMediaFile {
 			}
 		}
 		return $type;
+	}
+
+	/**
+	 * 動画トラックを持つか？
+	 *
+	 * @access public
+	 * @return boolean 動画トラックを持つならTrue
+	 */
+	public function hasMovieTrack () {
+		if (!$this->attributes->count()) {
+			$this->analyze();
+		}
+		return ($this['width'] && $this['height']);
 	}
 
 	/**

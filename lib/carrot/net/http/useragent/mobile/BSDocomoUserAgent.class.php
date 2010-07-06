@@ -8,7 +8,7 @@
  * Docomoユーザーエージェント
  *
  * @author 小石達也 <tkoishi@b-shock.co.jp>
- * @version $Id: BSDocomoUserAgent.class.php 2115 2010-06-01 03:36:31Z pooza $
+ * @version $Id: BSDocomoUserAgent.class.php 2204 2010-07-06 06:24:58Z pooza $
  */
 class BSDocomoUserAgent extends BSMobileUserAgent {
 	const DEFAULT_NAME = 'DoCoMo/2.0';
@@ -93,31 +93,6 @@ class BSDocomoUserAgent extends BSMobileUserAgent {
 			}
 		}
 		return parent::getDisplayInfo();
-	}
-
-	/**
-	 * ムービー表示用のXHTML要素を返す
-	 *
-	 * @access public
-	 * @param BSParameterHolder $params パラメータ配列
-	 * @param BSUserAgent $useragent 対象ブラウザ
-	 * @return BSDivisionElement 要素
-	 */
-	public function getMovieElement (BSParameterHolder $params) {
-		$container = new BSDivisionElement;
-		$object = $container->addElement(new BSObjectElement);
-		$object->setAttribute('declare', 'declare');
-		$object->setAttribute('type', $params['type']);
-		$object->setAttribute('data', $params['url']);
-		$object->setID('3gp_' . BSCrypt::getDigest($params['url']));
-		$anchor = $container->addElement(new BSDivisionElement);
-		$anchor = $anchor->addElement(new BSAnchorElement);
-		$anchor->setAttribute('href', '#' . $object->getID());
-		if (BSString::isBlank($label = $params['label'])) {
-			$label = '3GP表示';
-		}
-		$anchor->setBody($label);
-		return $container;
 	}
 
 	/**
