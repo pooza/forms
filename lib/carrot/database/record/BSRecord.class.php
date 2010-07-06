@@ -8,11 +8,11 @@
  * テーブルのレコード
  *
  * @author 小石達也 <tkoishi@b-shock.co.jp>
- * @version $Id: BSRecord.class.php 2196 2010-07-05 06:41:52Z pooza $
+ * @version $Id: BSRecord.class.php 2205 2010-07-06 10:12:25Z pooza $
  * @abstract
  */
 abstract class BSRecord implements ArrayAccess,
-	BSSerializable, BSAssignable, BSAttachmentContainer, BSImageContainer {
+	BSSerializable, BSAssignable, BSAttachmentContainer, BSImageContainer, BSHTTPRedirector {
 
 	private $attributes;
 	private $table;
@@ -464,6 +464,34 @@ abstract class BSRecord implements ArrayAccess,
 	 */
 	public function offsetUnset ($key) {
 		throw new BSDatabaseException('レコードの属性は削除できません。');
+	}
+
+	/**
+	 * リダイレクト対象
+	 *
+	 * @access public
+	 * @return BSURL
+	 */
+	public function getURL () {
+		if (BSString::isBlank($this['url'])) {
+			$url = BSURL::getInstance(null, 'carrot');
+			$url['module'] = 'User' . BSString::pascalize($this->getTable()->getName());
+			$url['action'] = 'Detail';
+			$url['record'] = $this;
+		} else {
+			$url = BSURL::getInstance($this['url']);
+		}
+		return $url;
+	}
+
+	/**
+	 * リダイレクト
+	 *
+	 * @access public
+	 * @return string ビュー名
+	 */
+	public function redirect () {
+		return BSController::getInstance()->redirect($this);
 	}
 
 	/**

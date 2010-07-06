@@ -9,9 +9,7 @@
  * @author 小石達也 <tkoishi@b-shock.co.jp>
  * @version $Id$
  */
-class Form extends BSSortableRecord
-	implements BSHTTPRedirector, BSValidatorContainer, BSDictionary {
-
+class Form extends BSSortableRecord implements BSValidatorContainer, BSDictionary {
 	private $similars;
 	private $exporter;
 	private $fields;
@@ -255,16 +253,6 @@ class Form extends BSSortableRecord
 		$url['action'] = $action;
 		$url['record'] = $this;
 		return $url;
-	}
-
-	/**
-	 * リダイレクト
-	 *
-	 * @access public
-	 * @return string ビュー名
-	 */
-	public function redirect () {
-		return $this->getURL()->redirect();
 	}
 
 	/**
