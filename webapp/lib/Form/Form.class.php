@@ -10,7 +10,6 @@
  * @version $Id$
  */
 class Form extends BSSortableRecord implements BSValidatorContainer, BSDictionary {
-	private $similars;
 	private $exporter;
 	private $fields;
 	private $registrations;
@@ -74,19 +73,6 @@ class Form extends BSSortableRecord implements BSValidatorContainer, BSDictionar
 		}
 
 		return $new->getID();
-	}
-
-	/**
-	 * 同種のレコードを返す
-	 *
-	 * @access public
-	 * @return SortableTableHandler テーブル
-	 */
-	public function getSimilars () {
-		if (!$this->similars) {
-			$this->similars = new FormHandler;
-		}
-		return $this->similars;
 	}
 
 	/**
