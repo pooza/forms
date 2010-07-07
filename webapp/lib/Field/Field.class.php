@@ -60,10 +60,10 @@ class Field extends BSSortableRecord implements BSValidatorContainer {
 	/**
 	 * 同種のレコードを返す
 	 *
-	 * @access public
+	 * @access protected
 	 * @return SortableTableHandler テーブル
 	 */
-	public function getSimilars () {
+	protected function getSimilars () {
 		if (!$this->similars) {
 			$this->similars = new FieldHandler;
 			$this->similars->getCriteria()->register('form_id', $this->getForm());
