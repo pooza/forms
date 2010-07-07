@@ -10,7 +10,7 @@ BSUtility::includeFile('Smarty/Smarty.class');
  * Smartyラッパー
  *
  * @author 小石達也 <tkoishi@b-shock.co.jp>
- * @version $Id: BSSmarty.class.php 2157 2010-06-19 13:11:23Z pooza $
+ * @version $Id: BSSmarty.class.php 2207 2010-07-07 01:49:15Z pooza $
  */
 class BSSmarty extends Smarty implements BSTextRenderer {
 	private $type;
@@ -174,6 +174,7 @@ class BSSmarty extends Smarty implements BSTextRenderer {
 	 */
 	public function setUserAgent (BSUserAgent $useragent) {
 		$this->useragent = $useragent;
+		$this->setAttribute('useragent', null);
 
 		$this->finder->clearSuffixes();
 		if ($useragent->isMobile()) {

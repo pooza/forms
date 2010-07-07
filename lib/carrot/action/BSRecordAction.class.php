@@ -8,7 +8,7 @@
  * 詳細画面用 アクションひな形
  *
  * @author 小石達也 <tkoishi@b-shock.co.jp>
- * @version $Id: BSRecordAction.class.php 2076 2010-05-13 11:53:27Z pooza $
+ * @version $Id: BSRecordAction.class.php 2206 2010-07-06 13:27:39Z pooza $
  * @abstract
  */
 abstract class BSRecordAction extends BSAction {
@@ -113,6 +113,7 @@ abstract class BSRecordAction extends BSAction {
 		} else {
 			$this->getRecord()->update($this->getRecordValues());
 		}
+		$this->getRecord()->setAttachments($this->request);
 	}
 
 	/**

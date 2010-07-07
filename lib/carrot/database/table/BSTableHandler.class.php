@@ -8,7 +8,7 @@
  * データベーステーブル
  *
  * @author 小石達也 <tkoishi@b-shock.co.jp>
- * @version $Id: BSTableHandler.class.php 2171 2010-06-24 14:59:49Z pooza $
+ * @version $Id: BSTableHandler.class.php 2206 2010-07-06 13:27:39Z pooza $
  * @abstract
  */
 abstract class BSTableHandler implements IteratorAggregate, BSDictionary, BSAssignable {
@@ -803,6 +803,28 @@ abstract class BSTableHandler implements IteratorAggregate, BSDictionary, BSAssi
 			$word = $this->getName();
 		}
 		return $word . 'テーブル';
+	}
+
+	/**
+	 * 画像のサイズ名を全てを返す
+	 *
+	 * @access public
+	 * @return BSArray 画像のサイズ名
+	 * @static
+	 */
+	static public function getImageNames () {
+		return new BSArray;
+	}
+
+	/**
+	 * 添付ファイル名を全てを返す
+	 *
+	 * @access public
+	 * @return BSArray 添付ファイル名
+	 * @static
+	 */
+	static public function getAttachmentNames () {
+		return new BSArray;
 	}
 
 	/**
