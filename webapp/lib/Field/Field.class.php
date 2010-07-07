@@ -61,7 +61,7 @@ class Field extends BSSortableRecord implements BSValidatorContainer {
 	 * 同種のレコードを返す
 	 *
 	 * @access protected
-	 * @return SortableTableHandler テーブル
+	 * @return BSSortableTableHandler テーブル
 	 */
 	protected function getSimilars () {
 		if (!$this->similars) {
