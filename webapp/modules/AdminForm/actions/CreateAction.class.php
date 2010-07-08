@@ -27,11 +27,6 @@ class CreateAction extends BSRecordAction {
 		try {
 			$this->database->beginTransaction();
 			$this->updateRecord();
-			foreach (FormHandler::getAttachmentNames() as $name) {
-				if ($info = $this->request[$name]) {
-					$this->getRecord()->setAttachment(new BSFile($info['tmp_name']), $name);
-				}
-			}
 			$this->database->commit();
 		} catch (Exception $e) {
 			$this->database->rollBack();

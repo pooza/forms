@@ -25,7 +25,7 @@ class FormHandler extends BSSortableTableHandler {
 	 * 添付ファイル名を全てを返す
 	 *
 	 * @access public
-	 * @return BSArray 添付ファイル名名
+	 * @return BSArray 添付ファイル名
 	 * @static
 	 */
 	static public function getAttachmentNames () {

@@ -26,22 +26,6 @@ class Form extends BSSortableRecord implements BSValidatorContainer, BSDictionar
 	}
 
 	/**
-	 * 削除
-	 *
-	 * @access public
-	 * @param integer $flags フラグのビット列
-	 *   BSDatabase::WITHOUT_LOGGING ログを残さない
-	 */
-	public function delete ($flags = null) {
-		foreach (FormHandler::getAttachmentNames() as $field) {
-			if ($file = $this->getAttachment($field)) {
-				$file->delete();
-			}
-		}
-		parent::delete($flags);
-	}
-
-	/**
 	 * 削除可能か？
 	 *
 	 * @access protected
@@ -306,15 +290,8 @@ class Form extends BSSortableRecord implements BSValidatorContainer, BSDictionar
 	 * @return BSArray ファイル属性の配列
 	 */
 	protected function getFullAttributes () {
-		$values = $this->getAttributes();
-		$values['url'] = $this->getURL()->getContents();
+		$values = parent::getFullAttributes();
 		$values['email'] = $this->getMailAddress()->getContents();
-		foreach (FormHandler::getAttachmentNames() as $field) {
-			if ($this->getAttachment($field)) {
-				$values['has_' . $field] = true;
-				$values[$field] = $this->getAttachmentInfo($field);
-			}
-		}
 		$values['fields'] = new BSArray;
 		foreach ($this->getFields() as $field) {
 			$values['fields'][$field->getName()] = $field->getAssignValue();
