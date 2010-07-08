@@ -8,7 +8,7 @@
  * ソート可能なテーブルのレコード
  *
  * @author 小石達也 <tkoishi@b-shock.co.jp>
- * @version $Id: BSSortableRecord.class.php 2210 2010-07-07 17:16:32Z pooza $
+ * @version $Id: BSSortableRecord.class.php 2211 2010-07-07 17:33:21Z pooza $
  * @abstract
  */
 abstract class BSSortableRecord extends BSRecord {
@@ -79,10 +79,10 @@ abstract class BSSortableRecord extends BSRecord {
 	/**
 	 * 同種のレコードを返す
 	 *
-	 * @access public
-	 * @return SortableTableHandler テーブル
+	 * @access protected
+	 * @return BSSortableTableHandler テーブル
 	 */
-	public function getSimilars () {
+	protected function getSimilars () {
 		if (!$this->similars) {
 			$this->similars = BSTableHandler::getInstance(get_class($this));
 			if ($record = $this->getParent()) {
