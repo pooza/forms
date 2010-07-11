@@ -2,7 +2,7 @@
 #
 # @package org.carrot-framework
 # @author 小石達也 <tkoishi@b-shock.co.jp>
-# @version $Id: carrot.yaml 2135 2010-06-12 08:39:20Z pooza $
+# @version $Id: carrot.yaml 2212 2010-07-10 12:53:44Z pooza $
 
 awstats:
   parent: lib
@@ -104,6 +104,8 @@ mysql:
   constant: yes
 pictogram:
   parent: images
+png2ico:
+  constant: yes
 proctools:
   constant: yes
 pgsql:

@@ -8,7 +8,7 @@
  * API結果文書用 既定ビュー
  *
  * @author 小石達也 <tkoishi@b-shock.co.jp>
- * @version $Id: BSJSONView.class.php 2122 2010-06-05 12:21:52Z pooza $
+ * @version $Id: BSJSONView.class.php 2212 2010-07-10 12:53:44Z pooza $
  */
 class BSJSONView extends BSView {
 
@@ -60,6 +60,9 @@ class BSJSONView extends BSView {
 	public function render () {
 		$params = $this->renderer->getParameters();
 		$params['status'] = $this->getStatus();
+		$params['module'] = $this->getModule()->getName();
+		$params['action'] = $this->getAction()->getName();
+		$params['params'] = $this->request->getParameters();
 		if ($this->request->hasErrors()) {
 			$params['errors'] = $this->request->getErrors();
 		}

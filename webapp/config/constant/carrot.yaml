@@ -2,11 +2,11 @@
 #
 # @package org.carrot-framework
 # @author 小石達也 <tkoishi@b-shock.co.jp>
-# @version $Id: carrot.yaml 2210 2010-07-07 17:16:32Z pooza $
+# @version $Id: carrot.yaml 2212 2010-07-10 12:53:44Z pooza $
 
 carrot:
   name: carrot Framework
-  ver: 2.3.131
+  ver: 2.3.132
 
 admin:
   email:
@@ -190,8 +190,10 @@ pdo:
     dsn: sqlite:%BS_VAR_DIR%/db/serialize.sqlite3
   twitter:
     dsn: sqlite:%BS_VAR_DIR%/db/twitter.sqlite3
-pictogram:
 pgsql:
+  dir: /usr/local
+pictogram:
+png2ico:
   dir: /usr/local
 proctools:
   dir: /usr/local
