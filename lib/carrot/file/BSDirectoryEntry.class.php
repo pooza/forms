@@ -8,12 +8,13 @@
  * ディレクトリエントリ
  *
  * @author 小石達也 <tkoishi@b-shock.co.jp>
- * @version $Id: BSDirectoryEntry.class.php 2197 2010-07-05 10:13:37Z pooza $
+ * @version $Id: BSDirectoryEntry.class.php 2215 2010-07-17 03:53:27Z pooza $
  * @abstract
  */
 abstract class BSDirectoryEntry {
 	protected $name;
 	protected $path;
+	protected $id;
 	private $suffix;
 	private $basename;
 	private $shortPath;
@@ -21,13 +22,16 @@ abstract class BSDirectoryEntry {
 	protected $directory;
 
 	/**
-	 * inodeを返す
+	 * ユニークなファイルIDを返す
 	 *
 	 * @access public
 	 * @return integer ID
 	 */
 	public function getID () {
-		return fileinode($this->getPath());
+		if (!$this->id) {
+			$this->id = BSCrypt::getDigest(array($this->getPath(), fileinode($this->getPath())));
+		}
+		return $this->id;
 	}
 
 	/**

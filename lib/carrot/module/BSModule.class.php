@@ -8,7 +8,7 @@
  * モジュール
  *
  * @author 小石達也 <tkoishi@b-shock.co.jp>
- * @version $Id: BSModule.class.php 2158 2010-06-19 14:18:56Z pooza $
+ * @version $Id: BSModule.class.php 2217 2010-07-17 04:13:38Z pooza $
  */
 class BSModule implements BSHTTPRedirector, BSAssignable {
 	protected $name;
@@ -196,7 +196,7 @@ class BSModule implements BSHTTPRedirector, BSAssignable {
 	 * @access public
 	 * @param BSArray $params 検索条件キャッシュ
 	 */
-	public function setParameterCache (BSArray $params) {
+	public function cacheParameters (BSArray $params) {
 		$this->params = clone $params;
 		$this->params->removeParameter(BSRequest::MODULE_ACCESSOR);
 		$this->params->removeParameter(BSRequest::ACTION_ACCESSOR);

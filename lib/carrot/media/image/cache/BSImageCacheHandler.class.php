@@ -8,7 +8,7 @@
  * 画像キャッシュ
  *
  * @author 小石達也 <tkoishi@b-shock.co.jp>
- * @version $Id: BSImageCacheHandler.class.php 2167 2010-06-21 08:21:05Z pooza $
+ * @version $Id: BSImageCacheHandler.class.php 2215 2010-07-17 03:53:27Z pooza $
  */
 class BSImageCacheHandler {
 	private $useragent;
@@ -208,7 +208,7 @@ class BSImageCacheHandler {
 			$info['height'] = $image->getHeight();
 			$info['alt'] = $record->getLabel();
 			$info['type'] = $image->getType();
-			$info['pixel_size'] = $info['width'] . '×' . $string[] = $info['height'];
+			$info['pixel_size'] = $info['width'] . '×' . $info['height'];
 			return $info;
 		} catch (BSImageException $e) {
 		}
@@ -324,16 +324,11 @@ class BSImageCacheHandler {
 	 * @return string サムネイル名
 	 */
 	private function getEntryName (BSImageContainer $record, $size) {
-		$name = new BSStringFormat('%s_%06d_%s');
-		$name[] = get_class($record);
-		$name[] = $record->getID();
-		$name[] = $size;
-		$name = $name->getContents();
-
-		if (!BS_DEBUG) {
-			$name = BSCrypt::getDigest($name);
-		}
-		return $name;
+		return BSCrypt::getDigest(array(
+			get_class($record),
+			$record->getID(),
+			$size
+		));
 	}
 
 	/**

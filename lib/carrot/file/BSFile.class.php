@@ -10,7 +10,7 @@ ini_set('auto_detect_line_endings', true);
  * ファイル
  *
  * @author 小石達也 <tkoishi@b-shock.co.jp>
- * @version $Id: BSFile.class.php 2194 2010-07-02 12:17:42Z pooza $
+ * @version $Id: BSFile.class.php 2215 2010-07-17 03:53:27Z pooza $
  */
 class BSFile extends BSDirectoryEntry implements BSRenderer, BSSerializable {
 	private $mode;
@@ -36,6 +36,25 @@ class BSFile extends BSDirectoryEntry implements BSRenderer, BSSerializable {
 		if ($this->isOpened()) {
 			$this->close();
 		}
+	}
+
+	/**
+	 * ユニークなファイルIDを返す
+	 *
+	 * @access public
+	 * @return integer ID
+	 */
+	public function getID () {
+		if (!$this->id) {
+			$this->id = BSCrypt::getDigest(array(
+				$this->getPath(),
+				$this->getType(),
+				$this->getSize(),
+				fileinode($this->getPath()),
+				$this->getUpdateDate()->format('YmdHis'),
+			));
+		}
+		return $this->id;
 	}
 
 	/**

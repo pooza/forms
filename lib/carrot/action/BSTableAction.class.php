@@ -8,7 +8,7 @@
  * 一覧画面用 アクションひな形
  *
  * @author 小石達也 <tkoishi@b-shock.co.jp>
- * @version $Id: BSTableAction.class.php 1975 2010-04-07 07:19:04Z pooza $
+ * @version $Id: BSTableAction.class.php 2217 2010-07-17 04:13:38Z pooza $
  * @abstract
  */
 abstract class BSTableAction extends BSAction {
@@ -30,12 +30,12 @@ abstract class BSTableAction extends BSAction {
 		parent::initialize();
 		$this->getModule()->clearRecordID();
 
-		$params = $this->getDefaultParameters();
+		$params = new BSArray;
 		$params->setParameters($this->getModule()->getParameterCache());
 		$params->setParameters($this->request->getParameters());
 
-		$this->request->setParameters($params->getParameters());
-		$this->getModule()->setParameterCache($params);
+		$this->request->setParameters($params);
+		$this->getModule()->cacheParameters($params);
 
 		$this->assignStatusOptions();
 
@@ -92,16 +92,6 @@ abstract class BSTableAction extends BSAction {
 			}
 		}
 		return $this->rows;
-	}
-
-	/**
-	 * デフォルトの検索条件を返す
-	 *
-	 * @access protected
-	 * @return BSArray 検索条件
-	 */
-	protected function getDefaultParameters () {
-		return new BSArray;
 	}
 
 	/**
