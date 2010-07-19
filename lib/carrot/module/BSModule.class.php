@@ -8,7 +8,7 @@
  * モジュール
  *
  * @author 小石達也 <tkoishi@b-shock.co.jp>
- * @version $Id: BSModule.class.php 2217 2010-07-17 04:13:38Z pooza $
+ * @version $Id: BSModule.class.php 2218 2010-07-18 16:40:02Z pooza $
  */
 class BSModule implements BSHTTPRedirector, BSAssignable {
 	protected $name;
@@ -50,11 +50,9 @@ class BSModule implements BSHTTPRedirector, BSAssignable {
 	public function __get ($name) {
 		switch ($name) {
 			case 'controller':
-				return BSController::getInstance();
 			case 'request':
-				return BSRequest::getInstance();
 			case 'user':
-				return BSUser::getInstance();
+				return BSUtility::executeMethod($name, 'getInstance');
 			default:
 				$message = new BSStringFormat('仮想プロパティ"%s"は未定義です。');
 				$message[] = $name;

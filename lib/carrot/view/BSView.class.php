@@ -8,7 +8,7 @@
  * 基底ビュー
  *
  * @author 小石達也 <tkoishi@b-shock.co.jp>
- * @version $Id: BSView.class.php 2152 2010-06-19 11:24:37Z pooza $
+ * @version $Id: BSView.class.php 2218 2010-07-18 16:40:02Z pooza $
  */
 class BSView extends BSHTTPResponse {
 	protected $nameSuffix;
@@ -43,11 +43,9 @@ class BSView extends BSHTTPResponse {
 	public function __get ($name) {
 		switch ($name) {
 			case 'controller':
-				return BSController::getInstance();
 			case 'request':
-				return BSRequest::getInstance();
 			case 'user':
-				return BSUser::getInstance();
+				return BSUtility::executeMethod($name, 'getInstance');
 			case 'useragent':
 				return BSRequest::getInstance()->getUserAgent();
 			case 'translator':

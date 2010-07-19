@@ -7,7 +7,7 @@
  * ユーティリティ
  *
  * @author 小石達也 <tkoishi@b-shock.co.jp>
- * @version $Id: BSUtility.class.php 1926 2010-03-21 14:36:34Z pooza $
+ * @version $Id: BSUtility.class.php 2218 2010-07-18 16:40:02Z pooza $
  */
 class BSUtility {
 
@@ -83,7 +83,10 @@ class BSUtility {
 	 * @return mixed メソッドの返値
 	 * @static
 	 */
-	static public function executeMethod ($object, $method, $values) {
+	static public function executeMethod ($object, $method, $values = array()) {
+		if (is_string($object)) {
+			$object = BSClassLoader::getInstance()->getClass($object);
+		}
 		if (!method_exists($object, $method)) {
 			$message = new BSStringFormat('クラス "%s" のメソッド "%s" が未定義です。');
 			$message[] = get_class($object);

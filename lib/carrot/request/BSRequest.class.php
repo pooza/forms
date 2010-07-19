@@ -8,7 +8,7 @@
  * 抽象リクエスト
  *
  * @author 小石達也 <tkoishi@b-shock.co.jp>
- * @version $Id: BSRequest.class.php 2121 2010-06-05 12:21:11Z pooza $
+ * @version $Id: BSRequest.class.php 2218 2010-07-18 16:40:02Z pooza $
  * @abstract
  */
 abstract class BSRequest extends BSHTTPRequest {
@@ -61,9 +61,8 @@ abstract class BSRequest extends BSHTTPRequest {
 	public function __get ($name) {
 		switch ($name) {
 			case 'controller':
-				return BSController::getInstance();
 			case 'user':
-				return BSUser::getInstance();
+				return BSUtility::executeMethod($name, 'getInstance');
 			default:
 				$message = new BSStringFormat('仮想プロパティ"%s"は未定義です。');
 				$message[] = $name;

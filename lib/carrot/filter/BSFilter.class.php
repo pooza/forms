@@ -8,7 +8,7 @@
  * 抽象フィルタ
  *
  * @author 小石達也 <tkoishi@b-shock.co.jp>
- * @version $Id: BSFilter.class.php 1926 2010-03-21 14:36:34Z pooza $
+ * @version $Id: BSFilter.class.php 2218 2010-07-18 16:40:02Z pooza $
  * @abstract
  */
 abstract class BSFilter extends BSParameterHolder {
@@ -29,11 +29,9 @@ abstract class BSFilter extends BSParameterHolder {
 	public function __get ($name) {
 		switch ($name) {
 			case 'controller':
-				return BSController::getInstance();
 			case 'request':
-				return BSRequest::getInstance();
 			case 'user':
-				return BSUser::getInstance();
+				return BSUtility::executeMethod($name, 'getInstance');
 			case 'action':
 				return BSController::getInstance()->getAction();
 			default:

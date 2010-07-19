@@ -3,7 +3,7 @@
  *
  * @package org.carrot-framework
  * @author 小石達也 <tkoishi@b-shock.co.jp>
- * @version $Id: carrot.js 2135 2010-06-12 08:39:20Z pooza $
+ * @version $Id: carrot.js 2219 2010-07-19 08:53:50Z pooza $
  */
 
 function redirect (m, a, id) {
@@ -99,6 +99,10 @@ document.observe('dom:loaded', function () {
   try {
     AjaxZip3.JSONDATA = document.location.protocol
       + '//ajaxzip3.googlecode.com/svn/trunk/ajaxzip3/zipdata';
+  } catch (e) {
+  }
+  try {
+    Shadowbox.init({autoplayMovies: false});
   } catch (e) {
   }
 });

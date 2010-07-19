@@ -8,7 +8,7 @@
  * 動画ファイル
  *
  * @author 小石達也 <tkoishi@b-shock.co.jp>
- * @version $Id: BSMovieFile.class.php 2204 2010-07-06 06:24:58Z pooza $
+ * @version $Id: BSMovieFile.class.php 2222 2010-07-19 09:10:56Z pooza $
  */
 class BSMovieFile extends BSMediaFile {
 
@@ -99,6 +99,10 @@ class BSMovieFile extends BSMediaFile {
 	 * @return BSDivisionElement 要素
 	 */
 	public function getElement (BSParameterHolder $params, BSUserAgent $useragent = null) {
+		if ($params['mode'] == 'shadowbox') {
+			return $this->getShadowboxElement($params);
+		}
+
 		$container = parent::getElement($params);
 		if ($inner = $container->getElement('div')) { //Gecko対応
 			$inner->setStyles($this->getStyles($params));
@@ -138,6 +142,33 @@ class BSMovieFile extends BSMediaFile {
 		$element->setURL(BSURL::getInstance()->setAttribute('path', BS_MOVIE_FLV_PLAYER_HREF));
 		$element->setFlashVar('config', $this->getPlayerConfig($params));
 		return $element;
+	}
+
+	/**
+	 * Shadowboxへのリンク要素を返す
+	 *
+	 * @access protected
+	 * @param BSParameterHolder $params パラメータ配列
+	 * @return BSShadowboxAnchorElement 要素
+	 */
+	protected function getShadowboxElement (BSParameterHolder $params) {
+		$container = new BSShadowboxAnchorElement;
+		$container->setWidth($params['width']);
+		$container->setHeight($params['height']);
+		$container->setURL($this->getMediaURL($params));
+		if ($info = $params['thumbnail']) {
+			$info = new BSArray($info);
+			$image = new BSImageElement;
+			$image->setAttribute('width', $info['width']);
+			$image->setAttribute('height', $info['height']);
+			$image->setAttribute('alt', $info['alt']);
+			$image->setURL($info['url']);
+			$image->registerStyleClass('deny_take_out');
+			$container->addElement($image);
+		} else {
+			$container->setBody($params['label']);
+		}
+		return $container;
 	}
 
 	/**

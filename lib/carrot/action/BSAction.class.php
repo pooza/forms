@@ -8,7 +8,7 @@
  * アクション
  *
  * @author 小石達也 <tkoishi@b-shock.co.jp>
- * @version $Id: BSAction.class.php 2085 2010-05-21 07:06:13Z pooza $
+ * @version $Id: BSAction.class.php 2218 2010-07-18 16:40:02Z pooza $
  * @abstract
  */
 abstract class BSAction implements BSHTTPRedirector, BSAssignable, BSValidatorContainer {
@@ -34,11 +34,9 @@ abstract class BSAction implements BSHTTPRedirector, BSAssignable, BSValidatorCo
 	public function __get ($name) {
 		switch ($name) {
 			case 'controller':
-				return BSController::getInstance();
 			case 'request':
-				return BSRequest::getInstance();
 			case 'user':
-				return BSUser::getInstance();
+				return BSUtility::executeMethod($name, 'getInstance');
 			case 'database':
 				if ($table = $this->getModule()->getTable()) {
 					return $table->getDatabase();

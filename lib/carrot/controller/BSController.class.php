@@ -8,7 +8,7 @@
  * Carrotアプリケーションコントローラ
  *
  * @author 小石達也 <tkoishi@b-shock.co.jp>
- * @version $Id: BSController.class.php 2168 2010-06-22 08:06:27Z pooza $
+ * @version $Id: BSController.class.php 2218 2010-07-18 16:40:02Z pooza $
  * @abstract
  */
 abstract class BSController {
@@ -35,9 +35,8 @@ abstract class BSController {
 	public function __get ($name) {
 		switch ($name) {
 			case 'request':
-				return BSRequest::getInstance();
 			case 'user':
-				return BSUser::getInstance();
+				return BSUtility::executeMethod($name, 'getInstance');
 			default:
 				$message = new BSStringFormat('仮想プロパティ"%s"は未定義です。');
 				$message[] = $name;
