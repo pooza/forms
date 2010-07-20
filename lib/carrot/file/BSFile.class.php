@@ -10,14 +10,14 @@ ini_set('auto_detect_line_endings', true);
  * ファイル
  *
  * @author 小石達也 <tkoishi@b-shock.co.jp>
- * @version $Id: BSFile.class.php 2215 2010-07-17 03:53:27Z pooza $
+ * @version $Id: BSFile.class.php 2223 2010-07-20 12:53:42Z pooza $
  */
 class BSFile extends BSDirectoryEntry implements BSRenderer, BSSerializable {
+	protected $error;
 	private $mode;
 	private $lines;
 	private $size;
 	private $handle;
-	private $error;
 	private $binary = false;
 	const LINE_SEPARATOR = "\n";
 

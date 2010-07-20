@@ -8,7 +8,7 @@
  * URLバリデータ
  *
  * @author 小石達也 <tkoishi@b-shock.co.jp>
- * @version $Id: BSURLValidator.class.php 2176 2010-06-27 07:16:07Z pooza $
+ * @version $Id: BSURLValidator.class.php 2225 2010-07-20 14:41:38Z pooza $
  */
 class BSURLValidator extends BSValidator {
 
@@ -25,6 +25,7 @@ class BSURLValidator extends BSValidator {
 			'スキーム(%s)が正しくありません。',
 			join('|', $this['schemes'])
 		);
+		$this['allow_fullpath'] = false;
 		return BSValidator::initialize($params);
 	}
 
@@ -41,13 +42,14 @@ class BSURLValidator extends BSValidator {
 	 */
 	public function execute ($value) {
 		try {
-			if (!mb_ereg('https?://[-_.!~*\'()a-zA-Z0-9;/?:@&=+$,%#]+', $value)) {
+			$pattern = 'https?://[-_.!~*\'()a-zA-Z0-9;/?:@&=+$,%#]+';
+			if (!$this['allow_fullpath'] && !mb_ereg($pattern, $value)) {
 				$this->error = $this['net_error'];
 			}
 			if (!$url = BSURL::getInstance($value)) {
 				$this->error = $this['net_error'];
 			}
-			if (!$this->getSchemes()->isContain($url['scheme'])) {
+			if (!$this['allow_fullpath'] && !$this->getSchemes()->isContain($url['scheme'])) {
 				$this->error = $this['scheme_error'];
 			}
 		} catch (Exception $e) {

@@ -8,7 +8,7 @@
  * 動画バリデータ
  *
  * @author 小石達也 <tkoishi@b-shock.co.jp>
- * @version $Id: BSMovieValidator.class.php 1955 2010-03-31 07:10:22Z pooza $
+ * @version $Id: BSMovieValidator.class.php 2223 2010-07-20 12:53:42Z pooza $
  */
 class BSMovieValidator extends BSValidator {
 
@@ -35,6 +35,9 @@ class BSMovieValidator extends BSValidator {
 			$file = new BSMovieFile($value['tmp_name']);
 			if (!$file->isExists() || !$file->validate()) {
 				$this->error = $this['invalid_error'];
+				if (!BSString::isBlank($error = $file->getError())) {
+					$this->error .= '(' . $error . ')';
+				}
 			}
 		} catch (Exception $e) {
 			$this->error = $this['invalid_error'];
