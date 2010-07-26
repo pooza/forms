@@ -8,7 +8,7 @@
  * img要素
  *
  * @author 小石達也 <tkoishi@b-shock.co.jp>
- * @version $Id: BSImageElement.class.php 2009 2010-04-17 07:27:55Z pooza $
+ * @version $Id: BSImageElement.class.php 2227 2010-07-26 08:36:31Z pooza $
  */
 class BSImageElement extends BSXHTMLElement {
 
@@ -70,6 +70,7 @@ class BSImageElement extends BSXHTMLElement {
 			case 'width':
 			case 'height':
 			case 'border':
+			case 'align':
 			case 'class':
 			case 'style':
 				return parent::setAttribute($name, $value);

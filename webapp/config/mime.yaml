@@ -2,7 +2,7 @@
 #
 # @package org.carrot-framework
 # @author 小石達也 <tkoishi@b-shock.co.jp>
-# @version $Id: mime.yaml 2197 2010-07-05 10:13:37Z pooza $
+# @version $Id: mime.yaml 2230 2010-07-26 08:38:23Z pooza $
 
 types:
   3gp: video/3gpp
@@ -65,6 +65,7 @@ types:
   wmv: video/x-ms-wmv
   yaml: text/yaml
   yml: text/yaml
+  xhtml: application/xhtml+xml
   xls: application/vnd.ms-excel
   xlsx: application/vnd.openxmlformats-officedocument.wordprocessingml.document
   xml: application/xml

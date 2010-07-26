@@ -8,7 +8,7 @@
  * Google Mapsクライアント
  *
  * @author 小石達也 <tkoishi@b-shock.co.jp>
- * @version $Id: BSGoogleMapsService.class.php 2173 2010-06-24 15:29:03Z pooza $
+ * @version $Id: BSGoogleMapsService.class.php 2229 2010-07-26 08:37:48Z pooza $
  */
 class BSGoogleMapsService extends BSCurlHTTP {
 	private $table;
@@ -159,8 +159,17 @@ class BSGoogleMapsService extends BSCurlHTTP {
 		$image = new BSImageElement;
 		$image->setURL(BSURL::getInstance($info['url']));
 		$container = new BSDivisionElement;
-		$anchor = $container->addElement(new BSAnchorElement);
-		$anchor->link($image, self::getURL($address, $this->useragent));
+		if (BSString::isBlank($label = $params['label'])) {
+			$anchor = $container->addElement(new BSAnchorElement);
+			$anchor->link($image, self::getURL($address, $this->useragent));
+		} else {
+			$container->addElement($image);
+			$labelContainer = $container->addElement(new BSDivisionElement);
+			$labelContainer->setAttribute('align', 'center');
+			$anchor = $labelContainer->addElement(new BSAnchorElement);
+			$anchor->setBody($label);
+			$anchor->setURL(self::getURL($address, $this->useragent));
+		}
 		return $container;
 	}
 
