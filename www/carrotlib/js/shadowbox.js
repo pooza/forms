@@ -2,7 +2,7 @@
  * Shadowbox.js carrot対応版
  *
  * @package org.carrot-framework
- * @version $Id: shadowbox.js 2226 2010-07-23 02:00:11Z pooza $
+ * @version $Id: shadowbox.js 2235 2010-08-02 02:08:33Z pooza $
  */
 
 /*!
@@ -4148,7 +4148,7 @@ K.options = {
      *
      * @type    {Number}
      */
-    overlayOpacity: 0.5,
+    overlayOpacity: 0.8,
 
     /**
      * The duration (in seconds) to use for resizing animations.
