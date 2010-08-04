@@ -8,7 +8,7 @@
  * ソート可能なテーブルのレコード
  *
  * @author 小石達也 <tkoishi@b-shock.co.jp>
- * @version $Id: BSSortableRecord.class.php 2211 2010-07-07 17:33:21Z pooza $
+ * @version $Id: BSSortableRecord.class.php 2245 2010-08-04 11:16:07Z pooza $
  * @abstract
  */
 abstract class BSSortableRecord extends BSRecord {
@@ -136,7 +136,9 @@ abstract class BSSortableRecord extends BSRecord {
 		$rank = 0;
 		foreach ($ids as $id) {
 			$rank ++;
-			$this->getSimilars()->getRecord($id)->setRank($rank);
+			if ($record = $this->getSimilars()->getRecord($id)) {
+				$record->setRank($rank);
+			}
 		}
 	}
 

@@ -8,7 +8,7 @@
  * Webリクエスト
  *
  * @author 小石達也 <tkoishi@b-shock.co.jp>
- * @version $Id: BSWebRequest.class.php 2042 2010-04-28 07:18:19Z pooza $
+ * @version $Id: BSWebRequest.class.php 2241 2010-08-03 16:38:21Z pooza $
  */
 class BSWebRequest extends BSRequest {
 
@@ -152,7 +152,11 @@ class BSWebRequest extends BSRequest {
 	 * @return boolean Cookie対応環境ならTrue
 	 */
 	public function isEnableCookie () {
-		return (!$this->isAjax() && !$this->isFlash() && !$this->isMobile());
+		return (!$this->isAjax()
+			&& !$this->isFlash()
+			&& !$this->isMobile()
+			&& !$this->isCarrot()
+		);
 	}
 
 	/**
@@ -193,6 +197,16 @@ class BSWebRequest extends BSRequest {
 	 */
 	public function isFlash () {
 		return $this->getHeader('x-flash-version') || $this->getHeader('x-is-flash');
+	}
+
+	/**
+	 * Carrot環境か？
+	 *
+	 * @access public
+	 * @return boolean Flash環境ならTrue
+	 */
+	public function isCarrot () {
+		return !!$this->getHeader(BSHTTP::VERSION_HEADER_NAME);
 	}
 
 	/**

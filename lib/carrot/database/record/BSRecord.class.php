@@ -8,7 +8,7 @@
  * テーブルのレコード
  *
  * @author 小石達也 <tkoishi@b-shock.co.jp>
- * @version $Id: BSRecord.class.php 2209 2010-07-07 09:11:32Z pooza $
+ * @version $Id: BSRecord.class.php 2244 2010-08-04 08:24:18Z pooza $
  * @abstract
  */
 abstract class BSRecord implements ArrayAccess,
@@ -452,10 +452,11 @@ abstract class BSRecord implements ArrayAccess,
 	 */
 	public function getLabel ($language = 'ja') {
 		foreach (array('name', 'label', 'title') as $name) {
-			foreach (array('', '_' . $language) as $suffix) {
-				$name .= $suffix;
-				if (!BSString::isBlank($label = $this[$name])) {
-					return $label;
+			foreach (array(null, $this->getTable()->getName() . '_') as $prefix) {
+				foreach (array(null, '_' . $language) as $suffix) {
+					if (!BSString::isBlank($label = $this[$prefix . $name . $suffix])) {
+						return $label;
+					}
 				}
 			}
 		}

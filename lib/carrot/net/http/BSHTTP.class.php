@@ -8,9 +8,10 @@
  * HTTPプロトコル
  *
  * @author 小石達也 <tkoishi@b-shock.co.jp>
- * @version $Id: BSHTTP.class.php 2068 2010-05-04 15:03:28Z pooza $
+ * @version $Id: BSHTTP.class.php 2241 2010-08-03 16:38:21Z pooza $
  */
 class BSHTTP extends BSSocket {
+	const VERSION_HEADER_NAME = 'X-Carrot-Version';
 
 	/**
 	 * HEADリクエスト
@@ -83,6 +84,7 @@ class BSHTTP extends BSSocket {
 		}
 
 		$request->setHeader('User-Agent', BSController::getFullName('en'));
+		$request->setHeader(self::VERSION_HEADER_NAME, BSController::getVersion());
 		$this->putLine($request->getContents());
 
 		$response = new BSHTTPResponse;

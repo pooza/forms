@@ -3,7 +3,7 @@
  *
  * @package org.carrot-framework
  * @author 小石達也 <tkoishi@b-shock.co.jp>
- * @version $Id: carrot.js 2219 2010-07-19 08:53:50Z pooza $
+ * @version $Id: carrot.js 2243 2010-08-04 07:39:27Z pooza $
  */
 
 function redirect (m, a, id) {
@@ -31,7 +31,7 @@ function openPictogramPallet (id) {
 function putSmartTag (tag, field, name, params) {
   var tag = '[[' + tag;
   if (name) {
-    tag += ':' + name.replace(':', '\\:');
+    tag += ':' + name.gsub(':', '&#58;').gsub('[', '&#91;').gsub(']', '&#93;');
     if (params) {
       var encoded = [];
       for(var key in params) {
@@ -99,10 +99,6 @@ document.observe('dom:loaded', function () {
   try {
     AjaxZip3.JSONDATA = document.location.protocol
       + '//ajaxzip3.googlecode.com/svn/trunk/ajaxzip3/zipdata';
-  } catch (e) {
-  }
-  try {
-    Shadowbox.init({autoplayMovies: false});
   } catch (e) {
   }
 });

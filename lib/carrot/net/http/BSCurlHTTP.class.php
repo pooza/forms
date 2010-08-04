@@ -8,7 +8,7 @@
  * CurlによるHTTP処理
  *
  * @author 小石達也 <tkoishi@b-shock.co.jp>
- * @version $Id: BSCurlHTTP.class.php 2068 2010-05-04 15:03:28Z pooza $
+ * @version $Id: BSCurlHTTP.class.php 2241 2010-08-03 16:38:21Z pooza $
  */
 class BSCurlHTTP extends BSHTTP {
 	protected $engine;
@@ -138,8 +138,10 @@ class BSCurlHTTP extends BSHTTP {
 			$this->setAttribute('returntransfer', true);
 			$this->setAttribute('maxredirs', 32);
 			$this->setAttribute('ssl_verifypeer', false);
-
-			if (!$this->host->isForeign(BSController::getInstance()->getHost())) {
+			$this->setAttribute('httpheader', array(
+				self::VERSION_HEADER_NAME => BSController::getVersion(),
+			));
+			if (!$this->host->isForeign()) {
 				$this->setAuth(BS_APP_BASIC_AUTH_UID, BS_APP_BASIC_AUTH_PASSWORD);
 			}
 		}
