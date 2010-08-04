@@ -8,7 +8,7 @@
  * Webリクエスト
  *
  * @author 小石達也 <tkoishi@b-shock.co.jp>
- * @version $Id: BSWebRequest.class.php 2241 2010-08-03 16:38:21Z pooza $
+ * @version $Id: BSWebRequest.class.php 2246 2010-08-04 16:04:11Z pooza $
  */
 class BSWebRequest extends BSRequest {
 
@@ -206,7 +206,7 @@ class BSWebRequest extends BSRequest {
 	 * @return boolean Flash環境ならTrue
 	 */
 	public function isCarrot () {
-		return !!$this->getHeader(BSHTTP::VERSION_HEADER_NAME);
+		return BSString::isContain(BS_CARROT_NAME, $this->getUserAgent()->getName());
 	}
 
 	/**
