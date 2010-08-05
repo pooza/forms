@@ -8,7 +8,7 @@
  * 文字列に関するユーティリティ
  *
  * @author 小石達也 <tkoishi@b-shock.co.jp>
- * @version $Id: BSString.class.php 2129 2010-06-09 13:34:48Z pooza $
+ * @version $Id: BSString.class.php 2251 2010-08-05 06:38:33Z pooza $
  */
 class BSString {
 
@@ -92,7 +92,7 @@ class BSString {
 				$value[$key] = self::unsanitize($item);
 			}
 		} else {
-			$value = htmlspecialchars_decode($value, ENT_QUOTES);
+			$value = html_entity_decode($value, ENT_QUOTES, 'utf-8');
 		}
 		return $value;
 	}
@@ -447,7 +447,7 @@ class BSString {
 				$value[$key] = self::stripTags($item);
 			}
 		} else {
-			$value = html_entity_decode($value, ENT_QUOTES, 'utf-8');
+			$value = BSString::unsanitize($value);
 			$value = strip_tags($value);
 			$value = BSSmartTag::parse($value);
 		}

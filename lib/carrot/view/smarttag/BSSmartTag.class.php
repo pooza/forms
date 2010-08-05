@@ -8,7 +8,7 @@
  * スマートタグ
  *
  * @author 小石達也 <tkoishi@b-shock.co.jp>
- * @version $Id: BSSmartTag.class.php 2116 2010-06-01 14:40:20Z pooza $
+ * @version $Id: BSSmartTag.class.php 2251 2010-08-05 06:38:33Z pooza $
  */
 abstract class BSSmartTag extends BSParameterHolder {
 	private $useragent;
@@ -21,8 +21,7 @@ abstract class BSSmartTag extends BSParameterHolder {
 	 */
 	public function __construct ($contents) {
 		$this->contents = '[[' . $contents . ']]';
-		$this->tag = BSString::explode(':', str_replace('\\:', '__COLON__', $contents));
-		$this->tag[1] = str_replace('__COLON__', ':', $this->tag[1]);
+		$this->tag = self::unescape(BSString::explode(':', $contents));
 	}
 
 	/**
@@ -132,6 +131,7 @@ abstract class BSSmartTag extends BSParameterHolder {
 		$tags[] = 'Generic';
 		$tags->uniquize();
 
+		$text = self::escape($text);
 		foreach (BSString::eregMatchAll('\\[\\[([^\\]]+)\\]\\]', $text) as $matches) {
 			foreach ($tags as $tag) {
 				$class = BSClassLoader::getInstance()->getClass($tag, 'Tag');
@@ -145,7 +145,53 @@ abstract class BSSmartTag extends BSParameterHolder {
 			$message = sprintf('[エラー: "%s" は不明なタグです。]', $matches[1]);
 			$text = str_replace($matches[0], $message, $text);
 		}
+		$text = self::unescape($text);
 		return $text;
+	}
+
+	/**
+	 * メタ文字をエスケープ
+	 *
+	 * @access public
+	 * @param string $text 置換対象文字列
+	 * @return string 置換された文字列
+	 * @static
+	 */
+	static protected function escape ($value) {
+		if (BSArray::isArray($value)) {
+			foreach ($value as $key => $item) {
+				$value[$key] = self::escape($item);
+			}
+		} else {
+			$value = str_replace('\\:', '__COLON__', $value);
+			$value = str_replace('\\[', '__RIGHT__', $value);
+			$value = str_replace('\\]', '__LEFT__', $value);
+		}
+		return $value;
+	}
+
+	/**
+	 * メタ文字のエスケープを戻す
+	 *
+	 * @access public
+	 * @param string $text 置換対象文字列
+	 * @return string 置換された文字列
+	 * @static
+	 */
+	static protected function unescape ($value) {
+		if (BSArray::isArray($value)) {
+			foreach ($value as $key => $item) {
+				$value[$key] = self::escape($item);
+			}
+		} else {
+			$value = str_replace('\\:', ':', $value);
+			$value = str_replace('\\[', '[', $value);
+			$value = str_replace('\\]', ']', $value);
+			$value = str_replace('__COLON__', ':', $value);
+			$value = str_replace('__RIGHT__', '[', $value);
+			$value = str_replace('__LEFT__', ']', $value);
+		}
+		return $value;
 	}
 }
 
