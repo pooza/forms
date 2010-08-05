@@ -8,7 +8,7 @@
  * Carrotアプリケーションコントローラ
  *
  * @author 小石達也 <tkoishi@b-shock.co.jp>
- * @version $Id: BSController.class.php 2218 2010-07-18 16:40:02Z pooza $
+ * @version $Id: BSController.class.php 2249 2010-08-04 17:15:42Z pooza $
  * @abstract
  */
 abstract class BSController {
@@ -282,36 +282,20 @@ abstract class BSController {
 	}
 
 	/**
-	 * アプリケーション名を返す
-	 *
-	 * @access public
-	 * @param string $lang 言語
-	 * @return string アプリケーション名
-	 */
-	static public function getName ($lang = 'ja') {
-		return self::getInstance()->getAttribute('app_name_' . $lang);
-	}
-
-	/**
-	 * アプリケーションのバージョンを返す
-	 *
-	 * @access public
-	 * @return string バージョン
-	 */
-	static public function getVersion () {
-		return BS_APP_VER;
-	}
-
-	/**
 	 * バージョン番号込みのアプリケーション名を返す
 	 *
 	 * @access public
 	 * @param string $lang 言語
 	 * @return string アプリケーション名
-	 * @static
 	 */
-	static public function getFullName ($lang = 'ja') {
-		return self::getName($lang) . ' ' . self::getVersion();
+	public function getName ($lang = 'ja') {
+		return sprintf(
+			'%s %s (Powered by %s %s)',
+			$this->getAttribute('app_name_' . $lang),
+			BS_APP_VER,
+			BS_CARROT_NAME,
+			BS_CARROT_VER
+		);
 	}
 }
 

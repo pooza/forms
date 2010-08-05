@@ -8,7 +8,7 @@
  * RSS0.9x文書
  *
  * @author 小石達也 <tkoishi@b-shock.co.jp>
- * @version $Id: BSRSS09Document.class.php 1812 2010-02-03 15:15:09Z pooza $
+ * @version $Id: BSRSS09Document.class.php 2249 2010-08-04 17:15:42Z pooza $
  */
 class BSRSS09Document extends BSXMLDocument implements BSFeedDocument {
 	protected $version = '0.9';
@@ -21,7 +21,7 @@ class BSRSS09Document extends BSXMLDocument implements BSFeedDocument {
 		parent::__construct('rss');
 		$this->setAttribute('version', $this->version);
 		$this->setDate(BSDate::getNow());
-		$this->getChannel()->createElement('generator', BSController::getFullName('ja'));
+		$this->getChannel()->createElement('generator', BSController::getInstance()->getName());
 		$author = BSAuthorRole::getInstance();
 		$this->setAuthor($author->getName('ja'), $author->getMailAddress('ja'));
 	}

@@ -8,7 +8,7 @@
  * HTTPプロトコル
  *
  * @author 小石達也 <tkoishi@b-shock.co.jp>
- * @version $Id: BSHTTP.class.php 2246 2010-08-04 16:04:11Z pooza $
+ * @version $Id: BSHTTP.class.php 2249 2010-08-04 17:15:42Z pooza $
  */
 class BSHTTP extends BSSocket {
 
@@ -82,7 +82,7 @@ class BSHTTP extends BSSocket {
 			throw new BSHTTPException($this . 'は既に開いています。');
 		}
 
-		$request->setHeader('User-Agent', BS_CARROT_NAME . ' ' . BS_CARROT_VER);
+		$request->setHeader('User-Agent', BSController::getInstance()->getName('en'));
 		$this->putLine($request->getContents());
 
 		$response = new BSHTTPResponse;

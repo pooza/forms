@@ -8,7 +8,7 @@
  * Atom0.3文書
  *
  * @author 小石達也 <tkoishi@b-shock.co.jp>
- * @version $Id: BSAtom03Document.class.php 1812 2010-02-03 15:15:09Z pooza $
+ * @version $Id: BSAtom03Document.class.php 2249 2010-08-04 17:15:42Z pooza $
  */
 class BSAtom03Document extends BSXMLDocument implements BSFeedDocument {
 	protected $version = '0.3';
@@ -23,7 +23,7 @@ class BSAtom03Document extends BSXMLDocument implements BSFeedDocument {
 		$this->setNamespace($this->namespace);
 		$this->setAttribute('version', $this->version);
 		$this->setDate(BSDate::getNow());
-		$this->createElement('generator', BSController::getFullName('ja'));
+		$this->createElement('generator', BSController::getInstance()->getName());
 		$author = BSAuthorRole::getInstance();
 		$this->setAuthor($author->getName('ja'), $author->getMailAddress('ja'));
 	}

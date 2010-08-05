@@ -8,7 +8,7 @@
  * XMPPメッセージ送信ロガー
  *
  * @author 小石達也 <tkoishi@b-shock.co.jp>
- * @version $Id: BSJabberLogger.class.php 1812 2010-02-03 15:15:09Z pooza $
+ * @version $Id: BSJabberLogger.class.php 2249 2010-08-04 17:15:42Z pooza $
  */
 class BSJabberLogger extends BSLogger {
 	private $server;
@@ -81,7 +81,7 @@ class BSJabberLogger extends BSLogger {
 	 */
 	private function send ($message, $priority) {
 		$message = array(
-			'[' . BSController::getInstance()->getName() . ']',
+			'[' . BS_APP_NAME_JA . ']',
 			'[' . gethostbyaddr($_SERVER['REMOTE_ADDR']) . ']', //BSRequest::getHostは使わない
 			'[' . $priority . ']',
 			$message,

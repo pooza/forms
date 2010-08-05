@@ -8,7 +8,7 @@
  * 抽象リクエスト
  *
  * @author 小石達也 <tkoishi@b-shock.co.jp>
- * @version $Id: BSRequest.class.php 2218 2010-07-18 16:40:02Z pooza $
+ * @version $Id: BSRequest.class.php 2247 2010-08-04 16:41:29Z pooza $
  * @abstract
  */
 abstract class BSRequest extends BSHTTPRequest {
@@ -395,6 +395,16 @@ abstract class BSRequest extends BSHTTPRequest {
 	 * @return boolean Flash環境ならTrue
 	 */
 	public function isFlash () {
+		return false;
+	}
+
+	/**
+	 * Carrot環境か？
+	 *
+	 * @access public
+	 * @return boolean Flash環境ならTrue
+	 */
+	public function isCarrot () {
 		return false;
 	}
 }

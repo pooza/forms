@@ -12,7 +12,7 @@ BSUtility::includeFile('fpdf/mbfpdf');
  * MBFPDFラッパー
  *
  * @author 小石達也 <tkoishi@b-shock.co.jp>
- * @version $Id: BSFPDF.class.php 1812 2010-02-03 15:15:09Z pooza $
+ * @version $Id: BSFPDF.class.php 2249 2010-08-04 17:15:42Z pooza $
  */
 class BSFPDF extends MBFPDF implements BSRenderer {
 	private $error;
@@ -165,7 +165,7 @@ class BSFPDF extends MBFPDF implements BSRenderer {
 	 * @return string ヘッダの内容
 	 */
 	protected function getHeaderContents () {
-		return BSController::getName();
+		return BSController::getInstance()->getName();
 	}
 
 	/**
