@@ -8,7 +8,7 @@
  * 管理者ロール
  *
  * @author 小石達也 <tkoishi@b-shock.co.jp>
- * @version $Id: BSAdministratorRole.class.php 1926 2010-03-21 14:36:34Z pooza $
+ * @version $Id: BSAdministratorRole.class.php 2253 2010-08-05 16:20:28Z pooza $
  */
 class BSAdministratorRole implements BSRole {
 	protected $networks;
@@ -72,7 +72,7 @@ class BSAdministratorRole implements BSRole {
 	 * @return string 名前
 	 */
 	public function getName ($language = 'ja') {
-		return BSController::getInstance()->getName($language) . ' 管理者';
+		return BSController::getInstance()->getAttribute('app_name_' . $language) . ' 管理者';
 	}
 
 	/**
@@ -126,9 +126,10 @@ class BSAdministratorRole implements BSRole {
 	 * @return boolean 正しいユーザーならTrue
 	 */
 	public function auth ($password = null) {
-		return !BSString::isBlank(BS_ADMIN_PASSWORD)
+		return (!BSString::isBlank(BS_ADMIN_PASSWORD)
 			&& !BSString::isBlank($password)
-			&& BSCrypt::getInstance()->auth(BS_ADMIN_PASSWORD, $password);
+			&& BSCrypt::getInstance()->auth(BS_ADMIN_PASSWORD, $password)
+		);
 	}
 
 	/**

@@ -8,7 +8,7 @@
  * MySQLデータベース
  *
  * @author 小石達也 <tkoishi@b-shock.co.jp>
- * @version $Id: BSMySQLDatabase.class.php 1922 2010-03-21 11:22:53Z pooza $
+ * @version $Id: BSMySQLDatabase.class.php 2255 2010-08-09 06:33:26Z pooza $
  */
 class BSMySQLDatabase extends BSDatabase {
 	static private $configFile;
@@ -76,7 +76,7 @@ class BSMySQLDatabase extends BSDatabase {
 	 */
 	protected function parseDSN () {
 		parent::parseDSN();
-		mb_ereg('^mysql:host=([^;]+);dbname=([^;]+)$', $this['dsn'], $matches);
+		mb_ereg('^mysql:host=([^;]+);dbname=([^;]+)$', $this->getDSN(), $matches);
 		$this->attributes['host'] = new BSHost($matches[1]);
 		$this->attributes['port'] = $this->getDefaultPort();
 		$this->attributes['database_name'] = $matches[2];

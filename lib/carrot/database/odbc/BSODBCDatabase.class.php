@@ -8,7 +8,7 @@
  * DOBCデータベース接続
  *
  * @author 小石達也 <tkoishi@b-shock.co.jp>
- * @version $Id: BSODBCDatabase.class.php 1920 2010-03-21 09:16:06Z pooza $
+ * @version $Id: BSODBCDatabase.class.php 2255 2010-08-09 06:33:26Z pooza $
  */
 class BSODBCDatabase extends BSDatabase {
 
@@ -23,7 +23,7 @@ class BSODBCDatabase extends BSDatabase {
 	static protected function connect ($name) {
 		foreach (self::getPasswords($name) as $password) {
 			try {
-				$db = new BSODBCDatabase(
+				$db = new self(
 					$constants['PDO_' . $name . '_DSN'],
 					$constants['PDO_' . $name . '_UID'],
 					$password
@@ -37,18 +37,6 @@ class BSODBCDatabase extends BSDatabase {
 		$message = new BSStringFormat('データベース "%s" に接続できません。');
 		$message[] = $name;
 		throw new BSDatabaseException($message);
-	}
-
-	/**
-	 * 文字列をクォート
-	 *
-	 * @access public
-	 * @param string $string 対象文字列
-	 * @param string $type クォートのタイプ
-	 * @return string クォート後の文字列
-	 */
-	public function quote ($string, $type = PDO::PARAM_STR) {
-		return '\'' . addslashes($string) . '\'';
 	}
 
 	/**

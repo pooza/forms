@@ -8,7 +8,7 @@
  * データベース接続
  *
  * @author 小石達也 <tkoishi@b-shock.co.jp>
- * @version $Id: BSDatabase.class.php 1987 2010-04-11 02:49:50Z pooza $
+ * @version $Id: BSDatabase.class.php 2255 2010-08-09 06:33:26Z pooza $
  * @abstract
  */
 abstract class BSDatabase extends PDO implements ArrayAccess, BSAssignable {
@@ -70,12 +70,10 @@ abstract class BSDatabase extends PDO implements ArrayAccess, BSAssignable {
 	static protected function getPasswords ($name) {
 		$constants = BSConstantHandler::getInstance();
 		$passwords = new BSArray;
-		$password = $constants['PDO_' . $name . '_PASSWORD'];
-		$passwords[] = $password;
-
-		if (!BSString::isBlank($password)) {
+		if (!BSString::isBlank($password = $constants['PDO_' . $name . '_PASSWORD'])) {
 			$passwords[] = BSCrypt::getInstance()->decrypt($password);
 		}
+		$passwords[] = $password;
 		return $passwords;
 	}
 
@@ -129,11 +127,10 @@ abstract class BSDatabase extends PDO implements ArrayAccess, BSAssignable {
 	 * @access protected
 	 */
 	protected function parseDSN () {
-		$constants = BSConstantHandler::getInstance();
 		$this->attributes['connection_name'] = $this->getName();
-		$this->attributes['dsn'] = $constants['PDO_' . $this->getName() . '_DSN'];
-		$this->attributes['uid'] = $constants['PDO_' . $this->getName() . '_UID'];
-		$this->attributes['password'] = $constants['PDO_' . $this->getName() . '_PASSWORD'];
+		$this->attributes['dsn'] = $this->getConstant('dsn');
+		$this->attributes['uid'] = $this->getConstant('uid');
+		$this->attributes['password'] = $this->getConstant('password');
 		$this->attributes['dbms'] = $this->getDBMS();
 		$this->attributes['version'] = $this->getVersion();
 		$this->attributes['encoding'] = $this->getEncoding();
@@ -293,11 +290,11 @@ abstract class BSDatabase extends PDO implements ArrayAccess, BSAssignable {
 	/**
 	 * クエリーログを使用するか？
 	 *
-	 * @access private
+	 * @access protected
 	 * @return boolean クエリーログを使用するならTrue
 	 */
-	private function isLoggable () {
-		return BSController::getInstance()->getAttribute('PDO_' . $this->getName() . '_LOGGABLE');
+	protected function isLoggable () {
+		return !!$this->getConstant('loggable');
 	}
 
 	/**
@@ -310,6 +307,18 @@ abstract class BSDatabase extends PDO implements ArrayAccess, BSAssignable {
 	 */
 	public function getSequenceName ($table, $field = 'id') {
 		return null;
+	}
+
+	/**
+	 * 定数を返す
+	 *
+	 * @access public
+	 * @param string $name 定数名
+	 * @return string 定数
+	 */
+	public function getConstant ($name) {
+		$constants = BSConstantHandler::getInstance();
+		return $constants['PDO_' . $this->getName() . '_' . $name];
 	}
 
 	/**
@@ -416,10 +425,10 @@ abstract class BSDatabase extends PDO implements ArrayAccess, BSAssignable {
 	/**
 	 * DBMSを返す
 	 *
-	 * @access private
-	 * @return string DBMS
+	 * @access protected
+	 * @return string DBMS名
 	 */
-	private function getDBMS () {
+	protected function getDBMS () {
 		if (!mb_ereg('^BS([[:alpha:]]+)Database$', get_class($this), $matches)) {
 			throw new BSDatabaseException(get_class($this) . 'のDBMS名が正しくありません。');
 		}

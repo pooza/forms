@@ -8,7 +8,7 @@
  * 発行者ロール
  *
  * @author 小石達也 <tkoishi@b-shock.co.jp>
- * @version $Id: BSAuthorRole.class.php 2057 2010-05-04 06:32:30Z pooza $
+ * @version $Id: BSAuthorRole.class.php 2252 2010-08-05 16:19:40Z pooza $
  */
 class BSAuthorRole implements BSRole {
 	protected $credentials;
@@ -86,7 +86,7 @@ class BSAuthorRole implements BSRole {
 	 */
 	public function getName ($language = 'ja') {
 		if (BSString::isBlank($name = BS_AUTHOR_NAME)) {
-			$name = BSController::getInstance()->getName($language);
+			$name = BSController::getInstance()->getAttribute('app_name_' . $language);
 		}
 		return $name;
 	}
@@ -109,9 +109,10 @@ class BSAuthorRole implements BSRole {
 	 * @return boolean 正しいユーザーならTrue
 	 */
 	public function auth ($password = null) {
-		return !BSString::isBlank(BS_AUTHOR_PASSWORD)
+		return (!BSString::isBlank(BS_AUTHOR_PASSWORD)
 			&& !BSString::isBlank($password)
-			&& BSCrypt::getInstance()->auth(BS_AUTHOR_PASSWORD, $password);
+			&& BSCrypt::getInstance()->auth(BS_AUTHOR_PASSWORD, $password)
+		);
 	}
 
 	/**

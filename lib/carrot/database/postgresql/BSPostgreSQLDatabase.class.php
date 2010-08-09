@@ -8,7 +8,7 @@
  * PostgreSQLデータベース
  *
  * @author 小石達也 <tkoishi@b-shock.co.jp>
- * @version $Id: BSPostgreSQLDatabase.class.php 1815 2010-02-04 10:54:12Z pooza $
+ * @version $Id: BSPostgreSQLDatabase.class.php 2255 2010-08-09 06:33:26Z pooza $
  */
 class BSPostgreSQLDatabase extends BSDatabase {
 
@@ -36,7 +36,7 @@ class BSPostgreSQLDatabase extends BSDatabase {
 		parent::parseDSN();
 		$this->attributes['port'] = $this->getDefaultPort();
 
-		mb_ereg('^pgsql:(.+)$', $this['dsn'], $matches);
+		mb_ereg('^pgsql:(.+)$', $this->getDSN(), $matches);
 		foreach (mb_split(' +', $matches[1]) as $config) {
 			$config = BSString::explode('=', $config);
 			switch ($config[0]) {
