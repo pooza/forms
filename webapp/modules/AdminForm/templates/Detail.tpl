@@ -162,8 +162,8 @@
 			<tr>
 				<td colspan="2">
 					<input type="submit" value="更新" />
-					<input type="button" value="複製" onclick="redirect('{$module.name}','Duplicate')" />
-					<input type="button" value="このフォームを削除..." onclick="confirmDelete('{$module.name}','Delete','フォーム')" />
+					<input type="button" value="複製" onclick="CarrotLib.redirect('{$module.name}','Duplicate')" />
+					<input type="button" value="このフォームを削除..." onclick="CarrotLib.confirmDelete('{$module.name}','Delete','フォーム')" />
 				</td>
 			</tr>
 		</table>

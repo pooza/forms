@@ -97,7 +97,7 @@
 			<tr>
 				<td colspan="2">
 					<input type="submit" value="更新" />
-					<input type="button" value="このフィールドを削除..." onclick="confirmDelete('{$module.name}','Delete','フィールド')" />
+					<input type="button" value="このフィールドを削除..." onclick="CarrotLib.confirmDelete('{$module.name}','Delete','フィールド')" />
 				</td>
 			</tr>
 		</table>
