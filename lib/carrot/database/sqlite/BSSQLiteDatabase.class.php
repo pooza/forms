@@ -8,35 +8,9 @@
  * SQLiteデータベース
  *
  * @author 小石達也 <tkoishi@b-shock.co.jp>
- * @version $Id: BSSQLiteDatabase.class.php 2255 2010-08-09 06:33:26Z pooza $
+ * @version $Id: BSSQLiteDatabase.class.php 2257 2010-08-09 16:39:10Z pooza $
  */
 class BSSQLiteDatabase extends BSDatabase {
-
-	/**
-	 * 接続
-	 *
-	 * @access protected
-	 * @name string $name データベース名
-	 * @return BSSQLiteDatabase インスタンス
-	 * @static
-	 */
-	static protected function connect ($name) {
-		$constants = BSConstantHandler::getInstance();
-		$db = new self($constants['PDO_' . $name . '_DSN']);
-		$db->setName($name);
-		return $db;
-	}
-
-	/**
-	 * DSNをパースしてプロパティに格納
-	 *
-	 * @access protected
-	 */
-	protected function parseDSN () {
-		parent::parseDSN();
-		mb_ereg('^sqlite:(.+)$', $this->getDSN(), $matches);
-		$this->attributes['file'] = new BSFile($matches[1]);
-	}
 
 	/**
 	 * テーブル名のリストを配列で返す

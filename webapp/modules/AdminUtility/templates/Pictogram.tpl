@@ -4,7 +4,7 @@
 @package org.carrot-framework
 @subpackage AdminUtility
 @author 小石達也 <tkoishi@b-shock.co.jp>
-@version $Id: Pictogram.tpl 2125 2010-06-06 04:26:12Z pooza $
+@version $Id: Pictogram.tpl 2273 2010-08-11 18:04:22Z pooza $
 *}
 <?xml version="1.0" encoding="UTF-8" ?>
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
@@ -25,7 +25,7 @@
 				<img src="{$picto.image.url}" width="{$picto.image.width}" height="{$picto.image.height}" alt="{$picto.image.alt}" />
 			</td>
 			<td width="180">
-				<a href="javascript:void(putSmartTag('picto',window.opener.$('{$params.field|default:'body'}'),'{$picto.name}'))">{$picto.name}</a>
+				<a href="javascript:void(CarrotLib.putSmartTag('picto',window.opener.$('{$params.field|default:'body'}'),'{$picto.name}'))">{$picto.name}</a>
 			</td>
 		</tr>
 {/foreach}

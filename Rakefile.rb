@@ -4,7 +4,7 @@
 #
 # @package org.carrot-framework
 # @author 小石達也 <tkoishi@b-shock.co.jp>
-# @version $Id: Rakefile.rb 2168 2010-06-22 08:06:27Z pooza $
+# @version $Id: Rakefile.rb 2270 2010-08-10 15:48:16Z pooza $
 
 $KCODE = 'u'
 require 'yaml'
@@ -23,6 +23,12 @@ end
 namespace :database do
   desc 'データベースを初期化'
   task :init => ['local:init']
+end
+
+desc 'テストを実行'
+task :test do
+  uid = Constants.new['BS_APP_PROCESS_UID']
+  sh 'sudo -u ' + Constants.new['BS_APP_PROCESS_UID'] + ' bin/carrotctl.php -a Test'
 end
 
 namespace :var do

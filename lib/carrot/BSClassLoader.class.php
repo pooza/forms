@@ -10,7 +10,7 @@
  * 原則的に、PHP標準の関数以外は使用してはならない。
  *
  * @author 小石達也 <tkoishi@b-shock.co.jp>
- * @version $Id: BSClassLoader.class.php 1812 2010-02-03 15:15:09Z pooza $
+ * @version $Id: BSClassLoader.class.php 2267 2010-08-10 15:04:22Z pooza $
  */
 class BSClassLoader {
 	private $classes = array();
@@ -177,12 +177,12 @@ class BSClassLoader {
 	/**
 	 * ファイル名からクラス名を返す
 	 *
-	 * @access private
+	 * @access public
 	 * @param string $filename ファイル名
 	 * @return string クラス名
 	 * @static
 	 */
-	static private function extractClass ($filename) {
+	static public function extractClass ($filename) {
 		require_once(BS_LIB_DIR . '/carrot/BSUtility.class.php');
 		if (BSUtility::isPathAbsolute($filename)) {
 			$filename = basename($filename);

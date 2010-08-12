@@ -2,11 +2,11 @@
 #
 # @package org.carrot-framework
 # @author 小石達也 <tkoishi@b-shock.co.jp>
-# @version $Id: carrot.yaml 2252 2010-08-05 16:19:40Z pooza $
+# @version $Id: carrot.yaml 2270 2010-08-10 15:48:16Z pooza $
 
 carrot:
   name: carrot Framework
-  ver: 2.3.143
+  ver: 2.4.0
 
 admin:
   email:
@@ -29,6 +29,8 @@ app:
     seconds: 60
     send_expires: no
   force_https: no
+  process:
+    uid: nobody
 author:
   name:
   email:
@@ -79,7 +81,7 @@ ffmpeg:
     mp3:
 file:
   types:
-    file: /etc/httpd/mime.types
+    file: /usr/local/apache2/conf/mime.types
 flash:
   player_ver: 9.0.0
   installer:
@@ -177,10 +179,8 @@ package:
   name:
   ver:
 pdo:
-  query_log:
-    enable: no
   default:
-    dsn: sqlite:%BS_VAR_DIR%/db/db.sqlite3
+    dsn: sqlite:%BS_VAR_DIR%/db/default.sqlite3
     loggable: yes
   geocode:
     dsn: sqlite:%BS_VAR_DIR%/db/geocode.sqlite3

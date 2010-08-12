@@ -2,7 +2,7 @@
 #
 # @package org.carrot-framework
 # @author 小石達也 <tkoishi@b-shock.co.jp>
-# @version $Id: carrot.yaml 2212 2010-07-10 12:53:44Z pooza $
+# @version $Id: carrot.yaml 2267 2010-08-10 15:04:22Z pooza $
 
 awstats:
   parent: lib
@@ -77,6 +77,9 @@ lib:
 local_lib:
   parent: webapp
   name: lib
+local_tests:
+  parent: webapp
+  name: tests
 log:
   parent: var
   class: BSLogDirectory
@@ -134,6 +137,8 @@ swf:
 templates:
   parent: webapp
   suffix: .tpl
+tests:
+  parent: root
 tmp:
   parent: var
   purge:

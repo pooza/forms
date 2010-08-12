@@ -8,7 +8,7 @@
  * 画像キャッシュ
  *
  * @author 小石達也 <tkoishi@b-shock.co.jp>
- * @version $Id: BSImageCacheHandler.class.php 2215 2010-07-17 03:53:27Z pooza $
+ * @version $Id: BSImageCacheHandler.class.php 2263 2010-08-10 10:20:47Z pooza $
  */
 class BSImageCacheHandler {
 	private $useragent;
@@ -261,6 +261,9 @@ class BSImageCacheHandler {
 		$prefix = '';
 		if (($useragent = $this->getUserAgent()) && $useragent->isMobile()) {
 			$prefix = 'w';
+			if (!$pixel) {
+				$pixel = $useragent->getDisplayInfo()->getParameter('width');
+			}
 		} else if ($flags & self::WITHOUT_SQUARE) {
 			$prefix = 's';
 		} else if ($flags & self::WIDTH_FIXED) {
