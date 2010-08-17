@@ -3,7 +3,7 @@
  *
  * @package org.carrot-framework
  * @author 小石達也 <tkoishi@b-shock.co.jp>
- * @version $Id: carrot.js 2273 2010-08-11 18:04:22Z pooza $
+ * @version $Id: carrot.js 2282 2010-08-17 08:44:40Z pooza $
  */
 
 var CarrotLib = {
@@ -15,7 +15,7 @@ var CarrotLib = {
     window.location.href = url;
   },
 
-  confirmDelete: function (module, a, recordType, id) {
+  confirmDelete: function (module, action, recordType, id) {
     if (confirm('この' + recordType + 'を削除しますか？')) {
       CarrotLib.redirect(module, action, id);
     }

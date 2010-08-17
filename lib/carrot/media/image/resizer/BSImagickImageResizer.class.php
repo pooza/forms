@@ -8,7 +8,7 @@
  * ImageMagick画像リサイズ機能
  *
  * @author 小石達也 <tkoishi@b-shock.co.jp>
- * @version $Id: BSImagickImageResizer.class.php 1914 2010-03-18 13:35:15Z pooza $
+ * @version $Id: BSImagickImageResizer.class.php 2286 2010-08-17 14:07:35Z pooza $
  */
 class BSImagickImageResizer extends BSImageResizer {
 	private $file;
@@ -32,6 +32,7 @@ class BSImagickImageResizer extends BSImageResizer {
 	 */
 	public function execute ($width, $height) {
 		$dest = new BSImagickImage($width, $height);
+		$dest->setType($this->source->getType());
 		if ($this->source->getAspect() < $dest->getAspect()) {
 			$width = $dest->getHeight() * $this->source->getAspect();
 			$x = BSNumeric::round(($dest->getWidth() - $width) / 2);

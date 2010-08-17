@@ -8,7 +8,7 @@
  * 画像ファイル
  *
  * @author 小石達也 <tkoishi@b-shock.co.jp>
- * @version $Id: BSImageFile.class.php 2212 2010-07-10 12:53:44Z pooza $
+ * @version $Id: BSImageFile.class.php 2286 2010-08-17 14:07:35Z pooza $
  */
 class BSImageFile extends BSMediaFile implements BSImageContainer, BSAssignable {
 	protected $renderer;
@@ -83,14 +83,16 @@ class BSImageFile extends BSMediaFile implements BSImageContainer, BSAssignable 
 			}
 			$info = getimagesize($this->getPath());
 
-			foreach (array('jpeg', 'gif', 'png') as $suffix) {
-				if ($info['mime'] == BSMIMEType::getType($suffix)) {
-					$class = BSClassLoader::getInstance()->getClass($this->rendererClass);
-					$this->renderer = new $class($info[0], $info[1]);
-					$this->renderer->setType($info['mime']);
-					$function = 'imagecreatefrom' . $suffix;
-					$this->renderer->setImage($function($this->getPath()));
-					return $this->renderer;
+			if ($this->rendererClass != 'BSImagickImage') {
+				foreach (array('jpeg', 'gif', 'png') as $suffix) {
+					if ($info['mime'] == BSMIMEType::getType($suffix)) {
+						$class = BSClassLoader::getInstance()->getClass($this->rendererClass);
+						$this->renderer = new $class($info[0], $info[1]);
+						$this->renderer->setType($info['mime']);
+						$function = 'imagecreatefrom' . $suffix;
+						$this->renderer->setImage($function($this->getPath()));
+						return $this->renderer;
+					}
 				}
 			}
 			if (extension_loaded('imagick')) {
@@ -151,21 +153,16 @@ class BSImageFile extends BSMediaFile implements BSImageContainer, BSAssignable 
 			throw new BSFileException($this . 'に書き込むことができません。');
 		}
 
-		$types = new BSArray(BSMIMEType::DEFAULT_TYPE);
+		$types = new BSArray;
+		$types[] = BSMIMEType::DEFAULT_TYPE;
 		$types[] = $this->getRenderer()->getType();
 		if (!$types->isContain($this->getType())) {
 			throw new BSImageException($this . 'のメディアタイプがレンダラーと一致しません。');
 		}
 
-		foreach (array('jpeg', 'gif', 'png') as $suffix) {
-			if ($this->getRenderer()->getType() == BSMIMEType::getType($suffix)) {
-				$this->clearImageCache();
-				$function = 'image' . $suffix;
-				$function($this->getRenderer()->getGDHandle(), $this->getPath());
-				return;
-			}
-		}
-		throw new BSImageException($this . 'のメディアタイプが正しくありません。');
+		$this->clearImageCache();
+		$this->setContents($this->getRenderer()->getContents());
+		$this->renderer = null;
 	}
 
 	/**

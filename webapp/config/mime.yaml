@@ -2,7 +2,7 @@
 #
 # @package org.carrot-framework
 # @author 小石達也 <tkoishi@b-shock.co.jp>
-# @version $Id: mime.yaml 2230 2010-07-26 08:38:23Z pooza $
+# @version $Id: mime.yaml 2286 2010-08-17 14:07:35Z pooza $
 
 types:
   3gp: video/3gpp
@@ -27,17 +27,19 @@ types:
   hmt: application/x-htmlmail-template
   htm: text/html
   html: text/html
-  ico: image/vnd.microsoft.icon
+  ico: image/x-ico
   ini: text/x-ini-file
   jpg: image/jpeg
   jpeg: image/jpeg
   js: text/javascript
   json: application/json
   khm: application/x-kddi-htmlmail
+  m4a: audio/mp4
   mime: message/rfc822
   mov: video/quicktime
   mp3: audio/mpeg
   mp4: video/mp4
+  mp4a: audio/mp4
   mpeg: video/mpeg
   mpg: video/mpeg
   odp: application/vnd.oasis.opendocument.presentation
@@ -79,6 +81,7 @@ suffixes:
   application/vnd.ms-word: doc
   application/xml: xml
   application/x-gzip: gz
+  audio/mp4: m4a
   audio/mpeg: mp3
   audio/x-aiff: aiff
   image/jpeg: jpg

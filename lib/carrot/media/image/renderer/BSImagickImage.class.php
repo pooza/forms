@@ -8,7 +8,7 @@
  * ImageMagick画像レンダラー
  *
  * @author 小石達也 <tkoishi@b-shock.co.jp>
- * @version $Id: BSImagickImage.class.php 2277 2010-08-15 05:54:09Z pooza $
+ * @version $Id: BSImagickImage.class.php 2285 2010-08-17 11:09:38Z pooza $
  */
 class BSImagickImage extends BSImage {
 
@@ -84,7 +84,7 @@ class BSImagickImage extends BSImage {
 	 * @return string メディアタイプ
 	 */
 	public function getType () {
-		return $this->imagick->getImageMimeType();
+		return $this->getImagick()->getImageMimeType();
 	}
 
 	/**
@@ -99,7 +99,8 @@ class BSImagickImage extends BSImage {
 			$message[] = $type;
 			throw new BSImageException($message);
 		}
-		$this->imagick->setImageFormat(ltrim($suffix, '.'));
+		$this->getImagick()->setImageFormat(ltrim($suffix, '.'));
+		$this->type = $type;
 	}
 
 	/**
