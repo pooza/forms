@@ -8,7 +8,7 @@
  * Smartyレンダラー用の基底ビュー
  *
  * @author 小石達也 <tkoishi@b-shock.co.jp>
- * @version $Id: BSSmartyView.class.php 2066 2010-05-04 14:25:29Z pooza $
+ * @version $Id: BSSmartyView.class.php 2281 2010-08-17 02:18:52Z pooza $
  */
 class BSSmartyView extends BSView {
 
@@ -19,17 +19,20 @@ class BSSmartyView extends BSView {
 	 * @param BSRenderer $renderer レンダラー
 	 */
 	public function __construct (BSAction $action, $suffix, BSRenderer $renderer = null) {
-		$this->action = $action;
-		$this->nameSuffix = $suffix;
-
-		if (!$renderer) {
-			$renderer = new BSSmarty;
-		}
-		$this->setRenderer($renderer);
+		parent::__construct($action, $suffix, $renderer);
 
 		$this->setHeader('Content-Script-Type', BSMIMEType::getType('js'));
 		$this->setHeader('Content-Style-Type', BSMIMEType::getType('css'));
-		$this->setHeader('X-Frame-Options', 'deny');
+	}
+
+	/**
+	 * 規定のレンダラーを生成して返す
+	 *
+	 * @access protected
+	 * @return BSRenderer レンダラー
+	 */
+	protected function createDefaultRenderer () {
+		return new BSSmarty;
 	}
 
 	/**

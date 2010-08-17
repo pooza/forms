@@ -8,7 +8,7 @@
  * データソース名
  *
  * @author 小石達也 <tkoishi@b-shock.co.jp>
- * @version $Id: BSDataSourceName.class.php 2260 2010-08-09 17:08:19Z pooza $
+ * @version $Id: BSDataSourceName.class.php 2276 2010-08-15 04:55:47Z pooza $
  * @abstract
  */
 abstract class BSDataSourceName extends BSParameterHolder {
@@ -53,7 +53,6 @@ abstract class BSDataSourceName extends BSParameterHolder {
 	 * @abstract
 	 */
 	abstract public function getDatabase ();
-
 
 	/**
 	 * パスワードの候補を配列で返す

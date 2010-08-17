@@ -8,7 +8,7 @@
  * 基底ビュー
  *
  * @author 小石達也 <tkoishi@b-shock.co.jp>
- * @version $Id: BSView.class.php 2218 2010-07-18 16:40:02Z pooza $
+ * @version $Id: BSView.class.php 2281 2010-08-17 02:18:52Z pooza $
  */
 class BSView extends BSHTTPResponse {
 	protected $nameSuffix;
@@ -30,9 +30,12 @@ class BSView extends BSHTTPResponse {
 		$this->nameSuffix = $suffix;
 
 		if (!$renderer) {
-			$renderer = new BSRawRenderer;
+			$renderer = $this->createDefaultRenderer();
 		}
 		$this->setRenderer($renderer);
+
+		$this->setHeader('X-Frame-Options', 'deny');
+		$this->setHeader('X-Content-Type-Options', 'nosniff');
 	}
 
 	/**
@@ -105,6 +108,16 @@ class BSView extends BSHTTPResponse {
 	 */
 	public function getNameSuffix () {
 		return $this->nameSuffix;
+	}
+
+	/**
+	 * 規定のレンダラーを生成して返す
+	 *
+	 * @access protected
+	 * @return BSRenderer レンダラー
+	 */
+	protected function createDefaultRenderer () {
+		return new BSRawRenderer;
 	}
 
 	/**

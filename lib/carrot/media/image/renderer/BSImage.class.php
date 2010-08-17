@@ -8,7 +8,7 @@
  * GD画像レンダラー
  *
  * @author 小石達也 <tkoishi@b-shock.co.jp>
- * @version $Id: BSImage.class.php 1925 2010-03-21 14:07:55Z pooza $
+ * @version $Id: BSImage.class.php 2277 2010-08-15 05:54:09Z pooza $
  */
 class BSImage implements BSImageRenderer {
 	protected $type;
@@ -445,7 +445,7 @@ class BSImage implements BSImageRenderer {
 			$types[$suffix] = BSMIMEType::getType($suffix);
 		}
 		if (extension_loaded('imagick')) {
-			foreach (array('.tiff', '.eps') as $suffix) {
+			foreach (array('.tiff', '.eps', '.ico') as $suffix) {
 				$types[$suffix] = BSMIMEType::getType($suffix);
 			}
 		}
