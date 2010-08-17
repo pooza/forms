@@ -8,7 +8,7 @@
  * 画像キャッシュ
  *
  * @author 小石達也 <tkoishi@b-shock.co.jp>
- * @version $Id: BSImageCacheHandler.class.php 2263 2010-08-10 10:20:47Z pooza $
+ * @version $Id: BSImageCacheHandler.class.php 2288 2010-08-17 15:26:33Z pooza $
  */
 class BSImageCacheHandler {
 	private $useragent;
@@ -131,7 +131,7 @@ class BSImageCacheHandler {
 			return null;
 		}
 		try {
-			return $file->getEngine();
+			return $file->getRenderer();
 		} catch (BSImageException $e) {
 			$file->delete();
 			BSLogManager::getInstance()->put($file . 'を削除しました。');
@@ -165,7 +165,7 @@ class BSImageCacheHandler {
 		}
 		$file->setEngine($this->convertImage($record, $pixel, $contents, $flags));
 		$file->save();
-		return $file->getEngine();
+		return $file->getRenderer();
 	}
 
 	/**

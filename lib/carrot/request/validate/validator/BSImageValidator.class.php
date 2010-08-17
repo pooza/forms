@@ -8,7 +8,7 @@
  * 画像バリデータ
  *
  * @author 小石達也 <tkoishi@b-shock.co.jp>
- * @version $Id: BSImageValidator.class.php 1812 2010-02-03 15:15:09Z pooza $
+ * @version $Id: BSImageValidator.class.php 2288 2010-08-17 15:26:33Z pooza $
  */
 class BSImageValidator extends BSValidator {
 
@@ -74,7 +74,7 @@ class BSImageValidator extends BSValidator {
 			}
 			$file = new BSImageFile($name);
 			$image = $file->getRenderer();
-		} catch (BSException $e) {
+		} catch (Exception $e) {
 			$this->error = $this['types_error'];
 			return false;
 		}
