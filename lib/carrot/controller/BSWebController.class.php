@@ -8,7 +8,7 @@
  * Webコントローラー
  *
  * @author 小石達也 <tkoishi@b-shock.co.jp>
- * @version $Id: BSWebController.class.php 2168 2010-06-22 08:06:27Z pooza $
+ * @version $Id: BSWebController.class.php 2297 2010-08-19 11:13:56Z pooza $
  */
 class BSWebController extends BSController {
 
@@ -26,6 +26,16 @@ class BSWebController extends BSController {
 			}
 		}
 		return $this->searchDirectories;
+	}
+
+	/**
+	 * プロキシサーバが有効か
+	 *
+	 * @access public
+	 * @return boolean 有効ならTrue
+	 */
+	public function hasProxyServer () {
+		return (BS_APP_HTTP_CACHE_MODE == 'public');
 	}
 
 	/**

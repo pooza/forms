@@ -8,7 +8,7 @@
  * テーブルのレコード
  *
  * @author 小石達也 <tkoishi@b-shock.co.jp>
- * @version $Id: BSRecord.class.php 2280 2010-08-16 11:09:01Z pooza $
+ * @version $Id: BSRecord.class.php 2294 2010-08-19 08:49:32Z pooza $
  * @abstract
  */
 abstract class BSRecord implements ArrayAccess,
@@ -318,6 +318,7 @@ abstract class BSRecord implements ArrayAccess,
 			$old->delete();
 		}
 		$file->setMode(0666);
+		$file->setBinary(true);
 		$suffix = BSMIMEType::getSuffix($file->analyzeType());
 		$file->rename($this->getAttachmentBaseName($name) . $suffix);
 		$file->moveTo($this->getTable()->getDirectory());

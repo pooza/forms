@@ -8,7 +8,7 @@
  * 基底ビュー
  *
  * @author 小石達也 <tkoishi@b-shock.co.jp>
- * @version $Id: BSView.class.php 2281 2010-08-17 02:18:52Z pooza $
+ * @version $Id: BSView.class.php 2297 2010-08-19 11:13:56Z pooza $
  */
 class BSView extends BSHTTPResponse {
 	protected $nameSuffix;
@@ -208,7 +208,7 @@ class BSView extends BSHTTPResponse {
 	 * @return boolean 有効ならTrue
 	 */
 	public function hasProxyServer () {
-		return (BS_APP_HTTP_CACHE_MODE == 'public');
+		return BSController::getInstance()->hasProxyServer();
 	}
 
 	/**

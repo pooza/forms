@@ -2,11 +2,11 @@
 #
 # @package org.carrot-framework
 # @author 小石達也 <tkoishi@b-shock.co.jp>
-# @version $Id: carrot.yaml 2283 2010-08-17 08:45:03Z pooza $
+# @version $Id: carrot.yaml 2294 2010-08-19 08:49:32Z pooza $
 
 carrot:
   name: carrot Framework
-  ver: 2.4.2
+  ver: 2.4.3
 
 admin:
   email:
@@ -193,6 +193,8 @@ pdo:
 pgsql:
   dir: /usr/local
 pictogram:
+png2ico:
+  dir: /usr/local
 proctools:
   dir: /usr/local
 request:

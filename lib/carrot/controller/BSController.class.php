@@ -8,7 +8,7 @@
  * Carrotアプリケーションコントローラ
  *
  * @author 小石達也 <tkoishi@b-shock.co.jp>
- * @version $Id: BSController.class.php 2249 2010-08-04 17:15:42Z pooza $
+ * @version $Id: BSController.class.php 2297 2010-08-19 11:13:56Z pooza $
  * @abstract
  */
 abstract class BSController {
@@ -221,6 +221,16 @@ abstract class BSController {
 	 */
 	public function getAttributes () {
 		return BSSerializeHandler::getInstance()->getAttributes();
+	}
+
+	/**
+	 * プロキシサーバが有効か
+	 *
+	 * @access public
+	 * @return boolean 有効ならTrue
+	 */
+	public function hasProxyServer () {
+		return false;
 	}
 
 	/**

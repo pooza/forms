@@ -8,7 +8,7 @@
  * モバイルユーザーエージェント
  *
  * @author 小石達也 <tkoishi@b-shock.co.jp>
- * @version $Id: BSMobileUserAgent.class.php 2208 2010-07-07 08:37:34Z pooza $
+ * @version $Id: BSMobileUserAgent.class.php 2297 2010-08-19 11:13:56Z pooza $
  * @abstract
  */
 abstract class BSMobileUserAgent extends BSUserAgent implements BSUserIdentifier {
@@ -42,6 +42,21 @@ abstract class BSMobileUserAgent extends BSUserAgent implements BSUserIdentifier
 		$view->getRenderer()->addOutputFilter('mobile');
 		$view->getRenderer()->addOutputFilter('encoding');
 		return true;
+	}
+
+	/**
+	 * 外向けURLを調整して返す
+	 *
+	 * @access public
+	 * @param BSHTTPRedirector $url 対象URL
+	 * @return string エンコード済みファイル名
+	 */
+	public function modifyURL (BSHTTPRedirector $url) {
+		$url = parent::modifyURL($url);
+		if (BSController::getInstance()->hasProxyServer()) {
+			$url->setParameter('guid', 'ON');
+		}
+		return $url;
 	}
 
 	/**
