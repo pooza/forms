@@ -8,7 +8,7 @@
  * モバイルユーザーエージェント
  *
  * @author 小石達也 <tkoishi@b-shock.co.jp>
- * @version $Id: BSMobileUserAgent.class.php 2297 2010-08-19 11:13:56Z pooza $
+ * @version $Id: BSMobileUserAgent.class.php 2298 2010-08-19 14:17:26Z pooza $
  * @abstract
  */
 abstract class BSMobileUserAgent extends BSUserAgent implements BSUserIdentifier {
@@ -49,7 +49,7 @@ abstract class BSMobileUserAgent extends BSUserAgent implements BSUserIdentifier
 	 *
 	 * @access public
 	 * @param BSHTTPRedirector $url 対象URL
-	 * @return string エンコード済みファイル名
+	 * @return BSURL 調整されたURL
 	 */
 	public function modifyURL (BSHTTPRedirector $url) {
 		$url = parent::modifyURL($url);

@@ -8,7 +8,7 @@
  * ユーザーエージェント
  *
  * @author 小石達也 <tkoishi@b-shock.co.jp>
- * @version $Id: BSUserAgent.class.php 2234 2010-08-02 02:07:51Z pooza $
+ * @version $Id: BSUserAgent.class.php 2298 2010-08-19 14:17:26Z pooza $
  * @abstract
  */
 abstract class BSUserAgent implements ArrayAccess, BSAssignable {
@@ -268,7 +268,7 @@ abstract class BSUserAgent implements ArrayAccess, BSAssignable {
 	 *
 	 * @access public
 	 * @param BSHTTPRedirector $url 対象URL
-	 * @return string エンコード済みファイル名
+	 * @return BSURL 調整されたURL
 	 */
 	public function modifyURL (BSHTTPRedirector $url) {
 		$url = $url->getURL();

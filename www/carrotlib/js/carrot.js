@@ -3,7 +3,7 @@
  *
  * @package org.carrot-framework
  * @author 小石達也 <tkoishi@b-shock.co.jp>
- * @version $Id: carrot.js 2282 2010-08-17 08:44:40Z pooza $
+ * @version $Id: carrot.js 2298 2010-08-19 14:17:26Z pooza $
  */
 
 var CarrotLib = {
@@ -32,7 +32,9 @@ var CarrotLib = {
   putSmartTag: function (tag, field, name, params) {
     var tag = '[[' + tag;
     if (name) {
-      tag += ':' + name.gsub(':', '\\:').gsub('[', '\\[').gsub(']', '\\]');
+      name = name.gsub(':', '\\:').gsub('[', '\\[').gsub(']', '\\]');
+      name = name.gsub('：', '\\:').gsub('［', '\\[').gsub('］', '\\]'); //全角
+      tag += ':' + name;
       if (params) {
         var encoded = [];
         for(var key in params) {
