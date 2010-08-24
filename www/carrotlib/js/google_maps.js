@@ -13,17 +13,23 @@
  *
  * @package org.carrot-framework
  * @author 小石達也 <tkoishi@b-shock.co.jp>
- * @version $Id: google_maps.js 2015 2010-04-17 12:12:17Z pooza $
+ * @version $Id: google_maps.js 2299 2010-08-21 10:31:55Z pooza $
  */
-function handleGoogleMaps (container, lat, lng, zoom) {
-  var point = new google.maps.LatLng(lat, lng);
-  var map = new google.maps.Map(container, {
-    zoom: zoom,
-    center: point,
-    mapTypeId: google.maps.MapTypeId.ROADMAP
-  });
-  var marker = new google.maps.Marker({
-    position: point,
-    map: map
-  });
-}
+var CarrotMapsLib = {
+  handleMap: function (container, lat, lng, zoom) {
+    if (!zoom) {
+      zoom = 17;
+    }
+    var point = new google.maps.LatLng(lat, lng);
+    var map = new google.maps.Map(container, {
+      zoom: zoom,
+      center: point,
+      mapTypeId: google.maps.MapTypeId.ROADMAP
+    });
+    var marker = new google.maps.Marker({
+      position: point,
+      map: map
+    });
+  },
+  initialized: true
+};

@@ -8,7 +8,7 @@
  * MIMEタイプ
  *
  * @author 小石達也 <tkoishi@b-shock.co.jp>
- * @version $Id: BSMIMEType.class.php 2184 2010-06-28 02:32:56Z pooza $
+ * @version $Id: BSMIMEType.class.php 2299 2010-08-21 10:31:55Z pooza $
  */
 class BSMIMEType extends BSParameterHolder implements BSSerializable {
 	private $typesFile;
@@ -57,7 +57,7 @@ class BSMIMEType extends BSParameterHolder implements BSSerializable {
 		if (!$this->typesFile) {
 			$this->typesFile = new BSFile(BS_FILE_TYPES_FILE);
 			if (!$this->typesFile->isReadable()) {
-				throw new BSConfigException($file . 'を開くことができません。');
+				throw new BSConfigException($this->typesFile . 'を開くことができません。');
 			}
 		}
 		return $this->typesFile;
