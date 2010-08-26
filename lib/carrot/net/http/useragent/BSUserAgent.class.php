@@ -8,7 +8,7 @@
  * ユーザーエージェント
  *
  * @author 小石達也 <tkoishi@b-shock.co.jp>
- * @version $Id: BSUserAgent.class.php 2298 2010-08-19 14:17:26Z pooza $
+ * @version $Id: BSUserAgent.class.php 2308 2010-08-26 13:19:16Z pooza $
  * @abstract
  */
 abstract class BSUserAgent implements ArrayAccess, BSAssignable {
@@ -278,6 +278,19 @@ abstract class BSUserAgent implements ArrayAccess, BSAssignable {
 		}
 		$url->setParameters($query);
 		return $url;
+	}
+
+	/**
+	 * 画像マネージャを生成して返す
+	 *
+	 * @access public
+	 * @param integer $flags フラグのビット列
+	 * @return BSImageManager 画像マネージャ
+	 */
+	public function createImageManager ($flags = null) {
+		$images = new BSImageManager($flags);
+		$images->setUserAgent($this);
+		return $images;
 	}
 
 	/**

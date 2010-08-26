@@ -8,7 +8,7 @@
  * 絵文字
  *
  * @author 小石達也 <tkoishi@b-shock.co.jp>
- * @version $Id: BSPictogram.class.php 2196 2010-07-05 06:41:52Z pooza $
+ * @version $Id: BSPictogram.class.php 2310 2010-08-26 13:48:04Z pooza $
  */
 class BSPictogram implements BSAssignable, BSImageContainer {
 	private $id;
@@ -16,7 +16,6 @@ class BSPictogram implements BSAssignable, BSImageContainer {
 	private $codes;
 	private $names;
 	private $imagefile;
-	private $imageinfo;
 	private $element;
 	static private $instances;
 
@@ -122,8 +121,8 @@ class BSPictogram implements BSAssignable, BSImageContainer {
 		if ($useragent->isMobile()) {
 			return $this->getNumericReference();
 		} else {
-			$caches = BSImageCacheHandler::getInstance();
-			return $caches->getElement($this->getImageInfo())->getContents();
+			$images = new BSImageManager;
+			return $images->getElement($this->getImageInfo())->getContents();
 		}
 	}
 
@@ -316,11 +315,11 @@ class BSPictogram implements BSAssignable, BSImageContainer {
 		if (!$controller->getAttribute($key)) {
 			$urls = new BSArray;
 			foreach (self::getPictograms() as $pictogram) {
-				$imageinfo = $pictogram->getImageInfo();
+				$info = $pictogram->getImageInfo();
 				foreach ($pictogram->getNames() as $name) {
 					$urls[$name] = new BSArray;
 					$urls[$name]['name'] = $name;
-					$urls[$name]['image'] = $imageinfo;
+					$urls[$name]['image'] = $info;
 				}
 			}
 			$controller->setAttribute($key, $urls);

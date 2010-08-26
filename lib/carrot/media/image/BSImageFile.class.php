@@ -8,7 +8,7 @@
  * 画像ファイル
  *
  * @author 小石達也 <tkoishi@b-shock.co.jp>
- * @version $Id: BSImageFile.class.php 2288 2010-08-17 15:26:33Z pooza $
+ * @version $Id: BSImageFile.class.php 2308 2010-08-26 13:19:16Z pooza $
  */
 class BSImageFile extends BSMediaFile implements BSImageContainer, BSAssignable {
 	protected $renderer;
@@ -212,7 +212,8 @@ class BSImageFile extends BSMediaFile implements BSImageContainer, BSAssignable 
 	 * @param string $size
 	 */
 	public function clearImageCache ($size = null) {
-		BSImageCacheHandler::getInstance()->removeThumbnail($this, $size);
+		$images = new BSImageManager;
+		$images->removeThumbnail($this, $size);
 	}
 
 	/**
@@ -225,7 +226,8 @@ class BSImageFile extends BSMediaFile implements BSImageContainer, BSAssignable 
 	 * @return BSArray 画像の情報
 	 */
 	public function getImageInfo ($size = null, $pixel = null, $flags = null) {
-		return BSImageCacheHandler::getInstance()->getImageInfo($this, $size, $pixel, $flags);
+		$images = new BSImageManager;
+		return $images->getImageInfo($this, $size, $pixel, $flags);
 	}
 
 	/**

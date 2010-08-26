@@ -8,7 +8,7 @@
  * データベーステーブル
  *
  * @author 小石達也 <tkoishi@b-shock.co.jp>
- * @version $Id: BSTableHandler.class.php 2206 2010-07-06 13:27:39Z pooza $
+ * @version $Id: BSTableHandler.class.php 2306 2010-08-26 10:47:56Z pooza $
  * @abstract
  */
 abstract class BSTableHandler implements IteratorAggregate, BSDictionary, BSAssignable {
@@ -841,6 +841,17 @@ abstract class BSTableHandler implements IteratorAggregate, BSDictionary, BSAssi
 			throw new BSDatabaseException($class . 'はテーブルハンドラではありません。');
 		}
 		return $table;
+	}
+
+	/**
+	 * 子クラスを返す
+	 *
+	 * @access public
+	 * @return BSArray 子クラス名の配列
+	 * @static
+	 */
+	public function getChildClasses () {
+		return new BSArray;
 	}
 
 	/**

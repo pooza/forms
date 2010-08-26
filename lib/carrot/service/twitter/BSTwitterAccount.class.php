@@ -8,7 +8,7 @@
  * Twitterアカウント
  *
  * @author 小石達也 <tkoishi@b-shock.co.jp>
- * @version $Id: BSTwitterAccount.class.php 2196 2010-07-05 06:41:52Z pooza $
+ * @version $Id: BSTwitterAccount.class.php 2308 2010-08-26 13:19:16Z pooza $
  */
 class BSTwitterAccount
 	implements BSImageContainer, BSSerializable, BSAssignable, BSHTTPRedirector {
@@ -275,8 +275,8 @@ class BSTwitterAccount
 	 */
 	public function getImageInfo ($size = 'icon', $pixel = null, $flags = null) {
 		if ($file = $this->getImageFile()) {
-			$caches = BSImageCacheHandler::getInstance();
-			$info = $caches->getImageInfo($file, $size, $pixel, $flags);
+			$images = new BSImageManager;
+			$info = $images->getImageInfo($file, $size, $pixel, $flags);
 			$info['alt'] = $this->getLabel();
 			return $info;
 		}

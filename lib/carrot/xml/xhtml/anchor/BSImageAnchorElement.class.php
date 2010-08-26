@@ -8,7 +8,7 @@
  * 画像へのリンク
  *
  * @author 小石達也 <tkoishi@b-shock.co.jp>
- * @version $Id: BSImageAnchorElement.class.php 1812 2010-02-03 15:15:09Z pooza $
+ * @version $Id: BSImageAnchorElement.class.php 2312 2010-08-26 14:03:25Z pooza $
  * @abstract
  */
 abstract class BSImageAnchorElement extends BSAnchorElement {
@@ -48,9 +48,8 @@ abstract class BSImageAnchorElement extends BSAnchorElement {
 	 * @return BSURL URL
 	 */
 	public function setImage (BSImageContainer $record, $size, $pixel = null, $flags = null) {
-		$this->setURL(
-			BSImageCacheHandler::getInstance()->getURL($record, $size, $pixel, $flags)
-		);
+		$images = $this->useragent->createImageManager($flags);
+		$this->setURL($images->getURL($record, $size, $pixel));
 	}
 }
 

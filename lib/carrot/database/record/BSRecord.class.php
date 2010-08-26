@@ -8,7 +8,7 @@
  * テーブルのレコード
  *
  * @author 小石達也 <tkoishi@b-shock.co.jp>
- * @version $Id: BSRecord.class.php 2294 2010-08-19 08:49:32Z pooza $
+ * @version $Id: BSRecord.class.php 2308 2010-08-26 13:19:16Z pooza $
  * @abstract
  */
 abstract class BSRecord implements ArrayAccess,
@@ -155,6 +155,13 @@ abstract class BSRecord implements ArrayAccess,
 			throw new BSDatabaseException($this . 'を削除することはできません。');
 		}
 
+		foreach ($this->getTable()->getChildClasses() as $class) {
+			$table = BSTableHandler::getInstance($class);
+			$table->getCriteria($this->getTable()->getName() . '_id', $this);
+			foreach ($table as $record) {
+				$record->delete();
+			}
+		}
 		if ($record = $this->getParent()) {
 			$record->touch();
 		}
@@ -384,7 +391,8 @@ abstract class BSRecord implements ArrayAccess,
 	 * @param string $size
 	 */
 	public function clearImageCache ($size = 'thumbnail') {
-		BSImageCacheHandler::getInstance()->removeThumbnail($this, $size);
+		$images = new BSImageManager;
+		$images->removeThumbnail($this, $size);
 	}
 
 	/**
@@ -397,7 +405,8 @@ abstract class BSRecord implements ArrayAccess,
 	 * @return BSArray 画像の情報
 	 */
 	public function getImageInfo ($size = 'thumbnail', $pixel = null, $flags = null) {
-		return BSImageCacheHandler::getInstance()->getImageInfo($this, $size, $pixel, $flags);
+		$images = new BSImageManager;
+		return $images->getImageInfo($this, $size, $pixel, $flags);
 	}
 
 	/**

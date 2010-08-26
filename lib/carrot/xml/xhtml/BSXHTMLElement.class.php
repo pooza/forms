@@ -8,7 +8,7 @@
  * XHTMLの要素
  *
  * @author 小石達也 <tkoishi@b-shock.co.jp>
- * @version $Id: BSXHTMLElement.class.php 1812 2010-02-03 15:15:09Z pooza $
+ * @version $Id: BSXHTMLElement.class.php 2312 2010-08-26 14:03:25Z pooza $
  */
 class BSXHTMLElement extends BSXMLElement {
 	protected $tag;
@@ -192,6 +192,19 @@ class BSXHTMLElement extends BSXMLElement {
 				return $this->registerStyleClass($value);
 		}
 		parent::setAttribute($name, $value);
+	}
+
+	/**
+	 * 上位のタグでくくって返す
+	 *
+	 * @access public
+	 * @param BSXMLElement $parent 上位の要素
+	 * @return BSXMLElement 上位の要素
+	 */
+	public function wrap (BSXMLElement $parent) {
+		$parent = parent::wrap($parent);
+		$parent->setUserAgent($this->useragent);
+		return $parent;
 	}
 }
 

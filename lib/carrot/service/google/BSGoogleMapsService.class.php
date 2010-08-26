@@ -8,7 +8,7 @@
  * Google Mapsクライアント
  *
  * @author 小石達也 <tkoishi@b-shock.co.jp>
- * @version $Id: BSGoogleMapsService.class.php 2303 2010-08-24 11:14:14Z pooza $
+ * @version $Id: BSGoogleMapsService.class.php 2308 2010-08-26 13:19:16Z pooza $
  */
 class BSGoogleMapsService extends BSCurlHTTP {
 	private $table;
@@ -157,7 +157,7 @@ class BSGoogleMapsService extends BSCurlHTTP {
 		$address = $params['address'];
 		$params->removeParameter('address');
 		$file = $this->getImageFile($geocode, $params);
-		$info = $file->getImageInfo('roadmap', null, BSImageCacheHandler::FORCE_GIF);
+		$info = $file->getImageInfo('roadmap', null, BSImageManager::FORCE_GIF);
 
 		$image = new BSImageElement;
 		$image->setURL(BSURL::getInstance($info['url']));

@@ -1,19 +1,19 @@
 <?php
 /**
  * @package org.carrot-framework
- * @subpackage media.image.cache
+ * @subpackage media.image
  */
 
 /**
- * 画像キャッシュ
+ * 画像マネージャ
  *
  * @author 小石達也 <tkoishi@b-shock.co.jp>
- * @version $Id: BSImageCacheHandler.class.php 2288 2010-08-17 15:26:33Z pooza $
+ * @version $Id: BSImageManager.class.php 2312 2010-08-26 14:03:25Z pooza $
  */
-class BSImageCacheHandler {
+class BSImageManager {
 	private $useragent;
 	private $type;
-	static private $instance;
+	private $flags = 0;
 	const WITHOUT_BROWSER_CACHE = 1;
 	const WIDTH_FIXED = 2;
 	const HEIGHT_FIXED = 4;
@@ -21,30 +21,11 @@ class BSImageCacheHandler {
 	const FORCE_GIF = 16;
 
 	/**
-	 * @access private
-	 */
-	private function __construct () {
-	}
-
-	/**
-	 * シングルトンインスタンスを返す
-	 *
 	 * @access public
-	 * @return ImageCacheHandler インスタンス
-	 * @static
+	 * @param mixed $flags フラグのビット列、又は配列
 	 */
-	static public function getInstance () {
-		if (!self::$instance) {
-			self::$instance = new self;
-		}
-		return self::$instance;
-	}
-
-	/**
-	 * @access public
-	 */
-	public function __clone () {
-		throw new BadFunctionCallException(__CLASS__ . 'はコピーできません。');
+	public function __construct ($flags = null) {
+		$this->setFlags($flags);
 	}
 
 	/**
@@ -68,6 +49,50 @@ class BSImageCacheHandler {
 	 */
 	public function setUserAgent (BSUserAgent $useragent) {
 		$this->useragent = $useragent;
+	}
+
+	/**
+	 * 規定フラグを返す
+	 *
+	 * @access public
+	 * @return integer フラグのビット列
+	 */
+	public function getFlags () {
+		return $this->flags;
+	}
+
+	/**
+	 * 規定のフラグを設定
+	 *
+	 * @access public
+	 * @param mixed $flags フラグのビット列、又は配列
+	 */
+	public function setFlags ($flags) {
+		if (BSString::isBlank($flags)) {
+			return;
+		} else if (is_numeric($flags)) {
+			$this->setFlag($flags);
+		} else {
+			if (!BSArray::isArray($flags)) {
+				$flags = BSString::explode(',', $flags);
+			}
+			foreach ($flags as $flag) {
+				$this->setFlag($flag);
+			}
+		}
+	}
+
+	private function setFlag ($flag) {
+		if (is_numeric($flag)) {
+			$constants = BSConstantHandler::getInstance();
+			$value = BSString::toUpper($flag);
+			if (BSString::isBlank($flag = $constants['BSImageManager::' . $value])) {
+				$message = new BSStringFormat('BSImageManager::%sが未定義です。');
+				$message[] = $value;
+				throw new BSImageException($message);
+			}
+		}
+		$this->flags |= $flag;
 	}
 
 	/**
@@ -100,8 +125,9 @@ class BSImageCacheHandler {
 			return null;
 		}
 
+		$flags |= $this->flags;
 		if (BSUser::getInstance()->isAdministrator()) {
-			$flags += self::WITHOUT_BROWSER_CACHE;
+			$flags |= self::WITHOUT_BROWSER_CACHE;
 		}
 
 		$url = BSFileUtility::getURL('image_cache');
@@ -127,6 +153,7 @@ class BSImageCacheHandler {
 	 * @return BSImage サムネイル
 	 */
 	public function getThumbnail (BSImageContainer $record, $size, $pixel, $flags = null) {
+		$flags |= $this->flags;
 		if (!$file = $this->getFile($record, $size, $pixel, $flags)) {
 			return null;
 		}
@@ -154,6 +181,7 @@ class BSImageCacheHandler {
 	 * @param BSImage サムネイル
 	 */
 	public function setThumbnail (BSImageContainer $record, $size, $pixel, $contents, $flags = null) {
+		$flags |= $this->flags;
 		$dir = $this->getEntryDirectory($record, $size);
 		$name = $this->getFileName($record, $pixel, $flags);
 		if ($flags & self::FORCE_GIF) {
@@ -198,6 +226,7 @@ class BSImageCacheHandler {
 	 */
 	public function getImageInfo (BSImageContainer $record, $size, $pixel = null, $flags = null) {
 		try {
+			$flags |= $this->flags;
 			if (!$image = $this->getThumbnail($record, $size, $pixel, $flags)) {
 				return null;
 			}
@@ -233,6 +262,7 @@ class BSImageCacheHandler {
 			return null;
 		}
 
+		$flags |= $this->flags;
 		$dir = $this->getEntryDirectory($record, $size);
 		$name = $this->getFileName($record, $pixel, $flags);
 		if ($flags & self::FORCE_GIF) {
@@ -258,6 +288,7 @@ class BSImageCacheHandler {
 	 * @return BSFile サムネイルファイル
 	 */
 	private function getFileName (BSImageContainer $record, $pixel, $flags = null) {
+		$flags |= $this->flags;
 		$prefix = '';
 		if (($useragent = $this->getUserAgent()) && $useragent->isMobile()) {
 			$prefix = 'w';
@@ -291,6 +322,7 @@ class BSImageCacheHandler {
 	private function convertImage (BSImageContainer $record, $pixel, $contents, $flags = null) {
 		$image = new BSImage;
 		$image->setImage($contents);
+		$flags |= $this->flags;
 		if ($flags & self::FORCE_GIF) {
 			$image->setType(BSMIMEType::getType('gif'));
 		} else {
@@ -373,6 +405,7 @@ class BSImageCacheHandler {
 	 */
 	public function getElement (BSArray $info) {
 		$element = new BSImageElement;
+		$element->setUserAgent($this->getUserAgent());
 		$element->setAttributes($info);
 		return $element;
 	}
@@ -404,40 +437,6 @@ class BSImageCacheHandler {
 		if ($container && ($container instanceof BSImageContainer)) {
 			return $container;
 		}
-	}
-
-	/**
-	 * 文字列、又は配列のフラグをビット列に変換
-	 *
-	 * @access private
-	 * @param mixed $values カンマ区切り文字列、又は配列
-	 * @return $flags フラグのビット列
-	 *   self::WITHOUT_BWORSER_CACHE クエリー末尾に乱数を加え、ブラウザキャッシュを無効にする
-	 *   self::WIDTH_FIXED 幅固定
-	 *   self::HEIGHT_FIXED 高さ固定
-	 *   self::WITHOUT_SQUARE 正方形に整形しない
-	 *   self::FORCE_GIF gif形式を強制
-	 */
-	public function convertFlags ($values) {
-		if (!BSArray::isArray($values)) {
-			if (BSString::isBlank($values)) {
-				return 0;
-			}
-			$values = BSString::explode(',', $values);
-		}
-		$values = BSString::toUpper($values);
-
-		$constants = BSConstantHandler::getInstance();
-		$flags = 0;
-		foreach ($values as $value) {
-			if (BSString::isBlank($flag = $constants['BSImageCacheHandler::' . $value])) {
-				$message = new BSStringFormat('BSImageCacheHandler::%sが未定義です。');
-				$message[] = $value;
-				throw new BSImageException($message);
-			}
-			$flags += $flag;
-		}
-		return $flags;
 	}
 }
 
