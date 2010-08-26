@@ -8,7 +8,7 @@
  * 画像マネージャ
  *
  * @author 小石達也 <tkoishi@b-shock.co.jp>
- * @version $Id: BSImageManager.class.php 2312 2010-08-26 14:03:25Z pooza $
+ * @version $Id: BSImageManager.class.php 2313 2010-08-26 14:42:43Z pooza $
  */
 class BSImageManager {
 	private $useragent;
@@ -83,7 +83,7 @@ class BSImageManager {
 	}
 
 	private function setFlag ($flag) {
-		if (is_numeric($flag)) {
+		if (!is_numeric($flag)) {
 			$constants = BSConstantHandler::getInstance();
 			$value = BSString::toUpper($flag);
 			if (BSString::isBlank($flag = $constants['BSImageManager::' . $value])) {
