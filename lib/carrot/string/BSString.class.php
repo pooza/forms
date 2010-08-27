@@ -8,7 +8,7 @@
  * 文字列に関するユーティリティ
  *
  * @author 小石達也 <tkoishi@b-shock.co.jp>
- * @version $Id: BSString.class.php 2256 2010-08-09 10:09:37Z pooza $
+ * @version $Id: BSString.class.php 2317 2010-08-27 10:49:26Z pooza $
  */
 class BSString {
 
@@ -135,7 +135,7 @@ class BSString {
 				$value[$key] = self::convertAlphabet($item, $format);
 			}
 		} else {
-			foreach (self::eregMatchAll('[[:alpha:]]+', $value) as $matches) {
+			foreach (self::eregMatchAll('[［］｛｝（）[:alnum:]]+', $value) as $matches) {
 				$value = str_replace($matches[0], mb_convert_kana($matches[0], 'a'), $value);
 			}
 		}

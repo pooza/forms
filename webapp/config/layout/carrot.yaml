@@ -2,7 +2,7 @@
 #
 # @package org.carrot-framework
 # @author 小石達也 <tkoishi@b-shock.co.jp>
-# @version $Id: carrot.yaml 2267 2010-08-10 15:04:22Z pooza $
+# @version $Id: carrot.yaml 2315 2010-08-27 02:30:21Z pooza $
 
 awstats:
   parent: lib
@@ -63,8 +63,6 @@ images:
 image_cache:
   parent: var
   href: /carrotlib/images/cache/
-  purge:
-    day: 7
 js:
   parent: carrotlib
   suffix: .js
@@ -142,7 +140,7 @@ tests:
 tmp:
   parent: var
   purge:
-    day: 7
+    day: 3
 twitter_account:
   parent: var
   suffix: .png

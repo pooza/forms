@@ -8,7 +8,7 @@
  * SQLiteデータベース
  *
  * @author 小石達也 <tkoishi@b-shock.co.jp>
- * @version $Id: BSSQLiteDatabase.class.php 2257 2010-08-09 16:39:10Z pooza $
+ * @version $Id: BSSQLiteDatabase.class.php 2314 2010-08-26 15:28:38Z pooza $
  */
 class BSSQLiteDatabase extends BSDatabase {
 
@@ -80,6 +80,35 @@ class BSSQLiteDatabase extends BSDatabase {
 	public function optimize () {
 		$this->exec('VACUUM');
 		$this->putLog($this . 'を最適化しました。');
+	}
+
+	/**
+	 * データベース関数を返す
+	 *
+	 * @access public
+	 * @param string $name 関数名
+	 * @param string $value 値
+	 * @param boolean $quotes クォートする
+	 * @return string 関数の記述
+	 */
+	public function getFunction ($name, $value, $quotes = false) {
+		switch ($name) {
+			case 'year':
+				$func = new BSStringFormat('strftime(\'%%Y\', %s)');
+				break;
+			case 'month':
+				$func = new BSStringFormat('strftime(\'%%m\', %s)');
+				break;
+			default:
+				return parent::getFunction($name, $value, $quotes);
+		}
+
+		if (!!$quotes) {
+			$func[] = $this->quote($value);
+		} else {
+			$func[] = $value;
+		}
+		return $func->getContents();
 	}
 
 	/**

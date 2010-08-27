@@ -8,7 +8,7 @@
  * データベース接続
  *
  * @author 小石達也 <tkoishi@b-shock.co.jp>
- * @version $Id: BSDatabase.class.php 2257 2010-08-09 16:39:10Z pooza $
+ * @version $Id: BSDatabase.class.php 2314 2010-08-26 15:28:38Z pooza $
  * @abstract
  */
 abstract class BSDatabase extends PDO implements ArrayAccess, BSAssignable {
@@ -446,6 +446,26 @@ abstract class BSDatabase extends PDO implements ArrayAccess, BSAssignable {
 			}
 		}
 		return $values;
+	}
+
+	/**
+	 * データベース関数を返す
+	 *
+	 * @access public
+	 * @param string $name 関数名
+	 * @param string $value 値
+	 * @param boolean $quotes クォートする
+	 * @return string 関数の記述
+	 */
+	public function getFunction ($name, $value, $quotes = false) {
+		$func = new BSStringFormat('%s(%s)');
+		$func[] = $name;
+		if (!!$quotes) {
+			$func[] = $this->quote($value);
+		} else {
+			$func[] = $value;
+		}
+		return $func->getContents();
 	}
 
 	/**
