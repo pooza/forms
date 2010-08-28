@@ -8,7 +8,7 @@
  * MIMEタイプ
  *
  * @author 小石達也 <tkoishi@b-shock.co.jp>
- * @version $Id: BSMIMEType.class.php 2299 2010-08-21 10:31:55Z pooza $
+ * @version $Id: BSMIMEType.class.php 2319 2010-08-28 10:10:25Z pooza $
  */
 class BSMIMEType extends BSParameterHolder implements BSSerializable {
 	private $typesFile;
@@ -70,7 +70,7 @@ class BSMIMEType extends BSParameterHolder implements BSSerializable {
 	 * @return BSConfigFile 設定ファイル
 	 */
 	private function getConfigFile () {
-		return BSConfigManager::getInstance()->getConfigFile('mime');
+		return BSConfigManager::getConfigFile('mime');
 	}
 
 	/**

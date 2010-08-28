@@ -3,7 +3,7 @@
 # @package org.carrot-framework
 # @subpackage AdminUtility
 # @author 小石達也 <tkoishi@b-shock.co.jp>
-# @version $Id: module.yaml 1819 2010-02-04 11:13:43Z pooza $
+# @version $Id: module.yaml 2320 2010-08-28 10:14:32Z pooza $
 
 module:
   title: ユーティリティ
@@ -13,3 +13,5 @@ actions:
     title: バックアップ
   Pictogram:
     title: 絵文字入力
+  GetGeocode:
+    view: BSJSONView
