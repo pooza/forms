@@ -4,13 +4,11 @@
  * @subpackage file
  */
 
-ini_set('auto_detect_line_endings', true);
-
 /**
  * ファイル
  *
  * @author 小石達也 <tkoishi@b-shock.co.jp>
- * @version $Id: BSFile.class.php 2223 2010-07-20 12:53:42Z pooza $
+ * @version $Id: BSFile.class.php 2321 2010-08-30 09:00:44Z pooza $
  */
 class BSFile extends BSDirectoryEntry implements BSRenderer, BSSerializable {
 	protected $error;
@@ -217,6 +215,7 @@ class BSFile extends BSDirectoryEntry implements BSRenderer, BSSerializable {
 			throw new BSFileException($this . 'は既に開かれています。');
 		}
 
+		ini_set('auto_detect_line_endings', true);
 		if (!$this->handle = fopen($this->getPath(), $mode)) {
 			$this->handle = null;
 			$this->mode = null;
