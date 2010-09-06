@@ -8,7 +8,7 @@
  * ユーザー
  *
  * @author 小石達也 <tkoishi@b-shock.co.jp>
- * @version $Id: BSUser.class.php 1985 2010-04-11 02:18:21Z pooza $
+ * @version $Id: BSUser.class.php 2325 2010-09-06 08:52:04Z pooza $
  */
 class BSUser extends BSParameterHolder {
 	protected $id;
@@ -196,6 +196,7 @@ class BSUser extends BSParameterHolder {
 	 */
 	public function logout () {
 		$this->id = null;
+		$this->clearCredentials();
 		$this->getSession()->write(__CLASS__, null);
 	}
 

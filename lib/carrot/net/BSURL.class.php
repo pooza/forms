@@ -8,7 +8,7 @@
  * 基底URL
  *
  * @author 小石達也 <tkoishi@b-shock.co.jp>
- * @version $Id: BSURL.class.php 1987 2010-04-11 02:49:50Z pooza $
+ * @version $Id: BSURL.class.php 2327 2010-09-06 10:21:17Z pooza $
  * @abstract
  */
 abstract class BSURL implements ArrayAccess, BSAssignable {
@@ -57,6 +57,8 @@ abstract class BSURL implements ArrayAccess, BSAssignable {
 			case 'tel':
 			case 'skype':
 				return new BSContactURL($params);
+			case 'javascript':
+				return new BSJavaScriptURL($params);
 			default:
 				return new $class($params);
 		}
