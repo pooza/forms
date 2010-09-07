@@ -8,7 +8,7 @@
  * 基底ビュー
  *
  * @author 小石達也 <tkoishi@b-shock.co.jp>
- * @version $Id: BSView.class.php 2322 2010-08-30 11:55:18Z pooza $
+ * @version $Id: BSView.class.php 2330 2010-09-07 03:34:22Z pooza $
  */
 class BSView extends BSHTTPResponse {
 	protected $nameSuffix;
@@ -225,7 +225,7 @@ class BSView extends BSHTTPResponse {
 			$value[] = BS_APP_HTTP_CACHE_MODE;
 			$value[] = BS_APP_HTTP_CACHE_SECONDS;
 			$this->setHeader('Cache-Control', $value->getContents());
-			if (BS_APP_HTTP_CACHE_SEND_EXPIRES || $this->hasProxyServer()) {
+			if (BS_APP_HTTP_CACHE_SEND_EXPIRES) {
 				$date = BSDate::getNow();
 				$date['second'] = '+' . BS_APP_HTTP_CACHE_SECONDS;
 				$this->setHeader('Expires', $date->format(DATE_RFC1123, BSDate::GMT));

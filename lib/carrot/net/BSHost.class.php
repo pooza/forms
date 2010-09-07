@@ -8,11 +8,12 @@
  * ホストコンピュータ
  *
  * @author 小石達也 <tkoishi@b-shock.co.jp>
- * @version $Id: BSHost.class.php 2099 2010-05-25 04:33:45Z pooza $
+ * @version $Id: BSHost.class.php 2331 2010-09-07 04:07:08Z pooza $
  */
 class BSHost implements BSAssignable {
 	protected $name;
 	protected $address;
+	protected $domain;
 
 	/**
 	 * @access public
@@ -71,6 +72,21 @@ class BSHost implements BSAssignable {
 		} catch (BSNetException $e) {
 			return false;
 		}
+	}
+
+	/**
+	 * 親ドメインを返す
+	 *
+	 * @access public
+	 * @return string 親ドメイン
+	 */
+	public function getDomain () {
+		if (!$this->domain) {
+			$name = BSString::explode('.', $this->getName());
+			$name->shift();
+			$this->domain = $name->join('.');
+		}
+		return $this->domain;
 	}
 
 	/**

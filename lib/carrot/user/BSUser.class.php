@@ -8,13 +8,14 @@
  * ユーザー
  *
  * @author 小石達也 <tkoishi@b-shock.co.jp>
- * @version $Id: BSUser.class.php 2325 2010-09-06 08:52:04Z pooza $
+ * @version $Id: BSUser.class.php 2333 2010-09-07 09:08:01Z pooza $
  */
 class BSUser extends BSParameterHolder {
 	protected $id;
 	private $attributes;
 	private $credentials;
 	static private $instance;
+	const COOKIE = 1;
 
 	/**
 	 * @access protected
@@ -77,9 +78,17 @@ class BSUser extends BSParameterHolder {
 	 *
 	 * @access public
 	 * @param string $name 属性名
+	 * @param integer $flags フラグのビット列
+	 *   self::COOKIE cookieのみ
 	 * @return mixed 属性値
 	 */
-	public function getAttribute ($name) {
+	public function getAttribute ($name, $flags = null) {
+		if ($flags & self::COOKIE) {
+			if (isset($_COOKIE[$name])) {
+				return $_COOKIE[$name];
+			}
+			return null;
+		}
 		return $this->attributes[$name];
 	}
 
@@ -101,11 +110,15 @@ class BSUser extends BSParameterHolder {
 	 * @param string $name 属性名
 	 * @param mixed $value 属性値
 	 * @param BSDate $expire 期限
+	 * @param string $domain 対象ドメイン
 	 */
-	public function setAttribute ($name, $value, BSDate $expire = null) {
+	public function setAttribute ($name, $value, BSDate $expire = null, $domain = null) {
 		$this->attributes[(string)$name] = $value;
 		if ($expire) {
-			setcookie((string)$name, $value, $expire->getTimestamp(), '/');
+			if (BSString::isBlank($domain)) {
+				$domain = BSController::getInstance()->getHost()->getName();
+			}
+			setcookie((string)$name, $value, $expire->getTimestamp(), '/', $domain, false, true);
 		}
 	}
 
@@ -277,7 +290,12 @@ class BSUser extends BSParameterHolder {
 	 * @return boolean ゲストユーザーならばTrue
 	 */
 	public function isGuest () {
-		return !$this->getCredentials()->count();
+		foreach ($this->getCredentials() as $credential) {
+			if (!!$credential) {
+				return false;
+			}
+		}
+		return true;
 	}
 }
 
