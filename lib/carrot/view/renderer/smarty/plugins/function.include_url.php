@@ -8,7 +8,7 @@
  * 外部コンテンツをインクルード
  *
  * @author 小石達也 <tkoishi@b-shock.co.jp>
- * @version $Id: function.include_url.php 1812 2010-02-03 15:15:09Z pooza $
+ * @version $Id: function.include_url.php 2342 2010-09-12 05:57:00Z pooza $
  */
 function smarty_function_include_url ($params, &$smarty) {
 	$params = new BSArray($params);
@@ -23,9 +23,7 @@ function smarty_function_include_url ($params, &$smarty) {
 	}
 
 	if (!$url['host']->isForeign(BSController::getInstance()->getHost())) {
-		if ($useragent = $smarty->getUserAgent()) {
-			$url->setParameters($useragent->getQuery());
-		}
+		$url->setUserAgent($smarty->getUserAgent());
 	}
 	return $url->fetch();
 }

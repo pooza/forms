@@ -8,7 +8,7 @@
  * ユーザーエージェント
  *
  * @author 小石達也 <tkoishi@b-shock.co.jp>
- * @version $Id: BSUserAgent.class.php 2308 2010-08-26 13:19:16Z pooza $
+ * @version $Id: BSUserAgent.class.php 2340 2010-09-12 05:39:12Z pooza $
  * @abstract
  */
 abstract class BSUserAgent implements ArrayAccess, BSAssignable {
@@ -29,6 +29,8 @@ abstract class BSUserAgent implements ArrayAccess, BSAssignable {
 		$this->attributes['type'] = $this->getType();
 		$this->attributes['type_lower'] = BSString::toLower($this->getType());
 		$this->attributes['is_' . BSString::underscorize($this->getType())] = true;
+		$this->attributes['is_mobile'] = $this->isMobile();
+		$this->attributes['is_smartphone'] = $this->isSmartPhone();
 		$this->attributes['is_legacy'] = $this->isLegacy();
 		$this->attributes['is_denied'] = $this->isDenied();
 		$this->bugs = new BSArray;
@@ -153,11 +155,16 @@ abstract class BSUserAgent implements ArrayAccess, BSAssignable {
 		$query = new BSWWWFormRenderer;
 		if (BS_DEBUG || BSUser::getInstance()->isAdministrator()) {
 			$request = BSRequest::getInstance();
-			if (!BSString::isBlank($name = $request[self::ACCESSOR])) {
-				$query[self::ACCESSOR] = $name;
-			}
-			if (!!$request['preview']) {
-				$query['preview'] = 1;
+			$names = new BSArray(array(
+				self::ACCESSOR,
+				BSTridentUserAgent::FORCE_MODE_ACCESSOR,
+			));
+			foreach ($names as $name) {
+				if (BSString::isBlank($value = $request[$name])) {
+					$query->removeParameter($name);
+				} else {
+					$query[$name] = $value;
+				}
 			}
 		}
 		return $query;
@@ -242,6 +249,16 @@ abstract class BSUserAgent implements ArrayAccess, BSAssignable {
 	}
 
 	/**
+	 * スマートフォンか？
+	 *
+	 * @access public
+	 * @return boolean スマートフォンならTrue
+	 */
+	public function isSmartPhone () {
+		return false;
+	}
+
+	/**
 	 * アップロードボタンのラベルを返す
 	 *
 	 * @access public
@@ -261,23 +278,6 @@ abstract class BSUserAgent implements ArrayAccess, BSAssignable {
 	public function encodeFileName ($name) {
 		$name = BSMIMEUtility::encode($name);
 		return BSString::sanitize($name);
-	}
-
-	/**
-	 * 外向けURLを調整して返す
-	 *
-	 * @access public
-	 * @param BSHTTPRedirector $url 対象URL
-	 * @return BSURL 調整されたURL
-	 */
-	public function modifyURL (BSHTTPRedirector $url) {
-		$url = $url->getURL();
-		$query = new BSArray($this->getQuery());
-		if ($url->isForeign()) {
-			$query->removeParameter(BSRequest::getInstance()->getSession()->getName());
-		}
-		$url->setParameters($query);
-		return $url;
 	}
 
 	/**
@@ -399,6 +399,9 @@ abstract class BSUserAgent implements ArrayAccess, BSAssignable {
 		return new BSArray(array(
 			'Trident',
 			'Gecko',
+			'iPhone',
+			'Android',
+			'iPad',
 			'WebKit',
 			'Opera',
 			'Tasman',

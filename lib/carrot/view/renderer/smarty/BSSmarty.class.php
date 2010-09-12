@@ -10,7 +10,7 @@ BSUtility::includeFile('Smarty/Smarty.class');
  * Smartyラッパー
  *
  * @author 小石達也 <tkoishi@b-shock.co.jp>
- * @version $Id: BSSmarty.class.php 2207 2010-07-07 01:49:15Z pooza $
+ * @version $Id: BSSmarty.class.php 2341 2010-09-12 05:47:35Z pooza $
  */
 class BSSmarty extends Smarty implements BSTextRenderer {
 	private $type;
@@ -179,6 +179,9 @@ class BSSmarty extends Smarty implements BSTextRenderer {
 		$this->finder->clearSuffixes();
 		if ($useragent->isMobile()) {
 			$this->finder->registerSuffix('mobile');
+		}
+		if ($useragent->isSmartPhone()) {
+			$this->finder->registerSuffix('smartphone');
 		}
 		$this->finder->registerSuffix($useragent->getType());
 	}

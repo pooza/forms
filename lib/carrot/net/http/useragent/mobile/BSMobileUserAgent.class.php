@@ -8,7 +8,7 @@
  * モバイルユーザーエージェント
  *
  * @author 小石達也 <tkoishi@b-shock.co.jp>
- * @version $Id: BSMobileUserAgent.class.php 2298 2010-08-19 14:17:26Z pooza $
+ * @version $Id: BSMobileUserAgent.class.php 2339 2010-09-12 05:21:48Z pooza $
  * @abstract
  */
 abstract class BSMobileUserAgent extends BSUserAgent implements BSUserIdentifier {
@@ -21,7 +21,6 @@ abstract class BSMobileUserAgent extends BSUserAgent implements BSUserIdentifier
 	 */
 	protected function __construct ($name = null) {
 		parent::__construct($name);
-		$this->attributes['is_mobile'] = $this->isMobile();
 		$this->attributes['id'] = $this->getID();
 		$this->attributes['is_attachable'] = $this->isAttachable();
 		$this->attributes['display'] = $this->getDisplayInfo();
@@ -45,21 +44,6 @@ abstract class BSMobileUserAgent extends BSUserAgent implements BSUserIdentifier
 	}
 
 	/**
-	 * 外向けURLを調整して返す
-	 *
-	 * @access public
-	 * @param BSHTTPRedirector $url 対象URL
-	 * @return BSURL 調整されたURL
-	 */
-	public function modifyURL (BSHTTPRedirector $url) {
-		$url = parent::modifyURL($url);
-		if (BSController::getInstance()->hasProxyServer()) {
-			$url->setParameter('guid', 'ON');
-		}
-		return $url;
-	}
-
-	/**
 	 * セッションハンドラを生成して返す
 	 *
 	 * @access public
@@ -79,6 +63,9 @@ abstract class BSMobileUserAgent extends BSUserAgent implements BSUserIdentifier
 		$query = parent::getQuery();
 		$session = BSRequest::getInstance()->getSession();
 		$query[$session->getName()] = $session->getID();
+		if (BSController::getInstance()->hasProxyServer()) {
+			$query['guid'] = 'ON';
+		}
 		return $query;
 	}
 
