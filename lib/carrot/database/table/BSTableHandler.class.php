@@ -8,7 +8,7 @@
  * データベーステーブル
  *
  * @author 小石達也 <tkoishi@b-shock.co.jp>
- * @version $Id: BSTableHandler.class.php 2343 2010-09-13 03:38:22Z pooza $
+ * @version $Id: BSTableHandler.class.php 2346 2010-09-15 04:12:46Z pooza $
  * @abstract
  */
 abstract class BSTableHandler implements IteratorAggregate, BSDictionary, BSAssignable {
@@ -291,7 +291,11 @@ abstract class BSTableHandler implements IteratorAggregate, BSDictionary, BSAssi
 	 * @return BSRecord レコード
 	 */
 	public function getRecord ($key) {
-		if (!BSArray::isArray($key)) {
+		if (is_array($key)) {
+			$key = new BSArray($key);
+		} else if ($key instanceof BSParameterHolder) {
+			$key = new BSArray($key->getParameters());
+		} else {
 			$key = new BSArray(array($this->getKeyField() => $key));
 		}
 
