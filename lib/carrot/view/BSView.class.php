@@ -8,7 +8,7 @@
  * 基底ビュー
  *
  * @author 小石達也 <tkoishi@b-shock.co.jp>
- * @version $Id: BSView.class.php 2335 2010-09-10 07:14:52Z pooza $
+ * @version $Id: BSView.class.php 2348 2010-09-15 14:23:23Z pooza $
  */
 class BSView extends BSHTTPResponse {
 	protected $nameSuffix;
@@ -34,7 +34,7 @@ class BSView extends BSHTTPResponse {
 		}
 		$this->setRenderer($renderer);
 
-		$this->setHeader('X-Frame-Options', 'deny');
+		$this->setHeader('X-Frame-Options', 'sameorigin');
 		$this->setHeader('X-Content-Type-Options', 'nosniff');
 	}
 

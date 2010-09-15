@@ -8,7 +8,7 @@
  * ユーザーエージェント
  *
  * @author 小石達也 <tkoishi@b-shock.co.jp>
- * @version $Id: BSUserAgent.class.php 2340 2010-09-12 05:39:12Z pooza $
+ * @version $Id: BSUserAgent.class.php 2349 2010-09-15 14:27:31Z pooza $
  * @abstract
  */
 abstract class BSUserAgent implements ArrayAccess, BSAssignable {
@@ -17,7 +17,7 @@ abstract class BSUserAgent implements ArrayAccess, BSAssignable {
 	protected $bugs;
 	static private $denied;
 	const ACCESSOR = 'ua';
-	const DEFAULT_NAME = 'Mozilla/4.0 (compatible; MSIE 8.0; Windows NT 6.1; Trident/4.0)';
+	const DEFAULT_NAME = 'Mozilla/4.0';
 
 	/**
 	 * @access protected
@@ -132,6 +132,10 @@ abstract class BSUserAgent implements ArrayAccess, BSAssignable {
 		$view->setAttribute('has_proxy_server', $view->hasProxyServer());
 		$view->setAttribute('is_ssl', BSRequest::getInstance()->isSSL());
 		$view->setAttribute('is_debug', BS_DEBUG);
+		$view->setAttribute('session', new BSArray(array(
+			'name' => BSRequest::getInstance()->getSession()->getName(),
+			'id' => BSRequest::getInstance()->getSession()->getID(),
+		)));
 		return true;
 	}
 

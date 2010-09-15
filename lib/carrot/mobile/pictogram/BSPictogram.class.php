@@ -8,7 +8,7 @@
  * 絵文字
  *
  * @author 小石達也 <tkoishi@b-shock.co.jp>
- * @version $Id: BSPictogram.class.php 2310 2010-08-26 13:48:04Z pooza $
+ * @version $Id: BSPictogram.class.php 2350 2010-09-15 15:19:35Z pooza $
  */
 class BSPictogram implements BSAssignable, BSImageContainer {
 	private $id;
@@ -17,6 +17,7 @@ class BSPictogram implements BSAssignable, BSImageContainer {
 	private $names;
 	private $imagefile;
 	private $element;
+	private $imageinfo;
 	static private $instances;
 
 	/**
