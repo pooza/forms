@@ -8,7 +8,7 @@
  * テーブルのレコード
  *
  * @author 小石達也 <tkoishi@b-shock.co.jp>
- * @version $Id: BSRecord.class.php 2308 2010-08-26 13:19:16Z pooza $
+ * @version $Id: BSRecord.class.php 2343 2010-09-13 03:38:22Z pooza $
  * @abstract
  */
 abstract class BSRecord implements ArrayAccess,
@@ -24,11 +24,13 @@ abstract class BSRecord implements ArrayAccess,
 	 * @param BSTableHandler $table テーブルハンドラ
 	 * @param string[] $attributes 属性の連想配列
 	 */
-	public function __construct (BSTableHandler $table, $attributes) {
+	public function __construct (BSTableHandler $table, $attributes = null) {
 		$this->table = $table;
 		$this->attributes = new BSArray;
 		$this->records = new BSArray;
-		$this->attributes->setParameters($attributes);
+		if ($attributes) {
+			$this->initialize($attributes);
+		}
 	}
 
 	/**
@@ -49,6 +51,19 @@ abstract class BSRecord implements ArrayAccess,
 		$message = new BSStringFormat('仮想メソッド"%s"は未定義です。');
 		$message[] = $method;
 		throw new BadFunctionCallException($message);
+	}
+
+	/**
+	 * 属性値を初期化
+	 *
+	 * @access public
+	 * @param string[] $attributes 属性の連想配列
+	 * @return BSRecord 自分自身
+	 */
+	public function initialize ($attributes) {
+		$this->attributes->clear();
+		$this->attributes->setParameters($attributes);
+		return $this;
 	}
 
 	/**
@@ -603,6 +618,7 @@ abstract class BSRecord implements ArrayAccess,
 	 */
 	protected function getFullAttributes () {
 		$values = $this->getAttributes();
+		$values['_attributes'] = $this->getAttributes();
 		if ($url = $this->getURL()) {
 			$values['url'] = $url->getContents();
 		}

@@ -8,7 +8,7 @@
  * XML要素
  *
  * @author 小石達也 <tkoishi@b-shock.co.jp>
- * @version $Id: BSXMLElement.class.php 1987 2010-04-11 02:49:50Z pooza $
+ * @version $Id: BSXMLElement.class.php 2345 2010-09-15 00:39:32Z pooza $
  */
 class BSXMLElement implements IteratorAggregate {
 	protected $contents;
@@ -263,8 +263,8 @@ class BSXMLElement implements IteratorAggregate {
 	public function getContents () {
 		if (!$this->contents) {
 			$this->contents = '<' . $this->getName();
-			if ($this->attributes->count()) {
-				foreach ($this->attributes as $key => $value) {
+			foreach ($this->attributes as $key => $value) {
+				if (!BSString::isBlank($value)) {
 					$this->contents .= sprintf(' %s="%s"', $key, BSString::sanitize($value));
 				}
 			}
@@ -368,7 +368,7 @@ class BSXMLElement implements IteratorAggregate {
 	 * @param boolean $mode RAWモード
 	 */
 	public function setRawMode ($mode) {
-		$this->raw = $mode;
+		$this->raw = !!$mode;
 		$this->body = null;
 		$this->contents = null;
 	}
