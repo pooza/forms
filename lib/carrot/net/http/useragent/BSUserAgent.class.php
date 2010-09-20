@@ -8,7 +8,7 @@
  * ユーザーエージェント
  *
  * @author 小石達也 <tkoishi@b-shock.co.jp>
- * @version $Id: BSUserAgent.class.php 2349 2010-09-15 14:27:31Z pooza $
+ * @version $Id: BSUserAgent.class.php 2351 2010-09-20 07:14:46Z pooza $
  * @abstract
  */
 abstract class BSUserAgent implements ArrayAccess, BSAssignable {
@@ -295,6 +295,16 @@ abstract class BSUserAgent implements ArrayAccess, BSAssignable {
 		$images = new BSImageManager($flags);
 		$images->setUserAgent($this);
 		return $images;
+	}
+
+	/**
+	 * 画面情報を返す
+	 *
+	 * @access public
+	 * @return BSArray 画面情報
+	 */
+	public function getDisplayInfo () {
+		return new BSArray;
 	}
 
 	/**

@@ -8,7 +8,7 @@
  * iPhoneユーザーエージェント
  *
  * @author 小石達也 <tkoishi@b-shock.co.jp>
- * @version $Id: BSIPhoneUserAgent.class.php 2336 2010-09-10 09:25:46Z pooza $
+ * @version $Id: BSIPhoneUserAgent.class.php 2351 2010-09-20 07:14:46Z pooza $
  */
 class BSIPhoneUserAgent extends BSWebKitUserAgent {
 
@@ -20,6 +20,18 @@ class BSIPhoneUserAgent extends BSWebKitUserAgent {
 	 */
 	public function isSmartPhone () {
 		return true;
+	}
+
+	/**
+	 * 画面情報を返す
+	 *
+	 * @access public
+	 * @return BSArray 画面情報
+	 */
+	public function getDisplayInfo () {
+		return new BSArray(array(
+			'width' => 480,
+		));
 	}
 
 	/**

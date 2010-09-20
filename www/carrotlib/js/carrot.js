@@ -3,7 +3,7 @@
  *
  * @package org.carrot-framework
  * @author 小石達也 <tkoishi@b-shock.co.jp>
- * @version $Id: carrot.js 2298 2010-08-19 14:17:26Z pooza $
+ * @version $Id: carrot.js 2352 2010-09-20 07:15:23Z pooza $
  */
 
 var CarrotLib = {
@@ -108,6 +108,28 @@ var CarrotLib = {
     var elements = $$(selector_name);
     for (var i = 0 ; i < elements.length ; i ++) {
       configureElement(elements[i]);
+    }
+  },
+
+  // @link http://memorandum.char-aznable.com/web_design/javascript.html
+  backToTop: function () {
+    var x1 = x2 = x3 = 0;
+    var y1 = y2 = y3 = 0;
+    if (document.documentElement) {
+      x1 = document.documentElement.scrollLeft || 0;
+      y1 = document.documentElement.scrollTop || 0;
+    }
+    if (document.body) {
+      x2 = document.body.scrollLeft || 0;
+      y2 = document.body.scrollTop || 0;
+    }
+    x3 = window.scrollX || 0;
+    y3 = window.scrollY || 0;
+    var x = Math.max(x1, Math.max(x2, x3));
+    var y = Math.max(y1, Math.max(y2, y3));
+    window.scrollTo(Math.floor(x / 2), Math.floor(y / 2));
+    if (x > 0 || y > 0) {
+      window.setTimeout('CarrotLib.backToTop()', 25);
     }
   },
 

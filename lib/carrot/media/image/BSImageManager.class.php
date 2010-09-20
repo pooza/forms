@@ -8,7 +8,7 @@
  * 画像マネージャ
  *
  * @author 小石達也 <tkoishi@b-shock.co.jp>
- * @version $Id: BSImageManager.class.php 2313 2010-08-26 14:42:43Z pooza $
+ * @version $Id: BSImageManager.class.php 2351 2010-09-20 07:14:46Z pooza $
  */
 class BSImageManager {
 	private $useragent;
@@ -49,6 +49,16 @@ class BSImageManager {
 	 */
 	public function setUserAgent (BSUserAgent $useragent) {
 		$this->useragent = $useragent;
+	}
+
+	/**
+	 * 規定の最大幅を返す
+	 *
+	 * @access public
+	 * @return integer 規定の最大幅
+	 */
+	public function getDefaultWidth () {
+		return $this->getUserAgent()->getDisplayInfo()->getParameter('width');
 	}
 
 	/**
@@ -290,11 +300,9 @@ class BSImageManager {
 	private function getFileName (BSImageContainer $record, $pixel, $flags = null) {
 		$flags |= $this->flags;
 		$prefix = '';
-		if (($useragent = $this->getUserAgent()) && $useragent->isMobile()) {
+		if (!$pixel && ($width = $this->getDefaultWidth())) {
 			$prefix = 'w';
-			if (!$pixel) {
-				$pixel = $useragent->getDisplayInfo()->getParameter('width');
-			}
+			$pixel = $width;
 		} else if ($flags & self::WITHOUT_SQUARE) {
 			$prefix = 's';
 		} else if ($flags & self::WIDTH_FIXED) {
@@ -343,9 +351,8 @@ class BSImageManager {
 			} else {
 				$image->resizeSquare($pixel);
 			}
-		} else if (($useragent = $this->getUserAgent()) && $useragent->isMobile()) {
-			$info = $useragent->getDisplayInfo();
-			$image->resizeWidth($info['width']);
+		} else if ($width = $this->getDefaultWidth()) {
+			$image->resizeWidth($width);
 		}
 		return $image;
 	}

@@ -2,11 +2,11 @@
 #
 # @package org.carrot-framework
 # @author 小石達也 <tkoishi@b-shock.co.jp>
-# @version $Id: carrot.yaml 2347 2010-09-15 14:22:34Z pooza $
+# @version $Id: carrot.yaml 2352 2010-09-20 07:15:23Z pooza $
 
 carrot:
   name: carrot Framework
-  ver: 2.4.14
+  ver: 2.4.15
 
 admin:
   email:
