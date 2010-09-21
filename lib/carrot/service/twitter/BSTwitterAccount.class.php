@@ -8,7 +8,7 @@
  * Twitterアカウント
  *
  * @author 小石達也 <tkoishi@b-shock.co.jp>
- * @version $Id: BSTwitterAccount.class.php 2308 2010-08-26 13:19:16Z pooza $
+ * @version $Id: BSTwitterAccount.class.php 2354 2010-09-21 11:24:51Z pooza $
  */
 class BSTwitterAccount
 	implements BSImageContainer, BSSerializable, BSAssignable, BSHTTPRedirector {
@@ -103,7 +103,7 @@ class BSTwitterAccount
 	 */
 	protected function getOAuth () {
 		if (!$this->oauth && ($token = $this->getAccessToken())) {
-			BSUtility::includeFile('twitteroauth/twitteroauth.php');
+			BSUtility::includeFile('twitteroauth');
 			$this->oauth = new TwitterOAuth(
 				BS_SERVICE_TWITTER_CONSUMER_KEY,
 				BS_SERVICE_TWITTER_CONSUMER_SECRET,
@@ -121,7 +121,7 @@ class BSTwitterAccount
 	 * @return BSHTTPURL 認証ページのURL
 	 */
 	public function getOAuthURL () {
-		BSUtility::includeFile('twitteroauth/twitteroauth.php');
+		BSUtility::includeFile('twitteroauth');
 		$oauth = new TwitterOAuth(
 			BS_SERVICE_TWITTER_CONSUMER_KEY,
 			BS_SERVICE_TWITTER_CONSUMER_SECRET
@@ -162,7 +162,7 @@ class BSTwitterAccount
 		}
 		$this->logout();
 
-		BSUtility::includeFile('twitteroauth/twitteroauth.php');
+		BSUtility::includeFile('twitteroauth');
 		$oauth = new TwitterOAuth(
 			BS_SERVICE_TWITTER_CONSUMER_KEY,
 			BS_SERVICE_TWITTER_CONSUMER_SECRET,

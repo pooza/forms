@@ -8,7 +8,7 @@
  * SoftBankユーザーエージェント
  *
  * @author 小石達也 <tkoishi@b-shock.co.jp>
- * @version $Id: BSSoftBankUserAgent.class.php 2114 2010-05-31 16:29:54Z pooza $
+ * @version $Id: BSSoftBankUserAgent.class.php 2353 2010-09-21 11:19:41Z pooza $
  */
 class BSSoftBankUserAgent extends BSMobileUserAgent {
 	const DEFAULT_NAME = 'SoftBank';
@@ -23,6 +23,21 @@ class BSSoftBankUserAgent extends BSMobileUserAgent {
 		}
 		parent::__construct($name);
 		$this->attributes['is_3gc'] = $this->is3GC();
+	}
+
+	/**
+	 * ビューを初期化
+	 *
+	 * @access public
+	 * @param BSSmartyView 対象ビュー
+	 * @return boolean 成功時にTrue
+	 */
+	public function initializeView (BSSmartyView $view) {
+		parent::initializeView($view);
+		if (BS_STRING_MOBILE_SOFTBANK_RAW_OUTPUT) {
+			$view->getRenderer()->setEncoding('utf8');
+		}
+		return true;
 	}
 
 	/**
