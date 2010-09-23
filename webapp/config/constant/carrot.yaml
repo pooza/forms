@@ -2,11 +2,11 @@
 #
 # @package org.carrot-framework
 # @author 小石達也 <tkoishi@b-shock.co.jp>
-# @version $Id: carrot.yaml 2353 2010-09-21 11:19:41Z pooza $
+# @version $Id: carrot.yaml 2355 2010-09-23 11:28:11Z pooza $
 
 carrot:
   name: carrot Framework
-  ver: 2.4.16
+  ver: 2.4.17
 
 admin:
   email:
@@ -249,6 +249,8 @@ string:
 upload:
   progress:
     key: progress_key
+user:
+  class:
 xmpp:
   host: talk.google.com
   port: 5222
