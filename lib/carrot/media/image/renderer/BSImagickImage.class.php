@@ -8,7 +8,7 @@
  * ImageMagick画像レンダラー
  *
  * @author 小石達也 <tkoishi@b-shock.co.jp>
- * @version $Id: BSImagickImage.class.php 2285 2010-08-17 11:09:38Z pooza $
+ * @version $Id: BSImagickImage.class.php 2357 2010-09-24 09:10:01Z pooza $
  */
 class BSImagickImage extends BSImage {
 
@@ -170,6 +170,17 @@ class BSImagickImage extends BSImage {
 	 */
 	public function drawLine (BSCoordinate $start, BSCoordinate $end, BSColor $color) {
 		throw new BSImageException('BSImagickImage::drawLineは未実装です。');
+	}
+
+	/**
+	 * 重ね合わせ
+	 *
+	 * @access public
+	 * @param BSImage $image 重ねる画像
+	 * @param BSCoordinate $coord 貼り付け先の起点座標
+	 */
+	public function overlay (BSImage $image, BSCoordinate $coord = null) {
+		throw new BSImageException('BSImagickImage::overlayは未実装です。');
 	}
 
 	/**

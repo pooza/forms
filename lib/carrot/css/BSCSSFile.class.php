@@ -8,7 +8,7 @@
  * CSSファイル
  *
  * @author 小石達也 <tkoishi@b-shock.co.jp>
- * @version $Id: BSCSSFile.class.php 2202 2010-07-05 11:37:30Z pooza $
+ * @version $Id: BSCSSFile.class.php 2358 2010-09-24 09:12:44Z pooza $
  */
 class BSCSSFile extends BSFile {
 
@@ -48,7 +48,7 @@ class BSCSSFile extends BSFile {
 	 * @access public
 	 */
 	public function serialize () {
-		BSUtility::includeFile('Minify/CSS/Compressor.php');
+		BSUtility::includeFile('Minify/CSS/Compressor');
 		$contents = Minify_CSS_Compressor::process($this->getContents());
 		BSController::getInstance()->setAttribute($this, $contents);
 	}

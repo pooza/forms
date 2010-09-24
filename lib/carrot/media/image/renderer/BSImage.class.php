@@ -8,7 +8,7 @@
  * GD画像レンダラー
  *
  * @author 小石達也 <tkoishi@b-shock.co.jp>
- * @version $Id: BSImage.class.php 2277 2010-08-15 05:54:09Z pooza $
+ * @version $Id: BSImage.class.php 2356 2010-09-24 08:17:52Z pooza $
  */
 class BSImage implements BSImageRenderer {
 	protected $type;
@@ -303,6 +303,26 @@ class BSImage implements BSImageRenderer {
 			$start->getX(), $start->getY(),
 			$end->getX(), $end->getY(),
 			$this->getColorID($color)
+		);
+	}
+
+	/**
+	 * 重ね合わせ
+	 *
+	 * @access public
+	 * @param BSImage $image 重ねる画像
+	 * @param BSCoordinate $coord 貼り付け先の起点座標
+	 */
+	public function overlay (BSImage $image, BSCoordinate $coord = null) {
+		if (!$coord) {
+			$coord = $this->getCoordinate(0, 0);
+		}
+		imagecopy(
+			$this->getGDHandle(),
+			$image->getGDHandle(),
+			$coord->getX(), $coord->getY(),
+			0, 0,
+			$image->getWidth(), $image->getHeight()
 		);
 	}
 
