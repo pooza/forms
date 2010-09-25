@@ -8,7 +8,7 @@
  * Twitterアカウント
  *
  * @author 小石達也 <tkoishi@b-shock.co.jp>
- * @version $Id: BSTwitterAccount.class.php 2354 2010-09-21 11:24:51Z pooza $
+ * @version $Id: BSTwitterAccount.class.php 2362 2010-09-25 06:34:43Z pooza $
  */
 class BSTwitterAccount
 	implements BSImageContainer, BSSerializable, BSAssignable, BSHTTPRedirector {
@@ -319,7 +319,7 @@ class BSTwitterAccount
 	 * @param string $size サイズ名
 	 */
 	public function setImageFile (BSImageFile $file, $size = 'icon') {
-		throw new BSImageException($this . 'の画像ファイルを設定できません。');
+		throw new BBServiceException($this . 'の画像ファイルを設定できません。');
 	}
 
 	/**

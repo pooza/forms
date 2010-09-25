@@ -8,41 +8,34 @@
  * OAuthシグネチャ
  *
  * @author 小石達也 <tkoishi@b-shock.co.jp>
- * @version $Id: BSOAuthSignature.class.php 2357 2010-09-24 09:10:01Z pooza $
+ * @version $Id: BSOAuthSignature.class.php 2362 2010-09-25 06:34:43Z pooza $
  */
 class BSOAuthSignature extends BSParameterHolder {
 	private $method;
-	private $header;
 	private $url;
+	private $request;
 	private $consumer;
 
 	/**
 	 * @access public
 	 */
-	public function __construct () {
+	public function __construct (BSRequest $request) {
 		$this->setMethod('GET');
-		$this->refresh();
-
+		$this->setURL(BSURL::getInstance());
+		$this->request = $request;
 		$this['oauth_signature_method'] = 'HMAC-SHA1';
 		$this['oauth_version'] = '1.0';
-
-		$request = BSRequest::getInstance();
-		$this['xoauth_requestor_id'] = $request['opensocial_viewer_id'];
-
-		if ($this->header = $request->getHeader('Authorization')) {
-			$this['oauth_token'] = $this->header['oauth_token'];
-		}
-	}
-
-	/**
-	 * シグネチャをリフレッシュ
-	 *
-	 * @access public
-	 */
-	public function refresh () {
-		$this->clear();
 		$this['oauth_nonce'] = BSDate::getNow('YmdHis') . BSNumeric::getRandom(1000, 9999);
 		$this['oauth_timestamp'] = BSDate::getNow()->getTimestamp();
+
+		if ($header = $this->request->getHeader('Authorization')) {
+			foreach (array('token', 'token_secret', 'nonce', 'timestamp') as $name) {
+				$name = 'oauth_' . $name;
+				if (!BSString::isBlank($value = $header[$name])) {
+					$this[$name] = $value;
+				}
+			}
+		}
 	}
 
 	/**
@@ -96,8 +89,8 @@ class BSOAuthSignature extends BSParameterHolder {
 		if ($this->consumer) {
 			$values[] = $this->consumer->getSecret();
 		}
-		if ($this->header) {
-			$values[] = $this->header['oauth_token_secret'];
+		if ($header = $this->request->getHeader('Authorization')) {
+			$values[] = $header['oauth_token_secret'];
 		}
 		$values = BSURL::encode($values);
 		return $values->join('&');
@@ -112,7 +105,7 @@ class BSOAuthSignature extends BSParameterHolder {
 	public function setMethod ($method) {
 		$this->method = BSString::toUpper($method);
 		if (!BSHTTPRequest::isValidMethod($this->method)) {
-			throw new BSHTTPException($this->method . 'は正しくないメソッドです。');
+			throw new BBServiceException($this->method . 'は正しくないメソッドです。');
 		}
 	}
 

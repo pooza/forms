@@ -8,7 +8,7 @@
  * Google Mapsクライアント
  *
  * @author 小石達也 <tkoishi@b-shock.co.jp>
- * @version $Id: BSGoogleMapsService.class.php 2323 2010-08-30 12:20:06Z pooza $
+ * @version $Id: BSGoogleMapsService.class.php 2362 2010-09-25 06:34:43Z pooza $
  */
 class BSGoogleMapsService extends BSCurlHTTP {
 	private $table;
@@ -56,7 +56,7 @@ class BSGoogleMapsService extends BSCurlHTTP {
 		if (!$geocode = $this->getGeocode($address)) {
 			$message = new BSStringFormat('"%s" のジオコードが取得できません。');
 			$message[] = $address;
-			throw new BSGeocodeException($message);
+			throw new BBServiceException($message);
 		}
 
 		if ($this->useragent->isMobile()) {

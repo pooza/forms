@@ -8,7 +8,7 @@
  * 基底URL
  *
  * @author 小石達也 <tkoishi@b-shock.co.jp>
- * @version $Id: BSURL.class.php 2355 2010-09-23 11:28:11Z pooza $
+ * @version $Id: BSURL.class.php 2360 2010-09-25 06:26:00Z pooza $
  * @abstract
  */
 abstract class BSURL implements ArrayAccess, BSAssignable {
@@ -279,6 +279,25 @@ abstract class BSURL implements ArrayAccess, BSAssignable {
 			}
 		} else {
 			$value = urlencode($value);
+		}
+		return $value;
+	}
+
+	/**
+	 * 文字列をURLデコード
+	 *
+	 * @access public
+	 * @param string $value 対象文字列
+	 * @return string URLデコードされた文字列
+	 * @static
+	 */
+	static public function decode ($value) {
+		if (BSArray::isArray($value)) {
+			foreach ($value as $key => $item) {
+				$value[$key] = self::decode($item);
+			}
+		} else {
+			$value = urldecode($value);
 		}
 		return $value;
 	}

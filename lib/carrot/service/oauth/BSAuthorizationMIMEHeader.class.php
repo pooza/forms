@@ -8,7 +8,7 @@
  * Authorizationヘッダ
  *
  * @author 小石達也 <tkoishi@b-shock.co.jp>
- * @version $Id: BSAuthorizationMIMEHeader.class.php 2355 2010-09-23 11:28:11Z pooza $
+ * @version $Id: BSAuthorizationMIMEHeader.class.php 2360 2010-09-25 06:26:00Z pooza $
  */
 class BSAuthorizationMIMEHeader extends BSMIMEHeader {
 	private $signature;
@@ -26,7 +26,7 @@ class BSAuthorizationMIMEHeader extends BSMIMEHeader {
 			foreach (BSString::explode(',', $contents) as $field) {
 				$field = trim($field);
 				if (mb_ereg('([^=]+)="([^"]+)"', $field, $matches)) {
-					$this[$matches[1]] = $matches[2];
+					$this[BSURL::decode($matches[1])] = BSURL::decode($matches[2]);
 				}
 			}
 		}
