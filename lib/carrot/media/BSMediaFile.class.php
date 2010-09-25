@@ -8,7 +8,7 @@
  * メディアファイル
  *
  * @author 小石達也 <tkoishi@b-shock.co.jp>
- * @version $Id: BSMediaFile.class.php 2224 2010-07-20 12:57:19Z pooza $
+ * @version $Id: BSMediaFile.class.php 2364 2010-09-25 10:51:04Z pooza $
  * @abstract
  */
 abstract class BSMediaFile extends BSFile implements ArrayAccess {
@@ -105,6 +105,7 @@ abstract class BSMediaFile extends BSFile implements ArrayAccess {
 	 * @return BSDivisionElement 要素
 	 */
 	public function getElement (BSParameterHolder $params, BSUserAgent $useragent = null) {
+		$this->resizeByWidth($params, $useragent);
 		$container = new BSDivisionElement;
 		$container->registerStyleClass($params['style_class']);
 		if ($params['mode'] == 'noscript') {
@@ -119,6 +120,31 @@ abstract class BSMediaFile extends BSFile implements ArrayAccess {
 			$container->addElement($this->getScriptElement($params));
 		}
 		return $container;
+	}
+
+	/**
+	 * 幅でリサイズ
+	 *
+	 * @access protected
+	 * @param BSParameterHolder $params パラメータ配列
+	 * @param BSUserAgent $useragent 対象ブラウザ
+	 */
+	protected function resizeByWidth (BSParameterHolder $params, BSUserAgent $useragent = null) {
+		if ($params['_resized_by_width']) {
+			return;
+		}
+		if (!$params['max_width'] && $useragent
+			&& ($width = $useragent->getDisplayInfo()->getParameter('width'))) {
+
+			$params['max_width'] = $width;
+		}
+		if ($params['max_width'] && ($params['max_width'] < $params['width'])) {
+			$params['height'] = BSNumeric::round(
+				$params['height'] * $params['max_width'] / $params['width']
+			);
+			$params['width'] = $params['max_width'];
+		}
+		$params['_resized_by_width'] = true;
 	}
 
 	/**

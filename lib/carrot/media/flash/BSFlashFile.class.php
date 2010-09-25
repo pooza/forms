@@ -8,7 +8,7 @@
  * Flashムービーファイル
  *
  * @author 小石達也 <tkoishi@b-shock.co.jp>
- * @version $Id: BSFlashFile.class.php 2148 2010-06-18 09:41:21Z pooza $
+ * @version $Id: BSFlashFile.class.php 2364 2010-09-25 10:51:04Z pooza $
  */
 class BSFlashFile extends BSMediaFile {
 
@@ -40,6 +40,7 @@ class BSFlashFile extends BSMediaFile {
 	 * @return BSDivisionElement 要素
 	 */
 	public function getElement (BSParameterHolder $params, BSUserAgent $useragent = null) {
+		$this->resizeByWidth($params, $useragent);
 		if (!$useragent) {
 			$useragent = BSRequest::getInstance()->getUserAgent();
 		}

@@ -8,7 +8,7 @@
  * 動画ファイル
  *
  * @author 小石達也 <tkoishi@b-shock.co.jp>
- * @version $Id: BSMovieFile.class.php 2222 2010-07-19 09:10:56Z pooza $
+ * @version $Id: BSMovieFile.class.php 2364 2010-09-25 10:51:04Z pooza $
  */
 class BSMovieFile extends BSMediaFile {
 
@@ -99,6 +99,7 @@ class BSMovieFile extends BSMediaFile {
 	 * @return BSDivisionElement 要素
 	 */
 	public function getElement (BSParameterHolder $params, BSUserAgent $useragent = null) {
+		$this->resizeByWidth($params, $useragent);
 		if ($params['mode'] == 'shadowbox') {
 			return $this->getShadowboxElement($params);
 		}
