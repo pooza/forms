@@ -2,7 +2,7 @@
 #
 # @package org.carrot-framework
 # @author 小石達也 <tkoishi@b-shock.co.jp>
-# @version $Id: carrot.yaml 2315 2010-08-27 02:30:21Z pooza $
+# @version $Id: carrot.yaml 2370 2010-09-29 14:24:22Z pooza $
 
 awstats:
   parent: lib
@@ -118,6 +118,8 @@ request:
     day: 7
 root:
   constant: yes
+sample:
+  parent: share
 sendmail:
   constant: yes
 serialized:

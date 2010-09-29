@@ -8,7 +8,7 @@
  * 楽曲ファイル
  *
  * @author 小石達也 <tkoishi@b-shock.co.jp>
- * @version $Id: BSMusicFile.class.php 2192 2010-06-30 09:15:45Z pooza $
+ * @version $Id: BSMusicFile.class.php 2365 2010-09-25 11:14:18Z pooza $
  */
 class BSMusicFile extends BSMediaFile {
 
@@ -76,6 +76,7 @@ class BSMusicFile extends BSMediaFile {
 	 * @return BSDivisionElement 要素
 	 */
 	public function getElement (BSParameterHolder $params, BSUserAgent $useragent = null) {
+		$this->resizeByWidth($params, $useragent);
 		$container = new BSDivisionElement;
 		$container->setAttribute('width', $this['width']);
 		$container->setAttribute('height', $this['height']);

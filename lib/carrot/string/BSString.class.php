@@ -8,7 +8,7 @@
  * 文字列に関するユーティリティ
  *
  * @author 小石達也 <tkoishi@b-shock.co.jp>
- * @version $Id: BSString.class.php 2317 2010-08-27 10:49:26Z pooza $
+ * @version $Id: BSString.class.php 2370 2010-09-29 14:24:22Z pooza $
  */
 class BSString {
 
@@ -138,6 +138,32 @@ class BSString {
 			foreach (self::eregMatchAll('[［］｛｝（）[:alnum:]]+', $value) as $matches) {
 				$value = str_replace($matches[0], mb_convert_kana($matches[0], 'a'), $value);
 			}
+		}
+		return $value;
+	}
+
+	/**
+	 * 機種依存文字等を置き換え
+	 *
+	 * @access public
+	 * @param mixed $value 変換対象の文字列又は配列
+	 * @return mixed 変換後
+	 * @static
+	 * @link http://php.nekosuke.com/000056.htm 参考
+	 */
+	static public function convertWrongCharacters ($value) {
+		if (BSArray::isArray($value)) {
+			foreach ($value as $key => $item) {
+				$value[$key] = self::convertWrongCharacters($item);
+			}
+		} else {
+			$search = array();
+			$replace = array();
+			foreach (BSConfigManager::getInstance()->compile('wrong_characters') as $rule) {
+				eval('$search[] = "' . $rule['search'] . '";');
+				$replace[] = $rule['replace'];
+			}
+			$value = str_replace($search, $replace, $value);
 		}
 		return $value;
 	}

@@ -8,7 +8,7 @@
  * 画像ファイル
  *
  * @author 小石達也 <tkoishi@b-shock.co.jp>
- * @version $Id: BSImageFile.class.php 2308 2010-08-26 13:19:16Z pooza $
+ * @version $Id: BSImageFile.class.php 2365 2010-09-25 11:14:18Z pooza $
  */
 class BSImageFile extends BSMediaFile implements BSImageContainer, BSAssignable {
 	protected $renderer;
@@ -173,6 +173,7 @@ class BSImageFile extends BSMediaFile implements BSImageContainer, BSAssignable 
 	 * @return BSDivisionElement 要素
 	 */
 	public function getElement (BSParameterHolder $params, BSUserAgent $useragent = null) {
+		$this->resizeByWidth($params, $useragent);
 		$params = new BSArray($params);
 		$element = new BSImageElement;
 		$element->setURL($this->getMediaURL($params));

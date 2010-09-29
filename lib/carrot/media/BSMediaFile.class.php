@@ -8,7 +8,7 @@
  * メディアファイル
  *
  * @author 小石達也 <tkoishi@b-shock.co.jp>
- * @version $Id: BSMediaFile.class.php 2364 2010-09-25 10:51:04Z pooza $
+ * @version $Id: BSMediaFile.class.php 2366 2010-09-25 11:19:28Z pooza $
  * @abstract
  */
 abstract class BSMediaFile extends BSFile implements ArrayAccess {
@@ -133,11 +133,16 @@ abstract class BSMediaFile extends BSFile implements ArrayAccess {
 		if ($params['_resized_by_width']) {
 			return;
 		}
-		if (!$params['max_width'] && $useragent
-			&& ($width = $useragent->getDisplayInfo()->getParameter('width'))) {
 
-			$params['max_width'] = $width;
+		if (!$useragent) {
+			$useragent = BSRequest::getInstance()->getUserAgent();
 		}
+
+		$info = $useragent->getDisplayInfo();
+		if (!$params['max_width'] && $info['width']) {
+			$params['max_width'] = $info['width'] - 20;
+		}
+
 		if ($params['max_width'] && ($params['max_width'] < $params['width'])) {
 			$params['height'] = BSNumeric::round(
 				$params['height'] * $params['max_width'] / $params['width']

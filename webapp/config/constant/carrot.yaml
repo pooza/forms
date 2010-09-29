@@ -2,11 +2,11 @@
 #
 # @package org.carrot-framework
 # @author 小石達也 <tkoishi@b-shock.co.jp>
-# @version $Id: carrot.yaml 2361 2010-09-25 06:27:07Z pooza $
+# @version $Id: carrot.yaml 2367 2010-09-29 11:31:45Z pooza $
 
 carrot:
   name: carrot Framework
-  ver: 2.4.19
+  ver: 2.4.20
 
 admin:
   email:
@@ -137,6 +137,7 @@ module:
     - Admin
     - User
     - Develop
+    - Console
   default:
     module: Default
     action: Default
