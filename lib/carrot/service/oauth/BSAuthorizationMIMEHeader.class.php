@@ -8,9 +8,10 @@
  * Authorizationヘッダ
  *
  * @author 小石達也 <tkoishi@b-shock.co.jp>
- * @version $Id: BSAuthorizationMIMEHeader.class.php 2360 2010-09-25 06:26:00Z pooza $
+ * @version $Id: BSAuthorizationMIMEHeader.class.php 2371 2010-09-30 12:35:45Z pooza $
  */
 class BSAuthorizationMIMEHeader extends BSMIMEHeader {
+	protected $name = 'Authorization';
 	private $signature;
 
 	/**

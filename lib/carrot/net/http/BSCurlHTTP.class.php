@@ -8,7 +8,7 @@
  * CurlによるHTTP処理
  *
  * @author 小石達也 <tkoishi@b-shock.co.jp>
- * @version $Id: BSCurlHTTP.class.php 2360 2010-09-25 06:26:00Z pooza $
+ * @version $Id: BSCurlHTTP.class.php 2371 2010-09-30 12:35:45Z pooza $
  */
 class BSCurlHTTP extends BSHTTP {
 	protected $engine;
@@ -86,7 +86,7 @@ class BSCurlHTTP extends BSHTTP {
 
 		$headers = array();
 		foreach ($this->headers as $header) {
-			$headers[] = $header->format(BSMIMEHeader::WITHOUT_CRLF);
+			$headers[] = $header->getName() . ': ' . $header->getContents();
 		}
 		$this->setAttribute('httpheader', $headers);
 
@@ -207,7 +207,7 @@ class BSCurlHTTP extends BSHTTP {
 	 * @param BSMIMEHeader $header ヘッダ
 	 */
 	public function setHeader (BSMIMEHeader $header) {
-		$this->headers[$name] = $header;
+		$this->headers[$header->getName()] = $header;
 	}
 
 	/**
