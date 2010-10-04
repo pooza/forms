@@ -2,7 +2,7 @@
 #
 # @package org.carrot-framework
 # @author 小石達也 <tkoishi@b-shock.co.jp>
-# @version $Id: carrot.yaml 2372 2010-10-04 04:45:58Z pooza $
+# @version $Id: carrot.yaml 2375 2010-10-04 05:04:14Z pooza $
 
 carrot:
   name: carrot Framework
@@ -257,6 +257,6 @@ xmpp:
   port: 5222
   server: gmail.com
   ssl: yes
-view::
+view:
   frame_options: sameorigin
   content_type_options: nosniff
