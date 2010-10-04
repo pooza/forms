@@ -8,7 +8,7 @@
  * ディレクトリエントリ
  *
  * @author 小石達也 <tkoishi@b-shock.co.jp>
- * @version $Id: BSDirectoryEntry.class.php 2215 2010-07-17 03:53:27Z pooza $
+ * @version $Id: BSDirectoryEntry.class.php 2373 2010-10-04 04:54:17Z pooza $
  * @abstract
  */
 abstract class BSDirectoryEntry {
@@ -76,7 +76,7 @@ abstract class BSDirectoryEntry {
 		}
 
 		$path = $this->getDirectory()->getPath() . DIRECTORY_SEPARATOR . basename($name);
-		if (!rename($this->getPath(), $path)) {
+		if (!@rename($this->getPath(), $path)) { // "@" はFreeBSD対応
 			throw new BSFileException($this . 'をリネームできません。');
 		}
 		$this->setPath($path);
@@ -149,7 +149,7 @@ abstract class BSDirectoryEntry {
 		}
 
 		$path = $dir->getPath() . DIRECTORY_SEPARATOR . $this->getName();
-		if (!rename($this->getPath(), $path)) {
+		if (!@rename($this->getPath(), $path)) { // "@"はFreeBSD対応
 			throw new BSFileException($this . 'を移動できません。');
 		}
 		$this->setPath($path);
