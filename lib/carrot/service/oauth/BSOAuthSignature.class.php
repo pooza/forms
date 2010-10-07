@@ -8,7 +8,7 @@
  * OAuthシグネチャ
  *
  * @author 小石達也 <tkoishi@b-shock.co.jp>
- * @version $Id: BSOAuthSignature.class.php 2362 2010-09-25 06:34:43Z pooza $
+ * @version $Id: BSOAuthSignature.class.php 2376 2010-10-07 11:56:52Z pooza $
  */
 class BSOAuthSignature extends BSParameterHolder {
 	private $method;
@@ -105,7 +105,7 @@ class BSOAuthSignature extends BSParameterHolder {
 	public function setMethod ($method) {
 		$this->method = BSString::toUpper($method);
 		if (!BSHTTPRequest::isValidMethod($this->method)) {
-			throw new BBServiceException($this->method . 'は正しくないメソッドです。');
+			throw new BSServiceException($this->method . 'は正しくないメソッドです。');
 		}
 	}
 

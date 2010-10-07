@@ -17,7 +17,7 @@
  * p($holidays->getHolidays()); //当月のすべての祝日を配列で
  *
  * @author 小石達也 <tkoishi@b-shock.co.jp>
- * @version $Id: BSJapaneseHolidayListService.class.php 2362 2010-09-25 06:34:43Z pooza $
+ * @version $Id: BSJapaneseHolidayListService.class.php 2376 2010-10-07 11:56:52Z pooza $
  * @link http://www.finds.jp/wsdocs/calendar/
  */
 class BSJapaneseHolidayListService extends BSCurlHTTP implements BSHolidayList, BSSerializable {
@@ -108,7 +108,7 @@ class BSJapaneseHolidayListService extends BSCurlHTTP implements BSHolidayList, 
 			$xml->setContents($response->getRenderer()->getContents());
 			return $xml;
 		} catch (Exception $e) {
-			throw new BBServiceException('祝日が取得できません。');
+			throw new BSServiceException('祝日が取得できません。');
 		}
 	}
 
@@ -164,7 +164,7 @@ class BSJapaneseHolidayListService extends BSCurlHTTP implements BSHolidayList, 
 	 */
 	public function serialize () {
 		if (!$result = $this->query()->getElement('result')) {
-			throw new BBServiceException('result要素がありません。');
+			throw new BSServiceException('result要素がありません。');
 		}
 		$holidays = new BSArray;
 		foreach ($result as $element) {
