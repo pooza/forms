@@ -8,9 +8,10 @@
  * Receivedヘッダ
  *
  * @author 小石達也 <tkoishi@b-shock.co.jp>
- * @version $Id: BSReceivedMIMEHeader.class.php 1812 2010-02-03 15:15:09Z pooza $
+ * @version $Id: BSReceivedMIMEHeader.class.php 2378 2010-10-08 14:10:29Z pooza $
  */
 class BSReceivedMIMEHeader extends BSMIMEHeader {
+	protected $name = 'Received';
 	private $servers;
 
 	/**

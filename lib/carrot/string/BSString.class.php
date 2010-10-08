@@ -8,7 +8,7 @@
  * 文字列に関するユーティリティ
  *
  * @author 小石達也 <tkoishi@b-shock.co.jp>
- * @version $Id: BSString.class.php 2370 2010-09-29 14:24:22Z pooza $
+ * @version $Id: BSString.class.php 2377 2010-10-08 13:52:47Z pooza $
  */
 class BSString {
 
@@ -529,9 +529,11 @@ class BSString {
 	 */
 	static public function eregMatchAll ($pattern, $subject) {
 		$matches = new BSArray;
-		mb_ereg_search_init($subject, $pattern);
-		while ($regs = mb_ereg_search_regs()) {
-			$matches[] = new BSArray($regs);
+		if (!BSString::isBlank($pattern) && !BSString::isBlank($subject)) {
+			mb_ereg_search_init($subject, $pattern);
+			while ($regs = mb_ereg_search_regs()) {
+				$matches[] = new BSArray($regs);
+			}
 		}
 		return $matches;
 	}

@@ -8,9 +8,10 @@
  * Content-Transfer-Encodingヘッダ
  *
  * @author 小石達也 <tkoishi@b-shock.co.jp>
- * @version $Id: BSContentTransferEncodingMIMEHeader.class.php 1812 2010-02-03 15:15:09Z pooza $
+ * @version $Id: BSContentTransferEncodingMIMEHeader.class.php 2378 2010-10-08 14:10:29Z pooza $
  */
 class BSContentTransferEncodingMIMEHeader extends BSMIMEHeader {
+	protected $name = 'Content-Transfer-Encoding';
 
 	/**
 	 * 内容を設定

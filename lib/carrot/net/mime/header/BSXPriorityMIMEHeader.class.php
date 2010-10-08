@@ -8,9 +8,10 @@
  * X-Priorityヘッダ
  *
  * @author 小石達也 <tkoishi@b-shock.co.jp>
- * @version $Id: BSXPriorityMIMEHeader.class.php 1923 2010-03-21 12:02:11Z pooza $
+ * @version $Id: BSXPriorityMIMEHeader.class.php 2378 2010-10-08 14:10:29Z pooza $
  */
 class BSXPriorityMIMEHeader extends BSMIMEHeader {
+	protected $name = 'X-Priority';
 
 	/**
 	 * 内容を設定

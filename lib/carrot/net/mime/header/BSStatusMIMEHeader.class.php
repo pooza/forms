@@ -8,9 +8,10 @@
  * Statusヘッダ
  *
  * @author 小石達也 <tkoishi@b-shock.co.jp>
- * @version $Id: BSStatusMIMEHeader.class.php 1920 2010-03-21 09:16:06Z pooza $
+ * @version $Id: BSStatusMIMEHeader.class.php 2378 2010-10-08 14:10:29Z pooza $
  */
 class BSStatusMIMEHeader extends BSMIMEHeader {
+	protected $name = 'Status';
 
 	/**
 	 * 内容を設定

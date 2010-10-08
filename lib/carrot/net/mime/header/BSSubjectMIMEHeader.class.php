@@ -8,9 +8,10 @@
  * Subjectヘッダ
  *
  * @author 小石達也 <tkoishi@b-shock.co.jp>
- * @version $Id: BSSubjectMIMEHeader.class.php 1812 2010-02-03 15:15:09Z pooza $
+ * @version $Id: BSSubjectMIMEHeader.class.php 2378 2010-10-08 14:10:29Z pooza $
  */
 class BSSubjectMIMEHeader extends BSMIMEHeader {
+	protected $name = 'Subject';
 
 	/**
 	 * 内容を返す

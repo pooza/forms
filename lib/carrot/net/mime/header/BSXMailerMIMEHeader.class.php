@@ -8,9 +8,10 @@
  * X-Mailerヘッダ
  *
  * @author 小石達也 <tkoishi@b-shock.co.jp>
- * @version $Id: BSXMailerMIMEHeader.class.php 2248 2010-08-04 16:57:26Z pooza $
+ * @version $Id: BSXMailerMIMEHeader.class.php 2378 2010-10-08 14:10:29Z pooza $
  */
 class BSXMailerMIMEHeader extends BSMIMEHeader {
+	protected $name = 'X-Mailer';
 }
 
 /* vim:set tabstop=4: */

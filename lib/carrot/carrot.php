@@ -4,7 +4,7 @@
  *
  * @package org.carrot-framework
  * @author 小石達也 <tkoishi@b-shock.co.jp>
- * @version $Id: carrot.php 2112 2010-05-29 16:37:08Z pooza $
+ * @version $Id: carrot.php 2377 2010-10-08 13:52:47Z pooza $
  */
 
 /**
@@ -127,6 +127,8 @@ $configure->compile('constant/package');
 $configure->compile('constant/carrot');
 
 set_error_handler('handleError');
+mb_internal_encoding('utf-8');
+mb_regex_encoding('utf-8');
 date_default_timezone_set(BS_DATE_TIMEZONE);
 ini_set('realpath_cache_size', '128K');
 ini_set('log_errors', 1);
