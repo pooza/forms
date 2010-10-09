@@ -8,7 +8,7 @@
  * Twitterアカウント
  *
  * @author 小石達也 <tkoishi@b-shock.co.jp>
- * @version $Id: BSTwitterAccount.class.php 2376 2010-10-07 11:56:52Z pooza $
+ * @version $Id: BSTwitterAccount.class.php 2382 2010-10-09 10:38:22Z pooza $
  */
 class BSTwitterAccount
 	implements BSImageContainer, BSSerializable, BSAssignable, BSHTTPRedirector {
@@ -235,6 +235,8 @@ class BSTwitterAccount
 		);
 		$json = new BSJSONRenderer;
 		$json->setContents($response->getRenderer()->getContents());
+
+		BSLogManager::getInstance()->put($this . 'がツイートしました。', $this->getService());
 		return $json;
 	}
 

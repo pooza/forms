@@ -1,0 +1,7 @@
+# スタイルセット設定ファイル
+#
+# @package __PACKAGE__
+# @author 小石達也 <tkoishi@b-shock.co.jp>
+# @version $Id: application.yaml 2381 2010-10-09 08:46:10Z pooza $
+
+words:

@@ -7,7 +7,7 @@
  * ユーティリティ
  *
  * @author 小石達也 <tkoishi@b-shock.co.jp>
- * @version $Id: BSUtility.class.php 2218 2010-07-18 16:40:02Z pooza $
+ * @version $Id: BSUtility.class.php 2382 2010-10-09 10:38:22Z pooza $
  */
 class BSUtility {
 
@@ -46,6 +46,21 @@ class BSUtility {
 			BSDate::getNow('YmdHis'),
 			uniqid(BSNumeric::getRandom(), true),
 		));
+	}
+
+	/**
+	 * 真偽値を文字列で返す
+	 *
+	 * @access public
+	 * @param boolean $bool 対象
+	 * @return string "true"又は"false"
+	 * @static
+	 */
+	static public function bool2str ($bool) {
+		if (!!$bool) {
+			return 'true';
+		}
+		return 'false';
 	}
 
 	/**
