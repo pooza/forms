@@ -8,7 +8,7 @@
  * Flashムービーファイル
  *
  * @author 小石達也 <tkoishi@b-shock.co.jp>
- * @version $Id: BSFlashFile.class.php 2364 2010-09-25 10:51:04Z pooza $
+ * @version $Id: BSFlashFile.class.php 2386 2010-10-11 10:08:53Z pooza $
  */
 class BSFlashFile extends BSMediaFile {
 
@@ -48,7 +48,13 @@ class BSFlashFile extends BSMediaFile {
 			$params['url'] = $this->getMediaURL($params);
 			return $useragent->getFlashElement($params);
 		}
-		return parent::getElement($params);
+		$container = parent::getElement($params);
+		if ($params['thumbnail'] && ($inner = $container->getElement('div'))) {
+			$image = new BSImageElement;
+			$image->setAttributes($params['thumbnail']);
+			$inner->addElement($image);
+		}
+		return $container;
 	}
 
 	/**
