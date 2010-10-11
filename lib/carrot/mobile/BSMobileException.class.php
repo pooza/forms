@@ -5,10 +5,10 @@
  */
 
 /**
- * 携帯電話例外
+ * ケータイ例外
  *
  * @author 小石達也 <tkoishi@b-shock.co.jp>
- * @version $Id: BSMobileException.class.php 1812 2010-02-03 15:15:09Z pooza $
+ * @version $Id: BSMobileException.class.php 2385 2010-10-11 07:19:15Z pooza $
  */
 class BSMobileException extends BSException {
 }

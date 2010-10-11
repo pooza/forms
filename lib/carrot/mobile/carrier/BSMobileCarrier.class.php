@@ -17,10 +17,10 @@ define('MPC_TO_CHARSET_SJIS', 'SJIS');
 define('MPC_TO_CHARSET_UTF8', 'UTF-8');
 
 /**
- * 携帯電話キャリア
+ * ケータイキャリア
  *
  * @author 小石達也 <tkoishi@b-shock.co.jp>
- * @version $Id: BSMobileCarrier.class.php 2200 2010-07-05 10:23:58Z pooza $
+ * @version $Id: BSMobileCarrier.class.php 2385 2010-10-11 07:19:15Z pooza $
  * @abstract
  */
 abstract class BSMobileCarrier {

@@ -5,10 +5,10 @@
  */
 
 /**
- * Au 携帯電話キャリア
+ * Au ケータイキャリア
  *
  * @author 小石達也 <tkoishi@b-shock.co.jp>
- * @version $Id: BSAuMobileCarrier.class.php 2189 2010-06-29 03:05:49Z pooza $
+ * @version $Id: BSAuMobileCarrier.class.php 2385 2010-10-11 07:19:15Z pooza $
  */
 class BSAuMobileCarrier extends BSMobileCarrier {
 

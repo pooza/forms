@@ -8,7 +8,7 @@
  * ヘッダ付きCSVデータ
  *
  * @author 小石達也 <tkoishi@b-shock.co.jp>
- * @version $Id: BSHeaderCSVData.class.php 1812 2010-02-03 15:15:09Z pooza $
+ * @version $Id: BSHeaderCSVData.class.php 2384 2010-10-10 08:00:01Z pooza $
  */
 class BSHeaderCSVData extends BSCSVData {
 	protected $fields;
@@ -39,7 +39,7 @@ class BSHeaderCSVData extends BSCSVData {
 	 * @access public
 	 * @param BSArray $fields 見出し
 	 */
-	public function setFieldNames (BSarray $fields) {
+	public function setFieldNames (BSArray $fields) {
 		$fields = BSString::convertEncoding($fields);
 		$fields = $this->trimRecord($fields);
 		$this->fields = $fields;

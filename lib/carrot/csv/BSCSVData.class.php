@@ -10,9 +10,9 @@
  * @author 小石達也 <tkoishi@b-shock.co.jp>
  * @link http://project-p.jp/halt/kinowiki/php/Tips/csv 参考
  * @link http://www.din.or.jp/~ohzaki/perl.htm#CSV2Values 参考
- * @version $Id: BSCSVData.class.php 1987 2010-04-11 02:49:50Z pooza $
+ * @version $Id: BSCSVData.class.php 2384 2010-10-10 08:00:01Z pooza $
  */
-class BSCSVData implements BSTextRenderer, IteratorAggregate {
+class BSCSVData implements BSTextRenderer, IteratorAggregate, Countable {
 	protected $contents;
 	protected $records;
 	protected $encoding = 'sjis-win';
@@ -249,6 +249,14 @@ class BSCSVData implements BSTextRenderer, IteratorAggregate {
 	 */
 	public function setFieldSeparator ($separator) {
 		$this->fieldSeparator = $separator;
+	}
+
+	/**
+	 * @access public
+	 * @return integer レコード数
+	 */
+	public function count () {
+		return $this->records->count();
 	}
 
 	/**

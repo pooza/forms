@@ -8,7 +8,7 @@
  * 日付
  *
  * @author 小石達也 <tkoishi@b-shock.co.jp>
- * @version $Id: BSDate.class.php 1987 2010-04-11 02:49:50Z pooza $
+ * @version $Id: BSDate.class.php 2384 2010-10-10 08:00:01Z pooza $
  */
 class BSDate implements ArrayAccess, BSAssignable {
 	const MON = 1;
@@ -620,36 +620,6 @@ class BSDate implements ArrayAccess, BSAssignable {
 		} else {
 			return $date->format($format);
 		}
-	}
-
-	/**
-	 * 月の配列を返す
-	 *
-	 * @access public
-	 * @return integer[] 月の配列
-	 * @static
-	 */
-	static public function getMonths () {
-		$months = array();
-		foreach (range(1, 12) as $month) {
-			$months[$month] = $month;
-		}
-		return $months;
-	}
-
-	/**
-	 * 日の配列を返す
-	 *
-	 * @access public
-	 * @return integer[] 日の配列
-	 * @static
-	 */
-	static public function getDays () {
-		$days = array();
-		foreach (range(1, 31) as $day) {
-			$days[$day] = $day;
-		}
-		return $days;
 	}
 
 	/**

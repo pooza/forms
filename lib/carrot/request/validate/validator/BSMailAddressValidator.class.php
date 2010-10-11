@@ -8,7 +8,7 @@
  * メールアドレスバリデータ
  *
  * @author 小石達也 <tkoishi@b-shock.co.jp>
- * @version $Id: BSMailAddressValidator.class.php 1812 2010-02-03 15:15:09Z pooza $
+ * @version $Id: BSMailAddressValidator.class.php 2385 2010-10-11 07:19:15Z pooza $
  */
 class BSMailAddressValidator extends BSValidator {
 
@@ -22,7 +22,7 @@ class BSMailAddressValidator extends BSValidator {
 		$this['domain'] = false;
 		$this['domain_error'] = '正しいドメインではない様です。';
 		$this['mobile_allowed'] = true;
-		$this['mobile_allowed_error'] = '携帯電話用のアドレスは使用できません。';
+		$this['mobile_allowed_error'] = 'ケータイ用のアドレスは使用できません。';
 		$this['invalid_error'] = '正しいメールアドレスではありません。';
 		return parent::initialize($params);
 	}
