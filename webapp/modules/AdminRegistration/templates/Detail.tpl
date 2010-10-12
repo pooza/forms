@@ -10,7 +10,7 @@
 
 <div id="BreadCrumbs">
 	<a href="/AdminForm/">フォーム一覧</a>
-	<a href="/AdminForm/Detail/{$form.id}?pane=RegistrationList">{$form.name}</a>
+	<a href="/AdminForm/Detail/{$form.id}?pane=RegistrationList">フォーム:{$form.name}</a>
 	<a href="#">{$action.title}</a>
 </div>
 

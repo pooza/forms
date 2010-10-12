@@ -174,7 +174,7 @@ class Form extends BSSortableRecord implements BSValidatorContainer, BSDictionar
 	 */
 	public function getAttachmentInfo ($name = null) {
 		if ($file = $this->getAttachment($name)) {
-			$info = $this->getAttachmentInfo($name);
+			$info = parent::getAttachmentInfo($name);
 			$info['contents'] = $file->getContents();
 			return $info;
 		}
@@ -194,6 +194,25 @@ class Form extends BSSortableRecord implements BSValidatorContainer, BSDictionar
 		$url['record'] = $this;
 		$url->setParameter('name', $name);
 		return $url;
+	}
+
+	/**
+	 * 添付ファイルをまとめて設定
+	 *
+	 * @access public
+	 * @param BSWebRequest $request リクエスト
+	 */
+	public function setAttachments (BSWebRequest $request) {
+		foreach ($this->getTable()->getImageNames() as $name) {
+			if ($info = $request[$name]) {
+				$this->setImageFile(new BSImageFile($info['tmp_name']), $name);
+			}
+		}
+		foreach ($this->getTable()->getAttachmentNames() as $name) {
+			if ($info = $request[$name]) {
+				$this->setAttachment(new BSTemplateFile($info['tmp_name']), $name);
+			}
+		}
 	}
 
 	/**

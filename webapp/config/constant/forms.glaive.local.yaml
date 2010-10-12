@@ -4,8 +4,8 @@
 # @author 小石達也 <tkoishi@b-shock.co.jp>
 # @version $Id$
 
-root_url: http://forms.gisarme.local/
-root_url_https: http://forms.gisarme.local/
+root_url: http://forms.glaive.local/
+root_url_https: http://forms.glaive.local/
 debug: yes
 
 admin:
