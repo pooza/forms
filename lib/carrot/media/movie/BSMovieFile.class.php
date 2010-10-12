@@ -8,7 +8,7 @@
  * 動画ファイル
  *
  * @author 小石達也 <tkoishi@b-shock.co.jp>
- * @version $Id: BSMovieFile.class.php 2364 2010-09-25 10:51:04Z pooza $
+ * @version $Id: BSMovieFile.class.php 2387 2010-10-11 10:53:18Z pooza $
  */
 class BSMovieFile extends BSMediaFile {
 
@@ -160,10 +160,7 @@ class BSMovieFile extends BSMediaFile {
 		if ($info = $params['thumbnail']) {
 			$info = new BSArray($info);
 			$image = new BSImageElement;
-			$image->setAttribute('width', $info['width']);
-			$image->setAttribute('height', $info['height']);
-			$image->setAttribute('alt', $info['alt']);
-			$image->setURL($info['url']);
+			$image->setAttributes($info);
 			$image->registerStyleClass('deny_take_out');
 			$container->addElement($image);
 		} else {

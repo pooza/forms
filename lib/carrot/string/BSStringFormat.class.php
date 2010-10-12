@@ -10,7 +10,7 @@
  * sprintfのラッパー
  *
  * @author 小石達也 <tkoishi@b-shock.co.jp>
- * @version $Id: BSStringFormat.class.php 1926 2010-03-21 14:36:34Z pooza $
+ * @version $Id: BSStringFormat.class.php 2388 2010-10-12 13:06:17Z pooza $
  */
 class BSStringFormat extends BSArray {
 
@@ -36,7 +36,11 @@ class BSStringFormat extends BSArray {
 	 * @return string 内容
 	 */
 	public function getContents () {
-		return call_user_func_array('sprintf', $this->getParameters());
+		try {
+			return call_user_func_array('sprintf', $this->getParameters());
+		} catch (Exception $e) {
+			return $this->join(', ');
+		}
 	}
 
 	/**

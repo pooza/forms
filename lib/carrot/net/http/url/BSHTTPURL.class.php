@@ -8,7 +8,7 @@
  * HTTPスキーマのURL
  *
  * @author 小石達也 <tkoishi@b-shock.co.jp>
- * @version $Id: BSHTTPURL.class.php 2340 2010-09-12 05:39:12Z pooza $
+ * @version $Id: BSHTTPURL.class.php 2389 2010-10-12 13:09:34Z pooza $
  */
 class BSHTTPURL extends BSURL implements BSHTTPRedirector, BSImageContainer {
 	private $fullpath;
@@ -196,7 +196,7 @@ class BSHTTPURL extends BSURL implements BSHTTPRedirector, BSImageContainer {
 		if ($this->isForeign()) {
 			$this->query->removeParameter(BSRequest::getInstance()->getSession()->getName());
 		}
-		return $url;
+		return $this;
 	}
 
 	/**
