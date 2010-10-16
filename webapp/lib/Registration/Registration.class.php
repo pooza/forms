@@ -50,7 +50,7 @@ class Registration extends BSRecord {
 				return;
 			}
 			$file = new BSFile($path);
-			if (!$file->isWritable()) {
+			if (!$file->isReadable()) {
 				throw new BSFileException($answer['name'] . 'が読み込めません。');
 			}
 			$this->setAttachment($file, $field->getName());
