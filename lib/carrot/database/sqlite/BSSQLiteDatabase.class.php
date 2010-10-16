@@ -8,7 +8,7 @@
  * SQLiteデータベース
  *
  * @author 小石達也 <tkoishi@b-shock.co.jp>
- * @version $Id: BSSQLiteDatabase.class.php 2314 2010-08-26 15:28:38Z pooza $
+ * @version $Id: BSSQLiteDatabase.class.php 2394 2010-10-16 08:57:37Z pooza $
  */
 class BSSQLiteDatabase extends BSDatabase {
 
@@ -109,6 +109,16 @@ class BSSQLiteDatabase extends BSDatabase {
 			$func[] = $value;
 		}
 		return $func->getContents();
+	}
+
+	/**
+	 * 外部キーが有効か？
+	 *
+	 * @access public
+	 * @return boolean 有効ならTrue
+	 */
+	public function hasForeignKey () {
+		return false;
 	}
 
 	/**

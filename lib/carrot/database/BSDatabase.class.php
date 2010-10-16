@@ -8,7 +8,7 @@
  * データベース接続
  *
  * @author 小石達也 <tkoishi@b-shock.co.jp>
- * @version $Id: BSDatabase.class.php 2314 2010-08-26 15:28:38Z pooza $
+ * @version $Id: BSDatabase.class.php 2394 2010-10-16 08:57:37Z pooza $
  * @abstract
  */
 abstract class BSDatabase extends PDO implements ArrayAccess, BSAssignable {
@@ -421,6 +421,16 @@ abstract class BSDatabase extends PDO implements ArrayAccess, BSAssignable {
 	 */
 	public function offsetUnset ($key) {
 		throw new BSDatabaseException('データベースの属性は削除できません。');
+	}
+
+	/**
+	 * 外部キーが有効か？
+	 *
+	 * @access public
+	 * @return boolean 有効ならTrue
+	 */
+	public function hasForeignKey () {
+		return true;
 	}
 
 	/**

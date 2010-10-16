@@ -8,7 +8,7 @@
  * 基底ビュー
  *
  * @author 小石達也 <tkoishi@b-shock.co.jp>
- * @version $Id: BSView.class.php 2374 2010-10-04 04:59:33Z pooza $
+ * @version $Id: BSView.class.php 2393 2010-10-16 08:49:54Z pooza $
  */
 class BSView extends BSHTTPResponse {
 	protected $nameSuffix;
@@ -184,16 +184,7 @@ class BSView extends BSHTTPResponse {
 			$this->setHeader($key, $value);
 		}
 
-		$this->setCacheControl(false);
-		if ($this->user->isGuest()) {
-			if ($this->useragent->hasBug('cache_control')) {
-				if (!$this->request->isSSL() && $this->isHTML()) {
-					$this->setCacheControl(true);
-				}
-			} else {
-				$this->setCacheControl(true);
-			}
-		}
+		$this->setCacheControl($this->isCacheable());
 
 		if ($header = $this->getHeader('status')) {
 			self::putHeader('HTTP/' . $this->getVersion() . ' ' . $header->getContents());
@@ -201,6 +192,25 @@ class BSView extends BSHTTPResponse {
 		foreach ($this->getHeaders() as $name => $header) {
 			self::putHeader($header->format(BSMIMEHeader::WITHOUT_CRLF));
 		}
+	}
+
+	/**
+	 * HTTPキャッシュ有効か
+	 *
+	 * @access public
+	 * @return boolean 有効ならTrue
+	 */
+	public function isCacheable () {
+		if ($this->user->isGuest()) {
+			if ($this->useragent->hasBug('cache_control')) {
+				if (!$this->request->isSSL() && $this->isHTML()) {
+					return true;
+				}
+			} else {
+				return true;
+			}
+		}
+		return false;
 	}
 
 	/**
