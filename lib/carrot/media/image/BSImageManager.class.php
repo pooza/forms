@@ -8,7 +8,7 @@
  * 画像マネージャ
  *
  * @author 小石達也 <tkoishi@b-shock.co.jp>
- * @version $Id: BSImageManager.class.php 2351 2010-09-20 07:14:46Z pooza $
+ * @version $Id: BSImageManager.class.php 2398 2010-10-17 11:06:02Z pooza $
  */
 class BSImageManager {
 	private $useragent;
@@ -236,21 +236,31 @@ class BSImageManager {
 	 */
 	public function getImageInfo (BSImageContainer $record, $size, $pixel = null, $flags = null) {
 		try {
-			$flags |= $this->flags;
+			$date = $record->getUpdateDate();
+		} catch (Exception $e) {
+			$date = null;
+		}
+
+		$flags |= $this->flags;
+		$name = get_class($this) . '.' . BSCrypt::getDigest(array(
+			get_class($record), $record->getID(), $date->format(), $size, $pixel, $flags,
+		));
+		if ($info = BSController::getInstance()->getAttribute($name)) {
+			$info = new BSArray($info);
+		} else {
 			if (!$image = $this->getThumbnail($record, $size, $pixel, $flags)) {
 				return null;
 			}
 			$info = new BSArray;
-			$info['is_cache'] = 1;
 			$info['url'] = $this->getURL($record, $size, $pixel, $flags)->getContents();
 			$info['width'] = $image->getWidth();
 			$info['height'] = $image->getHeight();
 			$info['alt'] = $record->getLabel();
 			$info['type'] = $image->getType();
 			$info['pixel_size'] = $info['width'] . '×' . $info['height'];
-			return $info;
-		} catch (BSImageException $e) {
+			BSController::getInstance()->setAttribute($name, $info, $date);
 		}
+		return $info;
 	}
 
 	/**

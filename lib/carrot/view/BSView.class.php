@@ -8,7 +8,7 @@
  * 基底ビュー
  *
  * @author 小石達也 <tkoishi@b-shock.co.jp>
- * @version $Id: BSView.class.php 2393 2010-10-16 08:49:54Z pooza $
+ * @version $Id: BSView.class.php 2397 2010-10-17 10:58:21Z pooza $
  */
 class BSView extends BSHTTPResponse {
 	protected $nameSuffix;
@@ -134,11 +134,11 @@ class BSView extends BSHTTPResponse {
 		}
 
 		$this->setHeader('content-type', BSMIMEUtility::getContentType($this->renderer));
-		$this->setHeader('content-length', $this->renderer->getSize());
+		//$this->setHeader('content-length', $this->renderer->getSize());
 
 		$this->putHeaders();
 		mb_http_output('pass');
-		print $this->renderer->getContents();
+		echo $this->renderer->getContents();
 	}
 
 	/**
