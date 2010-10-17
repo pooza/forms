@@ -7,7 +7,7 @@
 @version $Id$
 *}
 <div>
-	<a href="/AdminForm/Export" ><img src="/carrotlib/images/document.gif" width="16" height="16" alt="" />CSVエクスポート</a>
+	<a href="javascript:void(window.open('/AdminForm/Export', '{$module.name}Export', 'width=320,height=320,scrollbars=yes,'))"><img src="/carrotlib/images/document.gif" width="16" height="16" alt="" />CSVエクスポート</a>
 	<a href="javascript:void(window.open('/AdminForm/Import', '{$module.name}Import', 'width=320,height=320,scrollbars=yes,'))"><img src="/carrotlib/images/document.gif" width="16" height="16" alt="" />CSVインポート</a>
 </div>
 

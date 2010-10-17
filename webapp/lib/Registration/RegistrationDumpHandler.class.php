@@ -13,6 +13,7 @@ class RegistrationDumpHandler extends RegistrationHandler implements BSExportabl
 	private $exporter;
 	private $name;
 	private $form;
+	private $date;
 
 	/**
 	 * @access public
@@ -55,6 +56,15 @@ class RegistrationDumpHandler extends RegistrationHandler implements BSExportabl
 		return $this->name;
 	}
 
+	/**
+	 * 日付を設定
+	 *
+	 * @access public
+	 * @param BSDate $date 日付
+	 */
+	public function setDate (BSDate $date) {
+		$this->date = $date;
+	}
 
 	/**
 	 * ディレクトリを返す
@@ -117,7 +127,16 @@ class RegistrationDumpHandler extends RegistrationHandler implements BSExportabl
 	 */
 	public function export () {
 		$this->getExporter()->addRecord($this->getHeader());
-		foreach ($this->getDatabase()->query('SELECT * from ' . $this->getName()) as $row) {
+		$criteria = $this->createCriteriaSet();
+		if ($this->date) {
+			$duration = new BSArray(array(
+				$this->date->format('Y-m-d 00:00:00'),
+				$this->date->format('Y-m-d 23:59:59'),
+			));
+			$criteria->register('create_date', $duration, 'between');
+		}
+		$sql = BSSQL::getSelectQueryString('*', $this->getName(), $criteria);
+		foreach ($this->getDatabase()->query($sql) as $row) {
 			$row = new BSArray($row);
 			$row['form_id'] = $this->form->getName();
 			$this->getExporter()->addRecord($row);

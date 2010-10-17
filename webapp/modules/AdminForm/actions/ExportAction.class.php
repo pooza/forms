@@ -8,17 +8,32 @@
  * @version $Id$
  */
 class ExportAction extends BSRecordAction {
-	public function execute () {
-		$name = new BSStringFormat('registrations_%06d.csv');
-		$name[] = $this->getRecord()->getID();
-		$this->request->setAttribute('filename', $name->getContents());
+	public function getTitle () {
+		return 'CSVエクスポート';
+	}
 
-		$this->request->setAttribute('renderer', $this->getRecord()->export());
+	public function execute () {
+		if (BSString::isBlank($date = $this->request['date'])) {
+			$name = new BSStringFormat('registrations_%06d.csv');
+			$name[] = $this->getRecord()->getID();
+			$this->request->setAttribute('renderer', $this->getRecord()->export());
+		} else {
+			$date = BSDate::getInstance($date);
+			$this->request->setAttribute('renderer', $this->getRecord()->export($date));
+			$name = new BSStringFormat('registrations_%06d_%s.csv');
+			$name[] = $this->getRecord()->getID();
+			$name[] = $date->format('Ymd');
+		}
+		$this->request->setAttribute('filename', $name->getContents());
 		return BSView::SUCCESS;
 	}
 
+	public function getDefaultView () {
+		return BSView::INPUT;
+	}
+
 	public function handleError () {
-		return $this->controller->getAction('not_found')->forward();
+		return $this->getDefaultView();
 	}
 }
 

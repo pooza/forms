@@ -285,10 +285,14 @@ class Form extends BSSortableRecord implements BSValidatorContainer, BSDictionar
 	 * エクスポート
 	 *
 	 * @access public
+	 * @param BSDate $date 対象日付
 	 * @return BSExporter エクスポーター
 	 */
-	public function export () {
+	public function export (BSDate $date = null) {
 		$table = new RegistrationDumpHandler($this);
+		if ($date) {
+			$table->setDate($date);
+		}
 		return $table->export();
 	}
 
