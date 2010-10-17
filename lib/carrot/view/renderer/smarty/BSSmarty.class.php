@@ -10,7 +10,7 @@ BSUtility::includeFile('Smarty/Smarty.class');
  * Smartyラッパー
  *
  * @author 小石達也 <tkoishi@b-shock.co.jp>
- * @version $Id: BSSmarty.class.php 2341 2010-09-12 05:47:35Z pooza $
+ * @version $Id: BSSmarty.class.php 2396 2010-10-17 09:17:20Z pooza $
  */
 class BSSmarty extends Smarty implements BSTextRenderer {
 	private $type;
@@ -440,7 +440,9 @@ class BSSmarty extends Smarty implements BSTextRenderer {
 			$message[] = $source;
 			throw new BSViewException($message);
 		}
-		return parent::_get_auto_filename($base, $source, $id);
+		$source = str_replace(BS_WEBAPP_DIR, '', $source);
+		$source = str_replace(DIRECTORY_SEPARATOR, '%', $source);
+		return $base . DIRECTORY_SEPARATOR . $source;
 	}
 }
 
