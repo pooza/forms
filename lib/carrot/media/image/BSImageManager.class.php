@@ -8,7 +8,7 @@
  * 画像マネージャ
  *
  * @author 小石達也 <tkoishi@b-shock.co.jp>
- * @version $Id: BSImageManager.class.php 2400 2010-10-17 11:33:27Z pooza $
+ * @version $Id: BSImageManager.class.php 2401 2010-10-17 14:09:29Z pooza $
  */
 class BSImageManager {
 	private $useragent;
@@ -243,7 +243,7 @@ class BSImageManager {
 
 		$flags |= $this->flags;
 		$name = get_class($this) . '.' . BSCrypt::getDigest(array(
-			get_class($record), $record->getID(), $date->format(), $size, $pixel, $flags,
+			get_class($record), $record->getID(), $size, $pixel, $flags,
 		));
 		$info = new BSArray;
 		if ($values = BSController::getInstance()->getAttribute($name, $date)) {
