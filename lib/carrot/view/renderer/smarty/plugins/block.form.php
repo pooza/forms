@@ -8,7 +8,7 @@
  * form要素
  *
  * @author 小石達也 <tkoishi@b-shock.co.jp>
- * @version $Id: block.form.php 1812 2010-02-03 15:15:09Z pooza $
+ * @version $Id: block.form.php 2395 2010-10-17 08:52:07Z pooza $
  */
 function smarty_block_form ($params, $contents, &$smarty) {
 	$params = new BSArray($params);
@@ -21,6 +21,9 @@ function smarty_block_form ($params, $contents, &$smarty) {
 	}
 	if (!!$params['send_submit_values']) {
 		$form->addSubmitFields();
+	}
+	if ($params['onsubmit']) {
+		$form->setAttribute('onsubmit', $params['onsubmit']);
 	}
 	$form->setMethod($params['method']);
 	if ($params['attachable'] && (!$useragent->isMobile() || $useragent->isAttachable())) {

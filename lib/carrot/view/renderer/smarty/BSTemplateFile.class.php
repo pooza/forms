@@ -8,11 +8,12 @@
  * テンプレートファイル
  *
  * @author 小石達也 <tkoishi@b-shock.co.jp>
- * @version $Id: BSTemplateFile.class.php 2202 2010-07-05 11:37:30Z pooza $
+ * @version $Id: BSTemplateFile.class.php 2395 2010-10-17 08:52:07Z pooza $
  */
 class BSTemplateFile extends BSFile {
 	private $engine;
 	private $compiled;
+	private $body;
 
 	/**
 	 * バイナリファイルか？
@@ -41,7 +42,10 @@ class BSTemplateFile extends BSFile {
 	 * @return string コンパイル結果
 	 */
 	public function compile () {
-		return $this->engine->fetch($this->getPath());
+		if (!$this->body) {
+			$this->body = $this->engine->fetch($this->getPath());
+		}
+		return $this->body;
 	}
 
 	/**
