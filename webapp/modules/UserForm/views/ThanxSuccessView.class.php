@@ -9,6 +9,7 @@
  */
 class ThanxSuccessView extends BSSmartyView {
 	public function execute () {
+		$this->setAttribute('answer', $this->user->getAttribute('answer'));
 		if ($this->useragent->isMobile()) {
 			$template = 'mobile_thanx';
 		} else {
