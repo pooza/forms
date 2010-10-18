@@ -62,6 +62,15 @@ class RegisterAction extends BSRecordAction {
 				$field->clearTemporaryFile();
 			}
 		}
+
+		$aff = new BSArray($this->user->getAttribute('aff'));
+		foreach (array('s') as $key) {
+			if (!BSString::isBlank($value = $this->request[$key])) {
+				$aff[$key] = $value;
+			}
+		}
+		$this->user->setAttribute('aff', $aff);
+
 		return BSView::INPUT;
 	}
 

@@ -23,6 +23,8 @@ class ThanxAction extends BSRecordAction {
 	public function execute () {
 		$this->request->setAttribute('answer', $this->user->getAttribute('answer'));
 		$this->user->removeAttribute('answer');
+		$this->request->setAttribute('aff', $this->user->getAttribute('aff'));
+		$this->user->removeAttribute('aff');
 		return BSView::SUCCESS;
 	}
 
