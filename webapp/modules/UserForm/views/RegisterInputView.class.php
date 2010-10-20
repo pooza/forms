@@ -9,7 +9,7 @@
  */
 class RegisterInputView extends BSSmartyView {
 	public function execute () {
-		if ($this->useragent->isMobile()) {
+		if ($this->useragent->isMobile() || $this->useragent->isSmartPhone()) {
 			$template = 'mobile_form';
 		} else {
 			$template = 'form';

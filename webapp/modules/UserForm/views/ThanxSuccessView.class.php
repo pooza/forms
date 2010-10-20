@@ -9,7 +9,7 @@
  */
 class ThanxSuccessView extends BSSmartyView {
 	public function execute () {
-		if ($this->useragent->isMobile()) {
+		if ($this->useragent->isMobile() || $this->useragent->isSmartPhone()) {
 			$template = 'mobile_thanx';
 		} else {
 			$template = 'thanx';

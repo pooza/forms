@@ -10,7 +10,7 @@
 class ConfirmInputView extends BSSmartyView {
 	public function execute () {
 		$this->setAttribute('answer', $this->user->getAttribute('answer'));
-		if ($this->useragent->isMobile()) {
+		if ($this->useragent->isMobile() || $this->useragent->isSmartPhone()) {
 			$template = 'mobile_confirm';
 		} else {
 			$template = 'confirm';
