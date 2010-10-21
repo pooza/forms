@@ -8,7 +8,7 @@
  * Webリクエスト
  *
  * @author 小石達也 <tkoishi@b-shock.co.jp>
- * @version $Id: BSWebRequest.class.php 2338 2010-09-10 10:40:22Z pooza $
+ * @version $Id: BSWebRequest.class.php 2403 2010-10-21 11:30:45Z pooza $
  */
 class BSWebRequest extends BSRequest {
 
@@ -167,6 +167,16 @@ class BSWebRequest extends BSRequest {
 	 */
 	public function isMobile () {
 		return $this->getUserAgent()->isMobile();
+	}
+
+	/**
+	 * スマートフォン環境か？
+	 *
+	 * @access public
+	 * @return boolean スマートフォン環境ならTrue
+	 */
+	public function isSmartPhone () {
+		return $this->getUserAgent()->isSmartPhone();
 	}
 
 	/**

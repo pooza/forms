@@ -8,7 +8,7 @@
  * 基底ビュー
  *
  * @author 小石達也 <tkoishi@b-shock.co.jp>
- * @version $Id: BSView.class.php 2397 2010-10-17 10:58:21Z pooza $
+ * @version $Id: BSView.class.php 2402 2010-10-21 04:19:12Z pooza $
  */
 class BSView extends BSHTTPResponse {
 	protected $nameSuffix;
@@ -201,16 +201,12 @@ class BSView extends BSHTTPResponse {
 	 * @return boolean 有効ならTrue
 	 */
 	public function isCacheable () {
-		if ($this->user->isGuest()) {
-			if ($this->useragent->hasBug('cache_control')) {
-				if (!$this->request->isSSL() && $this->isHTML()) {
-					return true;
-				}
-			} else {
+		if ($this->useragent->hasBug('cache_control')) {
+			if ($this->request->isSSL() || !$this->isHTML()) {
 				return true;
 			}
 		}
-		return false;
+		return $this->user->isGuest();
 	}
 
 	/**

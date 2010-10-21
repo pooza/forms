@@ -8,7 +8,7 @@
  * 抽象リクエスト
  *
  * @author 小石達也 <tkoishi@b-shock.co.jp>
- * @version $Id: BSRequest.class.php 2247 2010-08-04 16:41:29Z pooza $
+ * @version $Id: BSRequest.class.php 2403 2010-10-21 11:30:45Z pooza $
  * @abstract
  */
 abstract class BSRequest extends BSHTTPRequest {
@@ -355,6 +355,16 @@ abstract class BSRequest extends BSHTTPRequest {
 	 * @return boolean ケータイ環境ならTrue
 	 */
 	public function isMobile () {
+		return false;
+	}
+
+	/**
+	 * スマートフォン環境か？
+	 *
+	 * @access public
+	 * @return boolean スマートフォン環境ならTrue
+	 */
+	public function isSmartPhone () {
 		return false;
 	}
 
