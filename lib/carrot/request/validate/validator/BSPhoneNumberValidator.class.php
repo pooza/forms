@@ -8,7 +8,7 @@
  * 電話番号バリデータ
  *
  * @author 小石達也 <tkoishi@b-shock.co.jp>
- * @version $Id: BSPhoneNumberValidator.class.php 2030 2010-04-21 02:48:29Z pooza $
+ * @version $Id: BSPhoneNumberValidator.class.php 2404 2010-10-27 01:16:32Z pooza $
  * @link http://www.soumu.go.jp/main_sosiki/joho_tsusin/top/tel_number/ 電話番号の桁数について
  */
 class BSPhoneNumberValidator extends BSValidator {
