@@ -8,7 +8,7 @@
  * ユーザーエージェント
  *
  * @author 小石達也 <tkoishi@b-shock.co.jp>
- * @version $Id: BSUserAgent.class.php 2351 2010-09-20 07:14:46Z pooza $
+ * @version $Id: BSUserAgent.class.php 2410 2010-10-29 13:15:30Z pooza $
  * @abstract
  */
 abstract class BSUserAgent implements ArrayAccess, BSAssignable {
@@ -33,6 +33,7 @@ abstract class BSUserAgent implements ArrayAccess, BSAssignable {
 		$this->attributes['is_smartphone'] = $this->isSmartPhone();
 		$this->attributes['is_legacy'] = $this->isLegacy();
 		$this->attributes['is_denied'] = $this->isDenied();
+		$this->attributes['is_attachable'] = $this->isAttachable();
 		$this->bugs = new BSArray;
 	}
 
@@ -108,6 +109,16 @@ abstract class BSUserAgent implements ArrayAccess, BSAssignable {
 			}
 		}
 		return false;
+	}
+
+	/**
+	 * 添付可能か？
+	 *
+	 * @access public
+	 * @return boolean 添付可能ならTrue
+	 */
+	public function isAttachable () {
+		return true;
 	}
 
 	/**

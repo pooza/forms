@@ -8,7 +8,7 @@
  * CurlによるHTTP処理
  *
  * @author 小石達也 <tkoishi@b-shock.co.jp>
- * @version $Id: BSCurlHTTP.class.php 2371 2010-09-30 12:35:45Z pooza $
+ * @version $Id: BSCurlHTTP.class.php 2407 2010-10-29 12:38:04Z pooza $
  */
 class BSCurlHTTP extends BSHTTP {
 	protected $engine;
@@ -102,7 +102,9 @@ class BSCurlHTTP extends BSHTTP {
 			$message[] = $this;
 			$message[] = $response->getStatus();
 			$message[] = $response->getError();
-			throw new BSHTTPException($message);
+			$exception = new BSHTTPException($message);
+			$exception->setResponse($response);
+			throw $exception;
 		}
 		return $response;
 	}

@@ -8,7 +8,7 @@
  * a要素
  *
  * @author 小石達也 <tkoishi@b-shock.co.jp>
- * @version $Id: BSAnchorElement.class.php 2016 2010-04-17 12:50:11Z pooza $
+ * @version $Id: BSAnchorElement.class.php 2406 2010-10-29 12:37:29Z pooza $
  */
 class BSAnchorElement extends BSXHTMLElement {
 
@@ -46,7 +46,7 @@ class BSAnchorElement extends BSXHTMLElement {
 	public function link (BSXMLElement $element, BSHTTPRedirector $url) {
 		$this->addElement($element);
 		$this->setURL($url);
-		if (!$this->useragent->isMobile() && $url->isForeign()) {
+		if ($url->isForeign()) {
 			$this->setAttribute('target', '_blank');
 		}
 		return $this;

@@ -8,7 +8,7 @@
  * 日付
  *
  * @author 小石達也 <tkoishi@b-shock.co.jp>
- * @version $Id: BSDate.class.php 2384 2010-10-10 08:00:01Z pooza $
+ * @version $Id: BSDate.class.php 2413 2010-10-29 13:32:59Z pooza $
  */
 class BSDate implements ArrayAccess, BSAssignable {
 	const MON = 1;
@@ -643,21 +643,6 @@ class BSDate implements ArrayAccess, BSAssignable {
 			}
 		}
 		return $newest;
-	}
-
-	/**
-	 * 年の配列を返す
-	 *
-	 * @access public
-	 * @return integer[] 年の配列
-	 * @static
-	 */
-	static public function getYears () {
-		$years = array();
-		foreach (range(BSDate::getNow('Y'), 1900) as $year) {
-			$years[$year] = $year;
-		}
-		return $years;
 	}
 
 	/**

@@ -8,7 +8,7 @@
  * form要素
  *
  * @author 小石達也 <tkoishi@b-shock.co.jp>
- * @version $Id: block.form.php 2395 2010-10-17 08:52:07Z pooza $
+ * @version $Id: block.form.php 2410 2010-10-29 13:15:30Z pooza $
  */
 function smarty_block_form ($params, $contents, &$smarty) {
 	$params = new BSArray($params);
@@ -26,7 +26,7 @@ function smarty_block_form ($params, $contents, &$smarty) {
 		$form->setAttribute('onsubmit', $params['onsubmit']);
 	}
 	$form->setMethod($params['method']);
-	if ($params['attachable'] && (!$useragent->isMobile() || $useragent->isAttachable())) {
+	if (!!$params['attachable'] && $useragent->isAttachable()) {
 		$form->setAttachable(true);
 		if (!BSString::isBlank($size = $params['attachment_size'])) {
 			$form->addHiddenField('MAX_FILE_SIZE', $size * 1024 * 1024);

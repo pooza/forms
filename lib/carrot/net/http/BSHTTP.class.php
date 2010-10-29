@@ -8,7 +8,7 @@
  * HTTPプロトコル
  *
  * @author 小石達也 <tkoishi@b-shock.co.jp>
- * @version $Id: BSHTTP.class.php 2249 2010-08-04 17:15:42Z pooza $
+ * @version $Id: BSHTTP.class.php 2412 2010-10-29 13:22:14Z pooza $
  */
 class BSHTTP extends BSSocket {
 
@@ -73,11 +73,11 @@ class BSHTTP extends BSSocket {
 	/**
 	 * リクエストを実行し、結果を返す。
 	 *
-	 * @access protected
+	 * @access private
 	 * @param BSHTTPRequest $request リクエスト
 	 * @return BSHTTPResponse 結果文書
 	 */
-	protected function send (BSHTTPRequest $request) {
+	private function send (BSHTTPRequest $request) {
 		if ($this->isOpened()) {
 			throw new BSHTTPException($this . 'は既に開いています。');
 		}
@@ -86,14 +86,17 @@ class BSHTTP extends BSSocket {
 		$this->putLine($request->getContents());
 
 		$response = new BSHTTPResponse;
-		$response->setContents($this->getLines());
+		$response->setContents($this->getLines()->join("\n"));
 		$response->setURL($request->getURL());
 
 		if (!$response->validate()) {
-			$message = new BSStringFormat('不正なレスポンスです。 (%d %s)');
+			$message = new BSStringFormat('%sからのレスポンスが不正です。 (%d %s)');
+			$message[] = $this;
 			$message[] = $response->getStatus();
 			$message[] = $response->getError();
-			throw new BSHTTPException($message);
+			$exception = new BSHTTPException($message);
+			$exception->setResponse($response);
+			throw $exception;
 		}
 		return $response;
 	}

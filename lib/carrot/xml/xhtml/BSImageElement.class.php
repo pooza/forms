@@ -8,7 +8,7 @@
  * img要素
  *
  * @author 小石達也 <tkoishi@b-shock.co.jp>
- * @version $Id: BSImageElement.class.php 2227 2010-07-26 08:36:31Z pooza $
+ * @version $Id: BSImageElement.class.php 2409 2010-10-29 13:11:14Z pooza $
  */
 class BSImageElement extends BSXHTMLElement {
 
@@ -52,9 +52,6 @@ class BSImageElement extends BSXHTMLElement {
 	 * @param string $value alt文字列
 	 */
 	public function setAlt ($value) {
-		if ($this->useragent->isMobile()) {
-			return;
-		}
 		$this->attributes['alt'] = $value;
 	}
 

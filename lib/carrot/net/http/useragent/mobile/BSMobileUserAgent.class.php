@@ -8,7 +8,7 @@
  * モバイルユーザーエージェント
  *
  * @author 小石達也 <tkoishi@b-shock.co.jp>
- * @version $Id: BSMobileUserAgent.class.php 2339 2010-09-12 05:21:48Z pooza $
+ * @version $Id: BSMobileUserAgent.class.php 2410 2010-10-29 13:15:30Z pooza $
  * @abstract
  */
 abstract class BSMobileUserAgent extends BSUserAgent implements BSUserIdentifier {
@@ -22,7 +22,6 @@ abstract class BSMobileUserAgent extends BSUserAgent implements BSUserIdentifier
 	protected function __construct ($name = null) {
 		parent::__construct($name);
 		$this->attributes['id'] = $this->getID();
-		$this->attributes['is_attachable'] = $this->isAttachable();
 		$this->attributes['display'] = $this->getDisplayInfo();
 		$this->attributes['gps'] = $this->getCarrier()->getGPSInfo();
 	}
