@@ -3,7 +3,7 @@
 # @package org.carrot-framework
 # @subpackage AdminUtility
 # @author 小石達也 <tkoishi@b-shock.co.jp>
-# @version $Id: module.yaml 2320 2010-08-28 10:14:32Z pooza $
+# @version $Id: module.yaml 2415 2010-10-30 09:49:00Z pooza $
 
 module:
   title: ユーティリティ
@@ -11,6 +11,8 @@ module:
 actions:
   Backup:
     title: バックアップ
+  Restore:
+    title: リストア
   Pictogram:
     title: 絵文字入力
   GetGeocode:

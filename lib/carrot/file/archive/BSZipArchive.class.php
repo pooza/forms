@@ -8,9 +8,9 @@
  * ZIPアーカイブ
  *
  * @author 小石達也 <tkoishi@b-shock.co.jp>
- * @version $Id: BSZipArchive.class.php 1898 2010-03-03 03:48:43Z pooza $
+ * @version $Id: BSZipArchive.class.php 2415 2010-10-30 09:49:00Z pooza $
  */
-class BSZipArchive extends ZipArchive implements BSrenderer {
+class BSZipArchive extends ZipArchive implements BSRenderer {
 	private $file;
 	private $temporaryFile;
 	private $opened = false;
@@ -56,6 +56,29 @@ class BSZipArchive extends ZipArchive implements BSrenderer {
 			$this->opened = false;
 			return parent::close();
 		}
+	}
+
+	/**
+	 * 展開
+	 *
+	 * ZipArchive::extractToが未実装っぽい？ので、unzipコマンドをキック。
+	 *
+	 * @access public
+	 * @param mixed $path 展開先パス、又はディレクトリ
+	 * @param mixed $entries 対象エントリー名、又はその配列。
+	 * @return bool 正常終了時はtrue。
+	 */
+	public function extractTo ($path, $entries = null) {
+		if ($path instanceof BSDirectory) {
+			$path = $path->getPath() . '/';
+		}
+		$command = new BSCommandLine('bin/unzip');
+		$command->setDirectory(BSFileUtility::getDirectory('unzip'));
+		$command->addValue($this->getFile()->getPath());
+		$command->addValue('-d');
+		$command->addValue($path);
+		$command->execute();
+		return true;
 	}
 
 	/**

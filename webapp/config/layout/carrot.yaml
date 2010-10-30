@@ -2,7 +2,7 @@
 #
 # @package org.carrot-framework
 # @author 小石達也 <tkoishi@b-shock.co.jp>
-# @version $Id: carrot.yaml 2370 2010-09-29 14:24:22Z pooza $
+# @version $Id: carrot.yaml 2415 2010-10-30 09:49:00Z pooza $
 
 awstats:
   parent: lib
@@ -148,6 +148,8 @@ twitter_account:
   suffix: .png
   purge:
     day: 1
+unzip:
+  constant: yes
 var:
   constant: yes
 webapp:

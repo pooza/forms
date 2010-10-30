@@ -8,7 +8,7 @@
  * バックアップマネージャ
  *
  * @author 小石達也 <tkoishi@b-shock.co.jp>
- * @version $Id: BSBackupManager.class.php 1926 2010-03-21 14:36:34Z pooza $
+ * @version $Id: BSBackupManager.class.php 2415 2010-10-30 09:49:00Z pooza $
  */
 class BSBackupManager {
 	private $config;
@@ -97,6 +97,48 @@ class BSBackupManager {
 		}
 		$zip->close();
 		return $zip;
+	}
+
+	/**
+	 * ZIPアーカイブファイルをリストア
+	 *
+	 * @access public
+	 * @param BSFile $file アーカイブファイル
+	 */
+	public function restore (BSFile $file) {
+		$this->clearRecords();
+
+		$zip = new BSZipArchive;
+		$zip->open($file->getPath());
+		$dir = BSFileUtility::getDirectory('tmp')->createDirectory(BSUtility::getUniqueID());
+		$zip->extractTo($dir);
+
+		foreach ($this->config['databases'] as $name) {
+			if ($file = $dir->getEntry($name . '.sqlite3')) {
+				$file->moveTo(BSFileUtility::getDirectory('db'));
+			}
+		}
+		foreach ($this->config['directories'] as $name) {
+			if (($src = $dir->getEntry($name)) && ($dest = BSFileUtility::getDirectory($name))) {
+				foreach ($src as $file) {
+					if (!$file->isIgnore()) {
+						$file->moveTo($dest);
+					}
+				}
+			}
+		}
+
+		$zip->close();
+		$dir->delete();
+	}
+
+	private function clearRecords () {
+		foreach ($this->config['classes'] as $class) {
+			$table = BSTableHandler::getInstance($class);
+			foreach ($table as $record) {
+				$record->delete();
+			}
+		}
 	}
 }
 
