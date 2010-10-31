@@ -8,7 +8,7 @@
  * ZIPアーカイブ
  *
  * @author 小石達也 <tkoishi@b-shock.co.jp>
- * @version $Id: BSZipArchive.class.php 2415 2010-10-30 09:49:00Z pooza $
+ * @version $Id: BSZipArchive.class.php 2417 2010-10-31 07:09:27Z pooza $
  */
 class BSZipArchive extends ZipArchive implements BSRenderer {
 	private $file;
@@ -74,9 +74,9 @@ class BSZipArchive extends ZipArchive implements BSRenderer {
 		}
 		$command = new BSCommandLine('bin/unzip');
 		$command->setDirectory(BSFileUtility::getDirectory('unzip'));
-		$command->addValue($this->getFile()->getPath());
-		$command->addValue('-d');
-		$command->addValue($path);
+		$command->push($this->getFile()->getPath());
+		$command->push('-d');
+		$command->push($path);
 		$command->execute();
 		return true;
 	}

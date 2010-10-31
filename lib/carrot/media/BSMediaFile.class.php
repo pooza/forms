@@ -8,7 +8,7 @@
  * メディアファイル
  *
  * @author 小石達也 <tkoishi@b-shock.co.jp>
- * @version $Id: BSMediaFile.class.php 2366 2010-09-25 11:19:28Z pooza $
+ * @version $Id: BSMediaFile.class.php 2417 2010-10-31 07:09:27Z pooza $
  * @abstract
  */
 abstract class BSMediaFile extends BSFile implements ArrayAccess {
@@ -64,9 +64,9 @@ abstract class BSMediaFile extends BSFile implements ArrayAccess {
 	 */
 	protected function analyze () {
 		$command = self::getCommandLine();
-		$command->addValue('-i');
-		$command->addValue($this->getPath());
-		$command->addValue('2>&1', null);
+		$command->setStderrRedirectable();
+		$command->push('-i', null);
+		$command->push($this->getPath());
 		$this->output = $command->getResult()->join("\n");
 
 		if (mb_ereg('Error .*$', $this->output, $matches)) {

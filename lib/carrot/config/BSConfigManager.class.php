@@ -8,7 +8,7 @@
  * 設定マネージャ
  *
  * @author 小石達也 <tkoishi@b-shock.co.jp>
- * @version $Id: BSConfigManager.class.php 2093 2010-05-23 04:11:21Z pooza $
+ * @version $Id: BSConfigManager.class.php 2416 2010-10-31 07:08:59Z pooza $
  */
 class BSConfigManager {
 	private $compilers;
@@ -75,6 +75,23 @@ class BSConfigManager {
 			}
 		}
 		throw new BSConfigException($file . 'の設定コンパイラがありません。');
+	}
+
+	/**
+	 * キャッシュをクリア
+	 *
+	 * @access public
+	 */
+	public function clearCache () {
+		foreach (array('serialized', 'cache', 'image_cache') as $name) {
+			if ($dir = BSFileUtility::getDirectory($name)) {
+				$command = new BSCommandLine('rm'); //強制的に削除
+				$command->setStderrRedirectable();
+				$command->push('-R');
+				$command->push($dir->getPath() . '/*', null);
+				$command->execute();
+			}
+		}
 	}
 
 	/**

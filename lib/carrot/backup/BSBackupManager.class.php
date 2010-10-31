@@ -8,7 +8,7 @@
  * バックアップマネージャ
  *
  * @author 小石達也 <tkoishi@b-shock.co.jp>
- * @version $Id: BSBackupManager.class.php 2415 2010-10-30 09:49:00Z pooza $
+ * @version $Id: BSBackupManager.class.php 2417 2010-10-31 07:09:27Z pooza $
  */
 class BSBackupManager {
 	private $config;
@@ -106,8 +106,6 @@ class BSBackupManager {
 	 * @param BSFile $file アーカイブファイル
 	 */
 	public function restore (BSFile $file) {
-		$this->clearRecords();
-
 		$zip = new BSZipArchive;
 		$zip->open($file->getPath());
 		$dir = BSFileUtility::getDirectory('tmp')->createDirectory(BSUtility::getUniqueID());
@@ -130,15 +128,7 @@ class BSBackupManager {
 
 		$zip->close();
 		$dir->delete();
-	}
-
-	private function clearRecords () {
-		foreach ($this->config['classes'] as $class) {
-			$table = BSTableHandler::getInstance($class);
-			foreach ($table as $record) {
-				$record->delete();
-			}
-		}
+		BSConfigManager::getInstance()->clearCache();
 	}
 }
 

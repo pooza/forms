@@ -8,7 +8,7 @@
  * 動画の変換
  *
  * @author 小石達也 <tkoishi@b-shock.co.jp>
- * @version $Id: BSMediaConvertor.class.php 2148 2010-06-18 09:41:21Z pooza $
+ * @version $Id: BSMediaConvertor.class.php 2417 2010-10-31 07:09:27Z pooza $
  * @abstract
  */
 abstract class BSMediaConvertor {
@@ -87,15 +87,15 @@ abstract class BSMediaConvertor {
 			$file = $duplicated;
 		} else {
 			$command = BSMediaFile::getCommandLine();
-			$command->addValue('-y', null);
-			$command->addValue('-i', null);
-			$command->addValue($source->getPath());
+			$command->setStderrRedirectable();
+			$command->push('-y', null);
+			$command->push('-i', null);
+			$command->push($source->getPath());
 			foreach ($this->config as $key => $value) {
-				$command->addValue('-' . $key, null);
-				$command->addValue($value);
+				$command->push('-' . $key, null);
+				$command->push($value);
 			}
-			$command->addValue($file->getPath());
-			$command->addValue('2>&1', null);
+			$command->push($file->getPath());
 			$this->output = $command->getResult()->join("\n");
 			BSLogManager::getInstance()->put($source . 'を変換しました。', $this);
 		}

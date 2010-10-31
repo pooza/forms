@@ -8,7 +8,7 @@
  * sendmailコマンドによるメール送信機能
  *
  * @author 小石達也 <tkoishi@b-shock.co.jp>
- * @version $Id: BSSendmailMailSender.class.php 2084 2010-05-21 06:37:57Z pooza $
+ * @version $Id: BSSendmailMailSender.class.php 2417 2010-10-31 07:09:27Z pooza $
  */
 class BSSendmailMailSender extends BSMailSender {
 
@@ -35,18 +35,18 @@ class BSSendmailMailSender extends BSMailSender {
 	 */
 	public function send (BSMail $mail) {
 		$sendmail = self::getSendmailCommand();
-		$sendmail->addValue('-f');
-		$sendmail->addValue($mail->getHeader('from')->getEntity()->getContents());
+		$sendmail->push('-f');
+		$sendmail->push($mail->getHeader('from')->getEntity()->getContents());
 
 		if (BS_DEBUG) {
 			$to = BSAdministratorRole::getInstance()->getMailAddress();
-			$sendmail->addValue($to->getContents());
+			$sendmail->push($to->getContents());
 		} else {
-			$sendmail->addValue('-t');
+			$sendmail->push('-t');
 		}
 
 		$command = new BSCommandLine('cat');
-		$command->addValue($mail->getFile()->getPath());
+		$command->push($mail->getFile()->getPath());
 		$command->registerPipe($sendmail);
 		$command->setBackground(true);
 		$command->execute();
@@ -64,7 +64,7 @@ class BSSendmailMailSender extends BSMailSender {
 	static public function getSendmailCommand () {
 		$command = new BSCommandLine('sbin/sendmail');
 		$command->setDirectory(BSFileUtility::getDirectory('sendmail'));
-		$command->addValue('-i');
+		$command->push('-i');
 		return $command;
 	}
 }
