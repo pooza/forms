@@ -10,7 +10,7 @@
  * BSJavaScriptSet/BSStyleSetの基底クラス
  *
  * @author 小石達也 <tkoishi@b-shock.co.jp>
- * @version $Id: BSDocumentSet.class.php 2124 2010-06-05 16:38:31Z pooza $
+ * @version $Id: BSDocumentSet.class.php 2422 2010-11-04 02:33:24Z pooza $
  * @abstract
  */
 abstract class BSDocumentSet implements BSTextRenderer, BSHTTPRedirector, IteratorAggregate {
@@ -182,8 +182,6 @@ abstract class BSDocumentSet implements BSTextRenderer, BSHTTPRedirector, Iterat
 		}
 		if ($entry instanceof BSSerializable) {
 			$this->documents[] = $entry;
-		} else {
-			$this->error = $entry . 'が読み込めません。';
 		}
 	}
 

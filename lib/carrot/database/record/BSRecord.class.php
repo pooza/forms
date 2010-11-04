@@ -8,7 +8,7 @@
  * テーブルのレコード
  *
  * @author 小石達也 <tkoishi@b-shock.co.jp>
- * @version $Id: BSRecord.class.php 2394 2010-10-16 08:57:37Z pooza $
+ * @version $Id: BSRecord.class.php 2419 2010-11-04 02:29:56Z pooza $
  * @abstract
  */
 abstract class BSRecord implements ArrayAccess,
@@ -171,6 +171,7 @@ abstract class BSRecord implements ArrayAccess,
 		}
 
 		if (!$this->getDatabase()->hasForeignKey()) {
+/*
 			foreach ($this->getTable()->getChildClasses() as $class) {
 				$table = BSTableHandler::getInstance($class);
 				$table->getCriteria($this->getTable()->getName() . '_id', $this);
@@ -178,6 +179,7 @@ abstract class BSRecord implements ArrayAccess,
 					$record->delete();
 				}
 			}
+*/
 		}
 		if ($record = $this->getParent()) {
 			$record->touch();
