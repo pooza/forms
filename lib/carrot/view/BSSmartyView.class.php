@@ -8,7 +8,7 @@
  * Smartyレンダラー用の基底ビュー
  *
  * @author 小石達也 <tkoishi@b-shock.co.jp>
- * @version $Id: BSSmartyView.class.php 2281 2010-08-17 02:18:52Z pooza $
+ * @version $Id: BSSmartyView.class.php 2427 2010-11-14 06:08:30Z pooza $
  */
 class BSSmartyView extends BSView {
 
@@ -59,6 +59,9 @@ class BSSmartyView extends BSView {
 		}
 		if ($file = $this->getDefaultTemplate()) {
 			$this->renderer->setTemplate($file);
+		}
+		if (BS_VIEW_MOBILE_XHTML && $this->request->getRealUserAgent()->isMobile()) {
+			$this->renderer->setType(BSMIMEType::getType('xhtml'));
 		}
 	}
 

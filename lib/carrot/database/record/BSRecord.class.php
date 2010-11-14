@@ -8,7 +8,7 @@
  * テーブルのレコード
  *
  * @author 小石達也 <tkoishi@b-shock.co.jp>
- * @version $Id: BSRecord.class.php 2419 2010-11-04 02:29:56Z pooza $
+ * @version $Id: BSRecord.class.php 2426 2010-11-14 05:47:28Z pooza $
  * @abstract
  */
 abstract class BSRecord implements ArrayAccess,
@@ -171,15 +171,13 @@ abstract class BSRecord implements ArrayAccess,
 		}
 
 		if (!$this->getDatabase()->hasForeignKey()) {
-/*
 			foreach ($this->getTable()->getChildClasses() as $class) {
 				$table = BSTableHandler::getInstance($class);
-				$table->getCriteria($this->getTable()->getName() . '_id', $this);
+				$table->getCriteria()->register($this->getTable()->getName() . '_id', $this);
 				foreach ($table as $record) {
 					$record->delete();
 				}
 			}
-*/
 		}
 		if ($record = $this->getParent()) {
 			$record->touch();
@@ -259,10 +257,10 @@ abstract class BSRecord implements ArrayAccess,
 	/**
 	 * 抽出条件を生成して返す
 	 *
-	 * @access public
+	 * @access protected
 	 * @return BSCriteriaSet 抽出条件
 	 */
-	public function createCriteriaSet () {
+	protected function createCriteriaSet () {
 		return $this->getDatabase()->createCriteriaSet();
 	}
 

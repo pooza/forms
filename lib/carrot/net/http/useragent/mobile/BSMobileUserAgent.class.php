@@ -8,7 +8,7 @@
  * モバイルユーザーエージェント
  *
  * @author 小石達也 <tkoishi@b-shock.co.jp>
- * @version $Id: BSMobileUserAgent.class.php 2410 2010-10-29 13:15:30Z pooza $
+ * @version $Id: BSMobileUserAgent.class.php 2423 2010-11-08 06:20:42Z pooza $
  * @abstract
  */
 abstract class BSMobileUserAgent extends BSUserAgent implements BSUserIdentifier {
@@ -212,7 +212,7 @@ abstract class BSMobileUserAgent extends BSUserAgent implements BSUserIdentifier
 	 * パスワードを用いず、端末個体認証を行う。
 	 *
 	 * @access public
-	 * @params string $password パスワード
+	 * @param string $password パスワード
 	 * @return boolean 正しいユーザーならTrue
 	 */
 	public function auth ($password = null) {

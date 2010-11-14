@@ -8,7 +8,7 @@
  * ユーザー識別
  *
  * @author 小石達也 <tkoishi@b-shock.co.jp>
- * @version $Id: BSUserIdentifier.interface.php 1812 2010-02-03 15:15:09Z pooza $
+ * @version $Id: BSUserIdentifier.interface.php 2423 2010-11-08 06:20:42Z pooza $
  */
 interface BSUserIdentifier {
 
@@ -24,7 +24,7 @@ interface BSUserIdentifier {
 	 * 認証
 	 *
 	 * @access public
-	 * @params string $password パスワード
+	 * @param string $password パスワード
 	 * @return boolean 正しいユーザーならTrue
 	 */
 	public function auth ($password = null);

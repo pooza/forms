@@ -8,7 +8,7 @@
  * 数値演算に関するユーティリティ
  *
  * @author 小石達也 <tkoishi@b-shock.co.jp>
- * @version $Id: BSNumeric.class.php 1812 2010-02-03 15:15:09Z pooza $
+ * @version $Id: BSNumeric.class.php 2423 2010-11-08 06:20:42Z pooza $
  */
 class BSNumeric {
 
@@ -35,7 +35,7 @@ class BSNumeric {
 	 *
 	 * @access public
 	 * @param float $num 処理対象の数値
-	 * @param int $digits 処理対象が小数であったときの有効桁数、既定値は2。
+	 * @param integer $digits 処理対象が小数であったときの有効桁数、既定値は2。
 	 * @return string カンマ区切りされた数値
 	 * @static
 	 */

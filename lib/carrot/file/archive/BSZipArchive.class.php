@@ -8,7 +8,7 @@
  * ZIPアーカイブ
  *
  * @author 小石達也 <tkoishi@b-shock.co.jp>
- * @version $Id: BSZipArchive.class.php 2417 2010-10-31 07:09:27Z pooza $
+ * @version $Id: BSZipArchive.class.php 2423 2010-11-08 06:20:42Z pooza $
  */
 class BSZipArchive extends ZipArchive implements BSRenderer {
 	private $file;
@@ -66,7 +66,7 @@ class BSZipArchive extends ZipArchive implements BSRenderer {
 	 * @access public
 	 * @param mixed $path 展開先パス、又はディレクトリ
 	 * @param mixed $entries 対象エントリー名、又はその配列。
-	 * @return bool 正常終了時はtrue。
+	 * @return boolean 正常終了時はtrue。
 	 */
 	public function extractTo ($path, $entries = null) {
 		if ($path instanceof BSDirectory) {

@@ -7,14 +7,14 @@
  * 例外
  *
  * @author 小石達也 <tkoishi@b-shock.co.jp>
- * @version $Id: BSException.class.php 1954 2010-03-30 14:39:03Z pooza $
+ * @version $Id: BSException.class.php 2423 2010-11-08 06:20:42Z pooza $
  */
 class BSException extends Exception {
 
 	/**
 	 * @access public
 	 * $param string $message メッセージ
-	 * @param int $code コード
+	 * @param integer $code コード
 	 * @param Exception $prev 直前の例外。例外の連結に使用。
 	 */
 	public function __construct ($message = null, $code = 0, Exception $prev = null) {

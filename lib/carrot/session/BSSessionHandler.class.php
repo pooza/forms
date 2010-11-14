@@ -8,7 +8,7 @@
  * セッションハンドラ
  *
  * @author 小石達也 <tkoishi@b-shock.co.jp>
- * @version $Id: BSSessionHandler.class.php 1888 2010-02-28 10:07:43Z pooza $
+ * @version $Id: BSSessionHandler.class.php 2423 2010-11-08 06:20:42Z pooza $
  */
 class BSSessionHandler implements BSUserIdentifier {
 	private $storage;
@@ -126,7 +126,7 @@ class BSSessionHandler implements BSUserIdentifier {
 	 * セッションが成立している時点で認証は困難、或いは不要と思われる。
 	 *
 	 * @access public
-	 * @params string $password パスワード
+	 * @param string $password パスワード
 	 * @return boolean 正しいユーザーならTrue
 	 */
 	public function auth ($password = null) {

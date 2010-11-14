@@ -8,7 +8,7 @@
  * 発行者ロール
  *
  * @author 小石達也 <tkoishi@b-shock.co.jp>
- * @version $Id: BSAuthorRole.class.php 2252 2010-08-05 16:19:40Z pooza $
+ * @version $Id: BSAuthorRole.class.php 2423 2010-11-08 06:20:42Z pooza $
  */
 class BSAuthorRole implements BSRole {
 	protected $credentials;
@@ -105,7 +105,7 @@ class BSAuthorRole implements BSRole {
 	 * 認証
 	 *
 	 * @access public
-	 * @params string $password パスワード
+	 * @param string $password パスワード
 	 * @return boolean 正しいユーザーならTrue
 	 */
 	public function auth ($password = null) {

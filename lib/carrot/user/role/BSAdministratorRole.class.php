@@ -8,7 +8,7 @@
  * 管理者ロール
  *
  * @author 小石達也 <tkoishi@b-shock.co.jp>
- * @version $Id: BSAdministratorRole.class.php 2253 2010-08-05 16:20:28Z pooza $
+ * @version $Id: BSAdministratorRole.class.php 2423 2010-11-08 06:20:42Z pooza $
  */
 class BSAdministratorRole implements BSRole {
 	protected $networks;
@@ -122,7 +122,7 @@ class BSAdministratorRole implements BSRole {
 	 * 認証
 	 *
 	 * @access public
-	 * @params string $password パスワード
+	 * @param string $password パスワード
 	 * @return boolean 正しいユーザーならTrue
 	 */
 	public function auth ($password = null) {
