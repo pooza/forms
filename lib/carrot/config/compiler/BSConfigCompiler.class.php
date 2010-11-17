@@ -8,7 +8,7 @@
  * 抽象設定コンパイラ
  *
  * @author 小石達也 <tkoishi@b-shock.co.jp>
- * @version $Id: BSConfigCompiler.class.php 2218 2010-07-18 16:40:02Z pooza $
+ * @version $Id: BSConfigCompiler.class.php 2430 2010-11-16 11:25:38Z pooza $
  */
 abstract class BSConfigCompiler extends BSParameterHolder {
 	private $body;
@@ -32,10 +32,6 @@ abstract class BSConfigCompiler extends BSParameterHolder {
 			case 'request':
 			case 'user':
 				return BSUtility::executeMethod($name, 'getInstance');
-			default:
-				$message = new BSStringFormat('仮想プロパティ"%s"は未定義です。');
-				$message[] = $name;
-				throw new BadFunctionCallException($message);
 		}
 	}
 

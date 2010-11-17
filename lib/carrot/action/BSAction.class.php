@@ -8,7 +8,7 @@
  * アクション
  *
  * @author 小石達也 <tkoishi@b-shock.co.jp>
- * @version $Id: BSAction.class.php 2318 2010-08-28 06:42:37Z pooza $
+ * @version $Id: BSAction.class.php 2430 2010-11-16 11:25:38Z pooza $
  * @abstract
  */
 abstract class BSAction implements BSHTTPRedirector, BSAssignable, BSValidatorContainer {
@@ -42,10 +42,6 @@ abstract class BSAction implements BSHTTPRedirector, BSAssignable, BSValidatorCo
 					return $table->getDatabase();
 				}
 				return BSDatabase::getInstance();
-			default:
-				$message = new BSStringFormat('仮想プロパティ"%s"は未定義です。');
-				$message[] = $name;
-				throw new BadFunctionCallException($message);
 		}
 	}
 

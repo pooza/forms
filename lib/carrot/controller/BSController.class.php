@@ -8,7 +8,7 @@
  * Carrotアプリケーションコントローラ
  *
  * @author 小石達也 <tkoishi@b-shock.co.jp>
- * @version $Id: BSController.class.php 2297 2010-08-19 11:13:56Z pooza $
+ * @version $Id: BSController.class.php 2430 2010-11-16 11:25:38Z pooza $
  * @abstract
  */
 abstract class BSController {
@@ -37,10 +37,6 @@ abstract class BSController {
 			case 'request':
 			case 'user':
 				return BSUtility::executeMethod($name, 'getInstance');
-			default:
-				$message = new BSStringFormat('仮想プロパティ"%s"は未定義です。');
-				$message[] = $name;
-				throw new BadFunctionCallException($message);
 		}
 	}
 
@@ -224,12 +220,12 @@ abstract class BSController {
 	}
 
 	/**
-	 * プロキシサーバが有効か
+	 * サーバサイドキャッシュが有効か
 	 *
 	 * @access public
 	 * @return boolean 有効ならTrue
 	 */
-	public function hasProxyServer () {
+	public function hasServerSideCache () {
 		return false;
 	}
 

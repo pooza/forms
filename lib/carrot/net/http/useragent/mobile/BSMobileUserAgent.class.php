@@ -8,7 +8,7 @@
  * モバイルユーザーエージェント
  *
  * @author 小石達也 <tkoishi@b-shock.co.jp>
- * @version $Id: BSMobileUserAgent.class.php 2423 2010-11-08 06:20:42Z pooza $
+ * @version $Id: BSMobileUserAgent.class.php 2428 2010-11-16 11:13:46Z pooza $
  * @abstract
  */
 abstract class BSMobileUserAgent extends BSUserAgent implements BSUserIdentifier {
@@ -62,7 +62,7 @@ abstract class BSMobileUserAgent extends BSUserAgent implements BSUserIdentifier
 		$query = parent::getQuery();
 		$session = BSRequest::getInstance()->getSession();
 		$query[$session->getName()] = $session->getID();
-		if (BSController::getInstance()->hasProxyServer()) {
+		if (BSController::getInstance()->hasServerSideCache()) {
 			$query['guid'] = 'ON';
 		}
 		return $query;

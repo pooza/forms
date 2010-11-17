@@ -8,7 +8,7 @@
  * バリデートマネージャ
  *
  * @author 小石達也 <tkoishi@b-shock.co.jp>
- * @version $Id: BSValidateManager.class.php 2218 2010-07-18 16:40:02Z pooza $
+ * @version $Id: BSValidateManager.class.php 2430 2010-11-16 11:25:38Z pooza $
  */
 class BSValidateManager implements IteratorAggregate {
 	private $fields;
@@ -51,10 +51,6 @@ class BSValidateManager implements IteratorAggregate {
 		switch ($name) {
 			case 'request':
 				return BSUtility::executeMethod($name, 'getInstance');
-			default:
-				$message = new BSStringFormat('仮想プロパティ"%s"は未定義です。');
-				$message[] = $name;
-				throw new BadFunctionCallException($message);
 		}
 	}
 
