@@ -4,7 +4,7 @@
  *
  * @package org.carrot-framework
  * @author 小石達也 <tkoishi@b-shock.co.jp>
- * @version $Id: carrot.php 2377 2010-10-08 13:52:47Z pooza $
+ * @version $Id: carrot.php 2432 2010-11-22 12:00:12Z pooza $
  */
 
 /**
@@ -12,10 +12,10 @@
  * @param string $name クラス名
  */
 function __autoload ($name) {
-	require_once(BS_LIB_DIR . '/carrot/BSClassLoader.class.php');
+	require_once BS_LIB_DIR . '/carrot/BSClassLoader.class.php';
 	$classes = BSClassLoader::getInstance()->getClasses();
 	if (isset($classes[strtolower($name)])) {
-		require_once($classes[strtolower($name)]);
+		require $classes[strtolower($name)];
 	}
 }
 

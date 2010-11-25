@@ -10,7 +10,7 @@
  * Excel97形式に対応。
  *
  * @author 小石達也 <tkoishi@b-shock.co.jp>
- * @version $Id: BSExcelExporter.class.php 1898 2010-03-03 03:48:43Z pooza $
+ * @version $Id: BSExcelExporter.class.php 2432 2010-11-22 12:00:12Z pooza $
  */
 class BSExcelExporter implements BSExporter, BSRenderer {
 	private $file;
@@ -22,8 +22,8 @@ class BSExcelExporter implements BSExporter, BSRenderer {
 	 * @access public
 	 */
 	public function __construct () {
-		require_once('PHPExcel.php');
-		require_once('PHPExcel/Writer/Excel5.php');
+		require_once 'PHPExcel.php';
+		require_once 'PHPExcel/Writer/Excel5.php';
 		$this->engine = new PHPExcel;
 		$this->engine->setActiveSheetIndex(0);
 		BSController::getInstance()->setTimeLimit(0);

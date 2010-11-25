@@ -8,7 +8,7 @@
  * モジュール
  *
  * @author 小石達也 <tkoishi@b-shock.co.jp>
- * @version $Id: BSModule.class.php 2430 2010-11-16 11:25:38Z pooza $
+ * @version $Id: BSModule.class.php 2433 2010-11-22 12:43:18Z pooza $
  */
 class BSModule implements BSHTTPRedirector, BSAssignable {
 	protected $name;
@@ -22,6 +22,9 @@ class BSModule implements BSHTTPRedirector, BSAssignable {
 	protected $table;
 	protected $params;
 	protected $recordClass;
+	protected $controller;
+	protected $request;
+	protected $user;
 	static private $instances;
 	static private $prefixes = array();
 
@@ -31,6 +34,9 @@ class BSModule implements BSHTTPRedirector, BSAssignable {
 	 */
 	protected function __construct ($name) {
 		$this->name = $name;
+		$this->controller = BSController::getInstance();
+		$this->request = BSRequest::getInstance();
+		$this->user = BSUser::getInstance();
 		if (!$this->getDirectory()) {
 			throw new BSModuleException($this . 'のディレクトリが見つかりません。');
 		}
@@ -39,20 +45,6 @@ class BSModule implements BSHTTPRedirector, BSAssignable {
 		}
 		if ($file = $this->getConfigFile('filters')) {
 			$this->config['filters'] = $file->getResult();
-		}
-	}
-
-	/**
-	 * @access public
-	 * @param string $name プロパティ名
-	 * @return mixed 各種オブジェクト
-	 */
-	public function __get ($name) {
-		switch ($name) {
-			case 'controller':
-			case 'request':
-			case 'user':
-				return BSUtility::executeMethod($name, 'getInstance');
 		}
 	}
 
@@ -72,7 +64,7 @@ class BSModule implements BSHTTPRedirector, BSAssignable {
 			$module = new self($name);
 			$class = $name . 'Module';
 			if ($file = $module->getDirectory()->getEntry($class . '.class.php')) {
-				require_once($file->getPath());
+				require $file->getPath();
 				$class = BSClassLoader::getInstance()->getClass($class);
 				$module = new $class($name);
 			}
@@ -363,7 +355,7 @@ class BSModule implements BSHTTPRedirector, BSAssignable {
 			$this->actions = new BSArray;
 		}
 		if (!$this->actions[$name]) {
-			require_once($file->getPath());
+			require $file->getPath();
 			$class = BSClassLoader::getInstance()->getClass($class);
 			$this->actions[$name] = new $class($this);
 		}

@@ -8,7 +8,7 @@
  * 日付
  *
  * @author 小石達也 <tkoishi@b-shock.co.jp>
- * @version $Id: BSDate.class.php 2413 2010-10-29 13:32:59Z pooza $
+ * @version $Id: BSDate.class.php 2432 2010-11-22 12:00:12Z pooza $
  */
 class BSDate implements ArrayAccess, BSAssignable {
 	const MON = 1;
@@ -151,7 +151,7 @@ class BSDate implements ArrayAccess, BSAssignable {
 	 * @access public
 	 */
 	public function setNow () {
-		$this->setTimestamp(time());
+		$this->setTimestamp($_SERVER['REQUEST_TIME']);
 	}
 
 	/**

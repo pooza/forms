@@ -8,7 +8,7 @@
  * アクション
  *
  * @author 小石達也 <tkoishi@b-shock.co.jp>
- * @version $Id: BSAction.class.php 2430 2010-11-16 11:25:38Z pooza $
+ * @version $Id: BSAction.class.php 2433 2010-11-22 12:43:18Z pooza $
  * @abstract
  */
 abstract class BSAction implements BSHTTPRedirector, BSAssignable, BSValidatorContainer {
@@ -17,6 +17,9 @@ abstract class BSAction implements BSHTTPRedirector, BSAssignable, BSValidatorCo
 	protected $config;
 	protected $module;
 	protected $methods;
+	protected $controller;
+	protected $request;
+	protected $user;
 
 	/**
 	 * @access public
@@ -24,6 +27,9 @@ abstract class BSAction implements BSHTTPRedirector, BSAssignable, BSValidatorCo
 	 */
 	public function __construct (BSModule $module) {
 		$this->module = $module;
+		$this->controller = BSController::getInstance();
+		$this->request = BSRequest::getInstance();
+		$this->user = BSUser::getInstance();
 	}
 
 	/**
@@ -33,10 +39,6 @@ abstract class BSAction implements BSHTTPRedirector, BSAssignable, BSValidatorCo
 	 */
 	public function __get ($name) {
 		switch ($name) {
-			case 'controller':
-			case 'request':
-			case 'user':
-				return BSUtility::executeMethod($name, 'getInstance');
 			case 'database':
 				if ($table = $this->getModule()->getTable()) {
 					return $table->getDatabase();
@@ -225,7 +227,7 @@ abstract class BSAction implements BSHTTPRedirector, BSAssignable, BSValidatorCo
 			foreach (array($name, null) as $suffix) {
 				$basename = $this->getName() . $suffix . 'View';
 				if ($file = $dir->getEntry($basename . '.class.php')) {
-					require_once($file->getPath());
+					require $file->getPath();
 					$class = BSClassLoader::getInstance()->getClass($basename);
 					break;
 				}

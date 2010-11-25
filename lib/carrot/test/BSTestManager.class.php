@@ -8,7 +8,7 @@
  * テストマネージャ
  *
  * @author 小石達也 <tkoishi@b-shock.co.jp>
- * @version $Id: BSTestManager.class.php 2269 2010-08-10 15:39:02Z pooza $
+ * @version $Id: BSTestManager.class.php 2432 2010-11-22 12:00:12Z pooza $
  */
 class BSTestManager implements IteratorAggregate {
 	private $tests;
@@ -59,7 +59,7 @@ class BSTestManager implements IteratorAggregate {
 				if ($entry->isDirectory()) {
 					$tests->merge($this->load($entry));
 				} else if ($entry->isFile()) {
-					require_once($entry->getPath());
+					require $entry->getPath();
 					$class = BSClassLoader::extractClass($entry->getPath());
 					$tests[] = new $class;
 				}

@@ -7,7 +7,7 @@
  * ユーティリティ
  *
  * @author 小石達也 <tkoishi@b-shock.co.jp>
- * @version $Id: BSUtility.class.php 2382 2010-10-09 10:38:22Z pooza $
+ * @version $Id: BSUtility.class.php 2432 2010-11-22 12:00:12Z pooza $
  */
 class BSUtility {
 
@@ -28,10 +28,14 @@ class BSUtility {
 	static public function isPathAbsolute ($path) {
 		if ($path[0] == DIRECTORY_SEPARATOR) {
 			return true;
-		} else if (strpos($path, '..') !== false) {
+		}
+		if (strpos($path, '..') !== false) {
 			return false;
 		}
-		return !!mb_ereg('^[[:alpha:]]:' . preg_quote(DIRECTORY_SEPARATOR) . '.+', $path);
+		if (DIRECTORY_SEPARATOR != '/') { // Windows環境
+			return !!mb_ereg('^[[:alpha:]]:' . preg_quote(DIRECTORY_SEPARATOR) . '.+', $path);
+		}
+		return false;
 	}
 
 	/**
@@ -84,7 +88,7 @@ class BSUtility {
 		}
 
 		ini_set('display_errors', 0);
-		require_once($file->getPath());
+		require_once $file->getPath();
 		ini_restore('display_errors');
 	}
 

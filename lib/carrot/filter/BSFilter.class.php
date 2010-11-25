@@ -8,33 +8,25 @@
  * 抽象フィルタ
  *
  * @author 小石達也 <tkoishi@b-shock.co.jp>
- * @version $Id: BSFilter.class.php 2430 2010-11-16 11:25:38Z pooza $
+ * @version $Id: BSFilter.class.php 2433 2010-11-22 12:43:18Z pooza $
  * @abstract
  */
 abstract class BSFilter extends BSParameterHolder {
+	protected $controller;
+	protected $request;
+	protected $user;
+	protected $action;
 
 	/**
 	 * @access public
 	 * @param string[] $params パラメータ配列
 	 */
 	public function __construct ($params = array()) {
+		$this->controller = BSController::getInstance();
+		$this->request = BSRequest::getInstance();
+		$this->user = BSUser::getInstance();
+		$this->action = $this->controller->getAction();
 		$this->initialize($params);
-	}
-
-	/**
-	 * @access public
-	 * @param string $name プロパティ名
-	 * @return mixed 各種オブジェクト
-	 */
-	public function __get ($name) {
-		switch ($name) {
-			case 'controller':
-			case 'request':
-			case 'user':
-				return BSUtility::executeMethod($name, 'getInstance');
-			case 'action':
-				return BSController::getInstance()->getAction();
-		}
 	}
 
 	/**

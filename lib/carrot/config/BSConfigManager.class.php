@@ -8,7 +8,7 @@
  * 設定マネージャ
  *
  * @author 小石達也 <tkoishi@b-shock.co.jp>
- * @version $Id: BSConfigManager.class.php 2416 2010-10-31 07:08:59Z pooza $
+ * @version $Id: BSConfigManager.class.php 2432 2010-11-22 12:00:12Z pooza $
  */
 class BSConfigManager {
 	private $compilers;
@@ -58,7 +58,7 @@ class BSConfigManager {
 		if (!$file->isReadable()) {
 			throw new BSConfigException($file . 'が読めません。');
 		}
-		return require($file->compile()->getPath());
+		return require $file->compile()->getPath();
 	}
 
 	/**
