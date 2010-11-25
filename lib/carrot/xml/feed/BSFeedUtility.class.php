@@ -4,13 +4,13 @@
  * @subpackage xml.feed
  */
 
-require_once('Zend/Feed.php');
+require_once 'Zend/Feed.php';
 
 /**
  * フィードユーティリティ
  *
  * @author 小石達也 <tkoishi@b-shock.co.jp>
- * @version $Id: BSFeedUtility.class.php 1920 2010-03-21 09:16:06Z pooza $
+ * @version $Id: BSFeedUtility.class.php 2432 2010-11-22 12:00:12Z pooza $
  */
 class BSFeedUtility extends Zend_Feed {
 	const IGNORE_TITLE_PATTERN = '^(PR|AD):';
@@ -49,7 +49,7 @@ class BSFeedUtility extends Zend_Feed {
 	 * @static
 	 */
 	static public function convertFeed (Zend_Feed_Abstract $feed) {
-		require_once('Zend/Feed/Reader.php');
+		require_once 'Zend/Feed/Reader.php';
 		$classes = new BSArray(array(
 			Zend_Feed_Reader::TYPE_RSS_090 => 'BSRSS09Document',
 			Zend_Feed_Reader::TYPE_RSS_091 => 'BSRSS09Document',
