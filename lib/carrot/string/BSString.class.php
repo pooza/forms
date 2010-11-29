@@ -8,7 +8,7 @@
  * 文字列に関するユーティリティ
  *
  * @author 小石達也 <tkoishi@b-shock.co.jp>
- * @version $Id: BSString.class.php 2377 2010-10-08 13:52:47Z pooza $
+ * @version $Id: BSString.class.php 2438 2010-11-29 07:26:18Z pooza $
  */
 class BSString {
 
@@ -166,6 +166,25 @@ class BSString {
 			$value = str_replace($search, $replace, $value);
 		}
 		return $value;
+	}
+
+	/**
+	 * 機種依存文字等が含まれているか？
+	 *
+	 * @access public
+	 * @param mixed $value 変換対象の文字列
+	 * @return boolean 機種依存文字が含まれていたらTrue
+	 * @static
+	 * @link http://php.nekosuke.com/000056.htm 参考
+	 */
+	static public function isContainWrongCharacter ($value) {
+		foreach (BSConfigManager::getInstance()->compile('wrong_characters') as $rule) {
+			eval('$search = "' . $rule['search'] . '";');
+			if (self::isContain($value, $search)) {
+				return true;
+			}
+		}
+		return false;
 	}
 
 	/**

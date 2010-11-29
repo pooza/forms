@@ -8,7 +8,7 @@
  * 文字列バリデータ
  *
  * @author 小石達也 <tkoishi@b-shock.co.jp>
- * @version $Id: BSStringValidator.class.php 1812 2010-02-03 15:15:09Z pooza $
+ * @version $Id: BSStringValidator.class.php 2438 2010-11-29 07:26:18Z pooza $
  */
 class BSStringValidator extends BSValidator {
 	const MAX_SIZE = 1024;
@@ -25,6 +25,10 @@ class BSStringValidator extends BSValidator {
 		$this['min'] = null;
 		$this['min_error'] = '短すぎます。';
 		$this['invalid_error'] = '正しくありません。';
+		$this['pictogram'] = true;
+		$this['pictogram_error'] = '絵文字が含まれています。';
+		$this['wrong_character'] = true;
+		$this['wrong_character_error'] = '機種依存文字が含まれています。';
 		return parent::initialize($params);
 	}
 
@@ -49,6 +53,16 @@ class BSStringValidator extends BSValidator {
 			}
 			if (!BSString::isBlank($this['max']) && ($this['max'] < BSString::getWidth($value))) {
 				$this->error = $this['max_error'];
+			}
+			if (!!$this['wrong_character'] && BSString::isContainWrongCharacter($value)) {
+				$this->error = $this['wrong_character_error'];
+			}
+			if (!!$this['pictogram']) {
+				if (($useragent = $this->request->getUserAgent()) && $useragent->isMobile()) {
+					if ($useragent->getCarrier()->isContainPictogram($value)) {
+						$this->error = $this['pictogram_error'];
+					}
+				}
 			}
 		}
 		return BSString::isBlank($this->error);
