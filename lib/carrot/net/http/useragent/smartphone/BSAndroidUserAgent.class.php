@@ -8,9 +8,18 @@
  * Androidユーザーエージェント
  *
  * @author 小石達也 <tkoishi@b-shock.co.jp>
- * @version $Id: BSAndroidUserAgent.class.php 2351 2010-09-20 07:14:46Z pooza $
+ * @version $Id: BSAndroidUserAgent.class.php 2441 2010-12-07 03:04:10Z pooza $
  */
 class BSAndroidUserAgent extends BSWebKitUserAgent {
+
+	/**
+	 * @access protected
+	 * @param string $name ユーザーエージェント名
+	 */
+	protected function __construct ($name = null) {
+		parent::__construct($name);
+		$this->attributes['is_tablet'] = $this->isTablet();
+	}
 
 	/**
 	 * スマートフォンか？
@@ -19,7 +28,17 @@ class BSAndroidUserAgent extends BSWebKitUserAgent {
 	 * @return boolean スマートフォンならTrue
 	 */
 	public function isSmartPhone () {
-		return true;
+		return !$this->isTablet();
+	}
+
+	/**
+	 * タブレット型か？
+	 *
+	 * @access public
+	 * @return boolean タブレット型ならTrue
+	 */
+	public function isTablet () {
+		return BSString::isContain('Tablet', $this->getName());
 	}
 
 	/**
@@ -29,9 +48,11 @@ class BSAndroidUserAgent extends BSWebKitUserAgent {
 	 * @return BSArray 画面情報
 	 */
 	public function getDisplayInfo () {
-		return new BSArray(array(
-			'width' => 480,
-		));
+		$info = new BSArray;
+		if (!$this->isTablet()) {
+			$info['width'] = 480;
+		}
+		return $info;
 	}
 
 	/**

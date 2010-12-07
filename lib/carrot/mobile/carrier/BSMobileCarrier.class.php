@@ -20,7 +20,7 @@ define('MPC_TO_CHARSET_UTF8', 'UTF-8');
  * ケータイキャリア
  *
  * @author 小石達也 <tkoishi@b-shock.co.jp>
- * @version $Id: BSMobileCarrier.class.php 2438 2010-11-29 07:26:18Z pooza $
+ * @version $Id: BSMobileCarrier.class.php 2443 2010-12-07 03:17:40Z pooza $
  * @abstract
  */
 abstract class BSMobileCarrier {
@@ -255,8 +255,17 @@ abstract class BSMobileCarrier {
 	 * @return boolean 絵文字が含まれていればTrue
 	 */
 	public function isContainPictogram ($body) {
-		$this->getMPC()->setString($body);
-		return !!$this->getMPC()->count();
+		$values = new BSArray(array(
+			BSString::convertEncoding($body, 'sjis-win'),
+			BSString::convertEncoding($body, 'utf-8'),
+		));
+		foreach ($values as $value) {
+			$this->getMPC()->setString($value);
+			if (!!$this->getMPC()->count()) {
+				return true;
+			}
+		}
+		return false;
 	}
 
 	/**
