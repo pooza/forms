@@ -3,18 +3,19 @@ GoogleAnalyticsテンプレート
 
 @package org.carrot-framework
 @author 小石達也 <tkoishi@b-shock.co.jp>
-@version $Id: GoogleAnalytics.tpl 1934 2010-03-25 09:37:36Z pooza $
+@version $Id: GoogleAnalytics.tpl 2444 2010-12-13 05:40:44Z pooza $
 *}
 
 <script type="text/javascript">
-var gaJsHost = (("https:" == document.location.protocol) ? "https://ssl." : "http://www.");
-document.write(unescape("%3Cscript src='" + gaJsHost + "google-analytics.com/ga.js' type='text/javascript'%3E%3C/script%3E"));
-</script>
-<script type="text/javascript">
-try {ldelim}
-var pageTracker = _gat._getTracker("UA-{$google_analytics.id}");
-pageTracker._trackPageview();
-{rdelim} catch(err) {ldelim}{rdelim}
+var _gaq = _gaq || [];
+_gaq.push(['_setAccount', 'UA-{$google_analytics.id}']);
+_gaq.push(['_trackPageview']);
+
+(function() {ldelim}
+  var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+  ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+  var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+{rdelim})();
 </script>
 
 {* vim: set tabstop=4: *}

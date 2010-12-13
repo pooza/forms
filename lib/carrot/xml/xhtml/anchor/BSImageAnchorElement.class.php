@@ -8,7 +8,7 @@
  * 画像へのリンク
  *
  * @author 小石達也 <tkoishi@b-shock.co.jp>
- * @version $Id: BSImageAnchorElement.class.php 2312 2010-08-26 14:03:25Z pooza $
+ * @version $Id: BSImageAnchorElement.class.php 2445 2010-12-13 05:41:58Z pooza $
  * @abstract
  */
 abstract class BSImageAnchorElement extends BSAnchorElement {
@@ -40,7 +40,6 @@ abstract class BSImageAnchorElement extends BSAnchorElement {
 	 * @param string $size サイズ名
 	 * @param integer $pixel ピクセル数
 	 * @param integer $flags フラグのビット列
-	 *   self::WITHOUT_BROWSER_CACHE クエリー末尾に乱数を加え、ブラウザキャッシュを無効にする
 	 *   self::WIDTH_FIXED 幅固定
 	 *   self::HEIGHT_FIXED 高さ固定
 	 *   self::WITHOUT_SQUARE 正方形に整形しない

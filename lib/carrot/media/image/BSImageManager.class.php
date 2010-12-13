@@ -8,13 +8,12 @@
  * 画像マネージャ
  *
  * @author 小石達也 <tkoishi@b-shock.co.jp>
- * @version $Id: BSImageManager.class.php 2401 2010-10-17 14:09:29Z pooza $
+ * @version $Id: BSImageManager.class.php 2445 2010-12-13 05:41:58Z pooza $
  */
 class BSImageManager {
 	private $useragent;
 	private $type;
 	private $flags = 0;
-	const WITHOUT_BROWSER_CACHE = 1;
 	const WIDTH_FIXED = 2;
 	const HEIGHT_FIXED = 4;
 	const WITHOUT_SQUARE = 8;
@@ -123,7 +122,6 @@ class BSImageManager {
 	 * @param string $size サイズ名
 	 * @param integer $pixel ピクセル数
 	 * @param integer $flags フラグのビット列
-	 *   self::WITHOUT_BROWSER_CACHE クエリー末尾に乱数を加え、ブラウザキャッシュを無効にする
 	 *   self::WIDTH_FIXED 幅固定
 	 *   self::HEIGHT_FIXED 高さ固定
 	 *   self::WITHOUT_SQUARE 正方形に整形しない
@@ -136,15 +134,8 @@ class BSImageManager {
 		}
 
 		$flags |= $this->flags;
-		if (BSUser::getInstance()->isAdministrator()) {
-			$flags |= self::WITHOUT_BROWSER_CACHE;
-		}
-
 		$url = BSFileUtility::getURL('image_cache');
 		$url['path'] .= $this->getEntryName($record, $size) . '/' . $file->getName();
-		if ($flags & self::WITHOUT_BROWSER_CACHE) {
-			$url->setParameter('at', BSNumeric::getRandom());
-		}
 		return $url;
 	}
 
