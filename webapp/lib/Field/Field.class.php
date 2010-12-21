@@ -42,18 +42,6 @@ class Field extends BSSortableRecord implements BSValidatorContainer {
 	}
 
 	/**
-	 * 削除
-	 *
-	 * @access public
-	 * @param integer $flags フラグのビット列
-	 *   BSDatabase::WITHOUT_LOGGING ログを残さない
-	 */
-	public function delete ($flags = null) {
-		$this->getForm()->touch();
-		parent::delete($flags);
-	}
-
-	/**
 	 * 同種のレコードを返す
 	 *
 	 * @access protected
