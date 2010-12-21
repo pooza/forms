@@ -14,6 +14,7 @@ class RegistrationDumpHandler extends RegistrationHandler implements BSExportabl
 	private $name;
 	private $form;
 	private $date;
+	private $permission;
 
 	/**
 	 * @access public
@@ -64,6 +65,16 @@ class RegistrationDumpHandler extends RegistrationHandler implements BSExportabl
 	 */
 	public function setDate (BSDate $date) {
 		$this->date = $date;
+	}
+
+	/**
+	 * メールパーミッションの扱いを設定
+	 *
+	 * @access public
+	 * @param boolean $permission Trueならば、mail_permissionフィールドがチェックされた応募を抽出
+	 */
+	public function setMailPermission ($permission) {
+		$this->permission = !!$permission;
 	}
 
 	/**
@@ -128,12 +139,20 @@ class RegistrationDumpHandler extends RegistrationHandler implements BSExportabl
 	public function export () {
 		$this->getExporter()->addRecord($this->getHeader());
 		$criteria = $this->createCriteriaSet();
+		if ($this->permission) {
+			$values = new BSArray(array(
+				'form_id' => $this->form->getID(),
+				'name' => 'mail_permission',
+			));
+			if ($field = $this->form->getFields()->getRecord($values)) {
+				$criteria->register(sprintf('a%02d', $field->getID()), 1);
+			}
+		}
 		if ($this->date) {
 			$duration = new BSArray(array(
 				$this->date->format('Y-m-d 00:00:00'),
 				$this->date->format('Y-m-d 23:59:59'),
 			));
-			$criteria->register('create_date', $duration, 'between');
 		}
 		$sql = BSSQL::getSelectQueryString('*', $this->getName(), $criteria);
 		foreach ($this->getDatabase()->query($sql) as $row) {

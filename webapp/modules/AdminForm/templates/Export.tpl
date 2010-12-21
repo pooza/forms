@@ -32,6 +32,16 @@ document.observe('dom:loaded', function(){ldelim}
 				<td width="210"><input type="text" id="date" name="date" size="10" maxlength="10" class="english" /></td>
 			</tr>
 			<tr>
+				<th width="60" align="left">mail_permissionフィールド</th>
+				<td width="210">
+					{if $form.fields.mail_permission}
+						<label><input type="checkbox" name="mail_permission" value="1" />チェックされている</label>
+					{else}
+						<span class="alert">未登録です。</span>
+					{/if}
+				</td>
+			</tr>
+			<tr>
 				<td colspan="2">
 					<input type="submit" value="送信" />
 				</td>

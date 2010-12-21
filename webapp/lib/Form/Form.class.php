@@ -286,10 +286,12 @@ class Form extends BSSortableRecord implements BSValidatorContainer, BSDictionar
 	 *
 	 * @access public
 	 * @param BSDate $date 対象日付
+	 * @param boolean $permission "mail_permission"がチェックされた応募を抽出
 	 * @return BSExporter エクスポーター
 	 */
-	public function export (BSDate $date = null) {
+	public function export (BSDate $date = null, $permission = null) {
 		$table = new RegistrationDumpHandler($this);
+		$table->setMailPermission($permission);
 		if ($date) {
 			$table->setDate($date);
 		}

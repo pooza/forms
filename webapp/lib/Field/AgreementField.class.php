@@ -9,7 +9,7 @@
  * @author 小石達也 <tkoishi@b-shock.co.jp>
  * @version $Id$
  */
-class AgreementField extends Field {
+class AgreementField extends SingleAnswerField {
 
 	/**
 	 * バリデータ登録
@@ -22,6 +22,23 @@ class AgreementField extends Field {
 			$this->getName(),
 			new BSEmptyValidator($params)
 		);
+	}
+
+	/**
+	 * 選択肢を返す
+	 *
+	 * @access public
+	 * @return BSArray 選択肢
+	 */
+	public function getChoices () {
+		if (!$this->choices) {
+			$prefs = new PrefHandler;
+			$this->choices = new BSArray(array(
+				0 => '同意しない',
+				1 => '同意する',
+			));
+		}
+		return $this->choices;
 	}
 }
 

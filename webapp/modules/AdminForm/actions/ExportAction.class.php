@@ -14,16 +14,19 @@ class ExportAction extends BSRecordAction {
 
 	public function execute () {
 		if (BSString::isBlank($date = $this->request['date'])) {
+			$date = null;
 			$name = new BSStringFormat('registrations_%06d.csv');
 			$name[] = $this->getRecord()->getID();
-			$this->request->setAttribute('renderer', $this->getRecord()->export());
 		} else {
 			$date = BSDate::getInstance($date);
-			$this->request->setAttribute('renderer', $this->getRecord()->export($date));
 			$name = new BSStringFormat('registrations_%06d_%s.csv');
 			$name[] = $this->getRecord()->getID();
 			$name[] = $date->format('Ymd');
 		}
+		$this->request->setAttribute(
+			'renderer',
+			$this->getRecord()->export($date, !!$this->request['mail_permission'])
+		);
 		$this->request->setAttribute('filename', $name->getContents());
 		return BSView::SUCCESS;
 	}

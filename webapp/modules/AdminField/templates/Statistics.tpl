@@ -14,7 +14,7 @@
 <tr>
 	<td width="210">{$row.answer}</td>
 	<td width="60" align="right">{$row.percentage*100|string_format:'%.1f'}%</td>
-	<td width="120">
+	<td width="180">
 	{if $row.count}
 		<img src="/carrotlib/images/bar.gif" height="8" width="{$row.percentage*100|floor}" alt="" />
 		{$row.count|number_format}

@@ -12,17 +12,13 @@
 class Field extends BSSortableRecord implements BSValidatorContainer {
 
 	/**
-	 * 更新
+	 * 親レコードを返す
 	 *
 	 * @access public
-	 * @param mixed $values 更新する値
-	 * @param integer $flags フラグのビット列
-	 *   BSDatabase::WITHOUT_LOGGING ログを残さない
-	 *   BSDatabase::WITHOUT_SERIALIZE シリアライズしない
+	 * @return BSRecord 親レコード
 	 */
-	public function update ($values, $flags = null) {
-		parent::update($values, $flags);
-		$this->getForm()->touch();
+	public function getParent () {
+		return $this->getForm();
 	}
 
 	/**
