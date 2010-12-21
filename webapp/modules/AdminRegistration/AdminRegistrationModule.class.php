@@ -32,6 +32,9 @@ class AdminRegistrationModule extends BSModule {
 	 * @return BSTableHandler テーブル
 	 */
 	public function getTable () {
+		if (BSString::isBlank($this->request['key'])) {
+			return parent::getTable();
+		}
 		if (!$this->table) {
 			$this->table = new RegistrationDumpHandler($this->getForm());
 		}

@@ -16,7 +16,7 @@ class ListAction extends BSPaginateTableAction {
 	 * @return integer ページサイズ
 	 */
 	protected function getPageSize () {
-		return 50;
+		return 20;
 	}
 
 	/**
