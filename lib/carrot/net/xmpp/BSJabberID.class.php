@@ -8,14 +8,13 @@
  * JabberID
  *
  * @author 小石達也 <tkoishi@b-shock.co.jp>
- * @version $Id: BSJabberID.class.php 1812 2010-02-03 15:15:09Z pooza $
+ * @version $Id: BSJabberID.class.php 2448 2011-01-02 06:16:45Z pooza $
  */
 class BSJabberID implements BSAssignable {
 	private $contents;
 	private $account;
 	private $host;
 	private $resource;
-	const PATTERN = '^([-_.[:alnum:]]+)@(([-_.[:alnum:]]+)+[[:alpha:]]+)(/([-_[:alnum:]]+))?$';
 
 	/**
 	 * @access public
@@ -23,7 +22,7 @@ class BSJabberID implements BSAssignable {
 	 */
 	public function __construct ($contents) {
 		$this->contents = $contents;
-		if (!mb_ereg(self::PATTERN, $this->contents, $matches)) {
+		if (!mb_ereg(BSJabberIDValidator::PATTERN, $this->contents, $matches)) {
 			throw new BSXMPPException($this . 'が正しくありません。');
 		}
 		$this->account = $matches[1];

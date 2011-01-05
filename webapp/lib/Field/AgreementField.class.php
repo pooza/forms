@@ -33,10 +33,7 @@ class AgreementField extends SingleAnswerField {
 	public function getChoices () {
 		if (!$this->choices) {
 			$prefs = new PrefHandler;
-			$this->choices = new BSArray(array(
-				0 => '同意しない',
-				1 => '同意する',
-			));
+			$this->choices = new BSArray(array(1, 0));
 		}
 		return $this->choices;
 	}

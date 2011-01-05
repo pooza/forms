@@ -8,7 +8,7 @@
  * ブログ更新Pingリクエスト
  *
  * @author 小石達也 <tkoishi@b-shock.co.jp>
- * @version $Id: BSBlogUpdatePingRequest.class.php 1866 2010-02-16 08:43:43Z pooza $
+ * @version $Id: BSBlogUpdatePingRequest.class.php 2451 2011-01-02 11:53:45Z pooza $
  */
 class BSBlogUpdatePingRequest extends BSXMLDocument {
 	private $params;
@@ -21,6 +21,16 @@ class BSBlogUpdatePingRequest extends BSXMLDocument {
 		parent::__construct($name);
 		$this->createElement('methodName', 'weblogUpdates.ping');
 		$this->params = $this->createElement('params');
+	}
+
+	/**
+	 * メディアタイプを返す
+	 *
+	 * @access public
+	 * @return string メディアタイプ
+	 */
+	public function getType () {
+		return 'text/xml';
 	}
 
 	/**

@@ -5,7 +5,7 @@
 
 /**
  * @author 小石達也 <tkoishi@b-shock.co.jp>
- * @version $Id: BSUtilityTest.class.php 2271 2010-08-10 15:56:13Z pooza $
+ * @version $Id: BSUtilityTest.class.php 2434 2010-11-22 12:48:48Z pooza $
  * @abstract
  */
 class BSUtilityTest extends BSTest {
@@ -18,7 +18,6 @@ class BSUtilityTest extends BSTest {
 	public function execute () {
 		$this->assert('isPathAbsolute_1', BSUtility::isPathAbsolute('/etc/hosts'));
 		$this->assert('isPathAbsolute_2', !BSUtility::isPathAbsolute('www/.htaccess'));
-		$this->assert('isPathAbsolute_3', BSUtility::isPathAbsolute('a:/config.sys'));
 		$this->assert('getUniqueID', BSUtility::getUniqueID() != BSUtility::getUniqueID());
 		$this->assert('includeFile_1', !BSUtility::includeFile('spyc'));
 		$this->assert('includeFile_2', !BSUtility::includeFile(

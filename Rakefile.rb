@@ -4,7 +4,7 @@
 #
 # @package org.carrot-framework
 # @author 小石達也 <tkoishi@b-shock.co.jp>
-# @version $Id: Rakefile.rb 2304 2010-08-26 10:17:28Z pooza $
+# @version $Id: Rakefile.rb 2448 2011-01-02 06:16:45Z pooza $
 
 $KCODE = 'u'
 require 'yaml'
@@ -37,10 +37,13 @@ namespace :var do
     sh 'chmod 777 var/*'
   end
 
-  desc 'varディレクトリをクリア'
-  task :clean do
-    sh 'sudo rm -R var/*/*'
-  end
+  desc '各種キャッシュをクリア'
+  task :clean => [
+    'config:clean',
+    'css:clean',
+    'js:clean',
+    'images:cache:clean',
+  ]
 
   namespace :images do
     namespace :cache do
@@ -150,10 +153,8 @@ namespace :docomo do
     sh 'bin/makexmldocomomap.pl > webapp/config/docomo_agents.xml'
   end
 
-  desc 'docomoの端末リストを更新'
-  task :update do
-    sh 'svn update webapp/config/docomo_atents.xml'
-  end
+  desc 'docomoの端末リストを取得'
+  task :update => [:fetch]
 end
 
 namespace :svn do

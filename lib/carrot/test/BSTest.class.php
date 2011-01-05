@@ -8,7 +8,7 @@
  * 基底テスト
  *
  * @author 小石達也 <tkoishi@b-shock.co.jp>
- * @version $Id: BSTest.class.php 2270 2010-08-10 15:48:16Z pooza $
+ * @version $Id: BSTest.class.php 2448 2011-01-02 06:16:45Z pooza $
  * @abstract
  */
 abstract class BSTest {
@@ -19,6 +19,20 @@ abstract class BSTest {
 	 */
 	public function __construct () {
 		$this->errors = new BSArray;
+	}
+
+	/**
+	 * @access public
+	 * @param string $name プロパティ名
+	 * @return mixed 各種オブジェクト
+	 */
+	public function __get ($name) {
+		switch ($name) {
+			case 'controller':
+			case 'request':
+			case 'user':
+				return BSUtility::executeMethod($name, 'getInstance');
+		}
 	}
 
 	/**

@@ -8,9 +8,10 @@
  * JabberIDバリデータ
  *
  * @author 小石達也 <tkoishi@b-shock.co.jp>
- * @version $Id: BSJabberIDValidator.class.php 1812 2010-02-03 15:15:09Z pooza $
+ * @version $Id: BSJabberIDValidator.class.php 2448 2011-01-02 06:16:45Z pooza $
  */
 class BSJabberIDValidator extends BSRegexValidator {
+	const PATTERN = '^([-_.[:alnum:]]+)@(([-_.[:alnum:]]+)+[[:alpha:]]+)(/([-_[:alnum:]]+))?$';
 
 	/**
 	 * 初期化
@@ -21,7 +22,7 @@ class BSJabberIDValidator extends BSRegexValidator {
 	public function initialize ($params = array()) {
 		$this['match'] = true;
 		$this['match_error'] = '正しいJabberIDではありません。';
-		$this['pattern'] = BSJabberID::PATTERN;
+		$this['pattern'] = self::PATTERN;
 		return BSValidator::initialize($params);
 	}
 }
