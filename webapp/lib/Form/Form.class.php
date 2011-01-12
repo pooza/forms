@@ -77,10 +77,10 @@ class Form extends BSSortableRecord implements BSValidatorContainer, BSDictionar
 	}
 
 	/**
-	 * 追加項目を返す
+	 * 項目を返す
 	 *
 	 * @access public
-	 * @return CampaignFieldHandler 追加項目テーブル
+	 * @return FieldHandler 項目テーブル
 	 */
 	public function getFields () {
 		if (!$this->fields) {
@@ -91,6 +91,24 @@ class Form extends BSSortableRecord implements BSValidatorContainer, BSDictionar
 			$this->fields->getOrder()->push('rank');
 		}
 		return $this->fields;
+	}
+
+	/**
+	 * 項目をJSONで返す
+	 *
+	 * @access public
+	 * @return BSResultJSONRenderer 項目情報
+	 */
+	public function getFieldOptions () {
+		$values = new BSArray($this->getAttributes());
+		$fields = $values['fields'] = new BSArray;
+		foreach ($this->getFields() as $field) {
+			$fields[$field->getName()] = $field->getOptions();
+		}
+
+		$json = new BSResultJSONRenderer;
+		$json->setContents($values);
+		return $json;
 	}
 
 	/**

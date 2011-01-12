@@ -19,6 +19,12 @@ crypt:
   engine: cbc
 
 module:
+  prefixes:
+    - Admin
+    - Agent
+    - User
+    - Develop
+    - Console
   secure:
     module: Default
     action: Login

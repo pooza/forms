@@ -56,6 +56,28 @@ class Field extends BSSortableRecord implements BSValidatorContainer {
 	}
 
 	/**
+	 * 項目情報を返す
+	 *
+	 * @access public
+	 * @return BSArray 項目情報
+	 */
+	public function getOptions () {
+		$values = new BSArray(array(
+			'id' => $this->getID(),
+			'name' => $this->getName(),
+			'label' => $this['label'],
+			'type' => $this->getFieldType()->getID(),
+		));
+		if (!!$this->getChoices()->count()) {
+			$values['choices'] = new BSArray;
+			foreach ($this->getChoices() as $choice) {
+				$values['choices'][] = $choice;
+			}
+		}
+		return $values;
+	}
+
+	/**
 	 * バリデータ登録
 	 *
 	 * @access public
