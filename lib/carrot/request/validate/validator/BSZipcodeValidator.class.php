@@ -8,7 +8,7 @@
  * 郵便番号バリデータ
  *
  * @author 小石達也 <tkoishi@b-shock.co.jp>
- * @version $Id: BSZipcodeValidator.class.php 2448 2011-01-02 06:16:45Z pooza $
+ * @version $Id: BSZipcodeValidator.class.php 2454 2011-01-12 03:48:11Z pooza $
  */
 class BSZipcodeValidator extends BSRegexValidator {
 	const PATTERN = '^([[:digit:]]{3})-([[:digit:]]{4})$';
@@ -21,7 +21,7 @@ class BSZipcodeValidator extends BSRegexValidator {
 	 */
 	public function initialize ($params = array()) {
 		$this['match'] = true;
-		$this['invalid_error'] = '正しくありません。';
+		$this['match_error'] = '正しくありません。';
 		$this['pattern'] = self::PATTERN;
 		$this['fields'] = array();
 		return BSValidator::initialize($params);

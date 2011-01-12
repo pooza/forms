@@ -8,7 +8,7 @@
  * 電話番号バリデータ
  *
  * @author 小石達也 <tkoishi@b-shock.co.jp>
- * @version $Id: BSPhoneNumberValidator.class.php 2449 2011-01-02 06:33:37Z pooza $
+ * @version $Id: BSPhoneNumberValidator.class.php 2454 2011-01-12 03:48:11Z pooza $
  * @link http://www.soumu.go.jp/main_sosiki/joho_tsusin/top/tel_number/ 電話番号の桁数について
  */
 class BSPhoneNumberValidator extends BSRegexValidator {
@@ -30,7 +30,7 @@ class BSPhoneNumberValidator extends BSRegexValidator {
 		}
 
 		$this['match'] = true;
-		$this['invalid_error'] = '正しくありません。';
+		$this['match_error'] = '正しくありません。';
 		$this['fields'] = array();
 		$this['pattern'] = self::PATTERN;
 		return BSValidator::initialize($params);
