@@ -8,7 +8,7 @@
  * CLI環境用 ダミーユーザーエージェント
  *
  * @author 小石達也 <tkoishi@b-shock.co.jp>
- * @version $Id: BSConsoleUserAgent.class.php 1812 2010-02-03 15:15:09Z pooza $
+ * @version $Id: BSConsoleUserAgent.class.php 2459 2011-01-14 07:55:25Z pooza $
  */
 class BSConsoleUserAgent extends BSUserAgent {
 
@@ -38,16 +38,6 @@ class BSConsoleUserAgent extends BSUserAgent {
 	 * @return string プラットホーム
 	 */
 	public function getPlatform () {
-		return null;
-	}
-
-	/**
-	 * 規定の画像形式を返す
-	 *
-	 * @access public
-	 * @return string 規定の画像形式
-	 */
-	public function getDefaultImageType () {
 		return null;
 	}
 

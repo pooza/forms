@@ -5,16 +5,10 @@
 
 /**
  * @author 小石達也 <tkoishi@b-shock.co.jp>
- * @version $Id: BSUtilityTest.class.php 2434 2010-11-22 12:48:48Z pooza $
+ * @version $Id: BSUtilityTest.class.php 2460 2011-01-14 08:01:54Z pooza $
  * @abstract
  */
 class BSUtilityTest extends BSTest {
-
-	/**
-	 * 実行
-	 *
-	 * @access public
-	 */
 	public function execute () {
 		$this->assert('isPathAbsolute_1', BSUtility::isPathAbsolute('/etc/hosts'));
 		$this->assert('isPathAbsolute_2', !BSUtility::isPathAbsolute('www/.htaccess'));

@@ -5,16 +5,10 @@
 
 /**
  * @author 小石達也 <tkoishi@b-shock.co.jp>
- * @version $Id: BSUserAgentTest.class.php 2336 2010-09-10 09:25:46Z pooza $
+ * @version $Id: BSUserAgentTest.class.php 2460 2011-01-14 08:01:54Z pooza $
  * @abstract
  */
 class BSUserAgentTest extends BSTest {
-
-	/**
-	 * 実行
-	 *
-	 * @access public
-	 */
 	public function execute () {
 		$useragent = BSUserAgent::getInstance(null, 'default');
 		$this->assert('getInstance_Default', $useragent instanceof BSDefaultUserAgent);

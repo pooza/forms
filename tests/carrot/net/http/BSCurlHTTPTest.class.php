@@ -5,16 +5,10 @@
 
 /**
  * @author 小石達也 <tkoishi@b-shock.co.jp>
- * @version $Id: BSCurlHTTPTest.class.php 2408 2010-10-29 13:03:29Z pooza $
+ * @version $Id: BSCurlHTTPTest.class.php 2460 2011-01-14 08:01:54Z pooza $
  * @abstract
  */
 class BSCurlHTTPTest extends BSTest {
-
-	/**
-	 * 実行
-	 *
-	 * @access public
-	 */
 	public function execute () {
 		$this->assert('__construct', $http = new BSCurlHTTP('www.b-shock.co.jp'));
 		try {

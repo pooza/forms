@@ -5,16 +5,10 @@
 
 /**
  * @author 小石達也 <tkoishi@b-shock.co.jp>
- * @version $Id: BSTwitterSearchServiceTest.class.php 2367 2010-09-29 11:31:45Z pooza $
+ * @version $Id: BSTwitterSearchServiceTest.class.php 2460 2011-01-14 08:01:54Z pooza $
  * @abstract
  */
 class BSTwitterSearchServiceTest extends BSTest {
-
-	/**
-	 * 実行
-	 *
-	 * @access public
-	 */
 	public function execute () {
 		$this->assert('__construct', $service = new BSTwitterSearchService);
 		$this->assert('searchTweets_twitter', !!$service->searchTweets('twitter')->count());

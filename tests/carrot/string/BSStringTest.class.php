@@ -5,16 +5,10 @@
 
 /**
  * @author 小石達也 <tkoishi@b-shock.co.jp>
- * @version $Id: BSStringTest.class.php 2370 2010-09-29 14:24:22Z pooza $
+ * @version $Id: BSStringTest.class.php 2460 2011-01-14 08:01:54Z pooza $
  * @abstract
  */
 class BSStringTest extends BSTest {
-
-	/**
-	 * 実行
-	 *
-	 * @access public
-	 */
 	public function execute () {
 		$string = BSString::convertWrongCharacters('㈱㈲');
 		$this->assert('convertWrongCharacters', $string == '(株)(有)');

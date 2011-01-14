@@ -5,16 +5,10 @@
 
 /**
  * @author 小石達也 <tkoishi@b-shock.co.jp>
- * @version $Id: BSPhoneNumberValidatorTest.class.php 2448 2011-01-02 06:16:45Z pooza $
+ * @version $Id: BSPhoneNumberValidatorTest.class.php 2460 2011-01-14 08:01:54Z pooza $
  * @abstract
  */
 class BSPhoneNumberValidatorTest extends BSTest {
-
-	/**
-	 * 実行
-	 *
-	 * @access public
-	 */
 	public function execute () {
 		$this->assert('__construct', $validator = new BSPhoneNumberValidator);
 		$this->assert('execute', $validator->execute('00-0000-0000'));

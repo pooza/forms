@@ -5,16 +5,10 @@
 
 /**
  * @author 小石達也 <tkoishi@b-shock.co.jp>
- * @version $Id: BSBlogUpdatePingServiceTest.class.php 2452 2011-01-02 11:54:54Z pooza $
+ * @version $Id: BSBlogUpdatePingServiceTest.class.php 2460 2011-01-14 08:01:54Z pooza $
  * @abstract
  */
 class BSBlogUpdatePingServiceTest extends BSTest {
-
-	/**
-	 * 実行
-	 *
-	 * @access public
-	 */
 	public function execute () {
 		$params = new BSArray(array(
 			'weblogname' => 'b-shock. Fortress',

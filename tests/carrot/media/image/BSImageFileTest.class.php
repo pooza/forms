@@ -5,16 +5,10 @@
 
 /**
  * @author 小石達也 <tkoishi@b-shock.co.jp>
- * @version $Id: BSImageFileTest.class.php 2286 2010-08-17 14:07:35Z pooza $
+ * @version $Id: BSImageFileTest.class.php 2460 2011-01-14 08:01:54Z pooza $
  * @abstract
  */
 class BSImageFileTest extends BSTest {
-
-	/**
-	 * 実行
-	 *
-	 * @access public
-	 */
 	public function execute () {
 		$dir = BSFileUtility::getDirectory('root');
 		$src = $dir->getEntry('www/carrotlib/images/button/pictogram.gif', 'BSImageFile');

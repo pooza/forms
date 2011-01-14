@@ -5,16 +5,10 @@
 
 /**
  * @author 小石達也 <tkoishi@b-shock.co.jp>
- * @version $Id: BSHTTPTest.class.php 2411 2010-10-29 13:21:21Z pooza $
+ * @version $Id: BSHTTPTest.class.php 2460 2011-01-14 08:01:54Z pooza $
  * @abstract
  */
 class BSHTTPTest extends BSTest {
-
-	/**
-	 * 実行
-	 *
-	 * @access public
-	 */
 	public function execute () {
 		$this->assert('__construct', $http = new BSHTTP('www.b-shock.co.jp'));
 		try {

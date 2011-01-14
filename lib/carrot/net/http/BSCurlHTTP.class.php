@@ -8,7 +8,7 @@
  * CurlによるHTTP処理
  *
  * @author 小石達也 <tkoishi@b-shock.co.jp>
- * @version $Id: BSCurlHTTP.class.php 2407 2010-10-29 12:38:04Z pooza $
+ * @version $Id: BSCurlHTTP.class.php 2456 2011-01-12 11:29:32Z pooza $
  */
 class BSCurlHTTP extends BSHTTP {
 	protected $engine;
@@ -122,8 +122,10 @@ class BSCurlHTTP extends BSHTTP {
 		$url['path'] ='/' . ltrim($href, '/');
 		if ($this->isSSL()) {
 			$url['scheme'] = 'https';
+			$url['port'] = BSNetworkService::getPort('https');
 		} else {
 			$url['scheme'] = 'http';
+			$url['port'] = BSNetworkService::getPort('http');
 		}
 		return $url;
 	}

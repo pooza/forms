@@ -5,16 +5,10 @@
 
 /**
  * @author 小石達也 <tkoishi@b-shock.co.jp>
- * @version $Id: BSZipcodeValidatorTest.class.php 2448 2011-01-02 06:16:45Z pooza $
+ * @version $Id: BSZipcodeValidatorTest.class.php 2460 2011-01-14 08:01:54Z pooza $
  * @abstract
  */
 class BSZipcodeValidatorTest extends BSTest {
-
-	/**
-	 * 実行
-	 *
-	 * @access public
-	 */
 	public function execute () {
 		$this->assert('__construct', $validator = new BSZipcodeValidator);
 		$this->assert('execute', $validator->execute('000-0000'));
