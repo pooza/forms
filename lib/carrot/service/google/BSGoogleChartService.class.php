@@ -8,7 +8,7 @@
  * Google Chartクライアント
  *
  * @author 小石達也 <tkoishi@b-shock.co.jp>
- * @version $Id: BSGoogleChartService.class.php 2463 2011-01-15 06:01:29Z pooza $
+ * @version $Id: BSGoogleChartService.class.php 2464 2011-01-17 12:36:35Z pooza $
  */
 class BSGoogleChartService extends BSCurlHTTP {
 	const DEFAULT_HOST = 'chart.apis.google.com';
@@ -32,9 +32,13 @@ class BSGoogleChartService extends BSCurlHTTP {
 	 * @param string $data 対象データ
 	 * @return BSImageFile 画像ファイル
 	 */
-	public function getQRCodeImageFile ($data, $size = BS_IMAGE_QRCODE_SIZE) {
+	public function getQRCodeImageFile ($data, $size = 0, $encoding = 'sjis-win') {
+		if (!$size) {
+			$size = BS_IMAGE_QRCODE_SIZE;
+		}
 		$params = new BSArray(array(
-			'chl' => $data,
+			'chl' => BSString::convertEncoding($data, $encoding),
+			'chld' => 'l|0',
 		));
 		return $this->getImageFile('qr', $size, $size, $params);
 	} 
