@@ -8,7 +8,7 @@
  * HTTPスキーマのURL
  *
  * @author 小石達也 <tkoishi@b-shock.co.jp>
- * @version $Id: BSHTTPURL.class.php 2459 2011-01-14 07:55:25Z pooza $
+ * @version $Id: BSHTTPURL.class.php 2463 2011-01-15 06:01:29Z pooza $
  */
 class BSHTTPURL extends BSURL implements BSHTTPRedirector, BSImageContainer {
 	private $fullpath;
@@ -269,8 +269,8 @@ class BSHTTPURL extends BSURL implements BSHTTPRedirector, BSImageContainer {
 				$service = new BSGoogleFaviconsService;
 				return $service->getImageFile($this['host']);
 			case 'qr':
-				$service = new BSGoogleURLShortnerService;
-				return $service->getQRCodeImageFile($this);
+				$service = new BSGoogleChartService;
+				return $service->getQRCodeImageFile($this->getContents());
 		}
 	}
 

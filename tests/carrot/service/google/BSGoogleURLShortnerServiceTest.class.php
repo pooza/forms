@@ -5,7 +5,7 @@
 
 /**
  * @author 小石達也 <tkoishi@b-shock.co.jp>
- * @version $Id: BSGoogleURLShortnerServiceTest.class.php 2460 2011-01-14 08:01:54Z pooza $
+ * @version $Id: BSGoogleURLShortnerServiceTest.class.php 2463 2011-01-15 06:01:29Z pooza $
  * @abstract
  */
 class BSGoogleURLShortnerServiceTest extends BSTest {
@@ -14,10 +14,6 @@ class BSGoogleURLShortnerServiceTest extends BSTest {
 
 		$url = BSURL::getInstance('http://www.b-shock.co.jp/');
 		$this->assert('getShortURL', ($service->getShortURL($url) instanceof BSHTTPURL));
-		$this->assert(
-			'getQRCodeImageFile',
-			($service->getQRCodeImageFile($url) instanceof BSImageFile)
-		);
 	}
 }
 

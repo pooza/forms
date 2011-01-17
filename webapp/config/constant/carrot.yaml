@@ -2,11 +2,11 @@
 #
 # @package org.carrot-framework
 # @author 小石達也 <tkoishi@b-shock.co.jp>
-# @version $Id: carrot.yaml 2456 2011-01-12 11:29:32Z pooza $
+# @version $Id: carrot.yaml 2463 2011-01-15 06:01:29Z pooza $
 
 carrot:
   name: carrot Framework
-  ver: 2.4.45
+  ver: 2.4.46
 
 admin:
   email:
@@ -94,9 +94,7 @@ image:
       au: image/png
       softbank: image/png
   qrcode:
-    size: 2
-    margin: 4
-    type: image/png
+    size: 100
   thumbnail:
     bgcolor: black
     type: image/png

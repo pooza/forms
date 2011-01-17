@@ -2,7 +2,7 @@
 #
 # @package org.carrot-framework
 # @author 小石達也 <tkoishi@b-shock.co.jp>
-# @version $Id: carrot.yaml 2457 2011-01-13 13:09:58Z pooza $
+# @version $Id: carrot.yaml 2463 2011-01-15 06:01:29Z pooza $
 
 awstats:
   parent: lib
@@ -25,6 +25,9 @@ carrot:
   parent: lib
 carrotlib:
   parent: www
+chart:
+  parent: var
+  suffix: .png
 config:
   parent: webapp
 compile:
@@ -109,9 +112,6 @@ proctools:
   constant: yes
 pgsql:
   constant: yes
-qrcode:
-  parent: var
-  suffix: .png
 request:
   parent: var
   suffix: .txt
