@@ -10,13 +10,16 @@
 class ConfirmInputView extends BSSmartyView {
 	public function execute () {
 		$this->setAttribute('answer', $this->user->getAttribute('answer'));
-		if ($this->useragent->isMobile() || $this->useragent->isSmartPhone()) {
-			$template = 'mobile_confirm';
+
+		$record = $this->getModule()->getRecord();
+		if ($this->useragent->isSmartPhone() && $record['smartphone_confirm_template']) {
+			$this->setTemplate($record->getTemplateFile('smartphone_confirm'));
+		} else if ($this->useragent->isMobile() && $record['mobile_confirm_template']) {
+			$this->setTemplate($record->getTemplateFile('mobile_confirm'));
 		} else {
-			$template = 'confirm';
+			$this->setTemplate($record->getTemplateFile('pc_confirm'));
 		}
-		$this->setTemplate($this->getModule()->getRecord()->getTemplateFile($template));
-		$this->translator->register($this->getModule()->getRecord(), BSArray::POSITION_TOP);
+		$this->translator->register($record, BSArray::POSITION_TOP);
 	}
 }
 

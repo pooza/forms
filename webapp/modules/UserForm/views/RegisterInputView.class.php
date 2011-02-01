@@ -9,13 +9,15 @@
  */
 class RegisterInputView extends BSSmartyView {
 	public function execute () {
-		if ($this->useragent->isMobile() || $this->useragent->isSmartPhone()) {
-			$template = 'mobile_form';
+		$record = $this->getModule()->getRecord();
+		if ($this->useragent->isSmartPhone() && $record['smartphone_form_template']) {
+			$this->setTemplate($record->getTemplateFile('smartphone_form'));
+		} else if ($this->useragent->isMobile() && $record['mobile_form_template']) {
+			$this->setTemplate($record->getTemplateFile('mobile_form'));
 		} else {
-			$template = 'form';
+			$this->setTemplate($record->getTemplateFile('pc_form'));
 		}
-		$this->setTemplate($this->getModule()->getRecord()->getTemplateFile($template));
-		$this->translator->register($this->getModule()->getRecord(), BSArray::POSITION_TOP);
+		$this->translator->register($record, BSArray::POSITION_TOP);
 	}
 }
 
