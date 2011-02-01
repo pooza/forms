@@ -2,7 +2,6 @@
 #
 # @package jp.co.commons.forms
 # @author 小石達也 <tkoishi@b-shock.co.jp>
-# @version $Id$
 
 SET NAMES 'utf8';
 ALTER TABLE `form` ADD `rank` smallint UNSIGNED NULL DEFAULT NULL  AFTER `email`;
