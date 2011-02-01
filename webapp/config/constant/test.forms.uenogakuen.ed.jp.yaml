@@ -2,7 +2,6 @@
 #
 # @package jp.co.commons.forms
 # @author 小石達也 <tkoishi@b-shock.co.jp>
-# @version $Id$
 
 root_url: http://test.forms.uenogakuen.ed.jp/
 root_url_https: http://test.forms.uenogakuen.ed.jp/
