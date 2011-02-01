@@ -14,34 +14,46 @@ fields:
   email:
     validators:
       - email
-  form_template:
-    file: yes
+  pc_form_template:
     validators:
       - smarty
-  confirm_template:
-    file: yes
+      - longtext
+  pc_confirm_template:
     validators:
       - smarty
-  thanx_template:
-    file: yes
+      - longtext
+  pc_thanx_template:
     validators:
       - smarty
+      - longtext
   mobile_form_template:
-    file: yes
     validators:
       - smarty
+      - longtext
   mobile_confirm_template:
-    file: yes
     validators:
       - smarty
+      - longtext
   mobile_thanx_template:
-    file: yes
     validators:
       - smarty
+      - longtext
+  smartphone_form_template:
+    validators:
+      - smarty
+      - longtext
+  smartphone_confirm_template:
+    validators:
+      - smarty
+      - longtext
+  smartphone_thanx_template:
+    validators:
+      - smarty
+      - longtext
   thanx_mail_template:
-    file: yes
     validators:
       - smarty
+      - longtext
   status:
     required: yes
     validators:

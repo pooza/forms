@@ -19,6 +19,16 @@ class CreateAction extends BSRecordAction {
 		return array(
 			'name' => $this->request['name'],
 			'email' => $this->request['email'],
+			'pc_form_template' => $this->request['pc_form_template'],
+			'pc_confirm_template' => $this->request['pc_confirm_template'],
+			'pc_thanx_template' => $this->request['pc_thanx_template'],
+			'mobile_form_template' => $this->request['mobile_form_template'],
+			'mobile_confirm_template' => $this->request['mobile_confirm_template'],
+			'mobile_thanx_template' => $this->request['mobile_thanx_template'],
+			'smartphone_form_template' => $this->request['smartphone_form_template'],
+			'smartphone_confirm_template' => $this->request['smartphone_confirm_template'],
+			'smartphone_thanx_template' => $this->request['smartphone_thanx_template'],
+			'thanx_mail_template' => $this->request['thanx_mail_template'],
 			'status' => $this->request['status'],
 		);
 	}
@@ -41,15 +51,6 @@ class CreateAction extends BSRecordAction {
 			$this->request['status'] = 'hide';
 		}
 		return BSView::INPUT;
-	}
-
-	public function registerValidators () {
-		$manager = BSValidateManager::getInstance();
-		if ($this->request['status'] == 'show') {
-			foreach (array('form', 'confirm', 'thanx', 'thanx_mail') as $name) {
-				$manager->register($name . '_template', new BSEmptyValidator);
-			}
-		}
 	}
 
 	public function handleError () {
