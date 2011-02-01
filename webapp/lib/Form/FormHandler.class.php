@@ -22,6 +22,22 @@ class FormHandler extends BSSortableTableHandler {
 	}
 
 	/**
+	 * レコード追加
+	 *
+	 * @access public
+	 * @param mixed $values 値
+	 * @param integer $flags フラグのビット列
+	 *   BSDatabase::WITH_LOGGING ログを残さない
+	 * @return string レコードの主キー
+	 */
+	public function createRecord ($values, $flags = null) {
+		$id = parent::createRecord($values, $flags);
+		$record = $this->getRecord($id);
+		$record->touch();
+		return $id;
+	}
+
+	/**
 	 * 添付ファイル名を全てを返す
 	 *
 	 * @access public

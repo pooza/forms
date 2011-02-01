@@ -26,6 +26,30 @@ class Form extends BSSortableRecord implements BSValidatorContainer, BSDictionar
 	}
 
 	/**
+	 * 更新
+	 *
+	 * @access public
+	 * @param mixed $values 更新する値
+	 * @param integer $flags フラグのビット列
+	 *   BSDatabase::WITHOUT_LOGGING ログを残さない
+	 *   BSDatabase::WITHOUT_SERIALIZE シリアライズしない
+	 */
+	public function update ($values, $flags = null) {
+		parent::update($values, $flags);
+		foreach (FormHandler::getAttachmentNames() as $field) {
+			if (BSString::isBlank($this[$field])) {
+				if ($file = $this->getAttachment($field)) {
+					$file->delete();
+				}
+			} else {
+				$file = BSFileUtility::getTemporaryFile();
+				$file->setContents($this[$field]);
+				$this->setAttachment($file, $field);
+			}
+		}
+	}
+
+	/**
 	 * 削除可能か？
 	 *
 	 * @access protected
