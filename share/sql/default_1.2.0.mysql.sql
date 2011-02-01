@@ -13,3 +13,4 @@ ALTER TABLE `form` ADD `mobile_thanx_template` text NULL DEFAULT NULL  AFTER `mo
 ALTER TABLE `form` ADD `smartphone_form_template` text NULL DEFAULT NULL  AFTER `mobile_thanx_template`;
 ALTER TABLE `form` ADD `smartphone_confirm_template` text NULL DEFAULT NULL  AFTER `smartphone_form_template`;
 ALTER TABLE `form` ADD `smartphone_thanx_template` text NULL DEFAULT NULL  AFTER `smartphone_confirm_template`;
+ALTER TABLE `form` ADD `thanx_mail_template` text NULL DEFAULT NULL  AFTER `smartphone_thanx_template`;

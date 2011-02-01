@@ -94,6 +94,7 @@ CREATE TABLE `form` (
   `smartphone_form_template` text,
   `smartphone_confirm_template` text,
   `smartphone_thanx_template` text,
+  `thanx_mail_template` text,
   `rank` smallint(5) unsigned DEFAULT NULL,
   `status` enum('show','hide') NOT NULL DEFAULT 'hide',
   `create_date` datetime NOT NULL,
@@ -200,4 +201,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2011-02-01 16:04:39
+-- Dump completed on 2011-02-01 16:10:50
