@@ -4,5 +4,5 @@
 # @author 小石達也 <tkoishi@b-shock.co.jp>
 
 package:
-  name:
-  ver:
+  name: forms
+  ver: 1.2.0

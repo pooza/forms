@@ -5,9 +5,9 @@
 
 app:
   name:
-    ja: forms
-    en: forms
-  ver: 1.2.0
+    ja: 入力フォーム
+    en: Registration Form
+  ver: 1.0.0
 
 author:
   name: 有限会社 ビーショック
