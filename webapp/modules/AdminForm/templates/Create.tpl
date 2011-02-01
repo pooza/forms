@@ -32,45 +32,63 @@
 			</td>
 		</tr>
 		<tr>
-			<th>フォーム<br/>テンプレート</th>
+			<th>フォームテンプレート</th>
 			<td>
-				<input type="file" name="form_template" size="48" />
+				<textarea name="pc_form_template" cols="60" rows="8">{$params.pc_form_template}</textarea>
 			</td>
 		</tr>
 		<tr>
-			<th>確認画面<br/>テンプレート</th>
+			<th>確認画面テンプレート</th>
 			<td>
-				<input type="file" name="confirm_template" size="48" />
+				<textarea name="pc_confirm_template" cols="60" rows="8">{$params.pc_confirm_template}</textarea>
 			</td>
 		</tr>
 		<tr>
-			<th>サンクス画面<br/>テンプレート</th>
+			<th>サンクス画面テンプレート</th>
 			<td>
-				<input type="file" name="thanx_template" size="48" />
+				<textarea name="pc_thanx_template" cols="60" rows="8">{$params.pc_thanx_template}</textarea>
 			</td>
 		</tr>
 		<tr>
-			<th>フォーム<br/>テンプレート(携)</th>
+			<th>フォームテンプレート(ケータイ)</th>
 			<td>
-				<input type="file" name="form_template" size="48" />
+				<textarea name="mobile_form_template" cols="60" rows="8">{$params.mobile_form_template}</textarea>
 			</td>
 		</tr>
 		<tr>
-			<th>確認画面<br/>テンプレート(携)</th>
+			<th>確認画面テンプレート(ケータイ)</th>
 			<td>
-				<input type="file" name="confirm_template" size="48" />
+				<textarea name="mobile_confirm_template" cols="60" rows="8">{$params.mobile_confirm_template}</textarea>
 			</td>
 		</tr>
 		<tr>
-			<th>サンクス画面<br/>テンプレート(携)</th>
+			<th>サンクス画面テンプレート(ケータイ)</th>
 			<td>
-				<input type="file" name="thanx_template" size="48" />
+				<textarea name="mobile_thanx_template" cols="60" rows="8">{$params.mobile_thanx_template}</textarea>
 			</td>
 		</tr>
 		<tr>
-			<th>サンクスメール<br/>テンプレート</th>
+			<th>フォームテンプレート(スマートフォン)</th>
 			<td>
-				<input type="file" name="thanx_mail_template" size="48" />
+				<textarea name="smartphone_form_template" cols="60" rows="8">{$params.smartphone_form_template}</textarea>
+			</td>
+		</tr>
+		<tr>
+			<th>確認画面テンプレート(スマートフォン)</th>
+			<td>
+				<textarea name="smartphone_confirm_template" cols="60" rows="8">{$params.smartphone_confirm_template}</textarea>
+			</td>
+		</tr>
+		<tr>
+			<th>サンクス画面テンプレート(スマートフォン)</th>
+			<td>
+				<textarea name="smartphone_thanx_template" cols="60" rows="8">{$params.smartphone_thanx_template}</textarea>
+			</td>
+		</tr>
+		<tr>
+			<th>サンクスメールテンプレート</th>
+			<td>
+				<textarea name="thanx_mail_template" cols="60" rows="8">{$params.thanx_mail_template}</textarea>
 			</td>
 		</tr>
 		<tr>

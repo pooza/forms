@@ -18,20 +18,10 @@
 <div class="tabs10">
 	<ul id="Tabs">
 {if $credentials.AdminEdit}
-		<li><a href="#DetailForm"><span>フォーム詳細</span></a></li>
+		<li><a href="#DetailForm"><span>フォーム</span></a></li>
+{/if}
 		<li><a href="#FieldList"><span>フィールド</span></a></li>
 		<li><a href="#RegistrationList"><span>応募</span></a></li>
-		{if $form.has_form_template}<li><a href="#FormTemplateViewer"><span>フォーム</span></a></li>{/if}
-		{if $form.has_confirm_template}<li><a href="#ConfirmTemplateViewer"><span>確認画面</span></a></li>{/if}
-		{if $form.has_thanx_template}<li><a href="#ThanxTemplateViewer"><span>サンクス画面</span></a></li>{/if}
-		{if $form.has_mobile_form_template}<li><a href="#MobileFormTemplateViewer"><span>フォーム(携)</span></a></li>{/if}
-		{if $form.has_mobile_confirm_template}<li><a href="#MobileConfirmTemplateViewer"><span>確認画面(携)</span></a></li>{/if}
-		{if $form.has_mobile_thanx_template}<li><a href="#MobileThanxTemplateViewer"><span>サンクス画面(携)</span></a></li>{/if}
-		{if $form.has_thanx_mail_template}<li><a href="#ThanxMailTemplateViewer"><span>サンクスメール</span></a></li>{/if}
-{else}
-		<li><a href="#FieldList"><span>フィールド管理</span></a></li>
-		<li><a href="#RegistrationList"><span>応募管理</span></a></li>
-{/if}
 	</ul>
 </div>
 
@@ -51,7 +41,7 @@
 				<th>応募画面URL</th>
 				<td>
 					{$form.url|url2link}
-	{if $form.has_mobile_form_template}
+	{if $form.mobile_form_template}
 					<div>{$form.url|qrcode}</div>
 	{/if}
 				</td>
@@ -69,80 +59,63 @@
 				</td>
 			</tr>
 			<tr>
-				<th>フォーム<br/>テンプレート</th>
+				<th>フォームテンプレート</th>
 				<td>
-					<input type="file" name="form_template" size="48" /><br/>
-{if $form.has_form_template}
-					<a href="{$form.form_template.url}" ><img src="/carrotlib/images/document.gif" width="16" height="16" alt="" /></a>
-					{$form.form_template.size|binary_size_format}B
-					[<a href="/{$module.name}/DeleteAttachment?name=form_template">このファイルを削除</a>]
-{/if}
+					<textarea name="pc_form_template" cols="60" rows="8">{$params.pc_form_template}</textarea>
 				</td>
 			</tr>
 			<tr>
-				<th>確認画面<br/>テンプレート</th>
+				<th>確認画面テンプレート</th>
 				<td>
-					<input type="file" name="confirm_template" size="48" /><br/>
-{if $form.has_confirm_template}
-					<a href="{$form.confirm_template.url}" ><img src="/carrotlib/images/document.gif" width="16" height="16" alt="" /></a>
-					{$form.confirm_template.size|binary_size_format}B
-					[<a href="/{$module.name}/DeleteAttachment?name=confirm_template">このファイルを削除</a>]
-{/if}
+					<textarea name="pc_confirm_template" cols="60" rows="8">{$params.pc_confirm_template}</textarea>
 				</td>
 			</tr>
 			<tr>
-				<th>サンクス画面<br/>テンプレート</th>
+				<th>サンクス画面テンプレート</th>
 				<td>
-					<input type="file" name="thanx_template" size="48" /><br/>
-{if $form.has_thanx_template}
-					<a href="{$form.thanx_template.url}" ><img src="/carrotlib/images/document.gif" width="16" height="16" alt="" /></a>
-					{$form.thanx_template.size|binary_size_format}B
-					[<a href="/{$module.name}/DeleteAttachment?name=thanx_template">このファイルを削除</a>]
-{/if}
+					<textarea name="pc_thanx_template" cols="60" rows="8">{$params.pc_thanx_template}</textarea>
 				</td>
 			</tr>
 			<tr>
-				<th>フォーム<br/>テンプレート(携)</th>
+				<th>フォームテンプレート(ケータイ)</th>
 				<td>
-					<input type="file" name="mobile_form_template" size="48" /><br/>
-{if $form.has_mobile_form_template}
-					<a href="{$form.mobile_form_template.url}" ><img src="/carrotlib/images/document.gif" width="16" height="16" alt="" /></a>
-					{$form.mobile_form_template.size|binary_size_format}B
-					[<a href="/{$module.name}/DeleteAttachment?name=mobile_form_template">このファイルを削除</a>]
-{/if}
+					<textarea name="mobile_form_template" cols="60" rows="8">{$params.mobile_form_template}</textarea>
 				</td>
 			</tr>
 			<tr>
-				<th>確認画面<br/>テンプレート(携)</th>
+				<th>確認画面テンプレート(ケータイ)</th>
 				<td>
-					<input type="file" name="mobile_confirm_template" size="48" /><br/>
-{if $form.has_mobile_confirm_template}
-					<a href="{$form.mobile_confirm_template.url}" ><img src="/carrotlib/images/document.gif" width="16" height="16" alt="" /></a>
-					{$form.mobile_confirm_template.size|binary_size_format}B
-					[<a href="/{$module.name}/DeleteAttachment?name=mobile_confirm_template">このファイルを削除</a>]
-{/if}
+					<textarea name="mobile_confirm_template" cols="60" rows="8">{$params.mobile_confirm_template}</textarea>
 				</td>
 			</tr>
 			<tr>
-				<th>サンクス画面<br/>テンプレート(携)</th>
+				<th>サンクス画面テンプレート(ケータイ)</th>
 				<td>
-					<input type="file" name="mobile_thanx_template" size="48" /><br/>
-{if $form.has_mobile_thanx_template}
-					<a href="{$form.mobile_thanx_template.url}" ><img src="/carrotlib/images/document.gif" width="16" height="16" alt="" /></a>
-					{$form.mobile_thanx_template.size|binary_size_format}B
-					[<a href="/{$module.name}/DeleteAttachment?name=mobile_thanx_template">このファイルを削除</a>]
-{/if}
+					<textarea name="mobile_thanx_template" cols="60" rows="8">{$params.mobile_thanx_template}</textarea>
 				</td>
 			</tr>
 			<tr>
-				<th>サンクスメール<br/>テンプレート</th>
+				<th>フォームテンプレート(スマートフォン)</th>
 				<td>
-					<input type="file" name="thanx_mail_template" size="48" /><br/>
-{if $form.has_thanx_mail_template}
-					<a href="{$form.thanx_mail_template.url}" ><img src="/carrotlib/images/document.gif" width="16" height="16" alt="" /></a>
-					{$form.thanx_mail_template.size|binary_size_format}B
-					[<a href="/{$module.name}/DeleteAttachment?name=thanx_mail_template">このファイルを削除</a>]
-{/if}
+					<textarea name="smartphone_form_template" cols="60" rows="8">{$params.smartphone_form_template}</textarea>
+				</td>
+			</tr>
+			<tr>
+				<th>確認画面テンプレート(スマートフォン)</th>
+				<td>
+					<textarea name="smartphone_confirm_template" cols="60" rows="8">{$params.smartphone_confirm_template}</textarea>
+				</td>
+			</tr>
+			<tr>
+				<th>サンクス画面テンプレート(スマートフォン)</th>
+				<td>
+					<textarea name="smartphone_thanx_template" cols="60" rows="8">{$params.smartphone_thanx_template}</textarea>
+				</td>
+			</tr>
+			<tr>
+				<th>サンクスメールテンプレート</th>
+				<td>
+					<textarea name="thanx_mail_template" cols="60" rows="8">{$params.thanx_mail_template}</textarea>
 				</td>
 			</tr>
 			<tr>
@@ -174,103 +147,9 @@
 <div id="FieldList" class="panel"></div>
 <div id="RegistrationList" class="panel"></div>
 
-{if $credentials.AdminEdit}
-{if $form.has_form_template}
-<div id="FormTemplateViewer" class="panel">
-	<div>
-		{smarty_preformatted}{$form.form_template.contents}{/smarty_preformatted}
-	</div>
-	<div class="attachment_navigation">
-		<a href="{$form.form_template.url}" ><img src="/carrotlib/images/document.gif" width="16" height="16" alt="" /></a>
-		{$form.form_template.size|binary_size_format}B
-		[<a href="/{$module.name}/DeleteAttachment?name=form_template">このファイルを削除</a>]
-	</div>
-</div>
-{/if}
-
-{if $form.has_confirm_template}
-<div id="ConfirmTemplateViewer" class="panel">
-	<div>
-		{smarty_preformatted}{$form.confirm_template.contents}{/smarty_preformatted}
-	</div>
-	<div class="attachment_navigation">
-		<a href="{$form.confirm_template.url}" ><img src="/carrotlib/images/document.gif" width="16" height="16" alt="" /></a>
-		{$form.confirm_template.size|binary_size_format}B
-		[<a href="/{$module.name}/DeleteAttachment?name=confirm_template">このファイルを削除</a>]
-	</div>
-</div>
-{/if}
-
-{if $form.has_thanx_template}
-<div id="ThanxTemplateViewer" class="panel">
-	<div>
-		{smarty_preformatted}{$form.thanx_template.contents}{/smarty_preformatted}
-	</div>
-	<div class="attachment_navigation">
-		<a href="{$form.thanx_template.url}" ><img src="/carrotlib/images/document.gif" width="16" height="16" alt="" /></a>
-		{$form.thanx_template.size|binary_size_format}B
-		[<a href="/{$module.name}/DeleteAttachment?name=thanx_template">このファイルを削除</a>]
-	</div>
-</div>
-{/if}
-
-{if $form.has_mobile_form_template}
-<div id="MobileFormTemplateViewer" class="panel">
-	<div>
-		{smarty_preformatted}{$form.mobile_form_template.contents}{/smarty_preformatted}
-	</div>
-	<div class="attachment_navigation">
-		<a href="{$form.mobile_form_template.url}" ><img src="/carrotlib/images/document.gif" width="16" height="16" alt="" /></a>
-		{$form.mobile_form_template.size|binary_size_format}B
-		[<a href="/{$module.name}/DeleteAttachment?name=mobile_form_template">このファイルを削除</a>]
-	</div>
-</div>
-{/if}
-
-{if $form.has_mobile_confirm_template}
-<div id="MobileConfirmTemplateViewer" class="panel">
-	<div>
-		{smarty_preformatted}{$form.mobile_confirm_template.contents}{/smarty_preformatted}
-	</div>
-	<div class="attachment_navigation">
-		<a href="{$form.mobile_confirm_template.url}" ><img src="/carrotlib/images/document.gif" width="16" height="16" alt="" /></a>
-		{$form.mobile_confirm_template.size|binary_size_format}B
-		[<a href="/{$module.name}/DeleteAttachment?name=mobile_confirm_template">このファイルを削除</a>]
-	</div>
-</div>
-{/if}
-
-{if $form.has_mobile_thanx_template}
-<div id="MobileThanxTemplateViewer" class="panel">
-	<div>
-		{smarty_preformatted}{$form.mobile_thanx_template.contents}{/smarty_preformatted}
-	</div>
-	<div class="attachment_navigation">
-		<a href="{$form.mobile_thanx_template.url}" ><img src="/carrotlib/images/document.gif" width="16" height="16" alt="" /></a>
-		{$form.mobile_thanx_template.size|binary_size_format}B
-		[<a href="/{$module.name}/DeleteAttachment?name=mobile_thanx_template">このファイルを削除</a>]
-	</div>
-</div>
-{/if}
-
-{if $form.has_thanx_mail_template}
-<div id="ThanxMailTemplateViewer" class="panel">
-	<div>
-		{smarty_preformatted}{$form.thanx_mail_template.contents}{/smarty_preformatted}
-	</div>
-	<div class="attachment_navigation">
-		<a href="{$form.thanx_mail_template.url}" ><img src="/carrotlib/images/document.gif" width="16" height="16" alt="" /></a>
-		{$form.thanx_mail_template.size|binary_size_format}B
-		[<a href="/{$module.name}/DeleteAttachment?name=thanx_mail_template">このファイルを削除</a>]
-	</div>
-</div>
-{/if}
-{/if}
-
 {if !$credentials.AdminEdit && !$params.pane}
 	{assign var='params.pane' value='FieldList'}
 {/if}
-
 <script type="text/javascript">
 document.observe('dom:loaded', function(){ldelim}
   new ProtoTabs('Tabs', {ldelim}
