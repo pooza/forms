@@ -41,8 +41,22 @@
 				<th>応募画面URL</th>
 				<td>
 					{$form.url|url2link}
-	{if $form.mobile_form_template}
+	{if $form.mobile_form_template || $form.smartphone_form_template}
 					<div>{$form.url|qrcode}</div>
+	{/if}
+				</td>
+			</tr>
+			<tr>
+				<th>プレビュー</th>
+				<td>
+	{if $form.pc_form_template}
+					[<a href="{$form.url}" target="_blank">PC</a>]
+	{/if}
+	{if $form.mobile_form_template}
+					[<a href="{$form.url}?ua=DoCoMo" target="_blank">ケータイ</a>]
+	{/if}
+	{if $form.smartphone_form_template}
+					[<a href="{$form.url}?ua=iPhone;" target="_blank">スマートフォン</a>]
 	{/if}
 				</td>
 			</tr>
