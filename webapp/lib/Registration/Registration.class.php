@@ -85,7 +85,7 @@ class Registration extends BSRecord {
 		if ($template instanceof BSTemplateFile) {
 			$file = $template;
 		} else if ($file = $mail->getRenderer()->searchTemplate($template . '.mail')) {
-		} else if ($file = $this->getForm()->getTemplateFile($template)) {
+		} else if ($file = $this->getForm()->getTemplate($template)) {
 		}
 		$mail->getRenderer()->setTemplate($file);
 

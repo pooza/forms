@@ -11,11 +11,11 @@ class ThanxSuccessView extends BSSmartyView {
 	public function execute () {
 		$record = $this->getModule()->getRecord();
 		if ($this->useragent->isSmartPhone() && $record['smartphone_thanx_template']) {
-			$this->setTemplate($record->getTemplateFile('smartphone_thanx'));
+			$this->setTemplate($record->getTemplate('smartphone_thanx'));
 		} else if ($this->useragent->isMobile() && $record['mobile_thanx_template']) {
-			$this->setTemplate($record->getTemplateFile('mobile_thanx'));
+			$this->setTemplate($record->getTemplate('mobile_thanx'));
 		} else {
-			$this->setTemplate($record->getTemplateFile('pc_thanx'));
+			$this->setTemplate($record->getTemplate('pc_thanx'));
 		}
 		$this->translator->register($record, BSArray::POSITION_TOP);
 

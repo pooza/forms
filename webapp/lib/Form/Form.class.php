@@ -255,7 +255,7 @@ class Form extends BSSortableRecord implements BSValidatorContainer, BSDictionar
 	 * @param string $name 名前
 	 * @return BSTemplateFile テンプレートファイル
 	 */
-	public function getTemplateFile ($name) {
+	public function getTemplate ($name) {
 		if (!$file = $this->getAttachment($name . '_template')) {
 			throw new BSViewException($this . 'に' . $name . '_templateがありません。');
 		}
