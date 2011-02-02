@@ -5,7 +5,6 @@
  * @package jp.co.commons.forms
  * @subpackage UserForm
  * @author 小石達也 <tkoishi@b-shock.co.jp>
- * @version $Id$
  */
 class ThanxView extends BSSmartyView {
 	public function execute () {
