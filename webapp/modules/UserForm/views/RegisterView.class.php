@@ -1,17 +1,15 @@
 <?php
 /**
- * ConfirmInputビュー
+ * Registerビュー
  *
  * @package jp.co.commons.forms
  * @subpackage UserForm
  * @author 小石達也 <tkoishi@b-shock.co.jp>
  * @version $Id$
  */
-class ConfirmInputView extends BSSmartyView {
+class RegisterView extends BSSmartyView {
 	public function execute () {
-		$this->setAttribute('answer', $this->user->getAttribute('answer'));
-
-		if ($file = $this->getModule()->getTemplate('confirm')) {
+		if ($file = $this->getModule()->getTemplate('form')) {
 			$this->setTemplate($file);
 		}
 		$this->translator->register($this->getModule()->getRecord(), BSArray::POSITION_TOP);
