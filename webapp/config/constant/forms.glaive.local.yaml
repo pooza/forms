@@ -1,8 +1,3 @@
-# ホスト別設定ファイル
-#
-# @package jp.co.commons.forms
-# @author 小石達也 <tkoishi@b-shock.co.jp>
-
 root_url: http://forms.glaive.local/
 root_url_https: http://forms.glaive.local/
 debug: yes
@@ -19,6 +14,9 @@ admin:
 author:
   email: info@b-shock.co.jp
   password: 7e240de74fb1ed08fa08d38063f6a6a91462a815
+
+crypt:
+  salt: FSKJB7LYUW
 
 app:
   process:

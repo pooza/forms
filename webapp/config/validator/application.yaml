@@ -4,7 +4,13 @@
 # @author 小石達也 <tkoishi@b-shock.co.jp>
 # @version $Id$
 
+api_key:
+  class: MincAPIValidator
 field_type:
   class: BSRecordValidator
   params:
     class: FieldType
+form:
+  class: BSRecordValidator
+  params:
+    class: Form
