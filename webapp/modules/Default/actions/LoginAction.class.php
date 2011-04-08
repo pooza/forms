@@ -9,7 +9,7 @@
  */
 class LoginAction extends BSAction {
 	private function auth (BSUserIdentifier $role) {
-		$email = BSMailAddress::getInstance($this->request['email']);
+		$email = BSMailAddress::create($this->request['email']);
 		if ($email->getContents() == $role->getMailAddress()->getContents()) {
 			if ($this->user->login($role, $this->request['password'])) {
 				return true;
@@ -32,10 +32,10 @@ class LoginAction extends BSAction {
 		}
 
 		if (!BSString::isBlank($url = $this->user->getAttribute('RequestURL'))) {
-			$url = BSURL::getInstance($url);
+			$url = BSURL::create($url);
 			$this->user->removeAttribute('RequestURL');
 		} else {
-			$url = BSURL::getInstance($this->controller->getAttribute('ROOT_URL_HTTPS'));
+			$url = BSURL::create($this->controller->getAttribute('ROOT_URL_HTTPS'));
 			$url['path'] = '/AdminForm/';
 		}
 		return $url->redirect();

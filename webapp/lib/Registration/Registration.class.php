@@ -124,7 +124,7 @@ class Registration extends BSRecord {
 	 * @return BSURL 添付ファイルURL
 	 */
 	public function getAttachmentURL ($name = null) {
-		$url = BSURL::getInstance(null, 'carrot');
+		$url = BSURL::create(null, 'carrot');
 		$url['module'] = 'AdminRegistration';
 		$url['action'] = 'Attachment';
 		$url['record'] = $this;

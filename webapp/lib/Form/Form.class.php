@@ -102,7 +102,7 @@ class Form extends BSSortableRecord implements BSValidatorContainer, BSDictionar
 	public function getMailAddress () {
 		if (!$this->email) {
 			if ($email = $this['email']) {
-				$this->email = BSMailAddress::getInstance($email);
+				$this->email = BSMailAddress::create($email);
 			} else {
 				$this->email = BSAuthorRole::getInstance()->getMailAddress();
 			}
@@ -240,7 +240,7 @@ class Form extends BSSortableRecord implements BSValidatorContainer, BSDictionar
 	 * @return BSURL 添付ファイルURL
 	 */
 	public function getAttachmentURL ($name = null) {
-		$url = BSURL::getInstance(null, 'carrot');
+		$url = BSURL::create(null, 'carrot');
 		$url['module'] = 'AdminForm';
 		$url['action'] = 'Attachment';
 		$url['record'] = $this;
@@ -270,7 +270,7 @@ class Form extends BSSortableRecord implements BSValidatorContainer, BSDictionar
 	 * @return BSURL
 	 */
 	public function getURL ($action = 'Register') {
-		$url = BSURL::getInstance(null, 'carrot');
+		$url = BSURL::create(null, 'carrot');
 		$url['module'] = 'UserForm';
 		$url['action'] = $action;
 		$url['record'] = $this;

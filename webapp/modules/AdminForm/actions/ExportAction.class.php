@@ -18,7 +18,7 @@ class ExportAction extends BSRecordAction {
 			$name = new BSStringFormat('registrations_%06d.csv');
 			$name[] = $this->getRecord()->getID();
 		} else {
-			$date = BSDate::getInstance($date);
+			$date = BSDate::create($date);
 			$name = new BSStringFormat('registrations_%06d_%s.csv');
 			$name[] = $this->getRecord()->getID();
 			$name[] = $date->format('Ymd');
