@@ -18,7 +18,7 @@
 
 {include file='ErrorMessages'}
 
-<table class="Detail">
+<table class="detail">
 	<tr>
 		<th>応募ID</th>
 		<td>{$registration.id}</td>

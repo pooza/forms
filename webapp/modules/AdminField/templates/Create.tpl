@@ -19,7 +19,7 @@
 {include file='ErrorMessages'}
 
 {form}
-	<table class="Detail">
+	<table class="detail">
 		<tr>
 			<th>名前</th>
 			<td>

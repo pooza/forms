@@ -32,7 +32,7 @@
 
 		{include file='ErrorMessages'}
 
-		<table class="Detail">
+		<table class="detail">
 			<tr>
 				<th>フォームID</th>
 				<td>{$form.id}</td>

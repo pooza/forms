@@ -18,7 +18,7 @@
 {include file='ErrorMessages'}
 
 {form attachable=true}
-	<table class="Detail">
+	<table class="detail">
 		<tr>
 			<th>名前</th>
 			<td>

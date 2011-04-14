@@ -4,12 +4,11 @@
 @package org.carrot-framework
 @subpackage AdminMemcache
 @author 小石達也 <tkoishi@b-shock.co.jp>
-@version $Id: Summary.tpl 1812 2010-02-03 15:15:09Z pooza $
 *}
 {include file='AdminHeader'}
 
 <h1>{$action.title}</h1>
-<table class="Detail">
+<table class="detail">
 
 {foreach from=$server key='key' item='value'}
 	<tr>

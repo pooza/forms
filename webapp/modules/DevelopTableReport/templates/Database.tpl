@@ -4,7 +4,6 @@
 @package org.carrot-framework
 @subpackage DevelopTableReport
 @author 小石達也 <tkoishi@b-shock.co.jp>
-@version $Id: Database.tpl 1833 2010-02-07 10:56:00Z pooza $
 *}
 {include file='AdminHeader'}
 {include file='ErrorMessages' hide_error_code=true}
@@ -22,7 +21,7 @@
 {/form}
 
 <h2>基本情報</h2>
-<table class="Detail">
+<table class="detail">
 
 {foreach from=$database.attributes key=key item=value}
 	<tr>

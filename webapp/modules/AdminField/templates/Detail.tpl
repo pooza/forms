@@ -41,7 +41,7 @@
 
 		{include file='ErrorMessages'}
 
-		<table class="Detail">
+		<table class="detail">
 			<tr>
 				<th>フィールドID</th>
 				<td>{$field.id}</td>
