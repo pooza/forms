@@ -55,7 +55,7 @@ class Registration extends BSRecord {
 			}
 			$this->setAttachment($file, $field->getName());
 			$answer = $file->getShortPath();
-		} else if (BSArray::isArray($answer)) {
+		} else if (is_array($answer) || ($answer instanceof BSParameterHolder)) {
 			$answer = new BSArray($answer);
 			$answer = $answer->join("\n");
 		}
