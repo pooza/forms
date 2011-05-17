@@ -30,7 +30,3 @@ module:
 
 mail:
   include_answers: no
-
-string:
-  mobile:
-    force_convert: yes
