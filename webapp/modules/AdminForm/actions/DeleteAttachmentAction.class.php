@@ -14,7 +14,7 @@ class DeleteAttachmentAction extends BSRecordAction {
 			$this->getRecord()->touch();
 		}
 
-		$url = $this->getModule()->getAction('Detail')->getURL();
+		$url = $this->getModule()->getAction('Detail')->createURL();
 		$url->setParameter('pane', 'DetailForm');
 		return $url->redirect();
 	}
