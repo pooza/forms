@@ -4,7 +4,6 @@
 @package jp.co.b-shock.forms
 @subpackage AdminRegistration
 @author 小石達也 <tkoishi@b-shock.co.jp>
-@version $Id$
 *}
 <div>
 	<a href="javascript:void(window.open('/AdminForm/Export', '{$module.name}Export', 'width=320,height=320,scrollbars=yes,'))"><img src="/carrotlib/images/document.gif" width="16" height="16" alt="" />CSVエクスポート</a>

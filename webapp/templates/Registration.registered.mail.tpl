@@ -3,7 +3,6 @@
  
 @package jp.co.b-shock.forms
 @author 小石達也 <tkoishi@b-shock.co.jp>
-@version $Id$
 *}
 Subject: [{const name='app_name_ja'}] {$form.name|default:'(不明)'}
 {if $registration.answers.email}

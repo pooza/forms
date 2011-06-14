@@ -7,7 +7,6 @@
  * フォームレコード
  *
  * @author 小石達也 <tkoishi@b-shock.co.jp>
- * @version $Id$
  */
 class Form extends BSSortableRecord implements BSValidatorContainer, BSDictionary {
 	private $exporter;

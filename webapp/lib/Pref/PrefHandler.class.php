@@ -7,7 +7,6 @@
  * 都道府県テーブル
  *
  * @author 小石達也 <tkoishi@b-shock.co.jp>
- * @version $Id$
  */
 class PrefHandler extends BSSerializableTableHandler {
 }

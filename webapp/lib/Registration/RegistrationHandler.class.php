@@ -7,7 +7,6 @@
  * 応募テーブル
  *
  * @author 小石達也 <tkoishi@b-shock.co.jp>
- * @version $Id$
  */
 class RegistrationHandler extends BSTableHandler {
 	const OVERWRITE_USER_AGENT = 128;

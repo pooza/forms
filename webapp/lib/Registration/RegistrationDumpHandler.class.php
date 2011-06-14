@@ -7,7 +7,6 @@
  * 応募ダンプ用のワークテーブル
  *
  * @author 小石達也 <tkoishi@b-shock.co.jp>
- * @version $Id$
  */
 class RegistrationDumpHandler extends RegistrationHandler implements BSExportable {
 	private $exporter;

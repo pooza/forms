@@ -7,7 +7,6 @@
  * 応募レコード
  *
  * @author 小石達也 <tkoishi@b-shock.co.jp>
- * @version $Id$
  */
 class Registration extends BSRecord {
 	private $answers;

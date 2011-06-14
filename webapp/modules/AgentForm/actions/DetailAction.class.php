@@ -5,7 +5,6 @@
  * @package jp.co.b-shock.forms
  * @subpackage AgentForm
  * @author 小石達也 <tkoishi@b-shock.co.jp>
- * @version $Id$
  */
 class DetailAction extends BSRecordAction {
 	public function execute () {
