@@ -1,6 +1,6 @@
 # 1.1.1→1.1.2へのアップグレード
 #
-# @package jp.co.commons.forms
+# @package jp.co.b-shock.forms
 # @author 小石達也 <tkoishi@b-shock.co.jp>
 
 SET NAMES 'utf8';

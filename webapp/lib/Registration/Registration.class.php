@@ -1,6 +1,6 @@
 <?php
 /**
- * @package jp.co.commons.forms
+ * @package jp.co.b-shock.forms
  */
 
 /**

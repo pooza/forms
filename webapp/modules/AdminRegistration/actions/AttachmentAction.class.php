@@ -2,7 +2,7 @@
 /**
  * Attachmentアクション
  *
- * @package jp.co.commons.forms
+ * @package jp.co.b-shock.forms
  * @subpackage AdminAttachment
  * @author 小石達也 <tkoishi@b-shock.co.jp>
  * @version $Id$
