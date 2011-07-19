@@ -346,12 +346,12 @@ class Form extends BSSortableRecord implements BSValidatorContainer, BSDictionar
 	 * @access protected
 	 * @return BSArray ファイル属性の配列
 	 */
-	protected function getFullAttributes () {
-		$values = parent::getFullAttributes();
+	protected function getSerializableValues () {
+		$values = parent::getSerializableValues();
 		$values['email'] = $this->getMailAddress()->getContents();
 		$values['fields'] = new BSArray;
 		foreach ($this->getFields() as $field) {
-			$values['fields'][$field->getName()] = $field->getAssignValue();
+			$values['fields'][$field->getName()] = $field->getAssignableValues();
 		}
 		return $values;
 	}

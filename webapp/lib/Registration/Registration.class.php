@@ -137,7 +137,7 @@ class Registration extends BSRecord {
 	 * @access protected
 	 * @return BSArray ファイル属性の配列
 	 */
-	protected function getFullAttributes () {
+	protected function getSerializableValues () {
 		$values = $this->getAttributes();
 		$values['answers'] = $this->getAnswers();
 		return $values;

@@ -75,8 +75,8 @@ class SingleAnswerField extends ChoiceField {
 	 * @access protected
 	 * @return BSArray ファイル属性の配列
 	 */
-	protected function getFullAttributes () {
-		$values = parent::getFullAttributes();
+	protected function getSerializableValues () {
+		$values = parent::getSerializableValues();
 		$values['choices_grouped'] = $this->getGroupedChoices();
 		return $values;
 	}

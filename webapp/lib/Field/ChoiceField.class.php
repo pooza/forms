@@ -84,8 +84,8 @@ abstract class ChoiceField extends Field {
 	 * @access protected
 	 * @return BSArray ファイル属性の配列
 	 */
-	protected function getFullAttributes () {
-		$values = parent::getFullAttributes();
+	protected function getSerializableValues () {
+		$values = parent::getSerializableValues();
 		$values['choices'] = $this->getChoices();
 		return $values;
 	}

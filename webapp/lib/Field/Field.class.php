@@ -120,8 +120,8 @@ class Field extends BSSortableRecord implements BSValidatorContainer {
 	 * @access protected
 	 * @return BSArray ファイル属性の配列
 	 */
-	protected function getFullAttributes () {
-		$values = parent::getFullAttributes();
+	protected function getSerializableValues () {
+		$values = parent::getSerializableValues();
 		$values['is_file'] = $this->isFile();
 		return $values;
 	}

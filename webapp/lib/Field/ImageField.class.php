@@ -47,8 +47,8 @@ class ImageField extends FileField {
 	 * @access protected
 	 * @return BSArray ファイル属性の配列
 	 */
-	protected function getFullAttributes () {
-		$values = parent::getFullAttributes();
+	protected function getSerializableValues () {
+		$values = parent::getSerializableValues();
 		$values['is_image'] = true;
 		return $values;
 	}
