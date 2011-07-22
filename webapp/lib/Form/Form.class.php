@@ -41,7 +41,7 @@ class Form extends BSSortableRecord implements BSValidatorContainer, BSDictionar
 					$file->delete();
 				}
 			} else {
-				$file = BSFileUtility::getTemporaryFile();
+				$file = BSFileUtility::createTemporaryFile();
 				$file->setContents($this[$field]);
 				$this->setAttachment($file, $field);
 			}
