@@ -3,7 +3,6 @@ awstats.confファイル テンプレート
 
 @package org.carrot-framework
 @author 小石達也 <tkoishi@b-shock.co.jp>
-@version $Id: awstats.conf.tpl 1812 2010-02-03 15:15:09Z pooza $
 *}
 LogFile="{$config.logfile}"
 SiteDomain="{$config.server_name}"
@@ -145,3 +144,5 @@ LogoLink="http://awstats.sourceforge.net"
 BarWidth=260
 BarHeight=90
 StyleSheet=""
+
+{* vim: set tabstop=4: *}
