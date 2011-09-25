@@ -72,11 +72,11 @@ class Registration extends BSRecord {
 	}
 
 	/**
-	 * メール送信
+	 * メールを送信
 	 *
 	 * @access public
-	 * @param string $template テンプレート、又はテンプレート名
-	 * @param BSParameterHolder $params 追加パラメータ
+	 * @param string $template テンプレート名
+	 * @param BSParameterHolder $params アサインするパラメータ
 	 */
 	public function sendMail ($template, BSParameterHolder $params = null) {
 		$mail = new BSSmartyMail;
