@@ -5,7 +5,7 @@
 
 - class: BSFakeUserAgentFilter
 - class: BSLegacyUserAgentFilter
-- class: BSPictogramRequestFilter
+#- class: BSPictogramRequestFilter
 - class: BSEncodingRequestFilter
 - class: BSNewLineRequestFilter
 - class: BSCookieFilter
@@ -18,3 +18,4 @@
 - class: BSReadingRequestFilter
 - class: BSDateRequestFilter
 - class: BSZipcodeRequestFilter
+- class: BSWrongCharactersRequestFilter
