@@ -14,6 +14,7 @@ class ThanxView extends BSSmartyView {
 		$this->translator->register($this->getModule()->getRecord(), BSArray::POSITION_TOP);
 
 		$this->setAttribute('has_image', $this->user->getAttribute('has_image'));
+		$this->setAttribute('regid', $this->user->getAttribute('regid'));
 	}
 }
 
