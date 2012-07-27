@@ -4,6 +4,10 @@
 # @author 小石達也 <tkoishi@b-shock.co.jp>
 
 SET NAMES 'utf8';
+
+ALTER TABLE `registration` DROP FOREIGN KEY `registration_ibfk_1`;
+ALTER TABLE `registration` ADD FOREIGN KEY (`form_id`) REFERENCES `form` (`id`);
+
 ALTER TABLE `form` ADD `pc_form_template` text NULL DEFAULT NULL  AFTER `email`;
 ALTER TABLE `form` ADD `pc_confirm_template` text NULL DEFAULT NULL  AFTER `pc_form_template`;
 ALTER TABLE `form` ADD `pc_thanx_template` text NULL DEFAULT NULL  AFTER `pc_confirm_template`;
