@@ -170,16 +170,8 @@ class Form extends BSSortableRecord implements BSValidatorContainer, BSDictionar
 		$values = new BSArray(array(
 			'form_id' => $this->getID(),
 		));
-		$fields = new BSArray(array(
-			'user_agent' => 'ブラウザ',
-			'remote_host' => 'リモートホスト',
-			'create_date' => '応募日',
-			'imported' => 'imported',
-		));
-		foreach ($fields as $key => $field) {
-			$values[$key] = $answers[$field];
-			$answers->removeParameter($field);
-		}
+		$values['imported'] = 'imported';
+		$answers->removeParameter('imported');
 		$values['imported'] = !!$values['imported'];
 
 		if ($answers['フォーム'] && ($answers['フォーム'] != $this->getName())) {

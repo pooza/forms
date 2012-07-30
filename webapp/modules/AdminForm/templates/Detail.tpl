@@ -55,7 +55,7 @@
 					[<a href="{$form.url}?ua=DoCoMo" target="_blank">ケータイ</a>]
 	{/if}
 	{if $form.smartphone_form_template}
-					[<a href="{$form.url}?ua=iPhone;" target="_blank">スマートフォン</a>]
+					[<a href="{$form.url}?ua={'iPhone; AppleWebKit/530.0'|urlencode}" target="_blank">スマートフォン</a>]
 	{/if}
 				</td>
 			</tr>
