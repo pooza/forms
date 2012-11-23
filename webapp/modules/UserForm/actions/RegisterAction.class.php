@@ -48,7 +48,7 @@ class RegisterAction extends BSRecordAction {
 		}
 		if ($answer = $this->user->getAttribute('answer')) {
 			$this->request->setParameters($answer);
-		} else if (!$this->request['submit']) {
+		} else if (!$this->request['_submitted']) {
 			foreach ($this->getRecord()->getFields() as $field) {
 				if (!!$field->getChoices()->count()) {
 					$choice = $field->getChoices()->getIterator()->getFirst();
