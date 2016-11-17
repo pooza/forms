@@ -24,3 +24,9 @@ module:
 
 mail:
   include_answers: no
+
+serialize:
+  storage: memcache
+
+session:
+  storage: memcache
