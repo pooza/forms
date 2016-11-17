@@ -52,7 +52,7 @@ class RegisterAction extends BSRecordAction {
 			foreach ($this->getRecord()->getFields() as $field) {
 				if (!!$field->getChoices()->count()) {
 					$choice = $field->getChoices()->getIterator()->getFirst();
-					$this->request[$field->getName()] = $choice;
+					//$this->request[$field->getName()] = $choice;
 				}
 			}
 		}
