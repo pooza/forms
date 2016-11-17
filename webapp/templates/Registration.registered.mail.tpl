@@ -38,8 +38,7 @@ X-Priority: 3
 {/if}
 
 クライアントホスト:
-{$client_host.ip}
-{$client_host.name|default:'(名前解決に失敗)'}
+{$client_host.address}
 
 ブラウザ:
 {$useragent.type}系
