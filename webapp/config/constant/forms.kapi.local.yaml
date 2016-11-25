@@ -1,5 +1,5 @@
-root_url: http://forms.torkan.local/
-root_url_https: http://forms.torkan.local/
+root_url: http://forms.kapi.local/
+root_url_https: http://forms.kapi.local/
 debug: yes
 
 root_site:
@@ -8,8 +8,6 @@ root_site:
 admin:
   email: admin@b-shock.co.jp
   password: 7e240de74fb1ed08fa08d38063f6a6a91462a815
-  networks:
-    - 192.168.100.0/24
 
 author:
   email: info@b-shock.co.jp
