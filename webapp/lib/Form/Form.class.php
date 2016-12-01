@@ -167,9 +167,9 @@ class Form extends BSSortableRecord implements BSValidatorContainer, BSDictionar
 	 */
 	public function registerAnswer (BSArray $answers) {
 		$answers = clone $answers;
-		$values = new BSArray(array(
+		$values = new BSArray([
 			'form_id' => $this->getID(),
-		));
+		]);
 		$values['imported'] = 'imported';
 		$answers->removeParameter('imported');
 		$values['imported'] = !!$values['imported'];
@@ -185,8 +185,8 @@ class Form extends BSSortableRecord implements BSValidatorContainer, BSDictionar
 
 		$this->getFields()->query();
 		foreach ($answers as $key => $answer) {
-			if (!$field = $this->getFields()->getRecord(array('name' => $key))) {
-				if (!$field = $this->getFields()->getRecord(array('label' => $key))) {
+			if (!$field = $this->getFields()->getRecord(['name' => $key])) {
+				if (!$field = $this->getFields()->getRecord(['label' => $key])) {
 					throw new BSException('フィールド' . $key . 'が見つかりません。');
 				}
 			}
@@ -290,7 +290,7 @@ class Form extends BSSortableRecord implements BSValidatorContainer, BSDictionar
 	public function translate ($label, $language) {
 		$fields = $this->getFields();
 		$fields->query();
-		if ($field = $fields->getRecord(array('name' => $label))) {
+		if ($field = $fields->getRecord(['name' => $label])) {
 			return $field['label'];
 		}
 	}

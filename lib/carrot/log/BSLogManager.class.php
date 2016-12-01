@@ -10,38 +10,17 @@
  * @author 小石達也 <tkoishi@b-shock.co.jp>
  */
 class BSLogManager implements IteratorAggregate {
+	use BSSingleton;
 	private $loggers;
-	static private $instance;
 
 	/**
-	 * @access private
+	 * @access protected
 	 */
-	private function __construct () {
+	protected function __construct () {
 		$this->loggers = new BSArray;
 		foreach (BSString::explode(',', BS_LOG_LOGGERS) as $class) {
 			$this->register(BSLoader::getInstance()->createObject($class, 'Logger'));
 		}
-	}
-
-	/**
-	 * シングルトンインスタンスを返す
-	 *
-	 * @access public
-	 * @return BSLogManager インスタンス
-	 * @static
-	 */
-	static public function getInstance () {
-		if (!self::$instance) {
-			self::$instance = new self;
-		}
-		return self::$instance;
-	}
-
-	/**
-	 * @access public
-	 */
-	public function __clone () {
-		throw new BadFunctionCallException(__CLASS__ . 'はコピーできません。');
 	}
 
 	/**
@@ -105,7 +84,7 @@ class BSLogManager implements IteratorAggregate {
 	 * @static
 	 */
 	static public function formatMessage ($message, $priority) {
-		foreach (array('HTTP_X_FORWARDED_FOR', 'REMOTE_ADDR') as $key) {
+		foreach (['HTTP_X_FORWARDED_FOR', 'REMOTE_ADDR'] as $key) {
 			if (isset($_SERVER[$key]) && ($value = $_SERVER[$key])) {
 				try {
 					$parts = mb_split('[:,]', $value);
@@ -113,12 +92,12 @@ class BSLogManager implements IteratorAggregate {
 				} catch (Exception $e) {
 					$host = $value;
 				}
-				$message = array(
+				$message = [
 					'[' . date('Y-m-d H:i:s') . ']',
 					'[' . $host . ']', 
 					'[' . $priority . ']',
 					$message,
-				);
+				];
 				return implode(' ', $message);
 			}
 		}

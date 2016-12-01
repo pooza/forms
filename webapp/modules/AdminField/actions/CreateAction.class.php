@@ -15,7 +15,7 @@ class CreateAction extends BSRecordAction {
 	 * @return mixed[] フィールド値の連想配列
 	 */
 	protected function getRecordValues () {
-		return array(
+		return [
 			'name' => $this->request['name'],
 			'label' => $this->request['label'],
 			'field_type_id' => $this->request['field_type_id'],
@@ -24,7 +24,7 @@ class CreateAction extends BSRecordAction {
 			'has_confirm_field' => (int)$this->request['has_confirm_field'],
 			'status' => $this->request['status'],
 			'form_id' => $this->getModule()->getForm()->getID(),
-		);
+		];
 	}
 
 	public function execute () {

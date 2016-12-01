@@ -15,7 +15,7 @@ class CreateAction extends BSRecordAction {
 	 * @return mixed[] フィールド値の連想配列
 	 */
 	protected function getRecordValues () {
-		return array(
+		return [
 			'name' => $this->request['name'],
 			'email' => $this->request['email'],
 			'pc_form_template' => $this->request['pc_form_template'],
@@ -29,7 +29,7 @@ class CreateAction extends BSRecordAction {
 			'smartphone_thanx_template' => $this->request['smartphone_thanx_template'],
 			'thanx_mail_template' => $this->request['thanx_mail_template'],
 			'status' => $this->request['status'],
-		);
+		];
 	}
 
 	public function execute () {

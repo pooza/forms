@@ -16,7 +16,7 @@ class AgreementField extends SingleAnswerField {
 	 * @access public
 	 */
 	public function registerValidators () {
-		$params = array('required_msg' => 'ご同意下さい。');
+		$params = ['required_msg' => 'ご同意下さい。'];
 		BSValidateManager::getInstance()->register(
 			$this->getName(),
 			new BSEmptyValidator($params)
@@ -32,7 +32,7 @@ class AgreementField extends SingleAnswerField {
 	public function getChoices () {
 		if (!$this->choices) {
 			$prefs = new PrefHandler;
-			$this->choices = new BSArray(array(1, 0));
+			$this->choices = new BSArray([1, 0]);
 		}
 		return $this->choices;
 	}

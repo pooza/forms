@@ -10,45 +10,24 @@
  * @author 小石達也 <tkoishi@b-shock.co.jp>
  */
 class BSTestManager implements IteratorAggregate {
+	use BSSingleton;
 	private $tests;
 	private $errors;
-	static private $instance;
 
 	/**
-	 * @access private
+	 * @access protected
 	 */
-	private function __construct () {
+	protected function __construct () {
 		$this->tests = new BSArray;
 		$this->errors = new BSArray;
 
-		$dirs = new BSArray(array(
+		$dirs = new BSArray([
 			BSFileUtility::getDirectory('tests'),
 			BSFileUtility::getDirectory('local_tests'),
-		));
+		]);
 		foreach ($dirs as $dir) {
 			$this->tests->merge($this->load($dir));
 		}
-	}
-
-	/**
-	 * シングルトンインスタンスを返す
-	 *
-	 * @access public
-	 * @return BSTestManager インスタンス
-	 * @static
-	 */
-	static public function getInstance () {
-		if (!self::$instance) {
-			self::$instance = new self;
-		}
-		return self::$instance;
-	}
-
-	/**
-	 * @access public
-	 */
-	public function __clone () {
-		throw new BadFunctionCallException(__CLASS__ . 'はコピーできません。');
 	}
 
 	private function load (BSDirectory $dir) {

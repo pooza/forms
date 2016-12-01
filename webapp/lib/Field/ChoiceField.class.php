@@ -22,15 +22,15 @@ abstract class ChoiceField extends Field {
 	public function registerValidators () {
 		$manager = BSValidateManager::getInstance();
 		if ($this['required']) {
-			$params = array('required_msg' => '選ばれていません。');
+			$params = ['required_msg' => '選ばれていません。'];
 			$manager->register($this->getName(), new BSEmptyValidator($params));
-			$params = array('max' => 256);
+			$params = ['max' => 256];
 			$manager->register($this->getName(), new BSStringValidator($params));
 		}
 
 		$choices = clone $this->getChoices();
 		$choices->removeParameter(self::EMPTY_VALUE);
-		$params = array('choices' => $choices, 'choices_error' => '空欄、又は正しくありません。');
+		$params = ['choices' => $choices, 'choices_error' => '空欄、又は正しくありません。'];
 		$manager->register($this->getName(), new BSChoiceValidator($params));
 	}
 

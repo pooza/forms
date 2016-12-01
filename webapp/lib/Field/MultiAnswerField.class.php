@@ -26,10 +26,10 @@ class MultiAnswerField extends ChoiceField {
 			foreach ($this->getDatabase()->query($sql) as $row) {
 				foreach (BSString::explode("\n", $row['answer'])->trim() as $answer) {
 					if (!$this->statistics[$answer]) {
-						$this->statistics[$answer] = new BSArray(array(
+						$this->statistics[$answer] = new BSArray([
 							'answer' => $answer,
 							'count' => 0,
-						));
+						]);
 					}
 					$this->statistics[$answer]['count'] += 1;
 				}

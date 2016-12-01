@@ -19,7 +19,7 @@ class ZipcodeField extends Field {
 		parent::registerValidators();
 		BSValidateManager::getInstance()->register(
 			$this->getName(),
-			new BSZipcodeValidator(array('address' => false))
+			new BSZipcodeValidator(['address' => false])
 		);
 	}
 }

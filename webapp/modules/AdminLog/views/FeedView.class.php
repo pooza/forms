@@ -21,11 +21,11 @@ class FeedView extends BSView {
 			$entry = $this->renderer->createEntry();
 			$entry->setTitle($log['message']);
 			$entry->setDate(BSDate::create($log['date']));
-			$message = new BSArray(array(
+			$message = new BSArray([
 				'date' => $log['date'],
 				'remote_host' => $log['remote_host'],
 				'priority' => $log['priority'],
-			));
+			]);
 			$entry->setBody($message->join("\n", ': '));
 		}
 	}

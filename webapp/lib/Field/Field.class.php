@@ -61,12 +61,12 @@ class Field extends BSSortableRecord implements BSValidatorContainer {
 	 * @return BSArray 項目情報
 	 */
 	public function getOptions () {
-		$values = new BSArray(array(
+		$values = new BSArray([
 			'id' => $this->getID(),
 			'name' => $this->getName(),
 			'label' => $this['label'],
 			'type' => $this->getFieldType()->getID(),
-		));
+		]);
 		if (!!$this->getChoices()->count()) {
 			$values['choices'] = new BSArray;
 			foreach ($this->getChoices() as $choice) {
@@ -87,10 +87,10 @@ class Field extends BSSortableRecord implements BSValidatorContainer {
 			$manager->register($this->getName(), new BSEmptyValidator);
 		}
 		if ($this['has_confirm_field']) {
-			$params = array('field' => $this->getName() . '_confirm');
+			$params = ['field' => $this->getName() . '_confirm'];
 			$manager->register($this->getName(), new BSPairValidator($params));
 		}
-		$params = array('max' => 2048);
+		$params = ['max' => 2048];
 		$manager->register($this->getName(), new BSStringValidator($params));
 	}
 

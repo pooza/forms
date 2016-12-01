@@ -24,8 +24,8 @@ class Registration extends BSRecord {
 			$criteria->register('detail.registration_id', $this);
 			$criteria[] = 'detail.field_id=field.id';
 			$sql = BSSQL::getSelectQueryString(
-				array('field.name AS field_name', 'detail.answer'),
-				array('registration_detail AS detail', 'field'),
+				['field.name AS field_name', 'detail.answer'],
+				['registration_detail AS detail', 'field'],
 				$criteria,
 				'field.rank,field.id'
 			);
@@ -62,11 +62,11 @@ class Registration extends BSRecord {
 			return;
 		}
 
-		$values = array(
+		$values = [
 			'registration_id' => $this->getID(),
 			'field_id' => $field->getID(),
 			'answer' => $answer,
-		);
+		];
 		$sql = BSSQL::getInsertQueryString('registration_detail', $values);
 		$this->getDatabase()->exec($sql);
 	}

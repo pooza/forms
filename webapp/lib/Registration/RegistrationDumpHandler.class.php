@@ -139,19 +139,19 @@ class RegistrationDumpHandler extends RegistrationHandler implements BSExportabl
 		$this->getExporter()->addRecord($this->getHeader());
 		$criteria = $this->createCriteriaSet();
 		if ($this->permission) {
-			$values = new BSArray(array(
+			$values = new BSArray([
 				'form_id' => $this->form->getID(),
 				'name' => 'mail_permission',
-			));
+			]);
 			if ($field = $this->form->getFields()->getRecord($values)) {
 				$criteria->register(sprintf('a%02d', $field->getID()), 1);
 			}
 		}
 		if ($this->date) {
-			$duration = new BSArray(array(
+			$duration = new BSArray([
 				$this->date->format('Y-m-d 00:00:00'),
 				$this->date->format('Y-m-d 23:59:59'),
-			));
+			]);
 		}
 		$sql = BSSQL::getSelectQueryString('*', $this->getName(), $criteria);
 		foreach ($this->getDatabase()->query($sql) as $row) {

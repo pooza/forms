@@ -10,35 +10,14 @@
  * @author 小石達也 <tkoishi@b-shock.co.jp>
  */
 class BSRenderManager {
+	use BSSingleton;
 	private $caches;
-	static private $instance;
 
 	/**
-	 * @access private
+	 * @access protected
 	 */
-	private function __construct () {
+	protected function __construct () {
 		$this->caches = new BSArray;
-	}
-
-	/**
-	 * シングルトンインスタンスを返す
-	 *
-	 * @access public
-	 * @return BSRenderManager インスタンス
-	 * @static
-	 */
-	static public function getInstance () {
-		if (!self::$instance) {
-			self::$instance = new self;
-		}
-		return self::$instance;
-	}
-
-	/**
-	 * @access public
-	 */
-	public function __clone () {
-		throw new BadFunctionCallException(__CLASS__ . 'はコピーできません。');
 	}
 
 	/**
@@ -79,10 +58,10 @@ class BSRenderManager {
 	 * @param BSHTTPResponse $view キャッシュ対象
 	 */
 	public function cache (BSHTTPResponse $view) {
-		$cache = array(
-			'headers' => array(),
+		$cache = [
+			'headers' => [],
 			'contents' => null,
-		);
+		];
 		foreach ($view->getHeaders() as $header) {
 			if ($header->isVisible() && $header->isCacheable()) {
 				$cache['headers'][$header->getName()] = $header->getContents();

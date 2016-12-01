@@ -44,7 +44,7 @@ class FormHandler extends BSSortableTableHandler {
 	 * @static
 	 */
 	static public function getAttachmentNames () {
-		return new BSArray(array(
+		return new BSArray([
 			'pc_form_template',
 			'pc_confirm_template',
 			'pc_thanx_template',
@@ -55,7 +55,7 @@ class FormHandler extends BSSortableTableHandler {
 			'smartphone_confirm_template',
 			'smartphone_thanx_template',
 			'thanx_mail_template',
-		));
+		]);
 	}
 }
 

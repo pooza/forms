@@ -55,7 +55,7 @@ class SingleAnswerField extends ChoiceField {
 			$criteria = $this->createCriteriaSet();
 			$criteria->register('field_id', $this);
 			$sql = BSSQL::getSelectQueryString(
-				array('count(*) AS count', 'answer'),
+				['count(*) AS count', 'answer'],
 				'registration_detail',
 				$criteria,
 				null,

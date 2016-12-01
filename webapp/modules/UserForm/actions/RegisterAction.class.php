@@ -63,7 +63,7 @@ class RegisterAction extends BSRecordAction {
 		}
 
 		$aff = new BSArray($this->user->getAttribute('aff'));
-		foreach (array('s') as $key) {
+		foreach (['s'] as $key) {
 			if (!BSString::isBlank($value = $this->request[$key])) {
 				$aff[$key] = $value;
 			}
