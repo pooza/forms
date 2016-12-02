@@ -13,6 +13,7 @@
 abstract class BSRecord implements ArrayAccess,
 	BSSerializable, BSAssignable, BSAttachmentContainer, BSImageContainer, BSHTTPRedirector {
 
+	use BSHTTPRedirectorMethods;
 	protected $attributes;
 	protected $table;
 	protected $url;
@@ -585,26 +586,6 @@ abstract class BSRecord implements ArrayAccess,
 			}
 		}
 		return $this->url;
-	}
-
-	/**
-	 * リダイレクト
-	 *
-	 * @access public
-	 * @return string ビュー名
-	 */
-	public function redirect () {
-		return $this->getURL()->redirect();
-	}
-
-	/**
-	 * URLをクローンして返す
-	 *
-	 * @access public
-	 * @return BSURL
-	 */
-	public function createURL () {
-		return clone $this->getURL();
 	}
 
 	/**
