@@ -2,7 +2,7 @@
 /**
  * SummaryViewビュー
  *
- * @package org.carrot-framework
+ * @package jp.co.b-shock.carrot
  * @subpackage AdminMemcache
  * @author 小石達也 <tkoishi@b-shock.co.jp>
  * @version $Id: SummaryView.class.php 2085 2010-05-21 07:06:13Z pooza $

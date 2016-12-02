@@ -2,7 +2,7 @@
 /**
  * Loginビュー
  *
- * @package org.carrot-framework
+ * @package jp.co.b-shock.carrot
  * @subpackage Default
  * @author 小石達也 <tkoishi@b-shock.co.jp>
  * @version $Id: LoginView.class.php 2429 2010-11-16 11:17:25Z pooza $
