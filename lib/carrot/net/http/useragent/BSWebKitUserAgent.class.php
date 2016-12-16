@@ -20,13 +20,10 @@ class BSWebKitUserAgent extends BSUserAgent {
 	protected function __construct ($name = null) {
 		parent::__construct($name);
 		$this['is_chrome'] = $this->isChrome();
+		$this['is_edge'] = $this->isEdge();
 		$this['is_safari'] = $this->isSafari();
 		$this->supports['html5_video'] = true;
-		$this->supports['html5_video_webm'] = $this->isChrome();
-		$this->supports['html5_video_h264'] = true;
 		$this->supports['html5_audio'] = true;
-		$this->supports['html5_audio_mp3'] = true;
-		$this->supports['html5_audio_aac'] = true;
 		$this->supports['flash'] = true;
 		$this->supports['cookie'] = true;
 		$this->supports['attach_file'] = true;
@@ -39,7 +36,19 @@ class BSWebKitUserAgent extends BSUserAgent {
 	 * @return boolean Google ChromeならTrue
 	 */
 	public function isChrome () {
-		return BSString::isContain('Chrome', $this->getName());
+		return (BSString::isContain('Chrome', $this->getName())
+			&& !BSString::isContain('Edge', $this->getName())
+		);
+	}
+
+	/**
+	 * Edgeか？
+	 *
+	 * @access public
+	 * @return boolean Google ChromeならTrue
+	 */
+	public function isEdge () {
+		return BSString::isContain('Edge', $this->getName());
 	}
 
 	/**
@@ -51,6 +60,7 @@ class BSWebKitUserAgent extends BSUserAgent {
 	public function isSafari () {
 		return (BSString::isContain('Macintosh', $this->getName())
 			&& !BSString::isContain('Chrome', $this->getName())
+			&& !BSString::isContain('Edge', $this->getName())
 		);
 	}
 
