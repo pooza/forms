@@ -5,11 +5,13 @@
  */
 
 /**
- * jQuery.lightpopへのリンク
+ * Lityへのリンク
  *
  * @author 小石達也 <tkoishi@b-shock.co.jp>
  */
-class BSLightpopAnchorElement extends BSImageAnchorElement {
+class BSLityAnchorElement extends BSImageAnchorElement {
+	private $width;
+	private $height;
 
 	/**
 	 * @access public
@@ -18,17 +20,7 @@ class BSLightpopAnchorElement extends BSImageAnchorElement {
 	 */
 	public function __construct ($name = null, BSUserAgent $useragent = null) {
 		parent::__construct($name, $useragent);
-		$this->registerStyleClass('lightpop');
-	}
-
-	/**
-	 * グループ名を設定
-	 *
-	 * @access public
-	 * @param string $group グループ名
-	 */
-	public function setImageGroup ($group) {
-		throw new BSMediaException(__CLASS__ . 'はsetImageGroupに非対応です。');
+		$this->setAttribute('data-lity', 'data-lity');
 	}
 }
 
