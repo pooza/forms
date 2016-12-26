@@ -1,5 +1,5 @@
-root_url: http://forms.kapi.local/
-root_url_https: http://forms.kapi.local/
+root_url: http://forms.dev.kapi.local/
+root_url_https: http://forms.dev.kapi.local/
 debug: yes
 
 root_site:
@@ -12,8 +12,11 @@ author:
   password: 7e240de74fb1ed08fa08d38063f6a6a91462a815
 crypt:
   salt: FSKJB7LYUW
+memcache:
+  host: unix:///tmp/memcached.sock
+  port: 0
 pdo:
   default:
     dsn: mysql:host=127.0.0.1;dbname=forms
     uid: root
-    password:
+    password: UmFuZG9tSVb4Pk0OE/UDJEV1dM3Az5QW2Aic2TPSw+OoNS58ly/Z7g==
