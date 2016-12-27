@@ -8,25 +8,18 @@ app:
     ja: forms
     en: forms
   ver: 1.2.1
-
 author:
   name: 有限会社 ビーショック
   email: info@b-shock.co.jp
-
 crypt:
   salt: EGQ1TT4MXA
-  engine: cbc
-
 module:
   secure:
     module: Default
     action: Login
-
 mail:
   include_answers: no
-
 serialize:
   storage: memcache
-
 session:
   storage: memcache

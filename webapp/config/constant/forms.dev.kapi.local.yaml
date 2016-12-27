@@ -12,9 +12,6 @@ author:
   password: 7e240de74fb1ed08fa08d38063f6a6a91462a815
 crypt:
   salt: FSKJB7LYUW
-memcache:
-  host: unix:///tmp/memcached.sock
-  port: 0
 pdo:
   default:
     dsn: mysql:host=127.0.0.1;dbname=forms
