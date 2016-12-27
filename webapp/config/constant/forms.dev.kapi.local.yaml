@@ -16,4 +16,4 @@ pdo:
   default:
     dsn: mysql:host=127.0.0.1;dbname=forms
     uid: root
-    password: UmFuZG9tSVb4Pk0OE/UDJEV1dM3Az5QW2Aic2TPSw+OoNS58ly/Z7g==
+    password: r1qLlSlRZVzZ/B1ALD1pJ5wmMIPnio++ZTsY3O49bfY=
