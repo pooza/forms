@@ -5,21 +5,18 @@
 
 carrot:
   name: carrot Framework
-  ver: 2.6.7
+  ver: 2.6.8
 
 admin:
   email:
   password:
-  jid:
   networks:
+  twitter:
 app:
   name:
     ja: unknown
     en: unknown
   ver: unknown
-  xmpp:
-    jid:
-    password:
   http_cache:
     mode: private
     seconds: 60
@@ -139,13 +136,14 @@ log:
   loggers:
     - file
     - mail
+    - system
   syslog:
     facility: LOCAL6
   mail:
     patterns:
       - BSDatabaseException
       - BSFileException
-  jabber:
+  twitter:
     patterns:
       - BSDatabaseException
       - BSMailException
@@ -289,7 +287,6 @@ service:
       secret: m5dkKU4xnuLfD5WHOpctisvR08rSfB80x9Bfy0nnlk
     access_token: 139985635-LEKAX9Soa2zrjjtOf0MWR8KQdFJM8cGCgX7myMo
     access_token_secret: MfGm4toy0En5ZntHJFt6O4xOcZzAnfwnW9rDUaY
-    suffix: .json
     minutes: 5
   ustream:
     api_key: F63FF416CDE35989812DC3F07B1CA6B9
@@ -313,11 +310,6 @@ unzip:
     default: /usr
 user:
   class:
-xmpp:
-  host: talk.google.com
-  port: 5222
-  server: gmail.com
-  ssl: yes
 view:
   frame_options: sameorigin
   content_type_options: nosniff

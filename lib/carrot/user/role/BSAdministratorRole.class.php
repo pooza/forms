@@ -12,6 +12,7 @@
 class BSAdministratorRole implements BSRole {
 	use BSSingleton;
 	protected $credentials;
+	protected $twitterAccount;
 	const CREDENTIAL = 'Admin';
 
 	/**
@@ -36,6 +37,19 @@ class BSAdministratorRole implements BSRole {
 	}
 
 	/**
+	 * Twitterアカウントを返す
+	 *
+	 * @access public
+	 * @return BSTwitterAccount アカウント
+	 */
+	public function getTwitterAccount () {
+		if (!$this->twitterAccount && !BSString::isBlank(BS_ADMIN_TWITTER)) {
+			$this->twitterAccount = new BSTwitterAccount(BS_ADMIN_TWITTER);
+		}
+		return $this->twitterAccount;
+	}
+
+	/**
 	 * 名前を返す
 	 *
 	 * @access public
@@ -44,18 +58,6 @@ class BSAdministratorRole implements BSRole {
 	 */
 	public function getName ($language = 'ja') {
 		return BSController::getInstance()->getAttribute('app_name_' . $language) . ' 管理者';
-	}
-
-	/**
-	 * JabberIDを返す
-	 *
-	 * @access public
-	 * @return BSJabberID JabberID
-	 */
-	public function getJabberID () {
-		if (!BSString::isBlank(BS_ADMIN_JID)) {
-			return new BSJabberID(BS_ADMIN_JID);
-		}
 	}
 
 	/**
