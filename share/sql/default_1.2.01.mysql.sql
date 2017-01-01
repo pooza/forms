@@ -3,17 +3,16 @@
 # @package jp.co.b-shock.forms
 # @author 小石達也 <tkoishi@b-shock.co.jp>
 
-use forms;
-set names utf8mb4;
+SET NAMES utf8mb4;
 
 ALTER DATABASE CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci;
 
-alter table field default character set utf8mb4;
-alter table field_type default character set utf8mb4;
-alter table form default character set utf8mb4;
-alter table pref default character set utf8mb4;
-alter table registration default character set utf8mb4;
-alter table registration_detail default character set utf8mb4;
+ALTER TABLE field DEFAULT CHARACTER SET utf8mb4;
+ALTER TABLE field_type DEFAULT CHARACTER SET utf8mb4;
+ALTER TABLE form DEFAULT CHARACTER SET utf8mb4;
+ALTER TABLE pref DEFAULT CHARACTER SET utf8mb4;
+ALTER TABLE registration DEFAULT CHARACTER SET utf8mb4;
+ALTER TABLE registration_detail DEFAULT CHARACTER SET utf8mb4;
 
 ALTER TABLE field MODIFY name varchar(64) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL;
 ALTER TABLE field MODIFY label varchar(64) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL;
