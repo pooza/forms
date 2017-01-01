@@ -14,6 +14,6 @@ crypt:
   salt: FSKJB7LYUW
 pdo:
   default:
-    dsn: mysql:host=127.0.0.1;dbname=forms
+    dsn: mysql:host=127.0.0.1;dbname=forms;charset=utf8mb4
     uid: root
     password: r1qLlSlRZVzZ/B1ALD1pJ5wmMIPnio++ZTsY3O49bfY=
