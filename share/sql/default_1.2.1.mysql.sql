@@ -1,3 +1,8 @@
+# 1.2.0→1.2.1へのアップグレード
+#
+# @package jp.co.b-shock.forms
+# @author 小石達也 <tkoishi@b-shock.co.jp>
+
 use forms;
 set names utf8mb4;
 
