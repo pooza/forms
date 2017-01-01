@@ -6,7 +6,7 @@
 use forms;
 set names utf8mb4;
 
-ALTER DATABASE forms CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci;
+ALTER DATABASE CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci;
 
 alter table field default character set utf8mb4;
 alter table field_type default character set utf8mb4;
