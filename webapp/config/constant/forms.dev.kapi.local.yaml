@@ -6,14 +6,14 @@ root_site:
   root_url:
 admin:
   email: admin@b-shock.co.jp
-  password: 7e240de74fb1ed08fa08d38063f6a6a91462a815
+  password: $2y$10$LjpJMX8FeDuKo64cxADOcu6QRUMRoM/POOkUVvJvwpeMLF0OBdae2
 author:
   email: info@b-shock.co.jp
-  password: 7e240de74fb1ed08fa08d38063f6a6a91462a815
+  password: $2y$10$lKwMKi0eEcBBv9.AfOAesOIA1vw/3bPTTMY3ygve4J3BI/H7VvQt2
 crypt:
   salt: FSKJB7LYUW
 pdo:
   default:
     dsn: mysql:host=127.0.0.1;dbname=forms;charset=utf8mb4
     uid: root
-    password: r1qLlSlRZVzZ/B1ALD1pJ5wmMIPnio++ZTsY3O49bfY=
+    password: xsxYPqgVRieRWPmW36IFAGV0QVEO6s/qA1ZZX+cAqxVUdUxhtMRnmzqLF1XjzcOD
