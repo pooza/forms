@@ -34,8 +34,7 @@ class LoginAction extends BSAction {
 			$url = BSURL::create($url);
 			$this->user->removeAttribute('RequestURL');
 		} else {
-			$url = BSURL::create($this->controller->getAttribute('ROOT_URL_HTTPS'));
-			$url['path'] = '/AdminForm/';
+			$url = BSModule::getInstance('AdminForm')->createURL();
 		}
 		return $url->redirect();
 	}
