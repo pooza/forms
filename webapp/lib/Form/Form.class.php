@@ -323,16 +323,6 @@ class Form extends BSSortableRecord implements BSValidatorContainer, BSDictionar
 	}
 
 	/**
-	 * シリアライズするか？
-	 *
-	 * @access public
-	 * @return boolean シリアライズするならTrue
-	 */
-	public function isSerializable () {
-		return true;
-	}
-
-	/**
 	 * 全てのファイル属性
 	 *
 	 * @access protected

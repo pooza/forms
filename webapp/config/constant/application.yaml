@@ -23,5 +23,7 @@ mail:
   include_answers: no
 serialize:
   storage: memcache
+  classes:
+    - Form
 session:
   storage: memcache
