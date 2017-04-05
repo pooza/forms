@@ -6,10 +6,13 @@
  */
 
 var CarrotLib = {
-  redirect: function (module, action, id) {
+  redirect: function (module, action, id, query) {
     var url = '/' + module + '/' + action;
     if (id) {
       url += '/' + id;
+    }
+    if (query) {
+      url += '?' + $H(query).toQueryString();
     }
     window.location.href = url;
   },
@@ -18,14 +21,6 @@ var CarrotLib = {
     if (confirm('この' + recordType + 'を削除しますか？')) {
       CarrotLib.redirect(module, action, id);
     }
-  },
-
-  openPictogramPallet: function (id) {
-    window.open(
-      '/AdminUtility/Pictogram?field=' + id,
-      'pictogram',
-      'width=240,height=300,scrollbars=yes'
-    );
   },
 
   putSmartTag: function (tag, field, name, params) {
@@ -172,7 +167,3 @@ if (!Array.prototype.contains) {
     return false;
   }
 }
-
-document.observe('dom:loaded', function () {
-  //alert('追加分の処理');
-});
