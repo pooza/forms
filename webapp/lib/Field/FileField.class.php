@@ -77,7 +77,7 @@ class FileField extends Field {
 	 */
 	protected function getTemporaryFileName () {
 		return BSCrypt::digest([
-			BSRequest::getInstance()->getSession()->getID(),
+			$this->request->getSession()->getID(),
 			$this->getName(),
 		]);
 	}
@@ -119,7 +119,7 @@ class FileField extends Field {
 		parent::registerValidators();
 
 		$params = new BSArray(['suffixes' => BSFileValidator::ATTACHABLE]);
-		$server = BSController::getInstance()->getHost();
+		$server = $this->controller->getHost();
 		if ($file = BSConfigManager::getConfigFile('validator/' . $server->getName())) {
 			$config = new BSArray(BSConfigManager::getInstance()->compile($file));
 			if ($config['file'] && isset($config['file']['params'])) {
