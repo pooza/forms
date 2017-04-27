@@ -31,9 +31,10 @@ class FormHandler extends BSTableHandler {
 	 * @return string レコードの主キー
 	 */
 	public function createRecord ($values, $flags = null) {
+		$values = BSArray::create($values);
+		$values[$this->getRankField()] = $this->getNextRank();
 		$id = parent::createRecord($values, $flags);
-		$record = $this->getRecord($id);
-		$record->touch();
+		$this->getRecord($id)->touch();
 		return $id;
 	}
 
