@@ -8,7 +8,8 @@
  *
  * @author 小石達也 <tkoishi@b-shock.co.jp>
  */
-class FieldTypeHandler extends BSSerializableTableHandler {
+class FieldTypeHandler extends BSTableHandler implements BSSerializable {
+	use BSSerializableTable;
 }
 
 /* vim:set tabstop=4 */

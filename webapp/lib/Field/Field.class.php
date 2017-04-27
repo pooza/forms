@@ -8,7 +8,8 @@
  *
  * @author 小石達也 <tkoishi@b-shock.co.jp>
  */
-class Field extends BSSortableRecord implements BSValidatorContainer {
+class Field extends BSRecord implements BSValidatorContainer {
+	use BSSortableRecord;
 
 	/**
 	 * 親レコードを返す
@@ -44,7 +45,7 @@ class Field extends BSSortableRecord implements BSValidatorContainer {
 	 * 同種のレコードを返す
 	 *
 	 * @access protected
-	 * @return BSSortableTableHandler テーブル
+	 * @return BSTableHandler テーブル
 	 */
 	protected function getSimilars () {
 		if (!$this->similars) {

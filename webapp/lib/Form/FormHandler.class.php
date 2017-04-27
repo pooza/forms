@@ -8,7 +8,8 @@
  *
  * @author 小石達也 <tkoishi@b-shock.co.jp>
  */
-class FormHandler extends BSSortableTableHandler {
+class FormHandler extends BSTableHandler {
+	use BSSortableTable;
 
 	/**
 	 * レコード追加可能か？

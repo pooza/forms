@@ -8,7 +8,8 @@
  *
  * @author 小石達也 <tkoishi@b-shock.co.jp>
  */
-class Form extends BSSortableRecord implements BSValidatorContainer, BSDictionary {
+class Form extends BSRecord implements BSValidatorContainer, BSDictionary {
+	use BSSortableRecord;
 	private $exporter;
 	private $fields;
 	private $registrations;
