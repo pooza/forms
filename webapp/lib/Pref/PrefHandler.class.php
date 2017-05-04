@@ -9,7 +9,7 @@
  * @author 小石達也 <tkoishi@b-shock.co.jp>
  */
 class PrefHandler extends BSTableHandler implements BSSerializable {
-	use BSSerializableTable;
+	use BSSerializableTable, BSSerializableMethods;
 }
 
 /* vim:set tabstop=4 */

@@ -31,7 +31,7 @@ class RegisterAction extends BSRecordAction {
 					$info['field_type'] = $field->getFieldType()->getID();
 					$answer[$field->getName()] = $info;
 					if ($file instanceof BSImageContainer) {
-						$file->clearImageCache();
+						$file->removeImageCache('image');
 					}
 				} else {
 					$field->clearTemporaryFile();

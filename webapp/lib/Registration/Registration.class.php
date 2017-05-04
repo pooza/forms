@@ -52,7 +52,7 @@ class Registration extends BSRecord {
 			if (!$file->isReadable()) {
 				throw new BSFileException($answer['name'] . 'が読み込めません。');
 			}
-			$this->setAttachment($file, $field->getName());
+			$this->setAttachment($field->getName(), $file);
 			$answer = $file->getShortPath();
 		} else if (is_array($answer) || ($answer instanceof BSParameterHolder)) {
 			$answer = new BSArray($answer);
@@ -107,28 +107,12 @@ class Registration extends BSRecord {
 	 * @param string $name 名前
 	 * @return string[] 添付ファイルの情報
 	 */
-	public function getAttachmentInfo ($name = null) {
+	public function getAttachmentInfo ($name) {
 		if ($file = $this->getAttachment($name)) {
 			$info = $this->getAttachmentInfo($name);
 			$info['contents'] = $file->getContents();
 			return $info;
 		}
-	}
-
-	/**
-	 * 添付ファイルのURLを返す
-	 *
-	 * @access public
-	 * @param string $name 名前
-	 * @return BSURL 添付ファイルURL
-	 */
-	public function getAttachmentURL ($name = null) {
-		$url = BSURL::create(null, 'carrot');
-		$url['module'] = 'AdminRegistration';
-		$url['action'] = 'Attachment';
-		$url['record'] = $this;
-		$url->setParameter('name', $name);
-		return $url;
 	}
 
 	/**

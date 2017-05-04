@@ -44,7 +44,7 @@ class Form extends BSRecord implements BSValidatorContainer, BSDictionary {
 			} else {
 				$file = BSFileUtility::createTemporaryFile('.tpl');
 				$file->setContents($this[$field]);
-				$this->setAttachment($file, $field, $file->getName());
+				$this->setAttachment($field, $file, $file->getName());
 			}
 		}
 	}
@@ -216,28 +216,12 @@ class Form extends BSRecord implements BSValidatorContainer, BSDictionary {
 	 * @param string $name 名前
 	 * @return string[] 添付ファイルの情報
 	 */
-	public function getAttachmentInfo ($name = null) {
+	public function getAttachmentInfo ($name) {
 		if ($file = $this->getAttachment($name)) {
 			$info = parent::getAttachmentInfo($name);
 			$info['contents'] = $file->getContents();
 			return $info;
 		}
-	}
-
-	/**
-	 * 添付ファイルのURLを返す
-	 *
-	 * @access public
-	 * @param string $name 名前
-	 * @return BSURL 添付ファイルURL
-	 */
-	public function getAttachmentURL ($name = null) {
-		$url = BSURL::create(null, 'carrot');
-		$url['module'] = 'AdminForm';
-		$url['action'] = 'Attachment';
-		$url['record'] = $this;
-		$url->setParameter('name', $name);
-		return $url;
 	}
 
 	/**
@@ -334,7 +318,7 @@ class Form extends BSRecord implements BSValidatorContainer, BSDictionary {
 		$values['email'] = $this->getMailAddress()->getContents();
 		$values['fields'] = new BSArray;
 		foreach ($this->getFields() as $field) {
-			$values['fields'][$field->getName()] = $field->getAssignableValues();
+			$values['fields'][$field->getName()] = $field->assign();
 		}
 		return $values;
 	}
