@@ -87,4 +87,3 @@ class RegisterAction extends BSRecordAction {
 	}
 }
 
-/* vim:set tabstop=4: */

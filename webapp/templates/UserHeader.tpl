@@ -13,5 +13,3 @@
 </head>
 <body>
 <div>
-
-{* vim: set tabstop=4: *}

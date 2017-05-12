@@ -49,4 +49,3 @@ document.observe('dom:loaded', function(){ldelim}
 	{/form}
 </body>
 </html>
-{* vim: set tabstop=4: *}

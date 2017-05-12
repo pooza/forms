@@ -12,4 +12,3 @@ class DetailInputView extends BSSmartyView {
 	}
 }
 
-/* vim:set tabstop=4: */

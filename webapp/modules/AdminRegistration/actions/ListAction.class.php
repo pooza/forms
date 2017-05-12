@@ -70,4 +70,3 @@ class ListAction extends BSPaginateTableAction {
 	}
 }
 
-/* vim:set tabstop=4: */

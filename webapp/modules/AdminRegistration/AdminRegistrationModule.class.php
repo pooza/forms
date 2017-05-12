@@ -41,4 +41,3 @@ class AdminRegistrationModule extends BSModule {
 	}
 }
 
-/* vim:set tabstop=4: */

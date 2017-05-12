@@ -36,5 +36,4 @@ class ConfirmAction extends BSRecordAction {
 	}
 }
 
-/* vim:set tabstop=4: */
 

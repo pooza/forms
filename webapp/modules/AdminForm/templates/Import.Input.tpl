@@ -31,4 +31,3 @@
 	{/form}
 </body>
 </html>
-{* vim: set tabstop=4: *}

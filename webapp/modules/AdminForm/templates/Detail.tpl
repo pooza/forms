@@ -177,4 +177,3 @@ document.observe('dom:loaded', function(){ldelim}
 
 {include file='AdminFooter'}
 
-{* vim: set tabstop=4: *}

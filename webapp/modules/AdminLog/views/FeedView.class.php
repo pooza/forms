@@ -31,4 +31,3 @@ class FeedView extends BSView {
 	}
 }
 
-/* vim:set tabstop=4: */

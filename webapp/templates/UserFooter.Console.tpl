@@ -6,4 +6,3 @@
 @version $Id: UserFooter.Console.tpl 1812 2010-02-03 15:15:09Z pooza $
 *}
 
-{* vim: set tabstop=4: *}

@@ -13,4 +13,3 @@ class DetailAction extends BSRecordAction {
 	}
 }
 
-/* vim:set tabstop=4: */

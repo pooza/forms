@@ -26,4 +26,3 @@ class SetRankAction extends BSRecordAction {
 	}
 }
 
-/* vim:set tabstop=4: */

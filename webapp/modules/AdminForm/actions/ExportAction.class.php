@@ -39,4 +39,3 @@ class ExportAction extends BSRecordAction {
 	}
 }
 
-/* vim:set tabstop=4: */

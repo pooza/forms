@@ -26,4 +26,3 @@
 <p class="alert">回答がありません。</p>
 {/if}
 
-{* vim: set tabstop=4: *}

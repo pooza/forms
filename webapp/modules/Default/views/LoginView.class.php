@@ -20,4 +20,3 @@ class LoginView extends BSSmartyView {
 	}
 }
 
-/* vim:set tabstop=4: */

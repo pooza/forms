@@ -13,4 +13,3 @@ class ListAllAction extends BSAction {
 	}
 }
 
-/* vim:set tabstop=4: */

@@ -51,4 +51,3 @@ class ImportAction extends BSRecordAction {
 	}
 }
 
-/* vim:set tabstop=4: */

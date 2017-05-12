@@ -176,4 +176,3 @@ class RegistrationDumpHandler extends RegistrationHandler implements BSExportabl
 	}
 }
 
-/* vim:set tabstop=4: */

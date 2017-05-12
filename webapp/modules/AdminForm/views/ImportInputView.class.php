@@ -12,4 +12,3 @@ class ImportInputView extends BSSmartyView {
 	}
 }
 
-/* vim:set tabstop=4: */

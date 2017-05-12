@@ -9,4 +9,3 @@
 class AttachmentAction extends BSAttachmentAction {
 }
 
-/* vim:set tabstop=4: */

@@ -21,4 +21,3 @@ class DuplicateAction extends BSRecordAction {
 	}
 }
 
-/* vim:set tabstop=4: */

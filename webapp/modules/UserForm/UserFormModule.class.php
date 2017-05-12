@@ -33,4 +33,3 @@ class UserFormModule extends BSModule {
 	}
 }
 
-/* vim:set tabstop=4: */

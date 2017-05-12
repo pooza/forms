@@ -23,4 +23,3 @@ class AdminFieldModule extends BSModule {
 	}
 }
 
-/* vim:set tabstop=4: */

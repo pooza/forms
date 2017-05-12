@@ -53,4 +53,3 @@
 	</tr>
 </table>
 
-{* vim: set tabstop=4: *}

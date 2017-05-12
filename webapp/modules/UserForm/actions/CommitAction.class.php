@@ -46,4 +46,3 @@ class CommitAction extends BSRecordAction {
 	}
 }
 
-/* vim:set tabstop=4: */
