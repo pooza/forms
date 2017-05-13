@@ -17,11 +17,11 @@
 		new Ajax.Updater(
 			window.opener.$('RegistrationList'),
 			'/AdminRegistration/List',
-			{ldelim}
-				onComplete: function () {ldelim}
+			{
+				onComplete: function () {
 					window.close();
-				{rdelim}
-			{rdelim}
+				}
+			}
 		);
 	</script>
 </body>

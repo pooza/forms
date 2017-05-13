@@ -109,14 +109,14 @@
 {/if}
 
 <script type="text/javascript">
-document.observe('dom:loaded', function(){ldelim}
-  new ProtoTabs('Tabs', {ldelim}
+document.observe('dom:loaded', function(){
+  new ProtoTabs('Tabs', {
     defaultPanel:'{$params.pane|default:'DetailForm'}',
-    ajaxUrls: {ldelim}
+    ajaxUrls: {
       Statistics: '/{$module.name}/Statistics/{$field.id}'
-    {rdelim}
-  {rdelim});
-{rdelim});
+    }
+  });
+});
 </script>
 
 {include file='AdminFooter'}

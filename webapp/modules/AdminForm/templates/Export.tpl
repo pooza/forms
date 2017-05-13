@@ -13,12 +13,12 @@
 {js_cache name=$jsset}
 {css_cache name=$styleset}
 <script type="text/javascript">
-document.observe('dom:loaded', function(){ldelim}
-  new InputCalendar('date', {ldelim}
+document.observe('dom:loaded', function(){
+  new InputCalendar('date', {
     lang:'ja',
     format:'yyyy-mm-dd'
-  {rdelim});
-{rdelim});
+  });
+});
 </script>
 </head>
 <body>

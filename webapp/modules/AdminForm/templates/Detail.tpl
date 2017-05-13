@@ -164,15 +164,15 @@
 	{assign var='params.pane' value='FieldList'}
 {/if}
 <script type="text/javascript">
-document.observe('dom:loaded', function(){ldelim}
-  new ProtoTabs('Tabs', {ldelim}
+document.observe('dom:loaded', function(){
+  new ProtoTabs('Tabs', {
     defaultPanel:'{$params.pane|default:'DetailForm'}',
-    ajaxUrls: {ldelim}
+    ajaxUrls: {
       FieldList: '/AdminField/List/{$form.id}',
       RegistrationList: '/AdminRegistration/List'
-    {rdelim}
-  {rdelim});
-{rdelim});
+    }
+  });
+});
 </script>
 
 {include file='AdminFooter'}
