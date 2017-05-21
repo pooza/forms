@@ -34,7 +34,7 @@ class Form extends BSRecord implements BSValidatorContainer, BSDictionary {
 	 *   BSDatabase::WITHOUT_LOGGING ログを残さない
 	 *   BSDatabase::WITHOUT_SERIALIZE シリアライズしない
 	 */
-	public function update ($values, $flags = null) {
+	public function update ($values, $flags = 0) {
 		parent::update($values, $flags);
 		foreach (FormHandler::getAttachmentNames() as $field) {
 			if (BSString::isBlank($this[$field])) {

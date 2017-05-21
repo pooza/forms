@@ -30,7 +30,7 @@ class FormHandler extends BSTableHandler {
 	 *   BSDatabase::WITH_LOGGING ログを残さない
 	 * @return string レコードの主キー
 	 */
-	public function createRecord ($values, $flags = null) {
+	public function createRecord ($values, $flags = 0) {
 		$values = BSArray::create($values);
 		$values[$this->getRankField()] = $this->getNextRank();
 		$id = parent::createRecord($values, $flags);
