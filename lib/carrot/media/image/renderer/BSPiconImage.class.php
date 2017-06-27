@@ -11,6 +11,18 @@
  */
 class BSPiconImage extends BSImage {
 	protected $url;
+	protected $service;
+	protected $method;
+
+	/**
+	 * リサイズ関数を設定
+	 *
+	 * @access public
+	 * @param string $function 関数名
+	 */
+	public function setResizeMethod ($method) {
+		$this->method = $method;
+	}
 
 	/**
 	 * サイズ変更
@@ -20,22 +32,20 @@ class BSPiconImage extends BSImage {
 	 * @param integer $height 高さ
 	 */
 	public function resize ($width, $height) {
-		$service = new BSCurlHTTP($this->url['host'], $this->url['port']);
-		$file = BSFileUtility::createTemporaryFile();
-		$file->setContents($this->getContents());
-		$params = BSArray::create([
-			'path' => $file->getPath(),
-			'width' => $width,
-			'height' => $height,
-			'background_color' => BS_IMAGE_THUMBNAIL_BGCOLOR,
-		]);
-		try {
-			$response = $service->sendGET('/convert', $params);
-			$this->setImage($response->getRenderer()->getContents());
-		} catch (Exception $e) {
-			//何もしない。
+		$this->getService()->resize($this, $width, $height);
+	}
+
+	/**
+	 * 幅変更
+	 *
+	 * @access public
+	 * @param integer $width 幅
+	 */
+	public function resizeWidth ($width) {
+		if ($this->getWidth() < $width) {
+			return;
 		}
-		$file->delete();
+		$this->getService()->resizeWidth($this, $width, $this->method);
 	}
 
 	/**
@@ -46,6 +56,19 @@ class BSPiconImage extends BSImage {
 	 */
 	public function setURL (BSHTTPRedirector $url) {
 		$this->url = $url->getURL();
+	}
+
+	/**
+	 * piconサービスを返す
+	 *
+	 * @access protected
+	 * @return BSPiconService
+	 */
+	protected function getService () {
+		if (!$this->service && $this->url) {
+			$this->service = new BSPiconService($this->url['host'], $this->url['port']);
+		}
+		return $this->service;
 	}
 }
 
