@@ -134,8 +134,8 @@ class Form extends BSRecord implements BSValidatorContainer, BSDictionary {
 	 * @return BSResultJSONRenderer 項目情報
 	 */
 	public function getFieldOptions () {
-		$values = new BSArray($this->getAttributes());
-		$fields = $values['fields'] = new BSArray;
+		$values = BSArray::create($this->getAttributes());
+		$fields = $values['fields'] = BSArray::create();
 		foreach ($this->getFields() as $field) {
 			$fields[$field->getName()] = $field->getOptions();
 		}
@@ -168,7 +168,7 @@ class Form extends BSRecord implements BSValidatorContainer, BSDictionary {
 	 */
 	public function registerAnswer (BSArray $answers) {
 		$answers = clone $answers;
-		$values = new BSArray([
+		$values = BSArray::create([
 			'form_id' => $this->getID(),
 		]);
 		$values['imported'] = 'imported';
@@ -316,7 +316,7 @@ class Form extends BSRecord implements BSValidatorContainer, BSDictionary {
 	protected function getSerializableValues () {
 		$values = parent::getSerializableValues();
 		$values['email'] = $this->getMailAddress()->getContents();
-		$values['fields'] = new BSArray;
+		$values['fields'] = BSArray::create();
 		foreach ($this->getFields() as $field) {
 			$values['fields'][$field->getName()] = $field->assign();
 		}

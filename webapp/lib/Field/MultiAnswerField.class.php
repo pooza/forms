@@ -18,7 +18,7 @@ class MultiAnswerField extends ChoiceField {
 	 */
 	public function getStatistics () {
 		if (!$this->statistics) {
-			$this->statistics = new BSArray;
+			$this->statistics = BSArray::create();
 
 			$criteria = $this->createCriteriaSet();
 			$criteria->register('field_id', $this);
@@ -26,7 +26,7 @@ class MultiAnswerField extends ChoiceField {
 			foreach ($this->getDatabase()->query($sql) as $row) {
 				foreach (BSString::explode("\n", $row['answer'])->trim() as $answer) {
 					if (!$this->statistics[$answer]) {
-						$this->statistics[$answer] = new BSArray([
+						$this->statistics[$answer] = BSArray::create([
 							'answer' => $answer,
 							'count' => 0,
 						]);

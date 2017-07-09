@@ -346,7 +346,7 @@ class BSImage implements BSImageRenderer {
 	 */
 	static public function getTypes () {
 		if (!self::$types) {
-			self::$types = new BSArray;
+			self::$types = BSArray::create();
 			foreach (self::getSuffixes() as $suffix) {
 				self::$types[$suffix] = BSMIMEType::getType($suffix);
 			}
@@ -363,7 +363,7 @@ class BSImage implements BSImageRenderer {
 	 */
 	static public function getSuffixes () {
 		if (!self::$suffixes) {
-			$suffixes = new BSArray(['.gif', '.jpg', '.png']);
+			$suffixes = BSArray::create(['.gif', '.jpg', '.png']);
 			if (extension_loaded('imagick')) {
 				$suffixes->merge(['.tif', '.eps', '.ico', '.pdf']);
 			}
@@ -371,7 +371,7 @@ class BSImage implements BSImageRenderer {
 				$suffixes->merge(['.tif', '.eps', '.pdf']);
 			}
 
-			self::$suffixes = new BSArray;
+			self::$suffixes = BSArray::create();
 			foreach ($suffixes->uniquize() as $suffix) {
 				self::$suffixes[BSMIMEType::getType($suffix)] = $suffix;
 			}

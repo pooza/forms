@@ -19,7 +19,7 @@ class Registration extends BSRecord {
 	 */
 	public function getAnswers () {
 		if (!$this->answers) {
-			$this->answers = new BSArray;
+			$this->answers = BSArray::create();
 			$criteria = $this->createCriteriaSet();
 			$criteria->register('detail.registration_id', $this);
 			$criteria[] = 'detail.field_id=field.id';
@@ -55,7 +55,7 @@ class Registration extends BSRecord {
 			$this->setAttachment($field->getName(), $file);
 			$answer = $file->getShortPath();
 		} else if (is_array($answer) || ($answer instanceof BSParameterHolder)) {
-			$answer = new BSArray($answer);
+			$answer = BSArray::create($answer);
 			$answer = $answer->join("\n");
 		}
 		if (BSString::isBlank($answer)) {

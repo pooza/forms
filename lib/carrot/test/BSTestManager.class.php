@@ -18,10 +18,10 @@ class BSTestManager implements IteratorAggregate {
 	 * @access protected
 	 */
 	protected function __construct () {
-		$this->tests = new BSArray;
-		$this->errors = new BSArray;
+		$this->tests = BSArray::create();
+		$this->errors = BSArray::create();
 
-		$dirs = new BSArray([
+		$dirs = BSArray::create([
 			BSFileUtility::getDirectory('tests'),
 			BSFileUtility::getDirectory('local_tests'),
 		]);
@@ -31,7 +31,7 @@ class BSTestManager implements IteratorAggregate {
 	}
 
 	private function load (BSDirectory $dir) {
-		$tests = new BSArray;
+		$tests = BSArray::create();
 		foreach ($dir as $entry) {
 			if (!$entry->isIgnore()) {
 				if ($entry instanceof BSDirectory) {

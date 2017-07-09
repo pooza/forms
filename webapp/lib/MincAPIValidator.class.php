@@ -28,7 +28,7 @@ class MincAPIValidator extends BSValidator {
 	}
 
 	static private function createAPIKey ($path) {
-		$values = new BSArray;
+		$values = BSArray::create();
 		$values[] = $path;
 		return BSCrypt::digest($values);
 	}

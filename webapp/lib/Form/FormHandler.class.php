@@ -46,7 +46,7 @@ class FormHandler extends BSTableHandler {
 	 * @static
 	 */
 	static public function getAttachmentNames () {
-		return new BSArray([
+		return BSArray::create([
 			'pc_form_template',
 			'pc_confirm_template',
 			'pc_thanx_template',

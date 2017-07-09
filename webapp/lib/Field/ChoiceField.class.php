@@ -42,7 +42,7 @@ abstract class ChoiceField extends Field {
 	 */
 	public function getChoices () {
 		if (!$this->choices) {
-			$this->choices = new BSArray;
+			$this->choices = BSArray::create();
 			$prefix = null;
 			foreach (BSString::explode("\n", $this['choices']) as $choice) {
 				if (BSString::isBlank($choice)) {

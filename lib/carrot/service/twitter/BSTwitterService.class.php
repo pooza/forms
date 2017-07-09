@@ -125,19 +125,19 @@ class BSTwitterService extends BSCurlHTTP {
 	}
 
 	protected function createCredential () {
-		$values = new BSArray;
+		$values = BSArray::create();
 		$values[] = $this->getConsumerKey();
 		$values[] = $this->getConsumerSecret();
 		return BSMIMEUtility::encodeBase64($values->join(':'));
 	}
 
 	protected function getBearerToken () {
-		$key = (new BSArray([
+		$key = BSArray::create([
 			$this->getConsumerKey(),
 			$this->getConsumerSecret(),
 			__CLASS__,
 			__FUNCTION__,
-		]))->join(':');
+		])->join(':');
 		$date = BSDate::getNow();
 		$date['minute'] = '-' . BS_SERVICE_TWITTER_MINUTES;
 		if (!$value = $this->getSerializeHandler()->getAttribute($key, $date)) {
@@ -161,14 +161,14 @@ class BSTwitterService extends BSCurlHTTP {
 	}
 
 	protected function createSignatureKey () {
-		return (new BSArray([
+		return BSArray::create([
 			BSURL::encode($this->getConsumerSecret()),
 			BSURL::encode($this->getAccessTokenSecret()),
-		]))->join('&');
+		])->join('&');
 	}
 
 	protected function createSignatureData (BSHTTPRedirector $url, BSWWWFormRenderer $params) {
-		return (new BSArray([
+		return BSArray::create([
 			'POST',
 			BSURL::encode($url->getContents()),
 			BSURL::encode(str_replace(
@@ -176,12 +176,12 @@ class BSTwitterService extends BSCurlHTTP {
 				['%20' , '~'],
 				$params->getContents()
 			)),
-		]))->join('&');
+		])->join('&');
 	}
 
 	protected function createOAuth ($path, BSParameterHolder $params) {
 		$url = $this->createRequestURL($path);
-		$params = new BSArray($params);
+		$params = BSArray::create($params);
 		$params['oauth_token'] = $this->getAccessToken();
 		$params['oauth_consumer_key'] = $this->getConsumerKey();
 		$params['oauth_signature_method'] = 'HMAC-SHA1';
@@ -210,16 +210,16 @@ class BSTwitterService extends BSCurlHTTP {
 	 * @return BSArray タイムライン
 	 */
 	public function getTimeline ($account, $count = 10) {
-		$key = (new BSArray([
+		$key = BSArray::create([
 			$account,
 			$count,
 			__CLASS__,
 			__FUNCTION__,
-		]))->join(':');
+		])->join(':');
 		$date = BSDate::getNow();
 		$date['minute'] = '-' . BS_SERVICE_TWITTER_MINUTES;
 		if (!$timeline = $this->getSerializeHandler()->getAttribute($key, $date)) {
-			$timeline = new BSArray;
+			$timeline = BSArray::create();
 			$url = $this->createRequestURL('/1.1/statuses/user_timeline.json');
 			$url->setParameter('screen_name', $account);
 			$url->setParameter('count', $count);
@@ -229,7 +229,7 @@ class BSTwitterService extends BSCurlHTTP {
 			$json->setContents($response->getRenderer()->getContents());
 			foreach ($json->getResult() as $entry) {
 				$urls = self::createTweetURLs($entry['id_str'], $account);
-				$timeline[] = new BSArray([
+				$timeline[] = BSArray::create([
 					'id' => $entry['id_str'],
 					'from_user' => $entry['user']['screen_name'],
 					'text' => $entry['text'],
@@ -253,16 +253,16 @@ class BSTwitterService extends BSCurlHTTP {
 	 * @return BSArray ツイート
 	 */
 	public function searchTweets ($keyword, $count = 10) {
-		$key = (new BSArray([
+		$key = BSArray::create([
 			$keyword,
 			$count,
 			__CLASS__,
 			__FUNCTION__,
-		]))->join(':');
+		])->join(':');
 		$date = BSDate::getNow();
 		$date['minute'] = '-' . BS_SERVICE_TWITTER_MINUTES;
 		if (!$timeline = $this->getSerializeHandler()->getAttribute($key, $date)) {
-			$timeline = new BSArray;
+			$timeline = BSArray::create();
 			$url = $this->createRequestURL('/1.1/search/tweets.json');
 			$url->setParameter('q', $keyword);
 			$url->setParameter('count', $count);
@@ -272,7 +272,7 @@ class BSTwitterService extends BSCurlHTTP {
 			$json->setContents($response->getRenderer()->getContents());
 			foreach ($json->getResult()['statuses'] as $entry) {
 				$urls = self::createTweetURLs($entry['id'], $entry['user']['screen_name']);
-				$timeline[] = new BSArray([
+				$timeline[] = BSArray::create([
 					'id' => $entry['id'],
 					'from_user' => $entry['user']['screen_name'],
 					'text' => $entry['text'],
@@ -295,11 +295,11 @@ class BSTwitterService extends BSCurlHTTP {
 	 * @return BSArray プロフィール
 	 */
 	public function getProfile ($account) {
-		$key = (new BSArray([
+		$key = BSArray::create([
 			$account,
 			__CLASS__,
 			__FUNCTION__,
-		]))->join(':');
+		])->join(':');
 		$date = BSDate::getNow();
 		$date['minute'] = '-' . BS_SERVICE_TWITTER_MINUTES;
 		if (!$profile = $this->getSerializeHandler()->getAttribute($key, $date)) {
@@ -412,8 +412,8 @@ class BSTwitterService extends BSCurlHTTP {
 	 * @static
 	 */
 	static public function createTweetURLs ($id, $account, $prefix = 'url') {
-		$urls = new BSArray;
-		$useragents = new BSArray([
+		$urls = BSArray::create();
+		$useragents = BSArray::create([
 			null => BSUserAgent::create(BSUserAgent::DEFAULT_NAME),
 			'_mobile' => BSUserAgent::create(BSDocomoUserAgent::DEFAULT_NAME),
 		]);

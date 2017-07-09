@@ -24,7 +24,7 @@ class ListAction extends BSTableAction {
 
 	public function getRows () {
 		if (!$this->rows) {
-			$this->rows = new BSArray;
+			$this->rows = BSArray::create();
 			foreach ($this->getTable() as $record) {
 				$values = $record->getAttributes();
 				$values['has_statistics'] = !!$record->getChoices()->count();

@@ -116,7 +116,7 @@ class RegistrationDumpHandler extends RegistrationHandler implements BSExportabl
 	 * @return BSArray 見出し
 	 */
 	public function getHeader () {
-		$header = new BSArray;
+		$header = BSArray::create();
 		$header[] = '応募ID';
 		$header[] = 'フォーム';
 		$header[] = 'ブラウザ';
@@ -139,7 +139,7 @@ class RegistrationDumpHandler extends RegistrationHandler implements BSExportabl
 		$this->getExporter()->addRecord($this->getHeader());
 		$criteria = $this->createCriteriaSet();
 		if ($this->permission) {
-			$values = new BSArray([
+			$values = BSArray::create([
 				'form_id' => $this->form->getID(),
 				'name' => 'mail_permission',
 			]);
@@ -148,14 +148,14 @@ class RegistrationDumpHandler extends RegistrationHandler implements BSExportabl
 			}
 		}
 		if ($this->date) {
-			$duration = new BSArray([
+			$duration = BSArray::create([
 				$this->date->format('Y-m-d 00:00:00'),
 				$this->date->format('Y-m-d 23:59:59'),
 			]);
 		}
 		$sql = BSSQL::getSelectQueryString('*', $this->getName(), $criteria);
 		foreach ($this->getDatabase()->query($sql) as $row) {
-			$row = new BSArray($row);
+			$row = BSArray::create($row);
 			$row['form_id'] = $this->form->getName();
 			$this->getExporter()->addRecord($row);
 		}

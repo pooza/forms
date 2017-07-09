@@ -118,10 +118,10 @@ class FileField extends Field {
 	public function registerValidators () {
 		parent::registerValidators();
 
-		$params = new BSArray(['suffixes' => BSFileValidator::ATTACHABLE]);
+		$params = BSArray::create(['suffixes' => BSFileValidator::ATTACHABLE]);
 		$server = $this->controller->getHost();
 		if ($file = BSConfigManager::getConfigFile('validator/' . $server->getName())) {
-			$config = new BSArray(BSConfigManager::getInstance()->compile($file));
+			$config = BSArray::create(BSConfigManager::getInstance()->compile($file));
 			if ($config['file'] && isset($config['file']['params'])) {
 				$params->setParameters($config['file']['params']);
 			}

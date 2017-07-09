@@ -19,7 +19,7 @@ class BSMySQLDatabase extends BSDatabase {
 	 */
 	public function getTableNames () {
 		if (!$this->tables) {
-			$this->tables = new BSArray;
+			$this->tables = BSArray::create();
 			foreach ($this->query('SHOW TABLES')->fetchAll(PDO::FETCH_NUM) as $row) {
 				$this->tables[] = $row[0];
 			}
@@ -49,6 +49,8 @@ class BSMySQLDatabase extends BSDatabase {
 	 */
 	protected function dump () {
 		$command = $this->createCommand('mysqldump');
+		$command->push('--single-transaction');
+		$command->push('--skip-dump-date');
 		$command->setStderrRedirectable(true);
 		if ($command->hasError()) {
 			throw new BSDatabaseException($command->getResult()->join(' '));

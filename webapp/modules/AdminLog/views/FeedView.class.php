@@ -21,7 +21,7 @@ class FeedView extends BSView {
 			$entry = $this->renderer->createEntry();
 			$entry->setTitle($log['message']);
 			$entry->setDate(BSDate::create($log['date']));
-			$message = new BSArray([
+			$message = BSArray::create([
 				'date' => $log['date'],
 				'remote_host' => $log['remote_host'],
 				'priority' => $log['priority'],

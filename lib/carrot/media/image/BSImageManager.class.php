@@ -281,7 +281,7 @@ class BSImageManager {
 			return;
 		}
 
-		$info = new BSArray;
+		$info = BSArray::create();
 		if ($url = $this->createURL($record, $size, $pixel, $flags)) {
 			$info['url'] = $url->getContents();
 		}
@@ -338,7 +338,7 @@ class BSImageManager {
 	 * @return BSFile サムネイルファイル
 	 */
 	protected function createFileName (BSImageFile $file, $pixel, $flags = 0) {
-		$values = new BSArray([
+		$values = BSArray::create([
 			'id' => $file->getID(),
 			'pixel' => $pixel,
 		]);
@@ -466,11 +466,12 @@ class BSImageManager {
 			if ($dir = $params['dir']) {
 				$finder->registerDirectory($dir);
 			}
-			$file = $finder->execute($path);
-			if ($file->getMainType() == 'image') {
-				return new BSImageFile($file->getPath());
-			} else if ($file->getMainType() == 'video') {
-				return new BSMovieFile($file->getPath());
+			if ($file = $finder->execute($path)) {
+				if ($file->getMainType() == 'image') {
+					return new BSImageFile($file->getPath());
+				} else if ($file->getMainType() == 'video') {
+					return new BSMovieFile($file->getPath());
+				}
 			}
 		}
 
@@ -505,13 +506,13 @@ class BSImageManager {
 	 */
 	static public function getRendererEntries () {
 		if (!self::$renderers) {
-			self::$renderers = new BSArray;
+			self::$renderers = BSArray::create();
 			foreach (new BSConstantHandler('IMAGE_RENDERERS') as $key => $value) {
 				$key = BSString::toLower(
 					BSString::explode('_', str_replace('BS_IMAGE_RENDERERS_', '', $key))
 				);
 				if (!self::$renderers->hasParameter($key[0])) {
-					self::$renderers[$key[0]] = new BSArray;
+					self::$renderers[$key[0]] = BSArray::create();
 				}
 				self::$renderers[$key[0]][$key[1]] = $value;
 			}

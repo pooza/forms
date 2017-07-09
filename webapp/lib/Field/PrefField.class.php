@@ -19,7 +19,7 @@ class PrefField extends SingleAnswerField {
 	public function getChoices () {
 		if (!$this->choices) {
 			$prefs = new PrefHandler;
-			$this->choices = new BSArray($prefs->getLabels());
+			$this->choices = BSArray::create($prefs->getLabels());
 		}
 		return $this->choices;
 	}

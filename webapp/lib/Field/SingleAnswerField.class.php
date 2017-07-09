@@ -19,7 +19,7 @@ class SingleAnswerField extends ChoiceField {
 	 */
 	public function getGroupedChoices () {
 		if (!$this->choicesGrouped) {
-			$this->choicesGrouped = new BSArray;
+			$this->choicesGrouped = BSArray::create();
 			$group = $this->choicesGrouped;
 			$prefix = null;
 			foreach (BSString::explode("\n", $this['choices']) as $choice) {
@@ -27,7 +27,7 @@ class SingleAnswerField extends ChoiceField {
 					continue;
 				} else if (mb_ereg('^=(.*)$', $choice, $matches)) {
 					$prefix = $matches[1];
-					$this->choicesGrouped[$prefix] = $group = new BSArray;
+					$this->choicesGrouped[$prefix] = $group = BSArray::create();
 				} else if (mb_ereg('^-(.*)$', $choice, $matches)) {
 					$group[self::EMPTY_VALUE] = $matches[1];
 				} else {
@@ -50,7 +50,7 @@ class SingleAnswerField extends ChoiceField {
 	 */
 	public function getStatistics () {
 		if (!$this->statistics) {
-			$this->statistics = new BSArray;
+			$this->statistics = BSArray::create();
 
 			$criteria = $this->createCriteriaSet();
 			$criteria->register('field_id', $this);
@@ -62,7 +62,7 @@ class SingleAnswerField extends ChoiceField {
 				'answer'
 			);
 			foreach ($this->getDatabase()->query($sql) as $row) {
-				$this->statistics[$row['answer']] = new BSArray($row);
+				$this->statistics[$row['answer']] = BSArray::create($row);
 			}
 			$this->summarizeStatistics();
 		}

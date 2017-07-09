@@ -32,7 +32,7 @@ class AgreementField extends SingleAnswerField {
 	public function getChoices () {
 		if (!$this->choices) {
 			$prefs = new PrefHandler;
-			$this->choices = new BSArray([1, 0]);
+			$this->choices = BSArray::create([1, 0]);
 		}
 		return $this->choices;
 	}

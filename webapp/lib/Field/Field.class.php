@@ -62,14 +62,14 @@ class Field extends BSRecord implements BSValidatorContainer {
 	 * @return BSArray 項目情報
 	 */
 	public function getOptions () {
-		$values = new BSArray([
+		$values = BSArray::create([
 			'id' => $this->getID(),
 			'name' => $this->getName(),
 			'label' => $this['label'],
 			'type' => $this->getFieldType()->getID(),
 		]);
 		if (!!$this->getChoices()->count()) {
-			$values['choices'] = new BSArray;
+			$values['choices'] = BSArray::create();
 			foreach ($this->getChoices() as $choice) {
 				$values['choices'][] = $choice;
 			}
@@ -102,7 +102,7 @@ class Field extends BSRecord implements BSValidatorContainer {
 	 * @return BSArray 選択肢
 	 */
 	public function getChoices () {
-		return new BSArray;
+		return BSArray::create();
 	}
 
 	/**
@@ -112,7 +112,7 @@ class Field extends BSRecord implements BSValidatorContainer {
 	 * @return BSArray 統計結果
 	 */
 	public function getStatistics () {
-		return new BSArray;
+		return BSArray::create();
 	}
 
 	/**

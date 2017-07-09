@@ -27,7 +27,7 @@ abstract class BSMediaConvertor {
 		$platform = $this->controller->getPlatform();
 		$values = $platform->getConstants(self::getOptions()->getKeys(), $this->constants);
 
-		$this->config = new BSArray;
+		$this->config = BSArray::create();
 		foreach ($values as $key => $value) {
 			$this->setConfig($key, $value);
 		}
@@ -149,7 +149,7 @@ abstract class BSMediaConvertor {
 	 * @static
 	 */
 	static protected function getOptions () {
-		return  new BSArray([
+		return  BSArray::create([
 			'video_codec' => 'vcodec',
 			'audio_codec' => 'acodec',
 			'size' => 's',

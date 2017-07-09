@@ -10,7 +10,7 @@ class CommitAction extends BSRecordAction {
 	public function execute () {
 		try {
 			$this->database->beginTransaction();
-			$answer = new BSArray($this->user->getAttribute('answer'));
+			$answer = BSArray::create($this->user->getAttribute('answer'));
 			$registration = $this->getRecord()->registerAnswer($answer);
 			$registration->sendMail('thanx_mail');
 			$registration->sendMail('Registration.registered');
