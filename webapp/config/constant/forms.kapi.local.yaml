@@ -1,5 +1,5 @@
-root_url: http://forms.dev.kapi.local/
-root_url_https: http://forms.dev.kapi.local/
+root_url: http://forms.kapi.local/
+root_url_https: http://forms.kapi.local/
 debug: yes
 
 root_site:
